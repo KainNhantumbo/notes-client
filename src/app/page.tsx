@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-
+import moment from 'moment'
+moment().calendar()
+import {} from 'react-icons'
 export default function Home() {
   return (
     <main className={styles.main}>
