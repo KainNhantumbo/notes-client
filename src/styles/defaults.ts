@@ -14,7 +14,7 @@ export const BaseButtonOutline = css`
   overflow: hidden;
   outline: none;
   :hover {
-    color: rgb(${({ theme }) => theme.primary_variant});
+    color: rgb(${({ theme }) => theme.primary_shade});
   }
   svg {
     width: 20px;
@@ -39,14 +39,14 @@ export const BaseButton = css`
   width: fit-content;
   cursor: pointer;
   background: rgb(${({ theme }) => theme.primary});
-  color: rgb(${({ theme }) => theme.text});
+  color: rgb(${({ theme }) => theme.font_dimmed});
   border: 1px solid transparent;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   outline: none;
   :hover {
-    box-shadow: 0 0 25px rgba(${({ theme }) => theme.accent}, 0.09);
+    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
   }
   :disabled {
     box-shadow: none;
@@ -78,7 +78,7 @@ export const Button_Mono_A = css`
   border: none;
   border-radius: 8px;
   background: rgb(${({ theme }) => theme.primary});
-  color: rgb(${({ theme }) => theme.text});
+  color: rgb(${({ theme }) => theme.font_dimmed});
   padding: 10px;
   width: fit-content;
   cursor: pointer;
@@ -102,7 +102,7 @@ export const Button_Mono_B = css`
   border-radius: 8px;
   background: none;
   color: rgb(${({ theme }) => theme.font});
-  border: 1px solid rgba(${({ theme }) => theme.accent}, 0.07);
+  border: 1px solid rgba(${({ theme }) => theme.black}, 0.07);
   position: relative;
   width: fit-content;
   cursor: pointer;
@@ -111,7 +111,7 @@ export const Button_Mono_B = css`
   outline: none;
 
   :hover {
-    color: rgb(${({ theme }) => theme.primary_variant});
+    color: rgb(${({ theme }) => theme.primary_shade});
   }
 
   svg {
@@ -127,7 +127,7 @@ export const Button_Mono_B = css`
 export const StyledCornerButton = css`
   border-radius: 50%;
   background: rgba(${({ theme }) => theme.primary}, 0.4);
-  color: rgb(${({ theme }) => theme.accent});
+  color: rgb(${({ theme }) => theme.black});
   border: none;
   width: fit-content;
   cursor: pointer;
@@ -137,7 +137,7 @@ export const StyledCornerButton = css`
   outline: none;
 
   :hover {
-    background: rgb(${({ theme }) => theme.alert});
+    background: rgb(${({ theme }) => theme.error});
     transition: all 200ms ease;
     svg {
       color: #fff;
@@ -180,11 +180,11 @@ export const StyledInputs = css`
     outline: none;
     border-radius: 10px;
     background: rgba(${({ theme }) => theme.background}, 0.7);
-    border: 1px solid rgba(${({ theme }) => theme.accent}, 0.05);
+    border: 1px solid rgba(${({ theme }) => theme.black}, 0.05);
     color: rgb(${({ theme }) => theme.font});
     :focus {
-      border: 1px solid rgba(${({ theme }) => theme.accent}, 0.15);
-      box-shadow: 0 0 20px rgba(${({ theme }) => theme.accent}, 0.06);
+      border: 1px solid rgba(${({ theme }) => theme.black}, 0.15);
+      box-shadow: 0 0 20px rgba(${({ theme }) => theme.black}, 0.06);
     }
     ::placeholder {
       color: rgba(${({ theme }) => theme.font}, 0.8);
@@ -219,7 +219,7 @@ export const statsContainerStyles = css`
     align-items: center;
     gap: 20px;
     margin: 20px 0;
-    color: rgb(${({ theme }) => theme.alert});
+    color: rgb(${({ theme }) => theme.error});
     font-weight: 500;
     font-size: 1.1rem;
     line-height: 1.4rem;
@@ -235,7 +235,7 @@ export const statsContainerStyles = css`
     font-size: 1.2rem;
     font-weight: 500;
     line-height: 1.6rem;
-    color: rgb(${({ theme }) => theme.primary_variant});
+    color: rgb(${({ theme }) => theme.primary_shade});
   }
 
   .loading {
@@ -252,6 +252,6 @@ export const statsContainerStyles = css`
     padding: 20px;
     margin: 0 auto;
 
-    color: rgb(${({ theme }) => theme.primary_variant});
+    color: rgb(${({ theme }) => theme.primary_shade});
   }
 `;

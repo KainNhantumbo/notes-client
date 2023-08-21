@@ -24,7 +24,7 @@ export type Theme = {
   secondary: string;
   secondary_shade: string;
   font: string;
-  accent: string;
+  font_dimmed: string;
   white: string;
   black: string;
   error: string;
@@ -75,11 +75,11 @@ export type TNote = {
 };
 
 export type TFolder = {
-  _id: string
+  _id: string;
   name: string;
   metadata: {
     color: string;
     favorite: boolean;
     tags: string[];
   };
-}
+};
