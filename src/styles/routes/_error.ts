@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButtonOutline } from '../defaults';
+import { BaseButton, BaseButtonOutline } from '../defaults';
 
 export const _error = styled.main`
   margin-top: 70px;
@@ -16,14 +16,27 @@ export const _error = styled.main`
     font-size: 1.2rem;
     font-weight: 500;
     h1 {
-      font-weight: 500;
-      font-size: 2.4rem;
+      font-weight: 600;
+      font-size: 4.4rem;
       line-height: 2.8rem;
       color: rgb(${({ theme }) => theme.error});
     }
 
+    h2 {
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+      line-height: 2.8rem;
+    }
+
+    p {
+      font-weight: 500;
+      text-transform: uppercase;
+      line-height: 1.8rem;
+    }
+
     button {
-      ${BaseButtonOutline}
+      ${BaseButton}
       margin-top: 20px;
       font-weight: 500;
     }
