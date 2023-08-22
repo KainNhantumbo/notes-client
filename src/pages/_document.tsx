@@ -5,7 +5,7 @@ const Document: FC = (): JSX.Element => (
   <Html lang='pt-br'>
     <Head>
       <link rel='manifest' href='/manifest.json' />
-      <link rel='apple-touch-icon' href='/rubymart192.png' />
+      <link rel='apple-touch-icon' href='/favicon-192x192.png' />
       <meta name='theme-color' content='#fff' />
       {/* ---------fonts----------- */}
       <link rel='preconnect' href='https://fonts.googleapis.com' />

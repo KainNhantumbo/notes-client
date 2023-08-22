@@ -22,9 +22,9 @@ const HeadWithMeta: FC<TProps> = (props): JSX.Element => (
     <meta name='apple-mobile-web-app-status-bar-style' content='default' />
     <meta name='format-detection' content='telephone=no' />
     <meta name='mobile-web-app-capable' content='yes' />
-    <link rel='icon' type='image/png' href='/favicon.png' />
+    <link rel='icon' type='image/png' href='/favicon-192x192.png' />
     <meta name='msapplication-tap-highlight' content='no' />
-    <link rel='shortcut icon' href='/favicon.png' />
+    <link rel='shortcut icon' href='/favicon-192x192.png' />
     <meta name='msapplication-TileColor' content='#000000' />
     <meta property='og:locale' content='en' />
     <meta property='og:type' content='website' />
