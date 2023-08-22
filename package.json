@@ -1,5 +1,5 @@
 {
-  "name": "notes-client",
+  "name": "choconotey-client",
   "version": "0.1.0",
   "private": true,
   "license": "Apache License Version 2.0",
@@ -12,8 +12,8 @@
     "website": "https://publish-it-programming.vercel.app"
   },
   "metadata": {
-    "name": "Notes",
-    "copyright_notice": "© 2023 Notes | All Rights Reserved."
+    "name": "ChocoNotey",
+    "copyright_notice": "© 2023 ChocoNotey | All Rights Reserved."
   },
   "scripts": {
     "dev": "next dev",
@@ -22,6 +22,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@medistream/editorjs-text-color-plugin": "^1.14.2",
+    "editorjs-alert": "^1.1.3",
+    "rc-dropdown": "^4.1.0",
+    "react-markdown": "^8.0.7",
     "@editorjs/checklist": "^1.5.0",
     "@editorjs/editorjs": "^2.27.0",
     "@editorjs/embed": "^2.5.3",
@@ -57,9 +61,10 @@
     "react-icons": "^4.8.0",
     "react-intersection-observer": "^9.4.4",
     "react-pdf": "^7.3.3",
-    "react-select": "^5.7.3",
+    "react-select": "^5.7.4",
     "react-spinners": "^0.13.8",
     "react-use-downloader": "^1.2.4",
+    "reading-time-estimator": "^1.9.0",
     "simple-image-editorjs": "^1.4.0",
     "styled-components": "^5.3.10",
     "typescript": "5.1.6"

@@ -71,6 +71,9 @@ export type TNote = {
     favorite: boolean;
     reminder: { time: string; expired: boolean };
     tags: string[];
+    deleted: boolean;
+    priority: 'none' | 'low' | 'medium' | 'high';
+    labels: 'none' | 'pending' | 'processing' | 'reviewing' | 'completed';
   };
 };
 
@@ -81,7 +84,6 @@ export type TFolder = {
     color: string;
     favorite: boolean;
     tags: string[];
+    deleted: boolean;
   };
 };
-
-

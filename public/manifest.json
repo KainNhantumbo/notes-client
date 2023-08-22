@@ -1,6 +1,6 @@
 {
-  "name": "Notes App",
-  "short_name": "Notes",
+  "name": "ChocoNotey - Notes App",
+  "short_name": "ChocoNotey",
   "icons": [
     {
       "src": "/favicon-192x192.png",
