@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "license": "Apache License Version 2.0",
+  "url": "",
+  "website_name": "",
   "author": {
     "name": "Kain Nhantumbo",
     "email": "nhantumbok@gmail.com",
@@ -11,7 +13,7 @@
   },
   "metadata": {
     "name": "Notes",
-    "copyrightSentence": "© 2023 Notes | All Rights Reserved."
+    "copyright_notice": "© 2023 Notes | All Rights Reserved."
   },
   "scripts": {
     "dev": "next dev",
