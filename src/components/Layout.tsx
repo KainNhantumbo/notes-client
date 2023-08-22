@@ -1,9 +1,9 @@
+import Logout from './modals/Logout';
+import Cookies from './modals/Cookies';
 import { FC, ReactNode, useEffect } from 'react';
-import HeadWithMeta, { TProps as HeadProps } from './Head';
-// import LogoutPrompt from './modals/LogoutPrompt';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
-import Cookies from './modals/Cookies';
+import HeadWithMeta, { TProps as HeadProps } from './Head';
 
 interface IProps {
   children: ReactNode;
@@ -14,19 +14,20 @@ const Layout: FC<IProps> = ({ children, metadata }) => {
   const { state } = useAppContext();
   const router: NextRouter = useRouter();
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     const debounceTimer = setTimeout(() => {
-      if (router.asPath.includes('notes') && !state.auth.id) {
+      if (router.asPath.includes('tabs') && !state.auth.id) {
         router.push('/auth/sign-in');
       }
     }, 500);
-    return () => clearTimeout(debounceTimer);
+    return (): void => clearTimeout(debounceTimer);
   }, [state.auth]);
 
   return (
     <>
       <HeadWithMeta {...metadata} />
       <Cookies />
+      <Logout />
       {children}
     </>
   );

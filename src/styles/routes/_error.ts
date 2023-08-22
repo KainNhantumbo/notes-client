@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton, BaseButtonOutline } from '../defaults';
+import { BaseButton } from '../defaults';
 
 export const _error = styled.main`
   margin-top: 70px;
