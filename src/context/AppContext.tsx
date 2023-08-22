@@ -1,6 +1,5 @@
 import {
   FC,
-  Context,
   createContext,
   ReactNode,
   useContext,
@@ -10,20 +9,20 @@ import {
 } from 'react';
 import { TAuth } from '../@types';
 import fetch from '../config/client';
+import actions from '../data/actions';
+import ThemeContext from './ThemeContext';
 import { initialState, reducer } from '../libs/reducer';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { NextRouter, useRouter } from 'next/router';
 import { TAction, TState } from '../@types/reducer';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import actions from '../data/actions';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
-type TProps = {
-  children: ReactNode;
-};
+type TProps = { children: ReactNode };
 
 type TContext = {
   state: TState;
   dispatch: Dispatch<TAction>;
+  handleLogout: () => Promise<void>;
   fetchAPI: <T>(config: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>;
 };
 
@@ -31,6 +30,7 @@ const context = createContext<TContext>({
   state: initialState,
   dispatch: () => {},
   fetchAPI: (): any => {},
+  handleLogout: async (): Promise<void> => {},
 });
 
 const queryClient: QueryClient = new QueryClient({
@@ -83,7 +83,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     });
   }
 
-  const logoutUser = async (): Promise<void> => {
+  const handleLogout = async (): Promise<void> => {
     try {
       await fetchAPI({
         method: 'post',
@@ -141,9 +141,11 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <context.Provider value={{ state, dispatch, fetchAPI }}>
-        {children}
-      </context.Provider>
+      <ThemeContext>
+        <context.Provider value={{ state, dispatch, fetchAPI, handleLogout }}>
+          {children}
+        </context.Provider>
+      </ThemeContext>
     </QueryClientProvider>
   );
 };
