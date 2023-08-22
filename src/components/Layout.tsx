@@ -4,13 +4,16 @@ import { FC, ReactNode, useEffect } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import HeadWithMeta, { TProps as HeadProps } from './Head';
+import Header from './Header';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 
 interface IProps {
   children: ReactNode;
+  renderHeader?: boolean;
   metadata: HeadProps | undefined;
 }
 
-const Layout: FC<IProps> = ({ children, metadata }) => {
+const Layout: FC<IProps> = ({ children, metadata, renderHeader }) => {
   const { state } = useAppContext();
   const router: NextRouter = useRouter();
 
@@ -24,12 +27,17 @@ const Layout: FC<IProps> = ({ children, metadata }) => {
   }, [state.auth]);
 
   return (
-    <>
-      <HeadWithMeta {...metadata} />
-      <Cookies />
-      <Logout />
-      {children}
-    </>
+    <MotionConfig reducedMotion='user'>
+      <LazyMotion strict={true} features={domAnimation}>
+        <>
+          {renderHeader ? <Header /> : null}
+          <HeadWithMeta {...metadata} />
+          <Cookies />
+          <Logout />
+          {children}
+        </>
+      </LazyMotion>
+    </MotionConfig>
   );
 };
 

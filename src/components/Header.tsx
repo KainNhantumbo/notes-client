@@ -1,12 +1,12 @@
 import {
-  IoClose,
-  IoAppsOutline,
-  IoLogInOutline,
-  IoStorefrontOutline,
-} from 'react-icons/io5';
+  BsBalloon,
+  BsBoxArrowInRight,
+  BsPersonPlus,
+  BsX,
+} from 'react-icons/bs';
 import Link from 'next/link';
 import Image from 'next/image';
-import { navigationAnchors } from '../data/app-data';
+import { app_metadata, navigationAnchors } from '../data/app-data';
 import { BiUser } from 'react-icons/bi';
 import { useState, useEffect, FC } from 'react';
 import { NextRouter, useRouter } from 'next/router';
@@ -20,7 +20,7 @@ const Header: FC = (): JSX.Element => {
   const { asPath, push }: NextRouter = useRouter();
   const { state } = useAppContext();
 
-  const toggleMenu = (): void => setIsMenu(!isMenu);
+  const toggleMenu = (): void => setIsMenu((current) => !current);
 
   const changeWidth = (): void =>
     window.innerWidth > 770 ? setIsMenu(true) : setIsMenu(false);
@@ -38,8 +38,16 @@ const Header: FC = (): JSX.Element => {
       <div className='wrapper'>
         <div className='logo'>
           <Link href={'/'}>
-            <Image alt='Choco NoteyLogo' src={logo} width={600} height={134} />{' '}
+            <Image
+              alt={`${app_metadata.appName} Logo`}
+              src={logo}
+              width={600}
+              height={134}
+            />{' '}
           </Link>
+          <h3>
+            <span>{app_metadata.appName}</span>
+          </h3>
         </div>
         <AnimatePresence>
           {isMenu && (
@@ -53,7 +61,7 @@ const Header: FC = (): JSX.Element => {
                 transition: { duration: 0.25 },
               }}
               style={{ display: isMenu ? 'flex' : 'none' }}>
-              <section>
+              <section className='navigation-anchors-container'>
                 {navigationAnchors.map((item, index) => (
                   <Link
                     key={index.toString()}
@@ -67,20 +75,20 @@ const Header: FC = (): JSX.Element => {
               </section>
 
               <div className='left-corner-container'>
-                {!state.auth.id || !state.auth.token ? (
+                {!state.auth.id ? (
                   <>
                     <Link href={'/auth/signin'} className='login-btn'>
-                      <IoLogInOutline />
+                      <BsBoxArrowInRight />
                       <span>Login</span>
                     </Link>
                     <Link href={'/auth/signup'} className='sign-in-btn'>
-                      <IoStorefrontOutline />
+                      <BsPersonPlus />
                       <span>Sign Up</span>
                     </Link>
                   </>
                 ) : null}
 
-                {!asPath.includes('tabs') ? (
+                {state.auth.id && !asPath.includes('tabs') ? (
                   <button
                     title='Painel de Controle e Conta'
                     className='user-account'
@@ -109,7 +117,7 @@ const Header: FC = (): JSX.Element => {
           aria-label='Toogle menu'
           className='toggle-btn'
           onClick={toggleMenu}>
-          {!isMenu ? <IoAppsOutline /> : <IoClose />}
+          {!isMenu ? <BsBalloon /> : <BsX />}
         </motion.button>
       </div>
     </Container>

@@ -33,7 +33,7 @@ export const BaseButtonOutline = css`
 
 export const BaseButton = css`
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
   padding: 10px;
   width: fit-content;

@@ -39,15 +39,19 @@ export const _header = styled.header`
     left: 30px;
     cursor: pointer;
     margin-right: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
 
     a {
       position: relative;
     }
 
     img {
-      width: 100%;
-      max-width: 130px;
-      height: 100%;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       object-fit: cover;
     }
 
@@ -71,12 +75,13 @@ export const _header = styled.header`
       color: rgb(${({ theme }) => theme.primary_shade});
     }
 
-    section {
+    .navigation-anchors-container {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       font-size: 0.96rem;
+      margin-top: 7px;
 
       @media screen and (max-width: 600px) {
         gap: 10px;
@@ -101,7 +106,7 @@ export const _header = styled.header`
       width: 100%;
       gap: 20px;
 
-      section {
+      .navigation-anchors-container {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -133,11 +138,12 @@ export const _header = styled.header`
       flex-direction: column;
       margin-top: 50px;
       background: rgba(${({ theme }) => theme.foreground}, 0.95);
-      border-bottom: 5px solid rgba(${({ theme }) => theme.primary}, 0.6);
+      border-bottom: 5px solid rgba(${({ theme }) => theme.black}, 0.6);
+      border-radius: 0 0 12px 12px;
       backdrop-filter: blur(30px);
       padding: 20px;
 
-      section {
+      .navigation-anchors-container {
         width: 100%;
         display: flex;
         align-items: flex-start;
@@ -149,7 +155,7 @@ export const _header = styled.header`
         span {
           padding: 5px 8px;
           width: max-content;
-          border-radius: 20px;
+          border-radius: 5px;
 
           :hover {
             cursor: pointer;
