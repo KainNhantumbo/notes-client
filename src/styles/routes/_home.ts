@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const _home = styled.main`
-  font-family: 'Zilla Slab', serif;
+position: relative;
+  
   .title {
     font-size: 1.6rem;
-    text-transform: uppercase;
     font-weight: 500;
-    color: rgb(${({ theme }) => theme.primary});
+    color: rgb(${({ theme }) => theme.font});
   }
 `;
