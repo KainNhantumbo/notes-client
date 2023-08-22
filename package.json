@@ -57,6 +57,7 @@
     "react-pdf": "^7.3.3",
     "react-select": "^5.7.3",
     "react-spinners": "^0.13.8",
+    "react-use-downloader": "^1.2.4",
     "simple-image-editorjs": "^1.4.0",
     "styled-components": "^5.3.10",
     "typescript": "5.1.6"

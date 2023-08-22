@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export const BASE_URL = 'http://localhost:5700';
-// export const BASE_URL = 'https://awful-crab-beanie.cyclic.app/api';
+// export const BASE_URL = 'https://awful-crab-beanie.cyclic.app';
 
 export default axios.create({ baseURL: BASE_URL });
