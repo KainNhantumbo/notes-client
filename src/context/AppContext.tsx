@@ -22,7 +22,6 @@ type TProps = { children: ReactNode };
 type TContext = {
   state: TState;
   dispatch: Dispatch<TAction>;
-  handleLogout: () => Promise<void>;
   fetchAPI: <T>(config: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>;
 };
 
@@ -30,7 +29,6 @@ const context = createContext<TContext>({
   state: initialState,
   dispatch: () => {},
   fetchAPI: (): any => {},
-  handleLogout: async (): Promise<void> => {},
 });
 
 const queryClient: QueryClient = new QueryClient({
@@ -83,32 +81,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     });
   }
 
-  const handleLogout = async (): Promise<void> => {
-    try {
-      await fetchAPI({
-        method: 'post',
-        url: '/api/v1/auth/logout',
-        withCredentials: true,
-      });
-      dispatch({
-        type: actions.AUTH,
-        payload: {
-          ...state,
-          auth: {
-            id: '',
-            name: '',
-            token: '',
-            email: '',
-            profile_image: '',
-          },
-        },
-      });
-      router.push('/auth/sign-in');
-    } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
-    }
-  };
-
   const authenticateUser = async (): Promise<void> => {
     try {
       const { data } = await fetch<TAuth>({
@@ -142,7 +114,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeContext>
-        <context.Provider value={{ state, dispatch, fetchAPI, handleLogout }}>
+        <context.Provider value={{ state, dispatch, fetchAPI }}>
           {children}
         </context.Provider>
       </ThemeContext>

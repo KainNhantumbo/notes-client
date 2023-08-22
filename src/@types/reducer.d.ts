@@ -1,7 +1,8 @@
-import { TAuth } from ".";
+import { TAuth } from '.';
 
 export type TState = {
-  auth: TAuth
+  auth: TAuth;
+  isLogoutModal: boolean;
 };
 
 export type TAction = { type: string; payload: TState };
