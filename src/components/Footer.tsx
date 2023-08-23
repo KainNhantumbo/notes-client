@@ -11,22 +11,16 @@ const Footer: FC = (): JSX.Element => {
 
   return (
     <Container>
-      <section className='navigation'>
-        <nav>
-          {footerAnchors.map((item, index) => (
-            <Link key={index.toString()} href={item.anchor}>
-              <span>{item.name}</span>
-            </Link>
-          ))}
-        </nav>
-      </section>
+      <nav>
+        {footerAnchors.map((item, index) => (
+          <Link key={index.toString()} href={item.anchor}>
+            <span>{item.name}</span>
+          </Link>
+        ))}
+      </nav>
 
       <div className='base-container'>
-        <div className='base-container_presentation'>
-          <div className='logo'>
-            <p>{app_metadata.copyright}</p>
-          </div>
-        </div>
+        <p className='copyright-sentence'>{app_metadata.copyright}</p>
 
         <div className='theme-fluent-buttons'>
           <button

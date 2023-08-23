@@ -17,7 +17,9 @@ export const app_metadata = {
   websiteName: Package.website_name,
   websiteUrl: Package.url,
   description: 'A simple taking notes application to fit your daily needs.',
-  copyright: `© ${new Date().getFullYear()} - ${Package.author.name}`,
+  copyright: `© ${new Date().getFullYear()} ${Package.metadata.name} | ${
+    Package.author.name
+  }`,
 };
 
 export const navigationAnchors = [
