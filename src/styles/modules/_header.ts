@@ -3,13 +3,13 @@ import { BaseButton, BaseButtonOutline } from '../defaults';
 
 export const _header = styled.header`
   width: 100%;
-  height: 70px;
+  height: 50px;
   position: fixed;
   top: 0;
   left: 0;
   backdrop-filter: blur(5px);
   background: rgba(${({ theme }) => theme.foreground}, 0.8);
-  padding: 20px 8px;
+  padding: 12px 8px;
   font-weight: 500;
   font-size: 0.9rem;
   z-index: 20000;
@@ -35,7 +35,7 @@ export const _header = styled.header`
 
   .logo {
     position: absolute;
-    top: calc(50% - 16px);
+    top: calc(50% - 13px);
     left: 30px;
     cursor: pointer;
     margin-right: 40px;
@@ -127,7 +127,7 @@ export const _header = styled.header`
 
     @media screen and (max-width: 770px) {
       position: absolute;
-      top: 20px;
+      top: 0px;
       left: 0;
       height: auto;
       width: 100%;
@@ -255,10 +255,10 @@ export const _header = styled.header`
 
   .toggle-btn {
     position: fixed;
-    top: 13px;
+    top:9px;
     right: 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 8px;
     background: none;
     color: rgb(${({ theme }) => theme.font});
     border: 1px solid rgba(${({ theme }) => theme.black}, 0.07);
@@ -266,7 +266,7 @@ export const _header = styled.header`
     cursor: pointer;
     display: grid;
     place-content: center;
-    padding: 10px;
+    padding: 5px;
     outline: none;
 
     :hover {

@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   * {    
+    scroll-padding-top: 90px;
     box-sizing: border-box;
     padding: 0;
     margin: 0;

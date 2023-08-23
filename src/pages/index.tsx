@@ -1,20 +1,18 @@
-import { BsArrowRightShort, BsBrowserChrome } from 'react-icons/bs';
-import { NextPage } from 'next';
 import Image from 'next/image';
-import Layout from '../components/Layout';
+import { NextPage } from 'next';
 import { m as motion } from 'framer-motion';
+import Layout from '@/src/components/Layout';
 import { NextRouter, useRouter } from 'next/router';
-import { useAppContext } from '../context/AppContext';
-import { _home as Container } from '../styles/routes/_home';
+import app_logo from '@/public/favicon-192x192.png';
+import demo_dark from '@/public/assets/demo-dark.jpg';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
+import demo_light from '@/public/assets/demo-light.jpg';
+import { _home as Container } from '../styles/routes/_home';
 import { app_features, app_metadata } from '../data/app-data';
-import demo_light from '../../public/assets/demo-light.jpg';
-import demo_dark from '../../public/assets/demo-dark.jpg';
-import app_logo from '../../public/favicon-192x192.png';
+import { BsArrowRightShort, BsBrowserChrome } from 'react-icons/bs';
 
 const Home: NextPage = (): JSX.Element => {
-  const { state } = useAppContext();
   const { darkmode } = useThemeContext();
   const router: NextRouter = useRouter();
   const theme: DefaultTheme = useTheme();
