@@ -14,6 +14,13 @@ const initialState: TState = {
     password: '',
     confirm_password: '',
   },
+  notification: {
+    title: '',
+    message: '',
+    status: false,
+    handleFunction: () => {},
+    actionButtonMessage: '',
+  },
 };
 
 const reducer = (state: TState, action: TAction): TState => {
@@ -30,6 +37,8 @@ const reducer = (state: TState, action: TAction): TState => {
       return { ...state, notes: action.payload.notes };
     case actions.FOLDERS:
       return { ...state, folders: action.payload.folders };
+    case actions.NOTIFICATION:
+      return { ...state, notification: action.payload.notification };
     default:
       return { ...state };
   }

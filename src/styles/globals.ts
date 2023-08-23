@@ -24,6 +24,7 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
   }
 
   ::-webkit-scrollbar {

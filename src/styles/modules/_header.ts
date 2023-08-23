@@ -11,7 +11,7 @@ export const _header = styled.header`
   background: rgba(${({ theme }) => theme.foreground}, 0.8);
   padding: 20px 8px;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   z-index: 20000;
 
   * {
@@ -49,8 +49,8 @@ export const _header = styled.header`
     }
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -70,6 +70,7 @@ export const _header = styled.header`
     top: -4px;
     left: 180px;
     gap: 20px;
+    font-size: 0.9rem;
 
     .active {
       color: rgb(${({ theme }) => theme.primary_shade});
@@ -80,8 +81,6 @@ export const _header = styled.header`
       align-items: center;
       justify-content: center;
       gap: 10px;
-      font-size: 0.96rem;
-      margin-top: 7px;
 
       @media screen and (max-width: 600px) {
         gap: 10px;
@@ -111,7 +110,6 @@ export const _header = styled.header`
         align-items: center;
         justify-content: center;
         gap: 10px;
-        font-size: 0.96rem;
 
         @media screen and (max-width: 600px) {
           gap: 10px;
@@ -181,22 +179,39 @@ export const _header = styled.header`
     position: relative;
     left: -190px;
 
-    .login-btn {
-      ${BaseButtonOutline}
+    .login-btn,
+    .sign-in-btn {
       border: none;
-
-      span {
-        position: relative;
-        top: calc(50% - 7px);
+      background: none;
+      border-radius: 10px;
+      position: relative;
+      padding: 10px;
+      color: rgb(${({ theme }) => theme.font});
+      width: fit-content;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      outline: none;
+      :hover {
+        color: rgb(${({ theme }) => theme.primary_shade});
       }
     }
 
     .sign-in-btn {
-      ${BaseButton}
-
       span {
         position: relative;
         top: calc(50% - 7px);
+        padding: 0;
+        padding-right: 25px;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: calc(50% - 10px);
+        right: 7px;
+        pointer-events: none;
       }
     }
 

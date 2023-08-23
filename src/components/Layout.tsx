@@ -1,5 +1,6 @@
 import Logout from './modals/Logout';
 import Cookies from './modals/Cookies';
+import Notification from './modals/Notification';
 import { FC, ReactNode, useEffect } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
@@ -34,6 +35,7 @@ const Layout: FC<IProps> = ({ children, metadata, renderHeader }) => {
           <HeadWithMeta {...metadata} />
           <Cookies />
           <Logout />
+          <Notification />
           {children}
         </>
       </LazyMotion>

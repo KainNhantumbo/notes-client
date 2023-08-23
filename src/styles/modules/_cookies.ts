@@ -12,7 +12,7 @@ export const _cookies = styled.div`
     position: absolute;
     left: 20px;
     bottom: 20px;
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 20px;
     max-width: 350px;
     display: flex;

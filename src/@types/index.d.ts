@@ -87,3 +87,11 @@ export type TFolder = {
     deleted: boolean;
   };
 };
+
+export type TNotification = {
+  title: string;
+  status: boolean;
+  message: string;
+  actionButtonMessage: string;
+  handleFunction: () => void | Promise<void>;
+};

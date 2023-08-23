@@ -1,11 +1,6 @@
-import {
-  BsBalloon,
-  BsBoxArrowInRight,
-  BsPersonPlus,
-  BsX,
-} from 'react-icons/bs';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BsArrowRight, BsBalloon, BsX } from 'react-icons/bs';
 import { app_metadata, navigationAnchors } from '../data/app-data';
 import { BiUser } from 'react-icons/bi';
 import { useState, useEffect, FC } from 'react';
@@ -78,11 +73,10 @@ const Header: FC = (): JSX.Element => {
                 {!state.auth.id ? (
                   <>
                     <Link href={'/auth/signin'} className='login-btn'>
-                      <BsBoxArrowInRight />
                       <span>Login</span>
                     </Link>
                     <Link href={'/auth/signup'} className='sign-in-btn'>
-                      <BsPersonPlus />
+                      <BsArrowRight />
                       <span>Sign Up</span>
                     </Link>
                   </>
