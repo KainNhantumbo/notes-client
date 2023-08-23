@@ -88,7 +88,7 @@ export type TFolder = {
   };
 };
 
-export type TNotification = {
+export type TModalProps = {
   title: string;
   status: boolean;
   message: string;

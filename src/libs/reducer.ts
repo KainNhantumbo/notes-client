@@ -21,6 +21,13 @@ const initialState: TState = {
     handleFunction: () => {},
     actionButtonMessage: '',
   },
+  prompt: {
+    title: '',
+    message: '',
+    status: false,
+    handleFunction: () => {},
+    actionButtonMessage: '',
+  },
 };
 
 const reducer = (state: TState, action: TAction): TState => {
@@ -39,6 +46,8 @@ const reducer = (state: TState, action: TAction): TState => {
       return { ...state, folders: action.payload.folders };
     case actions.NOTIFICATION:
       return { ...state, notification: action.payload.notification };
+    case actions.PROMPT:
+      return { ...state, prompt: action.payload.prompt };
     default:
       return { ...state };
   }

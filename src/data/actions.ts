@@ -6,6 +6,7 @@ const actions = {
   FOLDERS: 'FOLDERS',
   LOGOUT_MODAL: 'LOGOUT_MODAL',
   NOTIFICATION: 'NOTIFICATION',
+  PROMPT: 'PROMPT',
 };
 
 export default actions;

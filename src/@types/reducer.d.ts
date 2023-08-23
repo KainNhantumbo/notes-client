@@ -1,4 +1,4 @@
-import { TAuth, TFolder, TNote, TNotification, TSignIn, TSignUp } from '.';
+import { TAuth, TFolder, TModalProps, TNote, TSignIn, TSignUp } from './index';
 
 export type TState = {
   auth: TAuth;
@@ -7,7 +7,8 @@ export type TState = {
   folders: TFolder[];
   signIn: TSignIn;
   signUp: TSignUp;
-  notification: TNotification;
+  notification: TModalProps;
+  prompt: TModalProps;
 };
 
 export type TAction = { type: string; payload: TState };
