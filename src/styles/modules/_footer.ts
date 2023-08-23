@@ -32,41 +32,6 @@ export const _footer = styled.footer`
     }
   }
 
-  .featured-container {
-    padding: 0 20px;
-    display: flex;
-    flex-flow: row wrap;
-    gap: 40px;
-    justify-content: space-evenly;
-    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    @media screen and (max-width: 490px) {
-      gap: 12px;
-    }
-
-    h3 {
-      display: flex;
-      align-items: center;
-      font-weight: 500;
-      font-size: 1.1rem;
-      @media screen and (max-width: 410px) {
-        font-size: 1rem;
-        line-height: 1.6rem;
-      }
-      svg {
-        width: 20px;
-        height: 20px;
-        color: rgb(${({ theme }) => theme.primary_shade});
-      }
-      span {
-        padding-left: 5px;
-      }
-    }
-  }
-
   .navigation {
     display: flex;
     justify-content: flex-start;

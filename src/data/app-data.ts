@@ -1,5 +1,4 @@
 import {
-  BsBalloon,
   BsCloudCheck,
   BsGear,
   BsGrid,
@@ -68,3 +67,13 @@ export const app_extra_features = [
     content: `Sharing is made simple by exporting your notes to documents files to where you want.`,
   },
 ];
+
+export const footerAnchors = [
+  { name: 'Privacy policy', anchor: '/docs/privacy-policy' },
+  { name: 'Terms of use', anchor: '/docs/terms-of-use' },
+  { name: 'Contact', anchor: '/docs/contact' },
+  { name: 'Donate', anchor: 'https://www.buymeacoffee.com/nhantumbokU' },
+  { name: 'Github', anchor: app_metadata.repository },
+  { name: 'FAQ', anchor: '/docs/faq' },
+  { name: 'Portfolio', anchor: 'https://portifolio-dev-mu.vercel.app' },
+].sort((a, b) => (a.name > b.name ? 1 : -1));

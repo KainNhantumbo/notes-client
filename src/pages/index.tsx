@@ -26,6 +26,7 @@ const Home: NextPage = (): JSX.Element => {
   return (
     <Layout
       renderHeader
+      renderFooter
       metadata={{ title: `${app_metadata.appName} | Overview` }}>
       <Container>
         <div className='wrapper-container'>
@@ -42,12 +43,6 @@ const Home: NextPage = (): JSX.Element => {
               </p>
 
               <div className='action-buttons'>
-                {/* <motion.button
-                  whileTap={{ scale: 0.8 }}
-                  whileHover={{ scale: 1.05 }}
-                  className='download-button'>
-                  <span>Download</span>
-                </motion.button> */}
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}

@@ -1,3 +1,5 @@
+import Header from './Header';
+import Footer from './Footer';
 import Cookies from './modals/Cookies';
 import PromptModal from './modals/Prompt';
 import Notification from './modals/Notification';
@@ -5,16 +7,21 @@ import { FC, ReactNode, useEffect } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import HeadWithMeta, { TProps as HeadProps } from './Head';
-import Header from './Header';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 
 interface IProps {
   children: ReactNode;
   renderHeader?: boolean;
+  renderFooter?: boolean;
   metadata: HeadProps | undefined;
 }
 
-const Layout: FC<IProps> = ({ children, metadata, renderHeader }) => {
+const Layout: FC<IProps> = ({
+  children,
+  metadata,
+  renderHeader,
+  renderFooter,
+}) => {
   const { state } = useAppContext();
   const router: NextRouter = useRouter();
 
@@ -36,6 +43,7 @@ const Layout: FC<IProps> = ({ children, metadata, renderHeader }) => {
         <Notification key={state.notification.message.split(' ').join('')} />
         <PromptModal key={state.prompt.message.split(' ').join('')} />
         {children}
+        {renderFooter ? <Footer /> : null}
       </LazyMotion>
     </MotionConfig>
   );
