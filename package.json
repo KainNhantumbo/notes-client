@@ -5,6 +5,7 @@
   "license": "Apache License Version 2.0",
   "url": "",
   "website_name": "",
+  "repository": "https://github.com/notes-app",
   "author": {
     "name": "Kain Nhantumbo",
     "email": "nhantumbok@gmail.com",
@@ -15,6 +16,7 @@
     "name": "ChocoNotey",
     "copyright_notice": "© 2023 ChocoNotey | All Rights Reserved."
   },
+  "keywords": [],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

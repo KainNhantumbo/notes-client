@@ -14,6 +14,7 @@ export const app_metadata = {
   appName: Package.metadata.name,
   version: Package.version,
   license: Package.license,
+  repository: Package.repository,
   websiteName: Package.website_name,
   websiteUrl: Package.url,
   description: 'A simple taking notes application to fit your daily needs.',

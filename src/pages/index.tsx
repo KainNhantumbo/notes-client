@@ -4,18 +4,18 @@ import {
   app_metadata,
 } from '../data/app-data';
 import { NextPage } from 'next';
-import app_logo from '../../public/favicon-192x192.png';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 import { m as motion } from 'framer-motion';
+import { BsArrowRightShort, BsBrowserChrome } from 'react-icons/bs';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import { _home as Container } from '../styles/routes/_home';
-import { BsArrowRightShort, BsGift } from 'react-icons/bs';
-import Image from 'next/image';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import demo_light from '../../public/assets/demo-light.jpg';
 import demo_dark from '../../public/assets/demo-dark.jpg';
+import app_logo from '../../public/favicon-192x192.png';
 
 const Home: NextPage = (): JSX.Element => {
   const { state } = useAppContext();
@@ -31,11 +31,6 @@ const Home: NextPage = (): JSX.Element => {
         <div className='wrapper-container'>
           <article>
             <section className='introduction-container'>
-              <a href='/'>
-                <BsGift />
-                <span>See what's new</span>
-                <BsArrowRightShort />
-              </a>
               <h1>
                 <span>Collect your thoughts and convert into notes</span>
               </h1>
@@ -47,18 +42,27 @@ const Home: NextPage = (): JSX.Element => {
               </p>
 
               <div className='action-buttons'>
-                <motion.button
+                {/* <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   className='download-button'>
                   <span>Download</span>
-                </motion.button>
+                </motion.button> */}
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
-                  className='browser-button'>
+                  className='browser-button'
+                  onClick={() => router.push('/workspace/notes')}>
+                  <BsBrowserChrome />
                   <span>Open in Browser</span>
                 </motion.button>
+                <motion.a
+                  whileTap={{ scale: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  href={app_metadata.repository}>
+                  <span>See what's new</span>
+                  <BsArrowRightShort />
+                </motion.a>
               </div>
 
               <Image
@@ -134,6 +138,7 @@ const Home: NextPage = (): JSX.Element => {
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   className='browser-button'>
+                  <BsBrowserChrome />
                   <span>Open in Browser</span>
                 </motion.button>
               </div>
