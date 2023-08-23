@@ -111,6 +111,47 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     return (): void => clearTimeout(timer);
   }, [state.auth]);
 
+
+  const handleLogout = (): void => {
+    dispatch({
+      type: actions.PROMPT,
+      payload: {
+        ...state,
+        prompt: {
+          status: true,
+          actionButtonMessage: 'Confirm',
+          title: 'Logout',
+          message: 'Do you really want to exit this session and logout?',
+          handleFunction: async (): Promise<void> => {
+            try {
+              await fetchAPI({
+                method: 'post',
+                url: '/api/v1/auth/logout',
+                withCredentials: true,
+              });
+              dispatch({
+                type: actions.AUTH,
+                payload: {
+                  ...state,
+                  auth: {
+                    id: '',
+                    name: '',
+                    token: '',
+                    email: '',
+                    profile_image: '',
+                  },
+                },
+              });
+              router.push('/auth/sign-in');
+            } catch (error: any) {
+              console.error(error?.response?.data?.message ?? error);
+            }
+          },
+        },
+      },
+    });
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeContext>

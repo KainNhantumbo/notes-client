@@ -36,5 +36,45 @@ export const _home = styled.main`
       padding: 30px 20px;
     }
 
+    .introduction-container {
+    }
+
+    .features-container {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 20px;
+      user-select: none;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 15px;
+        width: 280px;
+        height: 100%;
+        border-radius: 10px;
+        padding: 20px;
+        background: rgb(${({ theme }) => theme.foreground});
+        border: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
+
+        h3 {
+          font-size: 1rem;
+          line-height: 1.2rem;
+          font-weight: 500;
+        }
+
+        h4 {
+          font-weight: 500;
+          color: rgb(${({ theme }) => theme.primary});
+        }
+      }
+    }
+
+    .extra-features-container {
+    }
   }
 `;

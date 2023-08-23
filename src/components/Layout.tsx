@@ -1,5 +1,5 @@
-import Logout from './modals/Logout';
 import Cookies from './modals/Cookies';
+import PromptModal from './modals/Prompt';
 import Notification from './modals/Notification';
 import { FC, ReactNode, useEffect } from 'react';
 import { NextRouter, useRouter } from 'next/router';
@@ -30,14 +30,12 @@ const Layout: FC<IProps> = ({ children, metadata, renderHeader }) => {
   return (
     <MotionConfig reducedMotion='user'>
       <LazyMotion strict={true} features={domAnimation}>
-        <>
-          {renderHeader ? <Header /> : null}
-          <HeadWithMeta {...metadata} />
-          <Cookies />
-          <Logout />
-          <Notification />
-          {children}
-        </>
+        {renderHeader ? <Header /> : null}
+        <HeadWithMeta {...metadata} />
+        <Cookies />
+        <Notification key={state.notification.message.split(' ').join('')} />
+        <PromptModal key={state.prompt.message.split(' ').join('')} />
+        {children}
       </LazyMotion>
     </MotionConfig>
   );

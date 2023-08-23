@@ -4,6 +4,9 @@ import {
   BsGear,
   BsGrid,
   BsHeart,
+  BsSearchHeart,
+  BsShare,
+  BsWind,
 } from 'react-icons/bs';
 import Package from '../../package.json';
 
@@ -45,5 +48,22 @@ export const app_features = [
     title: 'Make it Yours',
     content: `Customize your notes with filters, labels, priorities, and more.`,
   },
-  { icon: BsBalloon, title: '', content: '' },
+];
+
+export const app_extra_features = [
+  {
+    icon: BsWind,
+    title: 'Beautiful animations',
+    content: `Everything you do in ${app_metadata.appName} is  nicely animated for better experience.`,
+  },
+  {
+    icon: BsSearchHeart,
+    title: 'Quick find',
+    content: `All you need to do is start typing - name of a note, description or tag - and instantly you're taken there.`,
+  },
+  {
+    icon: BsShare,
+    title: 'Share your notes',
+    content: `Sharing is made simple by exporting your notes to documents files to where you want.`,
+  },
 ];
