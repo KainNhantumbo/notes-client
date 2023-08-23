@@ -40,8 +40,12 @@ const Layout: FC<IProps> = ({
         {renderHeader ? <Header /> : null}
         <HeadWithMeta {...metadata} />
         <Cookies />
-        <Notification key={state.notification.message.split(' ').join('')} />
-        <PromptModal key={state.prompt.message.split(' ').join('')} />
+        <Notification
+          key={state.notification.message.split(' ').join('') || undefined}
+        />
+        <PromptModal
+          key={state.prompt.message.split(' ').join('') || undefined}
+        />
         {children}
         {renderFooter ? <Footer /> : null}
       </LazyMotion>

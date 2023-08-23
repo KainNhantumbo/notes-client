@@ -37,7 +37,7 @@ export const app_features = [
   {
     icon: BsGrid,
     title: 'Powerful features',
-    content: `Blocks, tables, HTML & Markdown, multi document export: ${app_metadata.appName} is jammed with useful features.`,
+    content: `Sharing is made simple by exporting your notes to documents files to where you want - blocks, tables, HTML & Markdown, multi document export: ${app_metadata.appName} is jammed with useful features.`,
   },
   {
     icon: BsHeart,
@@ -50,9 +50,6 @@ export const app_features = [
     title: 'Make it Yours',
     content: `Customize your notes with filters, labels, priorities, and more.`,
   },
-];
-
-export const app_extra_features = [
   {
     icon: BsWind,
     title: 'Beautiful animations',
@@ -62,11 +59,6 @@ export const app_extra_features = [
     icon: BsSearchHeart,
     title: 'Quick find',
     content: `All you need to do is start typing - name of a note, description or tag - and instantly you're taken there.`,
-  },
-  {
-    icon: BsShare,
-    title: 'Share your notes',
-    content: `Sharing is made simple by exporting your notes to documents files to where you want.`,
   },
 ];
 

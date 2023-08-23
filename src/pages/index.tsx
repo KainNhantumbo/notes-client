@@ -1,18 +1,14 @@
-import {
-  app_extra_features,
-  app_features,
-  app_metadata,
-} from '../data/app-data';
+import { BsArrowRightShort, BsBrowserChrome } from 'react-icons/bs';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Layout from '../components/Layout';
 import { m as motion } from 'framer-motion';
-import { BsArrowRightShort, BsBrowserChrome } from 'react-icons/bs';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import { _home as Container } from '../styles/routes/_home';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
+import { app_features, app_metadata } from '../data/app-data';
 import demo_light from '../../public/assets/demo-light.jpg';
 import demo_dark from '../../public/assets/demo-dark.jpg';
 import app_logo from '../../public/favicon-192x192.png';
@@ -87,24 +83,6 @@ const Home: NextPage = (): JSX.Element => {
               ))}
             </section>
 
-            <section className='extra-features-container'>
-              {app_extra_features.map((feature, index) => (
-                <motion.div
-                  whileHover={{
-                    boxShadow: `0 0 25px rgba(${theme.black}, 0.09)`,
-                    border: '1px solid transparent',
-                  }}
-                  title={feature.title}
-                  key={String(index)}>
-                  <h3>
-                    <feature.icon />
-                    <span>{feature.title}</span>
-                  </h3>
-                  <p>{feature.content}</p>
-                </motion.div>
-              ))}
-            </section>
-
             <section className='call-to-action'>
               <Image
                 width={192}
@@ -114,21 +92,15 @@ const Home: NextPage = (): JSX.Element => {
                 alt={`${app_metadata.appName} logo image`}
               />
 
-              <h3>
+              <h2>
                 <span>Ready to get started?</span>
-              </h3>
+              </h2>
               <p>
-                Don't have a account yet? Sign up for a free account and take
+                Don't have an account yet? Sign up for a free account and take
                 your produtivity to next level...
               </p>
 
               <div className='action-buttons'>
-                <motion.button
-                  whileTap={{ scale: 0.8 }}
-                  whileHover={{ scale: 1.05 }}
-                  className='download-button'>
-                  <span>Download</span>
-                </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
