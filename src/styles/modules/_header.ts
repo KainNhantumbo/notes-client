@@ -14,13 +14,6 @@ export const _header = styled.header`
   font-size: 0.9rem;
   z-index: 20000;
 
-  * {
-    ::selection {
-      background: rgb(${({ theme }) => theme.background_shade});
-      color: rgb(${({ theme }) => theme.primary_shade});
-    }
-  }
-
   .wrapper {
     margin: 0 auto;
     @media screen and (min-width: 1200px) {
@@ -35,7 +28,7 @@ export const _header = styled.header`
 
   .logo {
     position: absolute;
-    top: calc(50% - 13px);
+    top: calc(50% - 14px);
     left: 30px;
     cursor: pointer;
     margin-right: 40px;

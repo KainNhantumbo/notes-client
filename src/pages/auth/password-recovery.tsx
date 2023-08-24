@@ -1,9 +1,10 @@
 import { NextPage } from 'next';
 import fetch from '@/src/config/client';
+import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
+import { BsEnvelopeAt } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import { SubmitEvent } from '@/src/@types';
-import { IoMailOutline } from 'react-icons/io5';
 import { app_metadata } from '@/src/data/app-data';
 import { PulseLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
@@ -45,13 +46,15 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
 
   return (
     <Layout
+      renderFooter
+      renderHeader
       metadata={{
         title: `${app_metadata.appName} | Password Recovery`,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }}>
       <Container>
-        <main>
+        <div className='wrapper-container'>
           <article>
             <div className='form-container'>
               <h2>Password Recovery</h2>
@@ -62,7 +65,7 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>
                   <label htmlFor='email'>
-                    <IoMailOutline />
+                    <BsEnvelopeAt />
                     <span>E-mail</span>
                   </label>
                   <input
@@ -79,29 +82,28 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
                 {error.status && !loading && (
                   <span className='error-message'>{error.message}</span>
                 )}
-                {loading && !error.status && (
-                  <>
-                    <PulseLoader
-                      color={`rgb(${theme.primary})`}
-                      loading={loading}
-                      aria-placeholder='Processando...'
-                      cssOverride={{
-                        display: 'block',
-                        margin: '0 auto',
-                      }}
-                    />
-                  </>
-                )}
-                <button
+                {loading && !error.status ? (
+                  <PulseLoader
+                    color={`rgb(${theme.primary})`}
+                    loading={loading}
+                    aria-placeholder='Loading...'
+                    cssOverride={{
+                      display: 'block',
+                      margin: '0 auto',
+                    }}
+                  />
+                ) : null}
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
                   className='login'
                   type='submit'
                   disabled={loading || error.status ? true : false}>
                   <span>Confirm and send request</span>
-                </button>
+                </motion.button>
               </form>
             </div>
           </article>
-        </main>
+        </div>
       </Container>
     </Layout>
   );

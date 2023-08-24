@@ -174,17 +174,17 @@ const SignUp: NextPage = (): JSX.Element => {
                   {error.status && !loading ? error.message : `  `}
                 </span>
 
-                {
+                {loading && !error.status ? (
                   <PulseLoader
                     color={`rgb(${theme.primary})`}
-                    loading={loading && !error.status && true}
-                    aria-placeholder='Processando...'
+                    loading={loading}
+                    aria-placeholder='Loading...'
                     cssOverride={{
                       display: 'block',
                       margin: '0 auto',
                     }}
                   />
-                }
+                ) : null}
 
                 <motion.button
                   whileTap={{ scale: 0.8 }}
