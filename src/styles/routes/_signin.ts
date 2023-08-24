@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import {
-  BaseButton,
-  StyledLabels,
-  StyledInputs,
-  BaseButtonOutline,
-} from '../defaults';
+import { BaseButton, StyledLabels, StyledInputs } from '../defaults';
 
 export const _signin = styled.main`
   width: 100%;
@@ -94,28 +89,16 @@ export const _signin = styled.main`
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
-        gap: 18px;
+        gap: 20px;
 
-        .form-section {
+        .input-field {
           display: flex;
-          flex-direction: row;
-          width: 100%;
+          flex-direction: column;
           gap: 10px;
-
-          @media screen and (max-width: 465px) {
-            flex-direction: column;
+          label {
+            ${StyledLabels};
           }
-
-          .form-element {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            label {
-              ${StyledLabels};
-            }
-            ${StyledInputs}
-          }
+          ${StyledInputs}
         }
 
         .error-message {
