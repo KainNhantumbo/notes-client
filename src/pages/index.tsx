@@ -11,6 +11,12 @@ import demo_light from '@/public/assets/demo-light.jpg';
 import { _home as Container } from '../styles/routes/_home';
 import { app_features, app_metadata } from '../data/app-data';
 import { BsArrowRightShort, BsBrowserChrome } from 'react-icons/bs';
+import {
+  $convertFromMarkdownString,
+  $convertToMarkdownString,
+  TRANSFORMERS,
+} from '@lexical/markdown';
+import {$generateHtmlFromNodes} from '@lexical/html'
 
 const Home: NextPage = (): JSX.Element => {
   const { darkmode } = useThemeContext();
