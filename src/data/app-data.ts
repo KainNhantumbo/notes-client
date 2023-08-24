@@ -37,7 +37,7 @@ export const app_features = [
   {
     icon: BsGrid,
     title: 'Powerful features',
-    content: `Sharing is made simple by exporting your notes to documents files to where you want - blocks, tables, HTML & Markdown, multi document export: ${app_metadata.appName} is jammed with useful features.`,
+    content: `Sharing is made simple by exporting your notes to where you want - PDF, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`,
   },
   {
     icon: BsHeart,
@@ -63,11 +63,11 @@ export const app_features = [
 ];
 
 export const footerAnchors = [
-  { name: 'Privacy policy', anchor: '/docs/privacy-policy' },
+  { name: 'Privacy Policy', anchor: '/docs/privacy-policy' },
   { name: 'Terms of use', anchor: '/docs/terms-of-use' },
   { name: 'Contact', anchor: '/docs/contact' },
+  { name: 'FAQ', anchor: '/docs/faq' },
   { name: 'Donate', anchor: 'https://www.buymeacoffee.com/nhantumbokU' },
   { name: 'Github', anchor: app_metadata.repository },
-  { name: 'FAQ', anchor: '/docs/faq' },
   { name: 'Portfolio', anchor: 'https://portifolio-dev-mu.vercel.app' },
 ].sort((a, b) => (a.name > b.name ? 1 : -1));

@@ -24,7 +24,7 @@ export const _footer = styled.footer`
     max-width: 1280px;
     display: flex;
     flex-flow: row wrap;
-    gap: 12px;
+    gap: 20px;
     padding: 0 30px;
     justify-content: flex-start;
     margin: 0 auto;

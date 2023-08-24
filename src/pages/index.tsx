@@ -68,7 +68,7 @@ const Home: NextPage = (): JSX.Element => {
                 <motion.div
                   whileHover={{
                     boxShadow: `0 0 25px rgba(${theme.black}, 0.09)`,
-                    border: '1px solid transparent',
+                    translateY: -8,
                   }}
                   title={feature.title}
                   key={String(index)}>

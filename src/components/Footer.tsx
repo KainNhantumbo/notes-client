@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { app_metadata, footerAnchors } from '../data/app-data';
-import { BsMoon, BsSun, BsDisplay } from 'react-icons/bs';
+import { BsSun, BsDisplay, BsMoonStars } from 'react-icons/bs';
 import { useThemeContext } from '../context/ThemeContext';
 import { _footer as Container } from '../styles/modules/_footer';
 
@@ -36,7 +36,7 @@ const Footer: FC = (): JSX.Element => {
             title='Dark mode'
             className={darkmode ? 'active' : ''}
             onClick={setDarkMode}>
-            <BsMoon />
+            <BsMoonStars />
           </button>
         </div>
       </div>

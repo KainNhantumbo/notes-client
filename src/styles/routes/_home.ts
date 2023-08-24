@@ -166,8 +166,6 @@ export const _home = styled.main`
       }
     }
 
-    .extra-features-container {
-    }
 
     .call-to-action {
       display: flex;
