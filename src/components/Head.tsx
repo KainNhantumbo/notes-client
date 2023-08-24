@@ -1,18 +1,41 @@
 import Head from 'next/head';
 import type { FC } from 'react';
 import { app_metadata } from '../data/app-data';
+import { Inter, Roboto, Nunito } from 'next/font/google';
+
+const inter = Inter({
+  weight: ['400', '500', '600'],
+  style: ['normal'],
+  subsets: ['latin'],
+});
+
+const roboto = Roboto({
+  weight: ['400', '500'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const nunito = Nunito({
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export type TProps =
   | {
       title?: string;
       createdAt?: string;
       updatedAt?: string;
-      tags?: string;
     }
   | undefined;
 
 const HeadWithMeta: FC<TProps> = (props): JSX.Element => (
   <Head>
+    <link rel='manifest' href='/manifest.json' />
+    <link rel='apple-touch-icon' href='/favicon-192x192.png' />
+    <meta name='theme-color' content='#000' />
     <meta name='apple-mobile-web-app-title' content={app_metadata.appName} />
     <meta
       name='viewport'
@@ -44,9 +67,15 @@ const HeadWithMeta: FC<TProps> = (props): JSX.Element => (
     <meta property='article:published_time' content={props?.createdAt} />
     <meta property='article:modified_time' content={props?.updatedAt} />
     <meta name='author' content={app_metadata.websiteName} />
-    <meta name='tags' content={props?.tags || ''} />
+    <meta name='tags' content={app_metadata.tags} />
     <meta name='description' content={app_metadata.description} />
     <title>{props?.title || app_metadata.appName}</title>
+    <style jsx global>{`
+      html {
+        font-family: ${inter.style.fontFamily}, ${inter.style.fontFamily},
+          ${nunito.style.fontFamily};
+      }
+    `}</style>
   </Head>
 );
 

@@ -11,5 +11,4 @@ module.exports = nextPWA({
   swcMinify: true,
   compiler: { styledComponents: true },
   images: { domains: ['https://res.cloudinary.com/'] },
-  experimental: { scrollRestoration: true },
 });

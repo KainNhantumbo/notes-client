@@ -18,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
     position: relative;
     color: rgb(${({ theme }) => theme.font});
     background: rgb(${({ theme }) => theme.foreground});
-    font-family: Inter, Nunito,'Zilla Slab', 'Open Sans', Roboto, 'Helvetica Neue', -apple-system, sans-serif;
+    font-family: Inter, Roboto, Nunito,'Zilla Slab', 'Open Sans', Roboto, 'Helvetica Neue', -apple-system, sans-serif;
   }
 
   html {

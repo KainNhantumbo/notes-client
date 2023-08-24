@@ -4,7 +4,6 @@ import {
   BsGrid,
   BsHeart,
   BsSearchHeart,
-  BsShare,
   BsWind,
 } from 'react-icons/bs';
 import Package from '../../package.json';
@@ -15,6 +14,7 @@ export const app_metadata = {
   license: Package.license,
   repository: Package.repository,
   websiteName: Package.website_name,
+  tags: Package.keywords.join(' '),
   websiteUrl: Package.url,
   description: 'A simple taking notes application to fit your daily needs.',
   copyright: `© ${new Date().getFullYear()} ${Package.metadata.name} | ${
