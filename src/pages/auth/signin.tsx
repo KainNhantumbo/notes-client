@@ -48,7 +48,7 @@ const SignIn: NextPage = (): JSX.Element => {
         payload: { ...state, auth: { ...data } },
       });
 
-      router.push(`/workspace/notes`);
+      router.push(`/workspace`);
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       setError({

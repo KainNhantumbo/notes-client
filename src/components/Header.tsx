@@ -86,7 +86,7 @@ const Header: FC = (): JSX.Element => {
                   <button
                     title='Painel de Controle e Conta'
                     className='user-account'
-                    onClick={() => push(`/workspace/notes`)}>
+                    onClick={() => push(`/workspace`)}>
                     {state.auth.profile_image ? (
                       <img
                         loading='lazy'

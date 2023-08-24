@@ -41,7 +41,7 @@ const Home: NextPage = (): JSX.Element => {
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   className='browser-button'
-                  onClick={() => router.push('/workspace/notes')}>
+                  onClick={() => router.push('/workspace')}>
                   <BsBrowserChrome />
                   <span>Open in Browser</span>
                 </motion.button>

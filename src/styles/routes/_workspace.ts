@@ -1,3 +1,3 @@
 import styled from "styled-components";
 
-export const _folders = styled.main``
+export const _workspace = styled.main``
