@@ -5,15 +5,15 @@ import fetch from '../../config/client';
 import actions from '@/src/data/actions';
 import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
+import { PulseLoader } from 'react-spinners';
 import { app_metadata } from '@/src/data/app-data';
 import { NextRouter, useRouter } from 'next/router';
-import { _signup as Container } from '@/src/styles/routes/_signup';
 import { useAppContext } from '@/src/context/AppContext';
 import { useEffect, useState } from 'react';
-import { InputEvents, SubmitEvent, TAuth } from '@/src/@types';
+import { InputEvents, SubmitEvent } from '@/src/@types';
 import media_login from '@/public/assets/media-login.jpg';
 import { DefaultTheme, useTheme } from 'styled-components';
-import { PulseLoader } from 'react-spinners';
+import { _signup as Container } from '@/src/styles/routes/_signup';
 import { BsEnvelopeAt, BsLock, BsPass, BsThreeDots } from 'react-icons/bs';
 
 const SignUp: NextPage = (): JSX.Element => {
@@ -41,8 +41,7 @@ const SignUp: NextPage = (): JSX.Element => {
     setLoading(true);
     try {
       await fetch({ method: 'post', url: '/api/v1/users', data: state.signUp });
-
-      // router.push(`/workspace/notes`);
+      router.push(`/auth/signup-success`);
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       setError({
@@ -65,7 +64,11 @@ const SignUp: NextPage = (): JSX.Element => {
     <Layout
       renderFooter
       renderHeader
-      metadata={{ title: `${app_metadata.appName} | Sign Up` }}>
+      metadata={{
+        title: `${app_metadata.appName} | Sign Up`,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }}>
       <Container>
         <div className='wrapper-container'>
           <Image

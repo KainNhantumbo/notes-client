@@ -71,7 +71,11 @@ const SignIn: NextPage = (): JSX.Element => {
     <Layout
       renderFooter
       renderHeader
-      metadata={{ title: `${app_metadata.appName} | Sign In` }}>
+      metadata={{
+        title: `${app_metadata.appName} | Sign In`,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }}>
       <Container>
         <div className='wrapper-container'>
           <Image
