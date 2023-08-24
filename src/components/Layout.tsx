@@ -6,7 +6,7 @@ import Notification from './modals/Notification';
 import { FC, ReactNode, useEffect } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
-import HeadWithMeta, { TProps as HeadProps } from './Head';
+import HeadContainer, { TProps as HeadProps } from './Head';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 
 interface IProps {
@@ -38,7 +38,7 @@ const Layout: FC<IProps> = ({
     <MotionConfig reducedMotion='user'>
       <LazyMotion strict={true} features={domAnimation}>
         {renderHeader ? <Header /> : null}
-        <HeadWithMeta {...metadata} />
+        <HeadContainer {...metadata} />
         <Cookies />
         <Notification
           key={state.notification.message.split(' ').join('') || undefined}

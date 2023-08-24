@@ -31,7 +31,7 @@ export type TProps =
     }
   | undefined;
 
-const HeadWithMeta: FC<TProps> = (props): JSX.Element => (
+const HeadContainer: FC<TProps> = (props): JSX.Element => (
   <Head>
     <link rel='manifest' href='/manifest.json' />
     <link rel='apple-touch-icon' href='/favicon-192x192.png' />
@@ -72,11 +72,11 @@ const HeadWithMeta: FC<TProps> = (props): JSX.Element => (
     <title>{props?.title || app_metadata.appName}</title>
     <style jsx global>{`
       html {
-        font-family: ${inter.style.fontFamily}, ${inter.style.fontFamily},
+        font-family: ${inter.style.fontFamily}, ${roboto.style.fontFamily},
           ${nunito.style.fontFamily};
       }
     `}</style>
   </Head>
 );
 
-export default HeadWithMeta;
+export default HeadContainer;

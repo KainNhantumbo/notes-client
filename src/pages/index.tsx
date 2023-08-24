@@ -8,8 +8,8 @@ import demo_dark from '@/public/assets/demo-dark.jpg';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import demo_light from '@/public/assets/demo-light.jpg';
-import { _home as Container } from '../styles/routes/_home';
-import { app_features, app_metadata } from '../data/app-data';
+import { _home as Container } from '@/src/styles/routes/_home';
+import { app_features, app_metadata } from '@/src/data/app-data';
 import { BsArrowRightShort, BsBrowserChrome } from 'react-icons/bs';
 
 const Home: NextPage = (): JSX.Element => {

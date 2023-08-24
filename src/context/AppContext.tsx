@@ -7,13 +7,13 @@ import {
   Dispatch,
   useEffect,
 } from 'react';
-import { TAuth } from '../@types';
-import fetch from '../config/client';
-import actions from '../data/actions';
+import { TAuth } from '@/src/@types';
+import fetch from '@/src/config/client';
+import actions from '@/src/data/actions';
 import ThemeContext from './ThemeContext';
 import { initialState, reducer } from '../libs/reducer';
 import { NextRouter, useRouter } from 'next/router';
-import { TAction, TState } from '../@types/reducer';
+import { TAction, TState } from '@/src/@types/reducer';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
@@ -110,7 +110,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     }, 1000 * 60 * 4);
     return (): void => clearTimeout(timer);
   }, [state.auth]);
-
 
   const handleLogout = (): void => {
     dispatch({
