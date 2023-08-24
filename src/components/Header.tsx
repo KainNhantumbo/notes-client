@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { BsArrowRight, BsBalloon, BsX } from 'react-icons/bs';
-import { app_metadata, navigationAnchors } from '../data/app-data';
+import { BsArrowRight, BsList, BsX } from 'react-icons/bs';
 import { BiUser } from 'react-icons/bi';
 import { useState, useEffect, FC } from 'react';
 import { NextRouter, useRouter } from 'next/router';
@@ -9,6 +8,7 @@ import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import logo from '../../public/favicon-192x192.png';
 import { _header as Container } from '../styles/modules/_header';
+import { app_metadata, navigationAnchors } from '../data/app-data';
 
 const Header: FC = (): JSX.Element => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
@@ -111,7 +111,7 @@ const Header: FC = (): JSX.Element => {
           aria-label='Toogle menu'
           className='toggle-btn'
           onClick={toggleMenu}>
-          {!isMenu ? <BsBalloon /> : <BsX />}
+          {!isMenu ? <BsList /> : <BsX />}
         </motion.button>
       </div>
     </Container>

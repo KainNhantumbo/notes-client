@@ -70,138 +70,140 @@ const SignUp: NextPage = (): JSX.Element => {
       renderHeader
       metadata={{ title: `${app_metadata.appName} | Sign Up` }}>
       <Container>
-        <Image
-          src={media_login}
-          width={undefined}
-          height={undefined}
-          alt='background image'
-          priority={false}
-        />
+        <div className='wrapper-container'>
+          <Image
+            src={media_login}
+            width={undefined}
+            height={undefined}
+            alt='background image'
+            priority={false}
+          />
 
-        <article>
-          <div className='form-container'>
-            <h2>Hi, welcome to {app_metadata.appName}</h2>
-            <p>Please fill the form below to create a new user account.</p>
-            <form onSubmit={handleSubmit}>
-              <section className='form-section'>
-                <div className='form-element'>
-                  <label htmlFor='first_name'>
-                    <BsThreeDots />
-                    <span>First name</span>
-                  </label>
-                  <input
-                    type='text'
-                    id='first_name'
-                    name='first_name'
-                    placeholder='Your last name'
-                    aria-label='Your last name'
-                    required={true}
-                    onChange={(e): void => handleChange(e)}
+          <article>
+            <div className='form-container'>
+              <h2>Hi, welcome to {app_metadata.appName}</h2>
+              <p>Please fill the form below to create a new user account.</p>
+              <form onSubmit={handleSubmit}>
+                <section className='form-section'>
+                  <div className='form-element'>
+                    <label htmlFor='first_name'>
+                      <BsThreeDots />
+                      <span>First name</span>
+                    </label>
+                    <input
+                      type='text'
+                      id='first_name'
+                      name='first_name'
+                      placeholder='Your last name'
+                      aria-label='Your last name'
+                      required={true}
+                      onChange={(e): void => handleChange(e)}
+                    />
+                  </div>
+                  <div className='form-element'>
+                    <label htmlFor='last_name'>
+                      <BsThreeDots />
+                      <span>Last name</span>
+                    </label>
+                    <input
+                      type='text'
+                      id='last_name'
+                      name='last_name'
+                      placeholder='Your last name'
+                      aria-label='Your last name'
+                      required={true}
+                      onChange={(e): void => handleChange(e)}
+                    />
+                  </div>
+                </section>
+
+                <section className='form-section'>
+                  <div className='form-element'>
+                    <label htmlFor='email'>
+                      <BsEnvelopeAt />
+                      <span>E-mail</span>
+                    </label>
+                    <input
+                      type='email'
+                      id='email'
+                      name='email'
+                      placeholder='Your email'
+                      aria-label='Your email'
+                      required
+                      onChange={(e): void => handleChange(e)}
+                    />
+                  </div>
+                  <div className='form-element'>
+                    <label htmlFor='password'>
+                      <BsPass />
+                      <span>Password</span>
+                    </label>
+                    <input
+                      type='password'
+                      id='password'
+                      name='password'
+                      minLength={8}
+                      aria-hidden='true'
+                      placeholder='Password'
+                      aria-label='Password'
+                      onChange={(e): void => handleChange(e)}
+                    />
+                  </div>
+                </section>
+
+                <section className='form-section'>
+                  <div className='form-element'>
+                    <label htmlFor='confirm_password'>
+                      <BsLock />
+                      <span>Confirm password</span>
+                    </label>
+                    <input
+                      type='password'
+                      id='confirm_password'
+                      name='confirm_password'
+                      aria-hidden='true'
+                      minLength={8}
+                      placeholder='Confirm your password'
+                      aria-label='Confirm your password'
+                      onChange={(e): void => handleChange(e)}
+                    />
+                  </div>
+                </section>
+
+                <span className='error-message'>
+                  {error.status && !loading ? error.message : `  `}
+                </span>
+
+                {
+                  <PulseLoader
+                    color={`rgb(${theme.primary})`}
+                    loading={loading && !error.status && true}
+                    aria-placeholder='Processando...'
+                    cssOverride={{
+                      display: 'block',
+                      margin: '0 auto',
+                    }}
                   />
-                </div>
-                <div className='form-element'>
-                  <label htmlFor='last_name'>
-                    <BsThreeDots />
-                    <span>Last name</span>
-                  </label>
-                  <input
-                    type='text'
-                    id='last_name'
-                    name='last_name'
-                    placeholder='Your last name'
-                    aria-label='Your last name'
-                    required={true}
-                    onChange={(e): void => handleChange(e)}
-                  />
-                </div>
-              </section>
+                }
 
-              <section className='form-section'>
-                <div className='form-element'>
-                  <label htmlFor='email'>
-                    <BsEnvelopeAt />
-                    <span>E-mail</span>
-                  </label>
-                  <input
-                    type='email'
-                    id='email'
-                    name='email'
-                    placeholder='Your email'
-                    aria-label='Your email'
-                    required
-                    onChange={(e): void => handleChange(e)}
-                  />
+                <button
+                  className='next'
+                  type='submit'
+                  disabled={loading || error.status ? true : false}>
+                  <span>Signup</span>
+                </button>
+              </form>
+              <div className='sign-in-options'>
+                <div className='signup-request'>
+                  Already have an account?
+                  <Link href={'/auth/sign-in'}>
+                    <span> Sign in.</span>
+                  </Link>
                 </div>
-                <div className='form-element'>
-                  <label htmlFor='password'>
-                    <BsPass />
-                    <span>Password</span>
-                  </label>
-                  <input
-                    type='password'
-                    id='password'
-                    name='password'
-                    minLength={8}
-                    aria-hidden='true'
-                    placeholder='Password'
-                    aria-label='Password'
-                    onChange={(e): void => handleChange(e)}
-                  />
-                </div>
-              </section>
-
-              <section className='form-section'>
-                <div className='form-element'>
-                  <label htmlFor='confirm_password'>
-                    <BsLock />
-                    <span>Confirm password</span>
-                  </label>
-                  <input
-                    type='password'
-                    id='confirm_password'
-                    name='confirm_password'
-                    aria-hidden='true'
-                    minLength={8}
-                    placeholder='Confirm your password'
-                    aria-label='Confirm your password'
-                    onChange={(e): void => handleChange(e)}
-                  />
-                </div>
-              </section>
-
-              <span className='error-message'>
-                {error.status && !loading ? error.message : `  `}
-              </span>
-
-              {
-                <PulseLoader
-                  color={`rgb(${theme.primary})`}
-                  loading={loading && !error.status && true}
-                  aria-placeholder='Processando...'
-                  cssOverride={{
-                    display: 'block',
-                    margin: '0 auto',
-                  }}
-                />
-              }
-
-              <button
-                className='next'
-                type='submit'
-                disabled={loading || error.status ? true : false}>
-                <span>Signup</span>
-              </button>
-            </form>
-            <div className='sign-in-options'>
-              <div className='signup-request'>
-                Already have an account?
-                <Link href={'/auth/sign-in'}>
-                  <span> Sign in.</span>
-                </Link>
               </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </Container>
     </Layout>
   );

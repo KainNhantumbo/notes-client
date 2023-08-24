@@ -1,15 +1,16 @@
-import styled from "styled-components";
-import { BaseButton, StyledInputs, StyledLabels } from "../defaults";
+import styled from 'styled-components';
+import { BaseButton, StyledInputs, StyledLabels } from '../defaults';
 
 export const _signup = styled.main`
- width: 100%;
+  width: 100%;
   min-height: 100vh;
-  padding: 60px 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  background: rgba(${({ theme }) => theme.background_shade}, 0.3);
+  display: grid;
+  place-content: center center;
+  place-items: center center;
+
+  @media screen and (max-width: 1140px) {
+    display: flex;
+  }
 
   * {
     ::selection {
@@ -18,18 +19,36 @@ export const _signup = styled.main`
     }
   }
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .wrapper-container {
     width: 100%;
-    z-index: -1;
-    object-fit: cover;
-    filter: blur(3px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    background: rgba(${({ theme }) => theme.background_shade}, 0.3);
+    border-radius: 12px;
+
+    @media screen and (max-width: 1140px) {
+      align-self: center;
+      width: fit-content;
+      margin: 40px 12px 12px;
+      box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
+    }
   }
-  article {
-    z-index: 100;
+
+  img {
     width: 100%;
+    object-fit: cover;
+    border-radius: 12px 0 0 12px;
+    @media screen and (max-width: 1140px) {
+      display: none;
+    }
+  }
+
+  article {
+    width: 100%;
+    height: 100%;
     display: grid;
     place-content: center;
     place-items: center;
@@ -37,20 +56,19 @@ export const _signup = styled.main`
 
     .form-container {
       width: 100%;
-      height: auto;
+      height: 100%;
       max-width: 500px;
       display: flex;
       gap: 20px;
       justify-content: flex-start;
       flex-direction: column;
-      border-radius: 20px;
-      padding: 30px 25px;
-      margin: 25px;
-      background: rgb(${({ theme }) => theme.foreground});
-      box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
 
       @media screen and (min-width: 440px) {
         min-width: 400px;
+      }
+
+      @media screen and (max-width: 365px) {
+        margin-top: 80px;
       }
 
       h2 {
@@ -79,9 +97,10 @@ export const _signup = styled.main`
           width: 100%;
           gap: 10px;
 
-          @media screen and (max-width: 655px) {
+          @media screen and (max-width: 465px) {
             flex-direction: column;
           }
+
           .form-element {
             display: flex;
             flex-direction: column;
@@ -128,8 +147,4 @@ export const _signup = styled.main`
       }
     }
   }
-
-
-
-
-`
+`;

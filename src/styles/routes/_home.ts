@@ -1,46 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { BaseButton } from '../defaults';
-
-const Buttons = css`
-  display: flex;
-  flex-flow: row wrap;
-  gap: 20px;
-  align-self: center;
-
-  button {
-    ${BaseButton}
-    border-radius: 8px;
-    padding: 8px 12px;
-  }
-
-  a {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    border-radius: 8px;
-    color: rgb(${({ theme }) => theme.font});
-    width: fit-content;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    padding: 10px 12px;
-    overflow: hidden;
-    background: rgba(${({ theme }) => theme.primary_shade}, 0.2);
-    font-weight: 500;
-
-    :hover {
-      color: rgb(${({ theme }) => theme.primary_shade});
-    }
-
-    svg {
-      width: 20px;
-      height: 20px;
-      box-shadow: 0 12px 35px rgba(${({ theme }) => theme.black}, 0.5);
-      border-radius: 5px;
-      background: rgb(${({ theme }) => theme.foreground});
-    }
-  }
-`;
 
 export const _home = styled.main`
   position: relative;
@@ -100,7 +59,45 @@ export const _home = styled.main`
       }
 
       .action-buttons {
-        ${Buttons}
+        display: flex;
+        flex-flow: row wrap;
+        gap: 12px;
+        align-self: center;
+        justify-content: center;
+
+        button {
+          ${BaseButton}
+          border-radius: 8px;
+          padding: 8px 12px;
+        }
+
+        a {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 5px;
+          border-radius: 8px;
+          color: rgb(${({ theme }) => theme.font});
+          width: fit-content;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          padding: 10px 12px;
+          overflow: hidden;
+          background: rgba(${({ theme }) => theme.primary_shade}, 0.2);
+          font-weight: 500;
+
+          :hover {
+            color: rgb(${({ theme }) => theme.primary_shade});
+          }
+
+          svg {
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 12px 35px rgba(${({ theme }) => theme.black}, 0.5);
+            border-radius: 5px;
+            background: rgb(${({ theme }) => theme.foreground});
+          }
+        }
       }
 
       img {
@@ -120,10 +117,8 @@ export const _home = styled.main`
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       justify-items: center;
-      gap: 25px;
-      margin-top: 20px;
       user-select: none;
-      padding: 20px 0;
+      gap: 25px;
 
       @media screen and (max-width: 980px) {
         grid-template-columns: repeat(2, 1fr);
@@ -166,7 +161,6 @@ export const _home = styled.main`
       }
     }
 
-
     .call-to-action {
       display: flex;
       flex-direction: column;
@@ -199,7 +193,11 @@ export const _home = styled.main`
       }
 
       .action-buttons {
-        ${Buttons}
+        button {
+          ${BaseButton}
+          border-radius: 8px;
+          padding: 8px 12px;
+        }
       }
     }
   }
