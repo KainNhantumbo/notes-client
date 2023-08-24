@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { NextPage } from 'next';
 import fetch from '../../config/client';
 import actions from '@/src/data/actions';
+import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
 import { app_metadata } from '@/src/data/app-data';
 import { NextRouter, useRouter } from 'next/router';
@@ -12,7 +14,6 @@ import { InputEvents, SubmitEvent, TAuth } from '@/src/@types';
 import media_login from '@/public/assets/media-login.jpg';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { PulseLoader } from 'react-spinners';
-import Link from 'next/link';
 import { BsEnvelopeAt, BsLock, BsPass, BsThreeDots } from 'react-icons/bs';
 
 const SignUp: NextPage = (): JSX.Element => {
@@ -39,11 +40,7 @@ const SignUp: NextPage = (): JSX.Element => {
     e.preventDefault();
     setLoading(true);
     try {
-      await fetch({
-        method: 'post',
-        url: '/api/v1/auth/login',
-        data: state.signUp,
-      });
+      await fetch({ method: 'post', url: '/api/v1/users', data: state.signUp });
 
       // router.push(`/workspace/notes`);
     } catch (error: any) {
@@ -186,17 +183,18 @@ const SignUp: NextPage = (): JSX.Element => {
                   />
                 }
 
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
                   className='next'
                   type='submit'
                   disabled={loading || error.status ? true : false}>
                   <span>Signup</span>
-                </button>
+                </motion.button>
               </form>
               <div className='sign-in-options'>
                 <div className='signup-request'>
                   Already have an account?
-                  <Link href={'/auth/sign-in'}>
+                  <Link href={'/auth/signin'}>
                     <span> Sign in.</span>
                   </Link>
                 </div>
