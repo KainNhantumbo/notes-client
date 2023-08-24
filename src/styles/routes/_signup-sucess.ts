@@ -18,7 +18,7 @@ export const _signinSuccess = styled.main`
     }
   }
 
-  main {
+  .wrapper-container {
     display: flex;
     flex-direction: column;
     gap: 50px;

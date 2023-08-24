@@ -40,7 +40,7 @@ const Header: FC = (): JSX.Element => {
               height={134}
             />{' '}
           </Link>
-          <h3>
+          <h3 onClick={() => push('/')}>
             <span>{app_metadata.appName}</span>
           </h3>
         </div>
@@ -77,7 +77,7 @@ const Header: FC = (): JSX.Element => {
                     </Link>
                     <Link href={'/auth/signup'} className='sign-in-btn'>
                       <BsArrowRight />
-                      <span>Sign Up</span>
+                      <span>Sign up</span>
                     </Link>
                   </>
                 ) : null}
@@ -86,7 +86,7 @@ const Header: FC = (): JSX.Element => {
                   <button
                     title='Painel de Controle e Conta'
                     className='user-account'
-                    onClick={() => push(`/tabs/notes`)}>
+                    onClick={() => push(`/workspace/notes`)}>
                     {state.auth.profile_image ? (
                       <img
                         loading='lazy'

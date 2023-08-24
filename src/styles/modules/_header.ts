@@ -43,7 +43,7 @@ export const _header = styled.header`
     flex-direction: row;
     align-items: center;
     gap: 12px;
-
+    user-select: none;
     a {
       position: relative;
     }
@@ -253,7 +253,7 @@ export const _header = styled.header`
 
   .toggle-btn {
     position: fixed;
-    top:9px;
+    top: 9px;
     right: 20px;
     border: none;
     border-radius: 8px;

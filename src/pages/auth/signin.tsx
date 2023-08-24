@@ -144,7 +144,7 @@ const SignIn: NextPage = (): JSX.Element => {
                 <div className='signup-request'>
                   Don't have a account yet?
                   <Link href={'/auth/signup'}>
-                    <span> Signup.</span>
+                    <span> Sign up.</span>
                   </Link>
                 </div>
               </div>

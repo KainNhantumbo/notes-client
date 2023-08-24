@@ -15,7 +15,7 @@ const SignupSuccess: NextPage = (): JSX.Element => (
       updatedAt: new Date().toISOString(),
     }}>
     <Container>
-      <main>
+      <div className='wrapper-container'>
         <article>
           <section>
             <div>
@@ -36,7 +36,7 @@ const SignupSuccess: NextPage = (): JSX.Element => (
             </Link>
           </section>
         </article>
-      </main>
+      </div>
     </Container>
   </Layout>
 );
