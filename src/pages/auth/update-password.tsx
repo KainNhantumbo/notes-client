@@ -2,33 +2,45 @@ import { NextPage } from 'next';
 import fetch from '@/src/config/client';
 import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
-import { BsEnvelopeAt } from 'react-icons/bs';
+import { BsEnvelopeAt, BsThreeDots } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
-import { SubmitEvent } from '@/src/@types';
+import { InputEvents, SubmitEvent } from '@/src/@types';
 import { app_metadata } from '@/src/data/app-data';
 import { PulseLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
-import { NextRouter, useRouter } from 'next/router';
 import { _recoveryPassword as Container } from '@/src/styles/routes/_recovery-pasword';
 
-const PasswordRecovery: NextPage = (): JSX.Element => {
+const UpdatePassword: NextPage = (): JSX.Element => {
   const theme: DefaultTheme = useTheme();
-  const router: NextRouter = useRouter();
-  const [email, setEmail] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
+  const [passwords, setPasswords] = useState({
+    password: '',
+    confirm_password: '',
+  });
+
+  const handleChange = (e: InputEvents): void => {
+    setPasswords((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = async (e: SubmitEvent): Promise<void> => {
     e.preventDefault();
+    if (passwords.password !== passwords.confirm_password)
+      return setError({
+        status: true,
+        message: 'Your password must match each other.',
+      });
+
     try {
       setLoading(true);
       await fetch({
         method: 'post',
-        url: '/api/v1/auth/request-new-password',
-        data: email,
-        withCredentials: true,
+        url: '/api/v1/auth/update-password',
+        data: passwords.password,
       });
-      router.push('/auth/_password-recovery-success');
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       setError({
@@ -52,7 +64,7 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
       renderFooter
       renderHeader
       metadata={{
-        title: `${app_metadata.appName} | Password Recovery`,
+        title: `${app_metadata.appName} | Update Password`,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }}>
@@ -60,25 +72,42 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
         <div className='wrapper-container'>
           <article>
             <div className='form-container'>
-              <h2>Password Recovery</h2>
+              <h2>Update Password</h2>
               <p>
-                Please type the e-mail associated with your account and we will
-                send an e-mail with instructions to recover your account.
+                Note: your password should be strong and must differ from past
+                used passwords.
               </p>
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>
-                  <label htmlFor='email'>
-                    <BsEnvelopeAt />
-                    <span>E-mail</span>
+                  <label htmlFor='password'>
+                    <BsThreeDots />
+                    <span>Password</span>
                   </label>
                   <input
-                    type='email'
-                    id='email'
-                    name='email'
-                    placeholder='Type your email account'
-                    aria-label='Type your email account'
-                    required={true}
-                    onChange={(e): void => setEmail(e.target.value)}
+                    type='password'
+                    id='password'
+                    name='password'
+                    minLength={8}
+                    aria-hidden='true'
+                    placeholder='Type your new password'
+                    aria-label='Type your new password'
+                    onChange={(e): void => handleChange(e)}
+                  />
+                </section>
+                <section className='input-field'>
+                  <label htmlFor='confirm_password'>
+                    <BsThreeDots />
+                    <span>Confirm password</span>
+                  </label>
+                  <input
+                    type='password'
+                    id='confirm_password'
+                    name='confirm_password'
+                    aria-hidden='true'
+                    minLength={8}
+                    placeholder='Confirm your password'
+                    aria-label='Confirm your password'
+                    onChange={(e): void => handleChange(e)}
                   />
                 </section>
 
@@ -101,7 +130,7 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
                   className='login'
                   type='submit'
                   disabled={loading || error.status ? true : false}>
-                  <span>Confirm and send request</span>
+                  <span>Submit and update</span>
                 </motion.button>
               </form>
             </div>
@@ -112,4 +141,4 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
   );
 };
 
-export default PasswordRecovery;
+export default UpdatePassword;
