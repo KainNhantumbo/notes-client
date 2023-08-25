@@ -1,4 +1,4 @@
-import './index.css';
+import './index.module.css';
 
 import { $isCodeNode } from '@lexical/code';
 import { $getNearestNodeFromDOMNode, LexicalEditor } from 'lexical';

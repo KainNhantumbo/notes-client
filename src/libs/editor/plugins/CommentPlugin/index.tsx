@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {Provider} from '@lexical/yjs';
 import type {
@@ -16,7 +9,7 @@ import type {
 } from 'lexical';
 import type {Doc} from 'yjs';
 
-import './index.css';
+import './index.module.css';
 
 import {
   $createMarkNode,

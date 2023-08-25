@@ -1,6 +1,6 @@
 import type { EditorThemeClasses } from 'lexical';
 
-import './StickyEditorTheme.css';
+import './StickyEditorTheme.module.css';
 
 import baseTheme from './PlaygroundEditorTheme';
 

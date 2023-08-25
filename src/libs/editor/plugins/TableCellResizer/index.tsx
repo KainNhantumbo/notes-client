@@ -1,7 +1,7 @@
 import type { Cell } from '@lexical/table';
 import type { LexicalEditor } from 'lexical';
 
-import './index.css';
+import './index.module.css';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import useLexicalEditable from '@lexical/react/useLexicalEditable';

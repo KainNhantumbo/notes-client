@@ -1,4 +1,4 @@
-import './index.css';
+import './index.module.css';
 
 import { $isCodeHighlightNode } from '@lexical/code';
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';

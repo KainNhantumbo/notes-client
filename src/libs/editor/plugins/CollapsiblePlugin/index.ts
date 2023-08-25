@@ -1,4 +1,4 @@
-import './Collapsible.css';
+import './Collapsible.module.css';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
@@ -179,8 +179,8 @@ export default function CollapsiblePlugin(): null {
           if (topLevelElement === null) {
             return false;
           }
-          
-// @ts-ignore
+
+          // @ts-ignore
           const container = topLevelElement.getPreviousSibling<LexicalNode>();
           if (!$isCollapsibleContainerNode(container) || container.getOpen()) {
             return false;

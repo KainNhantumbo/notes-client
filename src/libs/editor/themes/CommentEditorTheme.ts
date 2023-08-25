@@ -1,6 +1,6 @@
 import type { EditorThemeClasses } from 'lexical';
 
-import './CommentEditorTheme.css';
+import './CommentEditorTheme.module.css';
 
 import baseTheme from './PlaygroundEditorTheme';
 
