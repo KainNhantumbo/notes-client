@@ -1,4 +1,4 @@
-import './KatexEquationAlterer.css';
+import './KatexEquationAlterer.module.css';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import * as React from 'react';

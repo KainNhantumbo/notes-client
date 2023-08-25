@@ -1,6 +1,6 @@
 import type { Ref, RefObject } from 'react';
 
-import './EquationEditor.css';
+import './EquationEditor.module.css';
 
 import * as React from 'react';
 import { ChangeEvent, forwardRef } from 'react';

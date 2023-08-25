@@ -2,7 +2,6 @@ export type SettingName =
   | 'disableBeforeInput'
   | 'measureTypingPerf'
   | 'isRichText'
-  | 'isCollab'
   | 'isCharLimit'
   | 'isMaxLength'
   | 'isCharLimitUtf8'
@@ -17,10 +16,7 @@ export type SettingName =
 
 export type Settings = Record<SettingName, boolean>;
 
-const hostName = window.location.hostname;
-export const isDevPlayground: boolean =
-  hostName !== 'playground.lexical.dev' &&
-  hostName !== 'lexical-playground.vercel.app';
+export const isDevPlayground: boolean = false
 
 export const DEFAULT_SETTINGS: Settings = {
   disableBeforeInput: false,
@@ -28,7 +24,6 @@ export const DEFAULT_SETTINGS: Settings = {
   isAutocomplete: false,
   isCharLimit: false,
   isCharLimitUtf8: false,
-  isCollab: false,
   isMaxLength: false,
   isRichText: true,
   measureTypingPerf: false,

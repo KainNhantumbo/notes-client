@@ -1,4 +1,4 @@
-select {
+.select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -15,16 +15,10 @@ select {
   outline: none;
 }
 
-:root {
-  --select-border: #393939;
-  --select-focus: #101484;
-  --select-arrow: var(--select-border);
-}
-
 .select {
   min-width: 160px;
   max-width: 290px;
-  border: 1px solid var(--select-border);
+  border: 1px solid #393939;
   border-radius: 0.25em;
   padding: 0.25em 0.5em;
   font-size: 1rem;

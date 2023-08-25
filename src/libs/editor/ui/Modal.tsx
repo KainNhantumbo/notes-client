@@ -1,4 +1,4 @@
-import './Modal.css';
+import './Modal.module.css';
 
 import * as React from 'react';
 import { ReactNode, useEffect, useRef } from 'react';

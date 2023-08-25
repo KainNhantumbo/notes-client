@@ -1,6 +1,6 @@
 import type { Position } from '../../nodes/InlineImageNode';
 
-import '../../ui/Checkbox.css';
+import '../../ui/Checkbox.module.css';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';
@@ -135,6 +135,7 @@ export function InsertInlineImageDialog({
         <input
           id='caption'
           type='checkbox'
+          className='input-checkbox'
           checked={showCaption}
           onChange={handleShowCaptionChange}
         />
@@ -202,37 +203,38 @@ export default function InlineImagePlugin(): JSX.Element | null {
   return null;
 }
 
-const TRANSPARENT_IMAGE =
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-const img = document.createElement('img');
-img.src = TRANSPARENT_IMAGE;
-
 function onDragStart(event: DragEvent): boolean {
-  const node = getImageNodeInSelection();
-  if (!node) {
-    return false;
+  if (CAN_USE_DOM) {
+    const TRANSPARENT_IMAGE =
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    const img = document.createElement('img');
+    img.src = TRANSPARENT_IMAGE;
+    const node = getImageNodeInSelection();
+    if (!node) {
+      return false;
+    }
+    const dataTransfer = event.dataTransfer;
+    if (!dataTransfer) {
+      return false;
+    }
+    dataTransfer.setData('text/plain', '_');
+    dataTransfer.setDragImage(img as any, 0, 0);
+    dataTransfer.setData(
+      'application/x-lexical-drag',
+      JSON.stringify({
+        data: {
+          altText: node.__altText,
+          caption: node.__caption,
+          height: node.__height,
+          key: node.getKey(),
+          showCaption: node.__showCaption,
+          src: node.__src,
+          width: node.__width,
+        },
+        type: 'image',
+      })
+    );
   }
-  const dataTransfer = event.dataTransfer;
-  if (!dataTransfer) {
-    return false;
-  }
-  dataTransfer.setData('text/plain', '_');
-  dataTransfer.setDragImage(img, 0, 0);
-  dataTransfer.setData(
-    'application/x-lexical-drag',
-    JSON.stringify({
-      data: {
-        altText: node.__altText,
-        caption: node.__caption,
-        height: node.__height,
-        key: node.getKey(),
-        showCaption: node.__showCaption,
-        src: node.__src,
-        width: node.__width,
-      },
-      type: 'image',
-    })
-  );
 
   return true;
 }
