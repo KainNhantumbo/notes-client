@@ -1,5 +1,3 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';
 import {
   $createParagraphNode,
   $createRangeSelection,
@@ -18,6 +16,8 @@ import {
   LexicalCommand,
   LexicalEditor,
 } from 'lexical';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $wrapNodeInElement, mergeRegister } from '@lexical/utils';
 import { useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import { CAN_USE_DOM } from '../../shared/canUseDOM';
@@ -165,6 +165,7 @@ export function InsertImageDialog({
             data-test-id='image-modal-option-sample'
             onClick={() =>
               onClick(
+                // @ts-ignore
                 hasModifier.current
                   ? {
                       altText:

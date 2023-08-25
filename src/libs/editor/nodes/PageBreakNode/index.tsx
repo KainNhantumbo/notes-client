@@ -1,4 +1,4 @@
-import './index.css';
+import './index.module.css';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
@@ -124,6 +124,8 @@ export class PageBreakNode extends DecoratorNode<JSX.Element> {
     const el = document.createElement('figure');
     el.style.pageBreakAfter = 'always';
     el.setAttribute('type', this.getType());
+    el.setAttribute('className', this.getType() )
+    el.setAttribute('class', this.getType() )
     return el;
   }
 

@@ -7,7 +7,7 @@ import type {
   RangeSelection,
 } from 'lexical';
 
-import './InlineImageNode.css';
+import './InlineImageNode.module.css';
 
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';

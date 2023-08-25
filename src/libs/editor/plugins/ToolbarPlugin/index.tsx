@@ -1018,6 +1018,7 @@ export default function ToolbarPlugin(): JSX.Element {
               onClick={() =>
                 insertGifOnClick({
                   altText: 'Cat typing on a laptop',
+                  // @ts-ignore
                   src: catTypingGif,
                 })
               }
