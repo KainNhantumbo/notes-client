@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Layout from '@/src/components/Layout';
 import Navbar from '@/src/components/Navbar';
-import Editor from '@/src/components/Editor';
+import EditorContainer from '@/src/components/EditorContainer';
 import { app_metadata } from '@/src/data/app-data';
 import NotesList from '@/src/components/NotesList';
 import { useAppContext } from '../../context/AppContext';
@@ -19,7 +19,7 @@ const Workspace: NextPage = (): JSX.Element => {
       <Container>
         <Navbar />
         <NotesList />
-        <Editor />
+        <EditorContainer />
       </Container>
     </Layout>
   );
