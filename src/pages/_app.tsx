@@ -29,6 +29,7 @@ import '../libs/editor/ui/KatexEquationAlterer.css';
 import '../libs/editor/ui/Modal.css';
 import '../libs/editor/ui/Placeholder.css';
 import '../libs/editor/ui/Select.css';
+import '../libs/editor/ui/ColorPicker.css';
 
 import '../libs/editor/editor.css';
 

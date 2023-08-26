@@ -1,4 +1,3 @@
-
 import type { SettingName } from '../appSettings';
 
 import * as React from 'react';

@@ -1,5 +1,3 @@
-import { _colorPicker as Container } from './colorPicker.module';
-
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as React from 'react';
 
@@ -97,7 +95,10 @@ export default function ColorPicker({
   }, [color]);
 
   return (
-    <Container style={{ width: WIDTH }} ref={innerDivRef}>
+    <div
+      className='color-picker-wrapper'
+      style={{ width: WIDTH }}
+      ref={innerDivRef}>
       <TextInput label='Hex' onChange={onSetHex} value={inputColor} />
       <div className='color-picker-basic-color'>
         {basicColors.map((basicColor) => (
@@ -138,7 +139,7 @@ export default function ColorPicker({
         className='color-picker-color'
         style={{ backgroundColor: selfColor.hex }}
       />
-    </Container>
+    </div>
   );
 }
 
