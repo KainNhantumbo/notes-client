@@ -84,7 +84,6 @@ import {
   InsertImagePayload,
 } from '../ImagesPlugin';
 import { InsertInlineImageDialog } from '../InlineImagePlugin';
-import { INSERT_PAGE_BREAK } from '../PageBreakPlugin';
 import { InsertPollDialog } from '../PollPlugin';
 import { InsertNewTableDialog, InsertTableDialog } from '../TablePlugin';
 
@@ -133,16 +132,16 @@ const FONT_FAMILY_OPTIONS: [string, string][] = [
 
 const FONT_SIZE_OPTIONS: [string, string][] = [
   ['10px', '10px'],
-  ['11px', '11px'],
   ['12px', '12px'],
-  ['13px', '13px'],
   ['14px', '14px'],
-  ['15px', '15px'],
   ['16px', '16px'],
-  ['17px', '17px'],
   ['18px', '18px'],
-  ['19px', '19px'],
   ['20px', '20px'],
+  ['22px', '22px'],
+  ['24px', '24px'],
+  ['26px', '26px'],
+  ['28px', '28px'],
+  ['30px', '30px'],
 ];
 
 const ELEMENT_FORMAT_OPTIONS: {
@@ -174,7 +173,6 @@ function dropDownActiveClass(active: boolean) {
 function BlockFormatDropDown({
   editor,
   blockType,
-  rootType,
   disabled = false,
 }: {
   blockType: keyof typeof blockTypeToBlockName;
@@ -980,14 +978,7 @@ export default function ToolbarPlugin(): JSX.Element {
               <i className='icon horizontal-rule' />
               <span className='text'>Horizontal Rule</span>
             </DropDownItem>
-            <DropDownItem
-              onClick={() => {
-                activeEditor.dispatchCommand(INSERT_PAGE_BREAK, undefined);
-              }}
-              className='item'>
-              <i className='icon page-break' />
-              <span className='text'>Page Break</span>
-            </DropDownItem>
+            
             <DropDownItem
               onClick={() => {
                 showModal('Insert Image', (onClose) => (

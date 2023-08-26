@@ -2,7 +2,6 @@
 import '../styles/global.css';
 
 import '../libs/editor/nodes/ExcalidrawNode/ExcalidrawModal.css';
-import '../libs/editor/nodes/PageBreakNode/index.css';
 import '../libs/editor/nodes/ImageNode.css';
 import '../libs/editor/nodes/InlineImageNode.css';
 import '../libs/editor/nodes/PollNode.css';
