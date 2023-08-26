@@ -9,7 +9,6 @@ import '../libs/editor/nodes/StickyNode.css';
 import '../libs/editor/plugins/CodeActionMenuPlugin/index.css';
 import '../libs/editor/plugins/CodeActionMenuPlugin/components/PrettierButton/index.css';
 import '../libs/editor/plugins/CollapsiblePlugin/Collapsible.css';
-import '../libs/editor/plugins/CommentPlugin/index.css';
 import '../libs/editor/plugins/DraggableBlockPlugin/index.css';
 import '../libs/editor/plugins/FloatingLinkEditorPlugin/index.css';
 import '../libs/editor/plugins/FloatingTextFormatToolbarPlugin/index.css';
