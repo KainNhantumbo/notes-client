@@ -1,7 +1,6 @@
 // css imports are here to avoid the use of css modules
 import '../styles/global.css';
 
-import '../libs/editor/nodes/ExcalidrawNode/ExcalidrawModal.css';
 import '../libs/editor/nodes/ImageNode.css';
 import '../libs/editor/nodes/InlineImageNode.css';
 import '../libs/editor/nodes/PollNode.css';
