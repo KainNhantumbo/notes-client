@@ -1,4 +1,4 @@
-// css imports are here to avoid using css modules
+// css imports are here to avoid the use of css modules
 import '../styles/global.css';
 
 import '../libs/editor/nodes/ExcalidrawNode/ExcalidrawModal.css';

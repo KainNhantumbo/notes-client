@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { BsX } from 'react-icons/bs';
 
 function PortalImpl({
   onClose,
@@ -65,7 +66,7 @@ function PortalImpl({
           aria-label='Close modal'
           type='button'
           onClick={onClose}>
-          X
+          <BsX/>
         </button>
         <div className='Modal__content'>{children}</div>
       </div>
