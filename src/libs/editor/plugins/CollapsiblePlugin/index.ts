@@ -1,5 +1,3 @@
-import './Collapsible.module.css';
-
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
   $findMatchingParent,

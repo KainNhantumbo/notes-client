@@ -1,5 +1,3 @@
-import './ExcalidrawModal.module.css';
-
 import { Excalidraw } from '@excalidraw/excalidraw';
 import {
   AppState,

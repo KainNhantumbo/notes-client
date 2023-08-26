@@ -137,7 +137,7 @@ export const _signup = styled.main`
           color: rgb(${({ theme }) => theme.primary_shade});
           cursor: pointer;
           :hover {
-            color: rgb(${({ theme }) => theme.black});
+            color: rgb(${({ theme }) => theme.primary});
           }
 
           span {

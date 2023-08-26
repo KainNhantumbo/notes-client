@@ -1,7 +1,5 @@
 import type { Option, Options, PollNode } from './PollNode';
 
-import './PollNode.module.css';
-
 import { useCollaborationContext } from '@lexical/react/LexicalCollaborationContext';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';

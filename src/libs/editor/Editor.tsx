@@ -1,6 +1,4 @@
 'use client';
-import { _editorStyles as Container } from './editor.styles';
-
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { CharacterLimitPlugin } from '@lexical/react/LexicalCharacterLimitPlugin';
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
@@ -126,119 +124,117 @@ export default function Editor(): JSX.Element {
 
   return (
     <>
-      <Container>
-        {isRichText && <ToolbarPlugin />}
-        <div
-          className={`editor-container ${showTreeView ? 'tree-view' : ''} ${
-            !isRichText ? 'plain-text' : ''
-          }`}>
-          {isMaxLength && <MaxLengthPlugin maxLength={30} />}
-          <DragDropPaste />
-          <AutoFocusPlugin />
-          <ClearEditorPlugin />
-          <ComponentPickerPlugin />
-          <EmojiPickerPlugin />
-          <AutoEmbedPlugin />
+      {isRichText && <ToolbarPlugin />}
+      <div
+        className={`editor-container ${showTreeView ? 'tree-view' : ''} ${
+          !isRichText ? 'plain-text' : ''
+        }`}>
+        {isMaxLength && <MaxLengthPlugin maxLength={30} />}
+        <DragDropPaste />
+        <AutoFocusPlugin />
+        <ClearEditorPlugin />
+        <ComponentPickerPlugin />
+        <EmojiPickerPlugin />
+        <AutoEmbedPlugin />
 
-          <MentionsPlugin />
-          <EmojisPlugin />
-          <HashtagPlugin />
-          <KeywordsPlugin />
-          <AutoLinkPlugin />
+        <MentionsPlugin />
+        <EmojisPlugin />
+        <HashtagPlugin />
+        <KeywordsPlugin />
+        <AutoLinkPlugin />
 
-          {isRichText ? (
-            <>
-              <HistoryPlugin externalHistoryState={historyState} />
+        {isRichText ? (
+          <>
+            <HistoryPlugin externalHistoryState={historyState} />
+            <RichTextPlugin
+              contentEditable={
+                <div className='editor-scroller'>
+                  <div className='editor' ref={onRef}>
+                    <ContentEditable />
+                  </div>
+                </div>
+              }
+              placeholder={placeholder}
+              ErrorBoundary={LexicalErrorBoundary}
+            />
+            <MarkdownShortcutPlugin />
+            <CodeHighlightPlugin />
+            <ListPlugin />
+            <CheckListPlugin />
+            <ListMaxIndentLevelPlugin maxDepth={7} />
+            <TablePlugin
+              hasCellMerge={tableCellMerge}
+              hasCellBackgroundColor={tableCellBackgroundColor}
+            />
+            <TableCellResizer />
+            <NewTablePlugin cellEditorConfig={cellEditorConfig}>
+              <AutoFocusPlugin />
               <RichTextPlugin
                 contentEditable={
-                  <div className='editor-scroller'>
-                    <div className='editor' ref={onRef}>
-                      <ContentEditable />
-                    </div>
-                  </div>
+                  <ContentEditable className='TableNode__contentEditable' />
                 }
-                placeholder={placeholder}
+                placeholder={null}
                 ErrorBoundary={LexicalErrorBoundary}
               />
-              <MarkdownShortcutPlugin />
-              <CodeHighlightPlugin />
-              <ListPlugin />
-              <CheckListPlugin />
-              <ListMaxIndentLevelPlugin maxDepth={7} />
-              <TablePlugin
-                hasCellMerge={tableCellMerge}
-                hasCellBackgroundColor={tableCellBackgroundColor}
-              />
-              <TableCellResizer />
-              <NewTablePlugin cellEditorConfig={cellEditorConfig}>
-                <AutoFocusPlugin />
-                <RichTextPlugin
-                  contentEditable={
-                    <ContentEditable className='TableNode__contentEditable' />
-                  }
-                  placeholder={null}
-                  ErrorBoundary={LexicalErrorBoundary}
-                />
-                <MentionsPlugin />
-                <HistoryPlugin />
-                <ImagesPlugin captionsEnabled={false} />
-                <LinkPlugin />
-                <LexicalClickableLinkPlugin />
-                <FloatingTextFormatToolbarPlugin />
-              </NewTablePlugin>
-              <ImagesPlugin />
-              <InlineImagePlugin />
+              <MentionsPlugin />
+              <HistoryPlugin />
+              <ImagesPlugin captionsEnabled={false} />
               <LinkPlugin />
-              <PollPlugin />
-              <TwitterPlugin />
-              <YouTubePlugin />
-              <FigmaPlugin />
-              {!isEditable && <LexicalClickableLinkPlugin />}
-              <HorizontalRulePlugin />
-              <EquationsPlugin />
-              <ExcalidrawPlugin />
-              <TabFocusPlugin />
-              <TabIndentationPlugin />
-              <CollapsiblePlugin />
-              <PageBreakPlugin />
-              {floatingAnchorElem && !isSmallWidthViewport && (
-                <>
-                  <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
-                  <CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
-                  <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} />
-                  <TableCellActionMenuPlugin
-                    anchorElem={floatingAnchorElem}
-                    cellMerge={true}
-                  />
-                  <FloatingTextFormatToolbarPlugin
-                    anchorElem={floatingAnchorElem}
-                  />
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              <PlainTextPlugin
-                contentEditable={<ContentEditable />}
-                placeholder={placeholder}
-                ErrorBoundary={LexicalErrorBoundary}
-              />
-              <HistoryPlugin externalHistoryState={historyState} />
-            </>
-          )}
-          {(isCharLimit || isCharLimitUtf8) && (
-            <CharacterLimitPlugin
-              charset={isCharLimit ? 'UTF-16' : 'UTF-8'}
-              maxLength={5}
+              <LexicalClickableLinkPlugin />
+              <FloatingTextFormatToolbarPlugin />
+            </NewTablePlugin>
+            <ImagesPlugin />
+            <InlineImagePlugin />
+            <LinkPlugin />
+            <PollPlugin />
+            <TwitterPlugin />
+            <YouTubePlugin />
+            <FigmaPlugin />
+            {!isEditable && <LexicalClickableLinkPlugin />}
+            <HorizontalRulePlugin />
+            <EquationsPlugin />
+            <ExcalidrawPlugin />
+            <TabFocusPlugin />
+            <TabIndentationPlugin />
+            <CollapsiblePlugin />
+            <PageBreakPlugin />
+            {floatingAnchorElem && !isSmallWidthViewport && (
+              <>
+                <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
+                <CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
+                <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} />
+                <TableCellActionMenuPlugin
+                  anchorElem={floatingAnchorElem}
+                  cellMerge={true}
+                />
+                <FloatingTextFormatToolbarPlugin
+                  anchorElem={floatingAnchorElem}
+                />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <PlainTextPlugin
+              contentEditable={<ContentEditable />}
+              placeholder={placeholder}
+              ErrorBoundary={LexicalErrorBoundary}
             />
-          )}
-          {isAutocomplete && <AutocompletePlugin />}
-          <div>{showTableOfContents && <TableOfContentsPlugin />}</div>
-          {shouldUseLexicalContextMenu && <ContextMenuPlugin />}
-          <ActionsPlugin isRichText={isRichText} />
-        </div>
-        {showTreeView && <TreeViewPlugin />}
-      </Container>
+            <HistoryPlugin externalHistoryState={historyState} />
+          </>
+        )}
+        {(isCharLimit || isCharLimitUtf8) && (
+          <CharacterLimitPlugin
+            charset={isCharLimit ? 'UTF-16' : 'UTF-8'}
+            maxLength={5}
+          />
+        )}
+        {isAutocomplete && <AutocompletePlugin />}
+        <div>{showTableOfContents && <TableOfContentsPlugin />}</div>
+        {shouldUseLexicalContextMenu && <ContextMenuPlugin />}
+        <ActionsPlugin isRichText={isRichText} />
+      </div>
+      {showTreeView && <TreeViewPlugin />}
     </>
   );
 }

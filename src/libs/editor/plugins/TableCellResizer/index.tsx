@@ -1,8 +1,6 @@
 import type { Cell } from '@lexical/table';
 import type { LexicalEditor } from 'lexical';
 
-import './index.module.css';
-
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import useLexicalEditable from '@lexical/react/useLexicalEditable';
 import {
@@ -31,6 +29,7 @@ import {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { CAN_USE_DOM } from '../../shared/canUseDOM';
 
 type MousePosition = {
   x: number;
@@ -369,11 +368,16 @@ export default function TableCellResizerPlugin(): null | ReactPortal {
   const [editor] = useLexicalComposerContext();
   const isEditable = useLexicalEditable();
 
-  return useMemo(
-    () =>
-      isEditable
-        ? createPortal(<TableCellResizer editor={editor} />, document.body)
-        : null,
-    [editor, isEditable]
-  );
+  return useMemo(() => {
+    if (CAN_USE_DOM) {
+      if (isEditable) {
+        return createPortal(
+          <TableCellResizer editor={editor} />,
+          document.body
+        );
+      }
+      return null;
+    }
+    return null;
+  }, [editor, isEditable]);
 }

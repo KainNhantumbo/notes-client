@@ -1,7 +1,5 @@
 import type { LexicalEditor, NodeKey } from 'lexical';
 
-import './StickyNode.module.css';
-
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
@@ -226,8 +224,7 @@ export default function StickyComponent({
         <LexicalNestedComposer
           initialEditor={caption}
           initialTheme={StickyEditorTheme}>
-
-            <HistoryPlugin externalHistoryState={historyState} />
+          <HistoryPlugin externalHistoryState={historyState} />
           <PlainTextPlugin
             contentEditable={
               <ContentEditable className='StickyNode__contentEditable' />

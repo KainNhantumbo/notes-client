@@ -1,10 +1,12 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import actions from '../data/actions';
 import Layout from '@/src/components/Layout';
 import { useRouter, NextRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import { _editor as Container } from '@/src/styles/modules/_editor';
-import Editor from '../libs/editor/Editor';
+import dynamic from 'next/dynamic';
+
+const Editor = dynamic(import('../libs/editor/Editor'), {ssr: false})
 
 const EditorContainer: FC = (): JSX.Element => {
   const router: NextRouter = useRouter();
@@ -12,7 +14,9 @@ const EditorContainer: FC = (): JSX.Element => {
 
   return (
     <Container>
-      <Editor />
+      <Suspense fallback={'Loading editor'}>
+        <Editor />
+      </Suspense>
     </Container>
   );
 };

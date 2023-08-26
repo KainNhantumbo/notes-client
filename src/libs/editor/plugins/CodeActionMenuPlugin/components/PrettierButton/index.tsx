@@ -1,5 +1,3 @@
-import './index.module.css';
-
 import { $isCodeNode } from '@lexical/code';
 import { $getNearestNodeFromDOMNode, LexicalEditor } from 'lexical';
 import { Options } from 'prettier';

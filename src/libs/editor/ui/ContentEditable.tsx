@@ -1,5 +1,3 @@
-import './ContentEditable.module.css';
-
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import * as React from 'react';
 

@@ -1,5 +1,3 @@
-import './index.module.css';
-
 import {
   $isCodeNode,
   CodeNode,
