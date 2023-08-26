@@ -3,7 +3,6 @@ import '../styles/global.css';
 
 import '../libs/editor/nodes/ImageNode.css';
 import '../libs/editor/nodes/InlineImageNode.css';
-import '../libs/editor/nodes/PollNode.css';
 import '../libs/editor/nodes/StickyNode.css';
 
 import '../libs/editor/plugins/CodeActionMenuPlugin/index.css';

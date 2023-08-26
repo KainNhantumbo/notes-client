@@ -78,8 +78,7 @@ import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertEquationDialog } from '../EquationsPlugin';
 import { InsertImageDialog } from '../ImagesPlugin';
 import { InsertInlineImageDialog } from '../InlineImagePlugin';
-import { InsertPollDialog } from '../PollPlugin';
-import { InsertNewTableDialog, InsertTableDialog } from '../TablePlugin';
+import { InsertTableDialog } from '../TablePlugin';
 
 const blockTypeToBlockName = {
   bullet: 'Bulleted List',
@@ -1010,33 +1009,6 @@ export default function ToolbarPlugin(): JSX.Element {
               <i className='icon table' />
               <span className='text'>Table</span>
             </DropDownItem>
-            <DropDownItem
-              onClick={() => {
-                showModal('Insert Table', (onClose) => (
-                  <InsertNewTableDialog
-                    activeEditor={activeEditor}
-                    onClose={onClose}
-                  />
-                ));
-              }}
-              className='item'>
-              <i className='icon table' />
-              <span className='text'>Table (Experimental)</span>
-            </DropDownItem>
-            <DropDownItem
-              onClick={() => {
-                showModal('Insert Poll', (onClose) => (
-                  <InsertPollDialog
-                    activeEditor={activeEditor}
-                    onClose={onClose}
-                  />
-                ));
-              }}
-              className='item'>
-              <i className='icon poll' />
-              <span className='text'>Poll</span>
-            </DropDownItem>
-
             <DropDownItem
               onClick={() => {
                 showModal('Insert Equation', (onClose) => (

@@ -1,3 +1,13 @@
+.editor-shell {
+  margin: 20px auto;
+  border-radius: 2px;
+  max-width: 1100px;
+  color: #000;
+  position: relative;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
 .editor-shell .editor-container {
   background: #fff;
   position: relative;
@@ -288,7 +298,6 @@ pre::-webkit-scrollbar-thumb {
   width: 150px;
 }
 
-
 i.palette {
   background-image: url(images/icons/palette.svg);
 }
@@ -387,10 +396,6 @@ i.figma {
   background-image: url(images/icons/figma.svg);
 }
 
-i.poll {
-  background-image: url(images/icons/card-checklist.svg);
-}
-
 i.tweet {
   background-image: url(images/icons/tweet.svg);
 }
@@ -443,9 +448,6 @@ i.sticky {
   background-image: url(images/icons/sticky.svg);
 }
 
-i.mic {
-  background-image: url(images/icons/mic.svg);
-}
 
 i.import {
   background-image: url(images/icons/upload.svg);
@@ -467,10 +469,6 @@ i.equation {
   background-image: url(images/icons/plus-slash-minus.svg);
 }
 
-i.gif {
-  background-image: url(images/icons/filetype-gif.svg);
-}
-
 i.copy {
   background-image: url(images/icons/copy.svg);
 }
@@ -485,11 +483,6 @@ i.prettier {
 
 i.prettier-error {
   background-image: url(images/icons/prettier-error.svg);
-}
-
-i.page-break,
-.icon.page-break {
-  background-image: url(images/icons/scissors.svg);
 }
 
 .link-editor .button.active,
@@ -1083,8 +1076,6 @@ i.page-break,
   color: #000;
   overflow: hidden;
 }
-
-
 
 .keyword {
   color: rgb(241, 118, 94);
