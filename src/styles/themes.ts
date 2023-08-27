@@ -24,7 +24,7 @@ export const dark_default: Theme = {
   white: '240, 240,240',
   primary: '253, 200, 134',
   secondary: '255, 71, 71',
-  background: '32, 33, 36',
+  background: '46, 50, 53',
   foreground: '41, 42, 46',
   primary_shade: '228, 113, 49',
   secondary_shade: '157, 145, 255',
