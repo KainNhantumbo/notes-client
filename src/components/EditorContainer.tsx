@@ -1,4 +1,4 @@
-import { FC, Suspense, useState } from 'react';
+import { FC, useState } from 'react';
 import actions from '../data/actions';
 import Layout from '@/src/components/Layout';
 import { useRouter, NextRouter } from 'next/router';
@@ -12,8 +12,6 @@ import { bold, italic, code, codeBlock, codeEdit, codeLive } from '@uiw/react-md
 const MDEditor = dynamic<MDEditorProps>(() => import('@uiw/react-md-editor'), {
   ssr: false,
 });
-
-const Editor = dynamic(import('../libs/editor/Editor'), { ssr: false });
 
 import { HexColorPicker } from "react-colorful";
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -38,7 +36,3 @@ const EditorContainer: FC = (): JSX.Element => {
 };
 
 export default EditorContainer;
-
-// <Suspense fallback={'Loading editor'}>
-//   <Editor />
-// </Suspense>
