@@ -171,7 +171,7 @@ This line is only separated by a single newline, so it's a separate line in the 
 
   `);
 
-  const [innerHeight, setInnerHeight] = useState<number>();
+  const [innerHeight, setInnerHeight] = useState<number>(0);
 
   const computeInnerHeight = (): void => {
     setInnerHeight(() => {
@@ -189,9 +189,12 @@ This line is only separated by a single newline, so it's a separate line in the 
 
   return (
     <Container>
+      <section className='header-container'>
+        
+
+      </section>
       <MDEditor
         value={value}
-        data-color-mode='dark'
         onChange={(value) => setValue(() => value)}
         autoFocus={true}
         toolbarHeight={30}
