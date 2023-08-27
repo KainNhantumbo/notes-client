@@ -7,13 +7,11 @@ import NotesList from '@/src/components/NotesList';
 import { useAppContext } from '@/src/context/AppContext';
 import { _workspace as Container } from '@/src/styles/routes/_workspace';
 
-
 const Workspace: NextPage = (): JSX.Element => {
   const { state } = useAppContext();
 
   return (
     <Layout
-    renderFooter
       metadata={{
         title: `${app_metadata.appName} | ${state.auth.name} Workspace`,
         updatedAt: new Date().toISOString(),
