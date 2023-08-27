@@ -6,10 +6,10 @@ import {
   $convertFromMarkdownString,
   $convertToMarkdownString,
 } from '@lexical/markdown';
-import { useCollaborationContext } from '@lexical/react/LexicalCollaborationContext';
+
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { mergeRegister } from '@lexical/utils';
-import { CONNECTED_COMMAND, TOGGLE_CONNECT_COMMAND } from '@lexical/yjs';
+import { CONNECTED_COMMAND } from '@lexical/yjs';
 import {
   $createTextNode,
   $getRoot,
@@ -69,11 +69,9 @@ export default function ActionsPlugin({
 }): JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
-  const [isSpeechToText, setIsSpeechToText] = useState(false);
   const [connected, setConnected] = useState(false);
   const [isEditorEmpty, setIsEditorEmpty] = useState(true);
   const [modal, showModal] = useModal();
-  const { isCollabActive } = useCollaborationContext();
 
   useEffect(() => {
     return mergeRegister(
@@ -189,7 +187,7 @@ export default function ActionsPlugin({
         }}
         title='Read-Only Mode'
         aria-label={`${!isEditable ? 'Unlock' : 'Lock'} read-only mode`}>
-        <i className={!isEditable ? 'unlock' : 'lock'} />
+        <i className={!isEditable ? 'lock' : 'unlock'} />
       </button>
       <button
         className='action-button'
@@ -198,22 +196,7 @@ export default function ActionsPlugin({
         aria-label='Convert from markdown'>
         <i className='markdown' />
       </button>
-      {isCollabActive && (
-        <button
-          className='action-button connect'
-          onClick={() => {
-            editor.dispatchCommand(TOGGLE_CONNECT_COMMAND, !connected);
-          }}
-          title={`${
-            connected ? 'Disconnect' : 'Connect'
-          } Collaborative Editing`}
-          aria-label={`${
-            connected ? 'Disconnect from' : 'Connect to'
-          } a collaborative editing server`}>
-          <i className={connected ? 'disconnect' : 'connect'} />
-        </button>
-      )}
-      {modal}
+      <>{modal}</>
     </div>
   );
 }
@@ -227,7 +210,7 @@ function ShowClearDialog({
 }): JSX.Element {
   return (
     <>
-      Are you sure you want to clear the editor?
+      <span> Are you sure you want to clear the editor?</span>
       <div className='Modal__content'>
         <Button
           onClick={() => {
@@ -235,14 +218,14 @@ function ShowClearDialog({
             editor.focus();
             onClose();
           }}>
-          Clear
+          <span>Clear</span>
         </Button>{' '}
         <Button
           onClick={() => {
             editor.focus();
             onClose();
           }}>
-          Cancel
+          <span>Cancel</span>
         </Button>
       </div>
     </>

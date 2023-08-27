@@ -13,7 +13,6 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { CollapsibleContainerNode } from '../plugins/CollapsiblePlugin/CollapsibleContainerNode';
 import { CollapsibleContentNode } from '../plugins/CollapsiblePlugin/CollapsibleContentNode';
 import { CollapsibleTitleNode } from '../plugins/CollapsiblePlugin/CollapsibleTitleNode';
-import { AutocompleteNode } from './AutocompleteNode';
 import { EquationNode } from './EquationNode';
 import { FigmaNode } from './FigmaNode';
 import { ImageNode } from './ImageNode';
@@ -45,7 +44,6 @@ const PlaygroundNodes: Array<Klass<LexicalNode>> = [
   InlineImageNode,
   MentionNode,
   EquationNode,
-  AutocompleteNode,
   KeywordNode,
   HorizontalRuleNode,
   TweetNode,

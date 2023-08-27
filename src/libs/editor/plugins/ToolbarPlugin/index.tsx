@@ -125,16 +125,16 @@ const FONT_FAMILY_OPTIONS: [string, string][] = [
 
 const FONT_SIZE_OPTIONS: [string, string][] = [
   ['10px', '10px'],
+  ['11px', '11px'],
   ['12px', '12px'],
+  ['13px', '13px'],
   ['14px', '14px'],
+  ['15px', '15px'],
   ['16px', '16px'],
+  ['17px', '17px'],
   ['18px', '18px'],
+  ['19px', '19px'],
   ['20px', '20px'],
-  ['22px', '22px'],
-  ['24px', '24px'],
-  ['26px', '26px'],
-  ['28px', '28px'],
-  ['30px', '30px'],
 ];
 
 const ELEMENT_FORMAT_OPTIONS: {
@@ -1067,7 +1067,7 @@ export default function ToolbarPlugin(): JSX.Element {
         isRTL={isRTL}
       />
 
-      {modal}
+      <>{modal}</>
     </div>
   );
 }
