@@ -74,7 +74,7 @@ const ThemeContext: FC<TProps> = ({ children }): JSX.Element => {
   }, []);
 
   return (
-    <ThemeProvider theme={light_default}>
+    <ThemeProvider theme={currentTheme}>
       <GlobalStyles />
       <context.Provider
         value={{

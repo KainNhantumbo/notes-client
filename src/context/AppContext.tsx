@@ -16,7 +16,6 @@ import { NextRouter, useRouter } from 'next/router';
 import { TAction, TState } from '@/src/@types/reducer';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import EditorContext from './EditorContext';
 
 type TProps = { children: ReactNode };
 
@@ -156,7 +155,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     <QueryClientProvider client={queryClient}>
       <ThemeContext>
         <context.Provider value={{ state, dispatch, fetchAPI }}>
-          <EditorContext>{children}</EditorContext>
+          {children}
         </context.Provider>
       </ThemeContext>
     </QueryClientProvider>

@@ -13,12 +13,13 @@ const Workspace: NextPage = (): JSX.Element => {
 
   return (
     <Layout
+    renderFooter
       metadata={{
         title: `${app_metadata.appName} | ${state.auth.name} Workspace`,
         updatedAt: new Date().toISOString(),
       }}>
       <Container>
-        <Navbar />
+        {/* <Navbar /> */}
         <NotesList />
         <EditorContainer />
       </Container>

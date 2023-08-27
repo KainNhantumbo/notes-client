@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
-const removeImports = require('next-remove-imports')();
+const removeImports = require('next-remove-imports')({
+  test: /node_modules([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/,
+  matchImports: '\\.(less|css|scss|sass|styl)$',
+});
 
 module.exports = removeImports({
   webpack(config, options) {
     return config
   },
 });
+
 
 // const nextPWA = require('next-pwa')({
 //   dest: 'public',
@@ -18,5 +22,5 @@ module.exports = removeImports({
 //   reactStrictMode: true,
 //   swcMinify: true,
 //   compiler: { styledComponents: true },
-//   images: { domains: ['https://res.cloudinary.com/'] },
+//   images: { domains: ['https://res.cloudinary.com'] },
 // });
