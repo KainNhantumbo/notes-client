@@ -14,7 +14,6 @@ import '../libs/editor/plugins/FloatingTextFormatToolbarPlugin/index.css';
 import '../libs/editor/plugins/TableCellResizer/index.css';
 import '../libs/editor/plugins/TableOfContentsPlugin/index.css';
 
-import '../libs/editor/themes/CommentEditorTheme.css';
 import '../libs/editor/themes/PlaygroundEditorTheme.css';
 import '../libs/editor/themes/StickyEditorTheme.css';
 

@@ -35,7 +35,6 @@ import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { useSharedHistoryContext } from '../context/SharedHistoryContext';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';
-import MentionsPlugin from '../plugins/MentionsPlugin';
 
 import ContentEditable from '../ui/ContentEditable';
 import ImageResizer from '../ui/ImageResizer';
@@ -326,7 +325,6 @@ export default function ImageComponent({
           <div className='image-caption-container'>
             <LexicalNestedComposer initialEditor={caption}>
               <AutoFocusPlugin />
-              <MentionsPlugin />
               <LinkPlugin />
               <HashtagPlugin />
               <KeywordsPlugin />

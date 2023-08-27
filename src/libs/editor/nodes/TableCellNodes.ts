@@ -8,7 +8,6 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { EquationNode } from './EquationNode';
 import { ImageNode } from './ImageNode';
 import { KeywordNode } from './KeywordNode';
-import { MentionNode } from './MentionNode';
 
 const PlaygroundNodes: Array<Klass<LexicalNode>> = [
   HeadingNode,
@@ -21,7 +20,6 @@ const PlaygroundNodes: Array<Klass<LexicalNode>> = [
   AutoLinkNode,
   LinkNode,
   ImageNode,
-  MentionNode,
   EquationNode,
   KeywordNode,
 ];

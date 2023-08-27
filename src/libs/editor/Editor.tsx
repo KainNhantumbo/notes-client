@@ -41,7 +41,6 @@ import LinkPlugin from './plugins/LinkPlugin';
 import ListMaxIndentLevelPlugin from './plugins/ListMaxIndentLevelPlugin';
 import MarkdownShortcutPlugin from './plugins/MarkdownShortcutPlugin';
 import { MaxLengthPlugin } from './plugins/MaxLengthPlugin';
-import MentionsPlugin from './plugins/MentionsPlugin';
 import TabFocusPlugin from './plugins/TabFocusPlugin';
 import TableCellActionMenuPlugin from './plugins/TableActionMenuPlugin';
 import TableCellResizer from './plugins/TableCellResizer';
@@ -58,7 +57,6 @@ export default function Editor(): JSX.Element {
   const { historyState } = useSharedHistoryContext();
   const {
     settings: {
-      isAutocomplete,
       isMaxLength,
       isCharLimit,
       isCharLimitUtf8,
@@ -124,7 +122,6 @@ export default function Editor(): JSX.Element {
         <ClearEditorPlugin />
         <ComponentPickerPlugin />
         <AutoEmbedPlugin />
-        <MentionsPlugin />
         <HashtagPlugin />
         <KeywordsPlugin />
         <AutoLinkPlugin />
@@ -162,7 +159,6 @@ export default function Editor(): JSX.Element {
                 placeholder={null}
                 ErrorBoundary={LexicalErrorBoundary}
               />
-              <MentionsPlugin />
               <HistoryPlugin />
               <ImagesPlugin captionsEnabled={false} />
               <LinkPlugin />
