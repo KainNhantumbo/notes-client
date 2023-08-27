@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import type { FC } from 'react';
 import { app_metadata } from '../data/app-data';
-import { Inter, Roboto, Nunito } from 'next/font/google';
+import { Inter, Roboto, Nunito, JetBrains_Mono } from 'next/font/google';
 
 const inter = Inter({
   weight: ['400', '500', '600'],
@@ -21,6 +21,12 @@ const nunito = Nunito({
   style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  weight: ['400', '500'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
 });
 
 export type TProps =
@@ -73,7 +79,7 @@ const HeadContainer: FC<TProps> = (props): JSX.Element => (
     <style jsx global>{`
       html {
         font-family: ${inter.style.fontFamily}, ${roboto.style.fontFamily},
-          ${nunito.style.fontFamily};
+          ${nunito.style.fontFamily}, ${jetbrainsMono.style.fontFamily};
       }
     `}</style>
   </Head>

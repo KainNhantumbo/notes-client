@@ -4,6 +4,7 @@ export type TState = {
   auth: TAuth;
   isLogoutModal: boolean;
   notes: TNote[];
+  currentNote: TNote;
   folders: TFolder[];
   signIn: TSignIn;
   signUp: TSignUp;

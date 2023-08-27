@@ -1,7 +1,61 @@
 import styled from 'styled-components';
+import { BaseButtonOutline, StyledInputs } from '../defaults';
 
 export const _editor = styled.section`
-  padding-bottom: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .header-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+
+    input {
+      width: 100%;
+      height: fit-content;
+      border: none;
+      padding: 10px;
+      line-height: 1.2rem;
+      font-weight: 400;
+      outline: none;
+      background: none;
+      font-weight: 500;
+      font-size: 1.6rem;
+      color: rgb(${({ color }) => color});
+
+      ::placeholder {
+        color: rgba(${({ color }) => color}, 0.8);
+        font-weight: 500;
+        font-size: 1.6rem;
+      }
+    }
+
+    .properties-container {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    button {
+      ${BaseButtonOutline}
+      padding: 5px;
+      background: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+
+      span {
+        color: rgb(${({ color }) => color}) !important;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+        color: rgb(${({ color }) => color});
+      }
+    }
+  }
 
   /* add background support for the editor */
   .w-md-editor {
@@ -20,7 +74,7 @@ export const _editor = styled.section`
 
   .w-md-editor-text-pre > code,
   .w-md-editor-text-input {
-    font-size: 1.3rem !important;
+    font-size: 1.1rem !important;
     line-height: 1.4rem !important;
     font-family: Consolas, Hack, Menlo, Inter, monospace;
   }
@@ -62,8 +116,6 @@ export const _editor = styled.section`
     background-color: rgba(${({ theme }) => theme.font}, 0.5) !important;
   }
 
- 
-
   table {
     tr {
       background: rgb(${({ theme }) => theme.background}) !important;
@@ -98,6 +150,7 @@ export const _editor = styled.section`
 
   .w-md-editor-toolbar {
     border: none;
+    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
     border-radius: 0px;
     background-color: rgb(${({ theme }) => theme.foreground});
   }
@@ -124,9 +177,6 @@ export const _editor = styled.section`
 
   span {
     background-color: transparent !important;
-  }
-
-  span {
     color: rgb(${({ theme }) => theme.primary_shade}) !important;
     .token .variable {
       color: rgb(${({ theme }) => theme.secondary}) !important;

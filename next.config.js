@@ -5,9 +5,9 @@ const removeImports = require('next-remove-imports')({
 });
 
 module.exports = removeImports({
-  webpack(config, options) {
-    return config
-  },
+  reactStrictMode: true,
+  compiler: { styledComponents: true },
+  swcMinify: true,
 });
 
 

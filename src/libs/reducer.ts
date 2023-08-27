@@ -28,6 +28,22 @@ const initialState: TState = {
     handleFunction: () => {},
     actionButtonMessage: '',
   },
+  currentNote: {
+    _id: '',
+    title: '',
+    content: '',
+    created_by: '',
+    metadata: {
+      folder_id: '',
+      color:   '',
+      deleted: false,
+      favorite: false,
+      labels: 'none',
+      priority: 'none',
+      reminder: { time: '', expired: false },
+      tags: [],
+    },
+  },
 };
 
 const reducer = (state: TState, action: TAction): TState => {
@@ -48,6 +64,8 @@ const reducer = (state: TState, action: TAction): TState => {
       return { ...state, notification: action.payload.notification };
     case actions.PROMPT:
       return { ...state, prompt: action.payload.prompt };
+    case actions.CURRENT_NOTE:
+      return { ...state, currentNote: action.payload.currentNote };
     default:
       return { ...state };
   }

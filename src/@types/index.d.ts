@@ -53,20 +53,11 @@ export type TSignUp = {
 
 export type TNote = {
   _id: string;
-  name: string;
-  description: string;
-  content: {
-    time?: number;
-    version?: string;
-    blocks: Array<{
-      id?: string | undefined;
-      type: string;
-      data: any;
-      tunes?: { [name: string]: any };
-    }>;
-  };
+  title: string;
+  content: string;
+  created_by: string;
   metadata: {
-    folder: string;
+    folder_id: string;
     color: string;
     favorite: boolean;
     reminder: { time: string; expired: boolean };

@@ -71,3 +71,15 @@ export const footerAnchors = [
   { name: 'Github', anchor: app_metadata.repository },
   { name: 'Portfolio', anchor: 'https://portifolio-dev-mu.vercel.app' },
 ].sort((a, b) => (a.name > b.name ? 1 : -1));
+
+const colors: string[] = [
+  '#E93A9A',
+  '#E93D58',
+  '#E9643A',
+  '#E8CB2D',
+  '#3DD425',
+  '#00D3B8',
+  '#3DAEE9',
+  '#B875DC',
+  '#926EE4',
+];
