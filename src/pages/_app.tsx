@@ -1,5 +1,7 @@
 // css imports are here to avoid the use of css modules
 import '../styles/global.css';
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 
 import '../libs/editor/nodes/ImageNode.css';
 import '../libs/editor/nodes/InlineImageNode.css';
