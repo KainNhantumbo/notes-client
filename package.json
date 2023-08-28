@@ -27,7 +27,7 @@
     "npm": ">=9.6.7"
   },
   "license": "Apache License Version 2.0",
-  "repository": "https://github.com/notes-client",
+  "repository": "https://github.com/KainNhantumbo/notes-app",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
