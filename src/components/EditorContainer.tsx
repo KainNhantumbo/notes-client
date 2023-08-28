@@ -20,9 +20,8 @@ import {
   title5,
   title6,
 } from '@uiw/react-md-editor/lib/commands';
-import { FC, useEffect, useLayoutEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import actions from '../data/actions';
-import { useRouter, NextRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import { _editor as Container } from '@/src/styles/modules/_editor';
 import dynamic from 'next/dynamic';
@@ -30,25 +29,96 @@ import { MDEditorProps } from '@uiw/react-md-editor';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import rehypeSanitize from 'rehype-sanitize';
-import { BsFillHeartFill, BsHeart, BsStar, BsStarFill } from 'react-icons/bs';
-import { color } from 'framer-motion';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import TagsInput from 'react-tagsinput';
+
+// import rehypeHighlight from 'rehype-highlight';
 
 const MDEditor = dynamic<MDEditorProps>(() => import('@uiw/react-md-editor'), {
   ssr: false,
 });
 
 const EditorContainer: FC = (): JSX.Element => {
-  const router: NextRouter = useRouter();
   const theme: DefaultTheme = useTheme();
   const { darkmode } = useThemeContext();
   const { state, dispatch, fetchAPI } = useAppContext();
-  const [value, setValue] = useState<string | undefined>('');
-
   const [innerHeight, setInnerHeight] = useState<number>(0);
+
+  const currentActiveTags = useMemo(() => {
+    return state.currentNote.metadata.tags.map((tag) => ({
+      id: tag,
+      text: tag,
+    }));
+  }, [state.currentNote.metadata.tags]);
 
   const computeInnerHeight = (): void => {
     setInnerHeight(() => {
       return Number(window.innerHeight.toFixed(1)) - 250;
+    });
+  };
+
+  const handleChangeTag = (tags: string[], changed: string[]): void => {
+
+    console.log(tags, changed);
+
+      dispatch({
+        type: actions.CURRENT_NOTE,
+        payload: {
+          ...state,
+          currentNote: {
+            ...state.currentNote,
+            metadata: {
+              ...state.currentNote.metadata,
+              tags: [...changed],
+            },
+          },
+        },
+      });
+
+  };
+
+  const handleDeleteTag = (currentTagIndex: number): void => {
+    dispatch({
+      type: actions.CURRENT_NOTE,
+      payload: {
+        ...state,
+        currentNote: {
+          ...state.currentNote,
+          metadata: {
+            ...state.currentNote.metadata,
+            tags: [
+              ...state.currentNote.metadata.tags.filter(
+                (tag, index) => index !== currentTagIndex
+              ),
+            ],
+          },
+        },
+      },
+    });
+  };
+
+  const handleDragnDropTag = (
+    currentTag: { id: string; text: string },
+    currentPosition: number,
+    newPosition: number
+  ): void => {
+    const newTags = state.currentNote.metadata.tags
+      .slice()
+      .splice(currentPosition, 0)
+      .splice(newPosition, 0, currentTag.text);
+
+    dispatch({
+      type: actions.CURRENT_NOTE,
+      payload: {
+        ...state,
+        currentNote: {
+          ...state.currentNote,
+          metadata: {
+            ...state.currentNote.metadata,
+            tags: [...newTags],
+          },
+        },
+      },
     });
   };
 
@@ -61,9 +131,8 @@ const EditorContainer: FC = (): JSX.Element => {
   }, []);
 
   return (
-    <Container 
+    <Container
       color={state.currentNote.metadata.color ? theme.white : theme.font}>
-
       <section
         style={{
           background: darkmode
@@ -120,7 +189,13 @@ const EditorContainer: FC = (): JSX.Element => {
               </>
             )}
           </button>
-          <button className='tags-container'></button>
+          <div className='tags-container'>
+            <TagsInput
+            value={state.currentNote.metadata.tags}
+            onChange={handleChangeTag}
+            
+            />
+          </div>
         </div>
       </section>
       <MDEditor
@@ -135,7 +210,6 @@ const EditorContainer: FC = (): JSX.Element => {
           })
         }
         autoFocus={true}
-        toolbarHeight={30}
         highlightEnable={true}
         height={innerHeight}
         previewOptions={{
@@ -165,6 +239,7 @@ const EditorContainer: FC = (): JSX.Element => {
           hr,
           codeBlock,
         ]}
+        preview='edit'
       />
     </Container>
   );

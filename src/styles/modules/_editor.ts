@@ -11,6 +11,7 @@ export const _editor = styled.section`
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+    padding-bottom: 12px;
 
     input {
       width: 100%;
@@ -36,34 +37,35 @@ export const _editor = styled.section`
       display: flex;
       flex-direction: row;
       gap: 12px;
-    }
+      padding: 0 12px;
 
-    button {
-      ${BaseButtonOutline}
-      padding: 5px;
-      background: none;
-      font-weight: 500;
-      font-size: 0.9rem;
+      button {
+        ${BaseButtonOutline}
+        border-radius: 3px;
+        padding: 6px;
+        background: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
 
-      span {
-        color: rgb(${({ color }) => color}) !important;
-      }
-
-      svg {
-        width: 16px;
-        height: 16px;
-        color: rgb(${({ color }) => color});
+        span {
+          color: rgb(${({ color }) => color}) !important;
+          padding-left: 25px;
+        }
+        svg {
+          width: 16px;
+          height: 16px;
+          color: rgb(${({ color }) => color});
+        }
       }
     }
   }
 
-  /* add background support for the editor */
+  /* add custom styles for the editor */
   .w-md-editor {
     width: 100%;
     height: 100%;
     border: none;
-    background-color: rgb(${({ theme }) => theme.foreground});
-    color: rgb(${({ theme }) => theme.font}) !important;
     border-radius: 0px;
     box-shadow: none;
   }
@@ -76,56 +78,10 @@ export const _editor = styled.section`
   .w-md-editor-text-input {
     font-size: 1.1rem !important;
     line-height: 1.4rem !important;
-    font-family: Consolas, Hack, Menlo, Inter, monospace;
-  }
-
-  .w-md-editor-text,
-  .w-md-editor-text-input,
-  .w-md-editor-text-pre .title,
-  .w-md-editor-text-pre .bold,
-  .w-md-editor-text-pre .blockquote,
-  .w-md-editor-text-pre .table .punctuation,
-  .w-md-editor-text-pre .hr,
-  .w-md-editor-text-pre .table .table-header {
-    color: rgb(${({ theme }) => theme.font}) !important;
-  }
-
-  .w-md-editor-text-input {
-    color: rgb(${({ theme }) => theme.font}) !important;
-  }
-
-  .wmde-markdown-color,
-  .language-markdown {
-    color: rgb(${({ theme }) => theme.font}) !important;
-    ::selection {
-      background-color: rgb(105, 135, 175) !important;
-      color: rgb(${({ theme }) => theme.white}) !important;
-    }
-  }
-
-  .token,
-  .title,
-  .important {
-    ::selection {
-      background-color: rgb(105, 135, 175) !important;
-      color: rgb(${({ theme }) => theme.white}) !important;
-    }
-  }
-
-  hr {
-    background-color: rgba(${({ theme }) => theme.font}, 0.5) !important;
+    font-family: Consolas, Hack, Menlo, Inter, monospace !important;
   }
 
   table {
-    tr {
-      background: rgb(${({ theme }) => theme.background}) !important;
-    }
-
-    td,
-    th {
-      border-color: rgba(${({ theme }) => theme.font}, 0.5) !important;
-    }
-
     th {
       font-weight: bold;
     }
@@ -138,14 +94,6 @@ export const _editor = styled.section`
   .w-md-editor-text-pre .url {
     color: rgb(105, 135, 175) !important;
     background-color: transparent !important;
-  }
-
-  .w-md-editor-text-pre .strike {
-    background-color: transparent !important;
-  }
-
-  .w-md-editor-text-pre .url .content {
-    color: rgb(105, 135, 175) !important;
   }
 
   .w-md-editor-toolbar {
@@ -173,13 +121,5 @@ export const _editor = styled.section`
 
   .w-md-editor-preview {
     box-shadow: none;
-  }
-
-  span {
-    background-color: transparent !important;
-    color: rgb(${({ theme }) => theme.primary_shade}) !important;
-    .token .variable {
-      color: rgb(${({ theme }) => theme.secondary}) !important;
-    }
   }
 `;
