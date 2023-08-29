@@ -24,10 +24,10 @@ export const _editor = styled.section`
       background: none;
       font-weight: 500;
       font-size: 1.6rem;
-      color: rgb(${({ color }) => color});
+      color: rgb(${({ theme }) => theme.font});
 
       ::placeholder {
-        color: rgba(${({ color }) => color}, 0.8);
+        color: rgba(${({ theme }) => theme.font}, 0.4);
         font-weight: 500;
         font-size: 1.6rem;
       }
@@ -49,77 +49,20 @@ export const _editor = styled.section`
         border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
 
         span {
-          color: rgb(${({ color }) => color}) !important;
+          color: rgb(${({ theme }) => theme.font}) !important;
           padding-left: 25px;
         }
         svg {
           width: 16px;
           height: 16px;
-          color: rgb(${({ color }) => color});
+          color: rgb(${({ theme }) => theme.font});
         }
       }
     }
   }
 
-  /* add custom styles for the editor */
-  .w-md-editor {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 0px;
-    box-shadow: none;
+  .editor-container {
+    background: inherit;
   }
 
-  .w-md-editor-content {
-    border-radius: 0px;
-  }
-
-  .w-md-editor-text-pre > code,
-  .w-md-editor-text-input {
-    font-size: 1.1rem !important;
-    line-height: 1.4rem !important;
-    font-family: Consolas, Hack, Menlo, Inter, monospace !important;
-  }
-
-  table {
-    th {
-      font-weight: bold;
-    }
-  }
-
-  a {
-    color: rgb(105, 135, 175) !important;
-  }
-
-  .w-md-editor-text-pre .url {
-    color: rgb(105, 135, 175) !important;
-    background-color: transparent !important;
-  }
-
-  .w-md-editor-toolbar {
-    border: none;
-    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
-    border-radius: 0px;
-    background-color: rgb(${({ theme }) => theme.foreground});
-  }
-
-  .w-md-editor-toolbar li > button:hover,
-  .w-md-editor-toolbar li > button:focus,
-  .w-md-editor-toolbar li > button:active,
-  .w-md-editor-toolbar li.active > button {
-    color: rgb(${({ theme }) => theme.primary_shade});
-    background-color: rgba(${({ theme }) => theme.primary}, 0.2);
-  }
-
-  .w-md-editor-toolbar li > button {
-    color: rgb(${({ theme }) => theme.font});
-  }
-
-  .w-md-editor-toolbar-divider {
-    background-color: rgba(${({ theme }) => theme.font}, 0.4);
-  }
-
-  .w-md-editor-preview {
-    box-shadow: none;
-  }
 `;

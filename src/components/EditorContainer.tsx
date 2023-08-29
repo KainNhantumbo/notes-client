@@ -1,36 +1,15 @@
-import {
-  bold,
-  italic,
-  code,
-  codeBlock,
-  link,
-  strikethrough,
-  image,
-  checkedListCommand,
-  hr,
-  unorderedListCommand,
-  orderedListCommand,
-  quote,
-  divider,
-  group,
-  title1,
-  title2,
-  title3,
-  title4,
-  title5,
-  title6,
-} from '@uiw/react-md-editor/lib/commands';
-import { FC, useEffect, useMemo, useState } from 'react';
-import actions from '../data/actions';
-import { useAppContext } from '../context/AppContext';
-import { _editor as Container } from '@/src/styles/modules/_editor';
 import dynamic from 'next/dynamic';
-import { MDEditorProps } from '@uiw/react-md-editor';
+import actions from '../data/actions';
+import TagsInput from 'react-tagsinput';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { useAppContext } from '../context/AppContext';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
+import { _editor as Container } from '@/src/styles/modules/_editor';
+
+import { MDEditorProps } from '@uiw/react-md-editor';
 import rehypeSanitize from 'rehype-sanitize';
-import { BsStar, BsStarFill } from 'react-icons/bs';
-import TagsInput from 'react-tagsinput';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeformat from 'rehype-format';
@@ -42,18 +21,34 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 
-import '@uiw/react-markdown-editor/esm/index.css';
-import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
-import '@uiw/react-markdown-preview/markdown.css';
+// import '@uiw/react-markdown-preview/markdown.css';
+// import '@uiw/react-markdown-editor/esm/index.css';
+// import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
 
-const MarkdownEditor = dynamic(
-  () => import('@uiw/react-markdown-editor').then((mod) => mod.default),
+// const MarkdownEditor = dynamic(
+//   () => import('@uiw/react-markdown-editor').then((mod) => mod.default),
+//   { ssr: false }
+// );
+
+// const MDEditor = dynamic<MDEditorProps>(() => import('@uiw/react-md-editor'), {
+//   ssr: false,
+// });
+
+import '@mdxeditor/editor/style.css';
+import { listsPlugin } from '@mdxeditor/editor/plugins/lists';
+import { quotePlugin } from '@mdxeditor/editor/plugins/quote';
+import { thematicBreakPlugin } from '@mdxeditor/editor/plugins/thematic-break';
+import { headingsPlugin } from '@mdxeditor/editor/plugins/headings';
+import { UndoRedo } from '@mdxeditor/editor/plugins/toolbar/components/UndoRedo';
+import { BoldItalicUnderlineToggles } from '@mdxeditor/editor/plugins/toolbar/components/BoldItalicUnderlineToggles';
+import { toolbarPlugin } from '@mdxeditor/editor/plugins/toolbar';
+import { linkPlugin } from '@mdxeditor/editor/plugins/link';
+import { linkDialogPlugin } from '@mdxeditor/editor/plugins/link-dialog';
+import { BlockTypeSelect } from '@mdxeditor/editor/plugins/toolbar/components/BlockTypeSelect';
+export const MDXEditor = dynamic(
+  () => import('@mdxeditor/editor/MDXEditor').then((mod) => mod.MDXEditor),
   { ssr: false }
 );
-
-const MDEditor = dynamic<MDEditorProps>(() => import('@uiw/react-md-editor'), {
-  ssr: false,
-});
 
 const EditorContainer: FC = (): JSX.Element => {
   const theme: DefaultTheme = useTheme();
@@ -67,12 +62,6 @@ const EditorContainer: FC = (): JSX.Element => {
       text: tag,
     }));
   }, [state.currentNote.metadata.tags]);
-
-  const computeInnerHeight = (): void => {
-    setInnerHeight(() => {
-      return Number(window.innerHeight.toFixed(1)) - 250;
-    });
-  };
 
   const handleChangeTag = (tags: string[], changed: string[]): void => {
     console.log(tags, changed);
@@ -137,6 +126,12 @@ const EditorContainer: FC = (): JSX.Element => {
     });
   };
 
+  const computeInnerHeight = (): void => {
+    setInnerHeight(() => {
+      return Number(window.innerHeight.toFixed(1)) - 250;
+    });
+  };
+
   useEffect(() => {
     computeInnerHeight();
     window.addEventListener('resize', computeInnerHeight);
@@ -146,16 +141,8 @@ const EditorContainer: FC = (): JSX.Element => {
   }, []);
 
   return (
-    <Container
-      color={state.currentNote.metadata.color ? theme.white : theme.font}>
-      <section
-        style={{
-          background: darkmode
-            ? `${state.currentNote.metadata.color}`
-            : `${state.currentNote.metadata.color}`,
-          color: darkmode ? 'white' : 'black',
-        }}
-        className='header-container'>
+    <Container>
+      <section className='header-container'>
         <input
           type='text'
           name='title'
@@ -212,54 +199,43 @@ const EditorContainer: FC = (): JSX.Element => {
           </div>
         </div>
       </section>
-      {/* <MDEditor
-        autoFocus={true}
-        highlightEnable={true}
-        height={innerHeight}
-        previewOptions={{
-          rehypePlugins: [[rehypeSanitize]],
-        }}
-        commands={[
-          group([title1, title2, title3, title4, title5, title6], {
-            groupName: 'Toggle title',
-            name: 'Toggle Title',
-            buttonProps: {
-              'aria-label': 'Insert title',
-              title: 'Toggle title',
-            },
-          }),
-          bold,
-          italic,
-          strikethrough,
-          link,
-          divider,
-          checkedListCommand,
-          unorderedListCommand,
-          orderedListCommand,
-          divider,
-          image,
-          quote,
-          code,
-          hr,
-          codeBlock,
-        ]}
-        preview='edit'
-      /> */}
+      <section className='editor-container'>
+        <MDXEditor
+          // setMarkdown={state.currentNote.content}
+          className='light-mode'
+          markdown={state.currentNote.content}
+          onChange={(value) => {
+            console.info(value);
+            dispatch({
+              type: actions.CURRENT_NOTE,
+              payload: {
+                ...state,
+                currentNote: { ...state.currentNote, content: String(value) },
+              },
+            });
+          }}
+          plugins={[
+            headingsPlugin(),
+            listsPlugin(),
+            quotePlugin(),
+            thematicBreakPlugin(),
+            linkPlugin(),
+            linkDialogPlugin({
+              linkAutocompleteSuggestions: [''],
+            }),
 
-      <MarkdownEditor
-        value={state.currentNote.content}
-        onChange={(value) =>
-          dispatch({
-            type: actions.CURRENT_NOTE,
-            payload: {
-              ...state,
-              currentNote: { ...state.currentNote, content: String(value) },
-            },
-          })
-        }
-        
-        autoFocus={false}
-      />
+            toolbarPlugin({
+              toolbarContents: () => (
+                <>
+                  <UndoRedo />
+                  <BoldItalicUnderlineToggles />
+                  <BlockTypeSelect />
+                </>
+              ),
+            }),
+          ]}
+        />
+      </section>
     </Container>
   );
 };
