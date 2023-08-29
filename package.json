@@ -52,7 +52,6 @@
     "framer-motion": "^10.12.18",
     "moment": "^2.29.4",
     "next": "13.4.16",
-    "next-remove-imports": "^1.0.12",
     "prismjs": "^1.29.0",
     "rc-dropdown": "^4.1.0",
     "rc-menu": "^9.11.1",

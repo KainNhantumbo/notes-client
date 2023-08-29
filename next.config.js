@@ -1,15 +1,4 @@
 /** @type {import('next').NextConfig} */
-// const removeImports = require('next-remove-imports')({
-//   test: /node_modules([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/,
-//   matchImports: '\\.(less|css|scss|sass|styl)$',
-// });
-
-// module.exports = removeImports({
-//   reactStrictMode: true,
-//   compiler: { styledComponents: true },
-//   swcMinify: true,
-//   images: { domains: ['https://res.cloudinary.com'] },
-// });
 
 const nextConfig = {
   compiler: { styledComponents: true },
@@ -17,7 +6,30 @@ const nextConfig = {
   images: { domains: ['https://res.cloudinary.com'] },
   transpilePackages: ['@mdxeditor/editor', 'react-diff-view'],
   reactStrictMode: true,
-  webpack: (config) => {
+  webpack: (config, options) => {
+    const test = /node_modules([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/;
+    const matchImports = '\\.(less|css|scss|sass|styl)$';
+
+    if (!options.isServer) {
+      config.module.rules.unshift({
+        test: test,
+        loader: require.resolve('babel-loader', {
+          paths: [process.cwd()],
+        }),
+        options: {
+          plugins: [
+            [
+              require.resolve('babel-plugin-transform-remove-imports', {
+                paths: [process.cwd()],
+              }),
+              {
+                test: matchImports,
+              },
+            ],
+          ],
+        },
+      });
+    }
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },
