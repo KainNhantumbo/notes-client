@@ -6,9 +6,9 @@ import dynamic from 'next/dynamic';
 import { MDEditorProps } from '@uiw/react-md-editor';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
-import rehypeSanitize from 'rehype-sanitize';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 import TagsInput from 'react-tagsinput';
+import rehypeSanitize from 'rehype-sanitize';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeformat from 'rehype-format';
@@ -20,6 +20,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 
+import 'react-tagsinput/react-tagsinput.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-markdown-editor/esm/index.css';
 import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
@@ -38,13 +39,6 @@ const EditorContainer: FC = (): JSX.Element => {
   const { darkmode } = useThemeContext();
   const { state, dispatch, fetchAPI } = useAppContext();
   const [innerHeight, setInnerHeight] = useState<number>(0);
-
-  const currentActiveTags = useMemo(() => {
-    return state.currentNote.metadata.tags.map((tag) => ({
-      id: tag,
-      text: tag,
-    }));
-  }, [state.currentNote.metadata.tags]);
 
   const computeInnerHeight = (): void => {
     setInnerHeight(() => {
@@ -174,10 +168,28 @@ const EditorContainer: FC = (): JSX.Element => {
               </>
             )}
           </button>
-          <div className='tags-container'>
+          <div className='tags-component-container'>
             <TagsInput
+              className='tags-input-component'
+              focusedClassName='tags-input-component--focus'
               value={state.currentNote.metadata.tags}
               onChange={handleChangeTag}
+              onlyUnique={true}
+              inputProps={{
+                className: 'tags-input-component--input',
+                placeholder: 'Add a tag',
+              }}
+              tagProps={{
+                className: 'tags-input-component--tag',
+                classNameRemove: 'tags-input-component--tag-remove',
+              }}
+              validate={(tag: string) => {
+                if (!String(tag) || String(tag).length > 12) {
+                  return false;
+                }
+                return true;
+              }}
+              maxTags={12}
             />
           </div>
         </div>
@@ -185,8 +197,8 @@ const EditorContainer: FC = (): JSX.Element => {
 
       <MarkdownEditor
         value={state.currentNote.content}
-        
-        onChange={(value, viewUpdate) => {
+        onChange={(value:string, viewUpdate) => {
+          // viewUpdate.state.toJSON()
           dispatch({
             type: actions.CURRENT_NOTE,
             payload: {
@@ -195,6 +207,7 @@ const EditorContainer: FC = (): JSX.Element => {
             },
           });
         }}
+        height={String(innerHeight + 'px')}
       />
     </Container>
   );
