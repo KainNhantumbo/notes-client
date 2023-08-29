@@ -3,10 +3,12 @@ import actions from '../data/actions';
 import { useAppContext } from '../context/AppContext';
 import { _editor as Container } from '@/src/styles/modules/_editor';
 import dynamic from 'next/dynamic';
+import { TwitterPicker } from 'react-color';
 import { MDEditorProps } from '@uiw/react-md-editor';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
-import { BsStar, BsStarFill } from 'react-icons/bs';
+import { BsFillStickyFill, BsStar, BsStarFill } from 'react-icons/bs';
+import { m as motion } from 'framer-motion';
 import TagsInput from 'react-tagsinput';
 import rehypeSanitize from 'rehype-sanitize';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
@@ -19,7 +21,7 @@ import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
-
+import { colorsOptions } from '../data/app-data';
 import 'react-tagsinput/react-tagsinput.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-markdown-editor/esm/index.css';
@@ -39,6 +41,7 @@ const EditorContainer: FC = (): JSX.Element => {
   const { darkmode } = useThemeContext();
   const { state, dispatch, fetchAPI } = useAppContext();
   const [innerHeight, setInnerHeight] = useState<number>(0);
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const computeInnerHeight = (): void => {
     setInnerHeight(() => {
@@ -46,9 +49,7 @@ const EditorContainer: FC = (): JSX.Element => {
     });
   };
 
-  const handleChangeTag = (tags: string[], changed: string[]): void => {
-    console.log(tags, changed);
-
+  const handleChangeTag = (tags: string[]): void => {
     dispatch({
       type: actions.CURRENT_NOTE,
       payload: {
@@ -57,52 +58,7 @@ const EditorContainer: FC = (): JSX.Element => {
           ...state.currentNote,
           metadata: {
             ...state.currentNote.metadata,
-            tags: [...changed],
-          },
-        },
-      },
-    });
-  };
-
-  const handleDeleteTag = (currentTagIndex: number): void => {
-    dispatch({
-      type: actions.CURRENT_NOTE,
-      payload: {
-        ...state,
-        currentNote: {
-          ...state.currentNote,
-          metadata: {
-            ...state.currentNote.metadata,
-            tags: [
-              ...state.currentNote.metadata.tags.filter(
-                (tag, index) => index !== currentTagIndex
-              ),
-            ],
-          },
-        },
-      },
-    });
-  };
-
-  const handleDragnDropTag = (
-    currentTag: { id: string; text: string },
-    currentPosition: number,
-    newPosition: number
-  ): void => {
-    const newTags = state.currentNote.metadata.tags
-      .slice()
-      .splice(currentPosition, 0)
-      .splice(newPosition, 0, currentTag.text);
-
-    dispatch({
-      type: actions.CURRENT_NOTE,
-      payload: {
-        ...state,
-        currentNote: {
-          ...state.currentNote,
-          metadata: {
-            ...state.currentNote.metadata,
-            tags: [...newTags],
+            tags: [...tags],
           },
         },
       },
@@ -120,23 +76,29 @@ const EditorContainer: FC = (): JSX.Element => {
   return (
     <Container>
       <section className='header-container'>
-        <input
-          type='text'
-          name='title'
-          placeholder='Untitled'
-          aria-label='Your note title'
-          value={state.currentNote.title}
-          required
-          onChange={(e): void =>
-            dispatch({
-              type: actions.CURRENT_NOTE,
-              payload: {
-                ...state,
-                currentNote: { ...state.currentNote, title: e.target.value },
-              },
-            })
-          }
-        />
+        <div className='form-container'>
+          <input
+            type='text'
+            name='title'
+            placeholder='Untitled'
+            aria-label='Your note title'
+            value={state.currentNote.title}
+            maxLength={128}
+            required
+            onChange={(e): void =>
+              dispatch({
+                type: actions.CURRENT_NOTE,
+                payload: {
+                  ...state,
+                  currentNote: { ...state.currentNote, title: e.target.value },
+                },
+              })
+            }
+          />
+          <span className='counter'>{`${
+            state.currentNote.title.length.toString() || String(0)
+          } / 128`}</span>
+        </div>
 
         <div className='properties-container'>
           <button
@@ -168,6 +130,46 @@ const EditorContainer: FC = (): JSX.Element => {
               </>
             )}
           </button>
+
+          <div className='priority-selector'>
+            
+          </div>
+          <div className='label-selector'></div>
+          <div
+            className='color-selector'
+            onClick={() => setDisplayColorPicker(false)}>
+            <motion.button
+              onClick={() => {
+                setDisplayColorPicker(true);
+              }}>
+              <BsFillStickyFill color={state.currentNote.metadata.color} />
+              <span>Pick a color</span>
+            </motion.button>
+
+            {displayColorPicker ? (
+              <TwitterPicker
+                className='color-picker'
+                colors={colorsOptions}
+                color={state.currentNote.metadata.color}
+                triangle='top-left'
+                onChange={(color) => {
+                  dispatch({
+                    type: actions.CURRENT_NOTE,
+                    payload: {
+                      ...state,
+                      currentNote: {
+                        ...state.currentNote,
+                        metadata: {
+                          ...state.currentNote.metadata,
+                          color: String(color.hex),
+                        },
+                      },
+                    },
+                  });
+                }}
+              />
+            ) : null}
+          </div>
           <div className='tags-component-container'>
             <TagsInput
               className='tags-input-component'
@@ -197,7 +199,7 @@ const EditorContainer: FC = (): JSX.Element => {
 
       <MarkdownEditor
         value={state.currentNote.content}
-        onChange={(value:string, viewUpdate) => {
+        onChange={(value: string, viewUpdate) => {
           // viewUpdate.state.toJSON()
           dispatch({
             type: actions.CURRENT_NOTE,
@@ -208,6 +210,8 @@ const EditorContainer: FC = (): JSX.Element => {
           });
         }}
         height={String(innerHeight + 'px')}
+        placeholder={'Start writing a note...'}
+        title='Start writing a note...'
       />
     </Container>
   );

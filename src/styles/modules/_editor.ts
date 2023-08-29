@@ -13,26 +13,36 @@ export const _editor = styled.section`
     border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
     padding-bottom: 12px;
 
-    input {
-      width: 100%;
-      height: fit-content;
-      border: none;
-      padding: 10px;
-      line-height: 1.2rem;
-      font-weight: 400;
-      outline: none;
-      background: none;
-      font-weight: 500;
-      font-size: 1.6rem;
-      color: rgb(${({ theme }) => theme.font});
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
 
-      ::placeholder {
-        color: rgba(${({ theme }) => theme.font}, 0.4);
+      input {
+        width: 100%;
+        height: fit-content;
+        border: none;
+        padding: 10px;
+        line-height: 1.2rem;
+        font-weight: 400;
+        outline: none;
+        background: none;
         font-weight: 500;
         font-size: 1.6rem;
+        color: rgb(${({ theme }) => theme.font});
+
+        ::placeholder {
+          color: rgba(${({ theme }) => theme.font}, 0.4);
+          font-weight: 500;
+          font-size: 1.6rem;
+        }
+      }
+
+      .counter {
+        align-self: end;
+        font-size: 0.9rem;
       }
     }
-
     .properties-container {
       display: flex;
       flex-direction: row;
