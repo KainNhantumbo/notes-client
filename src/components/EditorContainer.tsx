@@ -31,8 +31,25 @@ import { useThemeContext } from '../context/ThemeContext';
 import rehypeSanitize from 'rehype-sanitize';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 import TagsInput from 'react-tagsinput';
+import { RehypeRewriteOptions } from 'rehype-rewrite';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeformat from 'rehype-format';
+import rehyped from 'rehype-stringify';
+import rehypeDocument from 'rehype-document';
+import rehypeFormat from 'rehype-format';
+import rehypeStringify from 'rehype-stringify';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
 
-// import rehypeHighlight from 'rehype-highlight';
+import '@uiw/react-markdown-editor/esm/index.css';
+import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
+import '@uiw/react-markdown-preview/markdown.css';
+
+const MarkdownEditor = dynamic(
+  () => import('@uiw/react-markdown-editor').then((mod) => mod.default),
+  { ssr: false }
+);
 
 const MDEditor = dynamic<MDEditorProps>(() => import('@uiw/react-md-editor'), {
   ssr: false,
@@ -58,23 +75,21 @@ const EditorContainer: FC = (): JSX.Element => {
   };
 
   const handleChangeTag = (tags: string[], changed: string[]): void => {
-
     console.log(tags, changed);
 
-      dispatch({
-        type: actions.CURRENT_NOTE,
-        payload: {
-          ...state,
-          currentNote: {
-            ...state.currentNote,
-            metadata: {
-              ...state.currentNote.metadata,
-              tags: [...changed],
-            },
+    dispatch({
+      type: actions.CURRENT_NOTE,
+      payload: {
+        ...state,
+        currentNote: {
+          ...state.currentNote,
+          metadata: {
+            ...state.currentNote.metadata,
+            tags: [...changed],
           },
         },
-      });
-
+      },
+    });
   };
 
   const handleDeleteTag = (currentTagIndex: number): void => {
@@ -191,24 +206,13 @@ const EditorContainer: FC = (): JSX.Element => {
           </button>
           <div className='tags-container'>
             <TagsInput
-            value={state.currentNote.metadata.tags}
-            onChange={handleChangeTag}
-            
+              value={state.currentNote.metadata.tags}
+              onChange={handleChangeTag}
             />
           </div>
         </div>
       </section>
-      <MDEditor
-        value={state.currentNote.content}
-        onChange={(value) =>
-          dispatch({
-            type: actions.CURRENT_NOTE,
-            payload: {
-              ...state,
-              currentNote: { ...state.currentNote, content: String(value) },
-            },
-          })
-        }
+      {/* <MDEditor
         autoFocus={true}
         highlightEnable={true}
         height={innerHeight}
@@ -240,9 +244,28 @@ const EditorContainer: FC = (): JSX.Element => {
           codeBlock,
         ]}
         preview='edit'
+      /> */}
+
+      <MarkdownEditor
+        value={state.currentNote.content}
+        onChange={(value) =>
+          dispatch({
+            type: actions.CURRENT_NOTE,
+            payload: {
+              ...state,
+              currentNote: { ...state.currentNote, content: String(value) },
+            },
+          })
+        }
+        
+        autoFocus={false}
       />
     </Container>
   );
 };
 
 export default EditorContainer;
+
+type TEditorPreferences = {
+  autoFocus: boolean;
+};

@@ -4,9 +4,11 @@ const removeImports = require('next-remove-imports')({
   matchImports: '\\.(less|css|scss|sass|styl)$',
 });
 
+
+
 module.exports = removeImports({
   reactStrictMode: true,
   compiler: { styledComponents: true },
   swcMinify: true,
   images: { domains: ['https://res.cloudinary.com'] },
-});
+})
