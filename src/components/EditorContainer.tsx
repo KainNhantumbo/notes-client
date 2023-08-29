@@ -34,7 +34,6 @@ import { unified } from 'unified';
 //   ssr: false,
 // });
 
-import '@mdxeditor/editor/style.css';
 import { listsPlugin } from '@mdxeditor/editor/plugins/lists';
 import { quotePlugin } from '@mdxeditor/editor/plugins/quote';
 import { thematicBreakPlugin } from '@mdxeditor/editor/plugins/thematic-break';
@@ -201,11 +200,10 @@ const EditorContainer: FC = (): JSX.Element => {
       </section>
       <section className='editor-container'>
         <MDXEditor
-          // setMarkdown={state.currentNote.content}
-          className='light-mode'
+          className={darkmode ? 'dark-theme' : 'light-theme'}
           markdown={state.currentNote.content}
           onChange={(value) => {
-            console.info(value);
+            console.info(state.currentNote.content);
             dispatch({
               type: actions.CURRENT_NOTE,
               payload: {
