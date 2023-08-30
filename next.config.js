@@ -7,12 +7,9 @@ const nextConfig = {
   transpilePackages: ['@mdxeditor/editor', 'react-diff-view'],
   reactStrictMode: true,
   webpack: (config, options) => {
-    const test = /node_modules([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/;
-    const matchImports = '\\.(less|css|scss|sass|styl)$';
-
     if (!options.isServer) {
       config.module.rules.unshift({
-        test: test,
+        test: /node_modules([\s\S]*?)\.(tsx|ts|js|mjs|jsx)$/,
         loader: require.resolve('babel-loader', {
           paths: [process.cwd()],
         }),
@@ -22,9 +19,7 @@ const nextConfig = {
               require.resolve('babel-plugin-transform-remove-imports', {
                 paths: [process.cwd()],
               }),
-              {
-                test: matchImports,
-              },
+              { test: '\\.(less|css|scss|sass|styl)$' },
             ],
           ],
         },
