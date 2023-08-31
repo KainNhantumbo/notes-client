@@ -28,11 +28,13 @@ export const _signin = styled.main`
     justify-content: flex-start;
     background: rgba(${({ theme }) => theme.background_shade}, 0.3);
     border-radius: 12px;
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
     @media screen and (max-width: 1140px) {
       align-self: center;
       width: fit-content;
       margin: 40px 12px 12px;
+      border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
       box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
     }
   }

@@ -25,14 +25,14 @@ const Layout: FC<IProps> = ({
   const { state } = useAppContext();
   const router: NextRouter = useRouter();
 
-  // useEffect((): (() => void) => {
-  //   const debounceTimer = setTimeout(() => {
-  //     if (router.asPath.includes('workspace') && !state.auth.id) {
-  //       router.push('/auth/signin');
-  //     }
-  //   }, 500);
-  //   return (): void => clearTimeout(debounceTimer);
-  // }, [state.auth]);
+  useEffect((): (() => void) => {
+    const debounceTimer = setTimeout(() => {
+      if (router.asPath.includes('workspace') && !state.auth.id) {
+        router.push('/auth/signin');
+      }
+    }, 500);
+    return (): void => clearTimeout(debounceTimer);
+  }, [state.auth]);
 
   return (
     <MotionConfig reducedMotion='user'>

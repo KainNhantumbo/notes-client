@@ -38,15 +38,17 @@ export const BaseButton = css`
   padding: 10px;
   width: fit-content;
   cursor: pointer;
-  background: rgb(${({ theme }) => theme.primary});
+  background: rgba(${({ theme }) => theme.primary}, .5);
   color: rgb(${({ theme }) => theme.font_dimmed});
   border: 1px solid transparent;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   outline: none;
+  border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   :hover {
-    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
+    background: rgba(${({ theme }) => theme.primary}, .9);
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.3);
   }
   :disabled {
     box-shadow: none;
@@ -178,7 +180,7 @@ export const StyledInputs = css`
     line-height: 1.2rem;
     font-weight: 400;
     outline: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background: rgba(${({ theme }) => theme.background}, 0.7);
     border: 1px solid rgba(${({ theme }) => theme.black}, 0.05);
     color: rgb(${({ theme }) => theme.font});
