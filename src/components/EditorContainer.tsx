@@ -131,9 +131,7 @@ const EditorContainer: FC = (): JSX.Element => {
             )}
           </button>
 
-          <div className='priority-selector'>
-            
-          </div>
+          <div className='priority-selector'></div>
           <div className='label-selector'></div>
           <div
             className='color-selector'
@@ -212,6 +210,7 @@ const EditorContainer: FC = (): JSX.Element => {
         height={String(innerHeight + 'px')}
         placeholder={'Start writing a note...'}
         title='Start writing a note...'
+        data-color-mode='light'
       />
     </Container>
   );
@@ -219,6 +218,3 @@ const EditorContainer: FC = (): JSX.Element => {
 
 export default EditorContainer;
 
-type TEditorPreferences = {
-  autoFocus: boolean;
-};
