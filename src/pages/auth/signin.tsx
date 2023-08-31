@@ -41,6 +41,7 @@ const SignIn: NextPage = (): JSX.Element => {
         method: 'post',
         url: '/api/v1/auth/default/login',
         data: state.signIn,
+        withCredentials: true,
       });
 
       dispatch({

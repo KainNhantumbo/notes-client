@@ -48,6 +48,7 @@ const Home: NextPage = (): JSX.Element => {
                 <motion.a
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
+                  target='_blank'
                   href={app_metadata.repository}>
                   <span>See what's new</span>
                   <BsArrowRightShort />
@@ -102,6 +103,7 @@ const Home: NextPage = (): JSX.Element => {
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
+                  onClick={() => router.push('/workspace')}
                   className='browser-button'>
                   <BsBrowserChrome />
                   <span>Open in Browser</span>

@@ -78,6 +78,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     return await fetch<T>({
       ...config,
       headers: { authorization: `Bearer ${state.auth.token}` },
+      withCredentials: true,
     });
   }
 

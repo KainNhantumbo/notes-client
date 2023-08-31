@@ -206,10 +206,24 @@ export const _header = styled.header`
       }
     }
 
-    .user-account,
-    .user-logout {
-      ${BaseButtonOutline}
+    .user-account {
       border: none;
+      background: none;
+      padding: 10px;
+      color: rgb(${({ theme }) => theme.font});
+      width: fit-content;
+      cursor: pointer;
+      white-space: nowrap;
+      outline: none;
+      overflow: visible;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+      :hover {
+        color: rgb(${({ theme }) => theme.primary_shade});
+      }
+
       img {
         object-fit: cover;
         border-radius: 50%;
@@ -220,20 +234,8 @@ export const _header = styled.header`
         right: -6px;
         pointer-events: none;
       }
-    }
-
-    .user-account {
-      overflow: visible;
-      span {
-        padding-left: 0;
-        padding-right: 20px;
-      }
 
       svg {
-        position: absolute;
-        top: calc(50% - 11px);
-        right: 0;
-        margin-left: 50px;
         width: 22px;
         height: 22px;
       }

@@ -40,7 +40,12 @@ const SignUp: NextPage = (): JSX.Element => {
     e.preventDefault();
     setLoading(true);
     try {
-      await fetch({ method: 'post', url: '/api/v1/users', data: state.signUp });
+      await fetch({
+        method: 'post',
+        url: '/api/v1/users',
+        data: state.signUp,
+        withCredentials: true,
+      });
       router.push(`/auth/signup-success`);
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);

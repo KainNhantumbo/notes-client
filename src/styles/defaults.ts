@@ -3,7 +3,6 @@ import { css } from 'styled-components';
 export const BaseButtonOutline = css`
   border: none;
   background: none;
-  border-radius: 10px;
   position: relative;
   padding: 10px;
   color: rgb(${({ theme }) => theme.font});

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { BsArrowRight, BsList, BsX } from 'react-icons/bs';
-import { BiUser } from 'react-icons/bi';
+import { ArrowRightIcon, AvatarIcon, Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { useState, useEffect, FC } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
@@ -76,17 +75,18 @@ const Header: FC = (): JSX.Element => {
                       <span>Login</span>
                     </Link>
                     <Link href={'/auth/signup'} className='sign-in-btn'>
-                      <BsArrowRight />
+                      <ArrowRightIcon/>
                       <span>Sign up</span>
                     </Link>
                   </>
                 ) : null}
 
-                {state.auth.id && !asPath.includes('tabs') ? (
+                {state.auth.id && !asPath.includes('workspace') ? (
                   <button
-                    title='Painel de Controle e Conta'
+                    title='Go to workspace'
                     className='user-account'
                     onClick={() => push(`/workspace`)}>
+                    <span>Account</span>
                     {state.auth.profile_image ? (
                       <img
                         loading='lazy'
@@ -95,9 +95,8 @@ const Header: FC = (): JSX.Element => {
                         alt='User profile image'
                       />
                     ) : (
-                      <BiUser />
+                      <AvatarIcon />
                     )}
-                    <span>Account</span>
                   </button>
                 ) : null}
               </div>
@@ -111,7 +110,7 @@ const Header: FC = (): JSX.Element => {
           aria-label='Toogle menu'
           className='toggle-btn'
           onClick={toggleMenu}>
-          {!isMenu ? <BsList /> : <BsX />}
+          {!isMenu ? <HamburgerMenuIcon /> : <Cross2Icon />}
         </motion.button>
       </div>
     </Container>
