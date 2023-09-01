@@ -1,0 +1,13 @@
+const actions = {
+  AUTH: 'AUTH',
+  NOTES: 'NOTES',
+  CURRENT_NOTE: 'CURRENT_NOTE',
+  SIGN_IN: 'SIGN_IN',
+  SIGN_UP: 'SIGN_UP',
+  FOLDERS: 'FOLDERS',
+  LOGOUT_MODAL: 'LOGOUT_MODAL',
+  NOTIFICATION: 'NOTIFICATION',
+  PROMPT: 'PROMPT',
+};
+
+export default actions;

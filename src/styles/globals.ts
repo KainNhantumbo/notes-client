@@ -1,0 +1,43 @@
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyles = createGlobalStyle`
+  * {    
+    scroll-padding-top: 90px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+  
+  label {
+    user-select: none;
+  }
+  
+  body {
+    width: 100%;
+    position: relative;
+    color: rgb(${({ theme }) => theme.font});
+    background: rgb(${({ theme }) => theme.foreground});
+    font-family: Inter, Roboto, Nunito,'Zilla Slab', 'Open Sans','Helvetica Neue', -apple-system, sans-serif;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(${({ theme }) => theme.background}, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background: rgb(${({ theme }) => theme.font});
+  }
+`;
