@@ -1,8 +1,8 @@
 import { m as motion } from 'framer-motion';
 import Layout from '@/components/Layout';
-import app_logo from '../../public/favicon-192x192.png';
 import demo_dark from '@/assets/demo-dark.jpg';
-import { ArrowRightIcon } from '@radix-ui/react-icons';
+import app_logo from '@/assets/logo-192x192.png';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import demo_light from '@/assets/demo-light.jpg';
@@ -49,7 +49,7 @@ const Home: FC = (): JSX.Element => {
                   target='_blank'
                   href={app_metadata.repository}>
                   <span>See what's new</span>
-                  <ArrowRightIcon />
+                  <GitHubLogoIcon />
                 </motion.a>
               </div>
 
