@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import actions from '../data/actions';
 import Layout from '@/src/components/Layout';
-import { useRouter, NextRouter } from 'next/router';
+import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { _navbar as Container } from '@/src/styles/modules/_navbar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
 const Navbar: FC = (): JSX.Element => {
-  const router: NextRouter = useRouter();
+  const navigate: NavigateFunction = useNavigate();
   const { state, dispatch, fetchAPI } = useAppContext();
 
   return (

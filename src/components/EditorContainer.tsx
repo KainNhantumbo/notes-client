@@ -1,10 +1,21 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import 'react-tagsinput/react-tagsinput.css';
+import '@uiw/react-markdown-preview/markdown.css';
+import '@uiw/react-markdown-editor/esm/index.css';
+import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
+
+import {
+  MixerHorizontalIcon,
+  StarFilledIcon,
+  StarIcon,
+} from '@radix-ui/react-icons';
+import { FC, useEffect, useState } from 'react';
 import actions from '../data/actions';
 import { useAppContext } from '../context/AppContext';
+import { colorsOptions } from '../data/app-data';
 import { _editor as Container } from '@/src/styles/modules/_editor';
-import dynamic from 'next/dynamic';
 import { TwitterPicker } from 'react-color';
 
+import MarkdownEditor from '@uiw/react-markdown-editor';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import { m as motion } from 'framer-motion';
@@ -20,17 +31,6 @@ import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
-import { colorsOptions } from '../data/app-data';
-import 'react-tagsinput/react-tagsinput.css';
-import '@uiw/react-markdown-preview/markdown.css';
-import '@uiw/react-markdown-editor/esm/index.css';
-import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
-import { MixerHorizontalIcon, StarFilledIcon, StarIcon } from '@radix-ui/react-icons';
-
-const MarkdownEditor = dynamic(
-  () => import('@uiw/react-markdown-editor').then((mod) => mod.default),
-  { ssr: false }
-);
 
 
 const EditorContainer: FC = (): JSX.Element => {

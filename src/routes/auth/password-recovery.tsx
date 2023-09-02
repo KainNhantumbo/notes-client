@@ -1,19 +1,18 @@
-import { NextPage } from 'next';
 import fetch from '@/src/config/client';
 import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { SubmitEvent } from '@/src/@types';
 import { app_metadata } from '@/src/data/app-data';
 import { PulseLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
-import { NextRouter, useRouter } from 'next/router';
 import { _recoveryPassword as Container } from '@/src/styles/routes/_recovery-pasword';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-const PasswordRecovery: NextPage = (): JSX.Element => {
+const PasswordRecovery: FC = (): JSX.Element => {
   const theme: DefaultTheme = useTheme();
-  const router: NextRouter = useRouter();
+  const navigate: NavigateFunction = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
@@ -28,7 +27,7 @@ const PasswordRecovery: NextPage = (): JSX.Element => {
         data: email,
         withCredentials: true,
       });
-      router.push('/auth/_password-recovery-success');
+      navigate('/auth/_password-recovery-success', { replace: true });
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       setError({

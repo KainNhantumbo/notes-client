@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { NextPage } from 'next';
+import {Link} from 'react-router-dom';
 import Layout from '@/src/components/Layout';
 import { app_metadata } from '@/src/data/app-data';
 import { _signinSuccess as Container } from '@/src/styles/routes/_signup-sucess';
 import { CardStackIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
+import { FC } from 'react';
 
-const ResetPasswordSuccess: NextPage = (): JSX.Element => (
+const ResetPasswordSuccess: FC = (): JSX.Element => (
   <Layout
     renderFooter
     renderHeader
@@ -27,11 +27,11 @@ const ResetPasswordSuccess: NextPage = (): JSX.Element => (
               password.
             </p>
 
-            <Link href={`mailto:`} className='a-open-mail'>
+            <Link to={`mailto:`} className='a-open-mail'>
               <EnvelopeOpenIcon/>
               <span>Go to your mail box</span>
             </Link>
-            <Link href={`/`} className='a-back'>
+            <Link to={`/`} className='a-back'>
               <span>Skip, I will check it later.</span>
             </Link>
           </section>

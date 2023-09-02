@@ -1,21 +1,18 @@
-import Image from 'next/image';
-import { NextPage } from 'next';
 import fetch from '@/src/config/client';
 import actions from '@/src/data/actions';
 import { m as motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Layout from '@/src/components/Layout';
 import { app_metadata } from '@/src/data/app-data';
-import { NextRouter, useRouter } from 'next/router';
 import media_login from '@/public/assets/media-login.jpg';
 import { useAppContext } from '@/src/context/AppContext';
 import { InputEvents, SubmitEvent, TAuth } from '@/src/@types';
 import { _signin as Container } from '@/src/styles/routes/_signin';
-import Link from 'next/link';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 
-const SignIn: NextPage = (): JSX.Element => {
-  const router: NextRouter = useRouter();
+const SignIn: FC = (): JSX.Element => {
+  const navigate: NavigateFunction = useNavigate();
   const { state, dispatch } = useAppContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
@@ -49,7 +46,7 @@ const SignIn: NextPage = (): JSX.Element => {
         payload: { ...state, auth: { ...data } },
       });
 
-      router.push(`/workspace`);
+      navigate(`/workspace`, { replace: true });
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       setError({
@@ -79,12 +76,11 @@ const SignIn: NextPage = (): JSX.Element => {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <Image
+          <img
+            loading='lazy'
+            decoding='async'
             src={media_login}
-            width={undefined}
-            height={undefined}
             alt='background image'
-            priority={false}
           />
 
           <article>
@@ -124,7 +120,7 @@ const SignIn: NextPage = (): JSX.Element => {
                   />
                 </section>
                 <div className='password-reset'>
-                  <Link href={'/auth/reset-password'}>
+                  <Link to={'/auth/reset-password'}>
                     <span>Forgot password? Recover account.</span>
                   </Link>
                 </div>
@@ -144,7 +140,7 @@ const SignIn: NextPage = (): JSX.Element => {
               <div className='sign-in-options'>
                 <div className='signup-request'>
                   Don't have a account yet?
-                  <Link href={'/auth/signup'}>
+                  <Link to={'/auth/signup'}>
                     <span> Sign up.</span>
                   </Link>
                 </div>

@@ -1,8 +1,7 @@
-import { NextPage } from 'next';
 import fetch from '@/src/config/client';
 import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { InputEvents, SubmitEvent } from '@/src/@types';
 import { app_metadata } from '@/src/data/app-data';
 import { PulseLoader } from 'react-spinners';
@@ -10,7 +9,7 @@ import { DefaultTheme, useTheme } from 'styled-components';
 import { _recoveryPassword as Container } from '@/src/styles/routes/_recovery-pasword';
 import { LockClosedIcon } from '@radix-ui/react-icons';
 
-const UpdatePassword: NextPage = (): JSX.Element => {
+const UpdatePassword: FC = (): JSX.Element => {
   const theme: DefaultTheme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });

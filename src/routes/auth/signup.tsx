@@ -3,26 +3,23 @@ import {
   EnvelopeClosedIcon,
   LockClosedIcon,
 } from '@radix-ui/react-icons';
-import Link from 'next/link';
-import Image from 'next/image';
-import { NextPage } from 'next';
 import fetch from '../../config/client';
 import actions from '@/src/data/actions';
 import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
 import { PulseLoader } from 'react-spinners';
 import { app_metadata } from '@/src/data/app-data';
-import { NextRouter, useRouter } from 'next/router';
+import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '@/src/context/AppContext';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { InputEvents, SubmitEvent } from '@/src/@types';
 import media_login from '@/public/assets/media-login.jpg';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { _signup as Container } from '@/src/styles/routes/_signup';
 
-const SignUp: NextPage = (): JSX.Element => {
-  const router: NextRouter = useRouter();
+const SignUp: FC = (): JSX.Element => {
   const theme: DefaultTheme = useTheme();
+  const navigate: NavigateFunction = useNavigate();
   const { state, dispatch } = useAppContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
@@ -50,7 +47,7 @@ const SignUp: NextPage = (): JSX.Element => {
         data: state.signUp,
         withCredentials: true,
       });
-      router.push(`/auth/signup-success`);
+      navigate(`/auth/signup-success`, { replace: true });
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       setError({
@@ -80,12 +77,12 @@ const SignUp: NextPage = (): JSX.Element => {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <Image
+          <img
+            loading='lazy'
+            decoding='async'
             src={media_login}
-            width={undefined}
-            height={undefined}
             alt='background image'
-            priority={false}
+            placeholder='background image'
           />
 
           <article>
@@ -206,7 +203,7 @@ const SignUp: NextPage = (): JSX.Element => {
               <div className='sign-in-options'>
                 <div className='signup-request'>
                   Already have an account?
-                  <Link href={'/auth/signin'}>
+                  <Link to={'/auth/signin'}>
                     <span> Sign in.</span>
                   </Link>
                 </div>

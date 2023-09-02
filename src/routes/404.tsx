@@ -1,10 +1,10 @@
-import { NextPage } from 'next';
+import { FC } from 'react';
 import { app_metadata } from '../data/app-data';
-import { NextRouter, useRouter } from 'next/router';
 import { _error as Container } from '../styles/routes/_error';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-const NotFoundError: NextPage = (): JSX.Element => {
-  const router: NextRouter = useRouter();
+const NotFoundError: FC = (): JSX.Element => {
+  const navigate: NavigateFunction = useNavigate();
 
   return (
     <Container>
@@ -17,7 +17,7 @@ const NotFoundError: NextPage = (): JSX.Element => {
         <h1>404</h1>
         <h2>Oops! Lost in {app_metadata.appName}?</h2>
         <p>The page you were looking for does not exist</p>
-        <button onClick={() => router.back()}>
+        <button onClick={() => navigate('back', { relative: 'path' })}>
           Get back!
         </button>
       </section>

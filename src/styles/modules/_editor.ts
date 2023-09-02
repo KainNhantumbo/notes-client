@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButtonOutline, StyledInputs } from '../defaults';
+import { BaseButtonOutline } from '../defaults';
 
 export const _editor = styled.section`
   width: 100%;

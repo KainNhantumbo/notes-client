@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { NextPage } from 'next';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '@/src/components/Layout';
 import { app_metadata } from '@/src/data/app-data';
 import { _signinSuccess as Container } from '@/src/styles/routes/_signup-sucess';
 import { LockClosedIcon, PersonIcon } from '@radix-ui/react-icons';
 
-const SignupSuccess: NextPage = (): JSX.Element => (
+const SignupSuccess: FC = (): JSX.Element => (
   <Layout
     renderFooter
     renderHeader
@@ -27,11 +27,11 @@ const SignupSuccess: NextPage = (): JSX.Element => (
               button below to continue.
             </p>
 
-            <Link href={`/auth/signin`} className='a-open-mail'>
+            <Link to={`/auth/signin`} className='a-open-mail'>
               <LockClosedIcon />
               <span>Login now</span>
             </Link>
-            <Link href={`/`} className='a-back'>
+            <Link to={`/`} className='a-back'>
               <span>Skip, I will check it later.</span>
             </Link>
           </section>

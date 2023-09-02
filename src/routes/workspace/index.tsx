@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { FC } from 'react';
 import Layout from '@/src/components/Layout';
 import Navbar from '@/src/components/Navbar';
 import EditorContainer from '@/src/components/EditorContainer';
@@ -7,7 +7,7 @@ import NotesList from '@/src/components/NotesList';
 import { useAppContext } from '@/src/context/AppContext';
 import { _workspace as Container } from '@/src/styles/routes/_workspace';
 
-const Workspace: NextPage = (): JSX.Element => {
+const Workspace: FC = (): JSX.Element => {
   const { state } = useAppContext();
 
   return (

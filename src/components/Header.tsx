@@ -1,8 +1,17 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRightIcon, AvatarIcon, Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
+import {
+  Link,
+  useNavigate,
+  NavigateFunction,
+  useLocation,
+  Location,
+} from 'react-router-dom';
+import {
+  ArrowRightIcon,
+  AvatarIcon,
+  Cross2Icon,
+  HamburgerMenuIcon,
+} from '@radix-ui/react-icons';
 import { useState, useEffect, FC } from 'react';
-import { NextRouter, useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import logo from '../../public/favicon-192x192.png';
@@ -11,7 +20,8 @@ import { app_metadata, navigationAnchors } from '../data/app-data';
 
 const Header: FC = (): JSX.Element => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
-  const { asPath, push }: NextRouter = useRouter();
+  const navigate: NavigateFunction = useNavigate();
+  const location: Location = useLocation();
   const { state } = useAppContext();
 
   const toggleMenu = (): void => setIsMenu((current) => !current);
@@ -31,15 +41,15 @@ const Header: FC = (): JSX.Element => {
     <Container>
       <div className='wrapper'>
         <div className='logo'>
-          <Link href={'/'}>
-            <Image
+          <Link to={'/'}>
+            <img
+              loading='lazy'
+              decoding='async'
               alt={`${app_metadata.appName} Logo`}
               src={logo}
-              width={600}
-              height={134}
             />{' '}
           </Link>
-          <h3 onClick={() => push('/')}>
+          <h3 onClick={() => navigate('/')}>
             <span>{app_metadata.appName}</span>
           </h3>
         </div>
@@ -59,8 +69,10 @@ const Header: FC = (): JSX.Element => {
                 {navigationAnchors.map((item, index) => (
                   <Link
                     key={index.toString()}
-                    href={item.url}
-                    className={asPath.includes(item.alias) ? 'active' : ''}>
+                    to={item.url}
+                    className={
+                      location.pathname.includes(item.alias) ? 'active' : ''
+                    }>
                     <motion.span whileHover={{ scale: 1.1 }}>
                       {item.name}
                     </motion.span>
@@ -71,21 +83,21 @@ const Header: FC = (): JSX.Element => {
               <div className='left-corner-container'>
                 {!state.auth.id ? (
                   <>
-                    <Link href={'/auth/signin'} className='login-btn'>
+                    <Link to={'/auth/signin'} className='login-btn'>
                       <span>Login</span>
                     </Link>
-                    <Link href={'/auth/signup'} className='sign-in-btn'>
-                      <ArrowRightIcon/>
+                    <Link to={'/auth/signup'} className='sign-in-btn'>
+                      <ArrowRightIcon />
                       <span>Sign up</span>
                     </Link>
                   </>
                 ) : null}
 
-                {state.auth.id && !asPath.includes('workspace') ? (
+                {state.auth.id && !location.pathname.includes('workspace') ? (
                   <button
                     title='Go to workspace'
                     className='user-account'
-                    onClick={() => push(`/workspace`)}>
+                    onClick={() => navigate(`/workspace`)}>
                     <span>Account</span>
                     {state.auth.profile_image ? (
                       <img

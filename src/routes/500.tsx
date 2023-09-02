@@ -1,11 +1,8 @@
-import { NextPage } from 'next';
+import { FC } from 'react';
 import { app_metadata } from '../data/app-data';
-import { NextRouter, useRouter } from 'next/router';
 import { _error as Container } from '../styles/routes/_error';
 
-const InternalServerError: NextPage = (): JSX.Element => {
-  const router: NextRouter = useRouter();
-
+const InternalServerError: FC = (): JSX.Element => {
   return (
     <Container>
       <section className='logo-container'>
@@ -17,9 +14,7 @@ const InternalServerError: NextPage = (): JSX.Element => {
         <h1>500</h1>
         <h2>Oops! Something went wrong on the server.</h2>
         <p>Try refreshing the page and if the error persists</p>
-        <button onClick={() => router.reload()}>
-          Get back!
-        </button>
+        <button onClick={() => location.reload()}>Get back!</button>
       </section>
     </Container>
   );

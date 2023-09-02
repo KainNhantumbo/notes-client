@@ -1,22 +1,23 @@
 import { Component } from 'react';
-import ErrorPage from '../pages/error-page';
+import ErrorPage from '@/src/routes/error-page';
 import type { PropsWithChildren, ErrorInfo, ReactNode } from 'react';
 
 interface IState extends Readonly<{}> {
   hasError: boolean;
+  error: Error | null;
 }
 
 export default class ErrorBoundary extends Component {
-  public props!: PropsWithChildren;
+  public declare props: PropsWithChildren;
   public state: IState;
 
   constructor(props: PropsWithChildren) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error) {
-    return { hasError: true };
+    return { hasError: true, error: error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -27,7 +28,9 @@ export default class ErrorBoundary extends Component {
   render(): ReactNode {
     if (this.state.hasError)
       return (
-        <ErrorPage retryFn={(): void => this.setState({ hasError: false })} />
+        <ErrorPage
+          retryFn={(): void => this.setState({ hasError: false, error: null })}
+        />
       );
     return this.props.children;
   }

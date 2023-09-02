@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { useThemeContext } from '../context/ThemeContext';
 import { app_metadata, footerAnchors } from '../data/app-data';
 import { _footer as Container } from '../styles/modules/_footer';
@@ -13,7 +13,7 @@ const Footer: FC = (): JSX.Element => {
     <Container>
       <nav>
         {footerAnchors.map((item, index) => (
-          <Link key={index.toString()} href={item.anchor}>
+          <Link key={index.toString()} to={item.anchor}>
             <span>{item.name}</span>
           </Link>
         ))}

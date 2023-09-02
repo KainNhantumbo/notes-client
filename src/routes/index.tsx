@@ -1,8 +1,5 @@
-import Image from 'next/image';
-import { NextPage } from 'next';
 import { m as motion } from 'framer-motion';
 import Layout from '@/src/components/Layout';
-import { NextRouter, useRouter } from 'next/router';
 import app_logo from '@/public/favicon-192x192.png';
 import demo_dark from '@/public/assets/demo-dark.jpg';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
@@ -11,11 +8,13 @@ import { useThemeContext } from '../context/ThemeContext';
 import demo_light from '@/public/assets/demo-light.jpg';
 import { _home as Container } from '@/src/styles/routes/_home';
 import { app_features, app_metadata } from '@/src/data/app-data';
+import { FC } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-const Home: NextPage = (): JSX.Element => {
+const Home: FC = (): JSX.Element => {
   const { darkmode } = useThemeContext();
-  const router: NextRouter = useRouter();
   const theme: DefaultTheme = useTheme();
+  const navigate: NavigateFunction = useNavigate();
 
   return (
     <Layout
@@ -41,7 +40,7 @@ const Home: NextPage = (): JSX.Element => {
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   className='browser-button'
-                  onClick={() => router.push('/workspace')}>
+                  onClick={() => navigate('/workspace')}>
                   <span>Open in Browser</span>
                 </motion.button>
                 <motion.a
@@ -54,12 +53,12 @@ const Home: NextPage = (): JSX.Element => {
                 </motion.a>
               </div>
 
-              <Image
-                width={undefined}
-                height={undefined}
+              <img
+                loading='lazy'
+                decoding='async'
                 src={darkmode ? demo_dark : demo_light}
-                priority={false}
                 alt={`${app_metadata.appName} demo image`}
+                placeholder={`${app_metadata.appName} demo image`}
               />
             </section>
 
@@ -82,12 +81,12 @@ const Home: NextPage = (): JSX.Element => {
             </section>
 
             <section className='call-to-action'>
-              <Image
-                width={192}
-                height={192}
+              <img
+                loading='lazy'
+                decoding='async'
                 src={app_logo}
-                priority={false}
                 alt={`${app_metadata.appName} logo image`}
+                placeholder={`${app_metadata.appName} logo image`}
               />
 
               <h2>
@@ -102,7 +101,7 @@ const Home: NextPage = (): JSX.Element => {
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
-                  onClick={() => router.push('/workspace')}
+                  onClick={() => navigate('/workspace')}
                   className='browser-button'>
                   <span>Open in Browser</span>
                 </motion.button>

@@ -1,5 +1,13 @@
 import type { ChangeEvent, FormEvent } from 'react';
 
+export type THeadProps =
+  | {
+      title?: string;
+      createdAt?: string;
+      updatedAt?: string;
+    }
+  | undefined;
+
 export type InputEvents =
   | ChangeEvent<HTMLInputElement>
   | ChangeEvent<HTMLSelectElement>
