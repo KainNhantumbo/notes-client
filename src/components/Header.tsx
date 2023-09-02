@@ -17,6 +17,7 @@ import { m as motion, AnimatePresence } from 'framer-motion';
 import logo from '../../public/favicon-192x192.png';
 import { _header as Container } from '../styles/modules/_header';
 import { app_metadata, navigationAnchors } from '../data/app-data';
+import {} from 'rc-dropdown';
 
 const Header: FC = (): JSX.Element => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
@@ -93,24 +94,22 @@ const Header: FC = (): JSX.Element => {
                   </>
                 ) : null}
 
-                {state.auth.id && !location.pathname.includes('workspace') ? (
-                  <button
-                    title='Go to workspace'
-                    className='user-account'
-                    onClick={() => navigate(`/workspace`)}>
-                    <span>Account</span>
-                    {state.auth.profile_image ? (
-                      <img
-                        loading='lazy'
-                        decoding='async'
-                        src={state.auth.profile_image}
-                        alt='User profile image'
-                      />
-                    ) : (
-                      <AvatarIcon />
-                    )}
-                  </button>
-                ) : null}
+                <button
+                  title='Go to workspace'
+                  className='user-account'
+                  onClick={() => navigate(`/workspace`)}>
+                  <span>Account</span>
+                  {state.auth.profile_image ? (
+                    <img
+                      loading='lazy'
+                      decoding='async'
+                      src={state.auth.profile_image}
+                      alt='User profile image'
+                    />
+                  ) : (
+                    <AvatarIcon />
+                  )}
+                </button>
               </div>
             </motion.nav>
           )}

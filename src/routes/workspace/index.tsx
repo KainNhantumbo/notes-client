@@ -12,7 +12,8 @@ const Workspace: FC = (): JSX.Element => {
 
   return (
     <Layout
-      renderFooter
+     renderHeader
+     renderFooter
       metadata={{
         title: `${app_metadata.appName} | ${state.auth.name} Workspace`,
         updatedAt: new Date().toISOString(),

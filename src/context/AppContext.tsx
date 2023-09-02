@@ -91,10 +91,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       });
       dispatch({
         type: actions.AUTH,
-        payload: {
-          ...state,
-          auth: { ...data },
-        },
+        payload: { ...state, auth: { ...data } },
       });
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);

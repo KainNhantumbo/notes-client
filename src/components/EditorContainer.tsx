@@ -4,9 +4,9 @@ import '@uiw/react-markdown-editor/esm/index.css';
 import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
 
 import {
+  BookmarkFilledIcon,
+  BookmarkIcon,
   MixerHorizontalIcon,
-  StarFilledIcon,
-  StarIcon,
 } from '@radix-ui/react-icons';
 import { FC, useEffect, useState } from 'react';
 import actions from '../data/actions';
@@ -16,7 +16,6 @@ import { _editor as Container } from '@/styles/modules/_editor';
 import { TwitterPicker } from 'react-color';
 
 import MarkdownEditor from '@uiw/react-markdown-editor';
-import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import { m as motion } from 'framer-motion';
 import TagsInput from 'react-tagsinput';
@@ -33,7 +32,6 @@ import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 
 const EditorContainer: FC = (): JSX.Element => {
-  const theme: DefaultTheme = useTheme();
   const { colorScheme } = useThemeContext();
   const { state, dispatch, fetchAPI } = useAppContext();
   const [innerHeight, setInnerHeight] = useState<number>(0);
@@ -91,9 +89,6 @@ const EditorContainer: FC = (): JSX.Element => {
               })
             }
           />
-          <span className='counter'>{`${
-            state.currentNote.title.length.toString() || String(0)
-          } / 128`}</span>
         </div>
 
         <div className='properties-container'>
@@ -116,13 +111,13 @@ const EditorContainer: FC = (): JSX.Element => {
             }>
             {state.currentNote.metadata.favorite ? (
               <>
-                <StarFilledIcon />
-                <span>Stared</span>
+                <BookmarkFilledIcon />
+                <span>Bookmarked</span>
               </>
             ) : (
               <>
-                <StarIcon />
-                <span>Star</span>
+                <BookmarkIcon />
+                <span>Bookmark</span>
               </>
             )}
           </button>
@@ -166,26 +161,16 @@ const EditorContainer: FC = (): JSX.Element => {
           </div>
           <div className='tags-component-container'>
             <TagsInput
-              className='tags-input-component'
-              focusedClassName='tags-input-component--focus'
-              value={state.currentNote.metadata.tags}
               onChange={handleChangeTag}
+              value={state.currentNote.metadata.tags}
               onlyUnique={true}
-              inputProps={{
-                className: 'tags-input-component--input',
-                placeholder: 'Add a tag',
-              }}
-              tagProps={{
-                className: 'tags-input-component--tag',
-                classNameRemove: 'tags-input-component--tag-remove',
-              }}
+              maxTags={12}
               validate={(tag: string) => {
                 if (!String(tag) || String(tag).length > 12) {
                   return false;
                 }
                 return true;
               }}
-              maxTags={12}
             />
           </div>
         </div>

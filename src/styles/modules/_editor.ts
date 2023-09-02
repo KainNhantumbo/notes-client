@@ -48,6 +48,7 @@ export const _editor = styled.section`
       flex-direction: row;
       gap: 12px;
       padding: 0 12px;
+      align-items: center;
 
       button {
         ${BaseButtonOutline}
@@ -73,52 +74,26 @@ export const _editor = styled.section`
 
   .tags-component-container {
     .react-tagsinput {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      overflow: hidden;
-      padding-left: 5px;
-      padding-top: 5px;
+      background-color: transparent;
+      border: none;
+      border-radius: 5px;
     }
 
     .react-tagsinput--focused {
-      border-color: #a5d24a;
+      border-color: transparent;
     }
 
     .react-tagsinput-tag {
-      background-color: #cde69c;
-      border-radius: 2px;
-      border: 1px solid #a5d24a;
-      color: #638421;
-      display: inline-block;
-      font-family: sans-serif;
-      font-size: 13px;
-      font-weight: 400;
-      margin-bottom: 5px;
-      margin-right: 5px;
-      padding: 5px;
-    }
-
-    .react-tagsinput-remove {
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .react-tagsinput-tag a::before {
-      content: ' ×';
+      background-color: rgba(${({ theme }) => theme.primary}, 0.2);
+      border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+      color: rgb(${({ theme }) => theme.font});
+      border-radius: 5px;
+      font-family: inherit !important;
     }
 
     .react-tagsinput-input {
       background: transparent;
-      border: 0;
-      color: #777;
-      font-family: sans-serif;
-      font-size: 13px;
-      font-weight: 400;
-      margin-bottom: 6px;
-      margin-top: 1px;
-      outline: none;
-      padding: 5px;
-      width: 80px;
+      color: rgb(${({ theme }) => theme.font});
     }
   }
 

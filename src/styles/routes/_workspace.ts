@@ -8,5 +8,7 @@ export const _workspace = styled.main`
   display: flex;
   flex-direction: row;
 
+  padding-top: 40px;
+
   
 `;
