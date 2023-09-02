@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom';
-import Layout from '@/src/components/Layout';
-import { app_metadata } from '@/src/data/app-data';
-import { _signinSuccess as Container } from '@/src/styles/routes/_signup-sucess';
+import { Link } from 'react-router-dom';
+import Layout from '@/components/Layout';
+import { app_metadata } from '@/data/app-data';
+import { _signinSuccess as Container } from '@/styles/routes/_signup-sucess';
 import { CardStackIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
 import { FC } from 'react';
 
@@ -28,7 +28,7 @@ const ResetPasswordSuccess: FC = (): JSX.Element => (
             </p>
 
             <Link to={`mailto:`} className='a-open-mail'>
-              <EnvelopeOpenIcon/>
+              <EnvelopeOpenIcon />
               <span>Go to your mail box</span>
             </Link>
             <Link to={`/`} className='a-back'>

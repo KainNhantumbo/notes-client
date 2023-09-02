@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import actions from '@/src/data/actions';
+import actions from '@/data/actions';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppContext } from '../../context/AppContext';
 import { _prompt as Container } from '../../styles/modules/_prompt';

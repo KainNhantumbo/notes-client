@@ -1,17 +1,18 @@
 import { FC } from 'react';
-import Layout from '@/src/components/Layout';
-import Navbar from '@/src/components/Navbar';
-import EditorContainer from '@/src/components/EditorContainer';
-import { app_metadata } from '@/src/data/app-data';
-import NotesList from '@/src/components/NotesList';
-import { useAppContext } from '@/src/context/AppContext';
-import { _workspace as Container } from '@/src/styles/routes/_workspace';
+import Layout from '@/components/Layout';
+import Navbar from '@/components/Navbar';
+import EditorContainer from '@/components/EditorContainer';
+import { app_metadata } from '@/data/app-data';
+import NotesList from '@/components/NotesList';
+import { useAppContext } from '@/context/AppContext';
+import { _workspace as Container } from '@/styles/routes/_workspace';
 
 const Workspace: FC = (): JSX.Element => {
   const { state } = useAppContext();
 
   return (
-    <Layout renderFooter
+    <Layout
+      renderFooter
       metadata={{
         title: `${app_metadata.appName} | ${state.auth.name} Workspace`,
         updatedAt: new Date().toISOString(),

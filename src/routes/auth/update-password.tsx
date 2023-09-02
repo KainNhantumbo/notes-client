@@ -1,12 +1,12 @@
-import fetch from '@/src/config/client';
+import fetch from '@/config/client';
 import { m as motion } from 'framer-motion';
-import Layout from '@/src/components/Layout';
+import Layout from '@/components/Layout';
 import { useState, useEffect, FC } from 'react';
-import { InputEvents, SubmitEvent } from '@/src/@types';
-import { app_metadata } from '@/src/data/app-data';
+import { InputEvents, SubmitEvent } from '@/@types';
+import { app_metadata } from '@/data/app-data';
 import { PulseLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
-import { _recoveryPassword as Container } from '@/src/styles/routes/_recovery-pasword';
+import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
 import { LockClosedIcon } from '@radix-ui/react-icons';
 
 const UpdatePassword: FC = (): JSX.Element => {

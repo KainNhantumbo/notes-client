@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import ErrorPage from '@/src/routes/error-page';
+import ErrorPage from '@/routes/error-page';
 import type { PropsWithChildren, ErrorInfo, ReactNode } from 'react';
 
 interface IState extends Readonly<{}> {

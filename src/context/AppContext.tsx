@@ -7,13 +7,13 @@ import {
   Dispatch,
   useEffect,
 } from 'react';
-import { TAuth } from '@/src/@types';
-import fetch from '@/src/config/client';
-import actions from '@/src/data/actions';
+import { TAuth } from '@/@types';
+import fetch from '@/config/client';
+import actions from '@/data/actions';
 import ThemeContext from './ThemeContext';
 import { initialState, reducer } from '../libs/reducer';
-import { NextRouter, useRouter } from 'next/router';
-import { TAction, TState } from '@/src/@types/reducer';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { TAction, TState } from '@/@types/reducer';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
@@ -40,7 +40,7 @@ const queryClient: QueryClient = new QueryClient({
 });
 
 const AppContext: FC<TProps> = ({ children }): JSX.Element => {
-  const router: NextRouter = useRouter();
+  const navigate: NavigateFunction = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const validateAuth = async (): Promise<void> => {
@@ -69,7 +69,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
         if (status > 400 && status < 404) {
           validateAuth().catch((error) => {
             console.error(error?.response?.data?.message ?? error);
-            router.push('/auth/sign-in');
+            navigate('/auth/sign-in', { replace: true });
           });
         }
         return Promise.reject(error);
@@ -142,7 +142,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
                   },
                 },
               });
-              router.push('/auth/sign-in');
+              navigate('/auth/sign-in', { replace: true });
             } catch (error: any) {
               console.error(error?.response?.data?.message ?? error);
             }

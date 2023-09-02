@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import actions from '../../data/actions';
-import Layout from '@/src/components/Layout';
+import Layout from '@/components/Layout';
 import { useAppContext } from '../../context/AppContext';
-import { _settings as Container } from '@/src/styles/routes/_settings';
-import { app_metadata } from '@/src/data/app-data';
+import { _settings as Container } from '@/styles/routes/_settings';
+import { app_metadata } from '@/data/app-data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 const Settings: FC = (): JSX.Element => {

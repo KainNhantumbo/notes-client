@@ -1,13 +1,13 @@
-import fetch from '@/src/config/client';
-import actions from '@/src/data/actions';
+import fetch from '@/config/client';
+import actions from '@/data/actions';
 import { m as motion } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
-import Layout from '@/src/components/Layout';
-import { app_metadata } from '@/src/data/app-data';
-import media_login from '@/public/assets/media-login.jpg';
-import { useAppContext } from '@/src/context/AppContext';
-import { InputEvents, SubmitEvent, TAuth } from '@/src/@types';
-import { _signin as Container } from '@/src/styles/routes/_signin';
+import Layout from '@/components/Layout';
+import { app_metadata } from '@/data/app-data';
+import media_login from '@/assets/media-login.jpg';
+import { useAppContext } from '@/context/AppContext';
+import { InputEvents, SubmitEvent, TAuth } from '@/@types';
+import { _signin as Container } from '@/styles/routes/_signin';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 

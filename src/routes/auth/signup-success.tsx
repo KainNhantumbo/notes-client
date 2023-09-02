@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import Layout from '@/src/components/Layout';
-import { app_metadata } from '@/src/data/app-data';
-import { _signinSuccess as Container } from '@/src/styles/routes/_signup-sucess';
+import Layout from '@/components/Layout';
+import { app_metadata } from '@/data/app-data';
+import { _signinSuccess as Container } from '@/styles/routes/_signup-sucess';
 import { LockClosedIcon, PersonIcon } from '@radix-ui/react-icons';
 
 const SignupSuccess: FC = (): JSX.Element => (

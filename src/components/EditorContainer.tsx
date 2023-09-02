@@ -12,7 +12,7 @@ import { FC, useEffect, useState } from 'react';
 import actions from '../data/actions';
 import { useAppContext } from '../context/AppContext';
 import { colorsOptions } from '../data/app-data';
-import { _editor as Container } from '@/src/styles/modules/_editor';
+import { _editor as Container } from '@/styles/modules/_editor';
 import { TwitterPicker } from 'react-color';
 
 import MarkdownEditor from '@uiw/react-markdown-editor';
@@ -31,7 +31,6 @@ import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
-
 
 const EditorContainer: FC = (): JSX.Element => {
   const theme: DefaultTheme = useTheme();

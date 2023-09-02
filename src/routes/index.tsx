@@ -1,15 +1,17 @@
 import { m as motion } from 'framer-motion';
-import Layout from '@/src/components/Layout';
-import app_logo from '@/public/favicon-192x192.png';
-import demo_dark from '@/public/assets/demo-dark.jpg';
+import Layout from '@/components/Layout';
+import app_logo from '../../public/favicon-192x192.png';
+import demo_dark from '@/assets/demo-dark.jpg';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
-import demo_light from '@/public/assets/demo-light.jpg';
-import { _home as Container } from '@/src/styles/routes/_home';
-import { app_features, app_metadata } from '@/src/data/app-data';
+import demo_light from '@/assets/demo-light.jpg';
+import { _home as Container } from '@/styles/routes/_home';
+import { app_features, app_metadata } from '@/data/app-data';
 import { FC } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+
+// font-family: 'Zilla Slab', serif;
 
 const Home: FC = (): JSX.Element => {
   const { darkmode } = useThemeContext();

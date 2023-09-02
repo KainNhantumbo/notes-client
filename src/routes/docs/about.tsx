@@ -1,6 +1,6 @@
-import Layout from '@/src/components/Layout';
-import { app_metadata } from '@/src/data/app-data';
-import { _about as Container } from '@/src/styles/routes/_about';
+import Layout from '@/components/Layout';
+import { app_metadata } from '@/data/app-data';
+import { _about as Container } from '@/styles/routes/_about';
 import { FC } from 'react';
 
 const About: FC = (): JSX.Element => {

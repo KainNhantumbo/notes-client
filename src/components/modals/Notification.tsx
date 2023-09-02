@@ -1,9 +1,13 @@
 import { FC } from 'react';
-import actions from '@/src/data/actions';
+import actions from '@/data/actions';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { useAppContext } from '@/src/context/AppContext';
-import { _notification as Container } from '@/src/styles/modules/_notification';
-import { ArrowLeftIcon, CardStackIcon, Cross2Icon } from '@radix-ui/react-icons';
+import { useAppContext } from '@/context/AppContext';
+import { _notification as Container } from '@/styles/modules/_notification';
+import {
+  ArrowLeftIcon,
+  CardStackIcon,
+  Cross2Icon,
+} from '@radix-ui/react-icons';
 
 const Notification: FC = (): JSX.Element => {
   const { state, dispatch } = useAppContext();

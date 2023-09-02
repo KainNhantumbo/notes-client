@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import actions from '../data/actions';
-import Layout from '@/src/components/Layout';
+import Layout from '@/components/Layout';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-import { _navbar as Container } from '@/src/styles/modules/_navbar';
+import { _navbar as Container } from '@/styles/modules/_navbar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
 const Navbar: FC = (): JSX.Element => {
