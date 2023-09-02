@@ -11,10 +11,8 @@ import { app_features, app_metadata } from '@/data/app-data';
 import { FC } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-// font-family: 'Zilla Slab', serif;
-
 const Home: FC = (): JSX.Element => {
-  const { darkmode } = useThemeContext();
+  const { colorScheme } = useThemeContext();
   const theme: DefaultTheme = useTheme();
   const navigate: NavigateFunction = useNavigate();
 
@@ -58,7 +56,7 @@ const Home: FC = (): JSX.Element => {
               <img
                 loading='lazy'
                 decoding='async'
-                src={darkmode ? demo_dark : demo_light}
+                src={colorScheme.scheme === 'dark' ? demo_dark : demo_light}
                 alt={`${app_metadata.appName} demo image`}
                 placeholder={`${app_metadata.appName} demo image`}
               />
