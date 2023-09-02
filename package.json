@@ -1,8 +1,34 @@
 {
-  "name": "notes-client",
+  "name": "choconotey-client",
+  "description": "markdown notes frontend application",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "url": "",
+  "website_name": "",
+  "author": {
+    "name": "Kain Nhantumbo",
+    "email": "nhantumbok@gmail.com",
+    "url": "https://portifolio-dev-mu.vercel.app",
+    "website": "https://publish-it-programming.vercel.app"
+  },
+  "metadata": {
+    "name": "ChocoNotey",
+    "copyright_notice": "© 2023 ChocoNotey | All Rights Reserved."
+  },
+  "keywords": [
+    "notes",
+    "notes markdown application",
+    "notes application",
+    "notes client application",
+    "choconotey frontend react application"
+  ],
+  "engines": {
+    "node": ">=18.17.0",
+    "npm": ">=9.6.7"
+  },
+  "license": "Apache License Version 2.0",
+  "repository": "https://github.com/KainNhantumbo/notes-app",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
