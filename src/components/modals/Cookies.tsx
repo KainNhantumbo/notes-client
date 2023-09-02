@@ -1,9 +1,9 @@
+import { Link } from 'react-router-dom';
 import { app_metadata } from '../../data/app-data';
 import { useState, useEffect, FC } from 'react';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _cookies as Container } from '../../styles/modules/_cookies';
 import { CheckIcon } from '@radix-ui/react-icons';
-import {Link} from 'react-router-dom'
 
 const Cookies: FC = (): JSX.Element => {
   const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
@@ -50,7 +50,7 @@ const Cookies: FC = (): JSX.Element => {
               <p>
                 We use cookies to grant you a better experience in our site. By
                 using {app_metadata.appName}, you accept our {'  '}
-                <Link href='/legal/privacy-policy'>
+                <Link to='/legal/privacy-policy'>
                   <strong>privacy policy</strong>
                 </Link>
                 .
