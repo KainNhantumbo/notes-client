@@ -1,5 +1,5 @@
 import { FC, JSX } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import PasswordRecovery from './routes/auth/password-recovery';
 import ResetPasswordSuccess from './routes/auth/password-recovery-success';
@@ -19,21 +19,30 @@ import InternalServerError from './routes/500';
 
 import Home from './routes/index';
 
-const routes = createBrowserRouter([
+const routes = [
   { path: '/', element: <Home /> },
   { path: '/workspace', element: <Workspace /> },
   { path: '/workspace/settings', element: <Settings /> },
-  { path: '/auth/password-recovery', element: <PasswordRecovery/> },
-  { path: '/auth/password-recovery-success', element: <ResetPasswordSuccess/> },
-  { path: '/auth/signin', element: <SignIn/> },
-  { path: '/auth/signup', element: <SignUp/> },
-  { path: '/auth/update-password', element: <UpdatePassword/> },
-  { path: '/auth/signup-success', element: <SignupSuccess/> },
-  { path: '/docs/about', element: <About/> },
-  { path: '/docs/privacy-policy', element: <PrivacyPolicy/> },
+  { path: '/auth/password-recovery', element: <PasswordRecovery /> },
+  {
+    path: '/auth/password-recovery-success',
+    element: <ResetPasswordSuccess />,
+  },
+  { path: '/auth/signin', element: <SignIn /> },
+  { path: '/auth/signup', element: <SignUp /> },
+  { path: '/auth/update-password', element: <UpdatePassword /> },
+  { path: '/auth/signup-success', element: <SignupSuccess /> },
+  { path: '/docs/about', element: <About /> },
+  { path: '/docs/privacy-policy', element: <PrivacyPolicy /> },
   { path: '*', element: <NotFoundError /> },
-]);
+];
 
-const AppRouter: FC = (): JSX.Element => <RouterProvider router={routes} />;
+const AppRouter: FC = (): JSX.Element => (
+  <Routes>
+    {routes.map((route, index) => (
+      <Route key={index} path={route.path} element={route.element} />
+    ))}
+  </Routes>
+);
 
 export default AppRouter;

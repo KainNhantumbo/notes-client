@@ -50,6 +50,7 @@ export const _home = styled.main`
         width: 100%;
         max-width: 600px;
         align-self: center;
+        font-family: 'Zilla Slab', serif;
       }
 
       p {
@@ -182,6 +183,7 @@ export const _home = styled.main`
         width: 100%;
         max-width: 600px;
         align-self: center;
+        font-family: 'Zilla Slab', serif;
       }
 
       img {

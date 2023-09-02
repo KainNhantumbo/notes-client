@@ -97,6 +97,7 @@ const SignIn: FC = (): JSX.Element => {
                     type='email'
                     id='email'
                     name='email'
+                    autoComplete='on'
                     placeholder='Type your email'
                     aria-label='Type your email'
                     required
@@ -116,11 +117,14 @@ const SignIn: FC = (): JSX.Element => {
                     aria-hidden='true'
                     placeholder='Type your password'
                     aria-label='Type your password'
+                    autoComplete='on'
                     onChange={(e): void => handleChange(e)}
                   />
                 </section>
                 <div className='password-reset'>
-                  <Link to={'/auth/reset-password'}>
+                  <Link
+                    to={'/auth/password-recovery'}
+                    preventScrollReset={false}>
                     <span>Forgot password? Recover account.</span>
                   </Link>
                 </div>
@@ -140,7 +144,7 @@ const SignIn: FC = (): JSX.Element => {
               <div className='sign-in-options'>
                 <div className='signup-request'>
                   Don't have a account yet?
-                  <Link to={'/auth/signup'}>
+                  <Link to={'/auth/signup'} preventScrollReset={false}>
                     <span> Sign up.</span>
                   </Link>
                 </div>

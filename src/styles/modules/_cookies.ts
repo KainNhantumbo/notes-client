@@ -24,7 +24,8 @@ export const _cookies = styled.div`
     backdrop-filter: blur(10px);
     background: rgba(${({ theme }) => theme.foreground}, 0.8);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
-
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    
     ::before {
       content: '';
       position: absolute;

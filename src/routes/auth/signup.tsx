@@ -66,6 +66,10 @@ const SignUp: FC = (): JSX.Element => {
     return (): void => clearTimeout(debounceTimer);
   }, [error.status]);
 
+  useEffect(() => {
+    window.scroll({ top: 0, left: 0, behavior: 'instant' });
+  }, [location.pathname]);
+
   return (
     <Layout
       renderFooter
@@ -100,6 +104,7 @@ const SignUp: FC = (): JSX.Element => {
                       type='text'
                       id='first_name'
                       name='first_name'
+                      autoComplete='on'
                       placeholder='Your last name'
                       aria-label='Your last name'
                       required={true}
@@ -114,6 +119,7 @@ const SignUp: FC = (): JSX.Element => {
                     <input
                       type='text'
                       id='last_name'
+                      autoComplete='on'
                       name='last_name'
                       placeholder='Your last name'
                       aria-label='Your last name'
@@ -135,6 +141,7 @@ const SignUp: FC = (): JSX.Element => {
                       name='email'
                       placeholder='Your email'
                       aria-label='Your email'
+                      autoComplete='on'
                       required
                       onChange={(e): void => handleChange(e)}
                     />
@@ -148,6 +155,7 @@ const SignUp: FC = (): JSX.Element => {
                       type='password'
                       id='password'
                       name='password'
+                      autoComplete='on'
                       minLength={8}
                       aria-hidden='true'
                       placeholder='Password'
@@ -167,6 +175,7 @@ const SignUp: FC = (): JSX.Element => {
                       type='password'
                       id='confirm_password'
                       name='confirm_password'
+                      autoComplete='on'
                       aria-hidden='true'
                       minLength={8}
                       placeholder='Confirm your password'
@@ -203,7 +212,7 @@ const SignUp: FC = (): JSX.Element => {
               <div className='sign-in-options'>
                 <div className='signup-request'>
                   Already have an account?
-                  <Link to={'/auth/signin'}>
+                  <Link to={'/auth/signin'} preventScrollReset={false}>
                     <span> Sign in.</span>
                   </Link>
                 </div>

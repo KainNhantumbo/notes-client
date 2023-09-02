@@ -71,7 +71,7 @@ export const _footer = styled.footer`
       flex-wrap: nowrap;
       gap: 2px;
       border: 1px solid rgba(${({ theme }) => theme.font}, 0.3);
-      border-radius: 12px;
+      border-radius: 8px;
       padding: 3px;
 
       .active {

@@ -7,10 +7,13 @@ export const _signup = styled.main`
   display: grid;
   place-content: center center;
   place-items: center center;
+  margin-top: 20px;
 
   @media screen and (max-width: 1140px) {
     display: flex;
+    margin-top: 0px;
   }
+  
 
   * {
     ::selection {

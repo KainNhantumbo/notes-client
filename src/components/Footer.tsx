@@ -6,8 +6,7 @@ import { _footer as Container } from '../styles/modules/_footer';
 import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 
 const Footer: FC = (): JSX.Element => {
-  const { setDarkMode, darkmode, setLightMode, matchMediaTheme } =
-    useThemeContext();
+  const { changeColorScheme, colorScheme } = useThemeContext();
 
   return (
     <Container>
@@ -25,17 +24,32 @@ const Footer: FC = (): JSX.Element => {
         <div className='theme-fluent-buttons'>
           <button
             title='Light mode'
-            className={!darkmode ? 'active' : ''}
-            onClick={setLightMode}>
+            className={
+              colorScheme.mode === 'manual' && colorScheme.scheme === 'light'
+                ? 'active'
+                : ''
+            }
+            onClick={(): void =>
+              changeColorScheme({ mode: 'manual', scheme: 'light' })
+            }>
             <SunIcon />
           </button>
-          <button title='Automatic' onClick={matchMediaTheme}>
+          <button
+            title='Automatic'
+            className={ colorScheme.mode === 'auto' ? 'active' : ''}
+            onClick={() => changeColorScheme({ mode: 'auto', scheme: 'dark' })}>
             <DesktopIcon />
           </button>
           <button
             title='Dark mode'
-            className={darkmode ? 'active' : ''}
-            onClick={setDarkMode}>
+            className={
+              colorScheme.mode === 'manual' && colorScheme.scheme === 'dark'
+                ? 'active'
+                : ''
+            }
+            onClick={(): void =>
+              changeColorScheme({ mode: 'manual', scheme: 'dark' })
+            }>
             <MoonIcon />
           </button>
         </div>

@@ -74,6 +74,7 @@ const PasswordRecovery: FC = (): JSX.Element => {
                     type='email'
                     id='email'
                     name='email'
+                    autoComplete='off'
                     placeholder='Type your email account'
                     aria-label='Type your email account'
                     required={true}

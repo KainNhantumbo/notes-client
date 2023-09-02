@@ -15,6 +15,11 @@ export type InputEvents =
 
 export type SubmitEvent = FormEvent<HTMLFormElement>;
 
+export type TColorScheme = {
+  mode: 'auto' | 'manual';
+  scheme: 'dark' | 'light';
+};
+
 export type TAuth = {
   id: string;
   name: string;

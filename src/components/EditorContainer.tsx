@@ -34,7 +34,7 @@ import { unified } from 'unified';
 
 const EditorContainer: FC = (): JSX.Element => {
   const theme: DefaultTheme = useTheme();
-  const { darkmode } = useThemeContext();
+  const { colorScheme } = useThemeContext();
   const { state, dispatch, fetchAPI } = useAppContext();
   const [innerHeight, setInnerHeight] = useState<number>(0);
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
@@ -191,7 +191,7 @@ const EditorContainer: FC = (): JSX.Element => {
         </div>
       </section>
 
-      <div data-color-mode={darkmode ? 'dark' : 'light'}>
+      <div data-color-mode={colorScheme.scheme}>
         <MarkdownEditor
           value={state.currentNote.content}
           onChange={(value: string, viewUpdate) => {

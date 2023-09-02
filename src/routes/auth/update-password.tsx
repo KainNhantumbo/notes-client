@@ -86,6 +86,7 @@ const UpdatePassword: FC = (): JSX.Element => {
                     type='password'
                     id='password'
                     name='password'
+                    autoComplete='off'
                     minLength={8}
                     aria-hidden='true'
                     placeholder='Type your new password'
@@ -102,6 +103,7 @@ const UpdatePassword: FC = (): JSX.Element => {
                     type='password'
                     id='confirm_password'
                     name='confirm_password'
+                    autoComplete='off'
                     aria-hidden='true'
                     minLength={8}
                     placeholder='Confirm your password'

@@ -6,83 +6,94 @@ import {
   useEffect,
   FC,
 } from 'react';
-import { Theme } from '../@types';
+import { Theme, TColorScheme } from '../@types';
 import { GlobalStyles } from '../styles/globals';
 import { ThemeProvider } from 'styled-components';
 import { dark_default, light_default } from '../styles/themes';
 
-interface IContext {
-  matchMediaTheme: () => void;
-  setLightMode: () => void;
-  setDarkMode: () => void;
-  darkmode: boolean;
-}
+type TContext = {
+  colorScheme: TColorScheme;
+  changeColorScheme: ({ mode, scheme }: TColorScheme) => void;
+};
 
 type TProps = { children: ReactNode };
 
-type ThemeType = { darkMode: boolean };
-
-const context = createContext<IContext>({
-  matchMediaTheme: () => {},
-  setLightMode: () => {},
-  setDarkMode: () => {},
-  darkmode: false,
+const context = createContext<TContext>({
+  colorScheme: { mode: 'auto', scheme: 'light' },
+  changeColorScheme: () => {},
 });
 
 const ThemeContext: FC<TProps> = ({ children }): JSX.Element => {
   const [currentTheme, setCurrentTheme] = useState<Theme>(light_default);
-  const [themeSettings, setThemeSettings] = useState<ThemeType>({
-    darkMode: false,
+  const [colorScheme, setColorScheme] = useState<TColorScheme>({
+    mode: 'auto',
+    scheme: 'light',
   });
 
-  const setDarkMode = (): void => {
+  const setDarkColorScheme = ({ mode, scheme }: TColorScheme): void => {
     setCurrentTheme(dark_default);
-    setThemeSettings({ darkMode: true });
+    setColorScheme({ mode, scheme });
+    localStorage.setItem('color-scheme', JSON.stringify({ mode, scheme }));
   };
-
-  const setLightMode = (): void => {
+  const setLightColorScheme = ({ mode, scheme }: TColorScheme): void => {
     setCurrentTheme(light_default);
-    setThemeSettings({ darkMode: false });
+    setColorScheme({ mode, scheme });
+    localStorage.setItem('color-scheme', JSON.stringify({ mode, scheme }));
   };
 
-  const matchMediaTheme = (): void => {
-    const currentMode = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
+  const changeColorScheme = ({ mode, scheme }: TColorScheme): void => {
+    switch (mode) {
+      case 'auto':
+        window
+          .matchMedia('(prefers-color-scheme: dark)')
+          .addEventListener('change', (e) => {
+            if (e.matches) {
+              setDarkColorScheme({ mode, scheme });
+            } else {
+              setLightColorScheme({ mode, scheme });
+            }
+          });
 
-    if (currentMode) {
-      setDarkMode();
-    } else {
-      setLightMode();
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          setDarkColorScheme({ mode, scheme });
+        } else {
+          setLightColorScheme({ mode, scheme });
+        }
+        break;
+      case 'manual':
+        if (scheme === 'dark') {
+          setDarkColorScheme({ mode, scheme });
+        }
+
+        if (scheme === 'light') {
+          setLightColorScheme({ mode, scheme });
+        }
+        break;
+      default:
+        setLightColorScheme({ mode: 'auto', scheme: 'light' });
     }
   };
 
-  useEffect((): (() => void) => {
-    matchMediaTheme();
-
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (e) =>
-        e.matches ? setDarkMode() : setLightMode()
-      );
-    return (): void =>
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', (e) =>
-          e.matches ? setDarkMode() : setLightMode()
-        );
+  useEffect((): void => {
+    const colorScheme: TColorScheme = JSON.parse(
+      localStorage.getItem('color-scheme') ||
+        `{"mode": "auto", "scheme": "light"}`
+    );
+    setColorScheme(colorScheme);
   }, []);
+
+  useEffect((): void => {
+    if (colorScheme.scheme === 'dark') {
+      setCurrentTheme(dark_default);
+    } else if (colorScheme.scheme === 'light') {
+      setCurrentTheme(light_default);
+    }
+  }, [colorScheme]);
 
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyles />
-      <context.Provider
-        value={{
-          darkmode: themeSettings.darkMode,
-          setDarkMode,
-          setLightMode,
-          matchMediaTheme,
-        }}>
+      <context.Provider value={{ colorScheme, changeColorScheme }}>
         {children}
       </context.Provider>
     </ThemeProvider>
@@ -90,4 +101,4 @@ const ThemeContext: FC<TProps> = ({ children }): JSX.Element => {
 };
 
 export default ThemeContext;
-export const useThemeContext = (): IContext => useContext(context);
+export const useThemeContext = (): TContext => useContext(context);

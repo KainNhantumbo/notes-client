@@ -7,18 +7,20 @@ export const _signin = styled.main`
   display: grid;
   place-content: center center;
   place-items: center center;
+  margin-top: 20px;
 
   @media screen and (max-width: 1140px) {
     display: flex;
+    margin-top: 0px;
   }
-
+  
   * {
     ::selection {
       background: rgb(${({ theme }) => theme.background_shade});
       color: rgb(${({ theme }) => theme.primary_shade});
     }
   }
-
+  
   .wrapper-container {
     width: 100%;
     height: 100%;
@@ -29,11 +31,10 @@ export const _signin = styled.main`
     background: rgba(${({ theme }) => theme.background_shade}, 0.3);
     border-radius: 12px;
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-
     @media screen and (max-width: 1140px) {
       align-self: center;
       width: fit-content;
-      margin: 40px 12px 12px;
+      margin: 40px 12px;
       border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
       box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
     }

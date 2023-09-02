@@ -17,7 +17,7 @@ const NotFoundError: FC = (): JSX.Element => {
         <h1>404</h1>
         <h2>Oops! Lost in {app_metadata.appName}?</h2>
         <p>The page you were looking for does not exist</p>
-        <button onClick={() => navigate('back', { relative: 'path' })}>
+        <button onClick={() => navigate('/', { replace: true })}>
           Get back!
         </button>
       </section>

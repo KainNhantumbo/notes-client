@@ -1,8 +1,3 @@
-import {
-  NavigateFunction,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Cookies from './modals/Cookies';
@@ -12,6 +7,7 @@ import Notification from './modals/Notification';
 import { FC, ReactNode, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
 interface IProps {
   children: ReactNode;
@@ -32,7 +28,7 @@ const Layout: FC<IProps> = ({
   useEffect((): (() => void) => {
     const debounceTimer = setTimeout(() => {
       if (location.pathname.includes('workspace') && !state.auth.id) {
-        navigate('/auth/signin');
+        navigate('/auth/signin', { replace: true });
       }
     }, 500);
     return (): void => clearTimeout(debounceTimer);

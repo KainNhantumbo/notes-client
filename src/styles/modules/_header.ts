@@ -174,9 +174,8 @@ export const _header = styled.header`
     .sign-in-btn {
       border: none;
       background: none;
-      border-radius: 10px;
       position: relative;
-      padding: 10px;
+      padding: 13px;
       color: rgb(${({ theme }) => theme.font});
       width: fit-content;
       cursor: pointer;

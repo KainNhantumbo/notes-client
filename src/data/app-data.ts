@@ -1,3 +1,11 @@
+import {
+  CheckIcon,
+  ColorWheelIcon,
+  DashboardIcon,
+  GearIcon,
+  HeartIcon,
+  MagnifyingGlassIcon,
+} from '@radix-ui/react-icons';
 import Package from '../../package.json';
 
 export const app_metadata = {
@@ -22,33 +30,33 @@ export const navigationAnchors = [
 
 export const app_features = [
   {
-    icon: BsCloudCheck,
+    icon: CheckIcon,
     title: 'Use it everywere',
     content: `Notes stay updated across all your devices, automaticaly and in real time. There's no "sync" button: it just works fine. `,
   },
   {
-    icon: BsGrid,
+    icon: DashboardIcon,
     title: 'Powerful features',
     content: `Sharing is made simple by exporting your notes to where you want - PDF, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`,
   },
   {
-    icon: BsHeart,
+    icon: HeartIcon,
     title: 'Ease to use',
     content:
       'Just open, write and organize without any interruptions: no heavy-lifting, no steep learning curve. Enjoy an ease experience.',
   },
   {
-    icon: BsGear,
+    icon: GearIcon,
     title: 'Make it Yours',
     content: `Customize your notes with filters, labels, priorities, and more.`,
   },
   {
-    icon: BsWind,
+    icon: ColorWheelIcon,
     title: 'Beautiful animations',
     content: `Everything you do in ${app_metadata.appName} is  nicely animated for better experience.`,
   },
   {
-    icon: BsSearchHeart,
+    icon: MagnifyingGlassIcon,
     title: 'Quick find',
     content: `All you need to do is start typing - name of a note, description or tag - and instantly you're taken there.`,
   },

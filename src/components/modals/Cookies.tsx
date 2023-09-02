@@ -56,8 +56,7 @@ const Cookies: FC = (): JSX.Element => {
                 .
               </p>
               <button onClick={advisorController}>
-                <CheckIcon />
-                <span>Accept and close.</span>
+                <span>Accept and close</span>
               </button>
             </div>
           </motion.section>
