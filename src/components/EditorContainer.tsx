@@ -34,14 +34,7 @@ import { unified } from 'unified';
 const EditorContainer: FC = (): JSX.Element => {
   const { colorScheme } = useThemeContext();
   const { state, dispatch, fetchAPI } = useAppContext();
-  const [innerHeight, setInnerHeight] = useState<number>(0);
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-
-  const computeInnerHeight = (): void => {
-    setInnerHeight(() => {
-      return Number(window.innerHeight.toFixed(1)) - 250;
-    });
-  };
 
   const handleChangeTag = (tags: string[]): void => {
     dispatch({
@@ -58,14 +51,6 @@ const EditorContainer: FC = (): JSX.Element => {
       },
     });
   };
-
-  useEffect(() => {
-    computeInnerHeight();
-    window.addEventListener('resize', computeInnerHeight);
-    return () => {
-      window.removeEventListener('resize', computeInnerHeight);
-    };
-  }, []);
 
   return (
     <Container>
@@ -189,10 +174,9 @@ const EditorContainer: FC = (): JSX.Element => {
               },
             });
           }}
-          height={String(innerHeight + 'px')}
+          height={String(state.windowInnerSize.height - 250 + 'px')}
           placeholder={'Start writing a note...'}
           title='Start writing a note...'
-          data-color-mode='light'
         />
       </div>
     </Container>

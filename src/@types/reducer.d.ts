@@ -10,6 +10,7 @@ export type TState = {
   signUp: TSignUp;
   notification: TModalProps;
   prompt: TModalProps;
+  windowInnerSize: { width: number; height: number };
 };
 
 export type TAction = { type: string; payload: TState };

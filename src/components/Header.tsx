@@ -14,10 +14,9 @@ import {
 import { useState, useEffect, FC } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import logo from '../../public/favicon-192x192.png';
+import logo from '@/assets/logo-192x192.png';
 import { _header as Container } from '../styles/modules/_header';
 import { app_metadata, navigationAnchors } from '../data/app-data';
-import {} from 'rc-dropdown';
 
 const Header: FC = (): JSX.Element => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
@@ -27,16 +26,9 @@ const Header: FC = (): JSX.Element => {
 
   const toggleMenu = (): void => setIsMenu((current) => !current);
 
-  const changeWidth = (): void =>
-    window.innerWidth > 770 ? setIsMenu(true) : setIsMenu(false);
-
-  useEffect((): (() => void) => {
-    changeWidth();
-    window.addEventListener('resize', changeWidth);
-    return () => {
-      window.removeEventListener('resize', changeWidth);
-    };
-  }, []);
+  useEffect((): void => {
+    state.windowInnerSize.width > 770 ? setIsMenu(true) : setIsMenu(false);
+  }, [state.windowInnerSize]);
 
   return (
     <Container>
@@ -48,7 +40,7 @@ const Header: FC = (): JSX.Element => {
               decoding='async'
               alt={`${app_metadata.appName} Logo`}
               src={logo}
-            />{' '}
+            />
           </Link>
           <h3 onClick={() => navigate('/')}>
             <span>{app_metadata.appName}</span>

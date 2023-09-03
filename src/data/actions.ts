@@ -8,6 +8,7 @@ const actions = {
   LOGOUT_MODAL: 'LOGOUT_MODAL',
   NOTIFICATION: 'NOTIFICATION',
   PROMPT: 'PROMPT',
+  WINDOW_INNER_SIZE: 'WINDOW_INNER_SIZE',
 };
 
 export default actions;

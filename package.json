@@ -49,8 +49,6 @@
     "compressorjs": "^1.2.1",
     "framer-motion": "^10.12.18",
     "moment": "^2.29.4",
-    "rc-dropdown": "^4.1.0",
-    "rc-menu": "^9.11.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",

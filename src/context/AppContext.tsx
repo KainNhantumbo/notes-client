@@ -98,17 +98,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     }
   };
 
-  useEffect((): void => {
-    authenticateUser();
-  }, []);
-
-  useEffect((): (() => void) => {
-    const timer = setTimeout((): void => {
-      validateAuth();
-    }, 1000 * 60 * 4);
-    return (): void => clearTimeout(timer);
-  }, [state.auth]);
-
   const handleLogout = (): void => {
     dispatch({
       type: actions.PROMPT,
@@ -148,6 +137,35 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       },
     });
   };
+
+  const computeInnerWindowSize = (): void => {
+    dispatch({
+      type: actions.WINDOW_INNER_SIZE,
+      payload: {
+        ...state,
+        windowInnerSize: {
+          width: Number(window.innerWidth.toFixed(0)),
+          height: Number(window.innerHeight.toFixed(0)),
+        },
+      },
+    });
+  };
+
+  useEffect(() => {
+    authenticateUser();
+    computeInnerWindowSize();
+    window.addEventListener('resize', computeInnerWindowSize);
+    return () => {
+      window.removeEventListener('resize', computeInnerWindowSize);
+    };
+  }, []);
+
+  useEffect((): (() => void) => {
+    const timer = setTimeout((): void => {
+      validateAuth();
+    }, 1000 * 60 * 4);
+    return (): void => clearTimeout(timer);
+  }, [state.auth]);
 
   return (
     <QueryClientProvider client={queryClient}>
