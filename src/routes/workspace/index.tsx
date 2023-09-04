@@ -20,7 +20,7 @@ const Workspace: FC = (): JSX.Element => {
       }}>
       <Container>
         {/* <Navbar /> */}
-        <NotesList />
+        {/* <NotesList /> */}
         <EditorContainer />
       </Container>
     </Layout>

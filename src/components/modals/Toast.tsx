@@ -1,20 +1,20 @@
-import { FC } from 'react';
-import actions from '@/data/actions';
-import { m as motion, AnimatePresence } from 'framer-motion';
-import { useAppContext } from '@/context/AppContext';
-import { _notification as Container } from '@/styles/modules/_notification';
 import {
   ArrowLeftIcon,
   CardStackIcon,
   Cross2Icon,
 } from '@radix-ui/react-icons';
+import { FC } from 'react';
+import actions from '@/data/actions';
+import { m as motion, AnimatePresence } from 'framer-motion';
+import { useAppContext } from '@/context/AppContext';
+import { _toast as Container } from '@/styles/modules/_toast';
 
-const Notification: FC = (): JSX.Element => {
+const Toast: FC = (): JSX.Element => {
   const { state, dispatch } = useAppContext();
 
   return (
     <AnimatePresence>
-      {state.notification.status && (
+      {state.toast.status && (
         <Container>
           <motion.section
             className='dialog-modal'
@@ -36,23 +36,23 @@ const Notification: FC = (): JSX.Element => {
                   className='box-btn_close'
                   onClick={() =>
                     dispatch({
-                      type: actions.NOTIFICATION,
+                      type: actions.TOAST,
                       payload: {
                         ...state,
-                        notification: { ...state.notification, status: false },
+                        toast: { ...state.toast, status: false },
                       },
                     })
                   }>
                   <Cross2Icon />
                 </button>
-                <span className='prompt-title'>{state.notification.title}</span>
+                <span className='prompt-title'>{state.toast.title}</span>
                 <section className='prompt-message'>
-                  {state.notification.message.includes('\n') ? (
-                    state.notification.message
+                  {state.toast.message.includes('\n') ? (
+                    state.toast.message
                       .split('\n')
                       .map((phrase) => <p>{phrase}</p>)
                   ) : (
-                    <p>{state.notification.message}</p>
+                    <p>{state.toast.message}</p>
                   )}
                 </section>
               </div>
@@ -61,10 +61,10 @@ const Notification: FC = (): JSX.Element => {
                   className='prompt-cancel'
                   onClick={() =>
                     dispatch({
-                      type: actions.NOTIFICATION,
+                      type: actions.TOAST,
                       payload: {
                         ...state,
-                        notification: { ...state.notification, status: false },
+                        toast: { ...state.toast, status: false },
                       },
                     })
                   }>
@@ -73,9 +73,9 @@ const Notification: FC = (): JSX.Element => {
                 </button>
                 <button
                   className='prompt-accept'
-                  onClick={state.notification.handleFunction}>
+                  onClick={state.toast.handleFunction}>
                   <CardStackIcon />
-                  <span>{state.notification.actionButtonMessage}</span>
+                  <span>{state.toast.actionButtonMessage}</span>
                 </button>
               </div>
             </div>
@@ -86,4 +86,4 @@ const Notification: FC = (): JSX.Element => {
   );
 };
 
-export default Notification;
+export default Toast;

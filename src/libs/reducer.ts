@@ -5,6 +5,7 @@ const initialState: TState = {
   notes: [],
   folders: [],
   isLogoutModal: false,
+  isPropertiesModal: false,
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', profile_image: '', token: '' },
@@ -15,7 +16,7 @@ const initialState: TState = {
     password: '',
     confirm_password: '',
   },
-  notification: {
+  toast: {
     title: '',
     message: '',
     status: false,
@@ -69,8 +70,8 @@ const reducer = (state: TState, action: TAction): TState => {
     case actions.FOLDERS:
       return { ...state, folders: action.payload.folders };
 
-    case actions.NOTIFICATION:
-      return { ...state, notification: action.payload.notification };
+    case actions.TOAST:
+      return { ...state, toast: action.payload.toast };
 
     case actions.PROMPT:
       return { ...state, prompt: action.payload.prompt };
@@ -81,6 +82,8 @@ const reducer = (state: TState, action: TAction): TState => {
     case actions.WINDOW_INNER_SIZE:
       return { ...state, windowInnerSize: action.payload.windowInnerSize };
 
+    case actions.PROPERTIES_MODAL:
+      return { ...state, isPropertiesModal: action.payload.isLogoutModal };
     default:
       return { ...state };
   }

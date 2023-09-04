@@ -3,7 +3,7 @@ import Footer from './Footer';
 import Cookies from './modals/Cookies';
 import PromptModal from './modals/Prompt';
 import type { THeadProps } from '../@types';
-import Notification from './modals/Notification';
+import Notification from './modals/Toast';
 import { FC, ReactNode, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
@@ -40,7 +40,7 @@ const Layout: FC<IProps> = ({
         {renderHeader ? <Header /> : null}
         <Cookies />
         <Notification
-          key={state.notification.message.split(' ').join('') || undefined}
+          key={state.toast.message.split(' ').join('') || undefined}
         />
         <PromptModal
           key={state.prompt.message.split(' ').join('') || undefined}

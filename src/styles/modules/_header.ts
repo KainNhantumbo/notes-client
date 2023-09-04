@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton } from '../defaults';
+import { BaseButton, StyledCornerButton } from '../defaults';
 
 export const _header = styled.header`
   width: 100%;
@@ -256,30 +256,14 @@ export const _header = styled.header`
     position: fixed;
     top: 9px;
     right: 20px;
-    border: none;
-    border-radius: 5px;
-    background: none;
-    color: rgb(${({ theme }) => theme.font});
-    border: 1px solid rgba(${({ theme }) => theme.black}, 0.07);
-    width: fit-content;
-    cursor: pointer;
-    display: grid;
-    place-content: center;
-    padding: 5px;
-    outline: none;
-
-    :hover {
-      color: rgb(${({ theme }) => theme.primary_shade});
-    }
-
-    svg {
-      pointer-events: none;
-      width: 20px;
-      height: 20px;
-    }
+    ${StyledCornerButton}
 
     @media screen and (min-width: 770px) {
       display: none;
     }
+  }
+
+  .toggle-btn_active {
+    background-color: rgba(${({ theme }) => theme.primary_shade}, 0.1);
   }
 `;

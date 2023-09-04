@@ -11,10 +11,10 @@ import {
   Cross2Icon,
   HamburgerMenuIcon,
 } from '@radix-ui/react-icons';
+import logo from '@/assets/logo-192x192.png';
 import { useState, useEffect, FC } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import logo from '@/assets/logo-192x192.png';
 import { _header as Container } from '../styles/modules/_header';
 import { app_metadata, navigationAnchors } from '../data/app-data';
 
@@ -109,9 +109,12 @@ const Header: FC = (): JSX.Element => {
 
         <motion.button
           whileTap={{ scale: 0.8 }}
-          title='Toogle menu'
-          aria-label='Toogle menu'
-          className='toggle-btn'
+          title={`${isMenu ? 'Close menu drawer' : 'Open menu drawer'}`}
+          aria-placeholder={`${
+            isMenu ? 'Close menu drawer' : 'Open menu drawer'
+          }`}
+          aria-label={`${isMenu ? 'Close menu drawer' : 'Open menu drawer'}`}
+          className={`toggle-btn ${isMenu ? 'toggle-btn_active' : ''}`}
           onClick={toggleMenu}>
           {!isMenu ? <HamburgerMenuIcon /> : <Cross2Icon />}
         </motion.button>

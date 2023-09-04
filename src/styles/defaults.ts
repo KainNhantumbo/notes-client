@@ -114,10 +114,10 @@ export const Button_Mono_B = css`
 `;
 
 export const StyledCornerButton = css`
-  border-radius: 50%;
-  background: rgba(${({ theme }) => theme.primary}, 0.4);
-  color: rgb(${({ theme }) => theme.black});
-  border: none;
+  border-radius: 5px;
+  background: none;
+  color: rgb(${({ theme }) => theme.font});
+  border: 1px solid rgba(${({ theme }) => theme.black}, 0.07);
   width: fit-content;
   cursor: pointer;
   display: grid;
@@ -126,15 +126,16 @@ export const StyledCornerButton = css`
   outline: none;
 
   :hover {
-    background: rgb(${({ theme }) => theme.error});
-    transition: all 200ms ease;
-    svg {
-      color: #fff;
-    }
+    color: rgb(${({ theme }) => theme.primary_shade});
   }
+
   svg {
     pointer-events: none;
+    width: 20px;
+    height: 20px;
   }
+
+ 
 `;
 
 export const StyledLabels = css`

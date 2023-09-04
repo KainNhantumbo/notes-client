@@ -3,12 +3,13 @@ import { TAuth, TFolder, TModalProps, TNote, TSignIn, TSignUp } from './index';
 export type TState = {
   auth: TAuth;
   isLogoutModal: boolean;
+  isPropertiesModal: boolean;
   notes: TNote[];
   currentNote: TNote;
   folders: TFolder[];
   signIn: TSignIn;
   signUp: TSignUp;
-  notification: TModalProps;
+  toast: TModalProps;
   prompt: TModalProps;
   windowInnerSize: { width: number; height: number };
 };

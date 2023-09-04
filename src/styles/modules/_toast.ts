@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { StyledCornerButton } from '../defaults';
 
-export const _notification = styled.section`
+export const _toast = styled.section`
  position: fixed;
   z-index: 30000;
   display: flex;
