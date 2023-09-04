@@ -90,7 +90,7 @@ const Header: FC = (): JSX.Element => {
                   title='Go to workspace'
                   className='user-account'
                   onClick={() => navigate(`/workspace`)}>
-                  <span>Account</span>
+                  <span>Workspace</span>
                   {state.auth.profile_image ? (
                     <img
                       loading='lazy'

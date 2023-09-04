@@ -76,6 +76,8 @@ export type TNote = {
     priority: 'none' | 'low' | 'medium' | 'high';
     labels: 'none' | 'pending' | 'processing' | 'reviewing' | 'completed';
   };
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type TFolder = {

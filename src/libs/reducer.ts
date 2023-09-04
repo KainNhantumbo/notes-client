@@ -44,6 +44,8 @@ const initialState: TState = {
       reminder: { time: '', expired: false },
       tags: [],
     },
+    updatedAt: '',
+    createdAt: '',
   },
 };
 
@@ -78,7 +80,7 @@ const reducer = (state: TState, action: TAction): TState => {
 
     case actions.WINDOW_INNER_SIZE:
       return { ...state, windowInnerSize: action.payload.windowInnerSize };
-      
+
     default:
       return { ...state };
   }
