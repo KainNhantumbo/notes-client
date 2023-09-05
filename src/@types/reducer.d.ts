@@ -1,4 +1,12 @@
-import { TAuth, TFolder, TModalProps, TNote, TSignIn, TSignUp } from './index';
+import {
+  TAuth,
+  TFolder,
+  TModalProps,
+  TNote,
+  TQuery,
+  TSignIn,
+  TSignUp,
+} from './index';
 
 export type TState = {
   auth: TAuth;
@@ -12,6 +20,7 @@ export type TState = {
   toast: TModalProps;
   prompt: TModalProps;
   windowInnerSize: { width: number; height: number };
+  query: TQuery;
 };
 
 export type TAction = { type: string; payload: TState };

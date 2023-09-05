@@ -1,38 +1,21 @@
 import 'react-tagsinput/react-tagsinput.css';
-import '@uiw/react-markdown-preview/markdown.css';
-import '@uiw/react-markdown-editor/esm/index.css';
-import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
 
 import {
   BookmarkFilledIcon,
   BookmarkIcon,
   MixerHorizontalIcon,
 } from '@radix-ui/react-icons';
-import { FC, useEffect, useState } from 'react';
+import { Editor } from './Editor';
+import { FC, useState } from 'react';
 import actions from '../data/actions';
-import { useAppContext } from '../context/AppContext';
-import { colorsOptions } from '../data/app-data';
-import { _editor as Container } from '@/styles/modules/_editor';
-import { TwitterPicker } from 'react-color';
-
-import MarkdownEditor from '@uiw/react-markdown-editor';
-import { useThemeContext } from '../context/ThemeContext';
-import { m as motion } from 'framer-motion';
 import TagsInput from 'react-tagsinput';
-import rehypeSanitize from 'rehype-sanitize';
-import { RehypeRewriteOptions } from 'rehype-rewrite';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeformat from 'rehype-format';
-import rehyped from 'rehype-stringify';
-import rehypeDocument from 'rehype-document';
-import rehypeFormat from 'rehype-format';
-import rehypeStringify from 'rehype-stringify';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
+import { m as motion } from 'framer-motion';
+import { TwitterPicker } from 'react-color';
+import { colorsOptions } from '../data/app-data';
+import { useAppContext } from '../context/AppContext';
+import { _editor as Container } from '@/styles/modules/_editor';
 
 const EditorContainer: FC = (): JSX.Element => {
-  const { colorScheme } = useThemeContext();
   const { state, dispatch, fetchAPI } = useAppContext();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
@@ -161,24 +144,7 @@ const EditorContainer: FC = (): JSX.Element => {
         </div>
       </section>
 
-      <div data-color-mode={colorScheme.scheme}>
-        <MarkdownEditor
-          value={state.currentNote.content}
-          onChange={(value: string, viewUpdate) => {
-            // viewUpdate.state.toJSON()
-            dispatch({
-              type: actions.CURRENT_NOTE,
-              payload: {
-                ...state,
-                currentNote: { ...state.currentNote, content: String(value) },
-              },
-            });
-          }}
-          height={String(state.windowInnerSize.height - 250 + 'px')}
-          placeholder={'Start writing a note...'}
-          title='Start writing a note...'
-        />
-      </div>
+      <Editor />
     </Container>
   );
 };

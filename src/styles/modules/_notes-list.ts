@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButtonOutline } from '../defaults';
+import { BaseButton, BaseButtonOutline } from '../defaults';
 
 export const _notesList = styled.section`
   width: 100%;
@@ -7,6 +7,31 @@ export const _notesList = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  .error-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    place-items: center;
+
+    .fetch-error-message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+      color: rgb(${({ theme }) => theme.error});
+      font-weight: 500;
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+      align-self: flex-end;
+
+      button {
+        ${BaseButton}
+      }
+    }
+  }
 
   .header-container {
     width: 100%;
@@ -106,14 +131,11 @@ export const _notesList = styled.section`
     }
   }
 
-
   .empty-notes-container {
     width: 100%;
     height: 100%;
     display: grid;
     place-items: center center;
     align-items: center center;
-
-    
   }
 `;

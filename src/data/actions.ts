@@ -10,6 +10,7 @@ const actions = {
   PROMPT: 'PROMPT',
   WINDOW_INNER_SIZE: 'WINDOW_INNER_SIZE',
   PROPERTIES_MODAL: 'PROPERTIES_MODAL',
+  QUERY_NOTES: 'QUERY_NOTES',
 };
 
 export default actions;

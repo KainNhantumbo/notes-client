@@ -1,4 +1,9 @@
 import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from '@tanstack/react-query';
+import {
   AvatarIcon,
   CaretSortIcon,
   DotsHorizontalIcon,
@@ -7,6 +12,7 @@ import {
   MagnifyingGlassIcon,
   MixIcon,
   Pencil2Icon,
+  ReloadIcon,
 } from '@radix-ui/react-icons';
 import { FC } from 'react';
 import actions from '../data/actions';
@@ -14,8 +20,18 @@ import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
+import { TNote } from '@/@types';
 
-const NotesList: FC = (): JSX.Element => {
+interface IProps {
+  isLoading: boolean;
+  isError: boolean;
+  error: unknown;
+  refetch: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<TNote[], unknown>>;
+}
+
+const NotesList: FC<IProps> = (props): JSX.Element => {
   const { state, dispatch } = useAppContext();
 
   return (
@@ -81,7 +97,24 @@ const NotesList: FC = (): JSX.Element => {
           </motion.button>
         </div>
       </section>
-      {state.notes.length > 0 ? (
+
+      {!props.isLoading && props.isError ? (
+        <section className='error-container'>
+          <div className='fetch-error-message '>
+            <h3>
+              {(props.error as any)?.response?.data?.message ||
+                (props.error as any)?.code ||
+                'An error occurred while fetching data'}
+            </h3>
+            <button onClick={() => props.refetch({ queryKey: ['notes'] })}>
+              <ReloadIcon />
+              <span>Try again</span>
+            </button>
+          </div>
+        </section>
+      ) : null}
+
+      {state.notes.length > 0 && !props.isLoading && !props.isError ? (
         <>
           <section className='notes-container'>
             {state.notes.map((note) => (
@@ -146,7 +179,6 @@ const NotesList: FC = (): JSX.Element => {
           </div>
         </section>
       ) : null}
-
     </Container>
   );
 };

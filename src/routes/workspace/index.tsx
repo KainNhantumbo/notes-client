@@ -1,26 +1,69 @@
-import { FC } from 'react';
+import { TNote } from '@/@types';
+import actions from '@/data/actions';
+import { FC, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Navbar from '@/components/Navbar';
-import EditorContainer from '@/components/EditorContainer';
+import { useQuery } from '@tanstack/react-query';
 import { app_metadata } from '@/data/app-data';
 import NotesList from '@/components/NotesList';
 import { useAppContext } from '@/context/AppContext';
+import EditorContainer from '@/components/EditorContainer';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 
+
 const Workspace: FC = (): JSX.Element => {
-  const { state } = useAppContext();
+  const { state, dispatch, fetchAPI } = useAppContext();
+
+  const getNotes = async (): Promise<TNote[]> => {
+    const { search, sort } = state.query;
+    const { data } = await fetchAPI<TNote[]>({
+      method: 'get',
+      url: `/api/v1/users/notes?${search ? `&search=${search}` : ''}${
+        sort ? `&sort=${sort}` : ''
+      }`,
+    });
+    return [...data];
+  };
+
+  const { error, data, refetch, isLoading, isError } = useQuery({
+    queryKey: ['notes'],
+    queryFn: getNotes,
+  });
+
+  useEffect((): (() => void) => {
+    if (data) {
+      dispatch({
+        type: actions.NOTES,
+        payload: { ...state, notes: [...data] },
+      });
+    }
+
+    return (): void => {
+      dispatch({
+        type: actions.NOTES,
+        payload: { ...state, notes: [] },
+      });
+    };
+  }, [data]);
+
+  useEffect((): (() => void) => {
+    const timer = setTimeout(() => {
+      refetch({ queryKey: ['notes'] });
+    }, 500);
+    return (): void => clearTimeout(timer);
+  }, [state.query]);
 
   return (
     <Layout
-     renderHeader
-     renderFooter
+      renderHeader
+      renderFooter
       metadata={{
         title: `${app_metadata.appName} | ${state.auth.name} Workspace`,
         updatedAt: new Date().toISOString(),
       }}>
       <Container>
         {/* <Navbar /> */}
-        {/* <NotesList /> */}
+        <NotesList {...{ isError, isLoading, error, refetch }} />
         <EditorContainer />
       </Container>
     </Layout>

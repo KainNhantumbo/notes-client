@@ -48,6 +48,10 @@ const initialState: TState = {
     updatedAt: '',
     createdAt: '',
   },
+  query: {
+    search: '',
+    sort: '',
+  },
 };
 
 const reducer = (state: TState, action: TAction): TState => {
@@ -84,6 +88,10 @@ const reducer = (state: TState, action: TAction): TState => {
 
     case actions.PROPERTIES_MODAL:
       return { ...state, isPropertiesModal: action.payload.isLogoutModal };
+
+    case actions.QUERY_NOTES:
+      return { ...state, query: action.payload.query };
+
     default:
       return { ...state };
   }

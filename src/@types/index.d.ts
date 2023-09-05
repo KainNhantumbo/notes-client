@@ -98,3 +98,8 @@ export type TModalProps = {
   actionButtonMessage: string;
   handleFunction: () => void | Promise<void>;
 };
+
+export type TQuery = {
+  search: string;
+  sort: string;
+};
