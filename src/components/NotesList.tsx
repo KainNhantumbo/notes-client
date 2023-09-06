@@ -81,7 +81,12 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
             aria-placeholder='Sort notes'
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.8 }}
-            onClick={() => {}}>
+            onClick={() =>
+              dispatch({
+                type: actions.QUERY_NOTES,
+                payload: { ...state, query: { ...state.query, sort: '' } },
+              })
+            }>
             <span>Sort</span>
             <CaretSortIcon />
           </motion.button>
@@ -139,7 +144,11 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
                 {note.metadata.tags.length > 0 ? (
                   <div className='tags-container'>
                     {note.metadata.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
+                      <span
+                        style={{ backgroundColor: tag.color }}
+                        key={tag.value}>
+                        {tag.value}
+                      </span>
                     ))}
                   </div>
                 ) : null}

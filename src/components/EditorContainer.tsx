@@ -6,7 +6,7 @@ import {
   MixerHorizontalIcon,
 } from '@radix-ui/react-icons';
 import { Editor } from './Editor';
-import { FC, useState } from 'react';
+import { FC, useState, useCallback } from 'react';
 import actions from '../data/actions';
 import TagsInput from 'react-tagsinput';
 import { m as motion } from 'framer-motion';
@@ -19,7 +19,11 @@ const EditorContainer: FC = (): JSX.Element => {
   const { state, dispatch, fetchAPI } = useAppContext();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
-  const handleChangeTag = (tags: string[]): void => {
+  const tagValues = useCallback(() => {
+    return state.currentNote.metadata.tags.map((tag) => tag.value);
+  }, [state.currentNote.metadata.tags]);
+
+  const handleAddTag = (tags: { color: string; value: string }[]): void => {
     dispatch({
       type: actions.CURRENT_NOTE,
       payload: {
@@ -71,13 +75,13 @@ const EditorContainer: FC = (): JSX.Element => {
                     ...state.currentNote,
                     metadata: {
                       ...state.currentNote.metadata,
-                      favorite: !state.currentNote.metadata.favorite,
+                      bookmarked: !state.currentNote.metadata.bookmarked,
                     },
                   },
                 },
               })
             }>
-            {state.currentNote.metadata.favorite ? (
+            {state.currentNote.metadata.bookmarked ? (
               <>
                 <BookmarkFilledIcon />
                 <span>Bookmarked</span>
@@ -127,19 +131,8 @@ const EditorContainer: FC = (): JSX.Element => {
               />
             ) : null}
           </div>
-          <div className='tags-component-container'>
-            <TagsInput
-              onChange={handleChangeTag}
-              value={state.currentNote.metadata.tags}
-              onlyUnique={true}
-              maxTags={12}
-              validate={(tag: string) => {
-                if (!String(tag) || String(tag).length > 12) {
-                  return false;
-                }
-                return true;
-              }}
-            />
+          <div className='tags-container'>
+            
           </div>
         </div>
       </section>

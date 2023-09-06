@@ -76,7 +76,7 @@ const Properties: FC = (): JSX.Element => {
                     <TokensIcon />
                     <span>Label</span>
                   </h3>
-                  <span>{state.currentNote.metadata.labels.toUpperCase()}</span>
+                  <span>{state.currentNote.metadata.status.toUpperCase()}</span>
                 </div>
 
                 {state.currentNote.metadata.tags.length > 0 ? (

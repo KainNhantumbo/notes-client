@@ -72,18 +72,20 @@ export const _editor = styled.section`
     }
   }
 
-  .tags-component-container {
-    .react-tagsinput {
+  .tags-container {
+    .tags-input {
       background-color: transparent;
       border: none;
       border-radius: 5px;
+      background: transparent;
+      color: rgb(${({ theme }) => theme.font});
     }
 
-    .react-tagsinput--focused {
+    .tags-input--focused {
       border-color: transparent;
     }
 
-    .react-tagsinput-tag {
+    .tags-input-tag {
       background-color: rgba(${({ theme }) => theme.primary}, 0.2);
       border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
       color: rgb(${({ theme }) => theme.font});
@@ -91,10 +93,6 @@ export const _editor = styled.section`
       font-family: inherit !important;
     }
 
-    .react-tagsinput-input {
-      background: transparent;
-      color: rgb(${({ theme }) => theme.font});
-    }
   }
 
   .editor-container {

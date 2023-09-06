@@ -7,6 +7,7 @@ import {
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
+import { TOption } from '@/@types';
 
 export const app_metadata = {
   appName: Package.metadata.name,
@@ -82,4 +83,28 @@ export const colorsOptions: string[] = [
   '#3DAEE9',
   '#B875DC',
   '#926EE4',
+];
+
+export const sortOptions: TOption[] = [
+  { value: 'title', label: 'Note Title' },
+  { value: '-title', label: 'Note Title (inverted)' },
+  { value: 'createdAt', label: 'Date Created' },
+  { value: '-createdAt', label: 'Date Created (inverted)' },
+  { value: 'updatedAt', label: 'Date Updated' },
+  { value: '-updatedAt', label: 'Date Updated (inverted)' },
+];
+
+export const priorityOptions: TOption[] = [
+  { value: 'none', label: 'None' },
+  { value: 'low', label: 'Low' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'high', label: 'High' },
+];
+
+export const statusOptions: TOption[] = [
+  { value: 'none', label: 'None' },
+  { value: 'active', label: 'Active' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'cancelled', label: 'Cancelled' },
+  { value: 'completed', label: 'Completed' },
 ];

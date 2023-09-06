@@ -69,12 +69,12 @@ export type TNote = {
   metadata: {
     folder_id: string;
     color: string;
-    favorite: boolean;
+    bookmarked: boolean;
     reminder: { time: string; expired: boolean };
-    tags: string[];
+    tags: { color: string; value: string }[];
     deleted: boolean;
     priority: 'none' | 'low' | 'medium' | 'high';
-    labels: 'none' | 'pending' | 'processing' | 'reviewing' | 'completed';
+    status: 'none' | 'pending' | 'processing' | 'reviewing' | 'completed';
   };
   createdAt: string;
   updatedAt: string;
@@ -103,3 +103,5 @@ export type TQuery = {
   search: string;
   sort: string;
 };
+
+export type TOption = { value: string; label: string };
