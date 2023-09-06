@@ -1,5 +1,3 @@
-import 'react-tagsinput/react-tagsinput.css';
-
 import {
   BookmarkFilledIcon,
   BookmarkIcon,
@@ -8,7 +6,6 @@ import {
 import { Editor } from './Editor';
 import { FC, useState, useCallback } from 'react';
 import actions from '../data/actions';
-import TagsInput from 'react-tagsinput';
 import { m as motion } from 'framer-motion';
 import { TwitterPicker } from 'react-color';
 import { colorsOptions } from '../data/app-data';
@@ -131,9 +128,7 @@ const EditorContainer: FC = (): JSX.Element => {
               />
             ) : null}
           </div>
-          <div className='tags-container'>
-            
-          </div>
+          <div className='tags-container'></div>
         </div>
       </section>
 
