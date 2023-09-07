@@ -1,4 +1,13 @@
+import {
+  DotsHorizontalIcon,
+  LockClosedIcon,
+  LockOpen2Icon,
+  PersonIcon,
+  PlusIcon,
+  TrashIcon,
+} from '@radix-ui/react-icons';
 import { FC, useEffect, useState } from 'react';
+import { m as motion } from 'framer-motion';
 import actions from '../../data/actions';
 import Layout from '@/components/Layout';
 import { useAppContext } from '../../context/AppContext';
@@ -7,12 +16,6 @@ import { app_metadata } from '@/data/app-data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import Compressor from 'compressorjs';
 import { InputEvents } from '@/@types';
-import {
-  DotsHorizontalIcon,
-  PersonIcon,
-  PlusIcon,
-  TrashIcon,
-} from '@radix-ui/react-icons';
 
 const Settings: FC = (): JSX.Element => {
   const { state, dispatch, fetchAPI } = useAppContext();
@@ -259,13 +262,68 @@ const Settings: FC = (): JSX.Element => {
 
             <section className='group-container'>
               <h1>
-                <span></span>
+                <span>Your Passwords</span>
               </h1>
               <div className='header-container'>
                 <h3>
-                  <span></span>
+                  <span>
+                    We encorage to use strong passwords that you can easily
+                    remember
+                  </span>
                 </h3>
-                <div className='data-container'></div>
+                <div className='data-container password-settings'>
+                  <section className='form-section'>
+                    <div className='form-element'>
+                      <label htmlFor='password'>
+                        <LockOpen2Icon />
+                        <span>New Password</span>
+                      </label>
+                      <input
+                        type='password'
+                        id='password'
+                        name='password'
+                        minLength={8}
+                        aria-hidden='true'
+                        autoComplete='off'
+                        placeholder='Your new password'
+                        aria-label='Your new password'
+                        onChange={(e): void => handlePasswordsChange(e)}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='confirm_password'>
+                        <LockClosedIcon />
+                        <span>Confirm Password</span>
+                      </label>
+                      <input
+                        type='password'
+                        id='confirm_password'
+                        name='confirm_password'
+                        aria-hidden='true'
+                        autoComplete='off'
+                        minLength={8}
+                        placeholder='Confirm your new password'
+                        aria-label='Confirm your new password'
+                        onChange={(e): void => handlePasswordsChange(e)}
+                      />
+                    </div>
+                  </section>
+                  <div className='save-container'>
+                    <h3>
+                      <span>
+                        Tip: just leave this section blanc if you don't want to
+                        update your password.
+                      </span>
+                    </h3>
+                    <motion.button
+                      className='save'
+                      title='Save updated password'
+                      aria-label='Save updated password'
+                      onClick={(): Promise<void> => handleUpdatePassword()}>
+                      <span>Update password and save</span>
+                    </motion.button>
+                  </div>
+                </div>
               </div>
             </section>
             <section className='group-container'>
