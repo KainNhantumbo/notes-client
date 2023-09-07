@@ -39,6 +39,72 @@ const Settings: FC = (): JSX.Element => {
     }));
   };
 
+  const handleUpdatePassword = async (): Promise<void> => {
+    dispatch({
+      type: actions.TOAST,
+      payload: {
+        ...state,
+        toast: { ...state.toast, status: false },
+      },
+    });
+
+    if (passwords.confirm_password !== '') {
+      if (passwords.password !== passwords.confirm_password) {
+        dispatch({
+          type: actions.TOAST,
+          payload: {
+            ...state,
+            toast: {
+              ...state.toast,
+              title: 'Update Password Error',
+              message: 'Passwords must match. Please, try again.',
+              status: true,
+            },
+          },
+        });
+      }
+    }
+
+    try {
+      await fetchAPI({
+        method: 'patch',
+        url: `/api/v1/users`,
+        data: { assetId: state.user?.profile_image?.id || '' },
+      });
+
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Password Updated',
+            message: 'Your password was updated successfully.',
+            status: true,
+          },
+        },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Update Password Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to update your password. Please, try again.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: handleUpdatePassword,
+          },
+        },
+      });
+    }
+  };
+
   const deleteAsset = async (): Promise<void> => {
     dispatch({
       type: actions.TOAST,
@@ -76,7 +142,7 @@ const Settings: FC = (): JSX.Element => {
             title: 'Delete Profile Picture Error',
             message:
               error?.response?.data?.message ??
-              'Failed to remove your profile pitcure. Please try again.',
+              'Failed to remove your profile pitcure. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: deleteAsset,
@@ -106,19 +172,6 @@ const Settings: FC = (): JSX.Element => {
           };
         },
       });
-    }
-  };
-
-  const handleUpdatePassword = async (): Promise<void> => {
-    if (passwords.confirm_password !== '') {
-      if (passwords.password !== passwords.confirm_password) {
-      }
-    }
-
-    try {
-      const { profile_image } = state.user;
-    } catch (error: any) {
-      console.error(error);
     }
   };
 
@@ -326,6 +379,7 @@ const Settings: FC = (): JSX.Element => {
                 </div>
               </div>
             </section>
+            
             <section className='group-container'>
               <h1>
                 <span></span>
