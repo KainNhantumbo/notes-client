@@ -19,6 +19,10 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 import { useThemeContext } from '@/context/ThemeContext';
+import {} from '@uiw/codemirror-extensions-basic-setup';
+import {} from '@uiw/codemirror-extensions-line-numbers-relative';
+import {} from '@uiw/codemirror-extensions-zebra-stripes';
+import {} from '@uiw/codemirror-themes-all';
 
 export const Editor: FC = (): JSX.Element => {
   const { colorScheme } = useThemeContext();
