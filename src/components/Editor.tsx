@@ -30,7 +30,6 @@ export const Editor: FC = (): JSX.Element => {
         hideToolbar={false}
         value={state.currentNote.content}
         onChange={(value: string, viewUpdate) => {
-          // viewUpdate.state.toJSON()
           dispatch({
             type: actions.CURRENT_NOTE,
             payload: {

@@ -61,6 +61,8 @@ export type TSignUp = {
   confirm_password: string;
 };
 
+export type Tag = { id: string; color: string; value: string }
+
 export type TNote = {
   _id: string;
   title: string;
@@ -71,7 +73,7 @@ export type TNote = {
     color: string;
     bookmarked: boolean;
     reminder: { time: string; expired: boolean };
-    tags: { color: string; value: string }[];
+    tags: Tag[];
     deleted: boolean;
     priority: 'none' | 'low' | 'medium' | 'high';
     status: 'none' | 'pending' | 'processing' | 'reviewing' | 'completed';
