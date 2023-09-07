@@ -105,6 +105,61 @@ const Settings: FC = (): JSX.Element => {
     }
   };
 
+  const handleDeleteAccount = async (): Promise<void> => {
+    try {
+      await fetchAPI({ method: 'delete', url: '/api/v1/users' });
+      dispatch({
+        type: actions.PROMPT,
+        payload: {
+          ...state,
+          prompt: { ...state.prompt, status: false },
+        },
+      });
+
+      dispatch({
+        type: actions.AUTH,
+        payload: {
+          ...state,
+          auth: {
+            id: '',
+            name: '',
+            token: '',
+            email: '',
+            profile_image: '',
+          },
+        },
+      });
+
+      navigate('/', { replace: true });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.PROMPT,
+        payload: {
+          ...state,
+          prompt: { ...state.prompt, status: false },
+        },
+      });
+
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Delete Account Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to update your password. Please, try again.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: handleUpdatePassword,
+          },
+        },
+      });
+    }
+  };
+
   const deleteAsset = async (): Promise<void> => {
     dispatch({
       type: actions.TOAST,
@@ -191,9 +246,9 @@ const Settings: FC = (): JSX.Element => {
         <div className='wrapper-container'>
           <article>
             <section className='group-container'>
-              <h1>
+              <h2>
                 <span>Profile Settings</span>
-              </h1>
+              </h2>
               <div className='header-container'>
                 <h3>
                   <span>Adjust your account settings</span>
@@ -314,9 +369,9 @@ const Settings: FC = (): JSX.Element => {
             </section>
 
             <section className='group-container'>
-              <h1>
+              <h2>
                 <span>Your Passwords</span>
-              </h1>
+              </h2>
               <div className='header-container'>
                 <h3>
                   <span>
@@ -362,16 +417,17 @@ const Settings: FC = (): JSX.Element => {
                     </div>
                   </section>
                   <div className='save-container'>
-                    <h3>
-                      <span>
-                        Tip: just leave this section blanc if you don't want to
-                        update your password.
-                      </span>
-                    </h3>
+                    <p>
+                      Tip: just leave this section blanc if you don't want to
+                      update your password.
+                    </p>
+
                     <motion.button
                       className='save'
                       title='Save updated password'
                       aria-label='Save updated password'
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.9 }}
                       onClick={(): Promise<void> => handleUpdatePassword()}>
                       <span>Update password and save</span>
                     </motion.button>
@@ -379,22 +435,52 @@ const Settings: FC = (): JSX.Element => {
                 </div>
               </div>
             </section>
-            
+
             <section className='group-container'>
-              <h1>
-                <span></span>
-              </h1>
+              <h2>
+                <span>Delete Account</span>
+              </h2>
               <div className='header-container'>
                 <h3>
-                  <span></span>
+                  <span>
+                    This will erase all your data from the server and delete
+                    your account, be careful, it can't be undone.
+                  </span>
                 </h3>
-                <div className='data-container'></div>
+                <div className='data-container delete-account-settings'>
+                  <motion.button
+                    className='save'
+                    title='Delete account'
+                    aria-label='Delete account'
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => {
+                      dispatch({
+                        type: actions.PROMPT,
+                        payload: {
+                          ...state,
+                          prompt: {
+                            ...state.prompt,
+                            title: 'Delete Account',
+                            message:
+                              'Erase all data and delete your account. This cannot be undone.',
+                            actionButtonMessage: 'Confirm',
+                            status: true,
+                            handleFunction: handleDeleteAccount,
+                          },
+                        },
+                      });
+                    }}>
+                    <span>Delete account</span>
+                  </motion.button>
+                </div>
               </div>
             </section>
+
             <section className='group-container'>
-              <h1>
+              <h2>
                 <span></span>
-              </h1>
+              </h2>
               <div className='header-container'>
                 <h3>
                   <span></span>
