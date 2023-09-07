@@ -7,6 +7,7 @@ import {
   TSettings,
   TSignIn,
   TSignUp,
+  TUser,
 } from './index';
 
 export type TState = {
@@ -22,7 +23,8 @@ export type TState = {
   prompt: TModalProps;
   windowInnerSize: { width: number; height: number };
   query: TQuery;
-  settings: TSettings
+  settings: TSettings;
+  user: TUser;
 };
 
 export type TAction = { type: string; payload: TState };

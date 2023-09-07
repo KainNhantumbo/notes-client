@@ -53,6 +53,7 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
             <MagnifyingGlassIcon />
             <input
               type='search'
+              name='search'
               placeholder='Search in notes'
               title='Search in notes'
               aria-placeholder='Search in notes'

@@ -137,3 +137,10 @@ export type TSettings = {
     automatic_ui_theme: boolean;
   };
 };
+
+export type TUser = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  profile_image: { id: string; url: string };
+};

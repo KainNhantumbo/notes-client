@@ -17,7 +17,7 @@ const Workspace: FC = (): JSX.Element => {
     const { search, sort } = state.query;
     const { data } = await fetchAPI<TNote[]>({
       method: 'get',
-      url: `/api/v1/users/notes?${search ? `&search=${search}` : ''}${
+      url: `/api/v1/notes?${search ? `&search=${search}` : ''}${
         sort ? `&sort=${sort}` : ''
       }`,
     });

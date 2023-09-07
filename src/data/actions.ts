@@ -1,5 +1,6 @@
 const actions = {
   AUTH: 'AUTH',
+  USER: 'USER',
   NOTES: 'NOTES',
   CURRENT_NOTE: 'CURRENT_NOTE',
   SETTINGS: 'SETTINGS',

@@ -118,7 +118,7 @@ export const NavigationDrawer: FC = (): JSX.Element => {
         label: 'Settings',
         icon: GearIcon,
         execute: () => {
-          navigate('/settings');
+          navigate('/workspace/settings');
         },
       },
       {

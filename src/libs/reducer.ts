@@ -9,6 +9,12 @@ const initialState: TState = {
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', profile_image: '', token: '' },
+  user: {
+    first_name: '',
+    last_name: '',
+    email: '',
+    profile_image: { id: '', url: '' },
+  },
   signUp: {
     first_name: '',
     last_name: '',
@@ -120,6 +126,9 @@ const reducer = (state: TState, action: TAction): TState => {
 
     case actions.SETTINGS:
       return { ...state, settings: action.payload.settings };
+
+    case actions.USER:
+      return { ...state, user: action.payload.user };
 
     default:
       return { ...state };

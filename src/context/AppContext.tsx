@@ -7,7 +7,7 @@ import {
   Dispatch,
   useEffect,
 } from 'react';
-import { TAuth } from '@/@types';
+import { TAuth, TNote, TUser } from '@/@types';
 import fetch from '@/config/client';
 import actions from '@/data/actions';
 import ThemeContext from './ThemeContext';
@@ -23,12 +23,18 @@ type TContext = {
   state: TState;
   dispatch: Dispatch<TAction>;
   fetchAPI: <T>(config: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>;
+  syncSettings: () => Promise<void>;
+  syncCurrentNote: () => Promise<void>;
+  syncUserData: () => Promise<void>;
 };
 
 const context = createContext<TContext>({
   state: initialState,
   dispatch: () => {},
   fetchAPI: (): any => {},
+  syncCurrentNote: async () => {},
+  syncSettings: async () => {},
+  syncUserData: async () => {},
 });
 
 const queryClient: QueryClient = new QueryClient({
@@ -111,9 +117,56 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     });
   };
 
+  const syncUserData = async (): Promise<void> => {
+    if (!state.auth.token) return undefined;
+    dispatch({
+      type: actions.TOAST,
+      payload: {
+        ...state,
+        toast: {
+          title: '',
+          message: '',
+          status: false,
+          handleFunction: () => {},
+          actionButtonMessage: '',
+        },
+      },
+    });
+
+    try {
+      const response = await fetchAPI<TUser>({
+        method: 'patch',
+        url: '/api/v1/user',
+        data: { ...state.user },
+      });
+
+      dispatch({
+        type: actions.USER,
+        payload: { ...state, user: { ...state.user, ...response.data } },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Account Data Sync Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to sync your account data.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: syncUserData,
+          },
+        },
+      });
+    }
+  };
+
   const syncSettings = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
-
     dispatch({
       type: actions.TOAST,
       payload: {
@@ -148,7 +201,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
               error?.response?.data?.message ?? 'Failed to sync your settings.',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: syncSettings
+            handleFunction: syncSettings,
           },
         },
       });
@@ -174,9 +227,21 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     try {
       const { _id, ...data } = state.currentNote;
       if (_id) {
-        await fetchAPI({ method: 'post', url: '/api/v1/notes', data });
-      } else {
         await fetchAPI({ method: 'patch', url: `/api/v1/notes/${_id}`, data });
+      } else {
+        const response = await fetchAPI<TNote>({
+          method: 'post',
+          url: '/api/v1/notes',
+          data,
+        });
+
+        dispatch({
+          type: actions.CURRENT_NOTE,
+          payload: {
+            ...state,
+            currentNote: { ...state.currentNote, _id: response.data._id },
+          },
+        });
       }
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
@@ -195,7 +260,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
           },
         },
       });
-    } finally {
     }
   };
 
@@ -226,6 +290,16 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     }
   }, [state.currentNote]);
 
+  useEffect(() => {
+    if (state.settings.editor.auto_save.enabled) {
+      const debounceTimer = setTimeout(() => {
+        syncUserData();
+      }, state.settings.editor.auto_save.delay);
+
+      return () => clearTimeout(debounceTimer);
+    }
+  }, [state.user]);
+
   useEffect((): (() => void) => {
     const timer = setTimeout((): void => {
       validateAuth();
@@ -235,7 +309,15 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <context.Provider value={{ state, dispatch, fetchAPI }}>
+      <context.Provider
+        value={{
+          state,
+          dispatch,
+          fetchAPI,
+          syncCurrentNote,
+          syncSettings,
+          syncUserData,
+        }}>
         <ThemeContext>{children}</ThemeContext>
       </context.Provider>
     </QueryClientProvider>
