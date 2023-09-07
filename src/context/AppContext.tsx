@@ -98,46 +98,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     }
   };
 
-  const handleLogout = (): void => {
-    dispatch({
-      type: actions.PROMPT,
-      payload: {
-        ...state,
-        prompt: {
-          status: true,
-          actionButtonMessage: 'Confirm',
-          title: 'Logout',
-          message: 'Do you really want to exit this session and logout?',
-          handleFunction: async (): Promise<void> => {
-            try {
-              await fetchAPI({
-                method: 'post',
-                url: '/api/v1/auth/logout',
-                withCredentials: true,
-              });
-              dispatch({
-                type: actions.AUTH,
-                payload: {
-                  ...state,
-                  auth: {
-                    id: '',
-                    name: '',
-                    token: '',
-                    email: '',
-                    profile_image: '',
-                  },
-                },
-              });
-              navigate('/auth/sign-in', { replace: true });
-            } catch (error: any) {
-              console.error(error?.response?.data?.message ?? error);
-            }
-          },
-        },
-      },
-    });
-  };
-
   const computeInnerWindowSize = (): void => {
     dispatch({
       type: actions.WINDOW_INNER_SIZE,
@@ -151,6 +111,93 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     });
   };
 
+  const syncSettings = async (): Promise<void> => {
+    if (!state.auth.token) return undefined;
+
+    dispatch({
+      type: actions.TOAST,
+      payload: {
+        ...state,
+        toast: {
+          title: '',
+          message: '',
+          status: false,
+          handleFunction: () => {},
+          actionButtonMessage: '',
+        },
+      },
+    });
+
+    try {
+      const { created_by, _id, ...data } = state.settings;
+      await fetchAPI({
+        method: 'patch',
+        url: '/api/v1/settings',
+        data: { ...data },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Settings Sync Error',
+            message:
+              error?.response?.data?.message ?? 'Failed to sync your settings.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: syncSettings
+          },
+        },
+      });
+    }
+  };
+
+  const syncCurrentNote = async (): Promise<void> => {
+    dispatch({
+      type: actions.TOAST,
+      payload: {
+        ...state,
+        toast: {
+          title: '',
+          message: '',
+          status: false,
+          handleFunction: () => {},
+          actionButtonMessage: '',
+        },
+      },
+    });
+
+    try {
+      const { _id, ...data } = state.currentNote;
+      if (_id) {
+        await fetchAPI({ method: 'post', url: '/api/v1/notes', data });
+      } else {
+        await fetchAPI({ method: 'patch', url: `/api/v1/notes/${_id}`, data });
+      }
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Note Sync Error',
+            message:
+              error?.response?.data?.message ?? 'Failed to sync your note.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: syncCurrentNote,
+          },
+        },
+      });
+    } finally {
+    }
+  };
+
   useEffect(() => {
     authenticateUser();
     computeInnerWindowSize();
@@ -159,6 +206,24 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       window.removeEventListener('resize', computeInnerWindowSize);
     };
   }, []);
+
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      syncSettings();
+    }, state.settings.editor.auto_save.delay);
+
+    return () => clearTimeout(debounceTimer);
+  }, [state.settings, state.auth]);
+
+  useEffect(() => {
+    if (state.settings.editor.auto_save.enabled) {
+      const debounceTimer = setTimeout(() => {
+        syncCurrentNote();
+      }, state.settings.editor.auto_save.delay);
+
+      return () => clearTimeout(debounceTimer);
+    }
+  }, [state.currentNote]);
 
   useEffect((): (() => void) => {
     const timer = setTimeout((): void => {

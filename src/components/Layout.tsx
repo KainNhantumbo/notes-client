@@ -1,9 +1,9 @@
 import Header from './Header';
 import Footer from './Footer';
+import Toast from './modals/Toast';
 import Cookies from './modals/Cookies';
 import PromptModal from './modals/Prompt';
 import type { THeadProps } from '../@types';
-import Notification from './modals/Toast';
 import { FC, ReactNode, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
@@ -39,9 +39,7 @@ const Layout: FC<IProps> = ({
       <LazyMotion strict={true} features={domAnimation}>
         {renderHeader ? <Header /> : null}
         <Cookies />
-        <Notification
-          key={state.toast.message.split(' ').join('') || undefined}
-        />
+        <Toast key={state.toast.message.split(' ').join('') || undefined} />
         <PromptModal
           key={state.prompt.message.split(' ').join('') || undefined}
         />

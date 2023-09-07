@@ -6,7 +6,7 @@ export const _toast = styled.section`
   z-index: 30000;
   display: flex;
   justify-content: flex-end;
-  top: 7vh;
+  bottom: 0;
   right: 0;
 
   .dialog-prompt {
@@ -14,12 +14,15 @@ export const _toast = styled.section`
     justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 5px;
     background: rgb(${({ theme }) => theme.foreground});
     max-width: 500px;
+    font-size: 0.9rem;
     margin: 20px;
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.15);
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
     position: relative;
 
     @media screen and (max-width: 430px) {
@@ -29,8 +32,8 @@ export const _toast = styled.section`
     .box-btn_close {
       ${StyledCornerButton}
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 5px;
+      right: 5px;
     }
 
     .prompt-info {
@@ -44,12 +47,14 @@ export const _toast = styled.section`
         line-height: 1.6rem;
         font-size: 0.8rem;
         text-transform: uppercase;
-        color: rgb(${({ theme }) => theme.primary});
+        color: rgb(${({ theme }) => theme.error});
       }
       .prompt-message {
         line-height: 1.4rem;
         font-size: 0.92rem;
       }
+
+      
     }
   }
 `;

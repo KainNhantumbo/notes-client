@@ -10,7 +10,6 @@ import { useAppContext } from '@/context/AppContext';
 import EditorContainer from '@/components/EditorContainer';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 
-
 const Workspace: FC = (): JSX.Element => {
   const { state, dispatch, fetchAPI } = useAppContext();
 
@@ -61,7 +60,7 @@ const Workspace: FC = (): JSX.Element => {
         updatedAt: new Date().toISOString(),
       }}>
       <Container>
-        {/* <Navbar /> */}
+        {/* <NavigationDrawer/> */}
         <NotesList {...{ isError, isLoading, error, refetch }} />
         <EditorContainer />
       </Container>
