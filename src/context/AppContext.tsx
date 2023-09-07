@@ -123,13 +123,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       type: actions.TOAST,
       payload: {
         ...state,
-        toast: {
-          title: '',
-          message: '',
-          status: false,
-          handleFunction: () => {},
-          actionButtonMessage: '',
-        },
+        toast: { ...state.toast, status: false },
       },
     });
 
@@ -171,13 +165,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       type: actions.TOAST,
       payload: {
         ...state,
-        toast: {
-          title: '',
-          message: '',
-          status: false,
-          handleFunction: () => {},
-          actionButtonMessage: '',
-        },
+        toast: { ...state.toast, status: false },
       },
     });
 
@@ -214,13 +202,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       type: actions.TOAST,
       payload: {
         ...state,
-        toast: {
-          title: '',
-          message: '',
-          status: false,
-          handleFunction: () => {},
-          actionButtonMessage: '',
-        },
+        toast: { ...state.toast, status: false },
       },
     });
 
