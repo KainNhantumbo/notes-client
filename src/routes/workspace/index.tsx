@@ -2,7 +2,7 @@ import { TNote } from '@/@types';
 import actions from '@/data/actions';
 import { FC, useEffect } from 'react';
 import Layout from '@/components/Layout';
-import Navbar from '@/components/Navbar';
+import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { useQuery } from '@tanstack/react-query';
 import { app_metadata } from '@/data/app-data';
 import NotesList from '@/components/NotesList';
@@ -56,7 +56,6 @@ const Workspace: FC = (): JSX.Element => {
   return (
     <Layout
       renderHeader
-      renderFooter
       metadata={{
         title: `${app_metadata.appName} | ${state.auth.name} Workspace`,
         updatedAt: new Date().toISOString(),

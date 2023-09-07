@@ -86,8 +86,9 @@ export const CustomTools: FC = (): JSX.Element => {
           )}
         </button>
 
-        <div className='priority-selector'></div>
-        <div className='label-selector'></div>
+        {/* <div className='priority-selector'></div>
+        <div className='status-selector'></div> */}
+
         <div
           className='color-selector'
           onClick={() => setDisplayColorPicker(false)}>
