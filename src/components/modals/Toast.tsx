@@ -1,12 +1,8 @@
-import {
-  ArrowLeftIcon,
-  CardStackIcon,
-  Cross2Icon,
-} from '@radix-ui/react-icons';
 import { FC } from 'react';
 import actions from '@/data/actions';
-import { m as motion, AnimatePresence } from 'framer-motion';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { _toast as Container } from '@/styles/modules/_toast';
 
 const Toast: FC = (): JSX.Element => {
@@ -68,13 +64,11 @@ const Toast: FC = (): JSX.Element => {
                       },
                     })
                   }>
-                  <ArrowLeftIcon />
                   <span>Dismiss</span>
                 </button>
                 <button
                   className='prompt-accept'
                   onClick={state.toast.handleFunction}>
-                  <CardStackIcon />
                   <span>{state.toast.actionButtonMessage}</span>
                 </button>
               </div>

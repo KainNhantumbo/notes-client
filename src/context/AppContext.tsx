@@ -156,6 +156,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   };
 
   const syncCurrentNote = async (): Promise<void> => {
+    if (!state.auth.token) return undefined;
     dispatch({
       type: actions.TOAST,
       payload: {

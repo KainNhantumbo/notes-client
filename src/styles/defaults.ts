@@ -4,7 +4,7 @@ export const BaseButtonOutline = css`
   border: none;
   background: none;
   position: relative;
-  padding: 10px;
+  padding: 7px 10px;
   color: rgb(${({ theme }) => theme.font});
   width: fit-content;
   cursor: pointer;
@@ -24,7 +24,6 @@ export const BaseButtonOutline = css`
     pointer-events: none;
   }
   span {
-    padding-left: 20px;
     font-weight: 500;
     pointer-events: none;
   }
@@ -34,7 +33,7 @@ export const BaseButton = css`
   border: none;
   border-radius: 5px;
   position: relative;
-  padding: 10px;
+  padding: 7px 10px;
   width: fit-content;
   cursor: pointer;
   background: rgba(${({ theme }) => theme.primary}, 0.5);

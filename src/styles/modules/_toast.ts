@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { StyledCornerButton } from '../defaults';
+import { BaseButton, BaseButtonOutline, StyledCornerButton } from '../defaults';
 
 export const _toast = styled.section`
- position: fixed;
+  position: fixed;
   z-index: 30000;
   display: flex;
   justify-content: flex-end;
@@ -53,8 +53,20 @@ export const _toast = styled.section`
         line-height: 1.4rem;
         font-size: 0.92rem;
       }
+    }
 
-      
+    .prompt-actions {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+
+      .prompt-cancel {
+        ${BaseButtonOutline}
+      }
+
+      .prompt-accept {
+        ${BaseButton}
+      }
     }
   }
 `;
