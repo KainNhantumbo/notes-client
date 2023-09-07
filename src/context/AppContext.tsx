@@ -169,11 +169,9 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeContext>
-        <context.Provider value={{ state, dispatch, fetchAPI }}>
-          {children}
-        </context.Provider>
-      </ThemeContext>
+      <context.Provider value={{ state, dispatch, fetchAPI }}>
+        <ThemeContext>{children}</ThemeContext>
+      </context.Provider>
     </QueryClientProvider>
   );
 };

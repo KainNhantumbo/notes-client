@@ -1,4 +1,5 @@
 import type { ChangeEvent, FormEvent } from 'react';
+import { editorThemeOptions } from '@/data/app-data';
 
 export type THeadProps =
   | {
@@ -61,7 +62,7 @@ export type TSignUp = {
   confirm_password: string;
 };
 
-export type Tag = { id: string; color: string; value: string }
+export type Tag = { id: string; color: string; value: string };
 
 export type TNote = {
   _id: string;
@@ -107,3 +108,32 @@ export type TQuery = {
 };
 
 export type TOption = { value: string; label: string };
+
+export type TSettings = {
+  _id: string;
+  created_by: string;
+  editor: {
+    auto_save: {
+      enabled: boolean;
+      delay: number;
+    };
+    font: {
+      font_size: number;
+      line_height: number;
+      font_family: string;
+      font_weight: 400 | 500 | 600 | 700 | 800;
+    };
+    editing: {
+      line_numbers: boolean;
+      enable_toolbar: boolean;
+      enable_relative_line_numbers: boolean;
+      tab_size: number;
+      highlight_active_line: boolean;
+    };
+  };
+  theme: {
+    ui_theme: 'light' | 'dark';
+    editor_theme: string;
+    automatic_ui_theme: boolean;
+  };
+};

@@ -4,6 +4,7 @@ import {
   TModalProps,
   TNote,
   TQuery,
+  TSettings,
   TSignIn,
   TSignUp,
 } from './index';
@@ -21,6 +22,7 @@ export type TState = {
   prompt: TModalProps;
   windowInnerSize: { width: number; height: number };
   query: TQuery;
+  settings: TSettings
 };
 
 export type TAction = { type: string; payload: TState };

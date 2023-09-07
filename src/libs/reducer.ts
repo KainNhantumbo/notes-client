@@ -52,6 +52,32 @@ const initialState: TState = {
     search: '',
     sort: '',
   },
+  settings: {
+    _id: '',
+    created_by: '',
+    editor: {
+      auto_save: { enabled: true, delay: 500 },
+      font: {
+        font_size: 16,
+        line_height: 1.6,
+        font_family:
+          "Menlo, Consolas, 'JetBrains Mono', 'Liberation Mono', 'Courier New', ui-monospace, monospace",
+        font_weight: 400,
+      },
+      editing: {
+        line_numbers: false,
+        enable_toolbar: true,
+        enable_relative_line_numbers: false,
+        tab_size: 2,
+        highlight_active_line: false,
+      },
+    },
+    theme: {
+      ui_theme: 'light',
+      editor_theme: 'basic',
+      automatic_ui_theme: true,
+    },
+  },
 };
 
 const reducer = (state: TState, action: TAction): TState => {
@@ -91,6 +117,9 @@ const reducer = (state: TState, action: TAction): TState => {
 
     case actions.QUERY_NOTES:
       return { ...state, query: action.payload.query };
+
+    case actions.SETTINGS:
+      return { ...state, settings: action.payload.settings };
 
     default:
       return { ...state };

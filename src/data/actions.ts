@@ -2,6 +2,7 @@ const actions = {
   AUTH: 'AUTH',
   NOTES: 'NOTES',
   CURRENT_NOTE: 'CURRENT_NOTE',
+  SETTINGS: 'SETTINGS',
   SIGN_IN: 'SIGN_IN',
   SIGN_UP: 'SIGN_UP',
   FOLDERS: 'FOLDERS',
