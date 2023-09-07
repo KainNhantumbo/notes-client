@@ -14,7 +14,7 @@ const InternalServerError: FC = (): JSX.Element => {
         <h1>500</h1>
         <h2>Oops! Something went wrong on the server.</h2>
         <p>Try refreshing the page and if the error persists</p>
-        <button onClick={() => location.reload()}>Get back!</button>
+        <button onClick={() => location.reload()}>Reload page!</button>
       </section>
     </Container>
   );

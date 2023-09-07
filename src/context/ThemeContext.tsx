@@ -35,6 +35,7 @@ const ThemeContext: FC<TProps> = ({ children }): JSX.Element => {
     setColorScheme({ mode, scheme });
     localStorage.setItem('color-scheme', JSON.stringify({ mode, scheme }));
   };
+
   const setLightColorScheme = ({ mode, scheme }: TColorScheme): void => {
     setCurrentTheme(light_default);
     setColorScheme({ mode, scheme });
@@ -48,16 +49,16 @@ const ThemeContext: FC<TProps> = ({ children }): JSX.Element => {
           .matchMedia('(prefers-color-scheme: dark)')
           .addEventListener('change', (e) => {
             if (e.matches) {
-              setDarkColorScheme({ mode, scheme });
+              setDarkColorScheme({ mode, scheme: 'dark' });
             } else {
-              setLightColorScheme({ mode, scheme });
+              setLightColorScheme({ mode, scheme: 'light' });
             }
           });
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          setDarkColorScheme({ mode, scheme });
+          setDarkColorScheme({ mode, scheme: 'dark' });
         } else {
-          setLightColorScheme({ mode, scheme });
+          setLightColorScheme({ mode, scheme: 'light' });
         }
         break;
       case 'manual':

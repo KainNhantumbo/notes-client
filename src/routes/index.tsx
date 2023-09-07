@@ -40,7 +40,7 @@ const Home: FC = (): JSX.Element => {
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   className='browser-button'
-                  onClick={() => navigate('/workspace')}>
+                  onClick={() => navigate('/workspace?tab=all&folder=none')}>
                   <span>Open in Browser</span>
                 </motion.button>
                 <motion.a
@@ -101,7 +101,7 @@ const Home: FC = (): JSX.Element => {
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
-                  onClick={() => navigate('/workspace')}
+                  onClick={() => navigate('/workspace?tab=all&folder=none')}
                   className='browser-button'>
                   <span>Open in Browser</span>
                 </motion.button>

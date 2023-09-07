@@ -1,5 +1,5 @@
-import { FC, JSX } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { FC, JSX, useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import PasswordRecovery from './routes/auth/password-recovery';
 import ResetPasswordSuccess from './routes/auth/password-recovery-success';
@@ -37,12 +37,20 @@ const routes = [
   { path: '*', element: <NotFoundError /> },
 ];
 
-const AppRouter: FC = (): JSX.Element => (
-  <Routes>
-    {routes.map((route, index) => (
-      <Route key={index} path={route.path} element={route.element} />
-    ))}
-  </Routes>
-);
+const AppRouter: FC = (): JSX.Element => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return (
+    <Routes>
+      {routes.map((route, index) => (
+        <Route key={index} path={route.path} element={route.element} />
+      ))}
+    </Routes>
+  );
+};
 
 export default AppRouter;

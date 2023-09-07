@@ -89,7 +89,7 @@ const Header: FC = (): JSX.Element => {
                 <button
                   title='Go to workspace'
                   className='user-account'
-                  onClick={() => navigate(`/workspace`)}>
+                  onClick={() => navigate(`/workspace?tab=all&folder=none`)}>
                   <span>Workspace</span>
                   {state.auth.profile_image ? (
                     <img
