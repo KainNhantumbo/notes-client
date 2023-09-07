@@ -2,37 +2,48 @@ import '@uiw/react-markdown-preview/markdown.css';
 import '@uiw/react-markdown-editor/esm/index.css';
 import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
 
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import actions from '@/data/actions';
 import MarkdownEditor from '@uiw/react-markdown-editor';
-import { bold } from '@uiw/react-markdown-editor/esm/commands/bold';
-import rehypeSanitize from 'rehype-sanitize';
-import { RehypeRewriteOptions } from 'rehype-rewrite';
 import { useAppContext } from '@/context/AppContext';
+import { bold } from '@uiw/react-markdown-editor/esm/commands/bold';
+import { RehypeRewriteOptions } from 'rehype-rewrite';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeformat from 'rehype-format';
-import rehyped from 'rehype-stringify';
 import rehypeDocument from 'rehype-document';
 import rehypeFormat from 'rehype-format';
 import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+
 import { unified } from 'unified';
 import { useThemeContext } from '@/context/ThemeContext';
-import {} from '@uiw/codemirror-extensions-basic-setup';
-import {} from '@uiw/codemirror-extensions-line-numbers-relative';
-import {} from '@uiw/codemirror-extensions-zebra-stripes';
+import { lineNumbersRelative } from '@uiw/codemirror-extensions-line-numbers-relative';
 import {} from '@uiw/codemirror-themes-all';
+import { DefaultTheme, useTheme } from 'styled-components';
+import { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 
 export const Editor: FC = (): JSX.Element => {
   const { colorScheme } = useThemeContext();
   const { state, dispatch } = useAppContext();
+  const theme: DefaultTheme = useTheme();
+
+  const usableExtensions =
+    useCallback((): ReactCodeMirrorProps['extensions'] => {
+      const extensions: ReactCodeMirrorProps['extensions'] = [];
+      return extensions;
+    }, []);
+
+
 
   return (
     <div data-color-mode={colorScheme.scheme}>
       <MarkdownEditor
-        hideToolbar={false}
+        hideToolbar={true}
         value={state.currentNote.content}
+        previewProps={{}}
+        basicSetup={{ indentOnInput: true }}
+        extensions={usableExtensions()}
         onChange={(value: string, viewUpdate) => {
           dispatch({
             type: actions.CURRENT_NOTE,

@@ -4,6 +4,8 @@ import { CustomTools } from './CustomTools';
 
 const styles: CSSProperties = {
   width: '100%',
+  height: '100%',
+  minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
 };

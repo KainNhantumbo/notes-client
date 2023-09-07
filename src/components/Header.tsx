@@ -84,24 +84,28 @@ const Header: FC = (): JSX.Element => {
                       <span>Sign up</span>
                     </Link>
                   </>
-                ) : null}
-
-                <button
-                  title='Go to workspace'
-                  className='user-account'
-                  onClick={() => navigate(`/workspace?tab=all-notes&folder=none`)}>
-                  <span>Workspace</span>
-                  {state.auth.profile_image ? (
-                    <img
-                      loading='lazy'
-                      decoding='async'
-                      src={state.auth.profile_image}
-                      alt='User profile image'
-                    />
-                  ) : (
-                    <AvatarIcon />
-                  )}
-                </button>
+                ) : (
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.9 }}
+                    title='Go to workspace'
+                    className='user-account'
+                    onClick={() =>
+                      navigate(`/workspace?tab=all-notes&folder=none`)
+                    }>
+                    <span>Workspace</span>
+                    {state.auth.profile_image ? (
+                      <img
+                        loading='lazy'
+                        decoding='async'
+                        src={state.auth.profile_image}
+                        alt='User profile image'
+                      />
+                    ) : (
+                      <AvatarIcon />
+                    )}
+                  </motion.button>
+                )}
               </div>
             </motion.nav>
           )}
