@@ -133,8 +133,6 @@ export const StyledCornerButton = css`
     width: 20px;
     height: 20px;
   }
-
- 
 `;
 
 export const StyledLabels = css`
@@ -242,5 +240,22 @@ export const statsContainerStyles = css`
     margin: 0 auto;
 
     color: rgb(${({ theme }) => theme.primary_shade});
+  }
+`;
+
+export const styledEndMark = css`
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background: rgb(${({ theme }) => theme.background_shade});
+  color: rgb(${({ theme }) => theme.error});
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 0;
+
+  svg {
+    width: 30px;
+    height: 30px;
   }
 `;

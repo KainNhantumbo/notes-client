@@ -20,7 +20,6 @@ export const _toast = styled.section`
     max-width: 500px;
     font-size: 0.9rem;
     margin: 20px;
-    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.15);
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
     position: relative;

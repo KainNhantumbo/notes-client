@@ -5,6 +5,7 @@ import {
   Button_Mono_A,
   StyledInputs,
   StyledLabels,
+  styledEndMark,
 } from '../defaults';
 
 export const _settings = styled.main`
@@ -18,6 +19,7 @@ export const _settings = styled.main`
       color: rgb(${({ theme }) => theme.primary_shade});
     }
   }
+
 
   .wrapper-container {
     display: grid;
@@ -36,6 +38,10 @@ export const _settings = styled.main`
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    .container-items__end-mark {
+      ${styledEndMark}
+    }
 
     .title-bar-container {
       border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
@@ -160,6 +166,13 @@ export const _settings = styled.main`
           button {
             ${BaseButton}
           }
+        }
+      }
+
+
+      .delete-account-settings {
+        button {
+          ${BaseButton}
         }
       }
 

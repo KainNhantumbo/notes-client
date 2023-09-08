@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import actions from '@/data/actions';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { useAppContext } from '../../context/AppContext';
 import { _prompt as Container } from '../../styles/modules/_prompt';
 import { ArrowLeftIcon, Cross2Icon } from '@radix-ui/react-icons';
@@ -51,13 +51,11 @@ const PromptModal: FC = (): JSX.Element => {
                       },
                     })
                   }>
-                  <Cross2Icon />
                   <span>Cancel</span>
                 </button>
                 <button
                   className='prompt-accept'
                   onClick={state.prompt.handleFunction}>
-                  <ArrowLeftIcon />
                   <span>{state.prompt.actionButtonMessage}</span>
                 </button>
               </div>

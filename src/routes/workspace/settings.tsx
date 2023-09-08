@@ -240,6 +240,46 @@ const Settings: FC = (): JSX.Element => {
             </div>
 
             <section className='group-container'>
+              <h2></h2>
+              <div className='content-container'>
+                <h3>
+                  <span></span>
+                </h3>
+                <div className='data-container'></div>
+              </div>
+            </section>
+
+            <section className='group-container'>
+              <h2></h2>
+              <div className='content-container'>
+                <h3>
+                  <span></span>
+                </h3>
+                <div className='data-container'></div>
+              </div>
+            </section>
+
+            <section className='group-container'>
+              <h2></h2>
+              <div className='content-container'>
+                <h3>
+                  <span></span>
+                </h3>
+                <div className='data-container'></div>
+              </div>
+            </section>
+
+            <section className='group-container'>
+              <h2></h2>
+              <div className='content-container'>
+                <h3>
+                  <span></span>
+                </h3>
+                <div className='data-container'></div>
+              </div>
+            </section>
+
+            <section className='group-container'>
               <h2>Profile Settings</h2>
               <div className='content-container'>
                 <h3>
@@ -461,15 +501,9 @@ const Settings: FC = (): JSX.Element => {
               </div>
             </section>
 
-            <section className='group-container'>
-              <h2></h2>
-              <div className='content-container'>
-                <h3>
-                  <span></span>
-                </h3>
-                <div className='data-container'></div>
-              </div>
-            </section>
+            <div className='container-items__end-mark'>
+              <DotsHorizontalIcon />
+            </div>
           </article>
         </div>
       </Container>

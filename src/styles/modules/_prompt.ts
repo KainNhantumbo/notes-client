@@ -21,10 +21,11 @@ export const _prompt = styled.section`
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     background: rgb(${({ theme }) => theme.foreground});
     max-width: 500px;
     margin: 25px;
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
 
     .prompt-info {
@@ -57,7 +58,7 @@ export const _prompt = styled.section`
       }
       .prompt-accept {
         ${BaseButton}
-        background: rgb(${({ theme }) => theme.error});
+        background: rgb(${({ theme }) => theme.primary_shade});
         color: rgb(${({ theme }) => theme.white});
       }
     }
