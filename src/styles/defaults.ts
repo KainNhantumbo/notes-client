@@ -3,7 +3,6 @@ import { css } from 'styled-components';
 export const BaseButtonOutline = css`
   border: none;
   background: none;
-  position: relative;
   padding: 7px 10px;
   color: rgb(${({ theme }) => theme.font});
   width: fit-content;
@@ -15,14 +14,6 @@ export const BaseButtonOutline = css`
   :hover {
     color: rgb(${({ theme }) => theme.primary_shade});
   }
-  svg {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: calc(50% - 10px);
-    left: 7px;
-    pointer-events: none;
-  }
   span {
     font-weight: 500;
     pointer-events: none;
@@ -32,7 +23,6 @@ export const BaseButtonOutline = css`
 export const BaseButton = css`
   border: none;
   border-radius: 5px;
-  position: relative;
   padding: 7px 10px;
   width: fit-content;
   cursor: pointer;
@@ -55,7 +45,6 @@ export const BaseButton = css`
       color: rgb(${({ theme }) => theme.foreground});
     }
   }
-
   span {
     font-weight: 500;
     pointer-events: none;

@@ -1,11 +1,10 @@
-import styled from 'styled-components';
 import {
   BaseButton,
   BaseButtonOutline,
-  Button_Mono_A,
   StyledCornerButton,
   styledEndMark,
 } from '../defaults';
+import styled from 'styled-components';
 
 export const _notesList = styled.section`
   width: 100%;
@@ -14,12 +13,15 @@ export const _notesList = styled.section`
   display: flex;
   flex-direction: column;
   max-width: 300px;
-  background: none;
+  background: rgb(${({ theme }) => theme.foreground});
 
   .header-container {
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    gap: 12px;
+    background: rgb(${({ theme }) => theme.background_shade});
 
     h2 {
       font-size: 1.2rem;
@@ -35,6 +37,10 @@ export const _notesList = styled.section`
       flex-direction: row;
       align-items: center;
       gap: 3px;
+      padding: 5px 8px;
+      background: rgb(${({ theme }) => theme.foreground});
+      border: 1px solid rgba(${({ theme }) => theme.black}, 0.05);
+      border-radius: 8px;
 
       button {
         ${StyledCornerButton}
@@ -42,49 +48,21 @@ export const _notesList = styled.section`
         border: none;
       }
 
-      .search-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+      input {
+        width: 100%;
+        height: fit-content;
+        border: none;
+        padding: 5px;
+        line-height: 1.2rem;
+        font-weight: 400;
+        outline: none;
+        background: none;
+        color: rgb(${({ theme }) => theme.font});
 
-        svg {
-          width: 20px;
-          height: 20px;
-          color: rgba(${({ theme }) => theme.font}, 0.5);
+        ::placeholder {
+          color: rgba(${({ theme }) => theme.font}, 0.8);
+          font-size: 0.9rem;
         }
-
-        input {
-          width: 100%;
-          height: fit-content;
-          border: 1px solid red;
-          padding: 5px;
-          line-height: 1.2rem;
-          font-weight: 400;
-          outline: none;
-          background: none;
-          color: rgb(${({ theme }) => theme.font});
-
-          ::placeholder {
-            color: rgba(${({ theme }) => theme.font}, 0.8);
-            font-size: 0.9rem;
-          }
-        }
-      }
-    }
-
-    .filters-container {
-      width: 100%;
-      display: flex;
-      flex-flow: row wrap;
-      gap: 12px;
-
-      .button {
-        ${BaseButtonOutline}
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        align-items: center;
-        background: transparent;
       }
     }
   }
@@ -125,6 +103,22 @@ export const _notesList = styled.section`
     display: grid;
     place-items: center center;
     align-items: center center;
+  }
+
+  .loading-indicator {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: rgb(${({ theme }) => theme.primary_shade});
+    align-self: center;
+    justify-self: center;
+    place-self: center center;
+    padding: calc(50% - 1px) 12px;
   }
 
   .error-container {

@@ -9,7 +9,6 @@ import {
   DotsHorizontalIcon,
   DropdownMenuIcon,
   HamburgerMenuIcon,
-  MagnifyingGlassIcon,
   MixIcon,
   Pencil2Icon,
   ReloadIcon,
@@ -21,13 +20,9 @@ import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
 import { TNote } from '@/@types';
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
-import { getSearchParamsForLocation } from 'react-router-dom/dist/dom';
+import { useSearchParams } from 'react-router-dom';
+import { MoonLoader, PulseLoader, RingLoader } from 'react-spinners';
+import { DefaultTheme, useTheme } from 'styled-components';
 
 interface IProps {
   isLoading: boolean;
@@ -39,6 +34,7 @@ interface IProps {
 }
 
 const NotesList: FC<IProps> = (props): JSX.Element => {
+  const theme: DefaultTheme = useTheme();
   const { state, dispatch } = useAppContext();
   let [searchParams, setSearchParams] = useSearchParams();
 
@@ -54,48 +50,45 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
         </h2>
 
         <div className='form-container'>
-          <button
+          <motion.button
             title='open navigation drawer'
             placeholder='open navigation drawer'
             aria-placeholder='open navigation drawer'
-            onClick={() => {}}>
-            <HamburgerMenuIcon />
-          </button>
-          <div className='search-container'>
-            <MagnifyingGlassIcon />
-            <input
-              type='search'
-              name='search'
-              placeholder='Search in notes'
-              title='Search in notes'
-              aria-placeholder='Search in notes'
-              value={state.query.search}
-              onChange={(e) =>
-                dispatch({
-                  type: actions.QUERY_NOTES,
-                  payload: {
-                    ...state,
-                    query: { ...state.query, search: e.target.value },
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.8 }}
+            onClick={() =>
+              dispatch({
+                type: actions.NAVIGATION_DRAWER,
+                payload: {
+                  ...state,
+                  navigation_drawer: {
+                    ...state.navigation_drawer,
+                    status: true,
                   },
-                })
-              }
-            />
-          </div>
-          <button className='avatar-container'>
-            {state.auth.profile_image ? (
-              <img
-                loading='lazy'
-                decoding='async'
-                src={state.auth.profile_image}
-                alt='User profile image'
-              />
-            ) : (
-              <AvatarIcon />
-            )}
-          </button>
-        </div>
+                },
+              })
+            }>
+            <HamburgerMenuIcon />
+          </motion.button>
 
-        <div className='filters-container'>
+          <input
+            type='search'
+            name='search'
+            placeholder='Search in notes'
+            title='Search in notes'
+            aria-placeholder='Search in notes'
+            value={state.query.search}
+            onChange={(e) =>
+              dispatch({
+                type: actions.QUERY_NOTES,
+                payload: {
+                  ...state,
+                  query: { ...state.query, search: e.target.value },
+                },
+              })
+            }
+          />
+
           <motion.button
             title='Sort notes'
             placeholder='Sort notes'
@@ -108,18 +101,7 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
                 payload: { ...state, query: { ...state.query, sort: '' } },
               })
             }>
-            <span>Sort</span>
             <CaretSortIcon />
-          </motion.button>
-          <motion.button
-            title='Filter notes'
-            placeholder='Filter notes'
-            aria-placeholder='Filter notes'
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.8 }}
-            onClick={() => {}}>
-            <span>Filter</span>
-            <DropdownMenuIcon />
           </motion.button>
         </div>
       </section>
@@ -196,7 +178,7 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
         </>
       ) : null}
 
-      {state.notes.length < 1 ? (
+      {state.notes.length < 1 && !props.isError && !props.isLoading ? (
         <section className='empty-notes-container'>
           <div>
             <MixIcon />
@@ -208,6 +190,20 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
             </p>
           </div>
         </section>
+      ) : null}
+
+      {props.isLoading && !props.isError ? (
+        <div className='loading-indicator'>
+          <MoonLoader
+            size={30}
+            color={`rgb(${theme.primary_shade})`}
+            aria-placeholder='Loading your notes...'
+            cssOverride={{
+              display: 'block',
+            }}
+          />
+          <h3>Loading your notes...</h3>
+        </div>
       ) : null}
     </Container>
   );
