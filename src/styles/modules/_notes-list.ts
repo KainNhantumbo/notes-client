@@ -8,7 +8,6 @@ import styled from 'styled-components';
 
 export const _notesList = styled.section`
   width: 100%;
-  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -20,8 +19,10 @@ export const _notesList = styled.section`
     display: flex;
     flex-direction: column;
     padding: 20px;
+    padding-bottom: 12px;
     gap: 12px;
-    background: rgb(${({ theme }) => theme.background_shade});
+    background: rgb(${({ theme }) => theme.foreground});
+    z-index: 2000;
 
     h2 {
       font-size: 1.2rem;
@@ -71,38 +72,71 @@ export const _notesList = styled.section`
     z-index: 3000;
     position: fixed;
     bottom: 20px;
-    left: 0;
+    right: 0;
     width: 32px;
     height: 32px;
     margin-top: 8px;
-    border: none;
-    display: grid;
-    background: rgba(${({ theme }) => theme.primary}, 0.2);
+
     border-radius: 10px;
-    backdrop-filter: blur(10px);
     place-content: center;
     position: relative;
     cursor: pointer;
     outline: none;
-
+    
     svg {
       width: 24px;
       height: 24px;
       color: rgb(${({ theme }) => theme.primary});
-
+      
       :hover {
         transition: all 200ms ease-in-out;
         color: rgb(${({ theme }) => theme.secondary});
       }
     }
   }
+  
+  .compose-button {
+    z-index: 3000;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    ${StyledCornerButton}
+    border-radius: 50%;
+    padding: 8px;
+    background: rgba(${({ theme }) => theme.primary}, 0.2);
+    backdrop-filter: blur(10px);
+    
+  }
 
   .empty-notes-container {
     width: 100%;
     height: 100%;
-    display: grid;
-    place-items: center center;
-    align-items: center center;
+    display: flex;
+    flex-direction: column;
+    padding: calc(50% - 1px) 20px;
+    gap: 20px;
+    align-items: center;
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    p {
+      text-align: center;
+      line-height: 1.6rem;
+      font-size: 0.95rem;
+
+      i {
+        color: rgb(${({ theme }) => theme.primary_shade});
+      }
+    }
+
+    svg {
+      width: 60px;
+      height: 60px;
+      color: rgb(${({ theme }) => theme.primary});
+    }
   }
 
   .loading-indicator {
@@ -115,34 +149,24 @@ export const _notesList = styled.section`
     font-weight: 500;
     font-size: 0.95rem;
     color: rgb(${({ theme }) => theme.primary_shade});
-    align-self: center;
-    justify-self: center;
-    place-self: center center;
     padding: calc(50% - 1px) 12px;
   }
 
   .error-container {
     width: 100%;
     height: 100%;
-    display: grid;
-    place-content: center;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: rgb(${({ theme }) => theme.error});
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.6rem;
+    padding: calc(50% - 1px) 12px;
 
-    .fetch-error-message {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      margin: 20px 0;
-      color: rgb(${({ theme }) => theme.error});
-      font-weight: 500;
-      font-size: 1.1rem;
-      line-height: 1.4rem;
-      align-self: flex-end;
-
-      button {
-        ${BaseButton}
-      }
+    button {
+      ${BaseButton}
     }
   }
 

@@ -88,8 +88,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     });
   }
 
-
-
   const computeInnerWindowSize = (): void => {
     dispatch({
       type: actions.WINDOW_INNER_SIZE,
@@ -111,7 +109,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
         url: '/api/v1/users',
         data: { ...state.user },
       });
-
       dispatch({
         type: actions.USER,
         payload: { ...state, user: { ...state.user, ...response.data } },
@@ -208,7 +205,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   };
 
   useEffect(() => {
-    authenticateUser()
+    authenticateUser();
     computeInnerWindowSize();
     window.addEventListener('resize', computeInnerWindowSize);
     return () => {
@@ -235,13 +232,10 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   }, [state.currentNote]);
 
   useEffect(() => {
-    if (state.settings.editor.auto_save.enabled) {
-      const debounceTimer = setTimeout(() => {
-        syncUserData();
-      }, state.settings.editor.auto_save.delay);
-
-      return () => clearTimeout(debounceTimer);
-    }
+    const debounceTimer = setTimeout(() => {
+      syncUserData();
+    }, 3000);
+    return () => clearTimeout(debounceTimer);
   }, [state.user]);
 
   useEffect((): (() => void) => {

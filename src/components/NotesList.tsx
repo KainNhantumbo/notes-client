@@ -108,17 +108,14 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
 
       {!props.isLoading && props.isError ? (
         <section className='error-container'>
-          <div className='fetch-error-message '>
-            <h3>
-              {(props.error as any)?.response?.data?.message ||
-                (props.error as any)?.code ||
-                'An error occurred while fetching data'}
-            </h3>
-            <button onClick={() => props.refetch({ queryKey: ['notes'] })}>
-              <ReloadIcon />
-              <span>Try again</span>
-            </button>
-          </div>
+          <h3>
+            {(props.error as any)?.response?.data?.message ||
+              (props.error as any)?.code ||
+              'An error occurred while fetching data'}
+          </h3>
+          <button onClick={() => props.refetch({ queryKey: ['notes'] })}>
+            <span>Try again</span>
+          </button>
         </section>
       ) : null}
 
@@ -164,31 +161,30 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
               </div>
             )}
           </section>
-
-          <motion.button
-            title='Compose a new note'
-            placeholder='Compose a new note'
-            aria-placeholder='Compose a new note'
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.8 }}
-            className='fluent-button'>
-            <Pencil2Icon />
-            <span>Compose</span>
-          </motion.button>
         </>
+      ) : null}
+
+      {!props.isError && !props.isLoading ? (
+        <motion.button
+          title='Compose a new note'
+          placeholder='Compose a new note'
+          aria-placeholder='Compose a new note'
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.8 }}
+          className='compose-button'>
+          <Pencil2Icon />
+        </motion.button>
       ) : null}
 
       {state.notes.length < 1 && !props.isError && !props.isLoading ? (
         <section className='empty-notes-container'>
-          <div>
-            <MixIcon />
-            <h3>
-              <span>No notes</span>
-            </h3>
-            <p>
-              Press <i>Compose</i> button to start writing notes
-            </p>
-          </div>
+          <MixIcon />
+          <h3>
+            <span>No notes</span>
+          </h3>
+          <p>
+            Press <i>Compose</i> button to start writing notes
+          </p>
         </section>
       ) : null}
 

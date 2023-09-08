@@ -1,7 +1,3 @@
-import '@uiw/react-markdown-preview/markdown.css';
-import '@uiw/react-markdown-editor/esm/index.css';
-import '@uiw/react-markdown-editor/esm/components/ToolBar/index.css';
-
 import { CSSProperties, FC, useCallback, useMemo } from 'react';
 import actions from '@/data/actions';
 import MarkdownEditor from '@uiw/react-markdown-editor';
