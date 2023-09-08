@@ -39,9 +39,9 @@ const Layout: FC<IProps> = ({
       <LazyMotion strict={true} features={domAnimation}>
         {renderHeader ? <Header /> : null}
         <Cookies />
-        <Toast key={state.toast.message.split(' ').join('') || undefined} />
+        <Toast key={state.toast.title.split(' ').join('') || undefined} />
         <PromptModal
-          key={state.prompt.message.split(' ').join('') || undefined}
+          key={state.prompt.title.split(' ').join('') || undefined}
         />
         {children}
         {renderFooter ? <Footer /> : null}

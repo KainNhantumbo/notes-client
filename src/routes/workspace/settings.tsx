@@ -1,5 +1,7 @@
 import {
+  AvatarIcon,
   DotsHorizontalIcon,
+  GearIcon,
   LockClosedIcon,
   LockOpen2Icon,
   PersonIcon,
@@ -40,14 +42,6 @@ const Settings: FC = (): JSX.Element => {
   };
 
   const handleUpdatePassword = async (): Promise<void> => {
-    dispatch({
-      type: actions.TOAST,
-      payload: {
-        ...state,
-        toast: { ...state.toast, status: false },
-      },
-    });
-
     if (passwords.confirm_password !== '') {
       if (passwords.password !== passwords.confirm_password) {
         dispatch({
@@ -161,14 +155,6 @@ const Settings: FC = (): JSX.Element => {
   };
 
   const deleteAsset = async (): Promise<void> => {
-    dispatch({
-      type: actions.TOAST,
-      payload: {
-        ...state,
-        toast: { ...state.toast, status: false },
-      },
-    });
-
     try {
       await fetchAPI({
         method: 'delete',
@@ -241,24 +227,28 @@ const Settings: FC = (): JSX.Element => {
   return (
     <Layout
       renderHeader
+      renderFooter
       metadata={{ title: `${app_metadata.appName} | Settings` }}>
       <Container>
         <div className='wrapper-container'>
           <article>
+            <div className='title-bar-container'>
+              <h1>
+                <GearIcon />
+                <span>Settings</span>
+              </h1>
+            </div>
+
             <section className='group-container'>
-              <h2>
-                <span>Profile Settings</span>
-              </h2>
-              <div className='header-container'>
+              <h2>Profile Settings</h2>
+              <div className='content-container'>
                 <h3>
                   <span>Adjust your account settings</span>
                 </h3>
                 <div className='data-container account-settings'>
-                  <div className='image-container profile-image'>
+                  <div className='image-container'>
                     {profileImageData?.data ? (
                       <img
-                        width={150}
-                        height={150}
                         decoding='async'
                         loading='lazy'
                         src={profileImageData.data}
@@ -266,8 +256,6 @@ const Settings: FC = (): JSX.Element => {
                       />
                     ) : state.user.profile_image?.url ? (
                       <img
-                        width={150}
-                        height={150}
                         decoding='async'
                         loading='lazy'
                         src={state.user.profile_image?.url}
@@ -276,16 +264,6 @@ const Settings: FC = (): JSX.Element => {
                     ) : (
                       <PersonIcon className='camera-icon' />
                     )}
-                    <label htmlFor='avatar' title='Change profile picture'>
-                      <span>Profile picture</span>
-                      <PlusIcon />
-                    </label>
-                    <button
-                      title='Clear profile picture'
-                      className='clear-image'
-                      onClick={deleteAsset}>
-                      <TrashIcon />
-                    </button>
                     <input
                       type='file'
                       id='avatar'
@@ -294,6 +272,18 @@ const Settings: FC = (): JSX.Element => {
                       multiple={false}
                       onChange={(e) => setProfileImageFile(e.target.files)}
                     />
+
+                    <div className='actions-container'>
+                      <label htmlFor='avatar' title='Change profile picture'>
+                        <span>Upload</span>
+                      </label>
+                      <button
+                        title='Clear profile picture'
+                        className='clear-image'
+                        onClick={deleteAsset}>
+                        <span>Clear</span>
+                      </button>
+                    </div>
                   </div>
 
                   <section className='form-section'>
@@ -310,19 +300,18 @@ const Settings: FC = (): JSX.Element => {
                         placeholder='Your first name'
                         aria-label='Your first name'
                         required={true}
+                        maxLength={32}
                         onChange={(e): void =>
-                          e.target.value.length > 32
-                            ? undefined
-                            : dispatch({
-                                type: actions.USER,
-                                payload: {
-                                  ...state,
-                                  user: {
-                                    ...state.user,
-                                    first_name: e.target.value,
-                                  },
-                                },
-                              })
+                          dispatch({
+                            type: actions.USER,
+                            payload: {
+                              ...state,
+                              user: {
+                                ...state.user,
+                                first_name: e.target.value,
+                              },
+                            },
+                          })
                         }
                         value={state.user.first_name}
                       />
@@ -344,19 +333,18 @@ const Settings: FC = (): JSX.Element => {
                         aria-label='Your last name'
                         value={state.user.last_name}
                         required={true}
+                        maxLength={32}
                         onChange={(e): void =>
-                          e.target.value.length > 32
-                            ? undefined
-                            : dispatch({
-                                type: actions.USER,
-                                payload: {
-                                  ...state,
-                                  user: {
-                                    ...state.user,
-                                    first_name: e.target.value,
-                                  },
-                                },
-                              })
+                          dispatch({
+                            type: actions.USER,
+                            payload: {
+                              ...state,
+                              user: {
+                                ...state.user,
+                                first_name: e.target.value,
+                              },
+                            },
+                          })
                         }
                       />
                       <span className='counter'>{`${
@@ -369,10 +357,8 @@ const Settings: FC = (): JSX.Element => {
             </section>
 
             <section className='group-container'>
-              <h2>
-                <span>Your Passwords</span>
-              </h2>
-              <div className='header-container'>
+              <h2>Your Passwords</h2>
+              <div className='content-container'>
                 <h3>
                   <span>
                     We encorage to use strong passwords that you can easily
@@ -437,10 +423,8 @@ const Settings: FC = (): JSX.Element => {
             </section>
 
             <section className='group-container'>
-              <h2>
-                <span>Delete Account</span>
-              </h2>
-              <div className='header-container'>
+              <h2>Delete Account</h2>
+              <div className='content-container'>
                 <h3>
                   <span>
                     This will erase all your data from the server and delete
@@ -478,10 +462,8 @@ const Settings: FC = (): JSX.Element => {
             </section>
 
             <section className='group-container'>
-              <h2>
-                <span></span>
-              </h2>
-              <div className='header-container'>
+              <h2></h2>
+              <div className='content-container'>
                 <h3>
                   <span></span>
                 </h3>

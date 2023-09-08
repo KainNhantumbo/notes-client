@@ -119,18 +119,10 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
 
   const syncUserData = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
-    dispatch({
-      type: actions.TOAST,
-      payload: {
-        ...state,
-        toast: { ...state.toast, status: false },
-      },
-    });
-
     try {
       const response = await fetchAPI<TUser>({
         method: 'patch',
-        url: '/api/v1/user',
+        url: '/api/v1/users',
         data: { ...state.user },
       });
 
@@ -161,14 +153,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
 
   const syncSettings = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
-    dispatch({
-      type: actions.TOAST,
-      payload: {
-        ...state,
-        toast: { ...state.toast, status: false },
-      },
-    });
-
     try {
       const { created_by, _id, ...data } = state.settings;
       await fetchAPI({
@@ -198,14 +182,6 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
 
   const syncCurrentNote = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
-    dispatch({
-      type: actions.TOAST,
-      payload: {
-        ...state,
-        toast: { ...state.toast, status: false },
-      },
-    });
-
     try {
       const { _id, ...data } = state.currentNote;
       if (_id) {

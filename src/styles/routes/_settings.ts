@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+import {
+  BaseButton,
+  BaseButtonOutline,
+  Button_Mono_A,
+  StyledInputs,
+  StyledLabels,
+} from '../defaults';
 
 export const _settings = styled.main`
   position: relative;
@@ -26,6 +33,31 @@ export const _settings = styled.main`
   article {
     padding: 30px 40px;
 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .title-bar-container {
+      border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+      padding-bottom: 20px;
+
+      h1 {
+        font-size: 2rem;
+        padding: 0;
+        margin: 0;
+        line-height: 2.2rem;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
+
+        svg {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+
     @media screen and (max-width: 620px) {
       padding: 30px 20px;
     }
@@ -35,15 +67,110 @@ export const _settings = styled.main`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    padding: 8px 12px;
+    border-radius: 5px;
+    background: rgb(${({ theme }) => theme.foreground});
 
-    .header-container {
+    h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.6rem;
+    }
+
+    .content-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.9rem;
+
       h3 {
-        span {
+        font-weight: 500;
+        line-height: 1.6rem;
+      }
+
+      .account-settings {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        justify-content: space-between;
+
+
+        @media screen and (max-width: 390px) {
+          flex-direction: column;
+        }
+
+        .image-container {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          gap: 12px;
+          flex-shrink: 2;
+
+          input {
+            display: none;
+          }
+
+          img {
+            border-radius: 50%;
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+          }
+
+          .camera-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            padding: 10px;
+            background: rgba(${({ theme }) => theme.font}, 0.1);
+          }
+
+          .actions-container {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            align-items: center;
+
+            label {
+              ${BaseButton}
+            }
+
+            .clear-image {
+              ${BaseButtonOutline}
+            }
+          }
         }
       }
 
-      .data-conatainer {
+      .data-container {
+        .form-section {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: 10px;
+
+          .form-element {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            label {
+              ${StyledLabels};
+            }
+            ${StyledInputs}
+
+            .counter {
+              align-self: end;
+              font-size: 0.9rem;
+            }
+          }
+        }
       }
     }
   }
