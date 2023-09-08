@@ -1,10 +1,11 @@
 import actions from '../data/actions';
-import { TAction, TState } from '../@types/reducer';
+import { TAction, TState } from '@/@types/reducer';
 
 const initialState: TState = {
   notes: [],
   folders: [],
   isLogoutModal: false,
+  navigation_drawer: { status: false },
   isPropertiesModal: false,
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
@@ -80,7 +81,7 @@ const initialState: TState = {
     },
     theme: {
       ui_theme: 'light',
-      editor_theme: 'basic',
+      editor_theme: 'xcode',
       automatic_ui_theme: true,
     },
   },
@@ -129,6 +130,9 @@ const reducer = (state: TState, action: TAction): TState => {
 
     case actions.USER:
       return { ...state, user: action.payload.user };
+
+    case actions.NAVIGATION_DRAWER:
+      return { ...state, navigation_drawer: action.payload.navigation_drawer };
 
     default:
       return { ...state };

@@ -250,12 +250,14 @@ const Settings: FC = (): JSX.Element => {
             </section>
 
             <section className='group-container'>
-              <h2></h2>
+              <h2>Themes</h2>
               <div className='content-container'>
                 <h3>
-                  <span></span>
+                  <span>Choose the global UI Theme and the editor color schemes</span>
                 </h3>
-                <div className='data-container'></div>
+                <div className='data-container'>
+                  
+                </div>
               </div>
             </section>
 

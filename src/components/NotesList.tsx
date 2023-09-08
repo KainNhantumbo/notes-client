@@ -14,13 +14,20 @@ import {
   Pencil2Icon,
   ReloadIcon,
 } from '@radix-ui/react-icons';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import actions from '../data/actions';
 import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
 import { TNote } from '@/@types';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
+import { getSearchParamsForLocation } from 'react-router-dom/dist/dom';
 
 interface IProps {
   isLoading: boolean;
@@ -33,12 +40,17 @@ interface IProps {
 
 const NotesList: FC<IProps> = (props): JSX.Element => {
   const { state, dispatch } = useAppContext();
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {}, [searchParams]);
 
   return (
     <Container>
       <section className='header-container'>
         <h2>
-          <span>Workspace</span>
+          <span>
+            {searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}
+          </span>
         </h2>
 
         <div className='form-container'>
@@ -57,8 +69,16 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
               placeholder='Search in notes'
               title='Search in notes'
               aria-placeholder='Search in notes'
-              value={''}
-              onChange={() => {}}
+              value={state.query.search}
+              onChange={(e) =>
+                dispatch({
+                  type: actions.QUERY_NOTES,
+                  payload: {
+                    ...state,
+                    query: { ...state.query, search: e.target.value },
+                  },
+                })
+              }
             />
           </div>
           <button className='avatar-container'>

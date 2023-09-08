@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { BaseButton, BaseButtonOutline, styledEndMark } from '../defaults';
+import {
+  BaseButton,
+  BaseButtonOutline,
+  Button_Mono_A,
+  StyledCornerButton,
+  styledEndMark,
+} from '../defaults';
 
 export const _notesList = styled.section`
   width: 100%;
@@ -7,39 +13,63 @@ export const _notesList = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-
-  .error-container {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    place-content: center;
-    place-items: center;
-
-    .fetch-error-message {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      margin: 20px 0;
-      color: rgb(${({ theme }) => theme.error});
-      font-weight: 500;
-      font-size: 1.1rem;
-      line-height: 1.4rem;
-      align-self: flex-end;
-
-      button {
-        ${BaseButton}
-      }
-    }
-  }
+  max-width: 300px;
+  background: none;
 
   .header-container {
     width: 100%;
     display: flex;
     flex-direction: column;
 
+    h2 {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      font-weight: 500;
+      margin: 0 auto;
+      text-transform: capitalize;
+    }
+
     .form-container {
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 3px;
+
+      button {
+        ${StyledCornerButton}
+        padding: 0;
+        border: none;
+      }
+
+      .search-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        svg {
+          width: 20px;
+          height: 20px;
+          color: rgba(${({ theme }) => theme.font}, 0.5);
+        }
+
+        input {
+          width: 100%;
+          height: fit-content;
+          border: 1px solid red;
+          padding: 5px;
+          line-height: 1.2rem;
+          font-weight: 400;
+          outline: none;
+          background: none;
+          color: rgb(${({ theme }) => theme.font});
+
+          ::placeholder {
+            color: rgba(${({ theme }) => theme.font}, 0.8);
+            font-size: 0.9rem;
+          }
+        }
+      }
     }
 
     .filters-container {
@@ -57,10 +87,6 @@ export const _notesList = styled.section`
         background: transparent;
       }
     }
-  }
-
-  .container-items__end-mark {
-    ${styledEndMark}
   }
 
   .fluent-button {
@@ -92,9 +118,6 @@ export const _notesList = styled.section`
       }
     }
   }
-  span {
-    padding: 0;
-  }
 
   .empty-notes-container {
     width: 100%;
@@ -102,5 +125,34 @@ export const _notesList = styled.section`
     display: grid;
     place-items: center center;
     align-items: center center;
+  }
+
+  .error-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    place-items: center;
+
+    .fetch-error-message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+      color: rgb(${({ theme }) => theme.error});
+      font-weight: 500;
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+      align-self: flex-end;
+
+      button {
+        ${BaseButton}
+      }
+    }
+  }
+
+  .container-items__end-mark {
+    ${styledEndMark}
   }
 `;

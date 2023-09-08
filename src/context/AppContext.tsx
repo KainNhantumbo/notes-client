@@ -49,11 +49,11 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   const navigate: NavigateFunction = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const validateAuth = async (): Promise<void> => {
+  const authenticateUser = async (): Promise<void> => {
     try {
       const { data } = await fetch<TAuth>({
         method: 'get',
-        url: '/api/v1/auth/refresh',
+        url: '/api/v1/auth/default/refresh',
         withCredentials: true,
       });
       dispatch({
@@ -73,7 +73,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       (error: AxiosError): Promise<never> => {
         const status = Number(error?.response?.status);
         if (status > 400 && status < 404) {
-          validateAuth().catch((error) => {
+          authenticateUser().catch((error) => {
             console.error(error?.response?.data?.message ?? error);
             navigate('/auth/sign-in', { replace: true });
           });
@@ -88,21 +88,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
     });
   }
 
-  const authenticateUser = async (): Promise<void> => {
-    try {
-      const { data } = await fetch<TAuth>({
-        method: 'get',
-        url: '/api/v1/auth/default/refresh',
-        withCredentials: true,
-      });
-      dispatch({
-        type: actions.AUTH,
-        payload: { ...state, auth: { ...data } },
-      });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
-    }
-  };
+
 
   const computeInnerWindowSize = (): void => {
     dispatch({
@@ -222,7 +208,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   };
 
   useEffect(() => {
-    authenticateUser();
+    authenticateUser()
     computeInnerWindowSize();
     window.addEventListener('resize', computeInnerWindowSize);
     return () => {
@@ -260,7 +246,7 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
 
   useEffect((): (() => void) => {
     const timer = setTimeout((): void => {
-      validateAuth();
+      authenticateUser();
     }, 1000 * 60 * 4);
     return (): void => clearTimeout(timer);
   }, [state.auth]);

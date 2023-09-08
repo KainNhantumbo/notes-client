@@ -25,6 +25,7 @@ export type TState = {
   query: TQuery;
   settings: TSettings;
   user: TUser;
+  navigation_drawer: { status: boolean };
 };
 
 export type TAction = { type: string; payload: TState };
