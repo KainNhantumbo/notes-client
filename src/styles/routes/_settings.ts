@@ -98,7 +98,6 @@ export const _settings = styled.main`
         gap: 12px;
         justify-content: space-between;
 
-
         @media screen and (max-width: 390px) {
           flex-direction: column;
         }
@@ -144,6 +143,22 @@ export const _settings = styled.main`
             .clear-image {
               ${BaseButtonOutline}
             }
+          }
+        }
+      }
+
+      .password-settings {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .save-container {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          button {
+            ${BaseButton}
           }
         }
       }
