@@ -5,7 +5,7 @@ export const _customTools = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+  /* border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15); */
   padding-bottom: 12px;
 
   .form-container {

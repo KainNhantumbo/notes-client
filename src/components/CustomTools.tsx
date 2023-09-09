@@ -3,7 +3,7 @@ import {
   BookmarkIcon,
   MixerHorizontalIcon,
 } from '@radix-ui/react-icons';
-import { Tag } from '@/@types';
+import { Tag } from '@/types';
 import { FC, useState } from 'react';
 import actions from '@/data/actions';
 import { m as motion } from 'framer-motion';
@@ -56,7 +56,7 @@ export const CustomTools: FC = (): JSX.Element => {
       </div>
 
       <div className='properties-container'>
-        <button
+        {/* <button
           className='favorite'
           onClick={() =>
             dispatch({
@@ -84,12 +84,12 @@ export const CustomTools: FC = (): JSX.Element => {
               <span>Bookmark</span>
             </>
           )}
-        </button>
+        </button> */}
 
         {/* <div className='priority-selector'></div>
         <div className='status-selector'></div> */}
 
-        <div
+        {/* <div
           className='color-selector'
           onClick={() => setDisplayColorPicker(false)}>
           <motion.button
@@ -123,8 +123,8 @@ export const CustomTools: FC = (): JSX.Element => {
               }}
             />
           ) : null}
-        </div>
-        <div className='tags-container'></div>
+        </div> */}
+        {/* <div className='tags-container'></div> */}
       </div>
     </Container>
   );

@@ -17,7 +17,7 @@ import { _settings as Container } from '@/styles/routes/_settings';
 import { app_metadata } from '@/data/app-data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import Compressor from 'compressorjs';
-import { InputEvents } from '@/@types';
+import { InputEvents } from '@/types';
 
 const Settings: FC = (): JSX.Element => {
   const { state, dispatch, fetchAPI } = useAppContext();
@@ -253,11 +253,11 @@ const Settings: FC = (): JSX.Element => {
               <h2>Themes</h2>
               <div className='content-container'>
                 <h3>
-                  <span>Choose the global UI Theme and the editor color schemes</span>
+                  <span>
+                    Choose the global UI Theme and the editor color schemes
+                  </span>
                 </h3>
-                <div className='data-container'>
-                  
-                </div>
+                <div className='data-container'></div>
               </div>
             </section>
 

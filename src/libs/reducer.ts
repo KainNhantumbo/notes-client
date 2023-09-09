@@ -1,11 +1,15 @@
 import actions from '../data/actions';
-import { TAction, TState } from '@/@types/reducer';
+import { TAction, TState } from '@/types/reducer';
 
 const initialState: TState = {
   notes: [],
   folders: [],
   isLogoutModal: false,
-  navigation_drawer: { status: false },
+  navigation: {
+    is_navigation_drawer: false,
+    is_editor_container: true,
+    is_notes_list: true,
+  },
   isPropertiesModal: false,
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
@@ -68,7 +72,7 @@ const initialState: TState = {
         font_size: 16,
         line_height: 1.6,
         font_family:
-          "Menlo, Consolas, 'JetBrains Mono', 'Liberation Mono', 'Courier New', ui-monospace, monospace",
+          "Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono', 'Courier New', ui-monospace, monospace",
         font_weight: 400,
       },
       editing: {
@@ -131,8 +135,8 @@ const reducer = (state: TState, action: TAction): TState => {
     case actions.USER:
       return { ...state, user: action.payload.user };
 
-    case actions.NAVIGATION_DRAWER:
-      return { ...state, navigation_drawer: action.payload.navigation_drawer };
+    case actions.NAVIGATION:
+      return { ...state, navigation: action.payload.navigation };
 
     default:
       return { ...state };

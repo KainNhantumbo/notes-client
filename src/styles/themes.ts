@@ -1,4 +1,4 @@
-import type { Theme } from '../@types';
+import type { Theme } from '../types';
 
 export const light_default: Theme = {
   error: '253, 56, 79',

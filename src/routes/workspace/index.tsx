@@ -1,4 +1,4 @@
-import { TNote } from '@/@types';
+import { TNote } from '@/types';
 import actions from '@/data/actions';
 import { FC, useEffect } from 'react';
 import Layout from '@/components/Layout';
@@ -54,15 +54,16 @@ const Workspace: FC = (): JSX.Element => {
 
   return (
     <Layout
-      renderHeader
       metadata={{
         title: `${app_metadata.appName} | ${state.auth.name} Workspace`,
         updatedAt: new Date().toISOString(),
       }}>
       <Container>
-        {/* <NavigationDrawer/> */}
-        <NotesList {...{ isError, isLoading, error, refetch }} />
-        <EditorContainer />
+        <NavigationDrawer />
+        {state.navigation.is_notes_list ? (
+          <NotesList {...{ isError, isLoading, error, refetch }} />
+        ) : null}
+        {state.navigation.is_editor_container ? <EditorContainer /> : null}
       </Container>
     </Layout>
   );

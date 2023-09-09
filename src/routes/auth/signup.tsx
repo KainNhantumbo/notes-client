@@ -12,7 +12,7 @@ import { app_metadata } from '@/data/app-data';
 import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
 import { FC, useEffect, useState } from 'react';
-import { InputEvents, SubmitEvent } from '@/@types';
+import { InputEvents, SubmitEvent } from '@/types';
 import media_login from '@/assets/media-login.jpg';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { _signup as Container } from '@/styles/routes/_signup';

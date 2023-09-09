@@ -1,21 +1,29 @@
 import {
+  ArchiveIcon,
   BookmarkIcon,
-  CardStackIcon,
   DotsHorizontalIcon,
+  DrawingPinIcon,
   ExitIcon,
   GearIcon,
+  HamburgerMenuIcon,
   PlusIcon,
   TrashIcon,
 } from '@radix-ui/react-icons';
-import { FC } from 'react';
+import { useNavigate, NavigateFunction } from 'react-router-dom';
+import { FC, useState } from 'react';
 import actions from '../data/actions';
 import { useAppContext } from '../context/AppContext';
-import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
+import { m as motion, AnimatePresence } from 'framer-motion';
+import logo from '@/assets/logo-192x192.png';
+import { app_metadata } from '@/data/app-data';
+import * as Collapsible from '@radix-ui/react-collapsible';
+import { RowSpacingIcon, Cross2Icon } from '@radix-ui/react-icons';
 
 export const NavigationDrawer: FC = (): JSX.Element => {
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch, fetchAPI } = useAppContext();
+  const [openCollapsible, setOpenCollapsible] = useState<boolean>(false);
 
   const handleLogout = (): void => {
     dispatch({
@@ -31,7 +39,7 @@ export const NavigationDrawer: FC = (): JSX.Element => {
             try {
               await fetchAPI({
                 method: 'post',
-                url: '/api/v1/auth/logout',
+                url: '/api/v1/auth/default/logout',
                 withCredentials: true,
               });
               dispatch({
@@ -70,7 +78,7 @@ export const NavigationDrawer: FC = (): JSX.Element => {
       },
       {
         label: 'Folders',
-        icon: CardStackIcon,
+        icon: ArchiveIcon,
         anchor: `/workspace?tab=folders&folder=none`,
         classname: 'folders',
         execute: () => {
@@ -104,7 +112,7 @@ export const NavigationDrawer: FC = (): JSX.Element => {
       },
       {
         label: 'Tags',
-        icon: TrashIcon,
+        icon: DrawingPinIcon,
         anchor: `/workspace?tab=tags&folder=tags`,
         classname: 'tags',
         execute: () => {
@@ -130,47 +138,97 @@ export const NavigationDrawer: FC = (): JSX.Element => {
   };
 
   return (
-    <Container>
-      <div className='wrapper-container'>
-        <section className='top-container'>
-          {navigation.top.map((action, index) => (
-            <div
-              key={String(index)}
-              className={`element ${action.classname}`}
-              onClick={() => action.execute()}>
-              <div className='header-container'>
-                <h3>
-                  <action.icon />
-                  <span>{action.label}</span>
-                </h3>
-                <button></button>
+    <AnimatePresence>
+      {state.navigation.is_navigation_drawer && (
+        <Container>
+          <motion.div
+            className='main-container'
+            initial={{ x: 0 }}
+            animate={{
+              translateX: 0,
+            }}
+            exit={{ translateX: -300, transition: { duration: 0.25 } }}
+            transition={{ duration: 0.5 }}>
+            <section
+              className='header-container'
+              onClick={() => {
+                dispatch({
+                  type: actions.NAVIGATION,
+                  payload: {
+                    ...state,
+                    navigation: {
+                      ...state.navigation,
+                      is_navigation_drawer: false,
+                    },
+                  },
+                });
+              }}>
+              <div className='logo-container'>
+                <img
+                  src={logo}
+                  loading='lazy'
+                  decoding='async'
+                  alt={`${app_metadata.appName} logo image`}
+                  aria-placeholder={`${app_metadata.appName} logo image`}
+                />
+                <h3>{app_metadata.appName.toLowerCase()}</h3>
+              </div>
+              <HamburgerMenuIcon />
+            </section>
+
+            <motion.ul>
+            <Collapsible.Root className="CollapsibleRoot" open={openCollapsible} onOpenChange={setOpenCollapsible}>
+              
+            </Collapsible.Root>
+              <div className='top-container'>
+                {navigation.top.map((action, index) => (
+                  <li
+                    key={String(index)}
+                    className={`element ${action.classname} ${
+                      location.search.includes(
+                        action.label.toLowerCase().split(' ').join('-')
+                      )
+                        ? 'active-element'
+                        : ''
+                    }`}
+                    onClick={() => action.execute()}>
+                    <div className='item-container'>
+                      <h3>
+                        <action.icon />
+                        <span>{action.label}</span>
+                      </h3>
+                    </div>
+
+                    {action.children ? (
+                      <div className='children-container'>
+                        {action.children.map((child, index) => (
+                          <p key={String(index)}></p>
+                        ))}
+                      </div>
+                    ) : null}
+                  </li>
+                ))}
               </div>
 
-              {action.children ? (
-                <div className='children-container'>
-                  {action.children.map((child, index) => (
-                    <p key={String(index)}></p>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ))}
-        </section>
-
-        <section className='bottom-container'>
-          {navigation.bottom.map((action, index) => (
-            <button
-              key={String(index)}
-              className={`element`}
-              onClick={() => action.execute()}>
-              <h3>
-                <action.icon />
-                <span>{action.label}</span>
-              </h3>
-            </button>
-          ))}
-        </section>
-      </div>
-    </Container>
+              <div className='bottom-container'>
+                {navigation.bottom.map((action, index) => (
+                  <button
+                    key={String(index)}
+                    className={`element`}
+                    onClick={() => action.execute()}>
+                    <h3>
+                      <action.icon />
+                      <span>{action.label}</span>
+                    </h3>
+                  </button>
+                ))}
+              </div>
+            </motion.ul>
+          </motion.div>
+        </Container>
+      )}
+    </AnimatePresence>
   );
 };
+
+// {}

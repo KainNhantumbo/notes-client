@@ -2,7 +2,7 @@ import fetch from '@/config/client';
 import { m as motion } from 'framer-motion';
 import Layout from '@/components/Layout';
 import { useState, useEffect, FC } from 'react';
-import { InputEvents, SubmitEvent } from '@/@types';
+import { InputEvents, SubmitEvent } from '@/types';
 import { app_metadata } from '@/data/app-data';
 import { PulseLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';

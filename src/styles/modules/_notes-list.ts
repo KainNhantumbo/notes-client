@@ -22,7 +22,7 @@ export const _notesList = styled.section`
     padding-bottom: 12px;
     gap: 12px;
     background: rgb(${({ theme }) => theme.foreground});
-    z-index: 2000;
+    z-index: 200;
 
     h2 {
       font-size: 1.2rem;
@@ -68,44 +68,16 @@ export const _notesList = styled.section`
     }
   }
 
-  .fluent-button {
-    z-index: 3000;
-    position: fixed;
-    bottom: 20px;
-    right: 0;
-    width: 32px;
-    height: 32px;
-    margin-top: 8px;
-
-    border-radius: 10px;
-    place-content: center;
-    position: relative;
-    cursor: pointer;
-    outline: none;
-    
-    svg {
-      width: 24px;
-      height: 24px;
-      color: rgb(${({ theme }) => theme.primary});
-      
-      :hover {
-        transition: all 200ms ease-in-out;
-        color: rgb(${({ theme }) => theme.secondary});
-      }
-    }
-  }
-  
   .compose-button {
-    z-index: 3000;
+    z-index: 200;
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 30px;
+    bottom: 50px;
     ${StyledCornerButton}
     border-radius: 50%;
     padding: 8px;
     background: rgba(${({ theme }) => theme.primary}, 0.2);
     backdrop-filter: blur(10px);
-    
   }
 
   .empty-notes-container {

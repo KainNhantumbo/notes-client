@@ -3,7 +3,6 @@ import actions from '@/data/actions';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { useAppContext } from '../../context/AppContext';
 import { _prompt as Container } from '../../styles/modules/_prompt';
-import { ArrowLeftIcon, Cross2Icon } from '@radix-ui/react-icons';
 
 const PromptModal: FC = (): JSX.Element => {
   const { state, dispatch } = useAppContext();

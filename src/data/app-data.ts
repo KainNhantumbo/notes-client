@@ -7,7 +7,7 @@ import {
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
-import { TOption } from '@/@types';
+import { TOption } from '@/types';
 
 export const app_metadata = {
   appName: Package.metadata.name,
@@ -108,8 +108,6 @@ export const statusOptions: TOption[] = [
   { value: 'cancelled', label: 'Cancelled' },
   { value: 'completed', label: 'Completed' },
 ];
-
-
 
 export const editorThemeOptions: string[] = [
   'abcdef',

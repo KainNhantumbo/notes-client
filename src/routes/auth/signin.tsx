@@ -6,7 +6,7 @@ import Layout from '@/components/Layout';
 import { app_metadata } from '@/data/app-data';
 import media_login from '@/assets/media-login.jpg';
 import { useAppContext } from '@/context/AppContext';
-import { InputEvents, SubmitEvent, TAuth } from '@/@types';
+import { InputEvents, SubmitEvent, TAuth } from '@/types';
 import { _signin as Container } from '@/styles/routes/_signin';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';

@@ -47,7 +47,7 @@ export const Editor: FC = (): JSX.Element => {
         value={state.currentNote.content}
         previewProps={{}}
         // @ts-ignore
-        theme={editorTheme[state.settings.theme.editor_theme]}
+        // theme={editorTheme[state.settings.theme.editor_theme]}
         extensions={usableExtensions}
         hideToolbar={state.settings.editor.editing.enable_toolbar}
         basicSetup={{
@@ -66,7 +66,7 @@ export const Editor: FC = (): JSX.Element => {
             },
           });
         }}
-        height={String(state.windowInnerSize.height - 250 + 'px')}
+        height={String(state.windowInnerSize.height - 92 + 'px')}
         placeholder={'Start writing a note...'}
         title='Start writing a note...'
       />

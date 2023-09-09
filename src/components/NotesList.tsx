@@ -4,14 +4,11 @@ import {
   RefetchQueryFilters,
 } from '@tanstack/react-query';
 import {
-  AvatarIcon,
   CaretSortIcon,
   DotsHorizontalIcon,
-  DropdownMenuIcon,
   HamburgerMenuIcon,
   MixIcon,
   Pencil2Icon,
-  ReloadIcon,
 } from '@radix-ui/react-icons';
 import { FC, useEffect } from 'react';
 import actions from '../data/actions';
@@ -19,7 +16,7 @@ import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
-import { TNote } from '@/@types';
+import { TNote } from '@/types';
 import { useSearchParams } from 'react-router-dom';
 import { MoonLoader, PulseLoader, RingLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
@@ -58,12 +55,12 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
             whileTap={{ scale: 0.8 }}
             onClick={() =>
               dispatch({
-                type: actions.NAVIGATION_DRAWER,
+                type: actions.NAVIGATION,
                 payload: {
                   ...state,
-                  navigation_drawer: {
-                    ...state.navigation_drawer,
-                    status: true,
+                  navigation: {
+                    ...state.navigation,
+                    is_navigation_drawer: true,
                   },
                 },
               })

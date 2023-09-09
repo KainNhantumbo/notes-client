@@ -3,7 +3,7 @@ import Footer from './Footer';
 import Toast from './modals/Toast';
 import Cookies from './modals/Cookies';
 import PromptModal from './modals/Prompt';
-import type { THeadProps } from '../@types';
+import type { THeadProps } from '../types';
 import { FC, ReactNode, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';

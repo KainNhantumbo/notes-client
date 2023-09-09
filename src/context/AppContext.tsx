@@ -7,13 +7,13 @@ import {
   Dispatch,
   useEffect,
 } from 'react';
-import { TAuth, TNote, TUser } from '@/@types';
+import { TAuth, TNote, TUser } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/data/actions';
 import ThemeContext from './ThemeContext';
 import { initialState, reducer } from '../libs/reducer';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { TAction, TState } from '@/@types/reducer';
+import { TAction, TState } from '@/types/reducer';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 

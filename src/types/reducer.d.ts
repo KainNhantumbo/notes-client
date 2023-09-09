@@ -2,13 +2,14 @@ import {
   TAuth,
   TFolder,
   TModalProps,
+  TNavigation,
   TNote,
   TQuery,
   TSettings,
   TSignIn,
   TSignUp,
   TUser,
-} from './index';
+} from '@/types/index';
 
 export type TState = {
   auth: TAuth;
@@ -25,7 +26,7 @@ export type TState = {
   query: TQuery;
   settings: TSettings;
   user: TUser;
-  navigation_drawer: { status: boolean };
+  navigation: TNavigation;
 };
 
 export type TAction = { type: string; payload: TState };
