@@ -3,7 +3,6 @@ import actions from '@/data/actions';
 import { FC, useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
-import { useQuery } from '@tanstack/react-query';
 import { app_metadata } from '@/data/app-data';
 import NotesList from '@/components/NotesList';
 import { useAppContext } from '@/context/AppContext';

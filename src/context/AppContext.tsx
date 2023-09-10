@@ -15,7 +15,6 @@ import { initialState, reducer } from '../libs/reducer';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { TAction, TState } from '@/types/reducer';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 type TProps = { children: ReactNode };
 
@@ -35,14 +34,6 @@ const context = createContext<TContext>({
   syncCurrentNote: async () => {},
   syncSettings: async () => {},
   syncUserData: async () => {},
-});
-
-const queryClient: QueryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      networkMode: 'always',
-    },
-  },
 });
 
 const AppContext: FC<TProps> = ({ children }): JSX.Element => {
@@ -247,19 +238,17 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   }, [state.auth]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <context.Provider
-        value={{
-          state,
-          dispatch,
-          fetchAPI,
-          syncCurrentNote,
-          syncSettings,
-          syncUserData,
-        }}>
-        <ThemeContext>{children}</ThemeContext>
-      </context.Provider>
-    </QueryClientProvider>
+    <context.Provider
+      value={{
+        state,
+        dispatch,
+        fetchAPI,
+        syncCurrentNote,
+        syncSettings,
+        syncUserData,
+      }}>
+      <ThemeContext>{children}</ThemeContext>
+    </context.Provider>
   );
 };
 
