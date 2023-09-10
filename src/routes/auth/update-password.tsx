@@ -1,7 +1,7 @@
 import fetch from '@/config/client';
 import { m as motion } from 'framer-motion';
-import Layout from '@/components/Layout';
-import { useState, useEffect, FC } from 'react';
+import { Layout } from '@/components/Layout';
+import { useState, useEffect } from 'react';
 import { InputEvents, SubmitEvent } from '@/types';
 import { app_metadata } from '@/data/app-data';
 import { PulseLoader } from 'react-spinners';
@@ -9,7 +9,7 @@ import { DefaultTheme, useTheme } from 'styled-components';
 import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
 import { LockClosedIcon } from '@radix-ui/react-icons';
 
-const UpdatePassword: FC = (): JSX.Element => {
+export function UpdatePassword() {
   const theme: DefaultTheme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
@@ -140,6 +140,4 @@ const UpdatePassword: FC = (): JSX.Element => {
       </Container>
     </Layout>
   );
-};
-
-export default UpdatePassword;
+}

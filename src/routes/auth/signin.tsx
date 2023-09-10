@@ -1,8 +1,8 @@
 import fetch from '@/config/client';
 import actions from '@/data/actions';
 import { m as motion } from 'framer-motion';
-import { FC, useEffect, useState } from 'react';
-import Layout from '@/components/Layout';
+import { useEffect, useState } from 'react';
+import { Layout } from '@/components/Layout';
 import { app_metadata } from '@/data/app-data';
 import media_login from '@/assets/media-login.jpg';
 import { useAppContext } from '@/context/AppContext';
@@ -11,7 +11,7 @@ import { _signin as Container } from '@/styles/routes/_signin';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 
-const SignIn: FC = (): JSX.Element => {
+export function SignIn() {
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch } = useAppContext();
   const [loading, setLoading] = useState<boolean>(false);
@@ -155,6 +155,4 @@ const SignIn: FC = (): JSX.Element => {
       </Container>
     </Layout>
   );
-};
-
-export default SignIn;
+}

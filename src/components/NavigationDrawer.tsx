@@ -11,7 +11,7 @@ import {
   TrashIcon,
 } from '@radix-ui/react-icons';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import actions from '../data/actions';
 import { useAppContext } from '../context/AppContext';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
@@ -20,7 +20,7 @@ import logo from '@/assets/logo-192x192.png';
 import { app_metadata } from '@/data/app-data';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
-export const NavigationDrawer: FC = (): JSX.Element => {
+export function NavigationDrawer() {
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch, fetchAPI } = useAppContext();
   const [openCollapsible, setOpenCollapsible] = useState<boolean>(false);
@@ -265,4 +265,4 @@ export const NavigationDrawer: FC = (): JSX.Element => {
       )}
     </AnimatePresence>
   );
-};
+}

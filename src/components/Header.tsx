@@ -12,13 +12,13 @@ import {
   HamburgerMenuIcon,
 } from '@radix-ui/react-icons';
 import logo from '@/assets/logo-192x192.png';
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _header as Container } from '../styles/modules/_header';
 import { app_metadata, navigationAnchors } from '../data/app-data';
 
-const Header: FC = (): JSX.Element => {
+export function Header() {
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const location: Location = useLocation();
@@ -125,6 +125,4 @@ const Header: FC = (): JSX.Element => {
       </div>
     </Container>
   );
-};
-
-export default Header;
+}

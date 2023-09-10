@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import { app_metadata } from '../../data/app-data';
-import { useState, useEffect, FC } from 'react';
+import { app_metadata } from '@/data/app-data';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, m as motion } from 'framer-motion';
-import { _cookies as Container } from '../../styles/modules/_cookies';
-import { CheckIcon } from '@radix-ui/react-icons';
+import { _cookies as Container } from '@/styles/modules/_cookies';
 
-const Cookies: FC = (): JSX.Element => {
+export function Cookies() {
   const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
 
   // controls the life cicle of the component
@@ -64,6 +63,4 @@ const Cookies: FC = (): JSX.Element => {
       )}
     </AnimatePresence>
   );
-};
-
-export default Cookies;
+}

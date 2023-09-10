@@ -1,10 +1,9 @@
-import { FC } from 'react';
 import actions from '@/data/actions';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { useAppContext } from '../../context/AppContext';
-import { _prompt as Container } from '../../styles/modules/_prompt';
+import { useAppContext } from '@/context/AppContext';
+import { _prompt as Container } from '@/styles/modules/_prompt';
 
-const PromptModal: FC = (): JSX.Element => {
+export function PromptModal() {
   const { state, dispatch } = useAppContext();
 
   return (
@@ -64,6 +63,4 @@ const PromptModal: FC = (): JSX.Element => {
       )}
     </AnimatePresence>
   );
-};
-
-export default PromptModal;
+}

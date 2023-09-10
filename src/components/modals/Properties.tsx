@@ -8,15 +8,15 @@ import {
   TokensIcon,
   TrashIcon,
 } from '@radix-ui/react-icons';
-import { FC, JSX } from 'react';
+import moment from 'moment';
 import actions from '@/data/actions';
 import { useAppContext } from '@/context/AppContext';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
-import moment from 'moment';
 
-const Properties: FC = (): JSX.Element => {
+export function Properties() {
   const { state, dispatch } = useAppContext();
+
   return (
     <AnimatePresence>
       {state.isPropertiesModal && (
@@ -87,7 +87,11 @@ const Properties: FC = (): JSX.Element => {
                     </h3>
                     <div className='tags-container'>
                       {state.currentNote.metadata.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
+                        <span
+                          style={{ backgroundColor: tag.color }}
+                          key={tag.id}>
+                          {tag.value}
+                        </span>
                       ))}
                     </div>
                   </div>
@@ -134,6 +138,4 @@ const Properties: FC = (): JSX.Element => {
       )}
     </AnimatePresence>
   );
-};
-
-export default Properties;
+}

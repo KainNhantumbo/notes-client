@@ -82,6 +82,8 @@ export const _settings = styled.main`
       font-size: 1rem;
       font-weight: 500;
       line-height: 1.6rem;
+      border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+      padding-bottom: 2px;
     }
 
     .content-container {
@@ -134,7 +136,7 @@ export const _settings = styled.main`
             border-radius: 8px;
             padding: 10px;
             border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
-            background: rgba(${({ theme }) => theme.font}, 0.1);
+            background: rgba(${({ theme }) => theme.font}, 0.02);
           }
 
           .actions-container {

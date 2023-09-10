@@ -4,7 +4,7 @@ import {
   MixerHorizontalIcon,
 } from '@radix-ui/react-icons';
 import { Tag } from '@/types';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import actions from '@/data/actions';
 import { m as motion } from 'framer-motion';
 import { TwitterPicker } from 'react-color';
@@ -12,7 +12,7 @@ import { colorsOptions } from '../data/app-data';
 import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
 
-export const CustomTools: FC = (): JSX.Element => {
+export function CustomTools() {
   const { state, dispatch, fetchAPI } = useAppContext();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
@@ -128,4 +128,4 @@ export const CustomTools: FC = (): JSX.Element => {
       </div>
     </Container>
   );
-};
+}

@@ -1,11 +1,10 @@
-import { FC } from 'react';
 import actions from '@/data/actions';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _toast as Container } from '@/styles/modules/_toast';
 
-const Toast: FC = (): JSX.Element => {
+export function Toast() {
   const { state, dispatch } = useAppContext();
 
   return (
@@ -93,6 +92,4 @@ const Toast: FC = (): JSX.Element => {
       )}
     </AnimatePresence>
   );
-};
-
-export default Toast;
+}

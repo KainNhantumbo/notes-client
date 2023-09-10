@@ -1,6 +1,5 @@
-import { FC } from 'react';
-import { app_metadata } from '../data/app-data';
-import { _error as Container } from '../styles/routes/_error';
+import { app_metadata } from '@/data/app-data';
+import { _error as Container } from '@/styles/routes/_error';
 
 interface IProps {
   title?: string | undefined;
@@ -9,7 +8,7 @@ interface IProps {
   retryFn: () => void;
 }
 
-const ErrorPage: FC<IProps> = (props): JSX.Element => {
+export function ErrorPage(props: IProps) {
   return (
     <Container>
       <section className='logo-container'>
@@ -29,6 +28,4 @@ const ErrorPage: FC<IProps> = (props): JSX.Element => {
       </section>
     </Container>
   );
-};
-
-export default ErrorPage;
+}

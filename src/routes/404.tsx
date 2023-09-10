@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import { app_metadata } from '../data/app-data';
 import { _error as Container } from '../styles/routes/_error';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-const NotFoundError: FC = (): JSX.Element => {
+export function NotFoundError() {
   const navigate: NavigateFunction = useNavigate();
 
   return (
@@ -23,6 +22,4 @@ const NotFoundError: FC = (): JSX.Element => {
       </section>
     </Container>
   );
-};
-
-export default NotFoundError;
+}

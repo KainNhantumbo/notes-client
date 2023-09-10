@@ -1,10 +1,10 @@
-import Header from './Header';
-import Footer from './Footer';
-import Toast from './modals/Toast';
-import Cookies from './modals/Cookies';
-import PromptModal from './modals/Prompt';
+import { Header } from './Header';
+import { Footer } from './Footer';
+import { Toast } from './modals/Toast';
+import { Cookies } from './modals/Cookies';
+import { PromptModal } from './modals/Prompt';
 import type { THeadProps } from '../types';
-import { FC, ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
@@ -16,12 +16,12 @@ interface IProps {
   metadata: THeadProps | undefined;
 }
 
-const Layout: FC<IProps> = ({
+export function Layout({
   children,
   metadata,
   renderHeader,
   renderFooter,
-}) => {
+}: IProps) {
   const { state } = useAppContext();
   const navigate: NavigateFunction = useNavigate();
   const location = useLocation();
@@ -48,6 +48,4 @@ const Layout: FC<IProps> = ({
       </LazyMotion>
     </MotionConfig>
   );
-};
-
-export default Layout;
+}

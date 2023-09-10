@@ -1,5 +1,5 @@
 import { Editor } from './Editor';
-import { CSSProperties, FC } from 'react';
+import { CSSProperties } from 'react';
 import { CustomTools } from './CustomTools';
 import { useAppContext } from '@/context/AppContext';
 import { DesktopIcon } from '@radix-ui/react-icons';
@@ -13,7 +13,7 @@ const styles: CSSProperties = {
   position: 'relative',
 };
 
-const EditorContainer: FC = (): JSX.Element => {
+export function EditorContainer() {
   const { state } = useAppContext();
   return (
     <div style={{ ...styles }}>
@@ -38,6 +38,6 @@ const EditorContainer: FC = (): JSX.Element => {
       )}
     </div>
   );
-};
+}
 
 export default EditorContainer;

@@ -6,18 +6,18 @@ import {
 import fetch from '@/config/client';
 import actions from '@/data/actions';
 import { m as motion } from 'framer-motion';
-import Layout from '@/components/Layout';
+import { Layout } from '@/components/Layout';
 import { PulseLoader } from 'react-spinners';
 import { app_metadata } from '@/data/app-data';
 import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InputEvents, SubmitEvent } from '@/types';
 import media_login from '@/assets/media-login.jpg';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { _signup as Container } from '@/styles/routes/_signup';
 
-const SignUp: FC = (): JSX.Element => {
+export function SignUp() {
   const theme: DefaultTheme = useTheme();
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch } = useAppContext();
@@ -223,6 +223,4 @@ const SignUp: FC = (): JSX.Element => {
       </Container>
     </Layout>
   );
-};
-
-export default SignUp;
+}

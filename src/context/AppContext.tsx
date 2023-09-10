@@ -1,5 +1,4 @@
 import {
-  FC,
   createContext,
   ReactNode,
   useContext,
@@ -7,10 +6,10 @@ import {
   Dispatch,
   useEffect,
 } from 'react';
-import { TAuth, TNote, TUser } from '@/types';
+import { TAuth, TNote, TSettings, TUser } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/data/actions';
-import ThemeContext from './ThemeContext';
+import { ThemeContext } from './ThemeContext';
 import { initialState, reducer } from '../libs/reducer';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { TAction, TState } from '@/types/reducer';
@@ -36,7 +35,7 @@ const context = createContext<TContext>({
   syncUserData: async () => {},
 });
 
-const AppContext: FC<TProps> = ({ children }): JSX.Element => {
+export function AppContext({ children }: TProps) {
   const navigate: NavigateFunction = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -90,6 +89,52 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
         },
       },
     });
+  };
+
+  const getInitialData = async (): Promise<void> => {
+    try {
+      const [settings, user] = await Promise.all([
+        fetchAPI<TSettings>({
+          method: 'get',
+          url: '/api/v1/settings',
+        }),
+        fetchAPI<TUser>({
+          method: 'get',
+          url: '/api/v1/users',
+        }),
+      ]);
+
+      dispatch({
+        type: actions.USER,
+        payload: { ...state, user: { ...state.user, ...user.data } },
+      });
+
+      dispatch({
+        type: actions.SETTINGS,
+        payload: {
+          ...state,
+          settings: { ...state.settings, ...settings.data },
+        },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Initial Data Sync Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to fetch your settings and user account data.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: getInitialData,
+          },
+        },
+      });
+    }
   };
 
   const syncUserData = async (): Promise<void> => {
@@ -250,8 +295,8 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
       <ThemeContext>{children}</ThemeContext>
     </context.Provider>
   );
-};
+}
 
-export default AppContext;
-
-export const useAppContext = (): TContext => useContext<TContext>(context);
+export function useAppContext() {
+  return useContext<TContext>(context);
+}

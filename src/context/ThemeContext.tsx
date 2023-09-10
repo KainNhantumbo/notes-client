@@ -4,7 +4,6 @@ import {
   ReactNode,
   useState,
   useEffect,
-  FC,
 } from 'react';
 import { Theme, TColorScheme } from '../types';
 import { GlobalStyles } from '../styles/globals';
@@ -25,7 +24,7 @@ const context = createContext<TContext>({
   changeColorScheme: () => {},
 });
 
-const ThemeContext: FC<TProps> = ({ children }): JSX.Element => {
+export function ThemeContext({ children }: TProps) {
   const { state, dispatch } = useAppContext();
   const [currentTheme, setCurrentTheme] = useState<Theme>(light_default);
   const [colorScheme, setColorScheme] = useState<TColorScheme>({
@@ -119,7 +118,8 @@ const ThemeContext: FC<TProps> = ({ children }): JSX.Element => {
       </context.Provider>
     </ThemeProvider>
   );
-};
+}
 
-export default ThemeContext;
-export const useThemeContext = (): TContext => useContext(context);
+export function useThemeContext() {
+  return useContext(context);
+}

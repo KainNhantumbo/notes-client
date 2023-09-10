@@ -91,7 +91,7 @@ const initialState: TState = {
   },
 };
 
-const reducer = (state: TState, action: TAction): TState => {
+function reducer(state: TState, action: TAction): TState {
   switch (action.type) {
     case actions.AUTH:
       return { ...state, auth: action.payload.auth };
@@ -141,6 +141,6 @@ const reducer = (state: TState, action: TAction): TState => {
     default:
       return { ...state };
   }
-};
+}
 
 export { initialState, reducer };

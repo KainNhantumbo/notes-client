@@ -1,7 +1,7 @@
 import fetch from '@/config/client';
 import { m as motion } from 'framer-motion';
-import Layout from '@/components/Layout';
-import { useState, useEffect, FC } from 'react';
+import { Layout } from '@/components/Layout';
+import { useState, useEffect } from 'react';
 import { SubmitEvent } from '@/types';
 import { app_metadata } from '@/data/app-data';
 import { PulseLoader } from 'react-spinners';
@@ -10,7 +10,7 @@ import { _recoveryPassword as Container } from '@/styles/routes/_recovery-paswor
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-const PasswordRecovery: FC = (): JSX.Element => {
+export function PasswordRecovery() {
   const theme: DefaultTheme = useTheme();
   const navigate: NavigateFunction = useNavigate();
   const [email, setEmail] = useState<string>('');
@@ -110,6 +110,4 @@ const PasswordRecovery: FC = (): JSX.Element => {
       </Container>
     </Layout>
   );
-};
-
-export default PasswordRecovery;
+}

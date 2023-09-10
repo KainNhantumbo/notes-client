@@ -26,7 +26,7 @@ export const app_metadata = {
 export const navigationAnchors = [
   { name: 'Overview', url: '/', alias: 'overview' },
   { name: 'Features', url: '/#features', alias: 'features' },
-  { name: 'About', url: '/docs/about', alias: 'about' },
+  { name: 'About', url: '/#about', alias: 'about' },
 ];
 
 export const app_features = [

@@ -4,12 +4,10 @@ import {
   MixIcon,
   Pencil2Icon,
 } from '@radix-ui/react-icons';
-import { FC } from 'react';
 import actions from '../data/actions';
 import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
-import { TNote } from '@/types';
 import { useSearchParams } from 'react-router-dom';
 import { MoonLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
@@ -23,7 +21,7 @@ interface IProps {
   refetch: () => Promise<void>;
 }
 
-const NotesList: FC<IProps> = (props): JSX.Element => {
+export function NotesList(props: IProps) {
   const theme: DefaultTheme = useTheme();
   const { state, dispatch, fetchAPI } = useAppContext();
   let [searchParams] = useSearchParams();
@@ -266,6 +264,4 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
       ) : null}
     </Container>
   );
-};
-
-export default NotesList;
+}

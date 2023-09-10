@@ -5,19 +5,22 @@ import {
   LockOpen2Icon,
   PersonIcon,
 } from '@radix-ui/react-icons';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { m as motion } from 'framer-motion';
-import actions from '../../data/actions';
-import Layout from '@/components/Layout';
-import { useAppContext } from '../../context/AppContext';
+import actions from '@/data/actions';
+import { Layout } from '@/components/Layout';
+import { useAppContext } from '@/context/AppContext';
 import { _settings as Container } from '@/styles/routes/_settings';
 import { app_metadata } from '@/data/app-data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import Compressor from 'compressorjs';
 import { InputEvents } from '@/types';
+import { SelectContainer } from '@/components/Select';
+import { useThemeContext } from '@/context/ThemeContext';
 
-const Settings: FC = (): JSX.Element => {
+export function Settings() {
   const { state, dispatch, fetchAPI } = useAppContext();
+  const { changeColorScheme } = useThemeContext();
   const navigate: NavigateFunction = useNavigate();
   const [profileImageFile, setProfileImageFile] = useState<FileList | null>(
     null
@@ -222,7 +225,6 @@ const Settings: FC = (): JSX.Element => {
     };
   }, [profileImageFile]);
 
-
   return (
     <Layout
       renderHeader
@@ -249,14 +251,49 @@ const Settings: FC = (): JSX.Element => {
             </section>
 
             <section className='group-container'>
-              <h2>Themes</h2>
+              <h2>UI Themes</h2>
               <div className='content-container'>
                 <h3>
                   <span>
                     Choose the global UI Theme and the editor color schemes
                   </span>
                 </h3>
-                <div className='data-container'></div>
+                <div className='data-container'>
+                  <SelectContainer
+                    data={[
+                      {
+                        label: 'Light Theme',
+                        value: 'light',
+                        onchange: () => {
+                          changeColorScheme({
+                            mode: 'manual',
+                            scheme: 'light',
+                          });
+                        },
+                      },
+                      {
+                        label: 'Dark Theme',
+                        value: 'dark',
+                        onchange: () => {
+                          changeColorScheme({ mode: 'manual', scheme: 'dark' });
+                        },
+                      },
+                      {
+                        label: 'Automatic',
+                        value: 'auto',
+                        onchange: () => {
+                          changeColorScheme({
+                            mode: 'auto',
+                            scheme: 'dark',
+                          });
+                        },
+                      },
+                    ]}
+                    placeholder='Choose a UI theme'
+                    label='Theme'
+                    key={'theme-selector'}
+                  />
+                </div>
               </div>
             </section>
 
@@ -516,6 +553,4 @@ const Settings: FC = (): JSX.Element => {
       </Container>
     </Layout>
   );
-};
-
-export default Settings;
+}

@@ -17,7 +17,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 
-export const Editor: FC = (): JSX.Element => {
+export function Editor() {
   const { colorScheme } = useThemeContext();
   const { state, dispatch } = useAppContext();
   const theme: DefaultTheme = useTheme();
@@ -85,4 +85,4 @@ export const Editor: FC = (): JSX.Element => {
       />
     </div>
   );
-};
+}
