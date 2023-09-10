@@ -1,6 +1,6 @@
 import { TNote } from '@/types';
 import actions from '@/data/actions';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { useQuery } from '@tanstack/react-query';
@@ -12,45 +12,44 @@ import { _workspace as Container } from '@/styles/routes/_workspace';
 
 const Workspace: FC = (): JSX.Element => {
   const { state, dispatch, fetchAPI } = useAppContext();
-
-  const getNotes = async (): Promise<TNote[]> => {
-    const { search, sort } = state.query;
-    const { data } = await fetchAPI<TNote[]>({
-      method: 'get',
-      url: `/api/v1/notes?${search ? `&search=${search}` : ''}${
-        sort ? `&sort=${sort}` : ''
-      }`,
-    });
-    return [...data];
-  };
-
-  const { error, data, refetch, isLoading, isError } = useQuery({
-    queryKey: ['notes'],
-    queryFn: getNotes,
+  const [queryStats, setQueryStats] = useState({
+    isLoading: false,
+    isError: false,
+    error: null,
   });
 
-  useEffect((): (() => void) => {
-    if (data) {
+  const getNotes = async (): Promise<void> => {
+    const { search, sort } = state.query;
+    try {
+      const { data } = await fetchAPI<TNote[]>({
+        method: 'get',
+        url: `/api/v1/notes?${search ? `&search=${search}` : ''}${
+          sort ? `&sort=${sort}` : ''
+        }`,
+      });
+
       dispatch({
         type: actions.NOTES,
         payload: { ...state, notes: [...data] },
       });
-    }
-
-    return (): void => {
-      dispatch({
-        type: actions.NOTES,
-        payload: { ...state, notes: [] },
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      setQueryStats({
+        isLoading: false,
+        isError: true,
+        error: error,
       });
-    };
-  }, [data]);
+    }
+  };
 
-  useEffect((): (() => void) => {
-    const timer = setTimeout(() => {
-      refetch({ queryKey: ['notes'] });
-    }, 500);
-    return (): void => clearTimeout(timer);
-  }, [state.query]);
+  useEffect((): (() => void) | void => {
+    if (state.auth.token) {
+      const timer = setTimeout(() => {
+        getNotes();
+      }, 500);
+      return (): void => clearTimeout(timer);
+    }
+  }, [state.query, state.auth.token]);
 
   return (
     <Layout
@@ -61,7 +60,7 @@ const Workspace: FC = (): JSX.Element => {
       <Container>
         <NavigationDrawer />
         {state.navigation.is_notes_list ? (
-          <NotesList {...{ isError, isLoading, error, refetch }} />
+          <NotesList {...{ ...queryStats, refetch: getNotes }} />
         ) : null}
         {state.navigation.is_editor_container ? <EditorContainer /> : null}
       </Container>

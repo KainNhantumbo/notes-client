@@ -1,18 +1,15 @@
-import {
-  BaseButton,
-  BaseButtonOutline,
-  StyledCornerButton,
-  styledEndMark,
-} from '../defaults';
+import { BaseButton, StyledCornerButton, styledEndMark } from '../defaults';
 import styled from 'styled-components';
 
 export const _notesList = styled.section`
   width: 100%;
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
   max-width: 300px;
   background: rgb(${({ theme }) => theme.foreground});
+  border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
 
   .header-container {
     width: 100%;
@@ -40,7 +37,7 @@ export const _notesList = styled.section`
       gap: 3px;
       padding: 5px 8px;
       background: rgb(${({ theme }) => theme.foreground});
-      border: 1px solid rgba(${({ theme }) => theme.black}, 0.05);
+      border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
       border-radius: 8px;
 
       button {
@@ -68,10 +65,38 @@ export const _notesList = styled.section`
     }
   }
 
+  .notes-list-container {
+    width: 100%;
+    height: 100%;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: rgb(${({ theme }) => theme.background});
+
+    .note-container {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+      background: rgb(${({ theme }) => theme.foreground});
+      padding: 12px 8px;
+      font-size: 0.9rem;
+      gap: 5px;
+      user-select: none;
+      cursor: pointer;
+
+      :hover {
+        transition: all 200ms ease-in-out;
+        border: 1px solid rgba(${({ theme }) => theme.primary_shade}, 0.1);
+      }
+    }
+  }
+
   .compose-button {
     z-index: 200;
-    position: absolute;
-    right: 30px;
+    position: fixed;
+    left: 230px;
     bottom: 50px;
     ${StyledCornerButton}
     border-radius: 50%;
@@ -140,9 +165,5 @@ export const _notesList = styled.section`
     button {
       ${BaseButton}
     }
-  }
-
-  .container-items__end-mark {
-    ${styledEndMark}
   }
 `;

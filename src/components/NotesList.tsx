@@ -1,41 +1,68 @@
 import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from '@tanstack/react-query';
-import {
   CaretSortIcon,
-  DotsHorizontalIcon,
   HamburgerMenuIcon,
   MixIcon,
   Pencil2Icon,
 } from '@radix-ui/react-icons';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import actions from '../data/actions';
 import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
-import { _notesList as Container } from '@/styles/modules/_notes-list';
 import { TNote } from '@/types';
 import { useSearchParams } from 'react-router-dom';
-import { MoonLoader, PulseLoader, RingLoader } from 'react-spinners';
+import { MoonLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
+import { _notesList as Container } from '@/styles/modules/_notes-list';
 
 interface IProps {
   isLoading: boolean;
   isError: boolean;
-  error: unknown;
-  refetch: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<TNote[], unknown>>;
+  error: any;
+  refetch: () => Promise<void>;
 }
 
 const NotesList: FC<IProps> = (props): JSX.Element => {
   const theme: DefaultTheme = useTheme();
-  const { state, dispatch } = useAppContext();
-  let [searchParams, setSearchParams] = useSearchParams();
+  const { state, dispatch, fetchAPI } = useAppContext();
+  let [searchParams] = useSearchParams();
 
-  useEffect(() => {}, [searchParams]);
+  const createNote = async (): Promise<void> => {
+    if (!state.auth.token) return undefined;
+    try {
+      const response = await fetchAPI<TNote>({
+        method: 'post',
+        url: '/api/v1/notes',
+        data: { title: 'New note' },
+      });
+
+      dispatch({
+        type: actions.CURRENT_NOTE,
+        payload: {
+          ...state,
+          currentNote: { ...state.currentNote, _id: response.data._id },
+        },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Note Sync Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to create your note. Check your internet connection and try again',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: createNote,
+          },
+        },
+      });
+    }
+  };
 
   return (
     <Container>
@@ -103,22 +130,9 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
         </div>
       </section>
 
-      {!props.isLoading && props.isError ? (
-        <section className='error-container'>
-          <h3>
-            {(props.error as any)?.response?.data?.message ||
-              (props.error as any)?.code ||
-              'An error occurred while fetching data'}
-          </h3>
-          <button onClick={() => props.refetch({ queryKey: ['notes'] })}>
-            <span>Try again</span>
-          </button>
-        </section>
-      ) : null}
-
       {state.notes.length > 0 && !props.isLoading && !props.isError ? (
         <>
-          <section className='notes-container'>
+          <section className='notes-list-container'>
             {state.notes.map((note) => (
               <div
                 key={note._id}
@@ -137,7 +151,9 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
                 <h3>
                   <span>{note.title}</span>
                 </h3>
-                <p>{note.content.slice(0, 40)}</p>
+                <p>
+                  {note?.content ? note.content.slice(0, 40) : '[Empty note]'}
+                </p>
                 {note.metadata.tags.length > 0 ? (
                   <div className='tags-container'>
                     {note.metadata.tags.map((tag) => (
@@ -152,13 +168,21 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
                 <span>{formatDate(note.updatedAt)}</span>
               </div>
             ))}
-            {state.notes.length > 0 && (
-              <div className='container-items__end-mark'>
-                <DotsHorizontalIcon />
-              </div>
-            )}
           </section>
         </>
+      ) : null}
+
+      {!props.isLoading && props.isError ? (
+        <section className='error-container'>
+          <h3>
+            {(props.error as any)?.response?.data?.message ||
+              (props.error as any)?.code ||
+              'An error occurred while fetching data'}
+          </h3>
+          <button onClick={() => props.refetch()}>
+            <span>Try again</span>
+          </button>
+        </section>
       ) : null}
 
       {!props.isError && !props.isLoading ? (
@@ -168,7 +192,8 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
           aria-placeholder='Compose a new note'
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.8 }}
-          className='compose-button'>
+          className='compose-button'
+          onClick={createNote}>
           <Pencil2Icon />
         </motion.button>
       ) : null}

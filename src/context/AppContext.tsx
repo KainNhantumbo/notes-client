@@ -166,24 +166,25 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   const syncCurrentNote = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
     try {
-      const { _id, ...data } = state.currentNote;
-      if (_id) {
-        await fetchAPI({ method: 'patch', url: `/api/v1/notes/${_id}`, data });
-      } else {
-        const response = await fetchAPI<TNote>({
-          method: 'post',
-          url: '/api/v1/notes',
-          data,
-        });
-
-        dispatch({
-          type: actions.CURRENT_NOTE,
-          payload: {
-            ...state,
-            currentNote: { ...state.currentNote, _id: response.data._id },
-          },
-        });
-      }
+      const { _id, created_by, ...currentNote } = state.currentNote;
+      const { data } = await fetchAPI<TNote>({
+        method: 'patch',
+        url: `/api/v1/notes/${_id}`,
+        data: { ...currentNote },
+      });
+      dispatch({
+        type: actions.NOTES,
+        payload: {
+          ...state,
+          notes: [
+            ...state.notes.map((note) => {
+              if (note._id === data._id) return { ...note, ...data };
+              return note;
+            }),
+          ],
+        },
+      });
+      console.log('Sync note: ', _id);
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       dispatch({

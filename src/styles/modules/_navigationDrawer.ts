@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StyledCornerButton } from '../defaults';
+import { BaseButtonOutline, StyledCornerButton } from '../defaults';
 
 export const _navigationDrawer = styled.section`
   top: 0;
@@ -24,6 +24,7 @@ export const _navigationDrawer = styled.section`
     flex-direction: column;
     backdrop-filter: blur(10px);
     z-index: 5000;
+    height: 100%;
   }
 
   .header-container {
@@ -51,7 +52,7 @@ export const _navigationDrawer = styled.section`
 
       h3 {
         text-transform: uppercase;
-        font-size: .8rem;
+        font-size: 0.8rem;
         font-weight: 600;
       }
     }
@@ -68,28 +69,23 @@ export const _navigationDrawer = styled.section`
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 100%;
 
       .element {
         width: 100%;
-        height: 100%;
         position: relative;
 
         :hover {
-          background: rgba(${({ theme }) => theme.font}, .1);
+          background: rgba(${({ theme }) => theme.font}, 0.1);
         }
 
         .item-container {
           padding: 3px 20px;
-
-          h3 {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            line-height: 1.6rem;
-          }
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.9rem;
+          line-height: 1.6rem;
         }
 
         :hover {
@@ -102,6 +98,28 @@ export const _navigationDrawer = styled.section`
         :hover {
           background: rgb(${({ theme }) => theme.background_shade});
         }
+      }
+    }
+
+    .bottom-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 20px 12px;
+      border-top: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 3000;
+      background: rgb(${({ theme }) => theme.foreground});
+
+      button {
+        ${BaseButtonOutline}
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
       }
     }
   }

@@ -1,6 +1,8 @@
 import {
   ArchiveIcon,
   BookmarkIcon,
+  BoxIcon,
+  CornersIcon,
   DotsHorizontalIcon,
   DrawingPinIcon,
   ExitIcon,
@@ -55,7 +57,14 @@ export const NavigationDrawer: FC = (): JSX.Element => {
                   },
                 },
               });
-              navigate('/auth/sign-in', { replace: true });
+              dispatch({
+                type: actions.PROMPT,
+                payload: {
+                  ...state,
+                  prompt: { ...state.prompt, status: false },
+                },
+              });
+              navigate('/auth/signin', { replace: true });
             } catch (error: any) {
               console.error(error?.response?.data?.message ?? error);
             }
@@ -123,16 +132,23 @@ export const NavigationDrawer: FC = (): JSX.Element => {
     ],
     bottom: [
       {
-        label: 'Settings',
+        label: 'Logout',
+        icon: ExitIcon,
+        execute: handleLogout,
+      },
+      {
+        label: 'Go Home',
+        icon: CornersIcon,
+        execute: () => {
+          navigate('/');
+        },
+      },
+      {
+        label: 'Open Settings',
         icon: GearIcon,
         execute: () => {
           navigate('/workspace/settings');
         },
-      },
-      {
-        label: 'Log out',
-        icon: ExitIcon,
-        execute: handleLogout,
       },
     ],
   };
@@ -177,38 +193,38 @@ export const NavigationDrawer: FC = (): JSX.Element => {
             </section>
 
             <motion.ul>
-            <Collapsible.Root className="CollapsibleRoot" open={openCollapsible} onOpenChange={setOpenCollapsible}>
-              
-            </Collapsible.Root>
-              <div className='top-container'>
+              <Collapsible.Root
+                open={openCollapsible}
+                onOpenChange={setOpenCollapsible}
+                className='top-container'>
                 {navigation.top.map((action, index) => (
                   <li
                     key={String(index)}
+                    onClick={() => action.execute()}
                     className={`element ${action.classname} ${
                       location.search.includes(
                         action.label.toLowerCase().split(' ').join('-')
                       )
                         ? 'active-element'
                         : ''
-                    }`}
-                    onClick={() => action.execute()}>
-                    <div className='item-container'>
+                    }`}>
+                    <Collapsible.Trigger asChild className='item-container'>
                       <h3>
                         <action.icon />
                         <span>{action.label}</span>
                       </h3>
-                    </div>
+                    </Collapsible.Trigger>
 
                     {action.children ? (
-                      <div className='children-container'>
+                      <Collapsible.Content className='children-container'>
                         {action.children.map((child, index) => (
-                          <p key={String(index)}></p>
+                          <p key={String(index)}>dsfijfiosdjfois</p>
                         ))}
-                      </div>
+                      </Collapsible.Content>
                     ) : null}
                   </li>
                 ))}
-              </div>
+              </Collapsible.Root>
 
               <div className='bottom-container'>
                 {navigation.bottom.map((action, index) => (
@@ -216,10 +232,8 @@ export const NavigationDrawer: FC = (): JSX.Element => {
                     key={String(index)}
                     className={`element`}
                     onClick={() => action.execute()}>
-                    <h3>
-                      <action.icon />
-                      <span>{action.label}</span>
-                    </h3>
+                    <action.icon />
+                    <span>{action.label}</span>
                   </button>
                 ))}
               </div>
