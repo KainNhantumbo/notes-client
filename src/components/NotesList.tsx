@@ -15,6 +15,7 @@ import { MoonLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+
 interface IProps {
   isLoading: boolean;
   isError: boolean;
@@ -159,43 +160,56 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
 
       {state.notes.length > 0 && !props.isLoading && !props.isError ? (
         <>
-          <section className='notes-list-container'>
-            {state.notes.map((note) => (
-              <div
-                key={note._id}
-                className={`note-container ${
-                  note._id === state.currentNote._id ? 'selected-note' : ''
-                }`}
-                onClick={() => {
-                  dispatch({
-                    type: actions.CURRENT_NOTE,
-                    payload: {
-                      ...state,
-                      currentNote: { ...note },
-                    },
-                  });
-                }}>
-                <h3>
-                  <span>{note.title ? note.title : '[Untitled]'}</span>
-                </h3>
-                <p>
-                  {note?.content ? note.content.slice(0, 40) : '[Empty note]'}
-                </p>
-                {note.metadata.tags.length > 0 ? (
-                  <div className='tags-container'>
-                    {note.metadata.tags.map((tag) => (
-                      <span
-                        style={{ backgroundColor: tag.color }}
-                        key={tag.value}>
-                        {tag.value}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-                <span>{formatDate(note.updatedAt)}</span>
-              </div>
-            ))}
-          </section>
+          <ScrollArea.Root className='notes-list-container'>
+            <ScrollArea.Viewport className='ScrollAreaViewport'>
+              {state.notes.map((note) => (
+                <div
+                  key={note._id}
+                  className={`note-container ${
+                    note._id === state.currentNote._id ? 'selected-note' : ''
+                  }`}
+                  onClick={() => {
+                    dispatch({
+                      type: actions.CURRENT_NOTE,
+                      payload: {
+                        ...state,
+                        currentNote: { ...note },
+                      },
+                    });
+                  }}>
+                  <h3>
+                    <span>{note.title ? note.title : '[Untitled]'}</span>
+                  </h3>
+                  <p>
+                    {note?.content ? note.content.slice(0, 40) : '[Empty note]'}
+                  </p>
+                  {note.metadata.tags.length > 0 ? (
+                    <div className='tags-container'>
+                      {note.metadata.tags.map((tag) => (
+                        <span
+                          style={{ backgroundColor: tag.color }}
+                          key={tag.value}>
+                          {tag.value}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                  <span>{formatDate(note.updatedAt)}</span>
+                </div>
+              ))}
+            </ScrollArea.Viewport>
+            <ScrollArea.Scrollbar
+              className='ScrollAreaScrollbar'
+              orientation='vertical'>
+              <ScrollArea.Thumb className='ScrollAreaThumb' />
+            </ScrollArea.Scrollbar>
+            <ScrollArea.Scrollbar
+              className='ScrollAreaScrollbar'
+              orientation='horizontal'>
+              <ScrollArea.Thumb className='ScrollAreaThumb' />
+            </ScrollArea.Scrollbar>
+            <ScrollArea.Corner className='ScrollAreaCorner' />
+          </ScrollArea.Root>
         </>
       ) : null}
 

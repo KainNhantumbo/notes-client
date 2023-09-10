@@ -69,22 +69,23 @@ export const _notesList = styled.section`
     width: 100%;
     height: 100%;
     padding: 12px 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 50px !important;
     background: rgb(${({ theme }) => theme.background});
 
     .note-container {
       display: flex;
       flex-direction: column;
+      gap: 5px;
       border-radius: 8px;
       border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
       background: rgb(${({ theme }) => theme.foreground});
       padding: 12px 8px;
       font-size: 0.9rem;
-      gap: 5px;
       user-select: none;
       cursor: pointer;
+      margin-bottom: 5px;
 
       :hover {
         transition: all 200ms ease-in-out;
@@ -94,6 +95,58 @@ export const _notesList = styled.section`
 
     .selected-note {
       background: rgba(${({ theme }) => theme.font}, 0.08);
+    }
+
+    overflow: hidden;
+    --scrollbar-size: 10px;
+
+    .ScrollAreaViewport {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+    }
+
+    .ScrollAreaScrollbar {
+      display: flex;
+      user-select: none;
+      /* disable browser handling of all panning and zooming gestures on touch devices */
+      touch-action: none;
+      padding: 2px;
+      background: transparent;
+      transition: background 160ms ease-out;
+    }
+    .ScrollAreaScrollbar:hover {
+      background: rgba(${({ theme }) => theme.font}, 0.05);
+    }
+    .ScrollAreaScrollbar[data-orientation='vertical'] {
+      width: 8px;
+    }
+    .ScrollAreaScrollbar[data-orientation='horizontal'] {
+      flex-direction: column;
+      height: 8px;
+    }
+
+    .ScrollAreaThumb {
+      flex: 1;
+      background: rgba(${({ theme }) => theme.font}, 0.3);
+      border-radius: 8px;
+      position: relative;
+    }
+    /* increase target size for touch devices https://www.w3.org/WAI/WCAG21/Understanding/target-size.html */
+    .ScrollAreaThumb::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    .ScrollAreaCorner {
+      background: rgba(${({ theme }) => theme.font}, 0.1);
     }
   }
 
