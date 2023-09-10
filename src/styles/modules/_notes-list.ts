@@ -68,7 +68,7 @@ export const _notesList = styled.section`
   .notes-list-container {
     width: 100%;
     height: 100%;
-    padding: 12px 8px;
+    padding: 8px;
     display: flex !important;
     flex-direction: column !important;
     gap: 50px !important;

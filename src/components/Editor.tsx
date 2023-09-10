@@ -79,10 +79,9 @@ export const Editor: FC = (): JSX.Element => {
           'codeBlock',
         ]}
         toolbarsMode={['preview']}
-        
+        placeholder={'Start writing...'}
         height={String(state.windowInnerSize.height - 92 + 'px')}
         maxHeight={String(state.windowInnerSize.height - 92 + 'px')}
-        placeholder={'Start writing...'}
       />
     </div>
   );
