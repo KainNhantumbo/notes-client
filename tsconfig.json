@@ -17,6 +17,7 @@
     /* Linting */
     "strict": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": false,
     "paths": {
       "@/*": ["./src/*"]
     }

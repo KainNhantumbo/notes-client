@@ -14,7 +14,7 @@ import { useSearchParams } from 'react-router-dom';
 import { MoonLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
-
+import * as ScrollArea from '@radix-ui/react-scroll-area';
 interface IProps {
   isLoading: boolean;
   isError: boolean;
@@ -30,17 +30,44 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
   const createNote = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
     try {
-      const response = await fetchAPI<TNote>({
+      const { data } = await fetchAPI<any>({
         method: 'post',
         url: '/api/v1/notes',
-        data: { title: 'New note' },
+        data: {},
       });
 
       dispatch({
         type: actions.CURRENT_NOTE,
+        payload: { ...state, currentNote: data },
+      });
+
+      // @ts-ignore
+      dispatch({
+        type: actions.NOTES,
         payload: {
           ...state,
-          currentNote: { ...state.currentNote, _id: response.data._id },
+          notes: [
+            {
+              _id: '',
+              title: '',
+              content: ``,
+              created_by: '',
+              metadata: {
+                folder_id: '',
+                color: '',
+                deleted: false,
+                bookmarked: false,
+                status: 'none',
+                priority: 'none',
+                reminder: { time: '', expired: false },
+                tags: [],
+              },
+              updatedAt: '',
+              createdAt: '',
+              ...data,
+            },
+            ...state.notes,
+          ],
         },
       });
     } catch (error: any) {
@@ -144,12 +171,12 @@ const NotesList: FC<IProps> = (props): JSX.Element => {
                     type: actions.CURRENT_NOTE,
                     payload: {
                       ...state,
-                      currentNote: { ...state.currentNote, ...note },
+                      currentNote: { ...note },
                     },
                   });
                 }}>
                 <h3>
-                  <span>{note.title}</span>
+                  <span>{note.title ? note.title : '[Untitled]'}</span>
                 </h3>
                 <p>
                   {note?.content ? note.content.slice(0, 40) : '[Empty note]'}

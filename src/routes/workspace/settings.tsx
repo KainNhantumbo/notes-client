@@ -1,12 +1,9 @@
 import {
-  AvatarIcon,
   DotsHorizontalIcon,
   GearIcon,
   LockClosedIcon,
   LockOpen2Icon,
   PersonIcon,
-  PlusIcon,
-  TrashIcon,
 } from '@radix-ui/react-icons';
 import { FC, useEffect, useState } from 'react';
 import { m as motion } from 'framer-motion';
@@ -42,7 +39,7 @@ const Settings: FC = (): JSX.Element => {
   };
 
   const handleUpdatePassword = async (): Promise<void> => {
-    if (passwords.confirm_password !== '') {
+    if (passwords.confirm_password) {
       if (passwords.password !== passwords.confirm_password) {
         dispatch({
           type: actions.TOAST,
@@ -155,11 +152,12 @@ const Settings: FC = (): JSX.Element => {
   };
 
   const deleteAsset = async (): Promise<void> => {
+    if (!state.user?.profile_image?.id) return undefined;
     try {
       await fetchAPI({
         method: 'delete',
         url: `/api/v1/users/assets`,
-        data: { assetId: state.user?.profile_image?.id || '' },
+        data: { assetId: state.user.profile_image.id },
       });
       setProfileImageData({ id: '', data: '' });
       dispatch({
@@ -223,6 +221,7 @@ const Settings: FC = (): JSX.Element => {
       setProfileImageFile(null);
     };
   }, [profileImageFile]);
+
 
   return (
     <Layout
@@ -316,15 +315,21 @@ const Settings: FC = (): JSX.Element => {
                     />
 
                     <div className='actions-container'>
-                      <label htmlFor='avatar' title='Change profile picture'>
+                      <motion.label
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.9 }}
+                        htmlFor='avatar'
+                        title='Change profile picture'>
                         <span>Upload</span>
-                      </label>
-                      <button
+                      </motion.label>
+                      <motion.button
                         title='Clear profile picture'
                         className='clear-image'
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.9 }}
                         onClick={deleteAsset}>
                         <span>Clear</span>
-                      </button>
+                      </motion.button>
                     </div>
                   </div>
 

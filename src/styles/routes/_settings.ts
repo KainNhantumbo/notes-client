@@ -20,7 +20,6 @@ export const _settings = styled.main`
     }
   }
 
-
   .wrapper-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -113,7 +112,7 @@ export const _settings = styled.main`
           display: flex;
           align-items: center;
           flex-direction: column;
-          justify-content: center;
+          justify-content: space-around;
           gap: 12px;
           flex-shrink: 2;
 
@@ -122,17 +121,19 @@ export const _settings = styled.main`
           }
 
           img {
-            border-radius: 50%;
             max-width: 100px;
             max-height: 100px;
             object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
           }
 
           .camera-icon {
             width: 100px;
             height: 100px;
-            border-radius: 50%;
+            border-radius: 8px;
             padding: 10px;
+            border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
             background: rgba(${({ theme }) => theme.font}, 0.1);
           }
 
@@ -142,12 +143,9 @@ export const _settings = styled.main`
             gap: 12px;
             align-items: center;
 
-            label {
+            label,
+            button {
               ${BaseButton}
-            }
-
-            .clear-image {
-              ${BaseButtonOutline}
             }
           }
         }
@@ -168,7 +166,6 @@ export const _settings = styled.main`
           }
         }
       }
-
 
       .delete-account-settings {
         button {

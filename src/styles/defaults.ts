@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 
 export const BaseButtonOutline = css`
+
   border: none;
   background: none;
   padding: 7px 10px;
@@ -21,7 +22,8 @@ export const BaseButtonOutline = css`
 `;
 
 export const BaseButton = css`
-  border: none;
+all: unset;
+ 
   border-radius: 5px;
   padding: 7px 10px;
   width: fit-content;
@@ -32,7 +34,7 @@ export const BaseButton = css`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  outline: none;
+ 
   border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   :hover {
     background: rgba(${({ theme }) => theme.primary}, 0.9);
@@ -79,7 +81,7 @@ export const Button_Mono_B = css`
   border-radius: 8px;
   background: none;
   color: rgb(${({ theme }) => theme.font});
-  border: 1px solid rgba(${({ theme }) => theme.black}, 0.07);
+  border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
   position: relative;
   width: fit-content;
   cursor: pointer;
@@ -156,7 +158,7 @@ export const StyledInputs = css`
     outline: none;
     border-radius: 5px;
     background: rgba(${({ theme }) => theme.background}, 0.7);
-    border: 1px solid rgba(${({ theme }) => theme.black}, 0.05);
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
     color: rgb(${({ theme }) => theme.font});
     :focus {
       border: 1px solid rgba(${({ theme }) => theme.black}, 0.15);

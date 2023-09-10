@@ -1,4 +1,4 @@
-import { TNote } from '@/types';
+import { TNote, TSettings, TUser } from '@/types';
 import actions from '@/data/actions';
 import { FC, useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
@@ -16,6 +16,70 @@ const Workspace: FC = (): JSX.Element => {
     isError: false,
     error: null,
   });
+
+  const getSettings = async (): Promise<void> => {
+    try {
+      const { data } = await fetchAPI<TSettings>({
+        method: 'get',
+        url: '/api/v1/settings',
+      });
+
+      dispatch({
+        type: actions.SETTINGS,
+        payload: { ...state, settings: { ...state.settings, ...data } },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Settings Sync Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to fetch your settings data.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: getSettings,
+          },
+        },
+      });
+    }
+  };
+
+  const getUserData = async (): Promise<void> => {
+    if (!state.auth.token ) return undefined;
+    try {
+      const { data } = await fetchAPI<TUser>({
+        method: 'get',
+        url: '/api/v1/users',
+      });
+      dispatch({
+        type: actions.USER,
+        payload: { ...state, user: { ...state.user, ...data } },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Account Data Sync Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to fetch your account data.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: getUserData,
+          },
+        },
+      });
+    }
+  };
 
   const getNotes = async (): Promise<void> => {
     const { search, sort } = state.query;
@@ -49,6 +113,16 @@ const Workspace: FC = (): JSX.Element => {
       return (): void => clearTimeout(timer);
     }
   }, [state.query, state.auth.token]);
+
+  useEffect((): (() => void) | void => {
+    if (state.auth.token) {
+      const timer = setTimeout(() => {
+        getSettings();
+        getUserData()
+      }, 500);
+      return (): void => clearTimeout(timer);
+    }
+  }, [state.auth.token]);
 
   return (
     <Layout

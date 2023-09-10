@@ -126,9 +126,9 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   };
 
   const syncSettings = async (): Promise<void> => {
-    if (!state.auth.token) return undefined;
+    const { created_by, _id, ...data } = state.settings;
+    if (!state.auth.token || !_id) return undefined;
     try {
-      const { created_by, _id, ...data } = state.settings;
       await fetchAPI({
         method: 'patch',
         url: '/api/v1/settings',
@@ -155,9 +155,9 @@ const AppContext: FC<TProps> = ({ children }): JSX.Element => {
   };
 
   const syncCurrentNote = async (): Promise<void> => {
-    if (!state.auth.token) return undefined;
+    const { _id, created_by, ...currentNote } = state.currentNote;
+    if (!state.auth.token || !_id) return undefined;
     try {
-      const { _id, created_by, ...currentNote } = state.currentNote;
       const { data } = await fetchAPI<TNote>({
         method: 'patch',
         url: `/api/v1/notes/${_id}`,

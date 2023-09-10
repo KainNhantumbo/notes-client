@@ -9,7 +9,7 @@ export const _notesList = styled.section`
   flex-direction: column;
   max-width: 300px;
   background: rgb(${({ theme }) => theme.foreground});
-  border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+  border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
   .header-container {
     width: 100%;
@@ -90,6 +90,10 @@ export const _notesList = styled.section`
         transition: all 200ms ease-in-out;
         border: 1px solid rgba(${({ theme }) => theme.primary_shade}, 0.1);
       }
+    }
+
+    .selected-note {
+      background: rgba(${({ theme }) => theme.font}, 0.08);
     }
   }
 

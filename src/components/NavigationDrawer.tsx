@@ -1,7 +1,6 @@
 import {
   ArchiveIcon,
   BookmarkIcon,
-  BoxIcon,
   CornersIcon,
   DotsHorizontalIcon,
   DrawingPinIcon,
@@ -20,7 +19,6 @@ import { m as motion, AnimatePresence } from 'framer-motion';
 import logo from '@/assets/logo-192x192.png';
 import { app_metadata } from '@/data/app-data';
 import * as Collapsible from '@radix-ui/react-collapsible';
-import { RowSpacingIcon, Cross2Icon } from '@radix-ui/react-icons';
 
 export const NavigationDrawer: FC = (): JSX.Element => {
   const navigate: NavigateFunction = useNavigate();
@@ -54,6 +52,16 @@ export const NavigationDrawer: FC = (): JSX.Element => {
                     token: '',
                     email: '',
                     profile_image: '',
+                  },
+                },
+              });
+              dispatch({
+                type: actions.NAVIGATION,
+                payload: {
+                  ...state,
+                  navigation: {
+                    ...state.navigation,
+                    is_navigation_drawer: false,
                   },
                 },
               });
@@ -140,6 +148,13 @@ export const NavigationDrawer: FC = (): JSX.Element => {
         label: 'Go Home',
         icon: CornersIcon,
         execute: () => {
+          dispatch({
+            type: actions.NAVIGATION,
+            payload: {
+              ...state,
+              navigation: { ...state.navigation, is_navigation_drawer: false },
+            },
+          });
           navigate('/');
         },
       },
@@ -147,6 +162,13 @@ export const NavigationDrawer: FC = (): JSX.Element => {
         label: 'Open Settings',
         icon: GearIcon,
         execute: () => {
+          dispatch({
+            type: actions.NAVIGATION,
+            payload: {
+              ...state,
+              navigation: { ...state.navigation, is_navigation_drawer: false },
+            },
+          });
           navigate('/workspace/settings');
         },
       },
@@ -244,5 +266,3 @@ export const NavigationDrawer: FC = (): JSX.Element => {
     </AnimatePresence>
   );
 };
-
-// {}
