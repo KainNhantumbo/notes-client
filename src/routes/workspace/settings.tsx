@@ -11,10 +11,10 @@ import actions from '@/data/actions';
 import { Layout } from '@/components/Layout';
 import { useAppContext } from '@/context/AppContext';
 import { _settings as Container } from '@/styles/routes/_settings';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata, colorSchemeOptions } from '@/data/app-data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import Compressor from 'compressorjs';
-import { InputEvents } from '@/types';
+import { InputEvents, TColorScheme } from '@/types';
 import { SelectContainer } from '@/components/Select';
 import { useThemeContext } from '@/context/ThemeContext';
 
@@ -260,38 +260,15 @@ export function Settings() {
                 </h3>
                 <div className='data-container'>
                   <SelectContainer
-                    data={[
-                      {
-                        label: 'Light Theme',
-                        value: 'light',
-                        onchange: () => {
-                          changeColorScheme({
-                            mode: 'manual',
-                            scheme: 'light',
-                          });
-                        },
-                      },
-                      {
-                        label: 'Dark Theme',
-                        value: 'dark',
-                        onchange: () => {
-                          changeColorScheme({ mode: 'manual', scheme: 'dark' });
-                        },
-                      },
-                      {
-                        label: 'Automatic',
-                        value: 'auto',
-                        onchange: () => {
-                          changeColorScheme({
-                            mode: 'auto',
-                            scheme: 'dark',
-                          });
-                        },
-                      },
-                    ]}
-                    placeholder='Choose a UI theme'
-                    label='Theme'
-                    key={'theme-selector'}
+                    options={colorSchemeOptions}
+                    placeholder={'Select the global color scheme...'}
+                    onChange={(option) => {
+                      const parsedValue: TColorScheme = JSON.parse(
+                        (option as any)?.value
+                      );
+                      changeColorScheme({ ...parsedValue });
+                      console.log(option)
+                    }}
                   />
                 </div>
               </div>

@@ -109,6 +109,21 @@ export const statusOptions: TOption[] = [
   { value: 'completed', label: 'Completed' },
 ];
 
+export const colorSchemeOptions = [
+  {
+    label: 'Light Theme',
+    value: `{"mode":"manual", "scheme": "light"}`,
+  },
+  {
+    label: 'Dark Theme',
+    value: `{"mode":"manual", "scheme": "dark"}`,
+  },
+  {
+    label: 'Automatic',
+    value: `{"mode":"auto", "scheme": "dark"}`,
+  },
+];
+
 export const editorThemeOptions: string[] = [
   'abcdef',
   'abyss',
