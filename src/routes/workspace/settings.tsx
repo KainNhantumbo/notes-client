@@ -267,7 +267,7 @@ export function Settings() {
                         (option as any)?.value
                       );
                       changeColorScheme({ ...parsedValue });
-                      console.log(option)
+                      console.log(parsedValue)
                     }}
                   />
                 </div>
