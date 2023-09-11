@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 
 export const BaseButtonOutline = css`
-
   border: none;
   background: none;
   padding: 7px 10px;
@@ -22,19 +21,18 @@ export const BaseButtonOutline = css`
 `;
 
 export const BaseButton = css`
-all: unset;
- 
+  all: unset;
   border-radius: 5px;
   padding: 7px 10px;
   width: fit-content;
   cursor: pointer;
   background: rgba(${({ theme }) => theme.primary}, 0.5);
-  color: rgb(${({ theme }) => theme.font_dimmed});
+  color: rgb(${({ theme }) => theme.font});
   border: 1px solid transparent;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
- 
+
   border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   :hover {
     background: rgba(${({ theme }) => theme.primary}, 0.9);
@@ -231,22 +229,5 @@ export const statsContainerStyles = css`
     margin: 0 auto;
 
     color: rgb(${({ theme }) => theme.primary_shade});
-  }
-`;
-
-export const styledEndMark = css`
-  width: 100%;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  background: rgb(${({ theme }) => theme.background_shade});
-  color: rgb(${({ theme }) => theme.error});
-  border-radius: 5px;
-  margin-top: 5px;
-  padding: 0;
-
-  svg {
-    width: 30px;
-    height: 30px;
   }
 `;

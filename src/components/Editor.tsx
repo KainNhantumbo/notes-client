@@ -1,5 +1,5 @@
 import actions from '@/data/actions';
-import { CSSProperties, FC, useMemo } from 'react';
+import { CSSProperties, useMemo } from 'react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import { useAppContext } from '@/context/AppContext';
 import { useThemeContext } from '@/context/ThemeContext';
@@ -37,14 +37,17 @@ export function Editor() {
     lineHeight: `${String(state.settings.editor.font.line_height)} px`,
   };
 
-  return (
-    <div data-color-mode={colorScheme.scheme}>
-      <MarkdownEditor
+  return <div data-color-mode={colorScheme.scheme}>
+
+    
+  </div>;
+}
+
+/**
+ * <MarkdownEditor
         style={{ ...editorStyles }}
         value={state.currentNote.content}
         previewProps={{}}
-        // @ts-ignore
-        // theme={editorTheme['']}
         extensions={usableExtensions}
         hideToolbar={state.settings.editor.editing.enable_toolbar}
         basicSetup={{
@@ -83,6 +86,8 @@ export function Editor() {
         height={String(state.windowInnerSize.height - 92 + 'px')}
         maxHeight={String(state.windowInnerSize.height - 92 + 'px')}
       />
-    </div>
-  );
-}
+ * 
+ * 
+ * 
+ * 
+ */

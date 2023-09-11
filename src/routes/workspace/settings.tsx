@@ -241,16 +241,6 @@ export function Settings() {
             </div>
 
             <section className='group-container'>
-              <h2></h2>
-              <div className='content-container'>
-                <h3>
-                  <span></span>
-                </h3>
-                <div className='data-container'></div>
-              </div>
-            </section>
-
-            <section className='group-container'>
               <h2>UI Themes</h2>
               <div className='content-container'>
                 <h3>
@@ -267,14 +257,14 @@ export function Settings() {
                         (option as any)?.value
                       );
                       changeColorScheme({ ...parsedValue });
-                      console.log(parsedValue)
+                      console.log(parsedValue);
                     }}
                   />
                 </div>
               </div>
             </section>
 
-            <section className='group-container'>
+            {/* <section className='group-container'>
               <h2></h2>
               <div className='content-container'>
                 <h3>
@@ -282,17 +272,7 @@ export function Settings() {
                 </h3>
                 <div className='data-container'></div>
               </div>
-            </section>
-
-            <section className='group-container'>
-              <h2></h2>
-              <div className='content-container'>
-                <h3>
-                  <span></span>
-                </h3>
-                <div className='data-container'></div>
-              </div>
-            </section>
+            </section> */}
 
             <section className='group-container'>
               <h2>Profile Settings</h2>
@@ -521,10 +501,6 @@ export function Settings() {
                 </div>
               </div>
             </section>
-
-            <div className='container-items__end-mark'>
-              <DotsHorizontalIcon />
-            </div>
           </article>
         </div>
       </Container>

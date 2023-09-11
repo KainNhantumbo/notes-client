@@ -1,12 +1,5 @@
 import styled from 'styled-components';
-import {
-  BaseButton,
-  BaseButtonOutline,
-  Button_Mono_A,
-  StyledInputs,
-  StyledLabels,
-  styledEndMark,
-} from '../defaults';
+import { BaseButton, StyledInputs, StyledLabels } from '../defaults';
 
 export const _settings = styled.main`
   position: relative;
@@ -37,10 +30,6 @@ export const _settings = styled.main`
     display: flex;
     flex-direction: column;
     gap: 20px;
-
-    .container-items__end-mark {
-      ${styledEndMark}
-    }
 
     .title-bar-container {
       border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);

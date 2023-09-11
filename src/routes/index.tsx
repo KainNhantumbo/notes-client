@@ -42,14 +42,14 @@ export function Home() {
                   onClick={() =>
                     navigate('/workspace?tab=all-notes&folder=none')
                   }>
-                  <span>Open in Browser</span>
+                  <span>Get started</span>
                 </motion.button>
                 <motion.a
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   target='_blank'
                   href={app_metadata.repository}>
-                  <span>See what's new</span>
+                  <span>Give a star</span>
                   <GitHubLogoIcon />
                 </motion.a>
               </div>
@@ -106,7 +106,7 @@ export function Home() {
                     navigate('/workspace?tab=all-notes&folder=none')
                   }
                   className='browser-button'>
-                  <span>Open in Browser</span>
+                  <span>Get started</span>
                 </motion.button>
               </div>
             </section>
