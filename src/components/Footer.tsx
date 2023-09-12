@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useThemeContext } from '../context/ThemeContext';
-import { app_metadata, footerAnchors } from '../data/app-data';
+import { app_metadata, footerAnchors } from '../shared/data';
 import { _footer as Container } from '../styles/modules/_footer';
 import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 

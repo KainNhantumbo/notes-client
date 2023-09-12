@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import { useState, useEffect } from 'react';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _cookies as Container } from '@/styles/modules/_cookies';

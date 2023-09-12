@@ -12,12 +12,12 @@ import {
 } from '@radix-ui/react-icons';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { useState } from 'react';
-import actions from '../data/actions';
+import actions from '../shared/actions';
 import { useAppContext } from '../context/AppContext';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import logo from '@/assets/logo-192x192.png';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import * as Collapsible from '@radix-ui/react-collapsible';
 
 export function NavigationDrawer() {

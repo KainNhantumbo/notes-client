@@ -7,11 +7,11 @@ import {
 } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
 import { m as motion } from 'framer-motion';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
 import { useAppContext } from '@/context/AppContext';
 import { _settings as Container } from '@/styles/routes/_settings';
-import { app_metadata, colorSchemeOptions } from '@/data/app-data';
+import { app_metadata, colorSchemeOptions } from '@/shared/data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import Compressor from 'compressorjs';
 import { InputEvents, TColorScheme } from '@/types';

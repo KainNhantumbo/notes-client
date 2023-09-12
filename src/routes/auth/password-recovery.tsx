@@ -3,7 +3,7 @@ import { m as motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { useState, useEffect } from 'react';
 import { SubmitEvent } from '@/types';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import { PulseLoader } from 'react-spinners';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';

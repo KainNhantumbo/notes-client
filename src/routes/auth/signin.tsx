@@ -1,9 +1,9 @@
 import fetch from '@/config/client';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Layout } from '@/components/Layout';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import media_login from '@/assets/media-login.jpg';
 import { useAppContext } from '@/context/AppContext';
 import { InputEvents, SubmitEvent, TAuth } from '@/types';

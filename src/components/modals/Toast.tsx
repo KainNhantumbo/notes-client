@@ -1,4 +1,4 @@
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';

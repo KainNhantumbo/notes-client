@@ -10,7 +10,7 @@ import { GlobalStyles } from '../styles/globals';
 import { ThemeProvider } from 'styled-components';
 import { dark_default, light_default } from '../styles/themes';
 import { useAppContext } from './AppContext';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 
 type TContext = {
   colorScheme: TColorScheme;

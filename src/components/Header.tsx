@@ -16,7 +16,7 @@ import { useState, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _header as Container } from '../styles/modules/_header';
-import { app_metadata, navigationAnchors } from '../data/app-data';
+import { app_metadata, navigationAnchors } from '../shared/data';
 
 export function Header() {
   const [isMenu, setIsMenu] = useState<boolean>(false);

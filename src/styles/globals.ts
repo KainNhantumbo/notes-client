@@ -32,12 +32,24 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
     background: rgba(${({ theme }) => theme.background}, 0.3);
   }
 
   ::-webkit-scrollbar-thumb {
-    border-radius: 15px;
+    border-radius: 8px;
     background: rgb(${({ theme }) => theme.font});
+  }
+  
+  ::-webkit-scrollbar-thumb::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    min-width: 44px;
+    min-height: 44px;
   }
 `;

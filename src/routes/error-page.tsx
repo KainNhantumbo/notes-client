@@ -1,4 +1,4 @@
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import { _error as Container } from '@/styles/routes/_error';
 
 interface IProps {

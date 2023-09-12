@@ -4,11 +4,11 @@ import {
   LockClosedIcon,
 } from '@radix-ui/react-icons';
 import fetch from '@/config/client';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { PulseLoader } from 'react-spinners';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
 import { useEffect, useState } from 'react';

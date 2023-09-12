@@ -1,4 +1,4 @@
-import { BaseButton, StyledCornerButton, styledEndMark } from '../defaults';
+import { BaseButton, StyledCornerButton } from '../defaults';
 import styled from 'styled-components';
 
 export const _notesList = styled.section`

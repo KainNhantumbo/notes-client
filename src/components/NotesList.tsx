@@ -4,7 +4,7 @@ import {
   MixIcon,
   Pencil2Icon,
 } from '@radix-ui/react-icons';
-import actions from '../data/actions';
+import actions from '../shared/actions';
 import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';

@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { TAuth, TNote, TSettings, TUser } from '@/types';
 import fetch from '@/config/client';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { ThemeContext } from './ThemeContext';
 import { initialState, reducer } from '../libs/reducer';
 import { NavigateFunction, useNavigate } from 'react-router-dom';

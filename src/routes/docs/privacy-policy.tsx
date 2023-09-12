@@ -1,5 +1,5 @@
 import { Layout } from '@/components/Layout';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import { _docs as Container } from '@/styles/routes/_docs';
 
 export function PrivacyPolicy() {

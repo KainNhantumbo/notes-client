@@ -1,5 +1,5 @@
 import type { ChangeEvent, FormEvent } from 'react';
-import { editorThemeOptions } from '@/data/app-data';
+import { editorThemeOptions } from '@/shared/data';
 
 export type THeadProps =
   | {

@@ -1,4 +1,4 @@
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { useAppContext } from '@/context/AppContext';
 import { _prompt as Container } from '@/styles/modules/_prompt';

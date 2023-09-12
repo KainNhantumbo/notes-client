@@ -1,4 +1,4 @@
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { CSSProperties, useMemo } from 'react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import { useAppContext } from '@/context/AppContext';
@@ -8,11 +8,7 @@ import * as editorTheme from '@uiw/codemirror-themes-all';
 import { DefaultTheme, useTheme } from 'styled-components';
 import { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeformat from 'rehype-format';
 import rehypeDocument from 'rehype-document';
-import rehypeFormat from 'rehype-format';
-import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
@@ -37,14 +33,9 @@ export function Editor() {
     lineHeight: `${String(state.settings.editor.font.line_height)} px`,
   };
 
-  return <div data-color-mode={colorScheme.scheme}>
-
-    
-  </div>;
-}
-
-/**
- * <MarkdownEditor
+  return (
+    <div data-color-mode={colorScheme.scheme}>
+      <MarkdownEditor
         style={{ ...editorStyles }}
         value={state.currentNote.content}
         previewProps={{}}
@@ -86,8 +77,6 @@ export function Editor() {
         height={String(state.windowInnerSize.height - 92 + 'px')}
         maxHeight={String(state.windowInnerSize.height - 92 + 'px')}
       />
- * 
- * 
- * 
- * 
- */
+    </div>
+  );
+}

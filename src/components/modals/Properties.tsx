@@ -9,7 +9,7 @@ import {
   TrashIcon,
 } from '@radix-ui/react-icons';
 import moment from 'moment';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { useAppContext } from '@/context/AppContext';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';

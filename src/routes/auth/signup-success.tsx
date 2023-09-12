@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import { _signinSuccess as Container } from '@/styles/routes/_signup-sucess';
 import { LockClosedIcon, PersonIcon } from '@radix-ui/react-icons';
 

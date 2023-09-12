@@ -1,9 +1,9 @@
 import { TNote } from '@/types';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { useEffect, useState } from 'react';
 import { Layout } from '@/components/Layout';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
-import { app_metadata } from '@/data/app-data';
+import { app_metadata } from '@/shared/data';
 import { NotesList } from '@/components/NotesList';
 import { useAppContext } from '@/context/AppContext';
 import EditorContainer from '@/components/EditorContainer';

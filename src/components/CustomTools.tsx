@@ -5,10 +5,10 @@ import {
 } from '@radix-ui/react-icons';
 import { Tag } from '@/types';
 import { useState } from 'react';
-import actions from '@/data/actions';
+import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { TwitterPicker } from 'react-color';
-import { colorsOptions } from '../data/app-data';
+import { colorsOptions } from '../shared/data';
 import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
 
