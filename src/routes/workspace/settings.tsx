@@ -63,7 +63,6 @@ export function Settings() {
     }
   };
 
-
   const getInitialData = async (): Promise<void> => {
     try {
       const [settings, user] = await Promise.all([
@@ -287,7 +286,6 @@ export function Settings() {
                         (option as any)?.value
                       );
                       changeColorScheme({ ...parsedValue });
-                      console.log(parsedValue);
                     }}
                   />
                 </div>

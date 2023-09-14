@@ -87,7 +87,6 @@ export const _settings = styled.main`
         line-height: 1.6rem;
       }
 
-
       .password-settings {
         display: flex;
         flex-direction: column;
@@ -97,6 +96,10 @@ export const _settings = styled.main`
           display: flex;
           flex-direction: column;
           gap: 12px;
+
+          p {
+            line-height: 1.6rem;
+          }
 
           button {
             ${BaseButton}

@@ -44,7 +44,6 @@
     "@uiw/react-markdown-editor": "^5.11.2",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
-    "compressorjs": "^1.2.1",
     "framer-motion": "^10.12.18",
     "moment": "^2.29.4",
     "nanoid": "^4.0.2",

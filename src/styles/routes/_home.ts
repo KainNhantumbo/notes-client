@@ -186,6 +186,11 @@ export const _home = styled.main`
         font-family: 'Zilla Slab', serif;
       }
 
+      p {
+        line-height: 1.6rem;
+        text-align: center;
+      }
+
       img {
         width: 100%;
         height: 100%;

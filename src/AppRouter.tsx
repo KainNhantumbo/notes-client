@@ -29,7 +29,7 @@ const routes = [
   { path: '*', element: <NotFoundError /> },
 ];
 
-export function AppRouter() {
+export default function AppRouter() {
   return (
     <Routes>
       {routes.map((route, index) => (
