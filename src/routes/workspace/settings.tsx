@@ -5,7 +5,7 @@ import {
   LockOpen2Icon,
   PersonIcon,
 } from '@radix-ui/react-icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { m as motion } from 'framer-motion';
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
@@ -13,8 +13,7 @@ import { useAppContext } from '@/context/AppContext';
 import { _settings as Container } from '@/styles/routes/_settings';
 import { app_metadata, colorSchemeOptions } from '@/shared/data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import Compressor from 'compressorjs';
-import { InputEvents, TColorScheme } from '@/types';
+import { InputEvents, TColorScheme, TSettings, TUser } from '@/types';
 import { SelectContainer } from '@/components/Select';
 import { useThemeContext } from '@/context/ThemeContext';
 
@@ -22,13 +21,7 @@ export function Settings() {
   const { state, dispatch, fetchAPI } = useAppContext();
   const { changeColorScheme } = useThemeContext();
   const navigate: NavigateFunction = useNavigate();
-  const [profileImageFile, setProfileImageFile] = useState<FileList | null>(
-    null
-  );
-  const [profileImageData, setProfileImageData] = useState({
-    id: '',
-    data: '',
-  });
+
   const [passwords, setPasswords] = useState({
     password: '',
     confirm_password: '',
@@ -39,6 +32,115 @@ export function Settings() {
       ...state,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const syncSettings = async (): Promise<void> => {
+    const { created_by, _id, ...data } = state.settings;
+    if (!state.auth.token || !_id) return undefined;
+    try {
+      await fetchAPI({
+        method: 'patch',
+        url: '/api/v1/settings',
+        data: { ...data },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Settings Sync Error',
+            message:
+              error?.response?.data?.message ?? 'Failed to sync your settings.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: syncSettings,
+          },
+        },
+      });
+    }
+  };
+
+
+  const getInitialData = async (): Promise<void> => {
+    try {
+      const [settings, user] = await Promise.all([
+        fetchAPI<TSettings>({
+          method: 'get',
+          url: '/api/v1/settings',
+        }),
+        fetchAPI<TUser>({
+          method: 'get',
+          url: '/api/v1/users',
+        }),
+      ]);
+
+      dispatch({
+        type: actions.USER,
+        payload: { ...state, user: { ...state.user, ...user.data } },
+      });
+
+      dispatch({
+        type: actions.SETTINGS,
+        payload: {
+          ...state,
+          settings: { ...state.settings, ...settings.data },
+        },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Initial Data Sync Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to fetch your settings and user account data.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: getInitialData,
+          },
+        },
+      });
+    }
+  };
+
+  const syncUserData = async (): Promise<void> => {
+    if (!state.auth.token) return undefined;
+    try {
+      const response = await fetchAPI<TUser>({
+        method: 'patch',
+        url: '/api/v1/users',
+        data: { ...state.user },
+      });
+      dispatch({
+        type: actions.USER,
+        payload: { ...state, user: { ...state.user, ...response.data } },
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Account Data Sync Error',
+            message:
+              error?.response?.data?.message ??
+              'Failed to sync your account data.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: syncUserData,
+          },
+        },
+      });
+    }
   };
 
   const handleUpdatePassword = async (): Promise<void> => {
@@ -63,7 +165,7 @@ export function Settings() {
       await fetchAPI({
         method: 'patch',
         url: `/api/v1/users`,
-        data: { assetId: state.user?.profile_image?.id || '' },
+        data: { password: passwords.password },
       });
 
       dispatch({
@@ -119,7 +221,6 @@ export function Settings() {
             name: '',
             token: '',
             email: '',
-            profile_image: '',
           },
         },
       });
@@ -153,77 +254,6 @@ export function Settings() {
       });
     }
   };
-
-  const deleteAsset = async (): Promise<void> => {
-    if (!state.user?.profile_image?.id) return undefined;
-    try {
-      await fetchAPI({
-        method: 'delete',
-        url: `/api/v1/users/assets`,
-        data: { assetId: state.user.profile_image.id },
-      });
-      setProfileImageData({ id: '', data: '' });
-      dispatch({
-        type: actions.USER,
-        payload: {
-          ...state,
-          user: {
-            ...state.user,
-            profile_image: { id: '', url: '' },
-          },
-        },
-      });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
-      dispatch({
-        type: actions.TOAST,
-        payload: {
-          ...state,
-          toast: {
-            ...state.toast,
-            title: 'Delete Profile Picture Error',
-            message:
-              error?.response?.data?.message ??
-              'Failed to remove your profile pitcure. Please, try again.',
-            status: true,
-            actionButtonMessage: 'Retry',
-            handleFunction: deleteAsset,
-          },
-        },
-      });
-    }
-  };
-
-  const handleProfileImageFile = (): void => {
-    const imageData: File | null | undefined = profileImageFile?.item(0);
-    if (imageData) {
-      new Compressor(imageData, {
-        quality: 0.8,
-        width: 150,
-        height: 150,
-        resize: 'cover',
-        success: (compressedImge: File | Blob): void => {
-          const reader = new FileReader();
-          reader.readAsDataURL(compressedImge);
-          reader.onloadend = function (e: ProgressEvent<FileReader>): void {
-            const encodedImage: string = e.target?.result as string;
-            setProfileImageData({
-              id: state.user.profile_image?.id || '',
-              data: encodedImage,
-            });
-          };
-        },
-      });
-    }
-  };
-
-  useEffect((): (() => void) => {
-    handleProfileImageFile();
-    return () => {
-      setProfileImageData({ id: '', data: '' });
-      setProfileImageFile(null);
-    };
-  }, [profileImageFile]);
 
   return (
     <Layout
@@ -281,52 +311,6 @@ export function Settings() {
                   <span>Adjust your account settings</span>
                 </h3>
                 <div className='data-container account-settings'>
-                  <div className='image-container'>
-                    {profileImageData?.data ? (
-                      <img
-                        decoding='async'
-                        loading='lazy'
-                        src={profileImageData.data}
-                        alt='profile image'
-                      />
-                    ) : state.user.profile_image?.url ? (
-                      <img
-                        decoding='async'
-                        loading='lazy'
-                        src={state.user.profile_image?.url}
-                        alt='profile image'
-                      />
-                    ) : (
-                      <PersonIcon className='camera-icon' />
-                    )}
-                    <input
-                      type='file'
-                      id='avatar'
-                      name='avatar'
-                      accept='.jpg, .jpeg, .png'
-                      multiple={false}
-                      onChange={(e) => setProfileImageFile(e.target.files)}
-                    />
-
-                    <div className='actions-container'>
-                      <motion.label
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.9 }}
-                        htmlFor='avatar'
-                        title='Change profile picture'>
-                        <span>Upload</span>
-                      </motion.label>
-                      <motion.button
-                        title='Clear profile picture'
-                        className='clear-image'
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={deleteAsset}>
-                        <span>Clear</span>
-                      </motion.button>
-                    </div>
-                  </div>
-
                   <section className='form-section'>
                     <div className='form-element'>
                       <label htmlFor='first_name'>

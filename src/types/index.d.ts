@@ -26,7 +26,6 @@ export type TAuth = {
   name: string;
   token: string;
   email: string;
-  profile_image: string;
 };
 
 export type Theme = {
@@ -142,7 +141,6 @@ export type TUser = {
   first_name: string;
   last_name: string;
   email: string;
-  profile_image: { id: string; url: string };
 };
 
 export type TNavigation = {

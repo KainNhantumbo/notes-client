@@ -87,60 +87,6 @@ export const _settings = styled.main`
         line-height: 1.6rem;
       }
 
-      .account-settings {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-        justify-content: space-between;
-
-        @media screen and (max-width: 390px) {
-          flex-direction: column;
-        }
-
-        .image-container {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          justify-content: space-around;
-          gap: 12px;
-          flex-shrink: 2;
-
-          input {
-            display: none;
-          }
-
-          img {
-            max-width: 100px;
-            max-height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
-          }
-
-          .camera-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
-            background: rgba(${({ theme }) => theme.font}, 0.02);
-          }
-
-          .actions-container {
-            display: flex;
-            flex-direction: row;
-            gap: 12px;
-            align-items: center;
-
-            label,
-            button {
-              ${BaseButton}
-            }
-          }
-        }
-      }
 
       .password-settings {
         display: flex;

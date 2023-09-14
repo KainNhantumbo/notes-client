@@ -6,7 +6,7 @@ import {
   Dispatch,
   useEffect,
 } from 'react';
-import { TAuth, TNote, TSettings, TUser } from '@/types';
+import { TAuth, TNote } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/shared/actions';
 import { ThemeContext } from './ThemeContext';
@@ -21,9 +21,7 @@ type TContext = {
   state: TState;
   dispatch: Dispatch<TAction>;
   fetchAPI: <T>(config: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>;
-  syncSettings: () => Promise<void>;
   syncCurrentNote: () => Promise<void>;
-  syncUserData: () => Promise<void>;
 };
 
 const context = createContext<TContext>({
@@ -31,8 +29,6 @@ const context = createContext<TContext>({
   dispatch: () => {},
   fetchAPI: (): any => {},
   syncCurrentNote: async () => {},
-  syncSettings: async () => {},
-  syncUserData: async () => {},
 });
 
 export function AppContext({ children }: TProps) {
@@ -91,114 +87,6 @@ export function AppContext({ children }: TProps) {
     });
   };
 
-  const getInitialData = async (): Promise<void> => {
-    try {
-      const [settings, user] = await Promise.all([
-        fetchAPI<TSettings>({
-          method: 'get',
-          url: '/api/v1/settings',
-        }),
-        fetchAPI<TUser>({
-          method: 'get',
-          url: '/api/v1/users',
-        }),
-      ]);
-
-      dispatch({
-        type: actions.USER,
-        payload: { ...state, user: { ...state.user, ...user.data } },
-      });
-
-      dispatch({
-        type: actions.SETTINGS,
-        payload: {
-          ...state,
-          settings: { ...state.settings, ...settings.data },
-        },
-      });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
-      dispatch({
-        type: actions.TOAST,
-        payload: {
-          ...state,
-          toast: {
-            ...state.toast,
-            title: 'Initial Data Sync Error',
-            message:
-              error?.response?.data?.message ??
-              'Failed to fetch your settings and user account data.',
-            status: true,
-            actionButtonMessage: 'Retry',
-            handleFunction: getInitialData,
-          },
-        },
-      });
-    }
-  };
-
-  const syncUserData = async (): Promise<void> => {
-    if (!state.auth.token) return undefined;
-    try {
-      const response = await fetchAPI<TUser>({
-        method: 'patch',
-        url: '/api/v1/users',
-        data: { ...state.user },
-      });
-      dispatch({
-        type: actions.USER,
-        payload: { ...state, user: { ...state.user, ...response.data } },
-      });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
-      dispatch({
-        type: actions.TOAST,
-        payload: {
-          ...state,
-          toast: {
-            ...state.toast,
-            title: 'Account Data Sync Error',
-            message:
-              error?.response?.data?.message ??
-              'Failed to sync your account data.',
-            status: true,
-            actionButtonMessage: 'Retry',
-            handleFunction: syncUserData,
-          },
-        },
-      });
-    }
-  };
-
-  const syncSettings = async (): Promise<void> => {
-    const { created_by, _id, ...data } = state.settings;
-    if (!state.auth.token || !_id) return undefined;
-    try {
-      await fetchAPI({
-        method: 'patch',
-        url: '/api/v1/settings',
-        data: { ...data },
-      });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
-      dispatch({
-        type: actions.TOAST,
-        payload: {
-          ...state,
-          toast: {
-            ...state.toast,
-            title: 'Settings Sync Error',
-            message:
-              error?.response?.data?.message ?? 'Failed to sync your settings.',
-            status: true,
-            actionButtonMessage: 'Retry',
-            handleFunction: syncSettings,
-          },
-        },
-      });
-    }
-  };
-
   const syncCurrentNote = async (): Promise<void> => {
     const { _id, created_by, ...currentNote } = state.currentNote;
     if (!state.auth.token || !_id) return undefined;
@@ -251,14 +139,6 @@ export function AppContext({ children }: TProps) {
   }, []);
 
   useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      syncSettings();
-    }, state.settings.editor.auto_save.delay);
-
-    return () => clearTimeout(debounceTimer);
-  }, [state.settings, state.auth]);
-
-  useEffect(() => {
     if (state.settings.editor.auto_save.enabled) {
       const debounceTimer = setTimeout(() => {
         syncCurrentNote();
@@ -267,13 +147,6 @@ export function AppContext({ children }: TProps) {
       return () => clearTimeout(debounceTimer);
     }
   }, [state.currentNote]);
-
-  useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      syncUserData();
-    }, 3000);
-    return () => clearTimeout(debounceTimer);
-  }, [state.user]);
 
   useEffect((): (() => void) => {
     const timer = setTimeout((): void => {
@@ -289,8 +162,6 @@ export function AppContext({ children }: TProps) {
         dispatch,
         fetchAPI,
         syncCurrentNote,
-        syncSettings,
-        syncUserData,
       }}>
       <ThemeContext>{children}</ThemeContext>
     </context.Provider>

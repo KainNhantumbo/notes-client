@@ -13,12 +13,11 @@ const initialState: TState = {
   isPropertiesModal: false,
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
-  auth: { id: '', email: '', name: '', profile_image: '', token: '' },
+  auth: { id: '', email: '', name: '', token: '' },
   user: {
     first_name: '',
     last_name: '',
     email: '',
-    profile_image: { id: '', url: '' },
   },
   signUp: {
     first_name: '',

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { TState } from '@/types/reducer';
 
-export const useStore = create<TState>(() => ({
+export const useStore = create<TState>((set) => ({
   notes: [],
   folders: [],
   isLogoutModal: false,
@@ -18,7 +18,6 @@ export const useStore = create<TState>(() => ({
     first_name: '',
     last_name: '',
     email: '',
-    profile_image: { id: '', url: '' },
   },
   signUp: {
     first_name: '',
@@ -88,8 +87,6 @@ export const useStore = create<TState>(() => ({
       editor_theme: 'xcode',
       automatic_ui_theme: true,
     },
-  },
+  }, 
 }));
 
-
-useStore((state)=>({}))
