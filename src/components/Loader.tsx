@@ -1,5 +1,6 @@
 import { CSSProperties } from 'react';
 import { BarLoader } from 'react-spinners';
+import { useTheme } from 'styled-components';
 
 const styles: CSSProperties = {
   width: '100vw',
@@ -14,10 +15,17 @@ const styles: CSSProperties = {
 };
 
 export default function Loader() {
+  const theme = useTheme();
   return (
     <section style={{ ...styles }}>
-      <h3>Loading... Please wait.</h3>
-      <BarLoader />
+      <h3>Loading... just a moment...</h3>
+      <BarLoader
+        color={`rgb(${theme.primary_shade})`}
+        cssOverride={{
+          display: 'block',
+          background: `rgb(${theme.background})`,
+        }}
+      />
     </section>
   );
 }

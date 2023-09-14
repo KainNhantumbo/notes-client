@@ -20,7 +20,7 @@ export const _notesList = styled.section`
     gap: 12px;
     background: rgb(${({ theme }) => theme.foreground});
     z-index: 200;
-
+    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
     h2 {
       font-size: 1.2rem;
       line-height: 1.6rem;
@@ -68,33 +68,28 @@ export const _notesList = styled.section`
   .notes-list-container {
     width: 100%;
     height: 100%;
-    padding: 8px;
     display: flex !important;
     flex-direction: column !important;
-    gap: 50px !important;
     background: rgb(${({ theme }) => theme.background});
 
     .note-container {
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      border-radius: 8px;
-      border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+      gap: 6px;
       background: rgb(${({ theme }) => theme.foreground});
       padding: 12px 8px;
       font-size: 0.9rem;
       user-select: none;
       cursor: pointer;
-      margin-bottom: 5px;
+      border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
       :hover {
         transition: all 200ms ease-in-out;
-        border: 1px solid rgba(${({ theme }) => theme.primary_shade}, 0.1);
       }
     }
 
     .selected-note {
-      background: rgba(${({ theme }) => theme.font}, 0.08);
+      background: rgba(${({ theme }) => theme.primary}, 0.1);
     }
 
     overflow: hidden;
@@ -153,7 +148,7 @@ export const _notesList = styled.section`
   .compose-button {
     z-index: 200;
     position: fixed;
-    left: 230px;
+    left: 240px;
     bottom: 50px;
     ${StyledCornerButton}
     border-radius: 50%;

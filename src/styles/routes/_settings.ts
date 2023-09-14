@@ -107,6 +107,12 @@ export const _settings = styled.main`
         }
       }
 
+      .account-settings {
+        button {
+          ${BaseButton}
+        }
+      }
+
       .delete-account-settings {
         button {
           ${BaseButton}

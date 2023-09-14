@@ -3,9 +3,8 @@ import {
   GearIcon,
   LockClosedIcon,
   LockOpen2Icon,
-  PersonIcon,
 } from '@radix-ui/react-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { m as motion } from 'framer-motion';
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
@@ -34,9 +33,7 @@ export function Settings() {
     }));
   };
 
-  const syncSettings = async (): Promise<void> => {
-    const { created_by, _id, ...data } = state.settings;
-    if (!state.auth.token || !_id) return undefined;
+  const syncSettings = async (data: TSettings): Promise<void> => {
     try {
       await fetchAPI({
         method: 'patch',
@@ -110,7 +107,6 @@ export function Settings() {
   };
 
   const syncUserData = async (): Promise<void> => {
-    if (!state.auth.token) return undefined;
     try {
       const response = await fetchAPI<TUser>({
         method: 'patch',
@@ -121,8 +117,22 @@ export function Settings() {
         type: actions.USER,
         payload: { ...state, user: { ...state.user, ...response.data } },
       });
+      dispatch({
+        type: actions.PROMPT,
+        payload: {
+          ...state,
+          prompt: { ...state.prompt, status: false },
+        },
+      });
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
+      dispatch({
+        type: actions.PROMPT,
+        payload: {
+          ...state,
+          prompt: { ...state.prompt, status: false },
+        },
+      });
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -189,7 +199,7 @@ export function Settings() {
             ...state.toast,
             title: 'Update Password Error',
             message:
-              error?.response?.data?.message ??
+              error?.response?.data?.message ||
               'Failed to update your password. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -254,6 +264,10 @@ export function Settings() {
     }
   };
 
+  useEffect(() => {
+    getInitialData();
+  }, []);
+
   return (
     <Layout
       renderHeader
@@ -286,6 +300,15 @@ export function Settings() {
                         (option as any)?.value
                       );
                       changeColorScheme({ ...parsedValue });
+                      syncSettings({
+                        ...state.settings,
+                        theme: {
+                          ...state.settings.theme,
+                          ui_theme: parsedValue.scheme,
+                          automatic_ui_theme:
+                            parsedValue.mode === 'auto' ? true : false,
+                        },
+                      });
                     }}
                   />
                 </div>
@@ -364,7 +387,7 @@ export function Settings() {
                               ...state,
                               user: {
                                 ...state.user,
-                                first_name: e.target.value,
+                                last_name: e.target.value,
                               },
                             },
                           })
@@ -375,6 +398,29 @@ export function Settings() {
                       } / 32`}</span>
                     </div>
                   </section>
+                  <motion.button
+                    title='Update account data'
+                    aria-label='Update account data'
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => {
+                      dispatch({
+                        type: actions.PROMPT,
+                        payload: {
+                          ...state,
+                          prompt: {
+                            ...state.prompt,
+                            title: 'Updatde Account',
+                            message: 'Do you wish to update your account data?',
+                            actionButtonMessage: 'Confirm',
+                            status: true,
+                            handleFunction: syncUserData,
+                          },
+                        },
+                      });
+                    }}>
+                    <span>Update account data</span>
+                  </motion.button>
                 </div>
               </div>
             </section>

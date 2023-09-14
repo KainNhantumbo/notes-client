@@ -58,8 +58,7 @@
     "rehype-document": "^6.1.0",
     "remark-pdf": "^0.0.13",
     "styled-components": "^5.3.10",
-    "vite-plugin-pwa": "^0.16.4",
-    "zustand": "^4.4.1"
+    "vite-plugin-pwa": "^0.16.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

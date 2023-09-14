@@ -18,24 +18,16 @@ export const _customTools = styled.section`
       height: fit-content;
       border: none;
       padding: 10px;
-      line-height: 1.2rem;
-      font-weight: 400;
+      line-height: 1.8rem;
       outline: none;
       background: none;
       font-weight: 500;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       color: rgb(${({ theme }) => theme.font});
 
       ::placeholder {
         color: rgba(${({ theme }) => theme.font}, 0.4);
-        font-weight: 500;
-        font-size: 1.6rem;
       }
-    }
-
-    .counter {
-      align-self: end;
-      font-size: 0.9rem;
     }
   }
 
