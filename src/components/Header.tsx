@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import {
   ArrowRightIcon,
-  AvatarIcon,
   Cross2Icon,
   HamburgerMenuIcon,
 } from '@radix-ui/react-icons';
@@ -93,17 +92,8 @@ export function Header() {
                     onClick={() =>
                       navigate(`/workspace?tab=all-notes&folder=none`)
                     }>
-                    <span>Workspace</span>
-                    {state.auth.profile_image ? (
-                      <img
-                        loading='lazy'
-                        decoding='async'
-                        src={state.auth.profile_image}
-                        alt='User profile image'
-                      />
-                    ) : (
-                      <AvatarIcon />
-                    )}
+                    <span>Go to Workspace</span>
+                    <ArrowRightIcon />
                   </motion.button>
                 )}
               </div>

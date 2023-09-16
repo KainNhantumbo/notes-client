@@ -73,6 +73,21 @@ export const _settings = styled.main`
       line-height: 1.6rem;
       border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
       padding-bottom: 2px;
+      color: rgb(${({ theme }) => theme.secondary_shade});
+    }
+
+    .sub-title {
+      font-weight: 500;
+      color: rgb(${({ theme }) => theme.secondary_shade});
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 8px;
+      padding-left: 5px;
+      svg {
+        width: 18px;
+        height: 18px;
+      }
     }
 
     .content-container {

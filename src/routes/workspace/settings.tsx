@@ -322,6 +322,12 @@ export function Settings() {
                 </h3>
                 <div className='data-container'>
                   <section className='form-section'>
+                    <hr />
+                    <h3 className='sub-title'>
+                      <DotsHorizontalIcon />
+                      <span>Editor Data Auto Save</span>
+                    </h3>
+
                     <div className='form-element '>
                       <label htmlFor='auto-save-state'>
                         <DownloadIcon />
@@ -395,6 +401,11 @@ export function Settings() {
 
                     <hr />
 
+                    <h3 className='sub-title'>
+                      <DotsHorizontalIcon />
+                      <span>Editor Fonts Customization</span>
+                    </h3>
+
                     <div className='form-element'>
                       <label htmlFor='font-family'>
                         <FontFamilyIcon />
@@ -403,6 +414,8 @@ export function Settings() {
                       <input
                         type='text'
                         id='font-family'
+                        minLength={3}
+                        maxLength={128}
                         value={state.settings.editor.font.font_family}
                         onChange={(e) => {
                           syncSettings({
@@ -499,6 +512,15 @@ export function Settings() {
                     </div>
 
                     <hr />
+
+                    <h3 className='sub-title'>
+                      <DotsHorizontalIcon />
+                      <span>Editor Experience Customization</span>
+                    </h3>
+
+                    <div className='form-element'>
+                      <label htmlFor=""></label>
+                    </div>
                   </section>
                 </div>
               </div>

@@ -125,7 +125,6 @@ export const StyledCornerButton = css`
 `;
 
 export const StyledLabels = css`
-  font-weight: 500;
   position: relative;
   line-height: 1.4rem;
 

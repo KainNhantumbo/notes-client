@@ -11,7 +11,7 @@ export const light_default: Theme = {
   background: '250, 250, 250',
   foreground: '255, 255, 255',
   primary_shade: '228, 113, 49',
-  secondary_shade: '157, 145, 255',
+  secondary_shade: '199, 158, 107',
   background_shade: '245, 242, 234',
   foreground_shade: '240, 240, 240',
 };
@@ -27,7 +27,7 @@ export const dark_default: Theme = {
   background: '27, 27, 31',
   foreground: '39, 40, 45',
   primary_shade: '153, 84, 58',
-  secondary_shade: '157, 145, 255',
+  secondary_shade: '221, 207, 136',
   background_shade: '32, 33, 36',
   foreground_shade: '34, 37, 41',
 };
