@@ -126,6 +126,11 @@ export const _settings = styled.main`
           width: 100%;
           gap: 10px;
 
+          hr {
+            all: unset;
+            border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+          }
+
           .form-element {
             display: flex;
             flex-direction: column;

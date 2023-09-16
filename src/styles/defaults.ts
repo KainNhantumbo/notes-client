@@ -28,12 +28,12 @@ export const BaseButton = css`
   cursor: pointer;
   background: rgba(${({ theme }) => theme.primary}, 0.5);
   color: rgb(${({ theme }) => theme.font});
-  border: 1px solid transparent;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-
   border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+  text-align: center;
+  
   :hover {
     background: rgba(${({ theme }) => theme.primary}, 0.9);
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.3);

@@ -1,5 +1,8 @@
 import {
   DotsHorizontalIcon,
+  FontBoldIcon,
+  FontFamilyIcon,
+  FontSizeIcon,
   GearIcon,
   LockClosedIcon,
   LockOpen2Icon,
@@ -315,67 +318,82 @@ export function Settings() {
                   <span>Customise your note editor settings</span>
                 </h3>
                 <div className='data-container'>
-                  <section className='font-size-container'>
-                    <h3>Modify editor font family</h3>
-                    <input
-                      type='text'
-                      value={state.settings.editor.font.font_family}
-                      onChange={(e) => {
-                        syncSettings({
-                          ...state.settings,
-                          editor: {
-                            ...state.settings.editor,
-                            font: {
-                              ...state.settings.editor.font,
-                              font_family:e.target.value,
+                  <section className='form-section'>
+                    <div className='form-element'>
+                      <label htmlFor='font-family'>
+                        <FontFamilyIcon />
+                        <span>Modify editor font family</span>
+                      </label>
+                      <input
+                        type='text'
+                        id='font-family'
+                        value={state.settings.editor.font.font_family}
+                        onChange={(e) => {
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              font: {
+                                ...state.settings.editor.font,
+                                font_family: e.target.value,
+                              },
                             },
-                          },
-                        });
-                      }}
-                    />
-                  </section>
-                  <section className='font-size-container'>
-                    <h3>Modify editor font size</h3>
-                    <input
-                      type='number'
-                      min={10}
-                      max={50}
-                      value={state.settings.editor.font.font_size}
-                      onChange={(e) => {
-                        syncSettings({
-                          ...state.settings,
-                          editor: {
-                            ...state.settings.editor,
-                            font: {
-                              ...state.settings.editor.font,
-                              font_size: Number(e.target.value) || 16,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='font-size'>
+                        <FontSizeIcon />
+                        <span>Modify editor font size</span>
+                      </label>
+                      <input
+                        type='number'
+                        id='font-size'
+                        min={10}
+                        max={50}
+                        value={state.settings.editor.font.font_size}
+                        onChange={(e) => {
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              font: {
+                                ...state.settings.editor.font,
+                                font_size: Number(e.target.value) || 16,
+                              },
                             },
-                          },
-                        });
-                      }}
-                    />
-                  </section>
-                  <section className='font-weight-container'>
-                    <h3>Modify editor font weight</h3>
-                    <input
-                      type='number'
-                      min={400}
-                      max={800}
-                      step={100}
-                      value={state.settings.editor.font.font_weight}
-                      onChange={(e) => {
-                        syncSettings({
-                          ...state.settings,
-                          editor: {
-                            ...state.settings.editor,
-                            font: {
-                              ...state.settings.editor.font,
-                              font_weight: e.target.value as any,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='font-weight'>
+                        <FontBoldIcon />
+                        <span>Modify editor font weight</span>
+                      </label>
+                      <input
+                        type='number'
+                        id='font-weight'
+                        min={400}
+                        max={800}
+                        step={100}
+                        value={state.settings.editor.font.font_weight}
+                        onChange={(e) => {
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              font: {
+                                ...state.settings.editor.font,
+                                font_weight: e.target.value as any,
+                              },
                             },
-                          },
-                        });
-                      }}
-                    />
+                          });
+                        }}
+                      />
+                    </div>
+                    <hr/>
                   </section>
                 </div>
               </div>
