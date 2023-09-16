@@ -1,8 +1,11 @@
 import {
+  ClockIcon,
   DotsHorizontalIcon,
+  DownloadIcon,
   FontBoldIcon,
   FontFamilyIcon,
   FontSizeIcon,
+  FontStyleIcon,
   GearIcon,
   LockClosedIcon,
   LockOpen2Icon,
@@ -319,6 +322,79 @@ export function Settings() {
                 </h3>
                 <div className='data-container'>
                   <section className='form-section'>
+                    <div className='form-element '>
+                      <label htmlFor='auto-save-state'>
+                        <DownloadIcon />
+                        <span>Auto Save Changes</span>
+                      </label>
+                      <p>
+                        This controls if your changes made at the editor will be
+                        automatically saved.
+                      </p>
+
+                      <SelectContainer
+                        id='auto-save-state'
+                        placeholder={
+                          state.settings.editor.auto_save.enabled
+                            ? 'Enabled'
+                            : 'Disabled'
+                        }
+                        options={[
+                          { label: 'Enabled', value: `{"enabled": true}` },
+                          { label: 'Disabled', value: `{"enabled": false}` },
+                        ]}
+                        onChange={(option) => {
+                          const parsedValue: { enabled: boolean } = JSON.parse(
+                            (option as any)?.value
+                          );
+
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              auto_save: {
+                                ...state.settings.editor.auto_save,
+                                enabled: parsedValue.enabled,
+                              },
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='auto-save-delay'>
+                        <ClockIcon />
+                        <span>Delay Time</span>
+                      </label>
+                      <p>
+                        This controls the time before automatic save in
+                        milliseconds.
+                      </p>
+
+                      <input
+                        type='number'
+                        id='auto-save-delay'
+                        min={300}
+                        max={20000}
+                        step={100}
+                        value={state.settings.editor.auto_save.delay}
+                        onChange={(e) => {
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              auto_save: {
+                                ...state.settings.editor.auto_save,
+                                delay: Number(e.target.value),
+                              },
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+
+                    <hr />
+
                     <div className='form-element'>
                       <label htmlFor='font-family'>
                         <FontFamilyIcon />
@@ -393,7 +469,36 @@ export function Settings() {
                         }}
                       />
                     </div>
-                    <hr/>
+                    <div className='form-element'>
+                      <label htmlFor='line-height'>
+                        <FontStyleIcon />
+                        <span>Modify editor line height</span>
+                      </label>
+                      <input
+                        type='number'
+                        id='line-height'
+                        min={1}
+                        max={5}
+                        step={0.1}
+                        value={state.settings.editor.font.line_height}
+                        onChange={(e) => {
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              font: {
+                                ...state.settings.editor.font,
+                                line_height: parseFloat(
+                                  Number(e.target.value).toFixed(1)
+                                ),
+                              },
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+
+                    <hr />
                   </section>
                 </div>
               </div>

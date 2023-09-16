@@ -128,7 +128,9 @@ export const _settings = styled.main`
 
           hr {
             all: unset;
-            border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+            border-bottom: 2px solid rgba(${({ theme }) => theme.font}, 0.15);
+            margin: 8px 0;
+            border-radius: 3px;
           }
 
           .form-element {
@@ -145,6 +147,10 @@ export const _settings = styled.main`
               align-self: end;
               font-size: 0.9rem;
             }
+          }
+
+          .auto-save_elements {
+            gap: 16px;
           }
         }
       }
