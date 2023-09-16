@@ -40,6 +40,10 @@ export function Settings() {
         url: '/api/v1/settings',
         data: { ...data },
       });
+      dispatch({
+        type: actions.SETTINGS,
+        payload: { ...state, settings: data },
+      });
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       dispatch({
@@ -63,14 +67,8 @@ export function Settings() {
   const getInitialData = async (): Promise<void> => {
     try {
       const [settings, user] = await Promise.all([
-        fetchAPI<TSettings>({
-          method: 'get',
-          url: '/api/v1/settings',
-        }),
-        fetchAPI<TUser>({
-          method: 'get',
-          url: '/api/v1/users',
-        }),
+        fetchAPI<TSettings>({ method: 'get', url: '/api/v1/settings' }),
+        fetchAPI<TUser>({ method: 'get', url: '/api/v1/users' }),
       ]);
 
       dispatch({
@@ -225,12 +223,7 @@ export function Settings() {
         type: actions.AUTH,
         payload: {
           ...state,
-          auth: {
-            id: '',
-            name: '',
-            token: '',
-            email: '',
-          },
+          auth: { id: '', name: '', token: '', email: '' },
         },
       });
 
@@ -315,6 +308,78 @@ export function Settings() {
               </div>
             </section>
 
+            <section className='group-container'>
+              <h2>Editor</h2>
+              <div className='content-container'>
+                <h3>
+                  <span>Customise your note editor settings</span>
+                </h3>
+                <div className='data-container'>
+                  <section className='font-size-container'>
+                    <h3>Modify editor font family</h3>
+                    <input
+                      type='text'
+                      value={state.settings.editor.font.font_family}
+                      onChange={(e) => {
+                        syncSettings({
+                          ...state.settings,
+                          editor: {
+                            ...state.settings.editor,
+                            font: {
+                              ...state.settings.editor.font,
+                              font_family:e.target.value,
+                            },
+                          },
+                        });
+                      }}
+                    />
+                  </section>
+                  <section className='font-size-container'>
+                    <h3>Modify editor font size</h3>
+                    <input
+                      type='number'
+                      min={10}
+                      max={50}
+                      value={state.settings.editor.font.font_size}
+                      onChange={(e) => {
+                        syncSettings({
+                          ...state.settings,
+                          editor: {
+                            ...state.settings.editor,
+                            font: {
+                              ...state.settings.editor.font,
+                              font_size: Number(e.target.value) || 16,
+                            },
+                          },
+                        });
+                      }}
+                    />
+                  </section>
+                  <section className='font-weight-container'>
+                    <h3>Modify editor font weight</h3>
+                    <input
+                      type='number'
+                      min={400}
+                      max={800}
+                      step={100}
+                      value={state.settings.editor.font.font_weight}
+                      onChange={(e) => {
+                        syncSettings({
+                          ...state.settings,
+                          editor: {
+                            ...state.settings.editor,
+                            font: {
+                              ...state.settings.editor.font,
+                              font_weight: e.target.value as any,
+                            },
+                          },
+                        });
+                      }}
+                    />
+                  </section>
+                </div>
+              </div>
+            </section>
             {/* <section className='group-container'>
               <h2></h2>
               <div className='content-container'>

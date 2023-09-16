@@ -129,6 +129,7 @@ export const _signup = styled.main`
           ${BaseButton}
           align-self: center;
           width: 100%;
+          text-align: center;
         }
       }
 

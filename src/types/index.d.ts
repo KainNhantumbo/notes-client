@@ -98,9 +98,7 @@ export type TModalProps = {
   status: boolean;
   message: string;
   actionButtonMessage: string | undefined;
-  handleFunction:
-    | (((data: any) => void) | (() => void) | Promise<void>)
-    | undefined;
+  handleFunction: ((data: any | undefined) => void | Promise<void>) | undefined;
 };
 
 export type TQuery = {

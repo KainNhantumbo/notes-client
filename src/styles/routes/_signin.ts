@@ -115,6 +115,7 @@ export const _signin = styled.main`
           ${BaseButton}
           align-self: center;
           width: 100%;
+          text-align: center;
         }
 
         .password-reset {
