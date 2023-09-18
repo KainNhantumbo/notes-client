@@ -9,6 +9,7 @@ import {
   GearIcon,
   LockClosedIcon,
   LockOpen2Icon,
+  RulerSquareIcon,
 } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
 import { m as motion } from 'framer-motion';
@@ -519,7 +520,176 @@ export function Settings() {
                     </h3>
 
                     <div className='form-element'>
-                      <label htmlFor=""></label>
+                      <label htmlFor='line-numbers'>
+                        <RulerSquareIcon />
+                        <span>Line Numbers</span>
+                      </label>
+                      <p>This controls the display of line numbers.</p>
+
+                      <SelectContainer
+                        id='line-numbers'
+                        placeholder={
+                          state.settings.editor.editing.line_numbers
+                            ? 'Enabled'
+                            : 'Disabled'
+                        }
+                        options={[
+                          { label: 'Enabled', value: `{"enabled": true}` },
+                          { label: 'Disabled', value: `{"enabled": false}` },
+                        ]}
+                        onChange={(option) => {
+                          const parsedValue: { enabled: boolean } = JSON.parse(
+                            (option as any)?.value
+                          );
+
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              editing: {
+                                ...state.settings.editor.editing,
+                                line_numbers: parsedValue.enabled,
+                              },
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='relative-line-numbers'>
+                        <RulerSquareIcon />
+                        <span>Relative Line Numbers</span>
+                      </label>
+                      <p>This controls the display of relative line numbers.</p>
+
+                      <SelectContainer
+                        id='relative-line-numbers'
+                        placeholder={
+                          state.settings.editor.editing
+                            .enable_relative_line_numbers
+                            ? 'Enabled'
+                            : 'Disabled'
+                        }
+                        options={[
+                          { label: 'Enabled', value: `{"enabled": true}` },
+                          { label: 'Disabled', value: `{"enabled": false}` },
+                        ]}
+                        onChange={(option) => {
+                          const parsedValue: { enabled: boolean } = JSON.parse(
+                            (option as any)?.value
+                          );
+
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              editing: {
+                                ...state.settings.editor.editing,
+                                enable_relative_line_numbers:
+                                  parsedValue.enabled,
+                              },
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='editor-toolbar'>
+                        <RulerSquareIcon />
+                        <span>Editor Toolbar</span>
+                      </label>
+                      <p>This controls the display of markup editor tools.</p>
+
+                      <SelectContainer
+                        id='editor-toolbar'
+                        placeholder={
+                          state.settings.editor.editing.enable_toolbar
+                            ? 'Enabled'
+                            : 'Disabled'
+                        }
+                        options={[
+                          { label: 'Enabled', value: `{"enabled": true}` },
+                          { label: 'Disabled', value: `{"enabled": false}` },
+                        ]}
+                        onChange={(option) => {
+                          const parsedValue: { enabled: boolean } = JSON.parse(
+                            (option as any)?.value
+                          );
+
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              editing: {
+                                ...state.settings.editor.editing,
+                                enable_toolbar: parsedValue.enabled,
+                              },
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='highlight-active-line'>
+                        <RulerSquareIcon />
+                        <span>Highlight Active Line</span>
+                      </label>
+                      <p>This controls the highlight of active line.</p>
+
+                      <SelectContainer
+                        id='highlight-active-line'
+                        placeholder={
+                          state.settings.editor.editing.highlight_active_line
+                            ? 'Enabled'
+                            : 'Disabled'
+                        }
+                        options={[
+                          { label: 'Enabled', value: `{"enabled": true}` },
+                          { label: 'Disabled', value: `{"enabled": false}` },
+                        ]}
+                        onChange={(option) => {
+                          const parsedValue: { enabled: boolean } = JSON.parse(
+                            (option as any)?.value
+                          );
+
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              editing: {
+                                ...state.settings.editor.editing,
+                                highlight_active_line: parsedValue.enabled,
+                              },
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className='form-element'>
+                      <label htmlFor='font-size'>
+                        <FontSizeIcon />
+                        <span>Editor Tab Size</span>
+                      </label>
+                      <input
+                        type='number'
+                        id='font-size'
+                        min={1}
+                        max={12}
+                        step={1}
+                        value={state.settings.editor.editing.tab_size}
+                        onChange={(e) => {
+                          syncSettings({
+                            ...state.settings,
+                            editor: {
+                              ...state.settings.editor,
+                              editing: {
+                                ...state.settings.editor.editing,
+                                tab_size: Number(e.target.value) || 2,
+                              },
+                            },
+                          });
+                        }}
+                      />
                     </div>
                   </section>
                 </div>
