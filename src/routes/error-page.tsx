@@ -19,12 +19,10 @@ export function ErrorPage(props: IProps) {
       <section className='content-container'>
         <h1>{props.title ?? 'Oops! This is an error.'}</h1>
         <p>
-          {props.message ??
+          {props.message ||
             'Oops! Looks like something bad happened, for now, thats all we know.'}
         </p>
-        <button onClick={props.retryFn}>
-          {props.button_message ?? 'Try again'}
-        </button>
+        <button onClick={props.retryFn}>{props.button_message ?? 'Try again'}</button>
       </section>
     </Container>
   );

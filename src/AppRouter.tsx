@@ -17,7 +17,7 @@ const routes = [
   { path: '/', element: Home },
   { path: '/workspace', element: Workspace },
   { path: '/workspace/settings', element: Settings },
-  { path: '/workspace/note-editor', element: NoteEditor },
+  { path: '/workspace/note-editor/:id', element: NoteEditor },
   { path: '/auth/password-recovery', element: PasswordRecovery },
   { path: '/auth/password-recovery-success', element: ResetPasswordSuccess },
   { path: '/auth/signin', element: SignIn },

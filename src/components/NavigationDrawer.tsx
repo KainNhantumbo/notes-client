@@ -59,10 +59,10 @@ export function NavigationDrawer() {
                   },
                 },
               });
-              
+
               navigate('/auth/signin', { replace: true });
             } catch (error: any) {
-              console.error(error?.response?.data?.message ?? error);
+              console.error(error?.response?.data?.message || error);
             } finally {
               dispatch({
                 type: actions.PROMPT,

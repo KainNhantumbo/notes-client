@@ -11,6 +11,8 @@ export const _notesList = styled.section`
 
   .header-container {
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -18,7 +20,8 @@ export const _notesList = styled.section`
     gap: 12px;
     background: rgb(${({ theme }) => theme.foreground});
     z-index: 200;
-    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    position: relative;
+
     h2 {
       font-size: 1.2rem;
       line-height: 1.6rem;
@@ -61,6 +64,48 @@ export const _notesList = styled.section`
         }
       }
     }
+
+    .compose-button {
+      z-index: 200;
+      ${BaseButton}
+      position: fixed;
+      right: calc(0% + 60px);
+      bottom: 50px;
+      background: rgba(${({ theme }) => theme.primary}, 0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      align-items: center;
+      svg {
+        pointer-events: none;
+        width: 20px;
+        height: 20px;
+      }
+
+      @media screen and (max-width: 460px) {
+        z-index: 200;
+        position: fixed;
+        right: calc(0% + 40px);
+        bottom: 50px;
+        ${StyledCornerButton}
+        border-radius: 50%;
+        padding: 8px;
+        background: rgba(${({ theme }) => theme.primary}, 0.2);
+        backdrop-filter: blur(10px);
+
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .header-hr {
+    all: unset;
+    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    margin: 8px 0;
+    border-radius: 3px;
   }
 
   .wrapper-container {
@@ -152,18 +197,6 @@ export const _notesList = styled.section`
     .ScrollAreaCorner {
       background: rgba(${({ theme }) => theme.font}, 0.1);
     }
-  }
-
-  .compose-button {
-    z-index: 200;
-    position: fixed;
-    left: 240px;
-    bottom: 50px;
-    ${StyledCornerButton}
-    border-radius: 50%;
-    padding: 8px;
-    background: rgba(${({ theme }) => theme.primary}, 0.2);
-    backdrop-filter: blur(10px);
   }
 
   .empty-notes-container {

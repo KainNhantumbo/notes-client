@@ -48,10 +48,10 @@ export default function SignIn() {
 
       navigate(`/workspace`, { replace: true });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message ?? error?.code,
+        message: error?.response?.data?.message || error?.code,
       });
     } finally {
       setLoading(false);
@@ -76,12 +76,7 @@ export default function SignIn() {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <img
-            loading='lazy'
-            decoding='async'
-            src={media_login}
-            alt='background image'
-          />
+          <img loading='lazy' decoding='async' src={media_login} alt='background image' />
 
           <article>
             <div className='form-container'>
@@ -122,15 +117,11 @@ export default function SignIn() {
                   />
                 </section>
                 <div className='password-reset'>
-                  <Link
-                    to={'/auth/password-recovery'}
-                    preventScrollReset={false}>
+                  <Link to={'/auth/password-recovery'} preventScrollReset={false}>
                     <span>Forgot password? Recover account.</span>
                   </Link>
                 </div>
-                {error.status && (
-                  <span className='error-message'>{error.message}</span>
-                )}
+                {error.status && <span className='error-message'>{error.message}</span>}
 
                 <motion.button
                   whileTap={{ scale: 0.8 }}

@@ -29,10 +29,10 @@ export default function PasswordRecovery() {
       });
       navigate('/auth/_password-recovery-success', { replace: true });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message ?? error?.code,
+        message: error?.response?.data?.message || error?.code,
       });
     } finally {
       setLoading(false);

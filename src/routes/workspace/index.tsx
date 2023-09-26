@@ -33,7 +33,7 @@ export default function Workspace() {
       });
       setQueryStats((data) => ({ ...data, isLoading: false }));
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       setQueryStats({
         isLoading: false,
         isError: true,

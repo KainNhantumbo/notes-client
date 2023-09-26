@@ -47,26 +47,21 @@ export function AppContext({ children }: TProps) {
         payload: { ...state, auth: { ...data } },
       });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
     }
   };
 
-  async function fetchAPI<T>(
-    config: AxiosRequestConfig
-  ): Promise<AxiosResponse<T, any>> {
-    fetch.interceptors.response.use(
-      undefined,
-      (error: AxiosError): Promise<never> => {
-        const status = Number(error?.response?.status);
-        if (status > 400 && status < 404) {
-          authenticateUser().catch((error) => {
-            console.error(error?.response?.data?.message ?? error);
-            navigate('/auth/sign-in', { replace: true });
-          });
-        }
-        return Promise.reject(error);
+  async function fetchAPI<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T, any>> {
+    fetch.interceptors.response.use(undefined, (error: AxiosError): Promise<never> => {
+      const status = Number(error?.response?.status);
+      if (status > 400 && status < 404) {
+        authenticateUser().catch((error) => {
+          console.error(error?.response?.data?.message || error);
+          navigate('/auth/sign-in', { replace: true });
+        });
       }
-    );
+      return Promise.reject(error);
+    });
     return await fetch<T>({
       ...config,
       headers: { authorization: `Bearer ${state.auth.token}` },
@@ -110,7 +105,7 @@ export function AppContext({ children }: TProps) {
       });
       console.log('Sync note: ', _id);
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -118,8 +113,7 @@ export function AppContext({ children }: TProps) {
           toast: {
             ...state.toast,
             title: 'Note Sync Error',
-            message:
-              error?.response?.data?.message ?? 'Failed to sync your note.',
+            message: error?.response?.data?.message || 'Failed to sync your note.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncCurrentNote,

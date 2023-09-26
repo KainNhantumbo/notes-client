@@ -2,17 +2,18 @@ import {
   CaretSortIcon,
   HamburgerMenuIcon,
   MixIcon,
-  Pencil2Icon,
+  Pencil2Icon
 } from '@radix-ui/react-icons';
 import actions from '../shared/actions';
 import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
+import { TNote } from '@/types';
 
 interface IProps {
   isLoading: boolean;
@@ -25,52 +26,43 @@ export function NotesList(props: IProps) {
   const theme = useTheme();
   const { state, dispatch, fetchAPI } = useAppContext();
   let [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const newNoteTemplate: TNote = {
+    _id: '',
+    title: '',
+    content: ``,
+    created_by: '',
+    metadata: {
+      folder_id: '',
+      color: '',
+      deleted: false,
+      bookmarked: false,
+      status: 'none',
+      priority: 'none',
+      reminder: { time: '', expired: false },
+      tags: []
+    },
+    updatedAt: '',
+    createdAt: ''
+  };
 
   const createNote = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
     try {
-      const { data } = await fetchAPI<any>({
+      const { data } = await fetchAPI<TNote>({
         method: 'post',
-        url: '/api/v1/notes',
-        data: {},
+        url: '/api/v1/notes'
       });
 
       dispatch({
         type: actions.CURRENT_NOTE,
-        payload: { ...state, currentNote: data },
+        payload: { ...state, currentNote: { ...newNoteTemplate, ...data } }
       });
 
-      // @ts-ignore
-      dispatch({
-        type: actions.NOTES,
-        payload: {
-          ...state,
-          notes: [
-            {
-              _id: '',
-              title: '',
-              content: ``,
-              created_by: '',
-              metadata: {
-                folder_id: '',
-                color: '',
-                deleted: false,
-                bookmarked: false,
-                status: 'none',
-                priority: 'none',
-                reminder: { time: '', expired: false },
-                tags: [],
-              },
-              updatedAt: '',
-              createdAt: '',
-              ...data,
-            },
-            ...state.notes,
-          ],
-        },
-      });
+      navigate(`/workspace/note-editor/${data._id}`);
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -79,13 +71,13 @@ export function NotesList(props: IProps) {
             ...state.toast,
             title: 'Note Sync Error',
             message:
-              error?.response?.data?.message ??
+              error?.response?.data?.message ||
               'Failed to create your note. Check your internet connection and try again',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: createNote,
-          },
-        },
+            handleFunction: createNote
+          }
+        }
       });
     }
   };
@@ -94,7 +86,9 @@ export function NotesList(props: IProps) {
     <Container>
       <section className='header-container'>
         <h2>
-          <span>{searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}</span>
+          <span>
+            {searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}
+          </span>
         </h2>
 
         <div className='form-container'>
@@ -111,9 +105,9 @@ export function NotesList(props: IProps) {
                   ...state,
                   navigation: {
                     ...state.navigation,
-                    is_navigation_drawer: true,
-                  },
-                },
+                    is_navigation_drawer: true
+                  }
+                }
               })
             }>
             <HamburgerMenuIcon />
@@ -131,8 +125,8 @@ export function NotesList(props: IProps) {
                 type: actions.QUERY_NOTES,
                 payload: {
                   ...state,
-                  query: { ...state.query, search: e.target.value },
-                },
+                  query: { ...state.query, search: e.target.value }
+                }
               })
             }
           />
@@ -146,16 +140,29 @@ export function NotesList(props: IProps) {
             onClick={() =>
               dispatch({
                 type: actions.QUERY_NOTES,
-                payload: { ...state, query: { ...state.query, sort: '' } },
+                payload: { ...state, query: { ...state.query, sort: '' } }
               })
             }>
             <CaretSortIcon />
           </motion.button>
         </div>
+
+        {!props.isError && !props.isLoading ? (
+          <motion.button
+            title='Compose a new note'
+            placeholder='Compose a new note'
+            aria-placeholder='Compose a new note'
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.8 }}
+            className='compose-button'
+            onClick={createNote}>
+            <Pencil2Icon />
+            <span>Compose</span>
+          </motion.button>
+        ) : null}
       </section>
 
-
-
+      <hr className='header-hr' />
 
       {state.notes.length > 0 && !props.isLoading && !props.isError ? (
         <div className='wrapper-container'>
@@ -167,23 +174,21 @@ export function NotesList(props: IProps) {
                   className={`note-container ${
                     note._id === state.currentNote._id ? 'selected-note' : ''
                   }`}
-                  onClick={() => {
-                    dispatch({
-                      type: actions.CURRENT_NOTE,
-                      payload: {
-                        ...state,
-                        currentNote: { ...note },
-                      },
-                    });
-                  }}>
+                  onClick={() =>
+                    navigate(`/workspace/note-editor/${note._id}`)
+                  }>
                   <h3>
                     <span>{note.title ? note.title : '[Untitled]'}</span>
                   </h3>
-                  <p>{note?.content ? note.content.slice(0, 40) : '[Empty note]'}</p>
+                  <p>
+                    {note?.content ? note.content.slice(0, 40) : '[Empty note]'}
+                  </p>
                   {note.metadata.tags.length > 0 ? (
                     <div className='tags-container'>
                       {note.metadata.tags.map((tag) => (
-                        <span style={{ backgroundColor: tag.color }} key={tag.value}>
+                        <span
+                          style={{ backgroundColor: tag.color }}
+                          key={tag.value}>
                           {tag.value}
                         </span>
                       ))}
@@ -193,7 +198,9 @@ export function NotesList(props: IProps) {
                 </div>
               ))}
             </ScrollArea.Viewport>
-            <ScrollArea.Scrollbar className='ScrollAreaScrollbar' orientation='vertical'>
+            <ScrollArea.Scrollbar
+              className='ScrollAreaScrollbar'
+              orientation='vertical'>
               <ScrollArea.Thumb className='ScrollAreaThumb' />
             </ScrollArea.Scrollbar>
             <ScrollArea.Scrollbar
@@ -219,19 +226,6 @@ export function NotesList(props: IProps) {
         </section>
       ) : null}
 
-      {!props.isError && !props.isLoading ? (
-        <motion.button
-          title='Compose a new note'
-          placeholder='Compose a new note'
-          aria-placeholder='Compose a new note'
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.8 }}
-          className='compose-button'
-          onClick={createNote}>
-          <Pencil2Icon />
-        </motion.button>
-      ) : null}
-
       {state.notes.length < 1 && !props.isError && !props.isLoading ? (
         <section className='empty-notes-container'>
           <MixIcon />
@@ -251,7 +245,7 @@ export function NotesList(props: IProps) {
             color={`rgb(${theme.primary_shade})`}
             aria-placeholder='Loading your notes...'
             cssOverride={{
-              display: 'block',
+              display: 'block'
             }}
           />
           <h3>Loading your notes...</h3>

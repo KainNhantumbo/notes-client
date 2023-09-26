@@ -52,7 +52,7 @@ export default function Settings() {
         payload: { ...state, settings: data },
       });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -60,7 +60,7 @@ export default function Settings() {
           toast: {
             ...state.toast,
             title: 'Settings Sync Error',
-            message: error?.response?.data?.message ?? 'Failed to sync your settings.',
+            message: error?.response?.data?.message || 'Failed to sync your settings.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncSettings,
@@ -90,7 +90,7 @@ export default function Settings() {
         },
       });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -99,7 +99,7 @@ export default function Settings() {
             ...state.toast,
             title: 'Initial Data Sync Error',
             message:
-              error?.response?.data?.message ??
+              error?.response?.data?.message ||
               'Failed to fetch your settings and user account data.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -129,7 +129,7 @@ export default function Settings() {
         },
       });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       dispatch({
         type: actions.PROMPT,
         payload: {
@@ -145,7 +145,7 @@ export default function Settings() {
             ...state.toast,
             title: 'Account Data Sync Error',
             message:
-              error?.response?.data?.message ?? 'Failed to sync your account data.',
+              error?.response?.data?.message || 'Failed to sync your account data.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncUserData,
@@ -193,7 +193,7 @@ export default function Settings() {
         },
       });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -234,7 +234,7 @@ export default function Settings() {
 
       navigate('/', { replace: true });
     } catch (error: any) {
-      console.error(error?.response?.data?.message ?? error);
+      console.error(error?.response?.data?.message || error);
       dispatch({
         type: actions.PROMPT,
         payload: {
@@ -251,7 +251,7 @@ export default function Settings() {
             ...state.toast,
             title: 'Delete Account Error',
             message:
-              error?.response?.data?.message ??
+              error?.response?.data?.message ||
               'Failed to update your password. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
