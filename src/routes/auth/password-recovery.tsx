@@ -5,13 +5,13 @@ import { useState, useEffect } from 'react';
 import { SubmitEvent } from '@/types';
 import { app_metadata } from '@/shared/data';
 import { PulseLoader } from 'react-spinners';
-import { DefaultTheme, useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 export function PasswordRecovery() {
-  const theme: DefaultTheme = useTheme();
+  const theme = useTheme();
   const navigate: NavigateFunction = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -61,8 +61,8 @@ export function PasswordRecovery() {
             <div className='form-container'>
               <h2>Password Recovery</h2>
               <p>
-                Please type the e-mail associated with your account and we will
-                send an e-mail with instructions to recover your account.
+                Please type the e-mail associated with your account and we will send an
+                e-mail with instructions to recover your account.
               </p>
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>

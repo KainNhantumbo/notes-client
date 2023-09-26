@@ -1,5 +1,8 @@
 import type { ChangeEvent, FormEvent } from 'react';
 import { editorThemeOptions } from '@/shared/data';
+import * as editorTheme from '@uiw/codemirror-themes-all';
+
+export type TEditorTheme = keyof typeof editorTheme;
 
 export type THeadProps =
   | {
@@ -132,7 +135,7 @@ export type TSettings = {
   };
   theme: {
     ui_theme: 'light' | 'dark';
-    editor_theme: string;
+    editor_theme: TEditorTheme;
     automatic_ui_theme: boolean;
   };
 };

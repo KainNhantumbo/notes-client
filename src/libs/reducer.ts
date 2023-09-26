@@ -1,3 +1,4 @@
+import { editorThemeOptions } from '@/shared/data';
 import actions from '../shared/actions';
 import { TAction, TState } from '@/types/reducer';
 
@@ -14,11 +15,7 @@ const initialState: TState = {
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', token: '' },
-  user: {
-    first_name: '',
-    last_name: '',
-    email: '',
-  },
+  user: { first_name: '',last_name: '',email: ''},
   signUp: {
     first_name: '',
     last_name: '',
@@ -58,10 +55,7 @@ const initialState: TState = {
     updatedAt: '',
     createdAt: '',
   },
-  query: {
-    search: '',
-    sort: '',
-  },
+  query: { search: '', sort: '' },
   settings: {
     _id: '',
     created_by: '',
@@ -84,7 +78,7 @@ const initialState: TState = {
     },
     theme: {
       ui_theme: 'light',
-      editor_theme: 'xcode',
+      editor_theme: 'basicLight',
       automatic_ui_theme: true,
     },
   },

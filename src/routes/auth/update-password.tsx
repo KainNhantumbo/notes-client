@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 import { InputEvents, SubmitEvent } from '@/types';
 import { app_metadata } from '@/shared/data';
 import { PulseLoader } from 'react-spinners';
-import { DefaultTheme, useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
 import { LockClosedIcon } from '@radix-ui/react-icons';
 
 export function UpdatePassword() {
-  const theme: DefaultTheme = useTheme();
+  const theme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
   const [passwords, setPasswords] = useState({
@@ -73,8 +73,8 @@ export function UpdatePassword() {
             <div className='form-container'>
               <h2>Update Password</h2>
               <p>
-                Note: your password should be strong and must differ from past
-                used passwords.
+                Note: your password should be strong and must differ from past used
+                passwords.
               </p>
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>

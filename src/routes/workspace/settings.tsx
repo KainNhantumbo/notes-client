@@ -17,7 +17,7 @@ import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
 import { useAppContext } from '@/context/AppContext';
 import { _settings as Container } from '@/styles/routes/_settings';
-import { app_metadata, colorSchemeOptions } from '@/shared/data';
+import { app_metadata, colorSchemeOptions, editorThemeOptions } from '@/shared/data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { InputEvents, TColorScheme, TSettings, TUser } from '@/types';
 import { SelectContainer } from '@/components/Select';
@@ -60,8 +60,7 @@ export function Settings() {
           toast: {
             ...state.toast,
             title: 'Settings Sync Error',
-            message:
-              error?.response?.data?.message ?? 'Failed to sync your settings.',
+            message: error?.response?.data?.message ?? 'Failed to sync your settings.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncSettings,
@@ -146,8 +145,7 @@ export function Settings() {
             ...state.toast,
             title: 'Account Data Sync Error',
             message:
-              error?.response?.data?.message ??
-              'Failed to sync your account data.',
+              error?.response?.data?.message ?? 'Failed to sync your account data.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncUserData,
@@ -284,12 +282,10 @@ export function Settings() {
             </div>
 
             <section className='group-container'>
-              <h2>UI Themes</h2>
+              <h2>Themes</h2>
               <div className='content-container'>
                 <h3>
-                  <span>
-                    Choose the global UI Theme and the editor color schemes
-                  </span>
+                  <span>Choose the global UI theme and the editor color schemes</span>
                 </h3>
                 <div className='data-container'>
                   <SelectContainer
@@ -305,8 +301,30 @@ export function Settings() {
                         theme: {
                           ...state.settings.theme,
                           ui_theme: parsedValue.scheme,
-                          automatic_ui_theme:
-                            parsedValue.mode === 'auto' ? true : false,
+                          automatic_ui_theme: parsedValue.mode === 'auto' ? true : false,
+                        },
+                      });
+                    }}
+                  />
+                </div>
+              </div>
+              <div className='content-container'>
+                <h3>
+                  <span>Editor color schemes</span>
+                </h3>
+                <div className='data-container'>
+                  <SelectContainer
+                    options={editorThemeOptions.map((item) => ({
+                      label: item,
+                      value: item,
+                    }))}
+                    placeholder={'Select the global color scheme...'}
+                    onChange={(option) => {
+                      syncSettings({
+                        ...state.settings,
+                        theme: {
+                          ...state.settings.theme,
+                          editor_theme: (option as any)?.value,
                         },
                       });
                     }}
@@ -342,9 +360,7 @@ export function Settings() {
                       <SelectContainer
                         id='auto-save-state'
                         placeholder={
-                          state.settings.editor.auto_save.enabled
-                            ? 'Enabled'
-                            : 'Disabled'
+                          state.settings.editor.auto_save.enabled ? 'Enabled' : 'Disabled'
                         }
                         options={[
                           { label: 'Enabled', value: `{"enabled": true}` },
@@ -373,10 +389,7 @@ export function Settings() {
                         <ClockIcon />
                         <span>Delay Time</span>
                       </label>
-                      <p>
-                        This controls the time before automatic save in
-                        milliseconds.
-                      </p>
+                      <p>This controls the time before automatic save in milliseconds.</p>
 
                       <input
                         type='number'
@@ -564,9 +577,11 @@ export function Settings() {
 
                       <SelectContainer
                         id='relative-line-numbers'
+                        isDisabled={
+                          state.settings.editor.editing.line_numbers ? false : true
+                        }
                         placeholder={
-                          state.settings.editor.editing
-                            .enable_relative_line_numbers
+                          state.settings.editor.editing.enable_relative_line_numbers
                             ? 'Enabled'
                             : 'Disabled'
                         }
@@ -585,8 +600,7 @@ export function Settings() {
                               ...state.settings.editor,
                               editing: {
                                 ...state.settings.editor.editing,
-                                enable_relative_line_numbers:
-                                  parsedValue.enabled,
+                                enable_relative_line_numbers: parsedValue.enabled,
                               },
                             },
                           });
@@ -810,8 +824,7 @@ export function Settings() {
               <div className='content-container'>
                 <h3>
                   <span>
-                    We encorage to use strong passwords that you can easily
-                    remember
+                    We encorage to use strong passwords that you can easily remember
                   </span>
                 </h3>
                 <div className='data-container password-settings'>
@@ -853,8 +866,8 @@ export function Settings() {
                   </section>
                   <div className='save-container'>
                     <p>
-                      Tip: just leave this section blanc if you don't want to
-                      update your password.
+                      Tip: just leave this section blanc if you don't want to update your
+                      password.
                     </p>
 
                     <motion.button
@@ -876,8 +889,8 @@ export function Settings() {
               <div className='content-container'>
                 <h3>
                   <span>
-                    This will erase all your data from the server and delete
-                    your account, be careful, it can't be undone.
+                    This will erase all your data from the server and delete your account,
+                    be careful, it can't be undone.
                   </span>
                 </h3>
                 <div className='data-container delete-account-settings'>

@@ -46,13 +46,7 @@ export function NavigationDrawer() {
                 type: actions.AUTH,
                 payload: {
                   ...state,
-                  auth: {
-                    id: '',
-                    name: '',
-                    token: '',
-                    email: '',
-                    profile_image: '',
-                  },
+                  auth: { id: '', name: '', token: '', email: '' },
                 },
               });
               dispatch({
@@ -65,6 +59,11 @@ export function NavigationDrawer() {
                   },
                 },
               });
+              
+              navigate('/auth/signin', { replace: true });
+            } catch (error: any) {
+              console.error(error?.response?.data?.message ?? error);
+            } finally {
               dispatch({
                 type: actions.PROMPT,
                 payload: {
@@ -72,9 +71,6 @@ export function NavigationDrawer() {
                   prompt: { ...state.prompt, status: false },
                 },
               });
-              navigate('/auth/signin', { replace: true });
-            } catch (error: any) {
-              console.error(error?.response?.data?.message ?? error);
             }
           },
         },

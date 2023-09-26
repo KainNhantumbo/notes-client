@@ -14,11 +14,11 @@ import { useAppContext } from '@/context/AppContext';
 import { useEffect, useState } from 'react';
 import { InputEvents, SubmitEvent } from '@/types';
 import media_login from '@/assets/media-login.jpg';
-import { DefaultTheme, useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { _signup as Container } from '@/styles/routes/_signup';
 
 export function SignUp() {
-  const theme: DefaultTheme = useTheme();
+  const theme = useTheme();
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch } = useAppContext();
   const [loading, setLoading] = useState<boolean>(false);

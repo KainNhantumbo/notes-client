@@ -7,7 +7,7 @@ import {
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
-import { TOption } from '@/types';
+import { TEditorTheme, TOption } from '@/types';
 
 export const app_metadata = {
   appName: Package.metadata.name,
@@ -110,53 +110,50 @@ export const statusOptions: TOption[] = [
 ];
 
 export const colorSchemeOptions = [
-  {
-    label: 'Light Theme',
-    value: `{"mode":"manual", "scheme": "light"}`,
-  },
-  {
-    label: 'Dark Theme',
-    value: `{"mode":"manual", "scheme": "dark"}`,
-  },
-  {
-    label: 'Automatic',
-    value: `{"mode":"auto", "scheme": "dark"}`,
-  },
+  { label: 'Light Theme', value: `{"mode":"manual", "scheme": "light"}` },
+  { label: 'Dark Theme', value: `{"mode":"manual", "scheme": "dark"}` },
+  { label: 'Automatic', value: `{"mode":"auto", "scheme": "dark"}` },
 ];
 
-export const editorThemeOptions: string[] = [
+export const editorThemeOptions: TEditorTheme[] = [
   'abcdef',
   'abyss',
   'androidstudio',
   'andromeda',
   'atomone',
   'aura',
-  'basic',
+  'basicDark',
+  'basicLight',
   'bbedit',
   'bespin',
   'copilot',
   'darcula',
   'dracula',
-  'duotone',
+  'duotoneDark',
+  'duotoneLight',
   'eclipse',
-  'github',
-  'gruvbox-dark',
+  'githubDark',
+  'githubLight',
+  'gruvboxDark',
   'kimbie',
   'material',
   'monokai',
-  'monokai-dimmed',
-  'noctis-lilac',
+  'monokaiDimmed',
+  'noctisLilac',
   'nord',
   'okaidia',
   'quietlight',
   'red',
-  'solarized',
+  'solarizedDark',
+  'solarizedLight',
   'sublime',
-  'tokyo-night',
-  'tokyo-night-storm',
-  'tokyo-night-day',
-  'tomorrow-night-blue',
-  'vscode',
-  'white',
-  'xcode',
+  'tokyoNight',
+  'tokyoNightStorm',
+  'tokyoNightDay',
+  'tomorrowNightBlue',
+  'vscodeDark',
+  'whiteDark',
+  'whiteLight',
+  'xcodeDark',
+  'xcodeLight',
 ];

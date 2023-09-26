@@ -10,7 +10,7 @@ import { formatDate } from '@/libs/utils';
 import { useAppContext } from '../context/AppContext';
 import { useSearchParams } from 'react-router-dom';
 import { MoonLoader } from 'react-spinners';
-import { DefaultTheme, useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { _notesList as Container } from '@/styles/modules/_notes-list';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 
@@ -22,7 +22,7 @@ interface IProps {
 }
 
 export function NotesList(props: IProps) {
-  const theme: DefaultTheme = useTheme();
+  const theme = useTheme();
   const { state, dispatch, fetchAPI } = useAppContext();
   let [searchParams] = useSearchParams();
 
@@ -94,9 +94,7 @@ export function NotesList(props: IProps) {
     <Container>
       <section className='header-container'>
         <h2>
-          <span>
-            {searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}
-          </span>
+          <span>{searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}</span>
         </h2>
 
         <div className='form-container'>
@@ -178,15 +176,11 @@ export function NotesList(props: IProps) {
                   <h3>
                     <span>{note.title ? note.title : '[Untitled]'}</span>
                   </h3>
-                  <p>
-                    {note?.content ? note.content.slice(0, 40) : '[Empty note]'}
-                  </p>
+                  <p>{note?.content ? note.content.slice(0, 40) : '[Empty note]'}</p>
                   {note.metadata.tags.length > 0 ? (
                     <div className='tags-container'>
                       {note.metadata.tags.map((tag) => (
-                        <span
-                          style={{ backgroundColor: tag.color }}
-                          key={tag.value}>
+                        <span style={{ backgroundColor: tag.color }} key={tag.value}>
                           {tag.value}
                         </span>
                       ))}
@@ -196,9 +190,7 @@ export function NotesList(props: IProps) {
                 </div>
               ))}
             </ScrollArea.Viewport>
-            <ScrollArea.Scrollbar
-              className='ScrollAreaScrollbar'
-              orientation='vertical'>
+            <ScrollArea.Scrollbar className='ScrollAreaScrollbar' orientation='vertical'>
               <ScrollArea.Thumb className='ScrollAreaThumb' />
             </ScrollArea.Scrollbar>
             <ScrollArea.Scrollbar

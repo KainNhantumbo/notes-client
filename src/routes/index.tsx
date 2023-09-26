@@ -3,7 +3,7 @@ import { Layout } from '@/components/Layout';
 import demo_dark from '@/assets/demo-dark.jpg';
 import app_logo from '@/assets/logo-192x192.png';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import { DefaultTheme, useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import demo_light from '@/assets/demo-light.jpg';
 import { _home as Container } from '@/styles/routes/_home';
@@ -12,7 +12,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 export function Home() {
   const { colorScheme } = useThemeContext();
-  const theme: DefaultTheme = useTheme();
+  const theme = useTheme();
   const navigate: NavigateFunction = useNavigate();
 
   return (
@@ -29,9 +29,8 @@ export function Home() {
               </h1>
 
               <p>
-                All your notes, synced on your devices. Get{' '}
-                {app_metadata.appName} now for free on all your devices or use
-                it in your browser.
+                All your notes, synced on your devices. Get {app_metadata.appName} now for
+                free on all your devices or use it in your browser.
               </p>
 
               <div className='action-buttons'>
@@ -39,9 +38,7 @@ export function Home() {
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   className='browser-button'
-                  onClick={() =>
-                    navigate('/workspace?tab=all-notes&folder=none')
-                  }>
+                  onClick={() => navigate('/workspace?tab=all-notes&folder=none')}>
                   <span>Get started</span>
                 </motion.button>
                 <motion.a
@@ -94,17 +91,15 @@ export function Home() {
                 <span>Ready to get started?</span>
               </h2>
               <p>
-                Don't have an account yet? Sign up for a free account and take
-                your produtivity to next level...
+                Don't have an account yet? Sign up for a free account and take your
+                produtivity to next level...
               </p>
 
               <div className='action-buttons'>
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
-                  onClick={() =>
-                    navigate('/workspace?tab=all-notes&folder=none')
-                  }
+                  onClick={() => navigate('/workspace?tab=all-notes&folder=none')}
                   className='browser-button'>
                   <span>Get started</span>
                 </motion.button>
