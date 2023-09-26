@@ -7,9 +7,7 @@ export const _notesList = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: 300px;
   background: rgb(${({ theme }) => theme.foreground});
-  border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
   .header-container {
     width: 100%;
@@ -63,6 +61,17 @@ export const _notesList = styled.section`
         }
       }
     }
+  }
+
+  .wrapper-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    justify-items: center;
+    max-width: 980px;
+    align-self: center;
+    margin: 0 auto;
+    padding-top: 50px;
   }
 
   .notes-list-container {

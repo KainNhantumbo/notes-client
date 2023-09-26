@@ -10,7 +10,7 @@ import { _recoveryPassword as Container } from '@/styles/routes/_recovery-paswor
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export function PasswordRecovery() {
+export default function PasswordRecovery() {
   const theme = useTheme();
   const navigate: NavigateFunction = useNavigate();
   const [email, setEmail] = useState<string>('');

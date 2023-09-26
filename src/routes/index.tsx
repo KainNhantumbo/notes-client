@@ -10,7 +10,7 @@ import { _home as Container } from '@/styles/routes/_home';
 import { app_features, app_metadata } from '@/shared/data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export function Home() {
+export default function Home() {
   const { colorScheme } = useThemeContext();
   const theme = useTheme();
   const navigate: NavigateFunction = useNavigate();

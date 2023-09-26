@@ -2,7 +2,7 @@ import { app_metadata } from '../shared/data';
 import { _error as Container } from '../styles/routes/_error';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export function NotFoundError() {
+export default function NotFoundError() {
   const navigate: NavigateFunction = useNavigate();
 
   return (

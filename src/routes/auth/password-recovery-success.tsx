@@ -4,7 +4,7 @@ import { app_metadata } from '@/shared/data';
 import { _signinSuccess as Container } from '@/styles/routes/_signup-sucess';
 import { CardStackIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
 
-export function ResetPasswordSuccess() {
+export default function ResetPasswordSuccess() {
   return (
     <Layout
       renderFooter

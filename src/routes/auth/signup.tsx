@@ -17,7 +17,7 @@ import media_login from '@/assets/media-login.jpg';
 import { useTheme } from 'styled-components';
 import { _signup as Container } from '@/styles/routes/_signup';
 
-export function SignUp() {
+export default function SignUp() {
   const theme = useTheme();
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch } = useAppContext();

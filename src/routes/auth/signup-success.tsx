@@ -4,7 +4,7 @@ import { app_metadata } from '@/shared/data';
 import { _signinSuccess as Container } from '@/styles/routes/_signup-sucess';
 import { LockClosedIcon, PersonIcon } from '@radix-ui/react-icons';
 
-export function SignupSuccess() {
+export default function SignupSuccess() {
   return (
     <Layout
       renderFooter

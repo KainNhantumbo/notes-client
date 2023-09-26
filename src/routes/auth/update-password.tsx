@@ -9,7 +9,7 @@ import { useTheme } from 'styled-components';
 import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
 import { LockClosedIcon } from '@radix-ui/react-icons';
 
-export function UpdatePassword() {
+export default function UpdatePassword() {
   const theme = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });

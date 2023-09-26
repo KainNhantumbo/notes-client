@@ -6,10 +6,9 @@ import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { app_metadata } from '@/shared/data';
 import { NotesList } from '@/components/NotesList';
 import { useAppContext } from '@/context/AppContext';
-import EditorContainer from '@/components/EditorContainer';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 
-export function Workspace() {
+export default function Workspace() {
   const { state, dispatch, fetchAPI } = useAppContext();
   const [queryStats, setQueryStats] = useState({
     isLoading: false,
@@ -17,8 +16,9 @@ export function Workspace() {
     error: null,
   });
 
-  const getNotes = async (): Promise<void> => {
+  async function getNotes() {
     const { search, sort } = state.query;
+    setQueryStats((data) => ({ ...data, isLoading: true }));
     try {
       const { data } = await fetchAPI<TNote[]>({
         method: 'get',
@@ -31,6 +31,7 @@ export function Workspace() {
         type: actions.NOTES,
         payload: { ...state, notes: [...data] },
       });
+      setQueryStats((data) => ({ ...data, isLoading: false }));
     } catch (error: any) {
       console.error(error?.response?.data?.message ?? error);
       setQueryStats({
@@ -39,7 +40,7 @@ export function Workspace() {
         error: error,
       });
     }
-  };
+  }
 
   useEffect((): (() => void) | void => {
     if (state.auth.token) {
@@ -58,10 +59,10 @@ export function Workspace() {
       }}>
       <Container>
         <NavigationDrawer />
+
         {state.navigation.is_notes_list ? (
           <NotesList {...{ ...queryStats, refetch: getNotes }} />
         ) : null}
-        {state.navigation.is_editor_container ? <EditorContainer /> : null}
       </Container>
     </Layout>
   );

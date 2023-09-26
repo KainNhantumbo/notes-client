@@ -11,8 +11,8 @@ import { useAppContext } from '../context/AppContext';
 import { useSearchParams } from 'react-router-dom';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
-import { _notesList as Container } from '@/styles/modules/_notes-list';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+import { _notesList as Container } from '@/styles/modules/_notes-list';
 
 interface IProps {
   isLoading: boolean;
@@ -154,8 +154,11 @@ export function NotesList(props: IProps) {
         </div>
       </section>
 
+
+
+
       {state.notes.length > 0 && !props.isLoading && !props.isError ? (
-        <>
+        <div className='wrapper-container'>
           <ScrollArea.Root className='notes-list-container'>
             <ScrollArea.Viewport className='ScrollAreaViewport'>
               {state.notes.map((note) => (
@@ -200,7 +203,7 @@ export function NotesList(props: IProps) {
             </ScrollArea.Scrollbar>
             <ScrollArea.Corner className='ScrollAreaCorner' />
           </ScrollArea.Root>
-        </>
+        </div>
       ) : null}
 
       {!props.isLoading && props.isError ? (

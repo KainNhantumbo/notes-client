@@ -2,7 +2,7 @@ import { Layout } from '@/components/Layout';
 import { app_metadata } from '@/shared/data';
 import { _docs as Container } from '@/styles/routes/_docs';
 
-export function PrivacyPolicy() {
+export default function PrivacyPolicy() {
   return (
     <Layout
       renderFooter

@@ -11,7 +11,7 @@ import { _signin as Container } from '@/styles/routes/_signin';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 
-export function SignIn() {
+export default function SignIn() {
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch } = useAppContext();
   const [loading, setLoading] = useState<boolean>(false);

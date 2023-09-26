@@ -23,7 +23,7 @@ import { InputEvents, TColorScheme, TSettings, TUser } from '@/types';
 import { SelectContainer } from '@/components/Select';
 import { useThemeContext } from '@/context/ThemeContext';
 
-export function Settings() {
+export default function Settings() {
   const { state, dispatch, fetchAPI } = useAppContext();
   const { changeColorScheme } = useThemeContext();
   const navigate: NavigateFunction = useNavigate();
