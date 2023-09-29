@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const _noteEditor = styled.main`
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   position: relative;
@@ -11,6 +10,10 @@ export const _noteEditor = styled.main`
   .md-editor {
     border-radius: 0px;
     box-shadow: none;
+    width: 100%;
+  }
+
+  .md-editor-content-editor {
     width: 100%;
   }
 

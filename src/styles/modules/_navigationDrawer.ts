@@ -22,7 +22,7 @@ export const _navigationDrawer = styled.section`
     z-index: 5000;
     height: 100%;
     backdrop-filter: blur(2px);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 12px 12px 0;
     background: rgba(${({ theme }) => theme.foreground}, 0.8);
     border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   }
@@ -52,13 +52,21 @@ export const _navigationDrawer = styled.section`
 
       h3 {
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         font-weight: 600;
       }
     }
 
     .hamburguer-icon {
-      
+      pointer-events: none;
+      width: 20px;
+      height: 20px;
+    }
+
+    :hover {
+      .hamburguer-icon {
+        color: rgb(${({ theme }) => theme.primary_shade});
+      }
     }
   }
 

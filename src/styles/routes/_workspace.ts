@@ -22,7 +22,7 @@ export const _workspace = styled.main`
       display: flex;
       flex-direction: column;
       padding: 20px;
-      padding-bottom: 12px;
+
       gap: 12px;
       background: rgb(${({ theme }) => theme.foreground});
       z-index: 200;
@@ -72,31 +72,38 @@ export const _workspace = styled.main`
       }
 
       .compose-button {
-        z-index: 200;
         ${BaseButton}
+        z-index: 200;
         position: fixed;
-        right: calc(0% + 60px);
-        bottom: 50px;
-        background: rgba(${({ theme }) => theme.primary}, 0.2);
+        right: 120px;
+        bottom: 60px;
+        background: rgba(${({ theme }) => theme.primary}, 0.1);
         backdrop-filter: blur(10px);
         display: flex;
         flex-direction: row;
-        gap: 12px;
+        gap: 8px;
         align-items: center;
+        border-radius: 18px;
+        border: none;
+        padding: 12px;
+        box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.2);
+
+        :hover {
+          border: none;
+          background: rgba(${({ theme }) => theme.primary}, 0.2);
+        }
         svg {
           pointer-events: none;
           width: 20px;
           height: 20px;
+          stroke-width: 5px;
         }
 
-        @media screen and (max-width: 460px) {
-          z-index: 200;
-          position: fixed;
+        @media screen and (max-width: 660px) {
           right: calc(0% + 40px);
-          bottom: 50px;
           ${StyledCornerButton}
           border-radius: 50%;
-          padding: 8px;
+          padding: 12px;
           background: rgba(${({ theme }) => theme.primary}, 0.2);
           backdrop-filter: blur(10px);
 
@@ -110,17 +117,17 @@ export const _workspace = styled.main`
     .header-hr {
       all: unset;
       border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-      margin: 8px 0;
+      margin: 2px 0;
       border-radius: 3px;
     }
 
     .wrapper-container {
       width: 100%;
+      height: 100%;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 5px;
       justify-items: center;
-      max-width: 980px;
+      max-width: 780px;
       align-self: center;
       margin: 0 auto;
     }
@@ -128,6 +135,7 @@ export const _workspace = styled.main`
     .notes-list-container {
       width: 100%;
       height: 100%;
+      max-height: 83vh;
       display: flex !important;
       flex-direction: column !important;
 
@@ -175,24 +183,25 @@ export const _workspace = styled.main`
           p,
           span {
             width: 100%;
-            max-width: 180px;
+            max-width: 380px;
             white-space: nowrap;
-            text-overflow: ellipsis;
             overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
 
         .action-panel {
           ${StyledCornerButton}
+          border: none;
 
           :hover {
-            background: rgba(${({ theme }) => theme.font}, 0.2);
+            background: rgba(${({ theme }) => theme.font}, 0.1);
           }
         }
       }
 
       overflow: hidden;
-      --scrollbar-size: 10px;
+      --scrollbar-size: 3px;
 
       .ScrollAreaViewport {
         width: 100%;
@@ -217,7 +226,7 @@ export const _workspace = styled.main`
       }
       .ScrollAreaScrollbar[data-orientation='horizontal'] {
         flex-direction: column;
-        height: 8px;
+        height: 3px;
       }
 
       .ScrollAreaThumb {
@@ -236,8 +245,8 @@ export const _workspace = styled.main`
         transform: translate(-50%, -50%);
         width: 100%;
         height: 100%;
-        min-width: 44px;
-        min-height: 44px;
+        min-width: 4px;
+        min-height: 4px;
       }
 
       .ScrollAreaCorner {

@@ -5,8 +5,6 @@ import {
   useReducer,
   Dispatch,
   useEffect,
-  useCallback,
-  useMemo
 } from 'react';
 import { TAuth, TNote } from '@/types';
 import fetch from '@/config/client';

@@ -4,10 +4,11 @@ import {
   FileTextIcon,
   HamburgerMenuIcon,
   MixIcon,
-  Pencil2Icon
+  PlusIcon
 } from '@radix-ui/react-icons';
 import { TNote } from '@/types';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
+import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
@@ -150,7 +151,7 @@ export default function Workspace() {
                   placeholder='Toggle navigation drawer'
                   aria-placeholder='Toggle navigation drawer'
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.8 }}
+                  whileTap={{ scale: 1 }}
                   onClick={() =>
                     dispatch({
                       type: actions.NAVIGATION,
@@ -210,7 +211,7 @@ export default function Workspace() {
                   whileTap={{ scale: 0.8 }}
                   className='compose-button'
                   onClick={createNote}>
-                  <Pencil2Icon />
+                  <PlusIcon />
                   <span>Compose</span>
                 </motion.button>
               ) : null}

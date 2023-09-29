@@ -11,6 +11,7 @@ import { TwitterPicker } from 'react-color';
 import { colorsOptions } from '../shared/data';
 import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
+import TagsContainer from './TagsContainer';
 
 export function CustomTools() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -56,6 +57,8 @@ export function CustomTools() {
       </div>
 
       <div className='properties-container'>
+        <TagsContainer />
+
         {/* <button
           className='favorite'
           onClick={() =>
