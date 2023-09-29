@@ -5,13 +5,11 @@ import { useAppContext } from '@/context/AppContext';
 import { useThemeContext } from '@/context/ThemeContext';
 import { lineNumbersRelative } from '@uiw/codemirror-extensions-line-numbers-relative';
 import * as editorTheme from '@uiw/codemirror-themes-all';
-import { useTheme } from 'styled-components';
 import { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 
 export function Editor() {
   const { colorScheme } = useThemeContext();
   const { state, dispatch } = useAppContext();
-  const theme = useTheme();
 
   const usableExtensions = useMemo((): ReactCodeMirrorProps['extensions'] => {
     const extensions: ReactCodeMirrorProps['extensions'] = [];
@@ -74,8 +72,8 @@ export function Editor() {
         ]}
         toolbarsMode={['preview']}
         placeholder={'Start writing...'}
-        height={String(state.windowInnerSize.height - 92 + 'px')}
-        maxHeight={String(state.windowInnerSize.height - 92 + 'px')}
+        height={String(state.windowInnerSize.height - 90 + 'px')}
+        maxHeight={String(state.windowInnerSize.height - 90 + 'px')}
       />
     </div>
   );

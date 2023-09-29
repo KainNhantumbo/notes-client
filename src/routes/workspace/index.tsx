@@ -1,12 +1,13 @@
 import {
   CaretSortIcon,
+  DotsVerticalIcon,
   FileTextIcon,
   HamburgerMenuIcon,
   MixIcon,
   Pencil2Icon
 } from '@radix-ui/react-icons';
 import { TNote } from '@/types';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
@@ -87,11 +88,11 @@ export default function Workspace() {
   };
 
   async function getNotes() {
-    const params = new URLSearchParams(state.query).toString();
+    const queryParams = new URLSearchParams(state.query).toString();
     try {
       const { data } = await useFetchAPI<TNote[]>({
         method: 'get',
-        url: `/api/v1/notes?${params}`
+        url: `/api/v1/notes?${queryParams}`
       });
       return data;
     } catch (error: any) {
@@ -119,7 +120,7 @@ export default function Workspace() {
   useEffect((): (() => void) | void => {
     if (state.auth.token) {
       const timer = setTimeout(() => {
-        getNotes();
+        refetch({ queryKey: ['query-notes'] });
       }, 500);
       return (): void => clearTimeout(timer);
     }
@@ -145,9 +146,9 @@ export default function Workspace() {
 
               <div className='form-container'>
                 <motion.button
-                  title='open navigation drawer'
-                  placeholder='open navigation drawer'
-                  aria-placeholder='open navigation drawer'
+                  title='Toggle navigation drawer'
+                  placeholder='Toggle navigation drawer'
+                  aria-placeholder='Toggle navigation drawer'
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.8 }}
                   onClick={() =>
@@ -157,7 +158,8 @@ export default function Workspace() {
                         ...state,
                         navigation: {
                           ...state.navigation,
-                          is_navigation_drawer: true
+                          is_navigation_drawer:
+                            !state.navigation.is_navigation_drawer
                         }
                       }
                     })
@@ -224,7 +226,14 @@ export default function Workspace() {
                       <div
                         key={note._id}
                         className={`note-container`}
-                        onClick={() => handleEditNote(note)}>
+                        onClick={(e) => {
+                          const target = (e as any).target.classList.contains(
+                            'action-panel'
+                          );
+                          if (!target) {
+                            handleEditNote(note);
+                          }
+                        }}>
                         <div className='left-side'>
                           <h3>
                             <FileTextIcon />
@@ -233,9 +242,11 @@ export default function Workspace() {
                             </span>
                           </h3>
                           <p>
-                            {note.content.length > 70
+                            {!note.content
+                              ? '[Empty note]'
+                              : note.content.length > 70
                               ? note.content.slice(0, 70)
-                              : '[Empty note]'}
+                              : note.content}
                           </p>
                         </div>
 
@@ -251,8 +262,12 @@ export default function Workspace() {
                               ))}
                             </div>
                           ) : null}
-                          <span>{formatDate(note.updatedAt)}</span>
+                          <h5>{formatDate(note.updatedAt)}</h5>
                         </div>
+
+                        <button className='action-panel'>
+                          <DotsVerticalIcon />
+                        </button>
                       </div>
                     ))}
                   </ScrollArea.Viewport>

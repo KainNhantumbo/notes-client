@@ -5,26 +5,26 @@ export const _navigationDrawer = styled.section`
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 220px;
   z-index: 11000;
   position: fixed;
   height: 100vh;
-  backdrop-filter: blur(2px);
   user-select: none;
-  border-radius: 0 8px 8px 0;
-  background: rgba(${({ theme }) => theme.foreground}, 0.8);
-  border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+  max-width: 220px;
 
   .main-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    max-width: 220px;
     display: flex;
     flex-direction: column;
-    backdrop-filter: blur(10px);
     z-index: 5000;
     height: 100%;
+    backdrop-filter: blur(2px);
+    border-radius: 0 8px 8px 0;
+    background: rgba(${({ theme }) => theme.foreground}, 0.8);
+    border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   }
 
   .header-container {
@@ -55,6 +55,10 @@ export const _navigationDrawer = styled.section`
         font-size: 0.8rem;
         font-weight: 600;
       }
+    }
+
+    .hamburguer-icon {
+      
     }
   }
 

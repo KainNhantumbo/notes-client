@@ -115,6 +115,7 @@ export const _workspace = styled.main`
     }
 
     .wrapper-container {
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr;
       gap: 5px;
@@ -133,16 +134,22 @@ export const _workspace = styled.main`
       .note-container {
         width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
         gap: 12px;
-        padding: 2px 8px;
+        padding: 7px 8px;
         font-size: 0.9rem;
         user-select: none;
         cursor: pointer;
         border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
         line-height: 1.2rem;
+
+        :hover {
+          border-radius: 12px;
+          background: rgba(${({ theme }) => theme.primary}, 0.2);
+          border-bottom: 1px solid transparent;
+        }
 
         .left-side {
           width: 100%;
@@ -150,40 +157,37 @@ export const _workspace = styled.main`
           align-items: center;
           flex-flow: row wrap;
           gap: 12px;
-          
+
           h3 {
+            width: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 5px;
 
-            span {
-              width: 100%;
-              max-width: 280px;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              overflow: hidden;
-            }
-
             svg {
               width: 18px;
               height: 18px;
+              color: rgb(${({ theme }) => theme.secondary});
             }
           }
 
-          p {
+          p,
+          span {
             width: 100%;
-            max-width: 280px;
+            max-width: 180px;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
           }
         }
 
-        :hover {
-          border-radius: 12px;
-          background: rgba(${({ theme }) => theme.primary}, 0.2);
-          border-bottom: 1px solid transparent;
+        .action-panel {
+          ${StyledCornerButton}
+
+          :hover {
+            background: rgba(${({ theme }) => theme.font}, 0.2);
+          }
         }
       }
 

@@ -177,12 +177,9 @@ export function NavigationDrawer() {
         <Container>
           <motion.div
             className='main-container'
-            initial={{ x: 0 }}
-            animate={{
-              translateX: 0
-            }}
-            exit={{ translateX: -300, transition: { duration: 0.25 } }}
-            transition={{ duration: 0.5 }}>
+            initial={{ opacity: 0, x: -300 }}
+            animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
+            exit={{ opacity: 0, x: -300, transition: { duration: 0.5 } }}>
             <section
               className='header-container'
               onClick={() => {
@@ -207,7 +204,7 @@ export function NavigationDrawer() {
                 />
                 <h3>{app_metadata.appName.toLowerCase()}</h3>
               </div>
-              <HamburgerMenuIcon />
+              <HamburgerMenuIcon className='hamburguer-icon' />
             </section>
 
             <motion.ul>
