@@ -8,7 +8,7 @@ import {
   GearIcon,
   HamburgerMenuIcon,
   PlusIcon,
-  TrashIcon,
+  TrashIcon
 } from '@radix-ui/react-icons';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ import * as Collapsible from '@radix-ui/react-collapsible';
 
 export function NavigationDrawer() {
   const navigate: NavigateFunction = useNavigate();
-  const { state, dispatch, fetchAPI } = useAppContext();
+  const { state, dispatch, useFetchAPI } = useAppContext();
   const [openCollapsible, setOpenCollapsible] = useState<boolean>(false);
 
   const handleLogout = (): void => {
@@ -37,17 +37,17 @@ export function NavigationDrawer() {
           message: 'Do you really want to exit this session and logout?',
           handleFunction: async (): Promise<void> => {
             try {
-              await fetchAPI({
+              await useFetchAPI({
                 method: 'post',
                 url: '/api/v1/auth/default/logout',
-                withCredentials: true,
+                withCredentials: true
               });
               dispatch({
                 type: actions.AUTH,
                 payload: {
                   ...state,
-                  auth: { id: '', name: '', token: '', email: '' },
-                },
+                  auth: { id: '', name: '', token: '', email: '' }
+                }
               });
               dispatch({
                 type: actions.NAVIGATION,
@@ -55,9 +55,9 @@ export function NavigationDrawer() {
                   ...state,
                   navigation: {
                     ...state.navigation,
-                    is_navigation_drawer: false,
-                  },
-                },
+                    is_navigation_drawer: false
+                  }
+                }
               });
 
               navigate('/auth/signin', { replace: true });
@@ -68,13 +68,13 @@ export function NavigationDrawer() {
                 type: actions.PROMPT,
                 payload: {
                   ...state,
-                  prompt: { ...state.prompt, status: false },
-                },
+                  prompt: { ...state.prompt, status: false }
+                }
               });
             }
-          },
-        },
-      },
+          }
+        }
+      }
     });
   };
 
@@ -87,7 +87,7 @@ export function NavigationDrawer() {
         classname: 'all-notes',
         execute: () => {
           navigate('/workspace?tab=all-notes&folder=none');
-        },
+        }
       },
       {
         label: 'Folders',
@@ -99,9 +99,9 @@ export function NavigationDrawer() {
         },
         button: {
           icon: PlusIcon,
-          handleFunction: () => {},
+          handleFunction: () => {}
         },
-        children: [],
+        children: []
       },
       {
         label: 'Trash',
@@ -111,7 +111,7 @@ export function NavigationDrawer() {
         execute: () => {
           navigate(`/workspace?tab=trash&folder=trash`);
         },
-        children: [],
+        children: []
       },
       {
         label: 'Bookmarks',
@@ -121,7 +121,7 @@ export function NavigationDrawer() {
         execute: () => {
           navigate(`/workspace?tab=bookmarks&folder=bookmarks`);
         },
-        children: [],
+        children: []
       },
       {
         label: 'Tags',
@@ -131,14 +131,14 @@ export function NavigationDrawer() {
         execute: () => {
           navigate(`/workspace?tab=tags&folder=tags`);
         },
-        children: [],
-      },
+        children: []
+      }
     ],
     bottom: [
       {
         label: 'Logout',
         icon: ExitIcon,
-        execute: handleLogout,
+        execute: handleLogout
       },
       {
         label: 'Go Home',
@@ -148,11 +148,11 @@ export function NavigationDrawer() {
             type: actions.NAVIGATION,
             payload: {
               ...state,
-              navigation: { ...state.navigation, is_navigation_drawer: false },
-            },
+              navigation: { ...state.navigation, is_navigation_drawer: false }
+            }
           });
           navigate('/');
-        },
+        }
       },
       {
         label: 'Open Settings',
@@ -162,13 +162,13 @@ export function NavigationDrawer() {
             type: actions.NAVIGATION,
             payload: {
               ...state,
-              navigation: { ...state.navigation, is_navigation_drawer: false },
-            },
+              navigation: { ...state.navigation, is_navigation_drawer: false }
+            }
           });
           navigate('/workspace/settings');
-        },
-      },
-    ],
+        }
+      }
+    ]
   };
 
   return (
@@ -179,7 +179,7 @@ export function NavigationDrawer() {
             className='main-container'
             initial={{ x: 0 }}
             animate={{
-              translateX: 0,
+              translateX: 0
             }}
             exit={{ translateX: -300, transition: { duration: 0.25 } }}
             transition={{ duration: 0.5 }}>
@@ -192,9 +192,9 @@ export function NavigationDrawer() {
                     ...state,
                     navigation: {
                       ...state.navigation,
-                      is_navigation_drawer: false,
-                    },
-                  },
+                      is_navigation_drawer: false
+                    }
+                  }
                 });
               }}>
               <div className='logo-container'>

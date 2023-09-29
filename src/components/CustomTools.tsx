@@ -1,7 +1,7 @@
 import {
   BookmarkFilledIcon,
   BookmarkIcon,
-  MixerHorizontalIcon,
+  MixerHorizontalIcon
 } from '@radix-ui/react-icons';
 import { Tag } from '@/types';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
 
 export function CustomTools() {
-  const { state, dispatch, fetchAPI } = useAppContext();
+  const { state, dispatch, useFetchAPI } = useAppContext();
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
 
   const handleAddTag = (tags: Tag[]): void => {
@@ -25,10 +25,10 @@ export function CustomTools() {
           ...state.currentNote,
           metadata: {
             ...state.currentNote.metadata,
-            tags: [...tags],
-          },
-        },
-      },
+            tags: [...tags]
+          }
+        }
+      }
     });
   };
 
@@ -48,8 +48,8 @@ export function CustomTools() {
               type: actions.CURRENT_NOTE,
               payload: {
                 ...state,
-                currentNote: { ...state.currentNote, title: e.target.value },
-              },
+                currentNote: { ...state.currentNote, title: e.target.value }
+              }
             })
           }
         />

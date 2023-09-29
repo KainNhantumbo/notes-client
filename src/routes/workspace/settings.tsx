@@ -9,7 +9,7 @@ import {
   GearIcon,
   LockClosedIcon,
   LockOpen2Icon,
-  RulerSquareIcon,
+  RulerSquareIcon
 } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
 import { m as motion } from 'framer-motion';
@@ -17,39 +17,43 @@ import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
 import { useAppContext } from '@/context/AppContext';
 import { _settings as Container } from '@/styles/routes/_settings';
-import { app_metadata, colorSchemeOptions, editorThemeOptions } from '@/shared/data';
+import {
+  app_metadata,
+  colorSchemeOptions,
+  editorThemeOptions
+} from '@/shared/data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { InputEvents, TColorScheme, TSettings, TUser } from '@/types';
 import { SelectContainer } from '@/components/Select';
 import { useThemeContext } from '@/context/ThemeContext';
 
 export default function Settings() {
-  const { state, dispatch, fetchAPI } = useAppContext();
+  const { state, dispatch, useFetchAPI } = useAppContext();
   const { changeColorScheme } = useThemeContext();
   const navigate: NavigateFunction = useNavigate();
 
   const [passwords, setPasswords] = useState({
     password: '',
-    confirm_password: '',
+    confirm_password: ''
   });
 
   const handlePasswordsChange = (e: InputEvents): void => {
     setPasswords((state) => ({
       ...state,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
 
   const syncSettings = async (data: TSettings): Promise<void> => {
     try {
-      await fetchAPI({
+      await useFetchAPI({
         method: 'patch',
         url: '/api/v1/settings',
-        data: { ...data },
+        data: { ...data }
       });
       dispatch({
         type: actions.SETTINGS,
-        payload: { ...state, settings: data },
+        payload: { ...state, settings: data }
       });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
@@ -60,12 +64,13 @@ export default function Settings() {
           toast: {
             ...state.toast,
             title: 'Settings Sync Error',
-            message: error?.response?.data?.message || 'Failed to sync your settings.',
+            message:
+              error?.response?.data?.message || 'Failed to sync your settings.',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: syncSettings,
-          },
-        },
+            handleFunction: syncSettings
+          }
+        }
       });
     }
   };
@@ -73,21 +78,21 @@ export default function Settings() {
   const getInitialData = async (): Promise<void> => {
     try {
       const [settings, user] = await Promise.all([
-        fetchAPI<TSettings>({ method: 'get', url: '/api/v1/settings' }),
-        fetchAPI<TUser>({ method: 'get', url: '/api/v1/users' }),
+        useFetchAPI<TSettings>({ method: 'get', url: '/api/v1/settings' }),
+        useFetchAPI<TUser>({ method: 'get', url: '/api/v1/users' })
       ]);
 
       dispatch({
         type: actions.USER,
-        payload: { ...state, user: { ...state.user, ...user.data } },
+        payload: { ...state, user: { ...state.user, ...user.data } }
       });
 
       dispatch({
         type: actions.SETTINGS,
         payload: {
           ...state,
-          settings: { ...state.settings, ...settings.data },
-        },
+          settings: { ...state.settings, ...settings.data }
+        }
       });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
@@ -103,30 +108,30 @@ export default function Settings() {
               'Failed to fetch your settings and user account data.',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: getInitialData,
-          },
-        },
+            handleFunction: getInitialData
+          }
+        }
       });
     }
   };
 
   const syncUserData = async (): Promise<void> => {
     try {
-      const response = await fetchAPI<TUser>({
+      const response = await useFetchAPI<TUser>({
         method: 'patch',
         url: '/api/v1/users',
-        data: { ...state.user },
+        data: { ...state.user }
       });
       dispatch({
         type: actions.USER,
-        payload: { ...state, user: { ...state.user, ...response.data } },
+        payload: { ...state, user: { ...state.user, ...response.data } }
       });
       dispatch({
         type: actions.PROMPT,
         payload: {
           ...state,
-          prompt: { ...state.prompt, status: false },
-        },
+          prompt: { ...state.prompt, status: false }
+        }
       });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
@@ -134,8 +139,8 @@ export default function Settings() {
         type: actions.PROMPT,
         payload: {
           ...state,
-          prompt: { ...state.prompt, status: false },
-        },
+          prompt: { ...state.prompt, status: false }
+        }
       });
       dispatch({
         type: actions.TOAST,
@@ -145,12 +150,13 @@ export default function Settings() {
             ...state.toast,
             title: 'Account Data Sync Error',
             message:
-              error?.response?.data?.message || 'Failed to sync your account data.',
+              error?.response?.data?.message ||
+              'Failed to sync your account data.',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: syncUserData,
-          },
-        },
+            handleFunction: syncUserData
+          }
+        }
       });
     }
   };
@@ -166,18 +172,18 @@ export default function Settings() {
               ...state.toast,
               title: 'Update Password Error',
               message: 'Passwords must match. Please, try again.',
-              status: true,
-            },
-          },
+              status: true
+            }
+          }
         });
       }
     }
 
     try {
-      await fetchAPI({
+      await useFetchAPI({
         method: 'patch',
         url: `/api/v1/users`,
-        data: { password: passwords.password },
+        data: { password: passwords.password }
       });
 
       dispatch({
@@ -188,9 +194,9 @@ export default function Settings() {
             ...state.toast,
             title: 'Password Updated',
             message: 'Your password was updated successfully.',
-            status: true,
-          },
-        },
+            status: true
+          }
+        }
       });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
@@ -206,30 +212,30 @@ export default function Settings() {
               'Failed to update your password. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: handleUpdatePassword,
-          },
-        },
+            handleFunction: handleUpdatePassword
+          }
+        }
       });
     }
   };
 
   const handleDeleteAccount = async (): Promise<void> => {
     try {
-      await fetchAPI({ method: 'delete', url: '/api/v1/users' });
+      await useFetchAPI({ method: 'delete', url: '/api/v1/users' });
       dispatch({
         type: actions.PROMPT,
         payload: {
           ...state,
-          prompt: { ...state.prompt, status: false },
-        },
+          prompt: { ...state.prompt, status: false }
+        }
       });
 
       dispatch({
         type: actions.AUTH,
         payload: {
           ...state,
-          auth: { id: '', name: '', token: '', email: '' },
-        },
+          auth: { id: '', name: '', token: '', email: '' }
+        }
       });
 
       navigate('/', { replace: true });
@@ -239,8 +245,8 @@ export default function Settings() {
         type: actions.PROMPT,
         payload: {
           ...state,
-          prompt: { ...state.prompt, status: false },
-        },
+          prompt: { ...state.prompt, status: false }
+        }
       });
 
       dispatch({
@@ -255,9 +261,9 @@ export default function Settings() {
               'Failed to update your password. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: handleUpdatePassword,
-          },
-        },
+            handleFunction: handleUpdatePassword
+          }
+        }
       });
     }
   };
@@ -285,7 +291,9 @@ export default function Settings() {
               <h2>Themes</h2>
               <div className='content-container'>
                 <h3>
-                  <span>Choose the global UI theme and the editor color schemes</span>
+                  <span>
+                    Choose the global UI theme and the editor color schemes
+                  </span>
                 </h3>
                 <div className='data-container'>
                   <SelectContainer
@@ -301,8 +309,9 @@ export default function Settings() {
                         theme: {
                           ...state.settings.theme,
                           ui_theme: parsedValue.scheme,
-                          automatic_ui_theme: parsedValue.mode === 'auto' ? true : false,
-                        },
+                          automatic_ui_theme:
+                            parsedValue.mode === 'auto' ? true : false
+                        }
                       });
                     }}
                   />
@@ -316,7 +325,7 @@ export default function Settings() {
                   <SelectContainer
                     options={editorThemeOptions.map((item) => ({
                       label: item,
-                      value: item,
+                      value: item
                     }))}
                     placeholder={'Select the global color scheme...'}
                     onChange={(option) => {
@@ -324,8 +333,8 @@ export default function Settings() {
                         ...state.settings,
                         theme: {
                           ...state.settings.theme,
-                          editor_theme: (option as any)?.value,
-                        },
+                          editor_theme: (option as any)?.value
+                        }
                       });
                     }}
                   />
@@ -360,11 +369,13 @@ export default function Settings() {
                       <SelectContainer
                         id='auto-save-state'
                         placeholder={
-                          state.settings.editor.auto_save.enabled ? 'Enabled' : 'Disabled'
+                          state.settings.editor.auto_save.enabled
+                            ? 'Enabled'
+                            : 'Disabled'
                         }
                         options={[
                           { label: 'Enabled', value: `{"enabled": true}` },
-                          { label: 'Disabled', value: `{"enabled": false}` },
+                          { label: 'Disabled', value: `{"enabled": false}` }
                         ]}
                         onChange={(option) => {
                           const parsedValue: { enabled: boolean } = JSON.parse(
@@ -377,9 +388,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               auto_save: {
                                 ...state.settings.editor.auto_save,
-                                enabled: parsedValue.enabled,
-                              },
-                            },
+                                enabled: parsedValue.enabled
+                              }
+                            }
                           });
                         }}
                       />
@@ -389,7 +400,10 @@ export default function Settings() {
                         <ClockIcon />
                         <span>Delay Time</span>
                       </label>
-                      <p>This controls the time before automatic save in milliseconds.</p>
+                      <p>
+                        This controls the time before automatic save in
+                        milliseconds.
+                      </p>
 
                       <input
                         type='number'
@@ -405,9 +419,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               auto_save: {
                                 ...state.settings.editor.auto_save,
-                                delay: Number(e.target.value),
-                              },
-                            },
+                                delay: Number(e.target.value)
+                              }
+                            }
                           });
                         }}
                       />
@@ -438,9 +452,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               font: {
                                 ...state.settings.editor.font,
-                                font_family: e.target.value,
-                              },
-                            },
+                                font_family: e.target.value
+                              }
+                            }
                           });
                         }}
                       />
@@ -463,9 +477,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               font: {
                                 ...state.settings.editor.font,
-                                font_size: Number(e.target.value) || 16,
-                              },
-                            },
+                                font_size: Number(e.target.value) || 16
+                              }
+                            }
                           });
                         }}
                       />
@@ -489,9 +503,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               font: {
                                 ...state.settings.editor.font,
-                                font_weight: e.target.value as any,
-                              },
-                            },
+                                font_weight: e.target.value as any
+                              }
+                            }
                           });
                         }}
                       />
@@ -517,9 +531,9 @@ export default function Settings() {
                                 ...state.settings.editor.font,
                                 line_height: parseFloat(
                                   Number(e.target.value).toFixed(1)
-                                ),
-                              },
-                            },
+                                )
+                              }
+                            }
                           });
                         }}
                       />
@@ -548,7 +562,7 @@ export default function Settings() {
                         }
                         options={[
                           { label: 'Enabled', value: `{"enabled": true}` },
-                          { label: 'Disabled', value: `{"enabled": false}` },
+                          { label: 'Disabled', value: `{"enabled": false}` }
                         ]}
                         onChange={(option) => {
                           const parsedValue: { enabled: boolean } = JSON.parse(
@@ -561,9 +575,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               editing: {
                                 ...state.settings.editor.editing,
-                                line_numbers: parsedValue.enabled,
-                              },
-                            },
+                                line_numbers: parsedValue.enabled
+                              }
+                            }
                           });
                         }}
                       />
@@ -578,16 +592,19 @@ export default function Settings() {
                       <SelectContainer
                         id='relative-line-numbers'
                         isDisabled={
-                          state.settings.editor.editing.line_numbers ? false : true
+                          state.settings.editor.editing.line_numbers
+                            ? false
+                            : true
                         }
                         placeholder={
-                          state.settings.editor.editing.enable_relative_line_numbers
+                          state.settings.editor.editing
+                            .enable_relative_line_numbers
                             ? 'Enabled'
                             : 'Disabled'
                         }
                         options={[
                           { label: 'Enabled', value: `{"enabled": true}` },
-                          { label: 'Disabled', value: `{"enabled": false}` },
+                          { label: 'Disabled', value: `{"enabled": false}` }
                         ]}
                         onChange={(option) => {
                           const parsedValue: { enabled: boolean } = JSON.parse(
@@ -600,9 +617,10 @@ export default function Settings() {
                               ...state.settings.editor,
                               editing: {
                                 ...state.settings.editor.editing,
-                                enable_relative_line_numbers: parsedValue.enabled,
-                              },
-                            },
+                                enable_relative_line_numbers:
+                                  parsedValue.enabled
+                              }
+                            }
                           });
                         }}
                       />
@@ -623,7 +641,7 @@ export default function Settings() {
                         }
                         options={[
                           { label: 'Enabled', value: `{"enabled": true}` },
-                          { label: 'Disabled', value: `{"enabled": false}` },
+                          { label: 'Disabled', value: `{"enabled": false}` }
                         ]}
                         onChange={(option) => {
                           const parsedValue: { enabled: boolean } = JSON.parse(
@@ -636,9 +654,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               editing: {
                                 ...state.settings.editor.editing,
-                                enable_toolbar: parsedValue.enabled,
-                              },
-                            },
+                                enable_toolbar: parsedValue.enabled
+                              }
+                            }
                           });
                         }}
                       />
@@ -659,7 +677,7 @@ export default function Settings() {
                         }
                         options={[
                           { label: 'Enabled', value: `{"enabled": true}` },
-                          { label: 'Disabled', value: `{"enabled": false}` },
+                          { label: 'Disabled', value: `{"enabled": false}` }
                         ]}
                         onChange={(option) => {
                           const parsedValue: { enabled: boolean } = JSON.parse(
@@ -672,9 +690,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               editing: {
                                 ...state.settings.editor.editing,
-                                highlight_active_line: parsedValue.enabled,
-                              },
-                            },
+                                highlight_active_line: parsedValue.enabled
+                              }
+                            }
                           });
                         }}
                       />
@@ -698,9 +716,9 @@ export default function Settings() {
                               ...state.settings.editor,
                               editing: {
                                 ...state.settings.editor.editing,
-                                tab_size: Number(e.target.value) || 2,
-                              },
-                            },
+                                tab_size: Number(e.target.value) || 2
+                              }
+                            }
                           });
                         }}
                       />
@@ -748,9 +766,9 @@ export default function Settings() {
                               ...state,
                               user: {
                                 ...state.user,
-                                first_name: e.target.value,
-                              },
-                            },
+                                first_name: e.target.value
+                              }
+                            }
                           })
                         }
                         value={state.user.first_name}
@@ -781,9 +799,9 @@ export default function Settings() {
                               ...state,
                               user: {
                                 ...state.user,
-                                last_name: e.target.value,
-                              },
-                            },
+                                last_name: e.target.value
+                              }
+                            }
                           })
                         }
                       />
@@ -808,9 +826,9 @@ export default function Settings() {
                             message: 'Do you wish to update your account data?',
                             actionButtonMessage: 'Confirm',
                             status: true,
-                            handleFunction: syncUserData,
-                          },
-                        },
+                            handleFunction: syncUserData
+                          }
+                        }
                       });
                     }}>
                     <span>Update account data</span>
@@ -824,7 +842,8 @@ export default function Settings() {
               <div className='content-container'>
                 <h3>
                   <span>
-                    We encorage to use strong passwords that you can easily remember
+                    We encorage to use strong passwords that you can easily
+                    remember
                   </span>
                 </h3>
                 <div className='data-container password-settings'>
@@ -866,8 +885,8 @@ export default function Settings() {
                   </section>
                   <div className='save-container'>
                     <p>
-                      Tip: just leave this section blanc if you don't want to update your
-                      password.
+                      Tip: just leave this section blanc if you don't want to
+                      update your password.
                     </p>
 
                     <motion.button
@@ -889,8 +908,8 @@ export default function Settings() {
               <div className='content-container'>
                 <h3>
                   <span>
-                    This will erase all your data from the server and delete your account,
-                    be careful, it can't be undone.
+                    This will erase all your data from the server and delete
+                    your account, be careful, it can't be undone.
                   </span>
                 </h3>
                 <div className='data-container delete-account-settings'>
@@ -912,9 +931,9 @@ export default function Settings() {
                               'Erase all data and delete your account. This cannot be undone.',
                             actionButtonMessage: 'Confirm',
                             status: true,
-                            handleFunction: handleDeleteAccount,
-                          },
-                        },
+                            handleFunction: handleDeleteAccount
+                          }
+                        }
                       });
                     }}>
                     <span>Delete account</span>

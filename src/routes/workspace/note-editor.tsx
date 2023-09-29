@@ -6,13 +6,12 @@ import { _noteEditor as Container } from '@/styles/routes/_note-editor';
 
 export default function NoteEditor() {
   const { state } = useAppContext();
-
   return (
     <Layout
       metadata={{
         title: `Editor | ${state.currentNote.title}`,
         createdAt: state.currentNote.createdAt || new Date().toISOString(),
-        updatedAt: state.currentNote.updatedAt || new Date().toISOString(),
+        updatedAt: state.currentNote.updatedAt || new Date().toISOString()
       }}>
       <Container>
         <CustomTools />

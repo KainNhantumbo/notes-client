@@ -1,17 +1,12 @@
 import actions from '@/shared/actions';
 import { CSSProperties, useMemo } from 'react';
-import MarkdownEditor, {defaultTheme} from '@uiw/react-markdown-editor';
+import MarkdownEditor from '@uiw/react-markdown-editor';
 import { useAppContext } from '@/context/AppContext';
 import { useThemeContext } from '@/context/ThemeContext';
 import { lineNumbersRelative } from '@uiw/codemirror-extensions-line-numbers-relative';
 import * as editorTheme from '@uiw/codemirror-themes-all';
 import { useTheme } from 'styled-components';
 import { ReactCodeMirrorProps } from '@uiw/react-codemirror';
-import { RehypeRewriteOptions } from 'rehype-rewrite';
-import rehypeDocument from 'rehype-document';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
 
 export function Editor() {
   const { colorScheme } = useThemeContext();
@@ -31,7 +26,8 @@ export function Editor() {
     fontSize: state.settings.editor.font.font_size,
     fontWeight: state.settings.editor.font.font_weight,
     lineHeight: `${String(state.settings.editor.font.line_height)} px`,
-    wordWrap: 'break-word', lineBreak: 'anywhere',
+    wordWrap: 'break-word',
+    lineBreak: 'anywhere',
     maxWidth: '400px'
   };
 
@@ -46,18 +42,19 @@ export function Editor() {
         extensions={usableExtensions}
         hideToolbar={state.settings.editor.editing.enable_toolbar}
         basicSetup={{
-          highlightActiveLine: state.settings.editor.editing.highlight_active_line,
+          highlightActiveLine:
+            state.settings.editor.editing.highlight_active_line,
           tabSize: state.settings.editor.editing.tab_size,
           lineNumbers: state.settings.editor.editing.line_numbers,
-          foldGutter: state.settings.editor.editing.line_numbers,
+          foldGutter: state.settings.editor.editing.line_numbers
         }}
-        onChange={(value: string, viewUpdate) => {
+        onChange={(value, viewUpdate) => {
           dispatch({
             type: actions.CURRENT_NOTE,
             payload: {
               ...state,
-              currentNote: { ...state.currentNote, content: String(value) },
-            },
+              currentNote: { ...state.currentNote, content: String(value) }
+            }
           });
         }}
         toolbars={[
@@ -73,7 +70,7 @@ export function Editor() {
           'ulist',
           'image',
           'code',
-          'codeBlock',
+          'codeBlock'
         ]}
         toolbarsMode={['preview']}
         placeholder={'Start writing...'}
