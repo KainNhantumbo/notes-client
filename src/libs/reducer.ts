@@ -1,4 +1,3 @@
-import { editorThemeOptions } from '@/shared/data';
 import actions from '../shared/actions';
 import { TAction, TState } from '@/types/reducer';
 

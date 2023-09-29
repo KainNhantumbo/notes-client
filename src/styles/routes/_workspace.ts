@@ -202,17 +202,14 @@ export const _workspace = styled.main`
 
       overflow: hidden;
       --scrollbar-size: 3px;
-
       .ScrollAreaViewport {
         width: 100%;
         height: 100%;
         border-radius: inherit;
       }
-
       .ScrollAreaScrollbar {
         display: flex;
         user-select: none;
-        /* disable browser handling of all panning and zooming gestures on touch devices */
         touch-action: none;
         padding: 2px;
         background: transparent;
@@ -224,19 +221,12 @@ export const _workspace = styled.main`
       .ScrollAreaScrollbar[data-orientation='vertical'] {
         width: 8px;
       }
-      .ScrollAreaScrollbar[data-orientation='horizontal'] {
-        flex-direction: column;
-        height: 3px;
-      }
-
       .ScrollAreaThumb {
         flex: 1;
         background: rgba(${({ theme }) => theme.font}, 0.3);
         border-radius: 8px;
         position: relative;
       }
-
-      /* increase target size for touch devices https://www.w3.org/WAI/WCAG21/Understanding/target-size.html */
       .ScrollAreaThumb::before {
         content: '';
         position: absolute;
@@ -248,7 +238,6 @@ export const _workspace = styled.main`
         min-width: 4px;
         min-height: 4px;
       }
-
       .ScrollAreaCorner {
         background: rgba(${({ theme }) => theme.font}, 0.1);
       }

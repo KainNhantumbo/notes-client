@@ -8,10 +8,10 @@ import { useState } from 'react';
 import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { TwitterPicker } from 'react-color';
+import TagsContainer from './TagsContainer';
 import { colorsOptions } from '../shared/data';
 import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
-import TagsContainer from './TagsContainer';
 
 export function CustomTools() {
   const { state, dispatch, useFetchAPI } = useAppContext();

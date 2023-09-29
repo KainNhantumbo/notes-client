@@ -228,7 +228,7 @@ export default function Workspace() {
                         key={note._id}
                         className={`note-container`}
                         onClick={(e) => {
-                          const target = (e as any).target.classList.contains(
+                          const target: any = (e as any).target.classList.contains(
                             'action-panel'
                           );
                           if (!target) {
