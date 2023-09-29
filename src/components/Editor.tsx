@@ -34,7 +34,6 @@ export function Editor() {
       <MarkdownEditor
         style={{ ...editorStyles }}
         value={state.currentNote.content}
-        previewProps={{}}
         // @ts-ignore
         theme={editorTheme[state.settings.theme.editor_theme]}
         extensions={usableExtensions}
@@ -70,10 +69,11 @@ export function Editor() {
           'code',
           'codeBlock'
         ]}
-        toolbarsMode={['preview']}
+        toolbarsMode={[]}
         placeholder={'Start writing...'}
         height={String(state.windowInnerSize.height - 90 + 'px')}
         maxHeight={String(state.windowInnerSize.height - 90 + 'px')}
+        // previewProps={{ style: { display: 'none' } }}
       />
     </div>
   );

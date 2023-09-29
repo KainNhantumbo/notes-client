@@ -11,21 +11,21 @@ import {
   LockOpen2Icon,
   RulerSquareIcon
 } from '@radix-ui/react-icons';
-import { useEffect, useState } from 'react';
-import { m as motion } from 'framer-motion';
-import actions from '@/shared/actions';
-import { Layout } from '@/components/Layout';
-import { useAppContext } from '@/context/AppContext';
-import { _settings as Container } from '@/styles/routes/_settings';
 import {
   app_metadata,
   colorSchemeOptions,
   editorThemeOptions
 } from '@/shared/data';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { InputEvents, TColorScheme, TSettings, TUser } from '@/types';
+import { useState } from 'react';
+import { m as motion } from 'framer-motion';
+import actions from '@/shared/actions';
+import { Layout } from '@/components/Layout';
+import { useAppContext } from '@/context/AppContext';
 import { SelectContainer } from '@/components/Select';
 import { useThemeContext } from '@/context/ThemeContext';
+import { _settings as Container } from '@/styles/routes/_settings';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { InputEvents, TColorScheme, TSettings, TUser } from '@/types';
 
 export default function Settings() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -69,46 +69,6 @@ export default function Settings() {
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncSettings
-          }
-        }
-      });
-    }
-  };
-
-  const getInitialData = async (): Promise<void> => {
-    try {
-      const [settings, user] = await Promise.all([
-        useFetchAPI<TSettings>({ method: 'get', url: '/api/v1/settings' }),
-        useFetchAPI<TUser>({ method: 'get', url: '/api/v1/users' })
-      ]);
-
-      dispatch({
-        type: actions.USER,
-        payload: { ...state, user: { ...state.user, ...user.data } }
-      });
-
-      dispatch({
-        type: actions.SETTINGS,
-        payload: {
-          ...state,
-          settings: { ...state.settings, ...settings.data }
-        }
-      });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
-      dispatch({
-        type: actions.TOAST,
-        payload: {
-          ...state,
-          toast: {
-            ...state.toast,
-            title: 'Initial Data Sync Error',
-            message:
-              error?.response?.data?.message ||
-              'Failed to fetch your settings and user account data.',
-            status: true,
-            actionButtonMessage: 'Retry',
-            handleFunction: getInitialData
           }
         }
       });
@@ -267,10 +227,6 @@ export default function Settings() {
       });
     }
   };
-
-  useEffect(() => {
-    getInitialData();
-  }, []);
 
   return (
     <Layout

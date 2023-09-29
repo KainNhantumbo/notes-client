@@ -13,6 +13,10 @@ export const _noteEditor = styled.main`
     width: 100%;
   }
 
+  .md-editor-preview {
+    display: none;
+  }
+
   .md-editor-content-editor {
     width: 100%;
   }

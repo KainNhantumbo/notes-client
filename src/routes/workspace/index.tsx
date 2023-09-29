@@ -6,7 +6,7 @@ import {
   MixIcon,
   PlusIcon
 } from '@radix-ui/react-icons';
-import { TNote } from '@/types';
+import { TNote, TSettings, TUser } from '@/types';
 import { useEffect } from 'react';
 import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
@@ -19,7 +19,7 @@ import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 
@@ -48,10 +48,52 @@ export default function Workspace() {
     createdAt: ''
   };
 
-  const { isError, isLoading, error, data, refetch } = useQuery({
-    queryFn: getNotes,
-    queryKey: ['query-notes']
+  const [notesQuery, settingsQuery, userQuery] = useQueries({
+    queries: [
+      { queryFn: getNotes, queryKey: ['query-notes'] },
+      { queryFn: getSettings, queryKey: ['query-settings'] },
+      { queryFn: getUser, queryKey: ['query-user'] }
+    ]
   });
+
+  const { isError, isLoading, error, data, refetch } = notesQuery;
+
+  async function getUser() {
+    try {
+      const { data } = await useFetchAPI<TUser>({
+        method: 'get',
+        url: '/api/v1/users'
+      });
+      return data;
+    } catch (error: any) {
+      console.error(error?.response?.data?.message || error);
+    }
+  }
+
+  async function getSettings() {
+    try {
+      const { data } = await useFetchAPI<TSettings>({
+        method: 'get',
+        url: '/api/v1/settings'
+      });
+      return data;
+    } catch (error: any) {
+      console.error(error?.response?.data?.message || error);
+    }
+  }
+
+  async function getNotes() {
+    const queryParams = new URLSearchParams(state.query).toString();
+    try {
+      const { data } = await useFetchAPI<TNote[]>({
+        method: 'get',
+        url: `/api/v1/notes?${queryParams}`
+      });
+      return data;
+    } catch (error: any) {
+      console.error(error?.response?.data?.message || error);
+    }
+  }
 
   const createNote = async (): Promise<void> => {
     if (!state.auth.token) return undefined;
@@ -88,19 +130,6 @@ export default function Workspace() {
     }
   };
 
-  async function getNotes() {
-    const queryParams = new URLSearchParams(state.query).toString();
-    try {
-      const { data } = await useFetchAPI<TNote[]>({
-        method: 'get',
-        url: `/api/v1/notes?${queryParams}`
-      });
-      return data;
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
-    }
-  }
-
   function handleEditNote(data: TNote) {
     dispatch({
       type: actions.CURRENT_NOTE,
@@ -108,6 +137,43 @@ export default function Workspace() {
     });
     navigate(`/workspace/note-editor/${data._id}`);
   }
+
+  useEffect(() => {
+    if (settingsQuery.isError || userQuery.isError) {
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Initial Data Sync Error',
+            message: 'Failed to fetch your settings and user account data.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: () => {
+              settingsQuery.refetch({ queryKey: ['query-settings'] });
+              userQuery.refetch({ queryKey: ['query-user'] });
+            }
+          }
+        }
+      });
+      return;
+    }
+
+    if (userQuery.data && settingsQuery.data) {
+      dispatch({
+        type: actions.USER,
+        payload: { ...state, user: { ...state.user, ...userQuery.data } }
+      });
+      dispatch({
+        type: actions.SETTINGS,
+        payload: {
+          ...state,
+          settings: { ...state.settings, ...settingsQuery.data }
+        }
+      });
+    }
+  }, [userQuery, settingsQuery]);
 
   useEffect(() => {
     if (data) {
@@ -228,9 +294,9 @@ export default function Workspace() {
                         key={note._id}
                         className={`note-container`}
                         onClick={(e) => {
-                          const target: any = (e as any).target.classList.contains(
-                            'action-panel'
-                          );
+                          const target: any = (
+                            e as any
+                          ).target.classList.contains('action-panel');
                           if (!target) {
                             handleEditNote(note);
                           }
@@ -255,11 +321,9 @@ export default function Workspace() {
                           {note.metadata.tags.length > 0 ? (
                             <div className='tags-container'>
                               {note.metadata.tags.map((tag) => (
-                                <span
-                                  style={{ backgroundColor: tag.color }}
-                                  key={tag.value}>
-                                  {tag.value}
-                                </span>
+                                <div key={tag.id}>
+                                  <p>{tag.value}</p>
+                                </div>
                               ))}
                             </div>
                           ) : null}
