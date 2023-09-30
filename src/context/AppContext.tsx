@@ -4,7 +4,7 @@ import {
   useContext,
   useReducer,
   Dispatch,
-  useEffect,
+  useEffect
 } from 'react';
 import { TAuth, TNote } from '@/types';
 import fetch from '@/config/client';
@@ -42,7 +42,7 @@ export function AppContext({ children }: TProps) {
   const navigate: NavigateFunction = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const authenticateUser = async (): Promise<void> => {
+  const authenticateUser = async () => {
     try {
       const { data } = await fetch<TAuth>({
         method: 'get',
@@ -94,7 +94,7 @@ export function AppContext({ children }: TProps) {
     });
   };
 
-  const syncCurrentNote = async (): Promise<void> => {
+  const syncCurrentNote = async () => {
     const { _id, created_by, ...currentNote } = state.currentNote;
     if (!state.auth.token || !_id) return undefined;
     try {

@@ -35,7 +35,7 @@ export function NavigationDrawer() {
           actionButtonMessage: 'Confirm',
           title: 'Logout',
           message: 'Do you really want to exit this session and logout?',
-          handleFunction: async (): Promise<void> => {
+          handleFunction: async () => {
             try {
               await useFetchAPI({
                 method: 'post',

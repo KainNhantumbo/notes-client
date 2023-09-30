@@ -44,7 +44,7 @@ export default function Settings() {
     }));
   };
 
-  const syncSettings = async (data: TSettings): Promise<void> => {
+  const syncSettings = async (data: TSettings) => {
     try {
       await useFetchAPI({
         method: 'patch',
@@ -75,7 +75,7 @@ export default function Settings() {
     }
   };
 
-  const syncUserData = async (): Promise<void> => {
+  const syncUserData = async () => {
     try {
       const response = await useFetchAPI<TUser>({
         method: 'patch',
@@ -121,7 +121,7 @@ export default function Settings() {
     }
   };
 
-  const handleUpdatePassword = async (): Promise<void> => {
+  const handleUpdatePassword = async () => {
     if (passwords.confirm_password) {
       if (passwords.password !== passwords.confirm_password) {
         dispatch({
@@ -179,7 +179,7 @@ export default function Settings() {
     }
   };
 
-  const handleDeleteAccount = async (): Promise<void> => {
+  const handleDeleteAccount = async () => {
     try {
       await useFetchAPI({ method: 'delete', url: '/api/v1/users' });
       dispatch({
@@ -851,7 +851,7 @@ export default function Settings() {
                       aria-label='Save updated password'
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.9 }}
-                      onClick={(): Promise<void> => handleUpdatePassword()}>
+                      onClick={() => handleUpdatePassword()}>
                       <span>Update password and save</span>
                     </motion.button>
                   </div>

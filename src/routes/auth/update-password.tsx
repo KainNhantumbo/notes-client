@@ -15,22 +15,22 @@ export default function UpdatePassword() {
   const [error, setError] = useState({ status: false, message: '' });
   const [passwords, setPasswords] = useState({
     password: '',
-    confirm_password: '',
+    confirm_password: ''
   });
 
   const handleChange = (e: InputEvents): void => {
     setPasswords((state) => ({
       ...state,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
 
-  const handleSubmit = async (e: SubmitEvent): Promise<void> => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     if (passwords.password !== passwords.confirm_password)
       return setError({
         status: true,
-        message: 'Your password must match each other.',
+        message: 'Your password must match each other.'
       });
 
     try {
@@ -38,13 +38,13 @@ export default function UpdatePassword() {
       await fetch({
         method: 'post',
         url: '/api/v1/auth/update-password',
-        data: passwords.password,
+        data: passwords.password
       });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message || error?.code,
+        message: error?.response?.data?.message || error?.code
       });
     } finally {
       setLoading(false);
@@ -65,7 +65,7 @@ export default function UpdatePassword() {
       metadata={{
         title: `${app_metadata.appName} | Update Password`,
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }}>
       <Container>
         <div className='wrapper-container'>
@@ -73,8 +73,8 @@ export default function UpdatePassword() {
             <div className='form-container'>
               <h2>Update Password</h2>
               <p>
-                Note: your password should be strong and must differ from past used
-                passwords.
+                Note: your password should be strong and must differ from past
+                used passwords.
               </p>
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>
@@ -122,7 +122,7 @@ export default function UpdatePassword() {
                     aria-placeholder='Loading...'
                     cssOverride={{
                       display: 'block',
-                      margin: '0 auto',
+                      margin: '0 auto'
                     }}
                   />
                 ) : null}

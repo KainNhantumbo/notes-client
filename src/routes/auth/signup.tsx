@@ -1,7 +1,7 @@
 import {
   DotsHorizontalIcon,
   EnvelopeClosedIcon,
-  LockClosedIcon,
+  LockClosedIcon
 } from '@radix-ui/react-icons';
 import fetch from '@/config/client';
 import actions from '@/shared/actions';
@@ -31,13 +31,13 @@ export default function SignUp() {
         ...state,
         signUp: {
           ...state.signUp,
-          [e.target.name]: e.target.value,
-        },
-      },
+          [e.target.name]: e.target.value
+        }
+      }
     });
   };
 
-  const handleSubmit = async (e: SubmitEvent): Promise<void> => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -45,14 +45,14 @@ export default function SignUp() {
         method: 'post',
         url: '/api/v1/users',
         data: state.signUp,
-        withCredentials: true,
+        withCredentials: true
       });
       navigate(`/auth/signup-success`, { replace: true });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message || error?.code,
+        message: error?.response?.data?.message || error?.code
       });
     } finally {
       setLoading(false);
@@ -77,7 +77,7 @@ export default function SignUp() {
       metadata={{
         title: `${app_metadata.appName} | Sign Up`,
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }}>
       <Container>
         <div className='wrapper-container'>
@@ -196,7 +196,7 @@ export default function SignUp() {
                     aria-placeholder='Loading...'
                     cssOverride={{
                       display: 'block',
-                      margin: '0 auto',
+                      margin: '0 auto'
                     }}
                   />
                 ) : null}

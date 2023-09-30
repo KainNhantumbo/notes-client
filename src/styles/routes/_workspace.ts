@@ -142,16 +142,17 @@ export const _workspace = styled.main`
       .note-container {
         width: 100%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        gap: 12px;
         padding: 7px 8px;
         font-size: 0.9rem;
         user-select: none;
         cursor: pointer;
+        position: relative;
         border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
         line-height: 1.2rem;
+        gap: 8px;
 
         :hover {
           border-radius: 12px;
@@ -159,7 +160,7 @@ export const _workspace = styled.main`
           border-bottom: 1px solid transparent;
         }
 
-        .left-side {
+        .top-side {
           width: 100%;
           display: flex;
           align-items: center;
@@ -172,7 +173,7 @@ export const _workspace = styled.main`
             flex-direction: row;
             align-items: center;
             gap: 5px;
-
+            font-weight: 500;
             svg {
               width: 18px;
               height: 18px;
@@ -190,9 +191,41 @@ export const _workspace = styled.main`
           }
         }
 
+        .bottom-side {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          gap: 12px;
+          align-items: center;
+
+          .tags-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 3px;
+
+            p {
+              padding: 3px 5px;
+              user-select: none;
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: rgb(${({ theme }) => theme.white});
+              border-radius: 12px;
+            }
+          }
+
+          h5 {
+            justify-self: flex-end;
+          }
+        }
+
         .action-panel {
           ${StyledCornerButton}
           border: none;
+          position: absolute;
+          top: 10px;
+          right: 10px;
 
           :hover {
             background: rgba(${({ theme }) => theme.font}, 0.1);

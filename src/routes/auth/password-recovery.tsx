@@ -17,7 +17,7 @@ export default function PasswordRecovery() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
 
-  const handleSubmit = async (e: SubmitEvent): Promise<void> => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
@@ -25,14 +25,14 @@ export default function PasswordRecovery() {
         method: 'post',
         url: '/api/v1/auth/request-new-password',
         data: email,
-        withCredentials: true,
+        withCredentials: true
       });
       navigate('/auth/_password-recovery-success', { replace: true });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message || error?.code,
+        message: error?.response?.data?.message || error?.code
       });
     } finally {
       setLoading(false);
@@ -53,7 +53,7 @@ export default function PasswordRecovery() {
       metadata={{
         title: `${app_metadata.appName} | Password Recovery`,
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }}>
       <Container>
         <div className='wrapper-container'>
@@ -61,8 +61,8 @@ export default function PasswordRecovery() {
             <div className='form-container'>
               <h2>Password Recovery</h2>
               <p>
-                Please type the e-mail associated with your account and we will send an
-                e-mail with instructions to recover your account.
+                Please type the e-mail associated with your account and we will
+                send an e-mail with instructions to recover your account.
               </p>
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>
@@ -92,7 +92,7 @@ export default function PasswordRecovery() {
                     aria-placeholder='Loading...'
                     cssOverride={{
                       display: 'block',
-                      margin: '0 auto',
+                      margin: '0 auto'
                     }}
                   />
                 ) : null}

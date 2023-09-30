@@ -1,6 +1,6 @@
 import {
   CaretSortIcon,
-  DotsVerticalIcon,
+  DotsHorizontalIcon,
   FileTextIcon,
   HamburgerMenuIcon,
   MixIcon,
@@ -11,15 +11,15 @@ import { useEffect } from 'react';
 import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
-import { NavigationDrawer } from '@/components/NavigationDrawer';
-import { app_metadata } from '@/shared/data';
-import { useAppContext } from '@/context/AppContext';
-import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
-import { useQueries, useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
+import { NavigationDrawer } from '@/components/NavigationDrawer';
+import { app_metadata } from '@/shared/data';
+import { useAppContext } from '@/context/AppContext';
+import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 
@@ -94,20 +94,18 @@ export default function Workspace() {
       console.error(error?.response?.data?.message || error);
     }
   }
-
-  const createNote = async (): Promise<void> => {
+  
+  async function createNote() {
     if (!state.auth.token) return undefined;
     try {
       const { data } = await useFetchAPI<TNote>({
         method: 'post',
         url: '/api/v1/notes'
       });
-
       dispatch({
         type: actions.CURRENT_NOTE,
         payload: { ...state, currentNote: { ...noteTemplate, ...data } }
       });
-
       navigate(`/workspace/note-editor/${data._id}`);
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
@@ -128,7 +126,7 @@ export default function Workspace() {
         }
       });
     }
-  };
+  }
 
   function handleEditNote(data: TNote) {
     dispatch({
@@ -183,6 +181,8 @@ export default function Workspace() {
       });
     }
   }, [data]);
+
+  
 
   useEffect((): (() => void) | void => {
     if (state.auth.token) {
@@ -301,7 +301,7 @@ export default function Workspace() {
                             handleEditNote(note);
                           }
                         }}>
-                        <div className='left-side'>
+                        <div className='top-side'>
                           <h3>
                             <FileTextIcon />
                             <span>
@@ -317,13 +317,15 @@ export default function Workspace() {
                           </p>
                         </div>
 
-                        <div className='right-side'>
+                        <div className='bottom-side'>
                           {note.metadata.tags.length > 0 ? (
                             <div className='tags-container'>
                               {note.metadata.tags.map((tag) => (
-                                <div key={tag.id}>
-                                  <p>{tag.value}</p>
-                                </div>
+                                <p
+                                  key={tag.id}
+                                  style={{ backgroundColor: tag.color }}>
+                                  {tag.value}
+                                </p>
                               ))}
                             </div>
                           ) : null}
@@ -331,7 +333,7 @@ export default function Workspace() {
                         </div>
 
                         <button className='action-panel'>
-                          <DotsVerticalIcon />
+                          <DotsHorizontalIcon />
                         </button>
                       </div>
                     ))}

@@ -24,13 +24,13 @@ export default function SignIn() {
         ...state,
         signIn: {
           ...state.signIn,
-          [e.target.name]: e.target.value,
-        },
-      },
+          [e.target.name]: e.target.value
+        }
+      }
     });
   };
 
-  const handleSubmit = async (e: SubmitEvent): Promise<void> => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -38,12 +38,12 @@ export default function SignIn() {
         method: 'post',
         url: '/api/v1/auth/default/login',
         data: state.signIn,
-        withCredentials: true,
+        withCredentials: true
       });
 
       dispatch({
         type: actions.AUTH,
-        payload: { ...state, auth: { ...data } },
+        payload: { ...state, auth: { ...data } }
       });
 
       navigate(`/workspace`, { replace: true });
@@ -51,7 +51,7 @@ export default function SignIn() {
       console.error(error?.response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message || error?.code,
+        message: error?.response?.data?.message || error?.code
       });
     } finally {
       setLoading(false);
@@ -72,11 +72,16 @@ export default function SignIn() {
       metadata={{
         title: `${app_metadata.appName} | Sign In`,
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }}>
       <Container>
         <div className='wrapper-container'>
-          <img loading='lazy' decoding='async' src={media_login} alt='background image' />
+          <img
+            loading='lazy'
+            decoding='async'
+            src={media_login}
+            alt='background image'
+          />
 
           <article>
             <div className='form-container'>
@@ -117,11 +122,15 @@ export default function SignIn() {
                   />
                 </section>
                 <div className='password-reset'>
-                  <Link to={'/auth/password-recovery'} preventScrollReset={false}>
+                  <Link
+                    to={'/auth/password-recovery'}
+                    preventScrollReset={false}>
                     <span>Forgot password? Recover account.</span>
                   </Link>
                 </div>
-                {error.status && <span className='error-message'>{error.message}</span>}
+                {error.status && (
+                  <span className='error-message'>{error.message}</span>
+                )}
 
                 <motion.button
                   whileTap={{ scale: 0.8 }}

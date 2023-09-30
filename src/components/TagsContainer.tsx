@@ -7,13 +7,18 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import { SubmitEvent, Tag } from '@/types';
 import { TwitterPicker } from 'react-color';
 import { m as motion } from 'framer-motion';
+import { usePopper } from 'react-popper';
 
 export default function TagsContainer() {
   const { state, dispatch } = useAppContext();
   const [tag, setTag] = useState<Tag>({ id: '', color: '', value: '' });
 
+  const {} = usePopper();
+
   const createTag = (e: SubmitEvent) => {
     e.preventDefault();
+    if (tag.value.length < 1) return undefined;
+
     const data: Tag = { id: nanoid(8), color: '#E47131', value: tag.value };
     if (state.currentNote.metadata.tags.length <= 10) {
       dispatch({
@@ -51,7 +56,29 @@ export default function TagsContainer() {
     });
   };
 
-  // todo: const updateTag = () => {};
+  const updateTag = () => {
+    const isValidObj = Object.values(tag).every((value) => value !== '');
+    if (!isValidObj) return undefined;
+    dispatch({
+      type: actions.CURRENT_NOTE,
+      payload: {
+        ...state,
+        currentNote: {
+          ...state.currentNote,
+          metadata: {
+            ...state.currentNote.metadata,
+            tags: [
+              ...state.currentNote.metadata.tags.map((currentTag) =>
+                currentTag.id === tag.id
+                  ? { ...currentTag, ...tag }
+                  : currentTag
+              )
+            ]
+          }
+        }
+      }
+    });
+  };
 
   return (
     <Container>
