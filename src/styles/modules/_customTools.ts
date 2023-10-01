@@ -5,6 +5,7 @@ export const _customTools = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 
   .form-container {
     input {
@@ -49,28 +50,6 @@ export const _customTools = styled.section`
         height: 16px;
         color: rgb(${({ theme }) => theme.font});
       }
-    }
-  }
-
-  .tags-container {
-    .tags-input {
-      background-color: transparent;
-      border: none;
-      border-radius: 5px;
-      background: transparent;
-      color: rgb(${({ theme }) => theme.font});
-    }
-
-    .tags-input--focused {
-      border-color: transparent;
-    }
-
-    .tags-input-tag {
-      background-color: rgba(${({ theme }) => theme.primary}, 0.2);
-      border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-      color: rgb(${({ theme }) => theme.font});
-      border-radius: 5px;
-      font-family: inherit !important;
     }
   }
 `;
