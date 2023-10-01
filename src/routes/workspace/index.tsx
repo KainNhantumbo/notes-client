@@ -8,7 +8,6 @@ import {
 } from '@radix-ui/react-icons';
 import { TNote, TSettings, TUser } from '@/types';
 import { useEffect } from 'react';
-import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
 import { m as motion } from 'framer-motion';
@@ -36,12 +35,10 @@ export default function Workspace() {
     created_by: '',
     metadata: {
       folder_id: '',
-      color: '',
       deleted: false,
-      bookmarked: false,
+      pinned: false,
       status: 'none',
       priority: 'none',
-      reminder: { time: '', expired: false },
       tags: []
     },
     updatedAt: '',
@@ -94,7 +91,7 @@ export default function Workspace() {
       console.error(error?.response?.data?.message || error);
     }
   }
-  
+
   async function createNote() {
     if (!state.auth.token) return undefined;
     try {
@@ -138,7 +135,7 @@ export default function Workspace() {
 
   useEffect(() => {
     if (settingsQuery.isError || userQuery.isError) {
-      dispatch({
+      return dispatch({
         type: actions.TOAST,
         payload: {
           ...state,
@@ -155,7 +152,6 @@ export default function Workspace() {
           }
         }
       });
-      return;
     }
 
     if (userQuery.data && settingsQuery.data) {
@@ -181,8 +177,6 @@ export default function Workspace() {
       });
     }
   }, [data]);
-
-  
 
   useEffect((): (() => void) | void => {
     if (state.auth.token) {

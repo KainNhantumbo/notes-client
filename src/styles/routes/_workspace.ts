@@ -193,8 +193,11 @@ export const _workspace = styled.main`
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          gap: 12px;
           align-items: center;
+          gap: 12px;
+          padding: 5px;
+          border-radius: 8px;
+          border: 2px dashed rgba(${({ theme }) => theme.font}, 0.25);
 
           .tags-container {
             width: 100%;
@@ -210,13 +213,13 @@ export const _workspace = styled.main`
               font-size: 0.8rem;
               font-weight: 500;
               color: rgb(${({ theme }) => theme.white});
-              border-radius: 5px;
+              border-radius: 8px;
             }
           }
 
           h5 {
-            width: 100%;
             justify-self: flex-end;
+            white-space: nowrap;
           }
         }
 

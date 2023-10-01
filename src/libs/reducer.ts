@@ -8,33 +8,33 @@ const initialState: TState = {
   navigation: {
     is_navigation_drawer: false,
     is_editor_container: true,
-    is_notes_list: true,
+    is_notes_list: true
   },
   isPropertiesModal: false,
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', token: '' },
-  user: { first_name: '',last_name: '',email: ''},
+  user: { first_name: '', last_name: '', email: '' },
   signUp: {
     first_name: '',
     last_name: '',
     email: '',
     password: '',
-    confirm_password: '',
+    confirm_password: ''
   },
   toast: {
     title: '',
     message: '',
     status: false,
     handleFunction: () => {},
-    actionButtonMessage: '',
+    actionButtonMessage: ''
   },
   prompt: {
     title: '',
     message: '',
     status: false,
     handleFunction: () => {},
-    actionButtonMessage: '',
+    actionButtonMessage: ''
   },
   currentNote: {
     _id: '',
@@ -43,16 +43,14 @@ const initialState: TState = {
     created_by: '',
     metadata: {
       folder_id: '',
-      color: '',
       deleted: false,
       pinned: false,
       status: 'none',
       priority: 'none',
-      reminder: { time: '', expired: false },
-      tags: [],
+      tags: []
     },
     updatedAt: '',
-    createdAt: '',
+    createdAt: ''
   },
   query: { search: '', sort: '' },
   settings: {
@@ -65,22 +63,22 @@ const initialState: TState = {
         line_height: 1.6,
         font_family:
           "Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono', 'Courier New', ui-monospace, monospace",
-        font_weight: 400,
+        font_weight: 400
       },
       editing: {
         line_numbers: false,
         enable_toolbar: true,
         enable_relative_line_numbers: false,
         tab_size: 2,
-        highlight_active_line: false,
-      },
+        highlight_active_line: false
+      }
     },
     theme: {
       ui_theme: 'light',
       editor_theme: 'basicLight',
-      automatic_ui_theme: true,
-    },
-  },
+      automatic_ui_theme: true
+    }
+  }
 };
 
 function reducer(state: TState, action: TAction): TState {

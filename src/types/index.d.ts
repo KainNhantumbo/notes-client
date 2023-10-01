@@ -73,13 +73,11 @@ export type TNote = {
   created_by: string;
   metadata: {
     folder_id: string;
-    color: string;
     pinned: boolean;
-    reminder: { time: string; expired: boolean };
     tags: Tag[];
     deleted: boolean;
     priority: 'none' | 'low' | 'medium' | 'high';
-    status: 'none' | 'pending' | 'processing' | 'reviewing' | 'completed';
+    status: 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
   };
   createdAt: string;
   updatedAt: string;

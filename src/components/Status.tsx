@@ -1,37 +1,45 @@
+import {
+  CaretDownIcon,
+  CheckCircledIcon,
+  CrossCircledIcon,
+  FrameIcon,
+  ReloadIcon,
+  UpdateIcon
+} from '@radix-ui/react-icons';
 import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
-import { CaretDownIcon, DotFilledIcon } from '@radix-ui/react-icons';
 
-type TPriority = 'none' | 'low' | 'medium' | 'high';
+type TStatus = 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
 
-const prioritiesDataMapping = [
-  { value: 'none', data: { label: 'None', color: '#ccc' } },
-  { value: 'low', data: { label: 'Low', color: '#3D9A50' } },
-  { value: 'medium', data: { label: 'Medium', color: '#FBE32D' } },
-  { value: 'high', data: { label: 'High', color: '#C62A2F' } }
+export const statusDataMapping = [
+  { value: 'none', data: { label: 'None', icon: FrameIcon } },
+  { value: 'active', data: { label: 'Active', icon: UpdateIcon } },
+  { value: 'pending', data: { label: 'Pending', icon: CrossCircledIcon } },
+  { value: 'reviewing', data: { label: 'Reviewing', icon: ReloadIcon } },
+  { value: 'completed', data: { label: 'Completed', icon: CheckCircledIcon } }
 ];
 
-export default function Priority() {
+export default function Status() {
   const { state, dispatch } = useAppContext();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const [{ data }] = prioritiesDataMapping.filter((item) => {
-    if (item.value === state.currentNote.metadata.priority) {
+  const [{ data }] = statusDataMapping.filter((item) => {
+    if (item.value === state.currentNote.metadata.status) {
       return item;
     }
   });
 
-  const handleUpdatePriority = (data: TPriority): void => {
+  const handleUpdateStatus = (data: TStatus): void => {
     dispatch({
       type: actions.CURRENT_NOTE,
       payload: {
         ...state,
         currentNote: {
           ...state.currentNote,
-          metadata: { ...state.currentNote.metadata, priority: data }
+          metadata: { ...state.currentNote.metadata, status: data }
         }
       }
     });
@@ -41,12 +49,12 @@ export default function Priority() {
   const renderDropdownItems = (): JSX.Element => {
     return (
       <DropdownContainer>
-        {prioritiesDataMapping.map(({ value, data }, index) => (
+        {statusDataMapping.map(({ value, data }, index) => (
           <div
             key={index.toString()}
-            onClick={() => handleUpdatePriority(value as TPriority)}>
-            <DotFilledIcon color={data.color} />
-            <span>Priority: {data.label}</span>
+            onClick={() => handleUpdateStatus(value as TStatus)}>
+            <data.icon />
+            <span>Status: {data.label}</span>
           </div>
         ))}
       </DropdownContainer>
@@ -61,10 +69,10 @@ export default function Priority() {
       onVisibleChange={(state) => setIsDropdownVisible(state)}
       overlay={renderDropdownItems}>
       <DropdownTriggerButton
-        title={`Set note priority`}
-        aria-placeholder={`Set note priority`}>
-        <DotFilledIcon color={data.color} className='dot-icon' />
-        <span>Priority: {data.label}</span>
+        title={`Set note status`}
+        aria-placeholder={`Set note status`}>
+        <data.icon />
+        <span>Status: {data.label}</span>
         <CaretDownIcon />
       </DropdownTriggerButton>
     </Dropdown>

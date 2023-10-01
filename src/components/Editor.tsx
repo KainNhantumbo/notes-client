@@ -7,7 +7,7 @@ import { lineNumbersRelative } from '@uiw/codemirror-extensions-line-numbers-rel
 import * as editorTheme from '@uiw/codemirror-themes-all';
 import { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 
-export function Editor() {
+export default function Editor() {
   const { colorScheme } = useThemeContext();
   const { state, dispatch } = useAppContext();
 
