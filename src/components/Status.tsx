@@ -15,11 +15,23 @@ import { useAppContext } from '@/context/AppContext';
 type TStatus = 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
 
 export const statusDataMapping = [
-  { value: 'none', data: { label: 'None', icon: FrameIcon } },
-  { value: 'active', data: { label: 'Active', icon: UpdateIcon } },
-  { value: 'pending', data: { label: 'Pending', icon: CrossCircledIcon } },
-  { value: 'reviewing', data: { label: 'Reviewing', icon: ReloadIcon } },
-  { value: 'completed', data: { label: 'Completed', icon: CheckCircledIcon } }
+  { value: 'none', data: { label: 'None', color: '#ccc', icon: FrameIcon } },
+  {
+    value: 'active',
+    data: { label: 'Active', color: '#0091FF', icon: UpdateIcon }
+  },
+  {
+    value: 'pending',
+    data: { label: 'Pending', color: '#F76808', icon: CrossCircledIcon }
+  },
+  {
+    value: 'reviewing',
+    data: { label: 'Reviewing', color: '#7E808A', icon: ReloadIcon }
+  },
+  {
+    value: 'completed',
+    data: { label: 'Completed', color: '#3D9A50', icon: CheckCircledIcon }
+  }
 ];
 
 export default function Status() {
@@ -53,7 +65,7 @@ export default function Status() {
           <div
             key={index.toString()}
             onClick={() => handleUpdateStatus(value as TStatus)}>
-            <data.icon />
+            <data.icon color={data.color} />
             <span>Status: {data.label}</span>
           </div>
         ))}
@@ -71,7 +83,7 @@ export default function Status() {
       <DropdownTriggerButton
         title={`Set note status`}
         aria-placeholder={`Set note status`}>
-        <data.icon />
+        <data.icon color={data.color} />
         <span>Status: {data.label}</span>
         <CaretDownIcon />
       </DropdownTriggerButton>
@@ -101,8 +113,8 @@ const DropdownContainer = styled.section`
     border-radius: 5px;
 
     svg {
-      width: 22px;
-      height: 22px;
+      width: 18px;
+      height: 18px;
     }
 
     :hover {
