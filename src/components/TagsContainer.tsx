@@ -104,7 +104,8 @@ export default function TagsContainer() {
           id={'tags'}
           name={'tags'}
           value={tag.value}
-          placeholder='Add tag'
+          style={{ display: state.currentNote.metadata.tags.length <= 10 ? 'block' : 'none'}}
+          placeholder='Add tag...'
           maxLength={12}
           onChange={(e) =>
             setTag((data) => ({ ...data, value: String(e.target.value) }))

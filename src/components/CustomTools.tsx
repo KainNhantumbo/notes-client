@@ -12,26 +12,10 @@ import TagsContainer from './TagsContainer';
 import { colorsOptions } from '../shared/data';
 import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
+import Priority from './Priority';
 
 export function CustomTools() {
-  const { state, dispatch, useFetchAPI } = useAppContext();
-  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-
-  const handleAddTag = (tags: Tag[]): void => {
-    dispatch({
-      type: actions.CURRENT_NOTE,
-      payload: {
-        ...state,
-        currentNote: {
-          ...state.currentNote,
-          metadata: {
-            ...state.currentNote.metadata,
-            tags: [...tags]
-          }
-        }
-      }
-    });
-  };
+  const { state, dispatch } = useAppContext();
 
   return (
     <Container>
@@ -54,6 +38,10 @@ export function CustomTools() {
             })
           }
         />
+      </div>
+
+      <div className='metadata-modifiers-container'>
+        <Priority />
       </div>
 
       <div className='properties-container'>

@@ -26,11 +26,13 @@ export function Editor() {
     lineHeight: `${String(state.settings.editor.font.line_height)} px`,
     wordWrap: 'break-word',
     lineBreak: 'anywhere',
-    maxWidth: '400px'
+    maxWidth: '1080px'
   };
 
   return (
-    <div data-color-mode={colorScheme.scheme}>
+    <div
+      style={{ width: '100%', height: 'fit-content' }}
+      data-color-mode={colorScheme.scheme}>
       <MarkdownEditor
         style={{ ...editorStyles }}
         value={state.currentNote.content}
@@ -69,10 +71,9 @@ export function Editor() {
           'code',
           'codeBlock'
         ]}
-        toolbarsMode={[]}
+        // toolbarsMode={[]}
         placeholder={'Start writing...'}
-        height={String(state.windowInnerSize.height - 90 + 'px')}
-        maxHeight={String(state.windowInnerSize.height - 90 + 'px')}
+        // height={String(Number(state.windowInnerSize.height - 110) + 'px')}
         // previewProps={{ style: { display: 'none' } }}
       />
     </div>

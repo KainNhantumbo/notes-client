@@ -5,18 +5,13 @@ export const _customTools = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 12px;
 
   .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
     input {
       width: 100%;
       height: fit-content;
       border: none;
-      padding: 10px;
+      padding: 10px 0;
       line-height: 1.8rem;
       outline: none;
       background: none;
@@ -34,7 +29,6 @@ export const _customTools = styled.section`
     display: flex;
     flex-direction: row;
     gap: 12px;
-    padding: 0 12px;
     align-items: center;
 
     button {

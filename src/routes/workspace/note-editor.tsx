@@ -14,8 +14,10 @@ export default function NoteEditor() {
         updatedAt: state.currentNote.updatedAt || new Date().toISOString()
       }}>
       <Container>
-        <CustomTools />
-        <Editor />
+        <div className='wrapper-container'>
+          <CustomTools />
+          <Editor />
+        </div>
       </Container>
     </Layout>
   );

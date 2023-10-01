@@ -7,14 +7,21 @@ export const _noteEditor = styled.main`
   flex-direction: column;
   position: relative;
 
+  .wrapper-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    max-width: 1080px;
+    align-self: center;
+    /* border: 1px solid red; */
+  }
+
   .md-editor {
     border-radius: 0px;
     box-shadow: none;
     width: 100%;
-  }
-
-  .md-editor-preview {
-    display: none;
   }
 
   .md-editor-content-editor {

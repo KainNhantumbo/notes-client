@@ -77,20 +77,19 @@ export const _workspace = styled.main`
         position: fixed;
         right: 120px;
         bottom: 60px;
-        background: rgba(${({ theme }) => theme.primary}, 0.1);
+        background: rgba(${({ theme }) => theme.primary}, 0.15);
         backdrop-filter: blur(10px);
         display: flex;
         flex-direction: row;
         gap: 8px;
         align-items: center;
         border-radius: 18px;
-        border: none;
         padding: 12px;
         box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.2);
+        border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
         :hover {
-          border: none;
-          background: rgba(${({ theme }) => theme.primary}, 0.2);
+          background: rgba(${({ theme }) => theme.primary}, 0.25);
         }
         svg {
           pointer-events: none;
@@ -155,9 +154,7 @@ export const _workspace = styled.main`
         gap: 8px;
 
         :hover {
-          border-radius: 12px;
           background: rgba(${({ theme }) => theme.primary}, 0.2);
-          border-bottom: 1px solid transparent;
         }
 
         .top-side {
@@ -200,22 +197,25 @@ export const _workspace = styled.main`
           align-items: center;
 
           .tags-container {
+            width: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 3px;
 
             p {
+              width: fit-content;
               padding: 3px 5px;
               user-select: none;
               font-size: 0.8rem;
               font-weight: 500;
               color: rgb(${({ theme }) => theme.white});
-              border-radius: 12px;
+              border-radius: 5px;
             }
           }
 
           h5 {
+            width: 100%;
             justify-self: flex-end;
           }
         }
