@@ -52,7 +52,7 @@ const initialState: TState = {
     updatedAt: '',
     createdAt: ''
   },
-  query: { search: '', sort: '' },
+  query: { search: '', sort: 'updatedAt' },
   settings: {
     _id: '',
     created_by: '',

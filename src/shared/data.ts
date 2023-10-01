@@ -4,7 +4,7 @@ import {
   DashboardIcon,
   GearIcon,
   HeartIcon,
-  MagnifyingGlassIcon,
+  MagnifyingGlassIcon
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
 import { TEditorTheme, TOption } from '@/types';
@@ -20,47 +20,47 @@ export const app_metadata = {
   description: 'A simple taking notes application to fit your daily needs.',
   copyright: `© ${new Date().getFullYear()} ${Package.metadata.name} | ${
     Package.author.name
-  }`,
+  }`
 };
 
 export const navigationAnchors = [
   { name: 'Overview', url: '/', alias: 'overview' },
   { name: 'Features', url: '/#features', alias: 'features' },
-  { name: 'About', url: '/#about', alias: 'about' },
+  { name: 'About', url: '/#about', alias: 'about' }
 ];
 
 export const app_features = [
   {
     icon: CheckIcon,
     title: 'Use it everywere',
-    content: `Notes stay updated across all your devices, automaticaly and in real time. There's no "sync" button: it just works fine. `,
+    content: `Notes stay updated across all your devices, automaticaly and in real time. There's no "sync" button: it just works fine. `
   },
   {
     icon: DashboardIcon,
     title: 'Powerful features',
-    content: `Sharing is made simple by exporting your notes to where you want - PDF, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`,
+    content: `Sharing is made simple by exporting your notes to where you want - PDF, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`
   },
   {
     icon: HeartIcon,
     title: 'Ease to use',
     content:
-      'Just open, write and organize without any interruptions: no heavy-lifting, no steep learning curve. Enjoy an ease experience.',
+      'Just open, write and organize without any interruptions: no heavy-lifting, no steep learning curve. Enjoy an ease experience.'
   },
   {
     icon: GearIcon,
     title: 'Make it Yours',
-    content: `Customize your notes with filters, labels, priorities, and more.`,
+    content: `Customize your notes with filters, labels, priorities, and more.`
   },
   {
     icon: ColorWheelIcon,
     title: 'Beautiful animations',
-    content: `Everything you do in ${app_metadata.appName} is  nicely animated for better experience.`,
+    content: `Everything you do in ${app_metadata.appName} is  nicely animated for better experience.`
   },
   {
     icon: MagnifyingGlassIcon,
     title: 'Quick find',
-    content: `All you need to do is start typing - name of a note, description or tag - and instantly you're taken there.`,
-  },
+    content: `All you need to do is start typing - name of a note, description or tag - and instantly you're taken there.`
+  }
 ];
 
 export const footerAnchors = [
@@ -70,35 +70,23 @@ export const footerAnchors = [
   { name: 'FAQ', anchor: '/docs/faq' },
   { name: 'Donate', anchor: 'https://www.buymeacoffee.com/nhantumbokU' },
   { name: 'Github', anchor: app_metadata.repository },
-  { name: 'Portfolio', anchor: 'https://portifolio-dev-mu.vercel.app' },
+  { name: 'Portfolio', anchor: 'https://portifolio-dev-mu.vercel.app' }
 ].sort((a, b) => (a.name > b.name ? 1 : -1));
 
-export const colorsOptions: string[] = [
-  '#E93A9A',
-  '#E93D58',
-  '#E9643A',
-  '#E8CB2D',
-  '#3DD425',
-  '#00D3B8',
-  '#3DAEE9',
-  '#B875DC',
-  '#926EE4',
-];
-
 export const sortOptions: TOption[] = [
-  { value: 'title', label: 'Note Title' },
-  { value: '-title', label: 'Note Title (inverted)' },
+  { value: 'title', label: 'Title [A-Z]' },
+  { value: '-title', label: 'Title [Z-A]' },
   { value: 'createdAt', label: 'Date Created' },
-  { value: '-createdAt', label: 'Date Created (inverted)' },
+  { value: '-createdAt', label: 'Date Created [Inverted]' },
   { value: 'updatedAt', label: 'Date Updated' },
-  { value: '-updatedAt', label: 'Date Updated (inverted)' },
+  { value: '-updatedAt', label: 'Date Updated [Inverted]' }
 ];
 
 export const priorityOptions: TOption[] = [
   { value: 'none', label: 'None' },
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Medium' },
-  { value: 'high', label: 'High' },
+  { value: 'high', label: 'High' }
 ];
 
 export const statusOptions: TOption[] = [
@@ -106,13 +94,13 @@ export const statusOptions: TOption[] = [
   { value: 'active', label: 'Active' },
   { value: 'pending', label: 'Pending' },
   { value: 'cancelled', label: 'Cancelled' },
-  { value: 'completed', label: 'Completed' },
+  { value: 'completed', label: 'Completed' }
 ];
 
 export const colorSchemeOptions = [
   { label: 'Light Theme', value: `{"mode":"manual", "scheme": "light"}` },
   { label: 'Dark Theme', value: `{"mode":"manual", "scheme": "dark"}` },
-  { label: 'Automatic', value: `{"mode":"auto", "scheme": "dark"}` },
+  { label: 'Automatic', value: `{"mode":"auto", "scheme": "dark"}` }
 ];
 
 export const editorThemeOptions: TEditorTheme[] = [
@@ -155,5 +143,5 @@ export const editorThemeOptions: TEditorTheme[] = [
   'whiteDark',
   'whiteLight',
   'xcodeDark',
-  'xcodeLight',
+  'xcodeLight'
 ];

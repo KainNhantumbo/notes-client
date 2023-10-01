@@ -21,6 +21,7 @@ import { useAppContext } from '@/context/AppContext';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
+import SortQuery from '@/components/SortQuery';
 
 export default function Workspace() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -246,20 +247,7 @@ export default function Workspace() {
                   }
                 />
 
-                <motion.button
-                  title='Sort notes'
-                  placeholder='Sort notes'
-                  aria-placeholder='Sort notes'
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.8 }}
-                  onClick={() =>
-                    dispatch({
-                      type: actions.QUERY_NOTES,
-                      payload: { ...state, query: { ...state.query, sort: '' } }
-                    })
-                  }>
-                  <CaretSortIcon />
-                </motion.button>
+                <SortQuery/>
               </div>
 
               {!isError && !isLoading ? (
