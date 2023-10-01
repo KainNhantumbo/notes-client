@@ -8,11 +8,17 @@ import { useState } from 'react';
 import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { TwitterPicker } from 'react-color';
-import TagsContainer from './TagsContainer';
+import TagsEditor from './Tags';
 import { colorsOptions } from '../shared/data';
 import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
 import Priority from './Priority';
+
+
+export function TooglePin () {
+
+  return 
+}
 
 export function CustomTools() {
   const { state, dispatch } = useAppContext();
@@ -41,41 +47,12 @@ export function CustomTools() {
       </div>
 
       <div className='metadata-modifiers-container'>
+
         <Priority />
       </div>
 
       <div className='properties-container'>
-        <TagsContainer />
-
-        {/* <button
-          className='favorite'
-          onClick={() =>
-            dispatch({
-              type: actions.CURRENT_NOTE,
-              payload: {
-                ...state,
-                currentNote: {
-                  ...state.currentNote,
-                  metadata: {
-                    ...state.currentNote.metadata,
-                    bookmarked: !state.currentNote.metadata.bookmarked,
-                  },
-                },
-              },
-            })
-          }>
-          {state.currentNote.metadata.bookmarked ? (
-            <>
-              <BookmarkFilledIcon />
-              <span>Bookmarked</span>
-            </>
-          ) : (
-            <>
-              <BookmarkIcon />
-              <span>Bookmark</span>
-            </>
-          )}
-        </button> */}
+        <TagsEditor />
 
         {/* <div className='priority-selector'></div>
         <div className='status-selector'></div> */}

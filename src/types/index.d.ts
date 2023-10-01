@@ -74,7 +74,7 @@ export type TNote = {
   metadata: {
     folder_id: string;
     color: string;
-    bookmarked: boolean;
+    pinned: boolean;
     reminder: { time: string; expired: boolean };
     tags: Tag[];
     deleted: boolean;

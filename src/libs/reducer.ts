@@ -45,7 +45,7 @@ const initialState: TState = {
       folder_id: '',
       color: '',
       deleted: false,
-      bookmarked: false,
+      pinned: false,
       status: 'none',
       priority: 'none',
       reminder: { time: '', expired: false },

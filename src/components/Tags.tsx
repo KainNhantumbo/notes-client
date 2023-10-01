@@ -7,13 +7,10 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import { SubmitEvent, Tag } from '@/types';
 import { TwitterPicker } from 'react-color';
 import { m as motion } from 'framer-motion';
-import { usePopper } from 'react-popper';
 
-export default function TagsContainer() {
+export default function Tags() {
   const { state, dispatch } = useAppContext();
   const [tag, setTag] = useState<Tag>({ id: '', color: '', value: '' });
-
-  const {} = usePopper();
 
   const createTag = (e: SubmitEvent) => {
     e.preventDefault();
@@ -104,7 +101,10 @@ export default function TagsContainer() {
           id={'tags'}
           name={'tags'}
           value={tag.value}
-          style={{ display: state.currentNote.metadata.tags.length <= 10 ? 'block' : 'none'}}
+          style={{
+            display:
+              state.currentNote.metadata.tags.length <= 10 ? 'block' : 'none'
+          }}
           placeholder='Add tag...'
           maxLength={12}
           onChange={(e) =>
