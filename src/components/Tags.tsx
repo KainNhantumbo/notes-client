@@ -16,6 +16,12 @@ export default function Tags() {
     e.preventDefault();
     if (tag.value.length < 1) return undefined;
 
+    const isTagAdded = state.currentNote.metadata.tags.some(
+      (item) => item.value.toLowerCase() === tag.value.toLowerCase()
+    );
+    
+    if (isTagAdded) return undefined;
+
     const data: Tag = { id: nanoid(8), color: '#E47131', value: tag.value };
     if (state.currentNote.metadata.tags.length <= 10) {
       dispatch({
@@ -105,7 +111,7 @@ export default function Tags() {
             display:
               state.currentNote.metadata.tags.length <= 10 ? 'block' : 'none'
           }}
-          placeholder='Add tag...'
+          placeholder={'Add tags...'}
           maxLength={12}
           onChange={(e) =>
             setTag((data) => ({ ...data, value: String(e.target.value) }))

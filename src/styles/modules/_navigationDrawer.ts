@@ -21,8 +21,8 @@ export const _navigationDrawer = styled.section`
     flex-direction: column;
     z-index: 5000;
     height: 100%;
-    backdrop-filter: blur(2px);
     border-radius: 0 12px 12px 0;
+    backdrop-filter: blur(2px);
     background: rgba(${({ theme }) => theme.foreground}, 0.8);
     border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   }

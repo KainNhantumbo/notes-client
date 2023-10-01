@@ -61,7 +61,7 @@ export const _tags = styled.div`
     input {
       all: unset;
       width: fit-content;
-      max-width: 70px;
+      max-width: 90px;
       padding: 5px 8px;
       line-height: 1.2rem;
       outline: none;

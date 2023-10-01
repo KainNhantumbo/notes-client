@@ -46,7 +46,7 @@ export default function Priority() {
             key={index.toString()}
             onClick={() => handleUpdatePriority(value as TPriority)}>
             <DotFilledIcon color={data.color} />
-            <span>{data.label}</span>
+            <span>Priority: {data.label}</span>
           </div>
         ))}
       </DropdownContainer>
@@ -64,7 +64,7 @@ export default function Priority() {
         title={`Set note priority`}
         aria-placeholder={`Set note priority`}>
         <DotFilledIcon color={data.color} className='dot-icon' />
-        <span>{data.label}</span>
+        <span>Priority: {data.label}</span>
         <CaretDownIcon />
       </DropdownTriggerButton>
     </Dropdown>
@@ -76,8 +76,9 @@ const DropdownContainer = styled.section`
   flex-direction: column;
   padding: 5px;
   border-radius: 8px;
+  backdrop-filter: blur(10px);
+  background: rgba(${({ theme }) => theme.foreground}, 0.85);
   border: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
-  background: rgb(${({ theme }) => theme.foreground});
   user-select: none;
   cursor: pointer;
   font-size: 0.9rem;
