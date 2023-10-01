@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import actions from '@/shared/actions';
 import { useAppContext } from '@/context/AppContext';
+import Dropdown from 'rc-dropdown';
 import { CaretDownIcon, DotFilledIcon } from '@radix-ui/react-icons';
 import { _priorities as Container } from '@/styles/modules/_priorities';
 
@@ -15,6 +16,7 @@ type TPriority = 'none' | 'low' | 'medium' | 'high';
 
 export default function Priority() {
   const { state, dispatch } = useAppContext();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const handleUpdatePriority = (data: TPriority): void => {
     dispatch({
@@ -27,6 +29,7 @@ export default function Priority() {
         }
       }
     });
+    setIsVisible(false)
   };
 
   const [{ data }] = useMemo(() => {
@@ -37,13 +40,36 @@ export default function Priority() {
     });
   }, [state.currentNote.metadata.priority]);
 
+  const renderDropdownItems = (): JSX.Element => {
+    return (
+      <section className='dropdown-container'>
+        {prioritiesDataMapping.map(({ value, data }, index) => (
+          <div
+            key={index.toString()}
+            onClick={() => handleUpdatePriority(value as TPriority)}>
+            <DotFilledIcon color={data.color} />
+            <span>{data.label}</span>
+          </div>
+        ))}
+      </section>
+    );
+  };
+
   return (
     <Container>
-      <button>
-        <DotFilledIcon color={data.color} />
-        <span>{data.label}</span>
-        <CaretDownIcon />
-      </button>
+      <Dropdown
+        trigger={['click']}
+        animation='slide-up'
+        visible={isVisible}
+        arrow={true}
+        onVisibleChange={(state) => setIsVisible(state)}
+        overlay={renderDropdownItems}>
+        <button className='dropdown-trigger-button'>
+          <DotFilledIcon color={data.color} />
+          <span>{data.label}</span>
+          <CaretDownIcon />
+        </button>
+      </Dropdown>
     </Container>
   );
 }
