@@ -110,6 +110,13 @@ const DropdownTriggerButton = styled.button`
   flex-direction: row;
   align-items: center;
   gap: 3px;
+  border-radius: 8px;
+  padding: 5px 8px;
+
+  :hover {
+    transition: all 200ms ease-in-out;
+    background: rgba(${({ theme }) => theme.primary}, 0.25);
+  }
 
   span {
     font-weight: 500;
@@ -117,7 +124,8 @@ const DropdownTriggerButton = styled.button`
   }
 
   .dot-icon {
-    width: 28px;
-    height: 28px;
+    width: 18px;
+    height: 18px;
+    transform: scale(50px);
   }
 `;

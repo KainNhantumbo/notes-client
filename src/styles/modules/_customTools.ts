@@ -6,7 +6,7 @@ export const _customTools = styled.section`
   display: flex;
   flex-direction: column;
   gap: 12px;
-
+  
   .form-container {
     input {
       width: 100%;
@@ -19,11 +19,21 @@ export const _customTools = styled.section`
       font-weight: 500;
       font-size: 1.4rem;
       color: rgb(${({ theme }) => theme.font});
-
+      
       ::placeholder {
         color: rgba(${({ theme }) => theme.font}, 0.4);
       }
     }
+  }
+  
+  .metadata-modifiers-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 5px;
+    border-radius: 12px;
+    border: 2px dashed rgba(${({ theme }) => theme.font}, 0.25);
   }
 
   .properties-container {

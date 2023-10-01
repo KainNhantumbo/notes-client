@@ -5,6 +5,7 @@ import {
 } from '@radix-ui/react-icons';
 import { Tag } from '@/types';
 import { useState } from 'react';
+import Priority from './Priority';
 import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { TwitterPicker } from 'react-color';
@@ -12,13 +13,7 @@ import TagsEditor from './Tags';
 import { colorsOptions } from '../shared/data';
 import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
-import Priority from './Priority';
-
-
-export function TooglePin () {
-
-  return 
-}
+import TooglePinNote from './PinNote';
 
 export function CustomTools() {
   const { state, dispatch } = useAppContext();
@@ -47,15 +42,12 @@ export function CustomTools() {
       </div>
 
       <div className='metadata-modifiers-container'>
-
+        <TooglePinNote />
         <Priority />
       </div>
 
       <div className='properties-container'>
         <TagsEditor />
-
-        {/* <div className='priority-selector'></div>
-        <div className='status-selector'></div> */}
 
         {/* <div
           className='color-selector'

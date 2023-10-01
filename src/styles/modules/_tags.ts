@@ -6,6 +6,7 @@ export const _tags = styled.div`
   align-items: center;
   width: 100%;
   gap: 2px;
+  margin-bottom: 8px;
 
   .tags-list-container {
     display: flex;
@@ -19,7 +20,7 @@ export const _tags = styled.div`
       align-items: center;
       gap: 2px;
       padding: 5px;
-      border-radius: 5px;
+      border-radius: 8px;
       user-select: none;
       width: 100%;
       min-width: fit-content;
@@ -40,7 +41,7 @@ export const _tags = styled.div`
 
         :hover {
           transition: all 200ms ease-in-out;
-          background: rgba(${({ theme }) => theme.foreground}, .8);
+          background: rgba(${({ theme }) => theme.foreground}, 0.8);
           svg {
             color: rgb(${({ theme }) => theme.error});
           }
