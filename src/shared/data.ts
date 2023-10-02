@@ -76,10 +76,10 @@ export const footerAnchors = [
 export const sortOptions: TOption[] = [
   { value: 'title', label: 'Title [A-Z]' },
   { value: '-title', label: 'Title [Z-A]' },
-  { value: 'createdAt', label: 'Date Created' },
-  { value: '-createdAt', label: 'Date Created [Inverted]' },
-  { value: 'updatedAt', label: 'Date Updated' },
-  { value: '-updatedAt', label: 'Date Updated [Inverted]' }
+  { value: '-createdAt', label: 'Date Created' },
+  { value: 'createdAt', label: 'Date Created [Inverted]' },
+  { value: '-updatedAt', label: 'Date Updated' },
+  { value: 'updatedAt', label: 'Date Updated [Inverted]' }
 ];
 
 export const priorityOptions: TOption[] = [
@@ -95,6 +95,18 @@ export const statusOptions: TOption[] = [
   { value: 'pending', label: 'Pending' },
   { value: 'cancelled', label: 'Cancelled' },
   { value: 'completed', label: 'Completed' }
+];
+
+export const colorOptions: TOption[] = [
+  { value: '#FFFFFF', label: 'Default' },
+  { value: '#0091FF', label: 'Blue' },
+  { value: '#99543A', label: 'Brown' },
+  { value: '#3D9A50', label: 'Green' },
+  { value: '#B5CC18', label: 'Olive' },
+  { value: '#F2711C', label: 'Orange' },
+  { value: '#DC3175', label: 'Rose' },
+  { value: '#00B5AD', label: 'Teal' },
+  { value: '#FBBD08', label: 'Yellow' }
 ];
 
 export const colorSchemeOptions = [

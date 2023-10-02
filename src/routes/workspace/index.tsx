@@ -4,7 +4,8 @@ import {
   FileTextIcon,
   HamburgerMenuIcon,
   MixIcon,
-  PlusIcon
+  PlusIcon,
+  TrashIcon
 } from '@radix-ui/react-icons';
 import { TNote, TSettings, TUser } from '@/types';
 import { useEffect } from 'react';
@@ -22,6 +23,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 import SortQuery from '@/components/SortQuery';
+import NoteActionsDropdown from '@/components/NotesActionsDropdown';
 
 export default function Workspace() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -247,7 +249,7 @@ export default function Workspace() {
                   }
                 />
 
-                <SortQuery/>
+                <SortQuery />
               </div>
 
               {!isError && !isLoading ? (
@@ -314,9 +316,20 @@ export default function Workspace() {
                           <h5>{formatDate(note.updatedAt)}</h5>
                         </div>
 
-                        <button className='action-panel'>
-                          <DotsHorizontalIcon />
-                        </button>
+                        <NoteActionsDropdown
+                          items={[
+                            {
+                              label: 'Pi',
+                              icon: TrashIcon,
+                              handler: () => {}
+                            },
+                            {
+                              label: 'Move to Trash',
+                              icon: TrashIcon,
+                              handler: () => {}
+                            }
+                          ]}
+                        />
                       </div>
                     ))}
                   </ScrollArea.Viewport>

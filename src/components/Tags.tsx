@@ -5,8 +5,8 @@ import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import { SubmitEvent, Tag } from '@/types';
-import { TwitterPicker } from 'react-color';
-import { m as motion } from 'framer-motion';
+import { AnimatePresence, m as motion } from 'framer-motion';
+import styled from 'styled-components';
 
 export default function Tags() {
   const { state, dispatch } = useAppContext();
@@ -19,7 +19,7 @@ export default function Tags() {
     const isTagAdded = state.currentNote.metadata.tags.some(
       (item) => item.value.toLowerCase() === tag.value.toLowerCase()
     );
-    
+
     if (isTagAdded) return undefined;
 
     const data: Tag = { id: nanoid(8), color: '#E47131', value: tag.value };
@@ -121,3 +121,17 @@ export default function Tags() {
     </Container>
   );
 }
+
+function TagEditor({ status }: { status: boolean }) {
+  return (
+    <AnimatePresence>
+      
+    </AnimatePresence>
+  );
+}
+
+const EditorContainer = styled.section`
+  
+
+
+`

@@ -223,7 +223,7 @@ export const _workspace = styled.main`
           }
         }
 
-        .action-panel {
+        button {
           ${StyledCornerButton}
           border: none;
           position: absolute;

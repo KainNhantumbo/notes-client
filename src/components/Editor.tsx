@@ -1,11 +1,22 @@
 import actions from '@/shared/actions';
-import { CSSProperties, useMemo } from 'react';
+import { CSSProperties, useMemo, useState } from 'react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import { useAppContext } from '@/context/AppContext';
 import { useThemeContext } from '@/context/ThemeContext';
 import { lineNumbersRelative } from '@uiw/codemirror-extensions-line-numbers-relative';
 import * as editorTheme from '@uiw/codemirror-themes-all';
 import { ReactCodeMirrorProps } from '@uiw/react-codemirror';
+
+import { EditorProvider, FloatingMenu, BubbleMenu } from '@tiptap/react';
+import { StarterKit } from '@tiptap/starter-kit';
+
+const extensions = [
+  StarterKit.configure({
+    heading: {
+      levels: [1, 2, 3]
+    }
+  })
+];
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -29,11 +40,17 @@ export default function Editor() {
     maxWidth: '1080px'
   };
 
+  const [data, setData] = useState('');
   return (
     <div
       style={{ width: '100%', height: 'fit-content' }}
       data-color-mode={colorScheme.scheme}>
-      <MarkdownEditor
+      <EditorProvider extensions={extensions} content={data}>
+        <FloatingMenu>This is the floating menu</FloatingMenu>
+        <BubbleMenu>This is the bubble menu</BubbleMenu>
+      </EditorProvider>
+
+      {/* <MarkdownEditor
         style={{ ...editorStyles }}
         value={state.currentNote.content}
         // @ts-ignore
@@ -75,7 +92,7 @@ export default function Editor() {
         placeholder={'Start writing...'}
         // height={String(Number(state.windowInnerSize.height - 110) + 'px')}
         // previewProps={{ style: { display: 'none' } }}
-      />
+      /> */}
     </div>
   );
 }

@@ -1,8 +1,14 @@
+import React from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { editorThemeOptions } from '@/shared/data';
 import * as editorTheme from '@uiw/codemirror-themes-all';
+import { IconProps } from '@radix-ui/react-icons/dist/types';
 
 export type TEditorTheme = keyof typeof editorTheme;
+
+export type IconType = React.ForwardRefExoticComponent<
+  IconProps & React.RefAttributes<SVGSVGElement>
+>;
 
 export type THeadProps =
   | {

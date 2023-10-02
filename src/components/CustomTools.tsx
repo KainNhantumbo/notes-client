@@ -33,9 +33,15 @@ export default function CustomTools() {
       </div>
 
       <div className='metadata-modifiers-container'>
+        <div className='right-side-container'>
         <TooglePinNote />
         <Priority />
         <StatusEditor />
+          
+        </div>
+        <div className='left-side-container'>
+
+        </div>
       </div>
 
       <div className='properties-container'>
