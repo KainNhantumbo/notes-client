@@ -18,9 +18,9 @@
   },
   "keywords": [
     "notes",
-    "notes markdown application",
     "notes application",
     "notes client application",
+    "markdown notes application",
     "choconotey frontend react application"
   ],
   "engines": {
@@ -51,9 +51,6 @@
     "@tiptap/pm": "^2.1.11",
     "@tiptap/react": "^2.1.11",
     "@tiptap/starter-kit": "^2.1.11",
-    "@uiw/codemirror-extensions-line-numbers-relative": "^4.21.11",
-    "@uiw/codemirror-themes-all": "^4.21.11",
-    "@uiw/react-markdown-editor": "^5.11.2",
     "@uiw/react-markdown-preview": "^4.1.15",
     "axios": "^1.4.0",
     "framer-motion": "^10.12.18",
