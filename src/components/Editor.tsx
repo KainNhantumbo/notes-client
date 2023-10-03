@@ -5,14 +5,27 @@ import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
 import { useThemeContext } from '@/context/ThemeContext';
 import { EditorProvider, FloatingMenu, BubbleMenu } from '@tiptap/react';
+import { Color } from '@tiptap/extension-color';
+import ListItem from '@tiptap/extension-list-item';
+import TextStyle from '@tiptap/extension-text-style';
 
-const extensions = [
+const editorExtensions = [
+  TextStyle,
+  Color.configure({ types: [TextStyle.name, ListItem.name] }),
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
       HTMLAttributes: {
         title: 'Select heading'
       }
+    },
+    bulletList: {
+      keepMarks: true,
+      keepAttributes: false // TODO : Making `false` becase marks are not preserved
+    },
+    orderedList: {
+      keepMarks: true,
+      keepAttributes: false // TODO : Making `false` becase marks are not preserved
     }
   })
 ];
@@ -38,7 +51,7 @@ export default function Editor() {
       style={{ width: '100%', height: 'fit-content' }}
       data-color-mode={colorScheme.scheme}>
       <EditorProvider
-        extensions={extensions}
+        extensions={editorExtensions}
         content={data}
         editorProps={{}}
         slotBefore={<EditorToolbar />}>
