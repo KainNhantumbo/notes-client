@@ -77,6 +77,8 @@ export default function Status() {
     <Dropdown
       trigger={['click']}
       animation='slide-up'
+      align={{ autoArrow: true }}
+      arrow={true}
       visible={isDropdownVisible}
       onVisibleChange={(state) => setIsDropdownVisible(state)}
       overlay={renderDropdownItems}>

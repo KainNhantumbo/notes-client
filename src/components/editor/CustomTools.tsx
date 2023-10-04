@@ -44,6 +44,7 @@ export default function CustomTools() {
 
         <div className='left-side-container'>
           <motion.button
+            whileTap={{ scale: 0.8 }}
             className='trigger-left-pannel-button'
             onClick={() => {
               dispatch({
@@ -51,7 +52,7 @@ export default function CustomTools() {
                 payload: { ...state, isPropertiesDrawer: true }
               });
             }}>
-            <RiMenuLine/>
+            <RiMenuLine />
           </motion.button>
         </div>
       </div>

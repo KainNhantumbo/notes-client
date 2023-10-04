@@ -14,7 +14,8 @@ import {
   RiStrikethrough,
   RiSubscript,
   RiSuperscript,
-  RiTextWrap
+  RiTextWrap,
+  RiUnderline
 } from 'react-icons/ri';
 import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
@@ -65,6 +66,16 @@ export default function EditorToolbar() {
       </button>
 
       <button
+        title='Underline'
+        aria-placeholder='Underline'
+        type='button'
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        disabled={!editor.can().chain().focus().toggleUnderline().run()}
+        className={editor.isActive('underline') ? 'is-active' : ''}>
+        <RiUnderline />
+      </button>
+
+      <button
         title='Strike'
         aria-placeholder='Strike'
         type='button'
@@ -83,7 +94,7 @@ export default function EditorToolbar() {
         className={editor.isActive('subscript') ? 'is-active' : ''}>
         <RiSubscript />
       </button>
-      
+
       <button
         title='Toogle superscript'
         aria-placeholder='Toogle superscript'

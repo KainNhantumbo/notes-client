@@ -13,6 +13,7 @@ import FontFamily from '@tiptap/extension-font-family';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
 import Subscript from '@tiptap/extension-subscript';
+import Underline from '@tiptap/extension-underline';
 import Superscript from '@tiptap/extension-superscript';
 
 export default function Editor() {
@@ -64,6 +65,9 @@ const editorExtensions = [
   }),
   Superscript.configure({
     HTMLAttributes: { class: 'my-custom-class' }
+  }),
+  Underline.configure({
+    HTMLAttributes: { class: 'underline-class' }
   }),
   Link.configure({
     protocols: ['ftp', 'mailto', 'http', 'https', 'tls'],

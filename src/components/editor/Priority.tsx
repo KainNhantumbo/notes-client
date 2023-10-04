@@ -57,6 +57,8 @@ export default function Priority() {
     <Dropdown
       trigger={['click']}
       animation='slide-up'
+      align={{ autoArrow: true }}
+      arrow={true}
       visible={isDropdownVisible}
       onVisibleChange={(state) => setIsDropdownVisible(state)}
       overlay={renderDropdownItems}>

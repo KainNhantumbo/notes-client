@@ -40,6 +40,8 @@ export default function SortQuery() {
     <Dropdown
       trigger={['click']}
       animation='slide-up'
+      align={{ autoArrow: true }}
+      arrow={true}
       visible={isDropdownVisible}
       onVisibleChange={(state) => setIsDropdownVisible(state)}
       overlay={renderDropdownItems}>
@@ -61,7 +63,7 @@ const DropdownContainer = styled.section`
   flex-direction: column;
   padding: 5px;
   border-radius: 8px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
   background: rgba(${({ theme }) => theme.foreground}, 0.85);
   border: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
   user-select: none;
