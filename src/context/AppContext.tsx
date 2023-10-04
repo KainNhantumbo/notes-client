@@ -4,8 +4,7 @@ import {
   useContext,
   useReducer,
   Dispatch,
-  useEffect
-} from 'react';
+  useEffect} from 'react';
 import { TAuth, TNote } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/shared/actions';
@@ -97,6 +96,7 @@ export function AppContext({ children }: TProps) {
   const syncCurrentNote = async () => {
     const { _id, created_by, ...currentNote } = state.currentNote;
     if (!state.auth.token || !_id) return undefined;
+
     try {
       const { data } = await useFetchAPI<TNote>({
         method: 'patch',

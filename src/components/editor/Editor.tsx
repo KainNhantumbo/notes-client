@@ -1,19 +1,14 @@
-import actions from '@/shared/actions';
 import EditorToolbar from './EditorToolbar';
-import { CSSProperties, useState } from 'react';
+import { CSSProperties } from 'react';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
 import { useThemeContext } from '@/context/ThemeContext';
-import { EditorProvider, FloatingMenu, BubbleMenu } from '@tiptap/react';
 import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
-import CharacterCount from '@tiptap/extension-character-count';
 import TextStyle from '@tiptap/extension-text-style';
 import Typography from '@tiptap/extension-typography';
-import Dropcursor from '@tiptap/extension-dropcursor';
-import GapCursor from '@tiptap/extension-gapcursor';
-import { highlight } from 'lowlight';
-import debounce from 'lodash.debounce';
+import { EditorProvider, FloatingMenu, BubbleMenu } from '@tiptap/react';
+import actions from '@/shared/actions';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -36,12 +31,19 @@ export default function Editor() {
       <EditorProvider
         extensions={editorExtensions}
         content={state.currentNote.content}
-        onUpdate={(props) => {
-          console.info(props.editor.getHTML());
+        onUpdate={({ editor, transaction }) => {
+          console.info(editor.getText());
+          dispatch({
+            type: actions.CURRENT_NOTE,
+            payload: {
+              ...state,
+              currentNote: { ...state.currentNote, content: editor.getText() }
+            }
+          });
         }}
-        editorProps={{}}
+        editorProps={{ attributes: { class: 'editor-container' } }}
         slotBefore={<EditorToolbar />}>
-        <FloatingMenu>This is the floating menu</FloatingMenu>
+        {/* <FloatingMenu></FloatingMenu> */}
         <BubbleMenu>This is the bubble menu</BubbleMenu>
       </EditorProvider>
     </div>

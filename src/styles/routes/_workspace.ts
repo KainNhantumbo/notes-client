@@ -75,8 +75,8 @@ export const _workspace = styled.main`
         ${BaseButton}
         z-index: 200;
         position: absolute;
-        right: -5vw;
-        bottom: -75vh;
+        right: -4vw;
+        bottom: -78vh;
         background: rgba(${({ theme }) => theme.primary}, 0.15);
         backdrop-filter: blur(10px);
         display: flex;
@@ -99,16 +99,6 @@ export const _workspace = styled.main`
         }
 
         @media screen and (max-width: 660px) {
-          right: calc(0% + 40px);
-          ${StyledCornerButton}
-          border-radius: 50%;
-          padding: 12px;
-          background: rgba(${({ theme }) => theme.primary}, 0.2);
-          backdrop-filter: blur(10px);
-
-          span {
-            display: none;
-          }
         }
       }
     }
@@ -202,7 +192,6 @@ export const _workspace = styled.main`
             flex-direction: row;
             align-items: center;
             gap: 3px;
-            
 
             p {
               width: fit-content;

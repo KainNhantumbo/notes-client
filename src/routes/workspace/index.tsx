@@ -21,7 +21,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 import SortQuery from '@/components/SortQuery';
-import NoteActionsDropdown from '@/components/NotesActionsDropdown';
+import NoteActionsDropdown from '@/components/NoteActionsDropdown';
 
 export default function Workspace() {
   const { state, dispatch, useFetchAPI } = useAppContext();

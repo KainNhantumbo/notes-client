@@ -1,6 +1,6 @@
 import { Layout } from '@/components/Layout';
-import Editor from '@/components/Editor';
-import CustomTools from '@/components/CustomTools';
+import Editor from '@/components/editor/Editor';
+import CustomTools from '@/components/editor/CustomTools';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
 import { Properties } from '@/components/modals/Properties';
@@ -16,7 +16,7 @@ export default function NoteEditor() {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <Properties/>
+          <Properties />
           <CustomTools />
           <Editor />
         </div>
