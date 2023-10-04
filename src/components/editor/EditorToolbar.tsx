@@ -19,6 +19,7 @@ import {
 } from 'react-icons/ri';
 import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
+import Headings from './Hedings';
 
 export default function EditorToolbar() {
   const { editor } = useCurrentEditor();
@@ -84,6 +85,8 @@ export default function EditorToolbar() {
         className={editor.isActive('strike') ? 'is-active' : ''}>
         <RiStrikethrough />
       </button>
+
+      <Headings />
 
       <button
         title='Toogle subscript'
