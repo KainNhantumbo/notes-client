@@ -12,6 +12,7 @@ import { EditorProvider, BubbleMenu } from '@tiptap/react';
 import FontFamily from '@tiptap/extension-font-family';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
+import Subscript from '@tiptap/extension-subscript'
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -56,7 +57,11 @@ export default function Editor() {
 
 const editorExtensions = [
   TextStyle,
-  Typography,
+  Typography,Subscript.configure({
+  HTMLAttributes: {
+    class: 'my-custom-class',
+  },
+}),
   Link.configure({
     protocols: ['ftp', 'mailto', 'http', 'https', 'tls'],
     openOnClick: false,

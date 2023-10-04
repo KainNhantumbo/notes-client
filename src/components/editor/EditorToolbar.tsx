@@ -12,6 +12,7 @@ import {
   RiParagraph,
   RiRulerLine,
   RiStrikethrough,
+  RiSubscript,
   RiTextWrap
 } from 'react-icons/ri';
 import { useCurrentEditor } from '@tiptap/react';
@@ -72,6 +73,15 @@ export default function EditorToolbar() {
         <RiStrikethrough />
       </button>
 
+      <button
+        title='Toogle subscript'
+        aria-placeholder='Toogle subscript'
+        type='button'
+        onClick={() => editor.chain().focus().toggleSubscript().run()}
+        disabled={!editor.can().chain().focus().toggleSubscript().run()}
+        className={editor.isActive('subscript') ? 'is-active' : ''}>
+        <RiSubscript />
+      </button>
       <button
         title='Code'
         aria-placeholder='Code'
