@@ -7,28 +7,14 @@ import { useThemeContext } from '@/context/ThemeContext';
 import { EditorProvider, FloatingMenu, BubbleMenu } from '@tiptap/react';
 import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
+import CharacterCount from '@tiptap/extension-character-count';
 import TextStyle from '@tiptap/extension-text-style';
+import Typography from '@tiptap/extension-typography';
+import Dropcursor from '@tiptap/extension-dropcursor';
+import GapCursor from '@tiptap/extension-gapcursor';
+import { highlight } from 'lowlight';
+import debounce from 'lodash.debounce'
 
-const editorExtensions = [
-  TextStyle,
-  Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  StarterKit.configure({
-    heading: {
-      levels: [1, 2, 3, 4, 5, 6],
-      HTMLAttributes: {
-        title: 'Select heading'
-      }
-    },
-    bulletList: {
-      keepMarks: true,
-      keepAttributes: false // TODO : Making `false` becase marks are not preserved
-    },
-    orderedList: {
-      keepMarks: true,
-      keepAttributes: false // TODO : Making `false` becase marks are not preserved
-    }
-  })
-];
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -44,15 +30,13 @@ export default function Editor() {
     maxWidth: '1080px'
   };
 
-  const [data, setData] = useState('');
-
   return (
     <div
       style={{ width: '100%', height: 'fit-content' }}
       data-color-mode={colorScheme.scheme}>
       <EditorProvider
         extensions={editorExtensions}
-        content={data}
+        content={state.currentNote.content}
         editorProps={{}}
         slotBefore={<EditorToolbar />}>
         <FloatingMenu>This is the floating menu</FloatingMenu>
@@ -61,3 +45,25 @@ export default function Editor() {
     </div>
   );
 }
+
+const editorExtensions = [
+  TextStyle,
+  Typography,
+  Color.configure({ types: [TextStyle.name, ListItem.name] }),
+  Dropcursor.configure({
+    color: '#ff0000',
+    width: 5,
+    class: 'class-dropcursor'
+  }),
+  GapCursor.configure({ class: 'gapcursor-class' }),
+  StarterKit.configure({
+    heading: {
+      levels: [1, 2, 3, 4, 5, 6],
+      HTMLAttributes: {
+        title: 'Select heading'
+      }
+    },
+    bulletList: { keepMarks: true, keepAttributes: false },
+    orderedList: { keepMarks: true, keepAttributes: false }
+  })
+];
