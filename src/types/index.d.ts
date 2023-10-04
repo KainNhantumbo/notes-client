@@ -149,9 +149,3 @@ export type TUser = {
   last_name: string;
   email: string;
 };
-
-export type TNavigation = {
-  is_navigation_drawer: boolean;
-  is_notes_list: boolean;
-  is_editor_container: boolean;
-};

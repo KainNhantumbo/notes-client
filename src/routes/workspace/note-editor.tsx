@@ -3,6 +3,7 @@ import Editor from '@/components/Editor';
 import CustomTools from '@/components/CustomTools';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
+import { Properties } from '@/components/modals/Properties';
 
 export default function NoteEditor() {
   const { state } = useAppContext();
@@ -15,6 +16,7 @@ export default function NoteEditor() {
       }}>
       <Container>
         <div className='wrapper-container'>
+          <Properties/>
           <CustomTools />
           <Editor />
         </div>

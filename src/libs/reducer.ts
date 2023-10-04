@@ -5,12 +5,8 @@ const initialState: TState = {
   notes: [],
   folders: [],
   isLogoutModal: false,
-  navigation: {
-    is_navigation_drawer: false,
-    is_editor_container: true,
-    is_notes_list: true
-  },
-  isPropertiesModal: false,
+  isNavigationDrawer: false,
+  isPropertiesDrawer: false,
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', token: '' },
@@ -113,8 +109,11 @@ function reducer(state: TState, action: TAction): TState {
     case actions.WINDOW_INNER_SIZE:
       return { ...state, windowInnerSize: action.payload.windowInnerSize };
 
-    case actions.PROPERTIES_MODAL:
-      return { ...state, isPropertiesModal: action.payload.isLogoutModal };
+    case actions.PROPERTIES_DRAWER:
+      return {
+        ...state,
+        isPropertiesDrawer: action.payload.isPropertiesDrawer
+      };
 
     case actions.QUERY_NOTES:
       return { ...state, query: action.payload.query };
@@ -125,8 +124,11 @@ function reducer(state: TState, action: TAction): TState {
     case actions.USER:
       return { ...state, user: action.payload.user };
 
-    case actions.NAVIGATION:
-      return { ...state, navigation: action.payload.navigation };
+    case actions.NAVIGATION_DRAWER:
+      return {
+        ...state,
+        isNavigationDrawer: action.payload.isNavigationDrawer
+      };
 
     default:
       return { ...state };

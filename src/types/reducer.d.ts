@@ -8,13 +8,14 @@ import {
   TSettings,
   TSignIn,
   TSignUp,
-  TUser,
+  TUser
 } from '@/types/index';
 
 export type TState = {
   auth: TAuth;
   isLogoutModal: boolean;
-  isPropertiesModal: boolean;
+  isPropertiesDrawer: boolean;
+  isNavigationDrawer: boolean;
   notes: TNote[];
   currentNote: TNote;
   folders: TFolder[];
@@ -26,7 +27,6 @@ export type TState = {
   query: TQuery;
   settings: TSettings;
   user: TUser;
-  navigation: TNavigation;
 };
 
 export type TAction = { type: string; payload: TState };

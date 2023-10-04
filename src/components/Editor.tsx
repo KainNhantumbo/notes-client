@@ -13,8 +13,7 @@ import Typography from '@tiptap/extension-typography';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import GapCursor from '@tiptap/extension-gapcursor';
 import { highlight } from 'lowlight';
-import debounce from 'lodash.debounce'
-
+import debounce from 'lodash.debounce';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -37,6 +36,9 @@ export default function Editor() {
       <EditorProvider
         extensions={editorExtensions}
         content={state.currentNote.content}
+        onUpdate={(props) => {
+          console.info(props.editor.getHTML());
+        }}
         editorProps={{}}
         slotBefore={<EditorToolbar />}>
         <FloatingMenu>This is the floating menu</FloatingMenu>
@@ -50,12 +52,6 @@ const editorExtensions = [
   TextStyle,
   Typography,
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  Dropcursor.configure({
-    color: '#ff0000',
-    width: 5,
-    class: 'class-dropcursor'
-  }),
-  GapCursor.configure({ class: 'gapcursor-class' }),
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
@@ -64,6 +60,11 @@ const editorExtensions = [
       }
     },
     bulletList: { keepMarks: true, keepAttributes: false },
-    orderedList: { keepMarks: true, keepAttributes: false }
+    orderedList: { keepMarks: true, keepAttributes: false },
+    dropcursor: {
+      color: '#ff0000',
+      width: 5,
+      class: 'class-dropcursor'
+    }
   })
 ];

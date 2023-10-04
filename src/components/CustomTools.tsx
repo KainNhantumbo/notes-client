@@ -3,7 +3,9 @@ import Priority from './Priority';
 import StatusEditor from './Status';
 import TooglePinNote from './PinNote';
 import actions from '@/shared/actions';
+import { ThreeDotsVertical } from 'react-bootstrap-icons';
 import { useAppContext } from '@/context/AppContext';
+import { m as motion } from 'framer-motion';
 import { _customTools as Container } from '@/styles/modules/_customTools';
 
 export default function CustomTools() {
@@ -34,13 +36,22 @@ export default function CustomTools() {
 
       <div className='metadata-modifiers-container'>
         <div className='right-side-container'>
-        <TooglePinNote />
-        <Priority />
-        <StatusEditor />
-          
+          <TooglePinNote />
+          <Priority />
+          <StatusEditor />
         </div>
-        <div className='left-side-container'>
 
+        <div className='left-side-container'>
+          <motion.button
+            className='trigger-left-pannel-button'
+            onClick={() => {
+              dispatch({
+                type: actions.PROPERTIES_DRAWER,
+                payload: { ...state, isPropertiesDrawer: true }
+              });
+            }}>
+            <ThreeDotsVertical />
+          </motion.button>
         </div>
       </div>
 

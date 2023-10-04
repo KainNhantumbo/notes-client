@@ -6,7 +6,7 @@ import {
   LayersIcon,
   StackIcon,
   TokensIcon,
-  TrashIcon,
+  TrashIcon
 } from '@radix-ui/react-icons';
 import moment from 'moment';
 import actions from '@/shared/actions';
@@ -19,18 +19,18 @@ export function Properties() {
 
   return (
     <AnimatePresence>
-      {state.isPropertiesModal && (
+      {state.isPropertiesDrawer && (
         <Container
           className='main'
           onClick={(e: any): void => {
             const target = (e as any).target.classList;
             if (target.contains('main')) {
               dispatch({
-                type: actions.PROPERTIES_MODAL,
+                type: actions.PROPERTIES_DRAWER,
                 payload: {
                   ...state,
-                  isPropertiesModal: false,
-                },
+                  isPropertiesDrawer: false
+                }
               });
             }
           }}>
@@ -47,11 +47,11 @@ export function Properties() {
                 className='box-btn_close'
                 onClick={() =>
                   dispatch({
-                    type: actions.PROPERTIES_MODAL,
+                    type: actions.PROPERTIES_DRAWER,
                     payload: {
                       ...state,
-                      isPropertiesModal: false,
-                    },
+                      isPropertiesDrawer: false
+                    }
                   })
                 }>
                 <Cross2Icon />

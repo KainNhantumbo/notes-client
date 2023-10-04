@@ -74,9 +74,9 @@ export const _workspace = styled.main`
       .compose-button {
         ${BaseButton}
         z-index: 200;
-        position: fixed;
-        right: 120px;
-        bottom: 60px;
+        position: absolute;
+        right: -5vw;
+        bottom: -75vh;
         background: rgba(${({ theme }) => theme.primary}, 0.15);
         backdrop-filter: blur(10px);
         display: flex;
@@ -195,9 +195,6 @@ export const _workspace = styled.main`
           justify-content: space-between;
           align-items: center;
           gap: 12px;
-          padding: 5px;
-          border-radius: 8px;
-          border: 2px dashed rgba(${({ theme }) => theme.font}, 0.25);
 
           .tags-container {
             width: 100%;
@@ -205,6 +202,7 @@ export const _workspace = styled.main`
             flex-direction: row;
             align-items: center;
             gap: 3px;
+            
 
             p {
               width: fit-content;

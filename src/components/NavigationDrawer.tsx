@@ -50,13 +50,10 @@ export function NavigationDrawer() {
                 }
               });
               dispatch({
-                type: actions.NAVIGATION,
+                type: actions.NAVIGATION_DRAWER,
                 payload: {
                   ...state,
-                  navigation: {
-                    ...state.navigation,
-                    is_navigation_drawer: false
-                  }
+                  isNavigationDrawer: false
                 }
               });
 
@@ -145,11 +142,8 @@ export function NavigationDrawer() {
         icon: CornersIcon,
         execute: () => {
           dispatch({
-            type: actions.NAVIGATION,
-            payload: {
-              ...state,
-              navigation: { ...state.navigation, is_navigation_drawer: false }
-            }
+            type: actions.NAVIGATION_DRAWER,
+            payload: { ...state, isNavigationDrawer: false }
           });
           navigate('/');
         }
@@ -159,11 +153,8 @@ export function NavigationDrawer() {
         icon: GearIcon,
         execute: () => {
           dispatch({
-            type: actions.NAVIGATION,
-            payload: {
-              ...state,
-              navigation: { ...state.navigation, is_navigation_drawer: false }
-            }
+            type: actions.NAVIGATION_DRAWER,
+            payload: { ...state, isNavigationDrawer: false }
           });
           navigate('/workspace/settings');
         }
@@ -173,7 +164,7 @@ export function NavigationDrawer() {
 
   return (
     <AnimatePresence>
-      {state.navigation.is_navigation_drawer && (
+      {state.isNavigationDrawer && (
         <Container>
           <motion.div
             className='main-container'
@@ -184,14 +175,8 @@ export function NavigationDrawer() {
               className='header-container'
               onClick={() => {
                 dispatch({
-                  type: actions.NAVIGATION,
-                  payload: {
-                    ...state,
-                    navigation: {
-                      ...state.navigation,
-                      is_navigation_drawer: false
-                    }
-                  }
+                  type: actions.NAVIGATION_DRAWER,
+                  payload: { ...state, isNavigationDrawer: false }
                 });
               }}>
               <div className='logo-container'>

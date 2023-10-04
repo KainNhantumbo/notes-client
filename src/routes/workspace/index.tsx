@@ -1,6 +1,4 @@
 import {
-  CaretSortIcon,
-  DotsHorizontalIcon,
   FileTextIcon,
   HamburgerMenuIcon,
   MixIcon,
@@ -199,195 +197,186 @@ export default function Workspace() {
       <Container>
         <NavigationDrawer />
 
-        {state.navigation.is_notes_list ? (
-          <section className='notes-renderer-container'>
-            <section className='header-container'>
-              <h2>
-                <span>
-                  {searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}
-                </span>
-              </h2>
+        <section className='notes-renderer-container'>
+          <section className='header-container'>
+            <h2>
+              <span>
+                {searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}
+              </span>
+            </h2>
 
-              <div className='form-container'>
-                <motion.button
-                  title='Toggle navigation drawer'
-                  placeholder='Toggle navigation drawer'
-                  aria-placeholder='Toggle navigation drawer'
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 1 }}
-                  onClick={() =>
-                    dispatch({
-                      type: actions.NAVIGATION,
-                      payload: {
-                        ...state,
-                        navigation: {
-                          ...state.navigation,
-                          is_navigation_drawer:
-                            !state.navigation.is_navigation_drawer
-                        }
-                      }
-                    })
-                  }>
-                  <HamburgerMenuIcon />
-                </motion.button>
+            <div className='form-container'>
+              <motion.button
+                title='Toggle navigation drawer'
+                placeholder='Toggle navigation drawer'
+                aria-placeholder='Toggle navigation drawer'
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 1 }}
+                onClick={() =>
+                  dispatch({
+                    type: actions.NAVIGATION_DRAWER,
+                    payload: {
+                      ...state,
+                      isNavigationDrawer: !state.isNavigationDrawer
+                    }
+                  })
+                }>
+                <HamburgerMenuIcon />
+              </motion.button>
 
-                <input
-                  type='search'
-                  name='search'
-                  placeholder='Search in notes'
-                  title='Search in notes'
-                  aria-placeholder='Search in notes'
-                  value={state.query.search}
-                  onChange={(e) =>
-                    dispatch({
-                      type: actions.QUERY_NOTES,
-                      payload: {
-                        ...state,
-                        query: { ...state.query, search: e.target.value }
-                      }
-                    })
-                  }
-                />
+              <input
+                type='search'
+                name='search'
+                placeholder='Search in notes'
+                title='Search in notes'
+                aria-placeholder='Search in notes'
+                value={state.query.search}
+                onChange={(e) =>
+                  dispatch({
+                    type: actions.QUERY_NOTES,
+                    payload: {
+                      ...state,
+                      query: { ...state.query, search: e.target.value }
+                    }
+                  })
+                }
+              />
 
-                <SortQuery />
-              </div>
+              <SortQuery />
+            </div>
 
-              {!isError && !isLoading ? (
-                <motion.button
-                  title='Compose a new note'
-                  placeholder='Compose a new note'
-                  aria-placeholder='Compose a new note'
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.8 }}
-                  className='compose-button'
-                  onClick={createNote}>
-                  <PlusIcon />
-                  <span>Compose</span>
-                </motion.button>
-              ) : null}
-            </section>
-
-            <hr className='header-hr' />
-
-            {state.notes.length > 0 && !isLoading && !isError ? (
-              <div className='wrapper-container'>
-                <ScrollArea.Root className='notes-list-container'>
-                  <ScrollArea.Viewport className='ScrollAreaViewport'>
-                    {state.notes.map((note) => (
-                      <div
-                        key={note._id}
-                        className={`note-container`}
-                        onClick={(e) => {
-                          const target: any = (
-                            e as any
-                          ).target.classList.contains('action-panel');
-                          if (!target) {
-                            handleEditNote(note);
-                          }
-                        }}>
-                        <div className='top-side'>
-                          <h3>
-                            <FileTextIcon />
-                            <span>
-                              {note.title ? note.title : '[Untitled]'}
-                            </span>
-                          </h3>
-                          <p>
-                            {!note.content
-                              ? '[Empty note]'
-                              : note.content.length > 70
-                              ? note.content.slice(0, 70)
-                              : note.content}
-                          </p>
-                        </div>
-
-                        <div className='bottom-side'>
-                          {note.metadata.tags.length > 0 ? (
-                            <div className='tags-container'>
-                              {note.metadata.tags.map((tag) => (
-                                <p
-                                  key={tag.id}
-                                  style={{ backgroundColor: tag.color }}>
-                                  {tag.value}
-                                </p>
-                              ))}
-                            </div>
-                          ) : null}
-                          <h5>{formatDate(note.updatedAt)}</h5>
-                        </div>
-
-                        <NoteActionsDropdown
-                          items={[
-                            {
-                              label: 'Pi',
-                              icon: TrashIcon,
-                              handler: () => {}
-                            },
-                            {
-                              label: 'Move to Trash',
-                              icon: TrashIcon,
-                              handler: () => {}
-                            }
-                          ]}
-                        />
-                      </div>
-                    ))}
-                  </ScrollArea.Viewport>
-                  <ScrollArea.Scrollbar
-                    className='ScrollAreaScrollbar'
-                    orientation='vertical'>
-                    <ScrollArea.Thumb className='ScrollAreaThumb' />
-                  </ScrollArea.Scrollbar>
-                  <ScrollArea.Scrollbar
-                    className='ScrollAreaScrollbar'
-                    orientation='horizontal'>
-                    <ScrollArea.Thumb className='ScrollAreaThumb' />
-                  </ScrollArea.Scrollbar>
-                  <ScrollArea.Corner className='ScrollAreaCorner' />
-                </ScrollArea.Root>
-              </div>
-            ) : null}
-
-            {!isLoading && isError ? (
-              <section className='error-container'>
-                <h3>
-                  {(error as any)?.response?.data?.message ||
-                    (error as any)?.code ||
-                    'An error occurred while fetching data'}
-                </h3>
-                <button onClick={() => refetch({ queryKey: ['query-notes'] })}>
-                  <span>Try again</span>
-                </button>
-              </section>
-            ) : null}
-
-            {state.notes.length < 1 && !isError && !isLoading ? (
-              <section className='empty-notes-container'>
-                <MixIcon />
-                <h3>
-                  <span>No notes</span>
-                </h3>
-                <p>
-                  Press <i>Compose</i> button to start writing notes
-                </p>
-              </section>
-            ) : null}
-
-            {isLoading && !isError ? (
-              <div className='loading-indicator'>
-                <MoonLoader
-                  size={30}
-                  color={`rgb(${theme.primary_shade})`}
-                  aria-placeholder='Loading your notes...'
-                  cssOverride={{
-                    display: 'block'
-                  }}
-                />
-                <h3>Loading your notes...</h3>
-              </div>
+            {!isError && !isLoading ? (
+              <motion.button
+                title='Compose a new note'
+                placeholder='Compose a new note'
+                aria-placeholder='Compose a new note'
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.8 }}
+                className='compose-button'
+                onClick={createNote}>
+                <PlusIcon />
+              </motion.button>
             ) : null}
           </section>
-        ) : null}
+
+          <hr className='header-hr' />
+
+          {state.notes.length > 0 && !isLoading && !isError ? (
+            <div className='wrapper-container'>
+              <ScrollArea.Root className='notes-list-container'>
+                <ScrollArea.Viewport className='ScrollAreaViewport'>
+                  {state.notes.map((note) => (
+                    <div
+                      key={note._id}
+                      className={`note-container`}
+                      onClick={(e) => {
+                        const target: any = (
+                          e as any
+                        ).target.classList.contains('action-panel');
+                        if (!target) {
+                          handleEditNote(note);
+                        }
+                      }}>
+                      <div className='top-side'>
+                        <h3>
+                          <FileTextIcon />
+                          <span>{note.title ? note.title : '[Untitled]'}</span>
+                        </h3>
+                        <p>
+                          {!note.content
+                            ? '[Empty note]'
+                            : note.content.length > 70
+                            ? note.content.slice(0, 70)
+                            : note.content}
+                        </p>
+                      </div>
+
+                      <div className='bottom-side'>
+                        {note.metadata.tags.length > 0 ? (
+                          <div className='tags-container'>
+                            {note.metadata.tags.map((tag) => (
+                              <p
+                                key={tag.id}
+                                style={{ backgroundColor: tag.color }}>
+                                {tag.value}
+                              </p>
+                            ))}
+                          </div>
+                        ) : null}
+                        <h5>{formatDate(note.updatedAt)}</h5>
+                      </div>
+
+                      <NoteActionsDropdown
+                        items={[
+                          {
+                            label: 'Pi',
+                            icon: TrashIcon,
+                            handler: () => {}
+                          },
+                          {
+                            label: 'Move to Trash',
+                            icon: TrashIcon,
+                            handler: () => {}
+                          }
+                        ]}
+                      />
+                    </div>
+                  ))}
+                </ScrollArea.Viewport>
+                <ScrollArea.Scrollbar
+                  className='ScrollAreaScrollbar'
+                  orientation='vertical'>
+                  <ScrollArea.Thumb className='ScrollAreaThumb' />
+                </ScrollArea.Scrollbar>
+                <ScrollArea.Scrollbar
+                  className='ScrollAreaScrollbar'
+                  orientation='horizontal'>
+                  <ScrollArea.Thumb className='ScrollAreaThumb' />
+                </ScrollArea.Scrollbar>
+                <ScrollArea.Corner className='ScrollAreaCorner' />
+              </ScrollArea.Root>
+            </div>
+          ) : null}
+
+          {!isLoading && isError ? (
+            <section className='error-container'>
+              <h3>
+                {(error as any)?.response?.data?.message ||
+                  (error as any)?.code ||
+                  'An error occurred while fetching data'}
+              </h3>
+              <button onClick={() => refetch({ queryKey: ['query-notes'] })}>
+                <span>Try again</span>
+              </button>
+            </section>
+          ) : null}
+
+          {state.notes.length < 1 && !isError && !isLoading ? (
+            <section className='empty-notes-container'>
+              <MixIcon />
+              <h3>
+                <span>No notes</span>
+              </h3>
+              <p>
+                Press <i>Compose</i> button to start writing notes
+              </p>
+            </section>
+          ) : null}
+
+          {isLoading && !isError ? (
+            <div className='loading-indicator'>
+              <MoonLoader
+                size={30}
+                color={`rgb(${theme.primary_shade})`}
+                aria-placeholder='Loading your notes...'
+                cssOverride={{
+                  display: 'block'
+                }}
+              />
+              <h3>Loading your notes...</h3>
+            </div>
+          ) : null}
+        </section>
       </Container>
     </Layout>
   );
