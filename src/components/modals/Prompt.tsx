@@ -18,8 +18,8 @@ export function PromptModal() {
                 type: actions.PROMPT,
                 payload: {
                   ...state,
-                  prompt: { ...state.prompt, status: false },
-                },
+                  prompt: { ...state.prompt, status: false }
+                }
               });
             }
           }}>
@@ -29,7 +29,7 @@ export function PromptModal() {
             animate={{
               opacity: 1,
               scale: 1,
-              transition: { duration: 0.3 },
+              transition: { duration: 0.3 }
             }}
             exit={{ opacity: 0, scale: 0 }}>
             <div className='dialog-prompt'>
@@ -38,24 +38,28 @@ export function PromptModal() {
                 <p className='prompt-message'>{state.prompt.message}</p>
               </div>
               <div className='prompt-actions'>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.8 }}
                   className='prompt-cancel'
                   onClick={() =>
                     dispatch({
                       type: actions.PROMPT,
                       payload: {
                         ...state,
-                        prompt: { ...state.prompt, status: false },
-                      },
+                        prompt: { ...state.prompt, status: false }
+                      }
                     })
                   }>
                   <span>Cancel</span>
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.8 }}
                   className='prompt-accept'
                   onClick={state.prompt.handleFunction}>
                   <span>{state.prompt.actionButtonMessage}</span>
-                </button>
+                </motion.button>
               </div>
             </div>
           </motion.section>

@@ -22,7 +22,7 @@ export const BaseButtonOutline = css`
 
 export const BaseButton = css`
   all: unset;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 7px 10px;
   width: fit-content;
   cursor: pointer;
@@ -103,7 +103,7 @@ export const Button_Mono_B = css`
 
 export const StyledCornerButton = css`
   all: unset;
-  border-radius: 5px;
+  border-radius: 10px;
   color: rgb(${({ theme }) => theme.font});
   border: 1px solid rgba(${({ theme }) => theme.black}, 0.07);
   width: fit-content;
@@ -152,12 +152,12 @@ export const StyledInputs = css`
     line-height: 1.2rem;
     font-weight: 400;
     outline: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background: rgba(${({ theme }) => theme.background}, 0.7);
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
     color: rgb(${({ theme }) => theme.font});
     :focus {
-      border: 1px solid rgba(${({ theme }) => theme.black}, 0.15);
+      border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
       box-shadow: 0 0 20px rgba(${({ theme }) => theme.black}, 0.06);
     }
     ::placeholder {

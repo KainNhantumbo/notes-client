@@ -7,11 +7,12 @@ export const _tags = styled.div`
   width: 100%;
   gap: 2px;
   margin-bottom: 8px;
+  position: relative;
 
   .tags-list-container {
     display: flex;
     flex-direction: row;
-    gap: 2px;
+    gap: 3px;
     width: fit-content;
 
     .tag {
@@ -20,19 +21,21 @@ export const _tags = styled.div`
       align-items: center;
       gap: 2px;
       padding: 5px;
-      border-radius: 8px;
+      border-radius: 12px;
       user-select: none;
       width: 100%;
       min-width: fit-content;
+      
       p {
         font-size: 0.8rem;
         font-weight: 500;
         color: rgb(${({ theme }) => theme.white});
+        cursor: pointer;
       }
 
-      button {
+      .remove-tag_button {
         all: unset;
-        border-radius: 5px;
+        border-radius: 12px;
         display: grid;
         place-content: center center;
         place-items: center center;
@@ -41,7 +44,7 @@ export const _tags = styled.div`
 
         :hover {
           transition: all 200ms ease-in-out;
-          background: rgba(${({ theme }) => theme.foreground}, 0.8);
+          background: rgba(${({ theme }) => theme.white}, 0.8);
           svg {
             color: rgb(${({ theme }) => theme.error});
           }
@@ -57,20 +60,18 @@ export const _tags = styled.div`
     }
   }
 
-  form {
-    input {
-      all: unset;
-      width: fit-content;
-      max-width: 90px;
-      padding: 5px 8px;
-      line-height: 1.2rem;
-      outline: none;
-      color: rgb(${({ theme }) => theme.font});
+  .tag-input {
+    all: unset;
+    width: fit-content;
+    max-width: 90px;
+    padding: 5px 8px;
+    line-height: 1.2rem;
+    outline: none;
+    color: rgb(${({ theme }) => theme.font});
 
-      ::placeholder {
-        color: rgba(${({ theme }) => theme.font}, 0.8);
-        font-size: 0.9rem;
-      }
+    ::placeholder {
+      color: rgba(${({ theme }) => theme.font}, 0.8);
+      font-size: 0.9rem;
     }
   }
 `;

@@ -3,7 +3,6 @@ import Priority from './Priority';
 import StatusEditor from './Status';
 import TooglePinNote from './PinNote';
 import actions from '@/shared/actions';
-import { ThreeDotsVertical } from 'react-bootstrap-icons';
 import { useAppContext } from '@/context/AppContext';
 import { m as motion } from 'framer-motion';
 import { _customTools as Container } from '@/styles/modules/_customTools';

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { StyledCornerButton } from '../defaults';
 
 export const _editorToolbar = styled.section`
   width: 100%;

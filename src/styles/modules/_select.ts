@@ -6,7 +6,7 @@ export function selectStyles(theme: DefaultTheme): StylesConfig {
     singleValue: (base) => ({ ...base, color: `rgb(${theme.font})` }),
     control: (baseStyles) => ({
       ...baseStyles,
-      borderRadius: '5px',
+      borderRadius: '8px',
       border: ` 1px solid rgba(${theme.font}, 0.15);`,
       background: `rgba(${theme.background}, 0.07);`,
       color: `rgb(${theme.font})`,
@@ -44,7 +44,7 @@ export function selectStyles(theme: DefaultTheme): StylesConfig {
     }),
     menu: (baseStyles) => ({
       ...baseStyles,
-      borderRadius: '5px',
+      borderRadius: '8px',
       color: `rgb(${theme.font})`,
     }),
     menuList: (baseStyles) => ({
@@ -53,7 +53,7 @@ export function selectStyles(theme: DefaultTheme): StylesConfig {
       color: `rgb(${theme.font})`,
       fontSize: '.9rem',
       lineHeight: '1.6rem',
-      borderRadius: '5px',
+      borderRadius: '8px',
       border: `none`,
       ':hover': {
         backgroundColor: `rgb(${theme.background});`,
@@ -62,7 +62,7 @@ export function selectStyles(theme: DefaultTheme): StylesConfig {
     container: (baseStyles) => ({
       ...baseStyles,
       backgroundColor: `rgba(${theme.background}, 0.7);`,
-      borderRadius: '5px',
+      borderRadius: '8px',
       color: `rgb(${theme.font})`,
       ':focus': {
         border: ` 1px solid rgba(${theme.font}, 0.4);`,
@@ -73,7 +73,7 @@ export function selectStyles(theme: DefaultTheme): StylesConfig {
       ...baseStyles,
       color: `rgb(${theme.font})`,
       padding: '5px 10px',
-      borderRadius: '5px 0 0 5px',
+      borderRadius: '8px 0 0 5px',
       fontSize: '.9rem',
       lineHeight: '1.6rem',
     }),

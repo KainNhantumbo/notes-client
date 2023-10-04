@@ -115,12 +115,12 @@ export const _properties = styled.section`
         .tags-container_content {
           display: flex;
           flex-flow: row wrap;
-          gap: 5px;
+          gap: 3px;
 
           div {
             width: fit-content;
             padding: 5px;
-            border-radius: 5px;
+            border-radius: 12px;
             color: rgb(${({ theme }) => theme.white});
           }
         }

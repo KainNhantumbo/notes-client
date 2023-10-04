@@ -64,7 +64,7 @@ const editorExtensions = [
     HTMLAttributes: { class: 'subscript-class' }
   }),
   Superscript.configure({
-    HTMLAttributes: { class: 'my-custom-class' }
+    HTMLAttributes: { class: 'superscript-class' }
   }),
   Underline.configure({
     HTMLAttributes: { class: 'underline-class' }

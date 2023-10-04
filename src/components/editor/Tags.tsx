@@ -1,28 +1,28 @@
-import actions from '@/shared/actions';
-import { useAppContext } from '@/context/AppContext';
-import { _tags as Container } from '@/styles/modules/_tags';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import { Cross1Icon } from '@radix-ui/react-icons';
+import TagEditor from './TagEditor';
+import actions from '@/shared/actions';
 import { SubmitEvent, Tag } from '@/types';
-import { AnimatePresence, m as motion } from 'framer-motion';
-import styled from 'styled-components';
+import { m as motion } from 'framer-motion';
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { useAppContext } from '@/context/AppContext';
+import { _tags as Container } from '@/styles/modules/_tags';
 
 export default function Tags() {
   const { state, dispatch } = useAppContext();
+  const [isTagEditorVisible, setIsTagEditorVisible] = useState<boolean>(false);
   const [tag, setTag] = useState<Tag>({ id: '', color: '', value: '' });
 
   const createTag = (e: SubmitEvent) => {
     e.preventDefault();
     if (tag.value.length < 1) return undefined;
-
     const isTagAdded = state.currentNote.metadata.tags.some(
       (item) => item.value.toLowerCase() === tag.value.toLowerCase()
     );
 
     if (isTagAdded) return undefined;
+    const data = { id: nanoid(8), color: '#E47131', value: tag.value };
 
-    const data: Tag = { id: nanoid(8), color: '#E47131', value: tag.value };
     if (state.currentNote.metadata.tags.length <= 10) {
       dispatch({
         type: actions.CURRENT_NOTE,
@@ -59,30 +59,6 @@ export default function Tags() {
     });
   };
 
-  const updateTag = () => {
-    const isValidObj = Object.values(tag).every((value) => value !== '');
-    if (!isValidObj) return undefined;
-    dispatch({
-      type: actions.CURRENT_NOTE,
-      payload: {
-        ...state,
-        currentNote: {
-          ...state.currentNote,
-          metadata: {
-            ...state.currentNote.metadata,
-            tags: [
-              ...state.currentNote.metadata.tags.map((currentTag) =>
-                currentTag.id === tag.id
-                  ? { ...currentTag, ...tag }
-                  : currentTag
-              )
-            ]
-          }
-        }
-      }
-    });
-  };
-
   return (
     <Container>
       <section className='tags-list-container'>
@@ -94,18 +70,27 @@ export default function Tags() {
             key={tag.id}
             className='tag'
             style={{ background: tag.color }}>
-            <p>{tag.value}</p>
-            <button onClick={() => removeTag(tag.id)}>
-              <Cross1Icon />
+            <p
+              onClick={() => {
+                setTag(tag);
+                setIsTagEditorVisible(true);
+              }}>
+              {tag.value}
+            </p>
+            <button
+              className='remove-tag_button'
+              onClick={() => removeTag(tag.id)}>
+              <Cross2Icon />
             </button>
           </motion.div>
         ))}
       </section>
-      <form onSubmit={(e) => createTag(e)} className='tags-input-container'>
+      <form onSubmit={(e) => createTag(e)}>
         <input
           type='text'
           id={'tags'}
           name={'tags'}
+          className='tag-input'
           value={tag.value}
           style={{
             display:
@@ -118,20 +103,13 @@ export default function Tags() {
           }
         />
       </form>
+
+      <TagEditor
+        data={tag}
+        setData={setTag}
+        isVisible={isTagEditorVisible}
+        setIsVisible={setIsTagEditorVisible}
+      />
     </Container>
   );
 }
-
-function TagEditor({ status }: { status: boolean }) {
-  return (
-    <AnimatePresence>
-      
-    </AnimatePresence>
-  );
-}
-
-const EditorContainer = styled.section`
-  
-
-
-`

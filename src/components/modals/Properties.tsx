@@ -1,21 +1,6 @@
 import {
-  ClockIcon,
-  CopyIcon,
-  CounterClockwiseClockIcon,
-  Cross2Icon,
-  LayersIcon,
-  StackIcon,
-  TrashIcon
-} from '@radix-ui/react-icons';
-import moment from 'moment';
-import actions from '@/shared/actions';
-import { useAppContext } from '@/context/AppContext';
-import { AnimatePresence, m as motion } from 'framer-motion';
-import { _properties as Container } from '@/styles/modules/_properties';
-import {
   RiBubbleChartLine,
   RiClipboardLine,
-  RiDeleteBin2Line,
   RiDeleteBin7Line,
   RiFileCopy2Line,
   RiHashtag,
@@ -23,6 +8,12 @@ import {
   RiTimerFlashLine,
   RiTimerLine
 } from 'react-icons/ri';
+import moment from 'moment';
+import actions from '@/shared/actions';
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { useAppContext } from '@/context/AppContext';
+import { AnimatePresence, m as motion } from 'framer-motion';
+import { _properties as Container } from '@/styles/modules/_properties';
 
 export default function Properties() {
   const { state, dispatch } = useAppContext();

@@ -200,7 +200,7 @@ export const _workspace = styled.main`
               font-size: 0.8rem;
               font-weight: 500;
               color: rgb(${({ theme }) => theme.white});
-              border-radius: 8px;
+              border-radius: 12px;
             }
           }
 

@@ -6,7 +6,6 @@ export const _customTools = styled.section`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 0 12px;
 
   .form-container {
     input {
@@ -38,7 +37,8 @@ export const _customTools = styled.section`
     border-radius: 12px;
     border: 2px dashed rgba(${({ theme }) => theme.font}, 0.25);
 
-    .right-side-container, .left-side-container {
+    .right-side-container,
+    .left-side-container {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -56,25 +56,5 @@ export const _customTools = styled.section`
     flex-direction: row;
     gap: 12px;
     align-items: center;
-
-    button {
-      ${BaseButtonOutline}
-      border-radius: 3px;
-      padding: 6px;
-      background: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
-
-      span {
-        color: rgb(${({ theme }) => theme.font}) !important;
-        padding-left: 25px;
-      }
-      svg {
-        width: 16px;
-        height: 16px;
-        color: rgb(${({ theme }) => theme.font});
-      }
-    }
   }
 `;
