@@ -7,6 +7,7 @@ import { ThreeDotsVertical } from 'react-bootstrap-icons';
 import { useAppContext } from '@/context/AppContext';
 import { m as motion } from 'framer-motion';
 import { _customTools as Container } from '@/styles/modules/_customTools';
+import { RiMenuLine } from 'react-icons/ri';
 
 export default function CustomTools() {
   const { state, dispatch } = useAppContext();
@@ -50,7 +51,7 @@ export default function CustomTools() {
                 payload: { ...state, isPropertiesDrawer: true }
               });
             }}>
-            <ThreeDotsVertical />
+            <RiMenuLine/>
           </motion.button>
         </div>
       </div>

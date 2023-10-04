@@ -1,20 +1,8 @@
 import {
-  CodeIcon,
-  FontBoldIcon,
-  FontItalicIcon,
-  ListBulletIcon,
-  ResetIcon,
-  RulerHorizontalIcon,
-  StrikethroughIcon,
-  TextIcon
-} from '@radix-ui/react-icons';
-import { useCurrentEditor } from '@tiptap/react';
-import {
   RiArrowGoBackLine,
   RiArrowGoForwardLine,
   RiBold,
   RiBracesLine,
-  RiCodeBoxLine,
   RiCodeLine,
   RiDoubleQuotesR,
   RiFontColor,
@@ -22,11 +10,11 @@ import {
   RiListOrdered,
   RiListRadio,
   RiParagraph,
-  RiQuoteText,
   RiRulerLine,
   RiStrikethrough,
   RiTextWrap
 } from 'react-icons/ri';
+import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
 
 export default function EditorToolbar() {
@@ -37,18 +25,27 @@ export default function EditorToolbar() {
   return (
     <Container>
       <button
+        title='Undo'
+        aria-placeholder='Undo'
+        type='button'
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}>
         <RiArrowGoBackLine />
       </button>
 
       <button
+        title='Redo'
+        aria-placeholder='Redo'
+        type='button'
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}>
         <RiArrowGoForwardLine />
       </button>
 
       <button
+        title='Bold'
+        aria-placeholder='Bold'
+        type='button'
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? 'is-active' : ''}>
@@ -56,6 +53,9 @@ export default function EditorToolbar() {
       </button>
 
       <button
+        title='Italic'
+        aria-placeholder='Italic'
+        type='button'
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         className={editor.isActive('italic') ? 'is-active' : ''}>
@@ -63,6 +63,9 @@ export default function EditorToolbar() {
       </button>
 
       <button
+        title='Strike'
+        aria-placeholder='Strike'
+        type='button'
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={!editor.can().chain().focus().toggleStrike().run()}
         className={editor.isActive('strike') ? 'is-active' : ''}>
@@ -70,6 +73,9 @@ export default function EditorToolbar() {
       </button>
 
       <button
+        title='Code'
+        aria-placeholder='Code'
+        type='button'
         onClick={() => editor.chain().focus().toggleCode().run()}
         disabled={!editor.can().chain().focus().toggleCode().run()}
         className={editor.isActive('code') ? 'is-active' : ''}>
@@ -77,51 +83,76 @@ export default function EditorToolbar() {
       </button>
 
       <button
+        title='Text style'
+        aria-placeholder='Text style'
+        type='button'
         onClick={() => editor.chain().focus().setColor('#958DF1').run()}
         className={
           editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''
         }>
-        <RiFontColor/>
+        <RiFontColor />
       </button>
 
       <button
+        title='Paragraph'
+        aria-placeholder='Paragraph'
+        type='button'
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={editor.isActive('paragraph') ? 'is-active' : ''}>
         <RiParagraph />
       </button>
 
       <button
+        title='Bullet list'
+        aria-placeholder='Bullet list'
+        type='button'
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? 'is-active' : ''}>
         <RiListRadio />
       </button>
 
       <button
+        title='Toggle ordered list'
+        aria-placeholder='Toggle ordered list'
+        type='button'
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive('orderedList') ? 'is-active' : ''}>
         <RiListOrdered />
       </button>
 
       <button
+        title='Toggle code block'
+        aria-placeholder='Toggle code block'
+        type='button'
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={editor.isActive('codeBlock') ? 'is-active' : ''}>
         <RiBracesLine />
       </button>
 
       <button
+        title='Toggle block quote'
+        aria-placeholder='Toggle block quote'
+        type='button'
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive('blockquote') ? 'is-active' : ''}>
         <RiDoubleQuotesR />
       </button>
 
-      <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+      <button
+        title='Set horizontal rule'
+        aria-placeholder='Set horizontal rule'
+        type='button'
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}>
         <RiRulerLine />
       </button>
 
-      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
+      <button
+        title='Hard breack to new line'
+        aria-placeholder='Hard breack to new line'
+        type='button'
+        onClick={() => editor.chain().focus().setHardBreak().run()}>
         <RiTextWrap />
       </button>
-
     </Container>
   );
 }

@@ -12,17 +12,11 @@ export const _navigationDrawer = styled.section`
   max-width: 220px;
 
   .main-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    max-width: 220px;
     display: flex;
     flex-direction: column;
-    z-index: 5000;
     height: 100%;
-    border-radius: 0 12px 12px 0;
-    backdrop-filter: blur(2px);
+    border-radius: 0 20px 20px 0;
+    backdrop-filter: blur(8px);
     background: rgba(${({ theme }) => theme.foreground}, 0.8);
     border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   }

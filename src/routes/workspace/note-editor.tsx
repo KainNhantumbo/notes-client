@@ -3,10 +3,20 @@ import Editor from '@/components/editor/Editor';
 import CustomTools from '@/components/editor/CustomTools';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
-import { Properties } from '@/components/modals/Properties';
+import Properties from '@/components/modals/Properties';
+import { useEffect } from 'react';
+import actions from '@/shared/actions';
 
 export default function NoteEditor() {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
+
+  useEffect(() => {
+    dispatch({
+      type: actions.PROPERTIES_DRAWER,
+      payload: { ...state, isPropertiesDrawer: false }
+    });
+  }, []);
+  
   return (
     <Layout
       metadata={{
@@ -16,9 +26,9 @@ export default function NoteEditor() {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <Properties />
           <CustomTools />
           <Editor />
+          <Properties />
         </div>
       </Container>
     </Layout>

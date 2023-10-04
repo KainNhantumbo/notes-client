@@ -32,7 +32,7 @@ export default function Editor() {
         extensions={editorExtensions}
         content={state.currentNote.content}
         onUpdate={({ editor, transaction }) => {
-          console.info(editor.getText());
+          console.info(editor.state.toJSON());
           dispatch({
             type: actions.CURRENT_NOTE,
             payload: {

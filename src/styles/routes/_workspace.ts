@@ -141,7 +141,7 @@ export const _workspace = styled.main`
         position: relative;
         border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
         line-height: 1.2rem;
-        gap: 8px;
+        gap: 12px;
 
         :hover {
           background: rgba(${({ theme }) => theme.primary}, 0.2);

@@ -282,13 +282,6 @@ export default function Workspace() {
                           <FileTextIcon />
                           <span>{note.title ? note.title : '[Untitled]'}</span>
                         </h3>
-                        <p>
-                          {!note.content
-                            ? '[Empty note]'
-                            : note.content.length > 70
-                            ? note.content.slice(0, 70)
-                            : note.content}
-                        </p>
                       </div>
 
                       <div className='bottom-side'>

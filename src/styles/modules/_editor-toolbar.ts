@@ -7,6 +7,7 @@ export const _editorToolbar = styled.section`
   align-items: center;
   flex-direction: row;
   gap: 5px;
+  margin-bottom: 5px;
 
   button {
     all: unset;
@@ -16,9 +17,11 @@ export const _editorToolbar = styled.section`
     display: grid;
     place-content: center;
     padding: 5px;
+    border-radius: 50%;
 
     :hover {
       color: rgb(${({ theme }) => theme.primary_shade});
+      background: rgb(${({ theme }) => theme.primary}, 0.2);
     }
 
     svg {
