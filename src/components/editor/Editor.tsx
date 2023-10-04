@@ -1,5 +1,6 @@
-import EditorToolbar from './EditorToolbar';
+import actions from '@/shared/actions';
 import { CSSProperties } from 'react';
+import EditorToolbar from './EditorToolbar';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
 import { useThemeContext } from '@/context/ThemeContext';
@@ -7,8 +8,9 @@ import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import Typography from '@tiptap/extension-typography';
-import { EditorProvider, FloatingMenu, BubbleMenu } from '@tiptap/react';
-import actions from '@/shared/actions';
+import { EditorProvider, BubbleMenu } from '@tiptap/react';
+import FontFamily from '@tiptap/extension-font-family';
+import Placeholder from '@tiptap/extension-placeholder';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -43,8 +45,9 @@ export default function Editor() {
         }}
         editorProps={{ attributes: { class: 'editor-container' } }}
         slotBefore={<EditorToolbar />}>
-        {/* <FloatingMenu></FloatingMenu> */}
-        <BubbleMenu>This is the bubble menu</BubbleMenu>
+        <BubbleMenu className='editor-bubble-menu'>
+          <p></p>
+        </BubbleMenu>
       </EditorProvider>
     </div>
   );
@@ -53,7 +56,12 @@ export default function Editor() {
 const editorExtensions = [
   TextStyle,
   Typography,
+  Placeholder.configure({
+    emptyEditorClass: 'editor-placeholder',
+    placeholder: 'Start typing something...'
+  }),
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
+  FontFamily,
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],

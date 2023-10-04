@@ -84,7 +84,11 @@ export default function Status() {
         title={`Set note status`}
         aria-placeholder={`Set note status`}>
         <data.icon color={data.color} />
-        <span>Status: {data.label}</span>
+        {state.currentNote.metadata.status === 'none' ? (
+          <span>Set status</span>
+        ) : (
+          <span>Currently {data.label}</span>
+        )}
         <CaretDownIcon />
       </DropdownTriggerButton>
     </Dropdown>

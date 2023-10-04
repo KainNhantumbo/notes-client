@@ -64,7 +64,11 @@ export default function Priority() {
         title={`Set note priority`}
         aria-placeholder={`Set note priority`}>
         <DotFilledIcon color={data.color} className='dot-icon' />
-        <span>Priority: {data.label}</span>
+        {state.currentNote.metadata.priority === 'none' ? (
+          <span>Set priority</span>
+        ) : (
+          <span>{data.label} Priority</span>
+        )}
         <CaretDownIcon />
       </DropdownTriggerButton>
     </Dropdown>

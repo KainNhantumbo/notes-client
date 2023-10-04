@@ -30,6 +30,14 @@ export const _noteEditor = styled.main`
     overflow-y: hidden;
     padding: 12px;
 
+    .editor-placeholder:first-child::before {
+      color: rgba(${({ theme }) => theme.font}, .5);
+      content: attr(data-placeholder);
+      float: left;
+      height: 0;
+      pointer-events: none;
+    }
+
     a {
       color: #1a8eff;
       text-decoration: underline;
