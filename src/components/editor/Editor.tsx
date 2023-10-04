@@ -12,7 +12,8 @@ import { EditorProvider, BubbleMenu } from '@tiptap/react';
 import FontFamily from '@tiptap/extension-font-family';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
-import Subscript from '@tiptap/extension-subscript'
+import Subscript from '@tiptap/extension-subscript';
+import Superscript from '@tiptap/extension-superscript';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -57,11 +58,13 @@ export default function Editor() {
 
 const editorExtensions = [
   TextStyle,
-  Typography,Subscript.configure({
-  HTMLAttributes: {
-    class: 'my-custom-class',
-  },
-}),
+  Typography,
+  Subscript.configure({
+    HTMLAttributes: { class: 'subscript-class' }
+  }),
+  Superscript.configure({
+    HTMLAttributes: { class: 'my-custom-class' }
+  }),
   Link.configure({
     protocols: ['ftp', 'mailto', 'http', 'https', 'tls'],
     openOnClick: false,
@@ -78,10 +81,9 @@ const editorExtensions = [
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
-      HTMLAttributes: {
-        title: 'Select heading'
-      }
+      HTMLAttributes: { title: 'Select heading' }
     },
+    italic: { HTMLAttributes: { class: 'italics-class' } },
     bulletList: { keepMarks: true, keepAttributes: false },
     orderedList: { keepMarks: true, keepAttributes: false },
     dropcursor: {

@@ -13,6 +13,7 @@ import {
   RiRulerLine,
   RiStrikethrough,
   RiSubscript,
+  RiSuperscript,
   RiTextWrap
 } from 'react-icons/ri';
 import { useCurrentEditor } from '@tiptap/react';
@@ -81,6 +82,16 @@ export default function EditorToolbar() {
         disabled={!editor.can().chain().focus().toggleSubscript().run()}
         className={editor.isActive('subscript') ? 'is-active' : ''}>
         <RiSubscript />
+      </button>
+      
+      <button
+        title='Toogle superscript'
+        aria-placeholder='Toogle superscript'
+        type='button'
+        onClick={() => editor.chain().focus().toggleSuperscript().run()}
+        disabled={!editor.can().chain().focus().toggleSuperscript().run()}
+        className={editor.isActive('superscript') ? 'is-active' : ''}>
+        <RiSuperscript />
       </button>
       <button
         title='Code'
