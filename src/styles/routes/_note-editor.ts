@@ -26,19 +26,19 @@ export const _noteEditor = styled.main`
     width: 100%;
     height: 100vh;
     max-height: 100%;
-
     overflow-y: hidden;
     padding: 12px;
 
     .editor-placeholder:first-child::before {
-      color: rgba(${({ theme }) => theme.font}, .5);
+      color: rgba(${({ theme }) => theme.font}, 0.5);
       content: attr(data-placeholder);
       float: left;
       height: 0;
       pointer-events: none;
     }
 
-    a {
+    a,
+    .link-class {
       color: #1a8eff;
       text-decoration: underline;
       text-underline-offset: 3px;

@@ -11,6 +11,7 @@ import Typography from '@tiptap/extension-typography';
 import { EditorProvider, BubbleMenu } from '@tiptap/react';
 import FontFamily from '@tiptap/extension-font-family';
 import Placeholder from '@tiptap/extension-placeholder';
+import Link from '@tiptap/extension-link';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -56,12 +57,19 @@ export default function Editor() {
 const editorExtensions = [
   TextStyle,
   Typography,
+  Link.configure({
+    protocols: ['ftp', 'mailto', 'http', 'https', 'tls'],
+    openOnClick: false,
+    linkOnPaste: true,
+    HTMLAttributes: {
+      class: 'link-class'
+    }
+  }),
   Placeholder.configure({
     emptyEditorClass: 'editor-placeholder',
     placeholder: 'Start typing something...'
   }),
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  FontFamily,
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
