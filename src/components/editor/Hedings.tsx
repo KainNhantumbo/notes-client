@@ -16,26 +16,29 @@ const headings: { icon: IconType; level: number }[] = [
 
 export default function Headings() {
   const { editor } = useCurrentEditor();
+  if (!editor) return null;
+
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const toggleHeading = (level: any) => {
-    if (editor) {
-      editor.chain().focus().toggleHeading({ level }).run();
-    }
+    editor.chain().focus().toggleHeading({ level }).run();
   };
 
-  const renderDropdownItems = (): JSX.Element => {
-    return (
-      <DropdownContainer>
-        {headings.map(({ icon: Icon, level }, index) => (
-          <div key={index.toString()} onClick={() => toggleHeading(level)}>
-            <Icon />
-            <span>Heading {level}</span>
-          </div>
-        ))}
-      </DropdownContainer>
-    );
-  };
+  const renderDropdownItems = (): JSX.Element => (
+    <DropdownContainer>
+      {headings.map(({ icon: Icon, level }, index) => (
+        <div
+          key={index.toString()}
+          onClick={() => toggleHeading(level)}
+          className={
+            editor.isActive('heading', { level: 2 }) ? 'is-active' : ''
+          }>
+          <Icon />
+          <span>Heading {String(level)}</span>
+        </div>
+      ))}
+    </DropdownContainer>
+  );
 
   return (
     <Dropdown
@@ -49,7 +52,7 @@ export default function Headings() {
       <button
         title={`Set heading`}
         aria-placeholder={`Set heading`}
-        className={editor?.isActive('heading') ? 'is-active' : ''}>
+        className={editor.isActive('heading') ? 'is-active' : ''}>
         <RiHeading />
       </button>
     </Dropdown>
@@ -85,5 +88,9 @@ const DropdownContainer = styled.section`
     :hover {
       background: rgba(${({ theme }) => theme.primary}, 0.25);
     }
+  }
+  .is-active {
+    color: rgb(${({ theme }) => theme.primary_shade});
+    background: rgb(${({ theme }) => theme.primary}, 0.2);
   }
 `;

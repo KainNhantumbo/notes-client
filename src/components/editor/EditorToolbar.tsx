@@ -20,6 +20,8 @@ import {
 import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
 import Headings from './Hedings';
+import TurndownService from 'turndown';
+import Image from './Image';
 
 export default function EditorToolbar() {
   const { editor } = useCurrentEditor();
@@ -173,6 +175,8 @@ export default function EditorToolbar() {
         <RiDoubleQuotesR />
       </button>
 
+      <Image/>
+
       <button
         title='Set horizontal rule'
         aria-placeholder='Set horizontal rule'
@@ -191,45 +195,3 @@ export default function EditorToolbar() {
     </Container>
   );
 }
-
-/**
- * <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
-      >
-        h1
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
-      >
-        h2
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
-      >
-        h3
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
-      >
-        h4
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
-      >
-        h5
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
-      >
-        h6
-      </button>
- * 
- * 
- * 
- */

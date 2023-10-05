@@ -15,6 +15,7 @@ import Link from '@tiptap/extension-link';
 import Subscript from '@tiptap/extension-subscript';
 import Underline from '@tiptap/extension-underline';
 import Superscript from '@tiptap/extension-superscript';
+import Image from '@tiptap/extension-image';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -76,6 +77,11 @@ const editorExtensions = [
     HTMLAttributes: {
       class: 'link-class'
     }
+  }),
+  Image.configure({
+    allowBase64: true,
+    inline: false,
+    HTMLAttributes: { class: 'image-class' }
   }),
   Placeholder.configure({
     emptyEditorClass: 'editor-placeholder',

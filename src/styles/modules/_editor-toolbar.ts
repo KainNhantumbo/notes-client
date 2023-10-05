@@ -16,7 +16,7 @@ export const _editorToolbar = styled.section`
     display: grid;
     place-content: center;
     padding: 5px;
-    border-radius: 50%;
+    border-radius: 8px;
 
     :hover {
       color: rgb(${({ theme }) => theme.primary_shade});
@@ -36,5 +36,6 @@ export const _editorToolbar = styled.section`
 
   .is-active {
     color: rgb(${({ theme }) => theme.primary_shade});
+    background: rgb(${({ theme }) => theme.primary}, 0.2);
   }
 `;

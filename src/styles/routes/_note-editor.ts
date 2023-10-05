@@ -24,7 +24,7 @@ export const _noteEditor = styled.main`
   .editor-container,
   .tiptap {
     width: 100%;
-    height: 100vh;
+    
     max-height: 100%;
     overflow-y: hidden;
     padding: 12px;
