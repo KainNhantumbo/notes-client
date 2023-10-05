@@ -7,6 +7,7 @@ import {
   RiDoubleQuotesR,
   RiFontColor,
   RiItalic,
+  RiListCheck,
   RiListOrdered,
   RiListRadio,
   RiParagraph,
@@ -14,6 +15,7 @@ import {
   RiStrikethrough,
   RiSubscript,
   RiSuperscript,
+  RiTaskLine,
   RiTextWrap,
   RiUnderline
 } from 'react-icons/ri';
@@ -158,6 +160,15 @@ export default function EditorToolbar() {
       </button>
 
       <button
+        title='Toggle task list'
+        aria-placeholder='Toggle task list'
+        type='button'
+        onClick={() => editor.chain().focus().toggleTaskList().run()}
+        className={editor.isActive('taskList') ? 'is-active' : ''}>
+        <RiListCheck />
+      </button>
+
+      <button
         title='Toggle code block'
         aria-placeholder='Toggle code block'
         type='button'
@@ -175,7 +186,7 @@ export default function EditorToolbar() {
         <RiDoubleQuotesR />
       </button>
 
-      <Image/>
+      <Image />
 
       <button
         title='Set horizontal rule'

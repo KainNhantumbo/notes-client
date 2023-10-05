@@ -16,6 +16,8 @@ import Subscript from '@tiptap/extension-subscript';
 import Underline from '@tiptap/extension-underline';
 import Superscript from '@tiptap/extension-superscript';
 import Image from '@tiptap/extension-image';
+import TaskList from '@tiptap/extension-task-list';
+import TaskItem from '@tiptap/extension-task-item';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -88,6 +90,13 @@ const editorExtensions = [
     placeholder: 'Start typing something...'
   }),
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
+  TaskList.configure({
+    HTMLAttributes: { class: 'task-list-class' }
+  }),
+  TaskItem.configure({
+    nested: true,
+    HTMLAttributes: { class: 'task-item-class' }
+  }),
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
