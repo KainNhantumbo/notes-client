@@ -20,7 +20,7 @@ export default function CustomTools() {
           placeholder='Untitled'
           aria-label='Your note title'
           value={state.currentNote.title}
-          maxLength={128}
+          maxLength={115}
           required
           onChange={(e): void =>
             dispatch({

@@ -253,10 +253,11 @@ export const _header = styled.header`
   }
 
   .toggle-btn {
+    ${StyledCornerButton}
     position: fixed;
     top: 9px;
     right: 20px;
-    ${StyledCornerButton}
+    border: none;
 
     @media screen and (min-width: 770px) {
       display: none;

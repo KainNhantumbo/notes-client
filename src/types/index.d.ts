@@ -67,7 +67,7 @@ export type Tag = { id: string; color: string; value: string };
 export type Note = {
   _id: string;
   title: string;
-  content: string;
+  content: object;
   created_by: string;
   metadata: {
     folder_id: string;

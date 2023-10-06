@@ -25,7 +25,7 @@ export const _prompt = styled.section`
     background: rgb(${({ theme }) => theme.foreground});
     max-width: 500px;
     margin: 25px;
-    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
 
     .prompt-info {
@@ -57,7 +57,6 @@ export const _prompt = styled.section`
       }
       .prompt-accept {
         ${BaseButton}
-
       }
     }
   }

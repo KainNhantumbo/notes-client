@@ -35,7 +35,7 @@ const initialState: TState = {
   currentNote: {
     _id: '',
     title: '',
-    content: ``,
+    content: {},
     created_by: '',
     metadata: {
       folder_id: '',

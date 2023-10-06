@@ -121,6 +121,7 @@ export const _properties = styled.section`
             width: fit-content;
             padding: 5px;
             border-radius: 12px;
+            font-size: .8rem;
             color: rgb(${({ theme }) => theme.white});
           }
         }

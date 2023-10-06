@@ -17,11 +17,65 @@ import { useAppContext } from '@/context/AppContext';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
 import { Note } from '@/types';
+import { EditorState } from '@tiptap/pm/state';
+import { generateText } from '@tiptap/react';
+import { editorExtensions } from './editor/Editor';
 
 export default function Properties() {
   const { state, dispatch, useFetchAPI } = useAppContext();
 
-  async function handleDuplicate() {
+  const handleCopyToClipboard = async () => {
+    dispatch({
+      type: actions.PROPERTIES_DRAWER,
+      payload: { ...state, isPropertiesDrawer: false }
+    });
+
+    const result = generateText(state.currentNote.content, editorExtensions, {
+      blockSeparator: '\n'
+    });
+    try {
+      await navigator.clipboard.writeText(result);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Note Copied!',
+            message: 'Note copied to clipboard successfully',
+            status: true,
+            actionButtonMessage: 'Close',
+            handleFunction: () =>
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: { ...state.toast, status: false }
+                }
+              })
+          }
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Note Copy Error',
+            message: 'Failed to copy note to the clipboard.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: handleCopyToClipboard
+          }
+        }
+      });
+    }
+  };
+
+  const handleDuplicate = () => {
     dispatch({
       type: actions.PROMPT,
       payload: {
@@ -101,7 +155,7 @@ export default function Properties() {
         }
       }
     });
-  }
+  };
 
   return (
     <AnimatePresence>
@@ -230,7 +284,10 @@ export default function Properties() {
                   <span>Duplicate</span>
                 </motion.button>
 
-                <motion.button whileTap={{ scale: 0.8 }} className='action'>
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  className='action'
+                  onClick={handleCopyToClipboard}>
                   <RiClipboardLine />
                   <span>Copy as text</span>
                 </motion.button>

@@ -160,7 +160,7 @@ export const _settings = styled.main`
 
             .counter {
               align-self: end;
-              font-size: 0.9rem;
+              font-size: 0.8rem;
             }
           }
 

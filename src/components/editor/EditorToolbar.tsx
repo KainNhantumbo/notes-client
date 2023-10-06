@@ -7,9 +7,7 @@ import {
   RiDoubleQuotesR,
   RiFontColor,
   RiItalic,
-  RiListCheck,
   RiListCheck2,
-  RiListOrdered,
   RiListOrdered2,
   RiListRadio,
   RiParagraph,
@@ -17,14 +15,12 @@ import {
   RiStrikethrough,
   RiSubscript,
   RiSuperscript,
-  RiTaskLine,
   RiTextWrap,
   RiUnderline
 } from 'react-icons/ri';
 import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
 import Headings from './Hedings';
-import TurndownService from 'turndown';
 import Image from './Image';
 
 export default function EditorToolbar() {

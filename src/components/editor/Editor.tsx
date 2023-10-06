@@ -40,13 +40,12 @@ export default function Editor() {
       <EditorProvider
         extensions={editorExtensions}
         content={state.currentNote.content}
-        onUpdate={({ editor, transaction }) => {
-          console.info(editor.state.toJSON());
+        onUpdate={({ editor}) => {
           dispatch({
             type: actions.CURRENT_NOTE,
             payload: {
               ...state,
-              currentNote: { ...state.currentNote, content: editor.getText() }
+              currentNote: { ...state.currentNote, content: editor.state.doc }
             }
           });
         }}
@@ -60,7 +59,7 @@ export default function Editor() {
   );
 }
 
-const editorExtensions = [
+export const editorExtensions = [
   TextStyle,
   Typography,
   Subscript.configure({

@@ -20,8 +20,8 @@ export const _toast = styled.section`
     max-width: 500px;
     font-size: 0.9rem;
     margin: 20px;
-    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.2);
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
+    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
     position: relative;
 
     @media screen and (max-width: 430px) {
