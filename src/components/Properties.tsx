@@ -5,6 +5,8 @@ import {
   RiFileCopy2Line,
   RiHashtag,
   RiHistoryLine,
+  RiHtml5Line,
+  RiMarkdownLine,
   RiPushpinFill,
   RiPushpinLine,
   RiTimerFlashLine,
@@ -17,24 +19,45 @@ import { useAppContext } from '@/context/AppContext';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
 import { Note } from '@/types';
-import { EditorState } from '@tiptap/pm/state';
-import { generateText } from '@tiptap/react';
+import { generateHTML, generateText } from '@tiptap/react';
 import { editorExtensions } from './editor/Editor';
+import TurndownService from 'turndown';
 
 export default function Properties() {
   const { state, dispatch, useFetchAPI } = useAppContext();
 
-  const handleCopyToClipboard = async () => {
+  const exportToClipboard = async (type: 'markdown' | 'html' | 'text') => {
     dispatch({
       type: actions.PROPERTIES_DRAWER,
       payload: { ...state, isPropertiesDrawer: false }
     });
 
-    const result = generateText(state.currentNote.content, editorExtensions, {
-      blockSeparator: '\n'
-    });
     try {
-      await navigator.clipboard.writeText(result);
+      if (Object.keys(state.currentNote.content).length < 1)
+        throw new Error('Cannot export empty notes to clipboard.');
+
+      const clipboard = async (data: string) =>
+        navigator.clipboard.writeText(data);
+      const html = generateHTML(state.currentNote.content, editorExtensions);
+      const markdown = new TurndownService({}).turndown(html);
+      const text = generateText(state.currentNote.content, editorExtensions, {
+        blockSeparator: '\n'
+      });
+
+      switch (type) {
+        case 'html':
+          await clipboard(html);
+          break;
+        case 'markdown':
+          await clipboard(markdown);
+          break;
+        case 'text':
+          await clipboard(text);
+          break;
+        default:
+          return undefined;
+      }
+
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -42,7 +65,7 @@ export default function Properties() {
           toast: {
             ...state.toast,
             title: 'Note Copied!',
-            message: 'Note copied to clipboard successfully',
+            message: 'Note contents copied to clipboard successfully',
             status: true,
             actionButtonMessage: 'Close',
             handleFunction: () =>
@@ -56,7 +79,7 @@ export default function Properties() {
           }
         }
       });
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
       dispatch({
         type: actions.TOAST,
@@ -65,10 +88,12 @@ export default function Properties() {
           toast: {
             ...state.toast,
             title: 'Note Copy Error',
-            message: 'Failed to copy note to the clipboard.',
+            message:
+              (error as Error).message ||
+              'Failed to copy note contents to clipboard.',
             status: true,
             actionButtonMessage: 'Retry',
-            handleFunction: handleCopyToClipboard
+            handleFunction: exportToClipboard
           }
         }
       });
@@ -287,9 +312,25 @@ export default function Properties() {
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   className='action'
-                  onClick={handleCopyToClipboard}>
+                  onClick={() => exportToClipboard('text')}>
                   <RiClipboardLine />
                   <span>Copy as text</span>
+                </motion.button>
+
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  className='action'
+                  onClick={() => exportToClipboard('markdown')}>
+                  <RiMarkdownLine />
+                  <span>Copy as Markdown</span>
+                </motion.button>
+
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  className='action'
+                  onClick={() => exportToClipboard('html')}>
+                  <RiHtml5Line />
+                  <span>Copy as HTML</span>
                 </motion.button>
 
                 <motion.button
