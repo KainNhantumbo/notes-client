@@ -13,7 +13,7 @@ export const _workspace = styled.main`
     width: 100%;
     display: flex;
     flex-direction: column;
-    background: rgb(${({ theme }) => theme.foreground});
+    background: rgb(${({ theme }) => theme.background});
 
     .header-container {
       width: 100%;
@@ -22,9 +22,7 @@ export const _workspace = styled.main`
       display: flex;
       flex-direction: column;
       padding: 20px;
-
       gap: 12px;
-      background: rgb(${({ theme }) => theme.foreground});
       z-index: 200;
       position: relative;
 
@@ -142,6 +140,7 @@ export const _workspace = styled.main`
         border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
         line-height: 1.2rem;
         gap: 12px;
+        background: rgb(${({ theme }) => theme.foreground});
 
         :hover {
           background: rgba(${({ theme }) => theme.primary}, 0.2);
