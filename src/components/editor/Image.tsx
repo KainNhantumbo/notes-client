@@ -10,7 +10,6 @@ import { useCurrentEditor } from '@tiptap/react';
 import { RiCloseLine, RiImage2Line } from 'react-icons/ri';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import debounce from 'lodash.debounce';
 import { isWebUri } from 'valid-url';
 
 type ImageAttributes = { src: string; alt: string; title: string };

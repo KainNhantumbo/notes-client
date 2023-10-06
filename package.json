@@ -75,7 +75,6 @@
     "framer-motion": "^10.12.18",
     "highlight.js": "^11.8.0",
     "husky": "^8.0.3",
-    "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
     "lowlight": "^3.0.0",
     "moment": "^2.29.4",
@@ -93,15 +92,12 @@
     "react-select": "^5.7.4",
     "react-spinners": "^0.13.8",
     "reading-time-estimator": "^1.9.0",
-    "remixicon": "^3.5.0",
     "styled-components": "^5.3.10",
     "turndown": "^7.1.2",
-    "use-react-query-auto-sync": "^0.1.0",
     "valid-url": "^1.0.9",
     "vite-plugin-pwa": "^0.16.4"
   },
   "devDependencies": {
-    "@types/lodash.debounce": "^4.0.7",
     "@types/lodash.isequal": "^4.5.6",
     "@types/lowlight": "^0.0.4",
     "@types/react": "^18.2.15",
