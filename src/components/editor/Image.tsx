@@ -1,7 +1,8 @@
 import {
   BaseButton,
   StyledCornerButton,
-  StyledInputs
+  StyledInputs,
+  StyledLabels
 } from '@/styles/defaults';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
@@ -29,22 +30,23 @@ export default function Image() {
   const handleImageData = () => {
     if (!imageData.src) return setErrorMessages('Please insert image url');
 
-    const isValidUrl = isWebUri(imageData.src);
-    if (!isValidUrl)
+    if (!isWebUri(imageData.src))
       return setErrorMessages('Please provide a valid image source url');
 
     editor.chain().focus().setImage(imageData).run();
     setImageData({ title: '', src: '', alt: '' });
+    setIsEditorVisible(false);
   };
 
   useEffect(() => {
-    debounce(() => {
+    const debounceTimer = setTimeout(() => {
       setErrorMessages('');
     }, 3000);
+    return () => clearTimeout(debounceTimer);
   }, [errorMessages]);
 
   return (
-    <ImageContainer>
+    <>
       <button
         title='Insert an image'
         aria-placeholder='Insert an image'
@@ -76,7 +78,7 @@ export default function Image() {
               }}>
               <h2>
                 <RiImage2Line />
-                <span>Image panel</span>
+                <span>Image</span>
               </h2>
 
               <motion.button
@@ -101,12 +103,12 @@ export default function Image() {
                     id={'image-title'}
                     name={'image-title'}
                     value={imageData.title}
-                    placeholder={'Image title...'}
+                    placeholder={'Type an image title'}
                     maxLength={32}
                     onChange={(e) =>
                       setImageData((data) => ({
                         ...data,
-                        title: String(e.target.value)
+                        title: e.target.value
                       }))
                     }
                   />
@@ -122,13 +124,10 @@ export default function Image() {
                     id={'image-alt'}
                     name={'image-alt'}
                     value={imageData.alt}
-                    placeholder={'Type the alternative text to show...'}
+                    placeholder={'Type the alternative text to show'}
                     maxLength={32}
                     onChange={(e) =>
-                      setImageData((data) => ({
-                        ...data,
-                        alt: String(e.target.value)
-                      }))
+                      setImageData((data) => ({ ...data, alt: e.target.value }))
                     }
                   />
                   <span className='counter'>{`${imageData.alt.length} / 32`}</span>
@@ -136,25 +135,22 @@ export default function Image() {
                 <section className='input-field'>
                   <label htmlFor='image-src'>
                     <DotsHorizontalIcon />
-                    <span>Image url</span>
+                    <span>Image url *</span>
                   </label>
                   <input
                     type='text'
                     id={'image-src'}
                     name={'image-src'}
                     value={imageData.src}
-                    placeholder={'Type the alternative text to show...'}
+                    placeholder={'Type the image source url'}
                     onChange={(e) =>
-                      setImageData((data) => ({
-                        ...data,
-                        alt: String(e.target.value)
-                      }))
+                      setImageData((data) => ({ ...data, src: e.target.value }))
                     }
                   />
                 </section>
               </form>
 
-              <p className='error-messages'>{errorMessages}</p>
+              <p className='error-message'>{errorMessages}</p>
 
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -167,13 +163,9 @@ export default function Image() {
           </Container>
         ) : null}
       </AnimatePresence>
-    </ImageContainer>
+    </>
   );
 }
-
-const ImageContainer = styled.section`
-  position: relative;
-`;
 
 const Container = styled.div`
   position: fixed;
@@ -189,7 +181,7 @@ const Container = styled.div`
   user-select: none;
   line-height: 1.4rem;
 
-  .data-container {
+  .image-panel-container {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -199,7 +191,6 @@ const Container = styled.div`
     background: rgb(${({ theme }) => theme.foreground});
     width: 100%;
     max-width: 500px;
-    margin: 25px;
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
     position: relative;
@@ -215,20 +206,25 @@ const Container = styled.div`
     }
 
     .image-form-container {
-      ${StyledInputs}
-      input {
-        width: 100%;
-      }
-
       display: flex;
       flex-direction: column;
-      gap: 10px;
+
       width: 100%;
       font-size: 0.9rem;
 
+      .input-field {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        label {
+          ${StyledLabels};
+        }
+        ${StyledInputs}
+      }
+
       .counter {
         align-self: end;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -237,10 +233,19 @@ const Container = styled.div`
       position: absolute;
       top: 16px;
       right: 12px;
-
+      border: none;
       :hover {
         color: rgb(${({ theme }) => theme.error});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
       }
+    }
+
+    .error-message {
+      color: rgb(${({ theme }) => theme.error});
+      font-weight: 500;
+      font-size: 0.8rem;
+      line-height: 1.4rem;
+      text-align: center;
     }
 
     .save-button {

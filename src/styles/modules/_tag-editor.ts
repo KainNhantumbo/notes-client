@@ -41,16 +41,16 @@ export const _tagEditor = styled.section`
     }
 
     .tag-form-container {
-      ${StyledInputs}
-      input {
-        width: 100%;
-      }
-
       display: flex;
       flex-direction: column;
       gap: 10px;
       width: 100%;
       font-size: 0.9rem;
+
+      ${StyledInputs}
+      input {
+        width: 100%;
+      }
 
       .counter {
         align-self: end;

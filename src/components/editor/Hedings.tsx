@@ -31,7 +31,7 @@ export default function Headings() {
           key={index.toString()}
           onClick={() => toggleHeading(level)}
           className={
-            editor.isActive('heading', { level: 2 }) ? 'is-active' : ''
+            editor.isActive('heading', { level }) ? 'is-active' : ''
           }>
           <Icon />
           <span>Heading {String(level)}</span>

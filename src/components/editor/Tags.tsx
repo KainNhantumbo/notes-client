@@ -71,6 +71,8 @@ export default function Tags() {
             className='tag'
             style={{ background: tag.color }}>
             <p
+              title='Edit and update tag'
+              aria-placeholder='Edit and update tag'
               onClick={() => {
                 setTag(tag);
                 setIsTagEditorVisible(true);
@@ -78,6 +80,8 @@ export default function Tags() {
               {tag.value}
             </p>
             <button
+              title='Remove tag'
+              aria-placeholder='Remove tag'
               className='remove-tag_button'
               onClick={() => removeTag(tag.id)}>
               <Cross2Icon />
@@ -97,6 +101,7 @@ export default function Tags() {
               state.currentNote.metadata.tags.length <= 10 ? 'block' : 'none'
           }}
           placeholder={'Add tags...'}
+          title='Type here to add new tags...'
           maxLength={12}
           onChange={(e) =>
             setTag((data) => ({ ...data, value: String(e.target.value) }))
