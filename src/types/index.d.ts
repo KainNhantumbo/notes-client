@@ -109,28 +109,15 @@ export type User = { first_name: string; last_name: string; email: string };
 export type Settings = {
   _id: string;
   created_by: string;
+  theme: { scheme: 'light' | 'dark'; is_automatic: boolean };
   editor: {
-    auto_save: {
-      enabled: boolean;
-      delay: number;
-    };
+    auto_save: { enabled: boolean; delay: number };
+    editing: { enable_toolbar: boolean };
     font: {
       font_size: number;
       line_height: number;
       font_family: string;
       font_weight: 400 | 500 | 600 | 700 | 800;
     };
-    editing: {
-      line_numbers: boolean;
-      enable_toolbar: boolean;
-      enable_relative_line_numbers: boolean;
-      tab_size: number;
-      highlight_active_line: boolean;
-    };
-  };
-  theme: {
-    ui_theme: 'light' | 'dark';
-    editor_theme: EditorTheme;
-    automatic_ui_theme: boolean;
   };
 };

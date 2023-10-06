@@ -58,22 +58,12 @@ const initialState: TState = {
         font_size: 16,
         line_height: 1.6,
         font_family:
-          "Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono', 'Courier New', ui-monospace, monospace",
+          "Inter, Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono', 'Courier New', ui-monospace, monospace",
         font_weight: 400
       },
-      editing: {
-        line_numbers: false,
-        enable_toolbar: true,
-        enable_relative_line_numbers: false,
-        tab_size: 2,
-        highlight_active_line: false
-      }
+      editing: { enable_toolbar: true }
     },
-    theme: {
-      ui_theme: 'light',
-      editor_theme: 'basicLight',
-      automatic_ui_theme: true
-    }
+    theme: { scheme: 'light', is_automatic: true }
   }
 };
 
