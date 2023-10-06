@@ -11,11 +11,7 @@ import {
   LockOpen2Icon,
   RulerSquareIcon
 } from '@radix-ui/react-icons';
-import {
-  app_metadata,
-  colorSchemeOptions,
-  editorThemeOptions
-} from '@/shared/data';
+import { app_metadata, colorSchemeOptions } from '@/shared/data';
 import { useState } from 'react';
 import { m as motion } from 'framer-motion';
 import actions from '@/shared/actions';
@@ -25,7 +21,7 @@ import { SelectContainer } from '@/components/Select';
 import { useThemeContext } from '@/context/ThemeContext';
 import { _settings as Container } from '@/styles/routes/_settings';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { InputEvents, TColorScheme, TSettings, TUser } from '@/types';
+import { InputEvents, ColorScheme, Settings, User } from '@/types';
 
 export default function Settings() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -44,7 +40,7 @@ export default function Settings() {
     }));
   };
 
-  const syncSettings = async (data: TSettings) => {
+  const syncSettings = async (data: Settings) => {
     try {
       await useFetchAPI({
         method: 'patch',
@@ -77,7 +73,7 @@ export default function Settings() {
 
   const syncUserData = async () => {
     try {
-      const response = await useFetchAPI<TUser>({
+      const response = await useFetchAPI<User>({
         method: 'patch',
         url: '/api/v1/users',
         data: { ...state.user }
@@ -256,7 +252,7 @@ export default function Settings() {
                     options={colorSchemeOptions}
                     placeholder={'Select the global color scheme...'}
                     onChange={(option) => {
-                      const parsedValue: TColorScheme = JSON.parse(
+                      const parsedValue: ColorScheme = JSON.parse(
                         (option as any)?.value
                       );
                       changeColorScheme({ ...parsedValue });
@@ -267,29 +263,6 @@ export default function Settings() {
                           ui_theme: parsedValue.scheme,
                           automatic_ui_theme:
                             parsedValue.mode === 'auto' ? true : false
-                        }
-                      });
-                    }}
-                  />
-                </div>
-              </div>
-              <div className='content-container'>
-                <h3>
-                  <span>Editor color schemes</span>
-                </h3>
-                <div className='data-container'>
-                  <SelectContainer
-                    options={editorThemeOptions.map((item) => ({
-                      label: item,
-                      value: item
-                    }))}
-                    placeholder={'Select the global color scheme...'}
-                    onChange={(option) => {
-                      syncSettings({
-                        ...state.settings,
-                        theme: {
-                          ...state.settings.theme,
-                          editor_theme: (option as any)?.value
                         }
                       });
                     }}

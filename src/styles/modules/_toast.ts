@@ -14,14 +14,14 @@ export const _toast = styled.section`
     justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
-    padding: 12px;
-    border-radius: 5px;
+    padding: 12px 20px;
+    border-radius: 12px;
     background: rgb(${({ theme }) => theme.foreground});
     max-width: 500px;
     font-size: 0.9rem;
     margin: 20px;
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
+    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.2);
     position: relative;
 
     @media screen and (max-width: 430px) {
@@ -33,6 +33,11 @@ export const _toast = styled.section`
       position: absolute;
       top: 5px;
       right: 5px;
+      border: none;
+      :hover {
+        color: rgb(${({ theme }) => theme.error});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
+      }
     }
 
     .prompt-info {

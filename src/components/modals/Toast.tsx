@@ -4,7 +4,7 @@ import { useAppContext } from '@/context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _toast as Container } from '@/styles/modules/_toast';
 
-export function Toast() {
+export default function Toast() {
   const { state, dispatch } = useAppContext();
 
   return (
@@ -17,12 +17,12 @@ export function Toast() {
             animate={{
               opacity: 1,
               y: 0,
-              transition: { duration: 1.2 },
+              transition: { duration: 1.2 }
             }}
             exit={{
               opacity: 0,
               y: 500,
-              transition: { duration: 1.2 },
+              transition: { duration: 1.2 }
             }}>
             <div className='dialog-prompt'>
               <div className='prompt-info'>
@@ -37,8 +37,8 @@ export function Toast() {
                       type: actions.TOAST,
                       payload: {
                         ...state,
-                        toast: { ...state.toast, status: false },
-                      },
+                        toast: { ...state.toast, status: false }
+                      }
                     })
                   }>
                   <Cross2Icon />
@@ -66,8 +66,8 @@ export function Toast() {
                       type: actions.TOAST,
                       payload: {
                         ...state,
-                        toast: { ...state.toast, status: false },
-                      },
+                        toast: { ...state.toast, status: false }
+                      }
                     })
                   }>
                   <span>Dismiss</span>

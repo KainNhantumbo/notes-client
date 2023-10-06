@@ -5,7 +5,7 @@ import {
   PlusIcon,
   TrashIcon
 } from '@radix-ui/react-icons';
-import { TNote, TSettings, TUser } from '@/types';
+import { Note, Settings, User } from '@/types';
 import { useEffect } from 'react';
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
@@ -29,7 +29,7 @@ export default function Workspace() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const noteTemplate: TNote = {
+  const noteTemplate: Note = {
     _id: '',
     title: '',
     content: ``,
@@ -58,7 +58,7 @@ export default function Workspace() {
 
   async function getUser() {
     try {
-      const { data } = await useFetchAPI<TUser>({
+      const { data } = await useFetchAPI<User>({
         method: 'get',
         url: '/api/v1/users'
       });
@@ -70,7 +70,7 @@ export default function Workspace() {
 
   async function getSettings() {
     try {
-      const { data } = await useFetchAPI<TSettings>({
+      const { data } = await useFetchAPI<Settings>({
         method: 'get',
         url: '/api/v1/settings'
       });
@@ -83,7 +83,7 @@ export default function Workspace() {
   async function getNotes() {
     const queryParams = new URLSearchParams(state.query).toString();
     try {
-      const { data } = await useFetchAPI<TNote[]>({
+      const { data } = await useFetchAPI<Note[]>({
         method: 'get',
         url: `/api/v1/notes?${queryParams}`
       });
@@ -96,7 +96,7 @@ export default function Workspace() {
   async function createNote() {
     if (!state.auth.token) return undefined;
     try {
-      const { data } = await useFetchAPI<TNote>({
+      const { data } = await useFetchAPI<Note>({
         method: 'post',
         url: '/api/v1/notes'
       });
@@ -126,7 +126,7 @@ export default function Workspace() {
     }
   }
 
-  function handleEditNote(data: TNote) {
+  function handleEditNote(data: Note) {
     dispatch({
       type: actions.CURRENT_NOTE,
       payload: { ...state, currentNote: { ...data } }

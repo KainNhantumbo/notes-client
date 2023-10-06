@@ -16,10 +16,92 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
+import { Note } from '@/types';
 
 export default function Properties() {
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch, useFetchAPI } = useAppContext();
 
+  async function handleDuplicate() {
+    dispatch({
+      type: actions.PROMPT,
+      payload: {
+        ...state,
+        prompt: {
+          status: true,
+          title: 'Duplicate Note',
+          actionButtonMessage: 'Yes, duplicate.',
+          message: 'Do you really want to make a new copy of this note?',
+          handleFunction: async () => {
+            try {
+              const { title, content, metadata } = state.currentNote;
+              await useFetchAPI<Note>({
+                method: 'post',
+                url: '/api/v1/notes',
+                data: {
+                  title: title.includes('(Duplicated)')
+                    ? title
+                    : `(Duplicated) ${title}`,
+                  content,
+                  metadata
+                }
+              });
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: {
+                    ...state.toast,
+                    title: 'Duplicate Confirmation',
+                    message: 'Note duplicated successfully',
+                    status: true,
+                    actionButtonMessage: 'Close',
+                    handleFunction: () =>
+                      dispatch({
+                        type: actions.TOAST,
+                        payload: {
+                          ...state,
+                          toast: { ...state.toast, status: false }
+                        }
+                      })
+                  }
+                }
+              });
+              dispatch({
+                type: actions.PROPERTIES_DRAWER,
+                payload: { ...state, isPropertiesDrawer: false }
+              });
+            } catch (error: any) {
+              console.error(error?.response?.data?.message || error);
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: {
+                    ...state.toast,
+                    title: 'Duplicate Note Error',
+                    message:
+                      error?.response?.data?.message ||
+                      'Failed to make a new copy of your note data.',
+                    status: true,
+                    actionButtonMessage: 'Retry',
+                    handleFunction: handleDuplicate
+                  }
+                }
+              });
+            } finally {
+              dispatch({
+                type: actions.PROMPT,
+                payload: {
+                  ...state,
+                  prompt: { ...state.prompt, status: false }
+                }
+              });
+            }
+          }
+        }
+      }
+    });
+  }
 
   return (
     <AnimatePresence>
@@ -134,7 +216,16 @@ export default function Properties() {
                 <span>Actions</span>
               </h2>
               <section>
-                <motion.button whileTap={{ scale: 0.8 }} className='action'>
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  className='action'
+                  onClick={() => {
+                    dispatch({
+                      type: actions.PROPERTIES_DRAWER,
+                      payload: { ...state, isPropertiesDrawer: false }
+                    });
+                    handleDuplicate();
+                  }}>
                   <RiFileCopy2Line />
                   <span>Duplicate</span>
                 </motion.button>

@@ -4,8 +4,9 @@ import {
   useContext,
   useReducer,
   Dispatch,
-  useEffect} from 'react';
-import { TAuth, TNote } from '@/types';
+  useEffect
+} from 'react';
+import { Auth, Note } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/shared/actions';
 import { ThemeContext } from './ThemeContext';
@@ -19,9 +20,9 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { networkMode: 'always' } }
 });
 
-type TProps = { children: ReactNode };
+type Props = { children: ReactNode };
 
-type TContext = {
+type Context = {
   state: TState;
   dispatch: Dispatch<TAction>;
   useFetchAPI: <T>(
@@ -30,20 +31,20 @@ type TContext = {
   syncCurrentNote: () => Promise<void>;
 };
 
-const context = createContext<TContext>({
+const context = createContext<Context>({
   state: initialState,
   dispatch: () => {},
   useFetchAPI: (): any => {},
   syncCurrentNote: async () => {}
 });
 
-export function AppContext({ children }: TProps) {
+export function AppContext({ children }: Props) {
   const navigate: NavigateFunction = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const authenticateUser = async () => {
     try {
-      const { data } = await fetch<TAuth>({
+      const { data } = await fetch<Auth>({
         method: 'get',
         url: '/api/v1/auth/default/refresh',
         withCredentials: true
@@ -98,7 +99,7 @@ export function AppContext({ children }: TProps) {
     if (!state.auth.token || !_id) return undefined;
 
     try {
-      const { data } = await useFetchAPI<TNote>({
+      const { data } = await useFetchAPI<Note>({
         method: 'patch',
         url: `/api/v1/notes/${_id}`,
         data: { ...currentNote }
@@ -178,5 +179,5 @@ export function AppContext({ children }: TProps) {
 }
 
 export function useAppContext() {
-  return useContext<TContext>(context);
+  return useContext<Context>(context);
 }

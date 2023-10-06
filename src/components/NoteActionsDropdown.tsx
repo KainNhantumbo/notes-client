@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { m as motion } from 'framer-motion';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 
-type TProps = {
+type Props = {
   items: {
     handler: () => void | ((params: any) => void);
     label: string;
@@ -13,7 +13,7 @@ type TProps = {
   }[];
 };
 
-export default function NoteActionsDropdown(props: TProps) {
+export default function NoteActionsDropdown(props: Props) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const renderDropdownItems = (): JSX.Element => {

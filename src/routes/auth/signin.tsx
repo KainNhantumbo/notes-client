@@ -6,7 +6,7 @@ import { Layout } from '@/components/Layout';
 import { app_metadata } from '@/shared/data';
 import media_login from '@/assets/media-login.jpg';
 import { useAppContext } from '@/context/AppContext';
-import { InputEvents, SubmitEvent, TAuth } from '@/types';
+import { InputEvents, SubmitEvent, Auth } from '@/types';
 import { _signin as Container } from '@/styles/routes/_signin';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
@@ -34,7 +34,7 @@ export default function SignIn() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await fetch<TAuth>({
+      const { data } = await fetch<Auth>({
         method: 'post',
         url: '/api/v1/auth/default/login',
         data: state.signIn,

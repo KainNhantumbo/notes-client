@@ -1,30 +1,31 @@
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { Toast } from './modals/Toast';
+import Toast from './modals/Toast';
 import { Cookies } from './modals/Cookies';
 import { PromptModal } from './modals/Prompt';
-import type { THeadProps } from '../types';
+import type { HeadProps } from '../types';
 import { ReactNode, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
-interface IProps {
+interface Props {
   children: ReactNode;
   renderHeader?: boolean;
   renderFooter?: boolean;
-  metadata: THeadProps | undefined;
+  metadata: HeadProps | undefined;
 }
 
 export function Layout({
   children,
   metadata,
   renderHeader,
-  renderFooter,
-}: IProps) {
+  renderFooter
+}: Props) {
   const { state } = useAppContext();
   const navigate: NavigateFunction = useNavigate();
   const location = useLocation();
+  
   useEffect((): (() => void) => {
     const debounceTimer = setTimeout(() => {
       if (location.pathname.includes('workspace') && !state.auth.id) {

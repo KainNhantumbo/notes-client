@@ -7,7 +7,7 @@ import {
   MagnifyingGlassIcon
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
-import { TEditorTheme, TOption } from '@/types';
+import { EditorTheme, Option } from '@/types';
 
 export const app_metadata = {
   appName: Package.metadata.name,
@@ -73,7 +73,7 @@ export const footerAnchors = [
   { name: 'Portfolio', anchor: 'https://portifolio-dev-mu.vercel.app' }
 ].sort((a, b) => (a.name > b.name ? 1 : -1));
 
-export const sortOptions: TOption[] = [
+export const sortOptions: Option[] = [
   { value: 'title', label: 'Title [A-Z]' },
   { value: '-title', label: 'Title [Z-A]' },
   { value: '-createdAt', label: 'Date Created' },
@@ -82,14 +82,14 @@ export const sortOptions: TOption[] = [
   { value: 'updatedAt', label: 'Date Updated [Inverted]' }
 ];
 
-export const priorityOptions: TOption[] = [
+export const priorityOptions: Option[] = [
   { value: 'none', label: 'None' },
   { value: 'low', label: 'Low' },
   { value: 'medium', label: 'Medium' },
   { value: 'high', label: 'High' }
 ];
 
-export const statusOptions: TOption[] = [
+export const statusOptions: Option[] = [
   { value: 'none', label: 'None' },
   { value: 'active', label: 'Active' },
   { value: 'pending', label: 'Pending' },
@@ -97,7 +97,7 @@ export const statusOptions: TOption[] = [
   { value: 'completed', label: 'Completed' }
 ];
 
-export const colorOptions: TOption[] = [
+export const colorOptions: Option[] = [
   { value: '#FFFFFF', label: 'Default' },
   { value: '#0091FF', label: 'Blue' },
   { value: '#99543A', label: 'Brown' },
@@ -113,47 +113,4 @@ export const colorSchemeOptions = [
   { label: 'Light Theme', value: `{"mode":"manual", "scheme": "light"}` },
   { label: 'Dark Theme', value: `{"mode":"manual", "scheme": "dark"}` },
   { label: 'Automatic', value: `{"mode":"auto", "scheme": "dark"}` }
-];
-
-export const editorThemeOptions: TEditorTheme[] = [
-  'abcdef',
-  'abyss',
-  'androidstudio',
-  'andromeda',
-  'atomone',
-  'aura',
-  'basicDark',
-  'basicLight',
-  'bbedit',
-  'bespin',
-  'copilot',
-  'darcula',
-  'dracula',
-  'duotoneDark',
-  'duotoneLight',
-  'eclipse',
-  'githubDark',
-  'githubLight',
-  'gruvboxDark',
-  'kimbie',
-  'material',
-  'monokai',
-  'monokaiDimmed',
-  'noctisLilac',
-  'nord',
-  'okaidia',
-  'quietlight',
-  'red',
-  'solarizedDark',
-  'solarizedLight',
-  'sublime',
-  'tokyoNight',
-  'tokyoNightStorm',
-  'tokyoNightDay',
-  'tomorrowNightBlue',
-  'vscodeDark',
-  'whiteDark',
-  'whiteLight',
-  'xcodeDark',
-  'xcodeLight'
 ];

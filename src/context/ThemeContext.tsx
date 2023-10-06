@@ -3,49 +3,49 @@ import {
   useContext,
   ReactNode,
   useState,
-  useEffect,
+  useEffect
 } from 'react';
-import { Theme, TColorScheme } from '../types';
+import { Theme, ColorScheme } from '../types';
 import { GlobalStyles } from '../styles/globals';
 import { ThemeProvider } from 'styled-components';
 import { dark_default, light_default } from '../styles/themes';
 import { useAppContext } from './AppContext';
 import actions from '@/shared/actions';
 
-type TContext = {
-  colorScheme: TColorScheme;
-  changeColorScheme: ({ mode, scheme }: TColorScheme) => void;
+type Context = {
+  colorScheme: ColorScheme;
+  changeColorScheme: ({ mode, scheme }: ColorScheme) => void;
 };
 
-type TProps = { children: ReactNode };
+type Props = { children: ReactNode };
 
-const context = createContext<TContext>({
+const context = createContext<Context>({
   colorScheme: { mode: 'auto', scheme: 'light' },
-  changeColorScheme: () => {},
+  changeColorScheme: () => {}
 });
 
-export function ThemeContext({ children }: TProps) {
+export function ThemeContext({ children }: Props) {
   const { state, dispatch } = useAppContext();
   const [currentTheme, setCurrentTheme] = useState<Theme>(light_default);
-  const [colorScheme, setColorScheme] = useState<TColorScheme>({
+  const [colorScheme, setColorScheme] = useState<ColorScheme>({
     mode: 'auto',
-    scheme: 'light',
+    scheme: 'light'
   });
 
-  const setDarkColorScheme = ({ mode, scheme }: TColorScheme): void => {
+  const setDarkColorScheme = ({ mode, scheme }: ColorScheme): void => {
     setCurrentTheme(dark_default);
     setColorScheme({ mode, scheme });
     localStorage.setItem('color-scheme', JSON.stringify({ mode, scheme }));
   };
 
-  const setLightColorScheme = ({ mode, scheme }: TColorScheme): void => {
+  const setLightColorScheme = ({ mode, scheme }: ColorScheme): void => {
     setCurrentTheme(light_default);
     setColorScheme({ mode, scheme });
 
     localStorage.setItem('color-scheme', JSON.stringify({ mode, scheme }));
   };
 
-  const changeColorScheme = ({ mode, scheme }: TColorScheme): void => {
+  const changeColorScheme = ({ mode, scheme }: ColorScheme): void => {
     switch (mode) {
       case 'auto':
         window
@@ -79,7 +79,7 @@ export function ThemeContext({ children }: TProps) {
   };
 
   useEffect((): void => {
-    const colorScheme: TColorScheme = JSON.parse(
+    const colorScheme: ColorScheme = JSON.parse(
       localStorage.getItem('color-scheme') ||
         `{"mode": "auto", "scheme": "light"}`
     );
@@ -103,10 +103,10 @@ export function ThemeContext({ children }: TProps) {
           theme: {
             ...state.settings.theme,
             ui_theme: colorScheme.scheme,
-            automatic_ui_theme: colorScheme.mode === 'auto' ? true : false,
-          },
-        },
-      },
+            automatic_ui_theme: colorScheme.mode === 'auto' ? true : false
+          }
+        }
+      }
     });
   }, [colorScheme]);
 

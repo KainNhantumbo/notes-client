@@ -21,7 +21,7 @@ export const _prompt = styled.section`
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 12px;
     background: rgb(${({ theme }) => theme.foreground});
     max-width: 500px;
     margin: 25px;
@@ -54,12 +54,10 @@ export const _prompt = styled.section`
       gap: 10px;
       .prompt-cancel {
         ${BaseButtonOutline}
-        border: none;
       }
       .prompt-accept {
         ${BaseButton}
-        background: rgb(${({ theme }) => theme.primary_shade});
-        color: rgb(${({ theme }) => theme.white});
+
       }
     }
   }

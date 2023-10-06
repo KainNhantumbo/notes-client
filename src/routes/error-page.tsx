@@ -1,14 +1,14 @@
 import { app_metadata } from '@/shared/data';
 import { _error as Container } from '@/styles/routes/_error';
 
-interface IProps {
+interface Props {
   title?: string | undefined;
   message?: string | undefined;
   button_message?: string | undefined;
   retryFn: () => void;
 }
 
-export function ErrorPage(props: IProps) {
+export function ErrorPage(props: Props) {
   return (
     <Container>
       <section className='logo-container'>
@@ -22,7 +22,9 @@ export function ErrorPage(props: IProps) {
           {props.message ||
             'Oops! Looks like something bad happened, for now, thats all we know.'}
         </p>
-        <button onClick={props.retryFn}>{props.button_message ?? 'Try again'}</button>
+        <button onClick={props.retryFn}>
+          {props.button_message ?? 'Try again'}
+        </button>
       </section>
     </Container>
   );

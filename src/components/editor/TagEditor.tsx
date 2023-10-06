@@ -8,7 +8,7 @@ import { SelectContainer } from '../Select';
 import { colorOptions } from '@/shared/data';
 import { _tagEditor as Container } from '@/styles/modules/_tag-editor';
 
-type TProps = {
+type Props = {
   data: Tag;
   setData: Dispatch<SetStateAction<Tag>>;
   isVisible: boolean;
@@ -20,7 +20,7 @@ export default function TagEditor({
   setIsVisible,
   data: tag,
   setData: setTag
-}: TProps) {
+}: Props) {
   const { state, dispatch } = useAppContext();
 
   const updateTag = () => {

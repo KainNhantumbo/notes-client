@@ -1,21 +1,16 @@
 import React from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
-import { editorThemeOptions } from '@/shared/data';
 import * as editorTheme from '@uiw/codemirror-themes-all';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
 
-export type TEditorTheme = keyof typeof editorTheme;
+export type EditorTheme = keyof typeof editorTheme;
 
 export type IconType = React.ForwardRefExoticComponent<
   IconProps & React.RefAttributes<SVGSVGElement>
 >;
 
-export type THeadProps =
-  | {
-      title?: string;
-      createdAt?: string;
-      updatedAt?: string;
-    }
+export type HeadProps =
+  | { title?: string; createdAt?: string; updatedAt?: string }
   | undefined;
 
 export type InputEvents =
@@ -25,12 +20,12 @@ export type InputEvents =
 
 export type SubmitEvent = FormEvent<HTMLFormElement>;
 
-export type TColorScheme = {
+export type ColorScheme = {
   mode: 'auto' | 'manual';
   scheme: 'dark' | 'light';
 };
 
-export type TAuth = {
+export type Auth = {
   id: string;
   name: string;
   token: string;
@@ -57,12 +52,9 @@ declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
 }
 
-export type TSignIn = {
-  email: string;
-  password: string;
-};
+export type SignIn = { email: string; password: string };
 
-export type TSignUp = {
+export type SignUp = {
   first_name: string;
   last_name: string;
   email: string;
@@ -72,7 +64,7 @@ export type TSignUp = {
 
 export type Tag = { id: string; color: string; value: string };
 
-export type TNote = {
+export type Note = {
   _id: string;
   title: string;
   content: string;
@@ -89,7 +81,7 @@ export type TNote = {
   updatedAt: string;
 };
 
-export type TFolder = {
+export type Folder = {
   _id: string;
   name: string;
   metadata: {
@@ -100,7 +92,7 @@ export type TFolder = {
   };
 };
 
-export type TModalProps = {
+export type Modal = {
   title: string;
   status: boolean;
   message: string;
@@ -108,14 +100,13 @@ export type TModalProps = {
   handleFunction: ((data: any | undefined) => void | Promise<void>) | undefined;
 };
 
-export type TQuery = {
-  search: string;
-  sort: string;
-};
+export type Query = { search: string; sort: string };
 
-export type TOption = { value: string; label: string };
+export type Option = { value: string; label: string };
 
-export type TSettings = {
+export type User = { first_name: string; last_name: string; email: string };
+
+export type Settings = {
   _id: string;
   created_by: string;
   editor: {
@@ -139,13 +130,7 @@ export type TSettings = {
   };
   theme: {
     ui_theme: 'light' | 'dark';
-    editor_theme: TEditorTheme;
+    editor_theme: EditorTheme;
     automatic_ui_theme: boolean;
   };
-};
-
-export type TUser = {
-  first_name: string;
-  last_name: string;
-  email: string;
 };
