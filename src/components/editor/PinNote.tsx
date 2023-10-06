@@ -1,8 +1,7 @@
-import { useAppContext } from '@/context/AppContext';
 import actions from '@/shared/actions';
-import { DrawingPinFilledIcon, DrawingPinIcon } from '@radix-ui/react-icons';
-import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
+import { useAppContext } from '@/context/AppContext';
 import styled, { useTheme } from 'styled-components';
+import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
 
 export default function TooglePinNote() {
   const { state, dispatch } = useAppContext();
@@ -10,6 +9,7 @@ export default function TooglePinNote() {
 
   return (
     <Container
+      title={state.currentNote.metadata.pinned ? 'Unpin note' : 'Pin note'}
       onClick={() =>
         dispatch({
           type: actions.CURRENT_NOTE,

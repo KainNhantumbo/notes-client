@@ -40,7 +40,7 @@ export default function Editor() {
       <EditorProvider
         extensions={editorExtensions}
         content={state.currentNote.content}
-        onUpdate={({ editor}) => {
+        onUpdate={({ editor }) => {
           dispatch({
             type: actions.CURRENT_NOTE,
             payload: {
@@ -85,7 +85,7 @@ export const editorExtensions = [
     HTMLAttributes: { class: 'image-class' }
   }),
   Placeholder.configure({
-    emptyEditorClass: 'editor-placeholder',
+    emptyEditorClass: 'placeholder-class',
     placeholder: 'Start typing something...'
   }),
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -99,15 +99,14 @@ export const editorExtensions = [
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
-      HTMLAttributes: { title: 'Select heading' }
+      HTMLAttributes: { class: 'headings-class' }
     },
     italic: { HTMLAttributes: { class: 'italics-class' } },
     bulletList: { keepMarks: true, keepAttributes: false },
     orderedList: { keepMarks: true, keepAttributes: false },
     dropcursor: {
-      color: '#ff0000',
-      width: 5,
-      class: 'class-dropcursor'
+      width: 3,
+      class: 'dropcursor-class'
     }
   })
 ];

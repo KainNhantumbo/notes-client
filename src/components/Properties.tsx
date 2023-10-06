@@ -13,18 +13,23 @@ import {
   RiTimerLine
 } from 'react-icons/ri';
 import moment from 'moment';
+import { Note } from '@/types';
+import TurndownService from 'turndown';
 import actions from '@/shared/actions';
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { editorExtensions } from './editor/Editor';
 import { useAppContext } from '@/context/AppContext';
+import { generateHTML, generateText } from '@tiptap/react';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
-import { Note } from '@/types';
-import { generateHTML, generateText } from '@tiptap/react';
-import { editorExtensions } from './editor/Editor';
-import TurndownService from 'turndown';
+import { useNavigate } from 'react-router-dom';
 
 export default function Properties() {
   const { state, dispatch, useFetchAPI } = useAppContext();
+  const navigate = useNavigate();
+
+  // TODO: ADD A PRINTER METHOD
+  const printToPDF = () => {};
 
   const exportToClipboard = async (type: 'markdown' | 'html' | 'text') => {
     dispatch({
@@ -164,6 +169,63 @@ export default function Properties() {
                     status: true,
                     actionButtonMessage: 'Retry',
                     handleFunction: handleDuplicate
+                  }
+                }
+              });
+            } finally {
+              dispatch({
+                type: actions.PROMPT,
+                payload: {
+                  ...state,
+                  prompt: { ...state.prompt, status: false }
+                }
+              });
+            }
+          }
+        }
+      }
+    });
+  };
+
+  const handleMoveNoteToTrash = () => {
+    dispatch({
+      type: actions.PROMPT,
+      payload: {
+        ...state,
+        prompt: {
+          status: true,
+          title: 'Move to Trash',
+          actionButtonMessage: 'Confirm',
+          message: 'Do you really want to move this note to trash?',
+          handleFunction: async () => {
+            dispatch({
+              type: actions.PROPERTIES_DRAWER,
+              payload: { ...state, isPropertiesDrawer: false }
+            });
+
+            try {
+              const { _id } = state.currentNote;
+              await useFetchAPI<Note>({
+                method: 'patch',
+                url: `/api/v1/notes/${_id}`,
+                data: { metadata: { deleted: true } }
+              });
+              navigate('/workspace', { replace: true });
+            } catch (error: any) {
+              console.error(error?.response?.data?.message || error);
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: {
+                    ...state.toast,
+                    title: 'Delete Error',
+                    message:
+                      error?.response?.data?.message ||
+                      'Failed to move your note data to trash.',
+                    status: true,
+                    actionButtonMessage: 'Retry',
+                    handleFunction: handleMoveNoteToTrash
                   }
                 }
               });
@@ -335,7 +397,8 @@ export default function Properties() {
 
                 <motion.button
                   whileTap={{ scale: 0.8 }}
-                  className='action delete-button'>
+                  className='action delete-button'
+                  onClick={handleMoveNoteToTrash}>
                   <RiDeleteBin7Line />
                   <span>Move to trash</span>
                 </motion.button>

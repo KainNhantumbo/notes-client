@@ -29,7 +29,7 @@ export const _noteEditor = styled.main`
     overflow-y: hidden;
     padding: 12px;
 
-    .editor-placeholder:first-child::before {
+    .placeholder-class:first-child::before {
       color: rgba(${({ theme }) => theme.font}, 0.5);
       content: attr(data-placeholder);
       float: left;
@@ -105,49 +105,6 @@ export const _noteEditor = styled.main`
       text-decoration: line-through;
     }
 
-    ::-webkit-scrollbar {
-      width: 14px;
-      height: 14px;
-    }
-
-    ::-webkit-scrollbar-track {
-      border: 4px solid transparent;
-      background-clip: padding-box;
-      border-radius: 8px;
-      background-color: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      border: 4px solid rgba(0, 0, 0, 0);
-      background-clip: padding-box;
-      border-radius: 8px;
-      background-color: rgba(0, 0, 0, 0);
-    }
-
-    :hover::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(0, 0, 0, 0.15);
-    }
-
-    .overflow-dark:hover::-webkit-scrollbar-thumb {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .overflow-dark::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    ::-webkit-scrollbar-button {
-      display: none;
-      width: 0;
-      height: 0;
-    }
-
-    ::-webkit-scrollbar-corner {
-      background-color: transparent;
-    }
   }
+
 `;

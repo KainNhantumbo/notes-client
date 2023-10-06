@@ -32,7 +32,7 @@ export default function Workspace() {
   const noteTemplate: Note = {
     _id: '',
     title: '',
-    content: ``,
+    content: {},
     created_by: '',
     metadata: {
       folder_id: '',
@@ -265,56 +265,57 @@ export default function Workspace() {
             <div className='wrapper-container'>
               <ScrollArea.Root className='notes-list-container'>
                 <ScrollArea.Viewport className='ScrollAreaViewport'>
-                  {state.notes.map((note) => (
-                    <div
-                      key={note._id}
-                      className={`note-container`}
-                      onClick={(e) => {
-                        const target: any = (
-                          e as any
-                        ).target.classList.contains('action-panel');
-                        if (!target) {
-                          handleEditNote(note);
-                        }
-                      }}>
-                      <div className='top-side'>
-                        <h3>
-                          <FileTextIcon />
-                          <span>{note.title ? note.title : '[Untitled]'}</span>
-                        </h3>
-                      </div>
+                  {state.notes
+                    .filter((note) => !note.metadata.deleted)
+                    .map((note) => (
+                      <div
+                        key={note._id}
+                        className={`note-container`}
+                        onClick={(e: any) => {
+                          const isTarget =
+                            e.target.classList.contains('action-panel');
+                          if (!isTarget) handleEditNote(note);
+                        }}>
+                        <div className='top-side'>
+                          <h3>
+                            <FileTextIcon />
+                            <span>
+                              {note.title ? note.title : '[Untitled]'}
+                            </span>
+                          </h3>
+                        </div>
 
-                      <div className='bottom-side'>
-                        {note.metadata.tags.length > 0 ? (
-                          <div className='tags-container'>
-                            {note.metadata.tags.map((tag) => (
-                              <p
-                                key={tag.id}
-                                style={{ backgroundColor: tag.color }}>
-                                {tag.value}
-                              </p>
-                            ))}
-                          </div>
-                        ) : null}
-                        <h5>{formatDate(note.updatedAt)}</h5>
-                      </div>
+                        <div className='bottom-side'>
+                          {note.metadata.tags.length > 0 ? (
+                            <div className='tags-container'>
+                              {note.metadata.tags.map((tag) => (
+                                <p
+                                  key={tag.id}
+                                  style={{ backgroundColor: tag.color }}>
+                                  {tag.value}
+                                </p>
+                              ))}
+                            </div>
+                          ) : null}
+                          <h5>{formatDate(note.updatedAt)}</h5>
+                        </div>
 
-                      <NoteActionsDropdown
-                        items={[
-                          {
-                            label: 'Pi',
-                            icon: TrashIcon,
-                            handler: () => {}
-                          },
-                          {
-                            label: 'Move to Trash',
-                            icon: TrashIcon,
-                            handler: () => {}
-                          }
-                        ]}
-                      />
-                    </div>
-                  ))}
+                        <NoteActionsDropdown
+                          items={[
+                            {
+                              label: 'Pi',
+                              icon: TrashIcon,
+                              handler: () => {}
+                            },
+                            {
+                              label: 'Move to Trash',
+                              icon: TrashIcon,
+                              handler: () => {}
+                            }
+                          ]}
+                        />
+                      </div>
+                    ))}
                 </ScrollArea.Viewport>
                 <ScrollArea.Scrollbar
                   className='ScrollAreaScrollbar'

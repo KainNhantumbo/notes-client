@@ -1,6 +1,6 @@
 import { Layout } from '@/components/Layout';
 import Editor from '@/components/editor/Editor';
-import CustomTools from '@/components/editor/CustomTools';
+import CustomTools from '@/components/editor/Tools';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
 import Properties from '@/components/Properties';

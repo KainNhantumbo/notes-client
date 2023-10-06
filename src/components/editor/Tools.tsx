@@ -5,8 +5,8 @@ import TooglePinNote from './PinNote';
 import actions from '@/shared/actions';
 import { useAppContext } from '@/context/AppContext';
 import { m as motion } from 'framer-motion';
-import { _customTools as Container } from '@/styles/modules/_customTools';
 import { RiMenuLine } from 'react-icons/ri';
+import { _customTools as Container } from '@/styles/modules/_customTools';
 
 export default function CustomTools() {
   const { state, dispatch } = useAppContext();
@@ -45,6 +45,8 @@ export default function CustomTools() {
           <motion.button
             whileTap={{ scale: 0.8 }}
             className='trigger-left-pannel-button'
+            title='Open note properties drawer'
+            aria-placeholder='Open note properties drawer'
             onClick={() => {
               dispatch({
                 type: actions.PROPERTIES_DRAWER,

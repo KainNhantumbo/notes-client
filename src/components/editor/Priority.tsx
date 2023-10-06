@@ -3,7 +3,8 @@ import actions from '@/shared/actions';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
-import { CaretDownIcon, DotFilledIcon } from '@radix-ui/react-icons';
+import { CaretDownIcon } from '@radix-ui/react-icons';
+import { RiTimerFlashLine } from 'react-icons/ri';
 
 type TPriority = 'none' | 'low' | 'medium' | 'high';
 
@@ -45,7 +46,7 @@ export default function Priority() {
           <div
             key={index.toString()}
             onClick={() => handleUpdatePriority(value as TPriority)}>
-            <DotFilledIcon color={data.color} />
+            <RiTimerFlashLine color={data.color} />
             <span>Priority: {data.label}</span>
           </div>
         ))}
@@ -65,7 +66,7 @@ export default function Priority() {
       <DropdownTriggerButton
         title={`Set note priority`}
         aria-placeholder={`Set note priority`}>
-        <DotFilledIcon color={data.color} className='dot-icon' />
+        <RiTimerFlashLine color={data.color} className='dot-icon' />
         {state.currentNote.metadata.priority === 'none' ? (
           <span>Set priority</span>
         ) : (
