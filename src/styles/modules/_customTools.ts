@@ -48,6 +48,10 @@ export const _customTools = styled.section`
     .trigger-left-pannel-button {
       ${StyledCornerButton}
       border: none;
+      :hover {
+        color: rgb(${({ theme }) => theme.primary_shade});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
+      }
     }
   }
 

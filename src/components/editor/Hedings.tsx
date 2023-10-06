@@ -69,8 +69,8 @@ const DropdownContainer = styled.section`
   border: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
   user-select: none;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-family: 'Inter';
+  font-size: 0.85rem;
 
   div {
     display: flex;
@@ -79,7 +79,7 @@ const DropdownContainer = styled.section`
     gap: 5px;
     padding: 5px 8px;
     border-radius: 5px;
-
+    position: relative;
     svg {
       width: 18px;
       height: 18px;
@@ -87,6 +87,16 @@ const DropdownContainer = styled.section`
 
     :hover {
       background: rgba(${({ theme }) => theme.primary}, 0.25);
+      ::after {
+        position: absolute;
+        content: '';
+        width: 3.5px;
+        height: 24px;
+        border-radius: 5px;
+        background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
+        top: calc(50% - 12px);
+        left: -7px;
+      }
     }
   }
   .is-active {

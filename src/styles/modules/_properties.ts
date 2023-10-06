@@ -156,6 +156,7 @@ export const _properties = styled.section`
         cursor: pointer;
         border-radius: 5px;
         padding: 10px 8px;
+        font-weight: 500;
 
         :hover {
           background: rgb(${({ theme }) => theme.primary}, 0.2);

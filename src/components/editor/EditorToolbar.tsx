@@ -8,7 +8,9 @@ import {
   RiFontColor,
   RiItalic,
   RiListCheck,
+  RiListCheck2,
   RiListOrdered,
+  RiListOrdered2,
   RiListRadio,
   RiParagraph,
   RiRulerLine,
@@ -156,16 +158,16 @@ export default function EditorToolbar() {
         type='button'
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive('orderedList') ? 'is-active' : ''}>
-        <RiListOrdered />
+        <RiListOrdered2 />
       </button>
 
       <button
-        title='Toggle task list'
-        aria-placeholder='Toggle task list'
+        title='Toggle check list'
+        aria-placeholder='Toggle check list'
         type='button'
         onClick={() => editor.chain().focus().toggleTaskList().run()}
         className={editor.isActive('taskList') ? 'is-active' : ''}>
-        <RiListCheck />
+        <RiListCheck2 />
       </button>
 
       <button

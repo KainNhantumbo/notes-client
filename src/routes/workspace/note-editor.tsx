@@ -3,7 +3,7 @@ import Editor from '@/components/editor/Editor';
 import CustomTools from '@/components/editor/CustomTools';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
-import Properties from '@/components/modals/Properties';
+import Properties from '@/components/Properties';
 import { useEffect } from 'react';
 import actions from '@/shared/actions';
 

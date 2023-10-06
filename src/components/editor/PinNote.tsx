@@ -1,6 +1,7 @@
 import { useAppContext } from '@/context/AppContext';
 import actions from '@/shared/actions';
 import { DrawingPinFilledIcon, DrawingPinIcon } from '@radix-ui/react-icons';
+import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
 import styled, { useTheme } from 'styled-components';
 
 export default function TooglePinNote() {
@@ -26,14 +27,12 @@ export default function TooglePinNote() {
       }>
       {state.currentNote.metadata.pinned ? (
         <>
-          <DrawingPinFilledIcon
-            style={{ color: `rgb(${primaryShadeColor})` }}
-          />
-          <span>Pinned</span>
+          <RiPushpinFill style={{ color: `rgb(${primaryShadeColor})` }} />
+          <span style={{ color: `rgb(${primaryShadeColor})` }}>Pinned</span>
         </>
       ) : (
         <>
-          <DrawingPinIcon />
+          <RiPushpinLine />
           <span>Pin</span>
         </>
       )}
@@ -54,7 +53,8 @@ const Container = styled.button`
 
   :hover {
     transition: all 200ms ease-in-out;
-    background: rgba(${({ theme }) => theme.primary}, 0.25);
+    color: rgb(${({ theme }) => theme.primary_shade});
+    background: rgb(${({ theme }) => theme.primary}, 0.2);
   }
 
   span {

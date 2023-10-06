@@ -3,12 +3,14 @@ import {
   StyledCornerButton,
   StyledInputs
 } from '@/styles/defaults';
-import { useState } from 'react';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
 import { RiCloseLine, RiImage2Line } from 'react-icons/ri';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m as motion } from 'framer-motion';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import debounce from 'lodash.debounce';
+import { isWebUri } from 'valid-url';
 
 type ImageAttributes = { src: string; alt: string; title: string };
 
@@ -27,10 +29,19 @@ export default function Image() {
   const handleImageData = () => {
     if (!imageData.src) return setErrorMessages('Please insert image url');
 
-    // TODO:  validate url string here
+    const isValidUrl = isWebUri(imageData.src);
+    if (!isValidUrl)
+      return setErrorMessages('Please provide a valid image source url');
+
     editor.chain().focus().setImage(imageData).run();
     setImageData({ title: '', src: '', alt: '' });
   };
+
+  useEffect(() => {
+    debounce(() => {
+      setErrorMessages('');
+    }, 3000);
+  }, [errorMessages]);
 
   return (
     <ImageContainer>

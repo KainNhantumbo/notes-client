@@ -5,6 +5,8 @@ import {
   RiFileCopy2Line,
   RiHashtag,
   RiHistoryLine,
+  RiPushpinFill,
+  RiPushpinLine,
   RiTimerFlashLine,
   RiTimerLine
 } from 'react-icons/ri';
@@ -17,6 +19,7 @@ import { _properties as Container } from '@/styles/modules/_properties';
 
 export default function Properties() {
   const { state, dispatch } = useAppContext();
+
 
   return (
     <AnimatePresence>
@@ -52,6 +55,20 @@ export default function Properties() {
                 <span>Properties</span>
               </h2>
               <section>
+                <div className='item-container priority-container'>
+                  {state.currentNote.metadata.pinned ? (
+                    <h3>
+                      <RiPushpinFill />
+                      <span>Pinned note</span>
+                    </h3>
+                  ) : (
+                    <h3>
+                      <RiPushpinLine />
+                      <span>Unpined note</span>
+                    </h3>
+                  )}
+                </div>
+
                 <div className='item-container priority-container'>
                   <h3>
                     <RiTimerFlashLine />

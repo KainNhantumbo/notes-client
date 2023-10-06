@@ -103,12 +103,12 @@ const DropdownContainer = styled.section`
   padding: 5px;
   border-radius: 8px;
   backdrop-filter: blur(10px);
+  font-family: 'Inter';
+  font-size: 0.85rem;
   background: rgba(${({ theme }) => theme.foreground}, 0.85);
   border: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
   user-select: none;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
 
   div {
     display: flex;
@@ -117,6 +117,7 @@ const DropdownContainer = styled.section`
     gap: 3px;
     padding: 5px 8px;
     border-radius: 5px;
+    position: relative;
 
     svg {
       width: 18px;
@@ -125,6 +126,16 @@ const DropdownContainer = styled.section`
 
     :hover {
       background: rgba(${({ theme }) => theme.primary}, 0.25);
+      ::after {
+        position: absolute;
+        content: '';
+        width: 3.5px;
+        height: 24px;
+        border-radius: 5px;
+        background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
+        top: calc(50% - 12px);
+        left: -7px;
+      }
     }
   }
 `;
@@ -138,11 +149,12 @@ const DropdownTriggerButton = styled.button`
   align-items: center;
   gap: 3px;
   border-radius: 8px;
-  padding: 5px 8px;
+  padding: 6px 8px;
 
   :hover {
     transition: all 200ms ease-in-out;
-    background: rgba(${({ theme }) => theme.primary}, 0.25);
+    color: rgb(${({ theme }) => theme.primary_shade});
+    background: rgb(${({ theme }) => theme.primary}, 0.2);
   }
 
   span {

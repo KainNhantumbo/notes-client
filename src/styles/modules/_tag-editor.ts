@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import {
-  BaseButton,
-  BaseButtonOutline,
-  StyledCornerButton,
-  StyledInputs
-} from '../defaults';
+import { BaseButton, StyledCornerButton, StyledInputs } from '../defaults';
 
 export const _tagEditor = styled.section`
   position: fixed;
@@ -59,7 +54,7 @@ export const _tagEditor = styled.section`
 
       .counter {
         align-self: end;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -68,9 +63,10 @@ export const _tagEditor = styled.section`
       position: absolute;
       top: 16px;
       right: 12px;
-
+      border: none;
       :hover {
         color: rgb(${({ theme }) => theme.error});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
       }
     }
 
