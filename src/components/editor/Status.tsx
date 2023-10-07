@@ -1,38 +1,12 @@
-import {
-  CaretDownIcon,
-  CheckCircledIcon,
-  CrossCircledIcon,
-  FrameIcon,
-  ReloadIcon,
-  UpdateIcon
-} from '@radix-ui/react-icons';
+import { useState } from 'react';
 import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { CaretDownIcon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
+import { statusDataMapping } from '@/shared/data';
 
 type TStatus = 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
-
-export const statusDataMapping = [
-  { value: 'none', data: { label: 'None', color: '#ccc', icon: FrameIcon } },
-  {
-    value: 'active',
-    data: { label: 'Active', color: '#0091FF', icon: UpdateIcon }
-  },
-  {
-    value: 'pending',
-    data: { label: 'Pending', color: '#F76808', icon: CrossCircledIcon }
-  },
-  {
-    value: 'reviewing',
-    data: { label: 'Reviewing', color: '#7E808A', icon: ReloadIcon }
-  },
-  {
-    value: 'completed',
-    data: { label: 'Completed', color: '#3D9A50', icon: CheckCircledIcon }
-  }
-];
 
 export default function Status() {
   const { state, dispatch } = useAppContext();

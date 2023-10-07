@@ -5,15 +5,9 @@ import { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { RiTimerFlashLine } from 'react-icons/ri';
+import { prioritiesDataMapping } from '@/shared/data';
 
 type TPriority = 'none' | 'low' | 'medium' | 'high';
-
-const prioritiesDataMapping = [
-  { value: 'none', data: { label: 'None', color: '#ccc' } },
-  { value: 'low', data: { label: 'Low', color: '#3D9A50' } },
-  { value: 'medium', data: { label: 'Medium', color: '#FBE32D' } },
-  { value: 'high', data: { label: 'High', color: '#C62A2F' } }
-];
 
 export default function Priority() {
   const { state, dispatch } = useAppContext();

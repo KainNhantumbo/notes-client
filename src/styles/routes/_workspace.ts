@@ -129,15 +129,15 @@ export const _workspace = styled.main`
         padding-left: 12px;
         color: rgb(${({ theme }) => theme.primary_shade});
       }
-      
+
       .notes-container {
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 8px;
         padding: 0 12px;
-    
+
         .note-container {
           width: 100%;
           display: flex;
@@ -150,21 +150,21 @@ export const _workspace = styled.main`
           cursor: pointer;
           position: relative;
           line-height: 1.2rem;
-          gap: 12px;
+          gap: 16px;
           background: rgb(${({ theme }) => theme.foreground});
           border-radius: 12px;
-    
+
           :hover {
             background: rgba(${({ theme }) => theme.primary}, 0.2);
           }
-    
+
           .top-side {
             width: 100%;
             display: flex;
             align-items: center;
             flex-flow: row wrap;
             gap: 12px;
-    
+
             h3 {
               width: 100%;
               display: flex;
@@ -184,20 +184,20 @@ export const _workspace = styled.main`
                 overflow: hidden;
                 text-overflow: ellipsis;
               }
-    
+
               @media screen and (max-width: 410px) {
                 max-width: 320px;
               }
             }
           }
-    
+
           .tags-container {
             width: 100%;
             display: flex;
             flex-flow: row wrap;
             align-items: center;
             gap: 3px;
-    
+
             p {
               width: fit-content;
               padding: 3px 5px;
@@ -208,28 +208,52 @@ export const _workspace = styled.main`
               border-radius: 12px;
             }
           }
-    
+
           .bottom-side {
             width: 100%;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
             align-items: center;
             gap: 12px;
-    
+
+            .priority-container,
+            .status-container {
+              user-select: none;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 3px;
+              border-radius: 12px;
+              padding: 6px 8px;
+              color: rgb(${({ theme }) => theme.primary_shade});
+              background: rgb(${({ theme }) => theme.primary}, 0.2);
+
+              span {
+                font-weight: 500;
+                font-size: 0.9rem;
+              }
+
+              .dot-icon {
+                width: 18px;
+                height: 18px;
+                transform: scale(50px);
+              }
+            }
+
             h5 {
               justify-self: flex-end;
               white-space: nowrap;
+              font-weight: 500;
             }
           }
-    
+
           button {
             ${StyledCornerButton}
             border: none;
             position: absolute;
             top: 10px;
             right: 10px;
-    
+
             :hover {
               background: rgba(${({ theme }) => theme.font}, 0.1);
             }
@@ -238,7 +262,6 @@ export const _workspace = styled.main`
       }
     }
   }
-
 
   .empty-notes-container {
     width: 100%;

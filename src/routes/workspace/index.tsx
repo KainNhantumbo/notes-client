@@ -1,3 +1,9 @@
+import {
+  RiDraftLine,
+  RiPushpinFill,
+  RiPushpinLine,
+  RiTimerFlashLine
+} from 'react-icons/ri';
 import React, { useEffect, JSX, useMemo } from 'react';
 import actions from '@/shared/actions';
 import { formatDate } from '@/libs/utils';
@@ -5,7 +11,11 @@ import { m as motion } from 'framer-motion';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
 import { Layout } from '@/components/Layout';
-import { app_metadata } from '@/shared/data';
+import {
+  app_metadata,
+  prioritiesDataMapping,
+  statusDataMapping
+} from '@/shared/data';
 import SortQuery from '@/components/SortQuery';
 import { Note, Settings, User } from '@/types';
 import { useQueries } from '@tanstack/react-query';
@@ -14,30 +24,12 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 import { HamburgerMenuIcon, MixIcon, PlusIcon } from '@radix-ui/react-icons';
-import { RiDraftLine, RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
 
 function Workspace(): JSX.Element {
   const theme = useTheme();
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
-  const noteTemplate: Note = {
-    _id: '',
-    title: '',
-    content: {},
-    created_by: '',
-    metadata: {
-      folder_id: '',
-      deleted: false,
-      pinned: false,
-      status: 'none',
-      priority: 'none',
-      tags: []
-    },
-    updatedAt: '',
-    createdAt: ''
-  };
 
   const [notesQuery, settingsQuery, userQuery] = useQueries({
     queries: [
@@ -103,7 +95,10 @@ function Workspace(): JSX.Element {
       });
       dispatch({
         type: actions.CURRENT_NOTE,
-        payload: { ...state, currentNote: { ...noteTemplate, ...data } }
+        payload: {
+          ...state,
+          currentNote: { ...NoteAttributes.getNoteTemplate(), ...data }
+        }
       });
       navigate(`/workspace/note-editor/${data._id}`);
     } catch (error: any) {
@@ -296,6 +291,8 @@ function Workspace(): JSX.Element {
                           ) : null}
 
                           <div className='bottom-side'>
+                            {NoteAttributes.renderPriority(note)}
+                            {NoteAttributes.renderStatus(note)}
                             <h5>{formatDate(note.updatedAt)}</h5>
                           </div>
                         </div>
@@ -351,3 +348,58 @@ function Workspace(): JSX.Element {
 }
 
 export default React.memo(Workspace);
+
+class NoteAttributes {
+  static renderPriority(note: Note): JSX.Element {
+    const [{ data, value }] = prioritiesDataMapping.filter(
+      (attr) => attr.value === note.metadata.priority
+    );
+
+    return (
+      <div className='priority-container'>
+        <RiTimerFlashLine color={data.color} className='dot-icon' />
+        {value === 'none' ? (
+          <span>Normal priority</span>
+        ) : (
+          <span>{data.label} Priority</span>
+        )}
+      </div>
+    );
+  }
+
+  static renderStatus(note: Note): JSX.Element {
+    const [{ data }] = statusDataMapping.filter(
+      (item) => item.value === note.metadata.status
+    );
+
+    return (
+      <div className='status-container'>
+        <data.icon color={data.color} className='dot-icon' />
+        {note.metadata.status === 'none' ? (
+          <span>Normal status</span>
+        ) : (
+          <span>Currently {data.label}</span>
+        )}
+      </div>
+    );
+  }
+
+  static getNoteTemplate(): Note {
+    return {
+      _id: '',
+      title: '',
+      content: {},
+      created_by: '',
+      metadata: {
+        folder_id: '',
+        deleted: false,
+        pinned: false,
+        status: 'none',
+        priority: 'none',
+        tags: []
+      },
+      updatedAt: '',
+      createdAt: ''
+    };
+  }
+}

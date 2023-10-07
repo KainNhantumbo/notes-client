@@ -1,13 +1,18 @@
 import {
+  CheckCircledIcon,
   CheckIcon,
   ColorWheelIcon,
+  CrossCircledIcon,
   DashboardIcon,
+  FrameIcon,
   GearIcon,
   HeartIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
+  ReloadIcon,
+  UpdateIcon
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
-import { EditorTheme, Option } from '@/types';
+import { Option } from '@/types';
 
 export const app_metadata = {
   appName: Package.metadata.name,
@@ -113,4 +118,31 @@ export const colorSchemeOptions = [
   { label: 'Light Theme', value: `{"mode":"manual", "scheme": "light"}` },
   { label: 'Dark Theme', value: `{"mode":"manual", "scheme": "dark"}` },
   { label: 'Automatic', value: `{"mode":"auto", "scheme": "dark"}` }
+];
+
+export const prioritiesDataMapping = [
+  { value: 'none', data: { label: 'None', color: '#ccc' } },
+  { value: 'low', data: { label: 'Low', color: '#3D9A50' } },
+  { value: 'medium', data: { label: 'Medium', color: '#FBE32D' } },
+  { value: 'high', data: { label: 'High', color: '#C62A2F' } }
+];
+
+export const statusDataMapping = [
+  { value: 'none', data: { label: 'None', color: '#ccc', icon: FrameIcon } },
+  {
+    value: 'active',
+    data: { label: 'Active', color: '#0091FF', icon: UpdateIcon }
+  },
+  {
+    value: 'pending',
+    data: { label: 'Pending', color: '#F76808', icon: CrossCircledIcon }
+  },
+  {
+    value: 'reviewing',
+    data: { label: 'Reviewing', color: '#7E808A', icon: ReloadIcon }
+  },
+  {
+    value: 'completed',
+    data: { label: 'Completed', color: '#3D9A50', icon: CheckCircledIcon }
+  }
 ];
