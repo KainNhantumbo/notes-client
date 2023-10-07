@@ -1,29 +1,30 @@
 import {
   RiDraftLine,
+  RiMenuLine,
   RiPushpinFill,
   RiPushpinLine,
   RiTimerFlashLine
 } from 'react-icons/ri';
-import React, { useEffect, JSX, useMemo } from 'react';
+import {
+  app_metadata,
+  prioritiesDataMapping,
+  statusDataMapping
+} from '@/shared/data';
 import actions from '@/shared/actions';
 import { formatDate } from '@/libs/utils';
 import { m as motion } from 'framer-motion';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
 import { Layout } from '@/components/Layout';
-import {
-  app_metadata,
-  prioritiesDataMapping,
-  statusDataMapping
-} from '@/shared/data';
 import SortQuery from '@/components/SortQuery';
 import { Note, Settings, User } from '@/types';
 import { useQueries } from '@tanstack/react-query';
 import { useAppContext } from '@/context/AppContext';
+import React, { useEffect, JSX, useMemo } from 'react';
+import { MixIcon, PlusIcon } from '@radix-ui/react-icons';
+import NavigationDrawer from '@/components/NavigationDrawer';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { _workspace as Container } from '@/styles/routes/_workspace';
-import { HamburgerMenuIcon, MixIcon, PlusIcon } from '@radix-ui/react-icons';
 
 function Workspace(): JSX.Element {
   const theme = useTheme();
@@ -91,7 +92,8 @@ function Workspace(): JSX.Element {
     try {
       const { data } = await useFetchAPI<Note>({
         method: 'post',
-        url: '/api/v1/notes'
+        url: '/api/v1/notes',
+        data: { content: { type: 'doc', content: [] } }
       });
       dispatch({
         type: actions.CURRENT_NOTE,
@@ -210,7 +212,7 @@ function Workspace(): JSX.Element {
                   }
                 })
               }>
-              <HamburgerMenuIcon />
+              <RiMenuLine />
             </motion.button>
 
             <input

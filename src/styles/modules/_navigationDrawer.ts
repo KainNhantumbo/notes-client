@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { BaseButtonOutline, StyledCornerButton } from '../defaults';
 
 export const _navigationDrawer = styled.section`
   top: 0;
@@ -15,13 +14,13 @@ export const _navigationDrawer = styled.section`
     display: flex;
     flex-direction: column;
     height: 100%;
-    border-radius: 0 20px 20px 0;
+    border-radius: 0 12px 12px 0;
     backdrop-filter: blur(8px);
     background: rgba(${({ theme }) => theme.foreground}, 0.8);
     border-right: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
   }
 
-  .header-container {
+  .header {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -71,7 +70,7 @@ export const _navigationDrawer = styled.section`
     flex-direction: column;
     justify-content: space-between;
 
-    .top-container {
+    .top-navigator {
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -107,7 +106,7 @@ export const _navigationDrawer = styled.section`
       }
     }
 
-    .bottom-container {
+    .bottom-navigator {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -121,11 +120,32 @@ export const _navigationDrawer = styled.section`
       background: rgb(${({ theme }) => theme.foreground});
 
       button {
-        ${BaseButtonOutline}
+        all: unset;
+        position: relative;
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 8px;
+        gap: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 10px 8px;
+        font-weight: 500;
+
+        :hover {
+          background: rgb(${({ theme }) => theme.primary}, 0.2);
+          color: rgb(${({ theme }) => theme.primary_shade});
+
+          :before {
+            position: absolute;
+            content: '';
+            width: 3.5px;
+            height: 24px;
+            border-radius: 5px;
+            background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
+            top: calc(50% - 12px);
+            left: -8px;
+          }
+        }
       }
     }
   }

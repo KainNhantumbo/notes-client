@@ -23,7 +23,7 @@ export default function Tags() {
     if (isTagAdded) return undefined;
     const data = { id: nanoid(8), color: '#E47131', value: tag.value };
 
-    if (state.currentNote.metadata.tags.length <= 10) {
+    if (state.currentNote.metadata.tags.length <= 7) {
       dispatch({
         type: actions.CURRENT_NOTE,
         payload: {
@@ -98,7 +98,7 @@ export default function Tags() {
           value={tag.value}
           style={{
             display:
-              state.currentNote.metadata.tags.length <= 10 ? 'block' : 'none'
+              state.currentNote.metadata.tags.length <= 7 ? 'block' : 'none'
           }}
           placeholder={'Add tags...'}
           title='Type here to add new tags...'

@@ -4,7 +4,6 @@ import {
   ColorWheelIcon,
   CrossCircledIcon,
   DashboardIcon,
-  FrameIcon,
   GearIcon,
   HeartIcon,
   MagnifyingGlassIcon,
@@ -13,6 +12,7 @@ import {
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
 import { Option } from '@/types';
+import { RiBubbleChartLine } from 'react-icons/ri';
 
 export const app_metadata = {
   appName: Package.metadata.name,
@@ -123,12 +123,15 @@ export const colorSchemeOptions = [
 export const prioritiesDataMapping = [
   { value: 'none', data: { label: 'None', color: '#ccc' } },
   { value: 'low', data: { label: 'Low', color: '#3D9A50' } },
-  { value: 'medium', data: { label: 'Medium', color: '#FBE32D' } },
+  { value: 'medium', data: { label: 'Medium', color: '#FBBD08' } },
   { value: 'high', data: { label: 'High', color: '#C62A2F' } }
 ];
 
 export const statusDataMapping = [
-  { value: 'none', data: { label: 'None', color: '#ccc', icon: FrameIcon } },
+  {
+    value: 'none',
+    data: { label: 'None', color: '#ccc', icon: RiBubbleChartLine }
+  },
   {
     value: 'active',
     data: { label: 'Active', color: '#0091FF', icon: UpdateIcon }

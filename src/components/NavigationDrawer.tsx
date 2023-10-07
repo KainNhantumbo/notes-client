@@ -1,34 +1,46 @@
 import {
-  ArchiveIcon,
-  BookmarkIcon,
-  CornersIcon,
-  DotsHorizontalIcon,
-  DrawingPinIcon,
-  ExitIcon,
-  GearIcon,
-  HamburgerMenuIcon,
-  PlusIcon,
-  TrashIcon
-} from '@radix-ui/react-icons';
-import { useNavigate, NavigateFunction } from 'react-router-dom';
-import { useState } from 'react';
-import actions from '../shared/actions';
-import { useAppContext } from '../context/AppContext';
-import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
-import { m as motion, AnimatePresence } from 'framer-motion';
-import logo from '@/assets/logo-192x192.png';
-import { app_metadata } from '@/shared/data';
-import {
+  RiAddLine,
+  RiDeleteBin6Fill,
+  RiDeleteBin6Line,
   RiDeleteBin7Line,
+  RiDraftLine,
+  RiFolder3Line,
+  RiHashtag,
   RiHome2Line,
   RiLogoutBoxRLine,
-  RiPushpinLine
+  RiMenuLine,
+  RiSettings6Line
 } from 'react-icons/ri';
+import actions from '../shared/actions';
+import { app_metadata } from '@/shared/data';
+import logo from '@/assets/logo-192x192.png';
+import { useMemo, useState, memo, JSX } from 'react';
+import { useAppContext } from '../context/AppContext';
+import { useNavigate, NavigateFunction } from 'react-router-dom';
+import { m as motion, AnimatePresence } from 'framer-motion';
+import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
+import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
 
-export function NavigationDrawer() {
+function NavigationDrawer(): JSX.Element {
   const navigate: NavigateFunction = useNavigate();
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [openCollapsible, setOpenCollapsible] = useState<boolean>(false);
+
+  const groupedTags = useMemo(() => {
+    const tags = state.notes
+      .filter((note) => !note.metadata.deleted)
+      .map((note) => note.metadata.tags)
+      .reduce((acc, current) => {
+        const group = acc.concat(current);
+        return group;
+      }, []);
+    return tags;
+  }, [state.notes]);
+
+  const deletedNotes = useMemo(() => {
+    const data = state.notes.filter((note) => note.metadata.deleted);
+    return data;
+  }, [state.notes]);
 
   const handleLogout = (): void => {
     dispatch({
@@ -84,7 +96,7 @@ export function NavigationDrawer() {
     top: [
       {
         label: 'All Notes',
-        icon: DotsHorizontalIcon,
+        icon: RiDraftLine,
         anchor: '/workspace?tab=all-notes&folder=none',
         classname: 'all-notes',
         execute: () => {
@@ -93,14 +105,18 @@ export function NavigationDrawer() {
       },
       {
         label: 'Folders',
-        icon: ArchiveIcon,
+        icon: RiFolder3Line,
         anchor: `/workspace?tab=folders&folder=none`,
+        statusIndicatorIcons: {
+          active: CaretDownIcon,
+          inactive: CaretUpIcon
+        },
         classname: 'folders',
         execute: () => {
           navigate(`/workspace?tab=folders&folder=none`);
         },
         button: {
-          icon: PlusIcon,
+          icon: RiAddLine,
           handleFunction: () => {}
         },
         children: []
@@ -108,6 +124,10 @@ export function NavigationDrawer() {
       {
         label: 'Trash',
         icon: RiDeleteBin7Line,
+        statusIndicatorIcons: {
+          active: RiDeleteBin6Line,
+          inactive: RiDeleteBin6Fill
+        },
         anchor: `/workspace?tab=trash&folder=trash`,
         classname: 'trash',
         execute: () => {
@@ -117,7 +137,11 @@ export function NavigationDrawer() {
       },
       {
         label: 'Tags',
-        icon: RiPushpinLine,
+        icon: RiHashtag,
+        statusIndicatorIcons: {
+          active: CaretDownIcon,
+          inactive: CaretUpIcon
+        },
         anchor: `/workspace?tab=tags&folder=tags`,
         classname: 'tags',
         execute: () => {
@@ -145,7 +169,7 @@ export function NavigationDrawer() {
       },
       {
         label: 'Settings',
-        icon: GearIcon,
+        icon: RiSettings6Line,
         execute: () => {
           dispatch({
             type: actions.NAVIGATION_DRAWER,
@@ -167,7 +191,7 @@ export function NavigationDrawer() {
             animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
             exit={{ opacity: 0, x: -300, transition: { duration: 0.5 } }}>
             <section
-              className='header-container'
+              className='header'
               onClick={() => {
                 dispatch({
                   type: actions.NAVIGATION_DRAWER,
@@ -184,11 +208,11 @@ export function NavigationDrawer() {
                 />
                 <h3>{app_metadata.appName.toLowerCase()}</h3>
               </div>
-              <HamburgerMenuIcon className='hamburguer-icon' />
+              <RiMenuLine className='hamburguer-icon' />
             </section>
 
             <motion.ul>
-              <section className='top-container'>
+              <div className='top-navigator'>
                 {navigation.top.map((action, index) => (
                   <li
                     key={String(index)}
@@ -216,9 +240,9 @@ export function NavigationDrawer() {
                     ) : null}
                   </li>
                 ))}
-              </section>
+              </div>
 
-              <div className='bottom-container'>
+              <div className='bottom-navigator'>
                 {navigation.bottom.map((action, index) => (
                   <button
                     key={String(index)}
@@ -236,3 +260,5 @@ export function NavigationDrawer() {
     </AnimatePresence>
   );
 }
+
+export default memo(NavigationDrawer);

@@ -18,6 +18,7 @@ import Superscript from '@tiptap/extension-superscript';
 import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
+import CharacterCount from '@tiptap/extension-character-count';
 
 export default function Editor() {
   const { colorScheme } = useThemeContext();
@@ -62,6 +63,7 @@ export default function Editor() {
 export const editorExtensions = [
   TextStyle,
   Typography,
+  CharacterCount.configure({ mode: 'textSize', limit: null }),
   Subscript.configure({
     HTMLAttributes: { class: 'subscript-class' }
   }),
@@ -104,9 +106,6 @@ export const editorExtensions = [
     italic: { HTMLAttributes: { class: 'italics-class' } },
     bulletList: { keepMarks: true, keepAttributes: false },
     orderedList: { keepMarks: true, keepAttributes: false },
-    dropcursor: {
-      width: 3,
-      class: 'dropcursor-class'
-    }
+    dropcursor: { width: 3, class: 'dropcursor-class' }
   })
 ];

@@ -15,7 +15,7 @@ export const _properties = styled.section`
     display: flex;
     flex-direction: column;
     height: 100%;
-    border-radius: 20px 0 0 20px;
+    border-radius: 12px 0 0 12px;
     backdrop-filter: blur(8px);
     background: rgba(${({ theme }) => theme.foreground}, 0.8);
     border-left: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
@@ -34,10 +34,9 @@ export const _properties = styled.section`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
     user-select: none;
+    padding: 8px 12px;
     border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-    padding: 12px 20px;
 
     h3 {
       width: 100%;
@@ -55,9 +54,11 @@ export const _properties = styled.section`
       max-width: 18px;
       height: 18px;
       border-radius: 10px;
+      border: none;
 
       :hover {
         color: rgb(${({ theme }) => theme.error});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
       }
     }
   }
@@ -66,7 +67,7 @@ export const _properties = styled.section`
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding: 8px;
+    padding: 5px 8px;
 
     h2 {
       font-weight: 500;
@@ -110,7 +111,7 @@ export const _properties = styled.section`
         display: flex;
         flex-direction: column;
         align-items: start;
-        gap: 12px;
+        gap: 8px;
 
         .tags-container_content {
           display: flex;
@@ -121,7 +122,7 @@ export const _properties = styled.section`
             width: fit-content;
             padding: 5px;
             border-radius: 12px;
-            font-size: .8rem;
+            font-size: 0.8rem;
             color: rgb(${({ theme }) => theme.white});
           }
         }
@@ -132,7 +133,7 @@ export const _properties = styled.section`
   .actions-container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     padding: 8px;
 
     h2 {
@@ -143,7 +144,7 @@ export const _properties = styled.section`
     section {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 5px;
       font-size: 0.9rem;
       padding-left: 5px;
 

@@ -16,22 +16,41 @@ import moment from 'moment';
 import { Note } from '@/types';
 import TurndownService from 'turndown';
 import actions from '@/shared/actions';
+import { useMemo, memo, JSX } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { editorExtensions } from './editor/Editor';
 import { useAppContext } from '@/context/AppContext';
+import { readingTime } from 'reading-time-estimator';
 import { generateHTML, generateText } from '@tiptap/react';
+import { editorExtensions as extensions } from './editor/Editor';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
-import { useNavigate } from 'react-router-dom';
 
-export default function Properties() {
+type ExportTypes = 'markdown' | 'html' | 'text';
+
+function Properties(): JSX.Element {
   const { state, dispatch, useFetchAPI } = useAppContext();
   const navigate = useNavigate();
 
   // TODO: ADD A PRINTER METHOD
-  const printToPDF = () => {};
+  // const printToPDF = () => {};
 
-  const exportToClipboard = async (type: 'markdown' | 'html' | 'text') => {
+  const metadata = useMemo(() => {
+    const content = generateText(state.currentNote.content, extensions, {
+      blockSeparator: '\n'
+    });
+    const estimatedLines = content.split('\n').length;
+    const measure = readingTime(content, undefined, 'en');
+
+    return {
+      words: measure.words,
+      lines: estimatedLines,
+      time: measure.minutes,
+      characters: content.length
+    };
+  }, [state.currentNote]);
+
+  const exportToClipboard = async (type: ExportTypes) => {
     dispatch({
       type: actions.PROPERTIES_DRAWER,
       payload: { ...state, isPropertiesDrawer: false }
@@ -43,9 +62,9 @@ export default function Properties() {
 
       const clipboard = async (data: string) =>
         navigator.clipboard.writeText(data);
-      const html = generateHTML(state.currentNote.content, editorExtensions);
+      const html = generateHTML(state.currentNote.content, extensions);
       const markdown = new TurndownService({}).turndown(html);
-      const text = generateText(state.currentNote.content, editorExtensions, {
+      const text = generateText(state.currentNote.content, extensions, {
         blockSeparator: '\n'
       });
 
@@ -339,13 +358,41 @@ export default function Properties() {
                 <div className='item-container'>
                   <h3>
                     <RiHistoryLine />
-                    <span>Updated</span>
+                    <span>Modfied:</span>
                   </h3>
                   <span>
                     {moment(state.currentNote.updatedAt || Date.now()).format(
                       'DD-MM-YY, hh:mm:ss'
                     )}
                   </span>
+                </div>
+                <div className='item-container'>
+                  <h3>
+                    <RiHistoryLine />
+                    <span>Word count:</span>
+                  </h3>
+                  <span>{metadata.words}</span>
+                </div>
+                <div className='item-container'>
+                  <h3>
+                    <RiHistoryLine />
+                    <span>Characters count:</span>
+                  </h3>
+                  <span>{metadata.characters}</span>
+                </div>
+                <div className='item-container'>
+                  <h3>
+                    <RiHistoryLine />
+                    <span>Lines:</span>
+                  </h3>
+                  <span>{metadata.lines}</span>
+                </div>
+                <div className='item-container'>
+                  <h3>
+                    <RiHistoryLine />
+                    <span>Read time:</span>
+                  </h3>
+                  <span>{`${metadata.time} minutes`}</span>
                 </div>
               </section>
             </div>
@@ -410,3 +457,5 @@ export default function Properties() {
     </AnimatePresence>
   );
 }
+
+export default memo(Properties);
