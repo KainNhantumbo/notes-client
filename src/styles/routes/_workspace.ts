@@ -3,78 +3,75 @@ import { BaseButton, StyledCornerButton } from '../defaults';
 
 export const _workspace = styled.main`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  background: rgb(${({ theme }) => theme.background});
 
-  .notes-renderer-container {
+  .header-container {
+    position: fixed;
+    top: 0;
+    right: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    gap: 12px;
+    z-index: 20;
     background: rgb(${({ theme }) => theme.background});
+    border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
-    .header-container {
+    h2 {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      font-weight: 500;
+      margin: 0 auto;
+      text-transform: capitalize;
+    }
+
+    .form-container {
       width: 100%;
       max-width: 600px;
-      margin: 0 auto;
       display: flex;
-      flex-direction: column;
-      padding: 20px;
-      gap: 12px;
-      z-index: 200;
+      flex-direction: row;
+      align-items: center;
+      gap: 3px;
+      padding: 5px 8px;
+      background: rgb(${({ theme }) => theme.foreground});
+      border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
+      border-radius: 8px;
+      margin: 0 auto;
       position: relative;
 
-      h2 {
-        font-size: 1.2rem;
-        line-height: 1.6rem;
-        font-weight: 500;
-        margin: 0 auto;
-        text-transform: capitalize;
+      button {
+        ${StyledCornerButton}
+        padding: 0;
+        border: none;
       }
 
-      .form-container {
+      input {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 3px;
-        padding: 5px 8px;
-        background: rgb(${({ theme }) => theme.foreground});
-        border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
-        border-radius: 8px;
+        height: fit-content;
+        border: none;
+        padding: 5px;
+        line-height: 1.2rem;
+        font-weight: 400;
+        outline: none;
+        background: none;
+        color: rgb(${({ theme }) => theme.font});
 
-        button {
-          ${StyledCornerButton}
-          padding: 0;
-          border: none;
-        }
-
-        input {
-          width: 100%;
-          height: fit-content;
-          border: none;
-          padding: 5px;
-          line-height: 1.2rem;
-          font-weight: 400;
-          outline: none;
-          background: none;
-          color: rgb(${({ theme }) => theme.font});
-
-          ::placeholder {
-            color: rgba(${({ theme }) => theme.font}, 0.8);
-            font-size: 0.9rem;
-          }
+        ::placeholder {
+          color: rgba(${({ theme }) => theme.font}, 0.8);
+          font-size: 0.9rem;
         }
       }
 
       .compose-button {
         ${BaseButton}
-        z-index: 200;
+        z-index: 2000;
         position: absolute;
-        right: -4vw;
-        bottom: -78vh;
+        right: -20px;
+        bottom: -82vh;
         background: rgba(${({ theme }) => theme.primary}, 0.15);
         backdrop-filter: blur(10px);
         display: flex;
@@ -97,233 +94,190 @@ export const _workspace = styled.main`
         }
 
         @media screen and (max-width: 660px) {
+          right: 5px;
         }
       }
     }
+  }
 
-    .header-hr {
-      all: unset;
-      border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-      margin: 2px 0;
-      border-radius: 3px;
-    }
+  .wrapper-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    padding-top: 130px;
+    padding-bottom: 12px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    max-width: 780px;
+    align-self: center;
+    margin: 0 auto;
+  }
 
-    .wrapper-container {
+  .notes-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 12px;
+
+    .note-container {
       width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr;
-      justify-items: center;
-      max-width: 780px;
-      align-self: center;
-      margin: 0 auto;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 8px;
+      font-size: 0.9rem;
+      user-select: none;
+      cursor: pointer;
+      position: relative;
+      line-height: 1.2rem;
+      gap: 12px;
+      background: rgb(${({ theme }) => theme.foreground});
+      border-radius: 12px;
 
-    .notes-list-container {
-      width: 100%;
-      height: 100%;
-      max-height: 83vh;
-      display: flex !important;
-      flex-direction: column !important;
+      :hover {
+        background: rgba(${({ theme }) => theme.primary}, 0.2);
+      }
 
-      .note-container {
+      .top-side {
         width: 100%;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
         align-items: center;
-        padding: 7px 8px;
-        font-size: 0.9rem;
-        user-select: none;
-        cursor: pointer;
-        position: relative;
-        border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
-        line-height: 1.2rem;
+        flex-flow: row wrap;
         gap: 12px;
-        background: rgb(${({ theme }) => theme.foreground});
 
-        :hover {
-          background: rgba(${({ theme }) => theme.primary}, 0.2);
-        }
-
-        .top-side {
+        h3 {
           width: 100%;
           display: flex;
+          flex-direction: row;
           align-items: center;
-          flex-flow: row wrap;
-          gap: 12px;
-
-          h3 {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 5px;
-            font-weight: 500;
-            svg {
-              width: 18px;
-              height: 18px;
-              color: rgb(${({ theme }) => theme.secondary});
-            }
+          gap: 5px;
+          font-weight: 500;
+          max-width: 380px;
+          svg {
+            width: 18px;
+            height: 18px;
+            color: rgb(${({ theme }) => theme.secondary});
           }
-
-          p,
           span {
             width: 100%;
-            max-width: 380px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
           }
-        }
 
-        .bottom-side {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          gap: 12px;
-
-          .tags-container {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 3px;
-
-            p {
-              width: fit-content;
-              padding: 3px 5px;
-              user-select: none;
-              font-size: 0.8rem;
-              font-weight: 500;
-              color: rgb(${({ theme }) => theme.white});
-              border-radius: 12px;
-            }
-          }
-
-          h5 {
-            justify-self: flex-end;
-            white-space: nowrap;
-          }
-        }
-
-        button {
-          ${StyledCornerButton}
-          border: none;
-          position: absolute;
-          top: 10px;
-          right: 10px;
-
-          :hover {
-            background: rgba(${({ theme }) => theme.font}, 0.1);
+          @media screen and (max-width: 410px) {
+            max-width: 320px;
           }
         }
       }
 
-      overflow: hidden;
-      --scrollbar-size: 3px;
-      .ScrollAreaViewport {
+      .tags-container {
         width: 100%;
-        height: 100%;
-        border-radius: inherit;
-      }
-      .ScrollAreaScrollbar {
         display: flex;
-        user-select: none;
-        touch-action: none;
-        padding: 2px;
-        background: transparent;
-        transition: background 160ms ease-out;
-      }
-      .ScrollAreaScrollbar:hover {
-        background: rgba(${({ theme }) => theme.font}, 0.05);
-      }
-      .ScrollAreaScrollbar[data-orientation='vertical'] {
-        width: 8px;
-      }
-      .ScrollAreaThumb {
-        flex: 1;
-        background: rgba(${({ theme }) => theme.font}, 0.3);
-        border-radius: 8px;
-        position: relative;
-      }
-      .ScrollAreaThumb::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
-        min-width: 4px;
-        min-height: 4px;
-      }
-      .ScrollAreaCorner {
-        background: rgba(${({ theme }) => theme.font}, 0.1);
-      }
-    }
+        flex-flow: row wrap;
+        align-items: center;
+        gap: 3px;
 
-    .empty-notes-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: calc(20% - 1px) 20px;
-      gap: 20px;
-      align-items: center;
-
-      h3 {
-        font-size: 1.2rem;
-        font-weight: 500;
-      }
-
-      p {
-        text-align: center;
-        line-height: 1.6rem;
-        font-size: 0.95rem;
-
-        i {
-          color: rgb(${({ theme }) => theme.primary_shade});
+        p {
+          width: fit-content;
+          padding: 3px 5px;
+          user-select: none;
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: rgb(${({ theme }) => theme.white});
+          border-radius: 12px;
         }
       }
 
-      svg {
-        width: 60px;
-        height: 60px;
-        color: rgb(${({ theme }) => theme.primary});
+      .bottom-side {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+
+        h5 {
+          justify-self: flex-end;
+          white-space: nowrap;
+        }
       }
-    }
-
-    .loading-indicator {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: rgb(${({ theme }) => theme.primary_shade});
-      padding: calc(20% - 1px) 12px;
-    }
-
-    .error-container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      color: rgb(${({ theme }) => theme.error});
-      font-weight: 500;
-      font-size: 0.95rem;
-      line-height: 1.6rem;
-      padding: calc(20% - 1px) 12px;
 
       button {
-        ${BaseButton}
+        ${StyledCornerButton}
+        border: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        :hover {
+          background: rgba(${({ theme }) => theme.font}, 0.1);
+        }
       }
+    }
+  }
+
+  .empty-notes-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: calc(20% - 1px) 20px;
+    gap: 20px;
+    align-items: center;
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    p {
+      text-align: center;
+      line-height: 1.6rem;
+      font-size: 0.95rem;
+
+      i {
+        color: rgb(${({ theme }) => theme.primary_shade});
+      }
+    }
+
+    svg {
+      width: 60px;
+      height: 60px;
+      color: rgb(${({ theme }) => theme.primary});
+    }
+  }
+
+  .loading-indicator {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: rgb(${({ theme }) => theme.primary_shade});
+    padding: calc(20% - 1px) 12px;
+  }
+
+  .error-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: rgb(${({ theme }) => theme.error});
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.6rem;
+    padding: calc(20% - 1px) 12px;
+
+    button {
+      ${BaseButton}
     }
   }
 `;

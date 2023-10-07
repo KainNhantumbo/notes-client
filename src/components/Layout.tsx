@@ -1,7 +1,7 @@
-import { Header } from './Header';
-import { Footer } from './Footer';
+import Header from './Header';
+import Footer from './Footer';
 import Toast from './modals/Toast';
-import { Cookies } from './modals/Cookies';
+import Cookies from './modals/Cookies';
 import { PromptModal } from './modals/Prompt';
 import type { HeadProps } from '../types';
 import { ReactNode, useEffect } from 'react';
@@ -25,7 +25,7 @@ export function Layout({
   const { state } = useAppContext();
   const navigate: NavigateFunction = useNavigate();
   const location = useLocation();
-  
+
   useEffect((): (() => void) => {
     const debounceTimer = setTimeout(() => {
       if (location.pathname.includes('workspace') && !state.auth.id) {

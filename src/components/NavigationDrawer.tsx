@@ -18,7 +18,12 @@ import { _navigationDrawer as Container } from '@/styles/modules/_navigationDraw
 import { m as motion, AnimatePresence } from 'framer-motion';
 import logo from '@/assets/logo-192x192.png';
 import { app_metadata } from '@/shared/data';
-import * as Collapsible from '@radix-ui/react-collapsible';
+import {
+  RiDeleteBin7Line,
+  RiHome2Line,
+  RiLogoutBoxRLine,
+  RiPushpinLine
+} from 'react-icons/ri';
 
 export function NavigationDrawer() {
   const navigate: NavigateFunction = useNavigate();
@@ -102,7 +107,7 @@ export function NavigationDrawer() {
       },
       {
         label: 'Trash',
-        icon: TrashIcon,
+        icon: RiDeleteBin7Line,
         anchor: `/workspace?tab=trash&folder=trash`,
         classname: 'trash',
         execute: () => {
@@ -111,18 +116,8 @@ export function NavigationDrawer() {
         children: []
       },
       {
-        label: 'Bookmarks',
-        icon: BookmarkIcon,
-        anchor: `/workspace?tab=bookmarks&folder=bookmarks`,
-        classname: 'bookmarks',
-        execute: () => {
-          navigate(`/workspace?tab=bookmarks&folder=bookmarks`);
-        },
-        children: []
-      },
-      {
         label: 'Tags',
-        icon: DrawingPinIcon,
+        icon: RiPushpinLine,
         anchor: `/workspace?tab=tags&folder=tags`,
         classname: 'tags',
         execute: () => {
@@ -134,12 +129,12 @@ export function NavigationDrawer() {
     bottom: [
       {
         label: 'Logout',
-        icon: ExitIcon,
+        icon: RiLogoutBoxRLine,
         execute: handleLogout
       },
       {
-        label: 'Go Home',
-        icon: CornersIcon,
+        label: 'Home',
+        icon: RiHome2Line,
         execute: () => {
           dispatch({
             type: actions.NAVIGATION_DRAWER,
@@ -149,7 +144,7 @@ export function NavigationDrawer() {
         }
       },
       {
-        label: 'Open Settings',
+        label: 'Settings',
         icon: GearIcon,
         execute: () => {
           dispatch({
@@ -193,10 +188,7 @@ export function NavigationDrawer() {
             </section>
 
             <motion.ul>
-              <Collapsible.Root
-                open={openCollapsible}
-                onOpenChange={setOpenCollapsible}
-                className='top-container'>
+              <section className='top-container'>
                 {navigation.top.map((action, index) => (
                   <li
                     key={String(index)}
@@ -208,23 +200,23 @@ export function NavigationDrawer() {
                         ? 'active-element'
                         : ''
                     }`}>
-                    <Collapsible.Trigger asChild className='item-container'>
+                    <button className='item-container'>
                       <h3>
                         <action.icon />
                         <span>{action.label}</span>
                       </h3>
-                    </Collapsible.Trigger>
+                    </button>
 
                     {action.children ? (
-                      <Collapsible.Content className='children-container'>
+                      <section className='children-container'>
                         {action.children.map((child, index) => (
                           <p key={String(index)}>dsfijfiosdjfois</p>
                         ))}
-                      </Collapsible.Content>
+                      </section>
                     ) : null}
                   </li>
                 ))}
-              </Collapsible.Root>
+              </section>
 
               <div className='bottom-container'>
                 {navigation.bottom.map((action, index) => (

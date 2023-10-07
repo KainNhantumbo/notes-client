@@ -2,30 +2,28 @@ import {
   FileTextIcon,
   HamburgerMenuIcon,
   MixIcon,
-  PlusIcon,
-  TrashIcon
+  PlusIcon
 } from '@radix-ui/react-icons';
-import { Note, Settings, User } from '@/types';
-import { useEffect } from 'react';
+import React, { useEffect, JSX } from 'react';
 import actions from '@/shared/actions';
-import { Layout } from '@/components/Layout';
-import { m as motion } from 'framer-motion';
 import { formatDate } from '@/libs/utils';
+import { m as motion } from 'framer-motion';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
-import { useQueries } from '@tanstack/react-query';
-import { NavigationDrawer } from '@/components/NavigationDrawer';
+import { Layout } from '@/components/Layout';
 import { app_metadata } from '@/shared/data';
+import { Note, Settings, User } from '@/types';
+import { useQueries } from '@tanstack/react-query';
 import { useAppContext } from '@/context/AppContext';
-import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 import SortQuery from '@/components/SortQuery';
-import NoteActionsDropdown from '@/components/NoteActionsDropdown';
+import { RiDraftLine } from 'react-icons/ri';
 
-export default function Workspace() {
-  const { state, dispatch, useFetchAPI } = useAppContext();
+function Workspace(): JSX.Element {
   const theme = useTheme();
+  const { state, dispatch, useFetchAPI } = useAppContext();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -62,7 +60,11 @@ export default function Workspace() {
         method: 'get',
         url: '/api/v1/users'
       });
-      return data;
+      dispatch({
+        type: actions.USER,
+        payload: { ...state, user: { ...state.user, ...data } }
+      });
+      return data
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
     }
@@ -74,7 +76,11 @@ export default function Workspace() {
         method: 'get',
         url: '/api/v1/settings'
       });
-      return data;
+      dispatch({
+        type: actions.SETTINGS,
+        payload: { ...state, settings: { ...state.settings, ...data } }
+      });
+      return data
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
     }
@@ -136,13 +142,13 @@ export default function Workspace() {
 
   useEffect(() => {
     if (settingsQuery.isError || userQuery.isError) {
-      return dispatch({
+      dispatch({
         type: actions.TOAST,
         payload: {
           ...state,
           toast: {
             ...state.toast,
-            title: 'Initial Data Sync Error',
+            title: 'Data Sync Error',
             message: 'Failed to fetch your settings and user account data.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -151,20 +157,6 @@ export default function Workspace() {
               userQuery.refetch({ queryKey: ['query-user'] });
             }
           }
-        }
-      });
-    }
-
-    if (userQuery.data && settingsQuery.data) {
-      dispatch({
-        type: actions.USER,
-        payload: { ...state, user: { ...state.user, ...userQuery.data } }
-      });
-      dispatch({
-        type: actions.SETTINGS,
-        payload: {
-          ...state,
-          settings: { ...state.settings, ...settingsQuery.data }
         }
       });
     }
@@ -179,7 +171,7 @@ export default function Workspace() {
     }
   }, [data]);
 
-  useEffect((): (() => void) | void => {
+  useEffect(() => {
     if (state.auth.token) {
       const timer = setTimeout(() => {
         refetch({ queryKey: ['query-notes'] });
@@ -197,52 +189,50 @@ export default function Workspace() {
       <Container>
         <NavigationDrawer />
 
-        <section className='notes-renderer-container'>
-          <section className='header-container'>
-            <h2>
-              <span>
-                {searchParams.get('tab')?.split('-').join(' ') ?? 'Workspace'}
-              </span>
-            </h2>
+        <section className='header-container'>
+          <h2>
+            <span>
+              {searchParams.get('tab')?.split('-')?.join(' ') ?? 'Workspace'}
+            </span>
+          </h2>
 
-            <div className='form-container'>
-              <motion.button
-                title='Toggle navigation drawer'
-                placeholder='Toggle navigation drawer'
-                aria-placeholder='Toggle navigation drawer'
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 1 }}
-                onClick={() =>
-                  dispatch({
-                    type: actions.NAVIGATION_DRAWER,
-                    payload: {
-                      ...state,
-                      isNavigationDrawer: !state.isNavigationDrawer
-                    }
-                  })
-                }>
-                <HamburgerMenuIcon />
-              </motion.button>
+          <div className='form-container'>
+            <motion.button
+              title='Toggle navigation drawer'
+              placeholder='Toggle navigation drawer'
+              aria-placeholder='Toggle navigation drawer'
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 1 }}
+              onClick={() =>
+                dispatch({
+                  type: actions.NAVIGATION_DRAWER,
+                  payload: {
+                    ...state,
+                    isNavigationDrawer: !state.isNavigationDrawer
+                  }
+                })
+              }>
+              <HamburgerMenuIcon />
+            </motion.button>
 
-              <input
-                type='search'
-                name='search'
-                placeholder='Search in notes'
-                title='Search in notes'
-                aria-placeholder='Search in notes'
-                value={state.query.search}
-                onChange={(e) =>
-                  dispatch({
-                    type: actions.QUERY_NOTES,
-                    payload: {
-                      ...state,
-                      query: { ...state.query, search: e.target.value }
-                    }
-                  })
-                }
-              />
-              <SortQuery />
-            </div>
+            <input
+              type='search'
+              name='search'
+              placeholder='Search in notes'
+              title='Search in notes'
+              aria-placeholder='Search in notes'
+              value={state.query.search}
+              onChange={(e) =>
+                dispatch({
+                  type: actions.QUERY_NOTES,
+                  payload: {
+                    ...state,
+                    query: { ...state.query, search: e.target.value }
+                  }
+                })
+              }
+            />
+            <SortQuery />
 
             {!isError && !isLoading ? (
               <motion.button
@@ -256,121 +246,92 @@ export default function Workspace() {
                 <PlusIcon />
               </motion.button>
             ) : null}
-          </section>
-
-          <hr className='header-hr' />
-
-          {state.notes.length > 0 && !isLoading && !isError ? (
-            <div className='wrapper-container'>
-              <ScrollArea.Root className='notes-list-container'>
-                <ScrollArea.Viewport className='ScrollAreaViewport'>
-                  {state.notes
-                    .filter((note) => !note.metadata.deleted)
-                    .map((note) => (
-                      <div
-                        key={note._id}
-                        className={`note-container`}
-                        onClick={(e: any) => {
-                          const isTarget =
-                            e.target.classList.contains('action-panel');
-                          if (!isTarget) handleEditNote(note);
-                        }}>
-                        <div className='top-side'>
-                          <h3>
-                            <FileTextIcon />
-                            <span>
-                              {note.title ? note.title : '[Untitled]'}
-                            </span>
-                          </h3>
-                        </div>
-
-                        <div className='bottom-side'>
-                          {note.metadata.tags.length > 0 ? (
-                            <div className='tags-container'>
-                              {note.metadata.tags.map((tag) => (
-                                <p
-                                  key={tag.id}
-                                  style={{ backgroundColor: tag.color }}>
-                                  {tag.value}
-                                </p>
-                              ))}
-                            </div>
-                          ) : null}
-                          <h5>{formatDate(note.updatedAt)}</h5>
-                        </div>
-
-                        <NoteActionsDropdown
-                          items={[
-                            {
-                              label: 'Pi',
-                              icon: TrashIcon,
-                              handler: () => {}
-                            },
-                            {
-                              label: 'Move to Trash',
-                              icon: TrashIcon,
-                              handler: () => {}
-                            }
-                          ]}
-                        />
-                      </div>
-                    ))}
-                </ScrollArea.Viewport>
-                <ScrollArea.Scrollbar
-                  className='ScrollAreaScrollbar'
-                  orientation='vertical'>
-                  <ScrollArea.Thumb className='ScrollAreaThumb' />
-                </ScrollArea.Scrollbar>
-                <ScrollArea.Scrollbar
-                  className='ScrollAreaScrollbar'
-                  orientation='horizontal'>
-                  <ScrollArea.Thumb className='ScrollAreaThumb' />
-                </ScrollArea.Scrollbar>
-                <ScrollArea.Corner className='ScrollAreaCorner' />
-              </ScrollArea.Root>
-            </div>
-          ) : null}
-
-          {!isLoading && isError ? (
-            <section className='error-container'>
-              <h3>
-                {(error as any)?.response?.data?.message ||
-                  (error as any)?.code ||
-                  'An error occurred while fetching data'}
-              </h3>
-              <button onClick={() => refetch({ queryKey: ['query-notes'] })}>
-                <span>Try again</span>
-              </button>
-            </section>
-          ) : null}
-
-          {state.notes.length < 1 && !isError && !isLoading ? (
-            <section className='empty-notes-container'>
-              <MixIcon />
-              <h3>
-                <span>No notes</span>
-              </h3>
-              <p>
-                Press <i>Compose</i> button to start writing notes
-              </p>
-            </section>
-          ) : null}
-
-          {isLoading && !isError ? (
-            <div className='loading-indicator'>
-              <MoonLoader
-                size={30}
-                color={`rgb(${theme.primary_shade})`}
-                aria-placeholder='Loading your notes...'
-                cssOverride={{
-                  display: 'block'
-                }}
-              />
-              <h3>Loading your notes...</h3>
-            </div>
-          ) : null}
+          </div>
         </section>
+
+        {state.notes.length > 0 && !isLoading && !isError ? (
+          <div className='wrapper-container'>
+            <section className='notes-container'>
+              {state.notes
+                .filter((note) => !note.metadata.deleted)
+                .map((note) => (
+                  <div
+                    key={note._id}
+                    className={`note-container`}
+                    onClick={(e: any) => {
+                      const isTarget =
+                        e.target.classList.contains('action-panel');
+                      if (!isTarget) handleEditNote(note);
+                    }}>
+                    <div className='top-side'>
+                      <h3>
+                        <RiDraftLine />
+                        <span>{note.title ? note.title : '[Untitled]'}</span>
+                      </h3>
+                    </div>
+
+                    {note.metadata.tags?.length > 0 ? (
+                      <div className='tags-container'>
+                        {note.metadata.tags.map((tag) => (
+                          <p
+                            key={tag.id}
+                            style={{ backgroundColor: tag.color }}>
+                            {tag.value}
+                          </p>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <div className='bottom-side'>
+                      <h5>{formatDate(note.updatedAt)}</h5>
+                    </div>
+                  </div>
+                ))}
+            </section>
+          </div>
+        ) : null}
+
+        {!isLoading && isError ? (
+          <section className='error-container'>
+            <h3>
+              {(error as any)?.response?.data?.message ||
+                (error as any)?.code ||
+                'An error occurred while fetching data'}
+            </h3>
+            <button onClick={() => refetch({ queryKey: ['query-notes'] })}>
+              <span>Try again</span>
+            </button>
+          </section>
+        ) : null}
+
+        {state.notes.length < 1 && !isError && !isLoading ? (
+          <section className='empty-notes-container'>
+            <MixIcon />
+            <h3>
+              <span>No notes</span>
+            </h3>
+            <p>
+              Press <i>Compose</i> button to start writing notes
+            </p>
+          </section>
+        ) : null}
+
+        {isLoading && !isError ? (
+          <div className='loading-indicator'>
+            <MoonLoader
+              size={30}
+              color={`rgb(${theme.primary_shade})`}
+              aria-placeholder='Loading your notes...'
+              cssOverride={{
+                display: 'block'
+              }}
+            />
+            <h3>Loading your notes...</h3>
+          </div>
+        ) : null}
       </Container>
     </Layout>
   );
 }
+
+export default React.memo(Workspace);

@@ -1,21 +1,16 @@
-import {
-  CaretSortIcon,
-  CircleIcon,
-  RadiobuttonIcon
-} from '@radix-ui/react-icons';
 import { useState } from 'react';
 import Dropdown from 'rc-dropdown';
-import styled, { useTheme } from 'styled-components';
+import classnames from 'classnames';
 import actions from '@/shared/actions';
+import styled from 'styled-components';
 import { m as motion } from 'framer-motion';
 import { sortOptions } from '@/shared/data';
-import { useAppContext } from '@/context/AppContext';
 import { RiSortDesc } from 'react-icons/ri';
-import classnames from 'classnames';
+import { useAppContext } from '@/context/AppContext';
+import { CircleIcon, RadiobuttonIcon } from '@radix-ui/react-icons';
 
 export default function SortQuery() {
   const { state, dispatch } = useAppContext();
-  const { primary_shade: primaryShadeColor } = useTheme();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const renderDropdownItems = (): JSX.Element => {

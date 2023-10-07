@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   useContext,
   ReactNode,
@@ -24,7 +24,7 @@ const context = createContext<Context>({
   changeColorScheme: () => {}
 });
 
-export function ThemeContext({ children }: Props) {
+ function ThemeContext({ children }: Props) {
   const { state, dispatch } = useAppContext();
   const [currentTheme, setCurrentTheme] = useState<Theme>(light_default);
   const [colorScheme, setColorScheme] = useState<ColorScheme>({
@@ -102,8 +102,8 @@ export function ThemeContext({ children }: Props) {
           ...state.settings,
           theme: {
             ...state.settings.theme,
-            ui_theme: colorScheme.scheme,
-            automatic_ui_theme: colorScheme.mode === 'auto' ? true : false
+            scheme: colorScheme.scheme,
+            is_automatic: colorScheme.mode === 'auto' ? true : false
           }
         }
       }
@@ -119,6 +119,8 @@ export function ThemeContext({ children }: Props) {
     </ThemeProvider>
   );
 }
+
+export default React.memo(ThemeContext)
 
 export function useThemeContext() {
   return useContext(context);

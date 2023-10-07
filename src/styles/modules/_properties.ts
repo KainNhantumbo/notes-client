@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { BaseButtonOutline, StyledCornerButton } from '../defaults';
+import { StyledCornerButton } from '../defaults';
 
 export const _properties = styled.section`
+  position: fixed;
   top: 0;
   right: 0;
   width: 100%;
-  z-index: 11000;
-  position: fixed;
+  max-width: 260px;
   height: 100vh;
   user-select: none;
-  max-width: 260px;
+  z-index: 2000;
 
   .main-container {
     display: flex;

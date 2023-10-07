@@ -17,7 +17,7 @@ import { m as motion, AnimatePresence } from 'framer-motion';
 import { _header as Container } from '../styles/modules/_header';
 import { app_metadata, navigationAnchors } from '../shared/data';
 
-export function Header() {
+export default function Header() {
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const location: Location = useLocation();

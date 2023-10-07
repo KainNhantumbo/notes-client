@@ -204,11 +204,11 @@ export default function Properties() {
             });
 
             try {
-              const { _id } = state.currentNote;
+              const { _id, metadata } = state.currentNote;
               await useFetchAPI<Note>({
                 method: 'patch',
                 url: `/api/v1/notes/${_id}`,
-                data: { metadata: { deleted: true } }
+                data: { metadata: { ...metadata, deleted: true } }
               });
               navigate('/workspace', { replace: true });
             } catch (error: any) {

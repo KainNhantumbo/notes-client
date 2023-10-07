@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { app_metadata } from '@/shared/data';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _cookies as Container } from '@/styles/modules/_cookies';
 
-export function Cookies() {
+export default function Cookies() {
   const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
 
   // controls the life cicle of the component
@@ -13,10 +13,11 @@ export function Cookies() {
     localStorage.setItem('cookies_warning', JSON.stringify('false'));
   };
 
-  useEffect((): void => {
+  useEffect(() => {
     const advisorState = JSON.parse(
       localStorage.getItem('cookies_warning') || 'false'
     );
+
     if (!advisorState) {
       localStorage.setItem('cookies_warning', JSON.stringify('true'));
       setIsPopupActive(() => true);
@@ -37,12 +38,12 @@ export function Cookies() {
             animate={{
               opacity: 1,
               y: 0,
-              transition: { duration: 1.2 },
+              transition: { duration: 1.2 }
             }}
             exit={{
               opacity: 0,
               y: 500,
-              transition: { duration: 1.2 },
+              transition: { duration: 1.2 }
             }}
             className='advisor'>
             <div>

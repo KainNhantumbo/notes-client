@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   ReactNode,
   useContext,
@@ -9,7 +9,8 @@ import {
 import { Auth, Note } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/shared/actions';
-import { ThemeContext } from './ThemeContext';
+import ThemeContext from './ThemeContext';
+import compareObjects from 'lodash.isequal';
 import { initialState, reducer } from '../libs/reducer';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { TAction, TState } from '@/types/reducer';
@@ -38,7 +39,7 @@ const context = createContext<Context>({
   syncCurrentNote: async () => {}
 });
 
-export function AppContext({ children }: Props) {
+function AppContext({ children }: Props) {
   const navigate: NavigateFunction = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -98,6 +99,11 @@ export function AppContext({ children }: Props) {
     const { _id, created_by, ...currentNote } = state.currentNote;
     if (!state.auth.token || !_id) return undefined;
 
+    const originalNote = state.notes.find((note) => note._id === _id);
+    const isNotModified = compareObjects(state.currentNote, originalNote);
+
+    if (isNotModified) return undefined;
+
     try {
       const { data } = await useFetchAPI<Note>({
         method: 'patch',
@@ -147,13 +153,12 @@ export function AppContext({ children }: Props) {
   }, []);
 
   useEffect(() => {
-    if (state.settings.editor.auto_save.enabled) {
-      const debounceTimer = setTimeout(() => {
-        syncCurrentNote();
-      }, state.settings.editor.auto_save.delay);
+    if (!state.settings.editor.auto_save.enabled) return;
 
-      return () => clearTimeout(debounceTimer);
-    }
+    const debounceTimer = setTimeout(() => {
+      syncCurrentNote();
+    }, state.settings.editor.auto_save.delay);
+    return () => clearTimeout(debounceTimer);
   }, [state.currentNote]);
 
   useEffect((): (() => void) => {
@@ -177,6 +182,8 @@ export function AppContext({ children }: Props) {
     </context.Provider>
   );
 }
+
+export default React.memo(AppContext);
 
 export function useAppContext() {
   return useContext<Context>(context);

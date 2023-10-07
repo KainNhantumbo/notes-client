@@ -5,11 +5,11 @@ export const _prompt = styled.section`
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background: rgba(${({ theme }) => theme.background}, 0.2);
-  backdrop-filter: blur(2px);
-  z-index: 11000;
   top: 0;
   left: 0;
+  z-index: 12000;
+  background: rgba(${({ theme }) => theme.background}, 0.2);
+  backdrop-filter: blur(2px);
   display: grid;
   place-content: center;
   user-select: none;

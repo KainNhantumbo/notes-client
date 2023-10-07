@@ -12,7 +12,7 @@ export const _cookies = styled.div`
     position: absolute;
     left: 20px;
     bottom: 20px;
-    border-radius: 5px;
+    border-radius: 12px;
     padding: 20px;
     max-width: 350px;
     display: flex;
@@ -24,8 +24,8 @@ export const _cookies = styled.div`
     backdrop-filter: blur(10px);
     background: rgba(${({ theme }) => theme.foreground}, 0.8);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
-    border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-    
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
+
     ::before {
       content: '';
       position: absolute;

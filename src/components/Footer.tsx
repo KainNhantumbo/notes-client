@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { app_metadata, footerAnchors } from '../shared/data';
 import { _footer as Container } from '../styles/modules/_footer';
 
-export function Footer() {
+export default function Footer() {
   return (
     <Container>
       <nav>

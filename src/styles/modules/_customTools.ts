@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButtonOutline, StyledCornerButton } from '../defaults';
+import { StyledCornerButton } from '../defaults';
 
 export const _customTools = styled.section`
   width: 100%;
