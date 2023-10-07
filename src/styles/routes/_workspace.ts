@@ -107,118 +107,138 @@ export const _workspace = styled.main`
     padding-top: 130px;
     padding-bottom: 12px;
     grid-template-columns: 1fr;
-    justify-items: center;
     max-width: 780px;
     align-self: center;
     margin: 0 auto;
-  }
+    gap: 12px;
 
-  .notes-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 0 12px;
-
-    .note-container {
-      width: 100%;
+    .groups-container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 7px 8px;
-      font-size: 0.9rem;
-      user-select: none;
-      cursor: pointer;
-      position: relative;
-      line-height: 1.2rem;
-      gap: 12px;
-      background: rgb(${({ theme }) => theme.foreground});
-      border-radius: 12px;
+      justify-content: flex-start;
+      gap: 8px;
 
-      :hover {
-        background: rgba(${({ theme }) => theme.primary}, 0.2);
-      }
-
-      .top-side {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        flex-flow: row wrap;
-        gap: 12px;
-
-        h3 {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 5px;
-          font-weight: 500;
-          max-width: 380px;
-          svg {
-            width: 18px;
-            height: 18px;
-            color: rgb(${({ theme }) => theme.secondary});
-          }
-          span {
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-
-          @media screen and (max-width: 410px) {
-            max-width: 320px;
-          }
-        }
-      }
-
-      .tags-container {
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        gap: 3px;
-
-        p {
-          width: fit-content;
-          padding: 3px 5px;
-          user-select: none;
-          font-size: 0.8rem;
-          font-weight: 500;
-          color: rgb(${({ theme }) => theme.white});
-          border-radius: 12px;
-        }
-      }
-
-      .bottom-side {
-        width: 100%;
+      .group-title {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        gap: 5px;
         align-items: center;
-        gap: 12px;
-
-        h5 {
-          justify-self: flex-end;
-          white-space: nowrap;
-        }
+        font-weight: 500;
+        line-height: 1.6rem;
+        text-transform: capitalize;
+        padding-left: 12px;
+        color: rgb(${({ theme }) => theme.primary_shade});
       }
-
-      button {
-        ${StyledCornerButton}
-        border: none;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-
-        :hover {
-          background: rgba(${({ theme }) => theme.font}, 0.1);
+      
+      .notes-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0 12px;
+    
+        .note-container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          padding: 7px 8px;
+          font-size: 0.9rem;
+          user-select: none;
+          cursor: pointer;
+          position: relative;
+          line-height: 1.2rem;
+          gap: 12px;
+          background: rgb(${({ theme }) => theme.foreground});
+          border-radius: 12px;
+    
+          :hover {
+            background: rgba(${({ theme }) => theme.primary}, 0.2);
+          }
+    
+          .top-side {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-flow: row wrap;
+            gap: 12px;
+    
+            h3 {
+              width: 100%;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 5px;
+              font-weight: 500;
+              max-width: 380px;
+              svg {
+                width: 18px;
+                height: 18px;
+                color: rgb(${({ theme }) => theme.secondary});
+              }
+              span {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+    
+              @media screen and (max-width: 410px) {
+                max-width: 320px;
+              }
+            }
+          }
+    
+          .tags-container {
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            gap: 3px;
+    
+            p {
+              width: fit-content;
+              padding: 3px 5px;
+              user-select: none;
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: rgb(${({ theme }) => theme.white});
+              border-radius: 12px;
+            }
+          }
+    
+          .bottom-side {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+    
+            h5 {
+              justify-self: flex-end;
+              white-space: nowrap;
+            }
+          }
+    
+          button {
+            ${StyledCornerButton}
+            border: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+    
+            :hover {
+              background: rgba(${({ theme }) => theme.font}, 0.1);
+            }
+          }
         }
       }
     }
   }
+
 
   .empty-notes-container {
     width: 100%;

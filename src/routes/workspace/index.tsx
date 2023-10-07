@@ -1,10 +1,4 @@
-import {
-  FileTextIcon,
-  HamburgerMenuIcon,
-  MixIcon,
-  PlusIcon
-} from '@radix-ui/react-icons';
-import React, { useEffect, JSX } from 'react';
+import React, { useEffect, JSX, useMemo } from 'react';
 import actions from '@/shared/actions';
 import { formatDate } from '@/libs/utils';
 import { m as motion } from 'framer-motion';
@@ -12,14 +6,15 @@ import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
 import { Layout } from '@/components/Layout';
 import { app_metadata } from '@/shared/data';
+import SortQuery from '@/components/SortQuery';
 import { Note, Settings, User } from '@/types';
 import { useQueries } from '@tanstack/react-query';
 import { useAppContext } from '@/context/AppContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { _workspace as Container } from '@/styles/routes/_workspace';
-import SortQuery from '@/components/SortQuery';
-import { RiDraftLine } from 'react-icons/ri';
+import { HamburgerMenuIcon, MixIcon, PlusIcon } from '@radix-ui/react-icons';
+import { RiDraftLine, RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
 
 function Workspace(): JSX.Element {
   const theme = useTheme();
@@ -64,7 +59,7 @@ function Workspace(): JSX.Element {
         type: actions.USER,
         payload: { ...state, user: { ...state.user, ...data } }
       });
-      return data
+      return data;
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
     }
@@ -80,7 +75,7 @@ function Workspace(): JSX.Element {
         type: actions.SETTINGS,
         payload: { ...state, settings: { ...state.settings, ...data } }
       });
-      return data
+      return data;
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
     }
@@ -180,6 +175,14 @@ function Workspace(): JSX.Element {
     }
   }, [state.query]);
 
+  const groupedNotes = useMemo(() => {
+    const group: { pinned: Note[]; unpinned: Note[] } = {
+      pinned: state.notes.filter((note) => note.metadata.pinned),
+      unpinned: state.notes.filter((note) => !note.metadata.pinned)
+    };
+    return group;
+  }, [state.notes]);
+
   return (
     <Layout
       metadata={{
@@ -251,43 +254,56 @@ function Workspace(): JSX.Element {
 
         {state.notes.length > 0 && !isLoading && !isError ? (
           <div className='wrapper-container'>
-            <section className='notes-container'>
-              {state.notes
-                .filter((note) => !note.metadata.deleted)
-                .map((note) => (
-                  <div
-                    key={note._id}
-                    className={`note-container`}
-                    onClick={(e: any) => {
-                      const isTarget =
-                        e.target.classList.contains('action-panel');
-                      if (!isTarget) handleEditNote(note);
-                    }}>
-                    <div className='top-side'>
-                      <h3>
-                        <RiDraftLine />
-                        <span>{note.title ? note.title : '[Untitled]'}</span>
-                      </h3>
-                    </div>
+            {Object.entries(groupedNotes).map(([key, notes]) =>
+              notes.length > 0 ? (
+                <div key={key} className='groups-container'>
+                  <h3 className='group-title'>
+                    {key === 'pinned' ? <RiPushpinFill /> : <RiPushpinLine />}
+                    <span>{key}</span>
+                  </h3>
 
-                    {note.metadata.tags?.length > 0 ? (
-                      <div className='tags-container'>
-                        {note.metadata.tags.map((tag) => (
-                          <p
-                            key={tag.id}
-                            style={{ backgroundColor: tag.color }}>
-                            {tag.value}
-                          </p>
-                        ))}
-                      </div>
-                    ) : null}
+                  <section className='notes-container'>
+                    {notes
+                      .filter((note) => !note.metadata.deleted)
+                      .map((note) => (
+                        <div
+                          key={note._id}
+                          className={`note-container`}
+                          onClick={(e: any) => {
+                            const isTarget =
+                              e.target.classList.contains('action-panel');
+                            if (!isTarget) handleEditNote(note);
+                          }}>
+                          <div className='top-side'>
+                            <h3>
+                              <RiDraftLine />
+                              <span>
+                                {note.title ? note.title : '[Untitled]'}
+                              </span>
+                            </h3>
+                          </div>
 
-                    <div className='bottom-side'>
-                      <h5>{formatDate(note.updatedAt)}</h5>
-                    </div>
-                  </div>
-                ))}
-            </section>
+                          {note.metadata.tags?.length > 0 ? (
+                            <div className='tags-container'>
+                              {note.metadata.tags.map((tag) => (
+                                <p
+                                  key={tag.id}
+                                  style={{ backgroundColor: tag.color }}>
+                                  {tag.value}
+                                </p>
+                              ))}
+                            </div>
+                          ) : null}
+
+                          <div className='bottom-side'>
+                            <h5>{formatDate(note.updatedAt)}</h5>
+                          </div>
+                        </div>
+                      ))}
+                  </section>
+                </div>
+              ) : null
+            )}
           </div>
         ) : null}
 
