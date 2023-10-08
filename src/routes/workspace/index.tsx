@@ -173,10 +173,20 @@ function Workspace(): JSX.Element {
   }, [state.query]);
 
   const groupedNotes = useMemo(() => {
-    const group: { pinned: Note[]; unpinned: Note[] } = {
-      pinned: state.notes.filter((note) => note.metadata.pinned),
-      unpinned: state.notes.filter((note) => !note.metadata.pinned)
-    };
+    const group = [
+      {
+        type: 'Pinned',
+        data: state.notes.filter(
+          (note) => note.metadata.pinned && !note.metadata.deleted
+        )
+      },
+      {
+        type: 'All Notes',
+        data: state.notes.filter(
+          (note) => !note.metadata.pinned && !note.metadata.deleted
+        )
+      }
+    ];
     return group;
   }, [state.notes]);
 
@@ -251,54 +261,55 @@ function Workspace(): JSX.Element {
 
         {state.notes.length > 0 && !isLoading && !isError ? (
           <div className='wrapper-container'>
-            {Object.entries(groupedNotes).map(([key, notes]) =>
-              notes.length > 0 ? (
-                <div key={key} className='groups-container'>
+            {groupedNotes.map(({ type, data }) =>
+              data.length > 0 ? (
+                <div key={type} className='groups-container'>
                   <h3 className='group-title'>
-                    {key === 'pinned' ? <RiPushpinFill /> : <RiPushpinLine />}
-                    <span>{key}</span>
+                    {type === 'Pinned' ? <RiPushpinFill /> : <RiPushpinLine />}
+                    <span>{type}</span>
                   </h3>
 
                   <section className='notes-container'>
-                    {notes
-                      .filter((note) => !note.metadata.deleted)
-                      .map((note) => (
-                        <div
-                          key={note._id}
-                          className={`note-container`}
-                          onClick={(e: any) => {
-                            const isTarget =
-                              e.target.classList.contains('action-panel');
-                            if (!isTarget) handleEditNote(note);
-                          }}>
-                          <div className='top-side'>
-                            <h3>
-                              <RiDraftLine />
-                              <span>
-                                {note.title ? note.title : '[Untitled]'}
-                              </span>
-                            </h3>
-                          </div>
-
-                          {note.metadata.tags?.length > 0 ? (
-                            <div className='tags-container'>
-                              {note.metadata.tags.map((tag) => (
-                                <p
-                                  key={tag.id}
-                                  style={{ backgroundColor: tag.color }}>
-                                  {tag.value}
-                                </p>
-                              ))}
-                            </div>
-                          ) : null}
-
-                          <div className='bottom-side'>
-                            {NoteAttributes.renderPriority(note)}
-                            {NoteAttributes.renderStatus(note)}
-                            <h5>{formatDate(note.updatedAt)}</h5>
-                          </div>
+                    {data.map((note) => (
+                      <motion.div
+                        key={note._id}
+                        className={`note-container`}
+                        whileHover={{
+                          boxShadow: `0px 12px 25px rgba(${theme.black}, .1)`
+                        }}
+                        onClick={(e: any) => {
+                          const isTarget =
+                            e.target.classList.contains('action-panel');
+                          if (!isTarget) handleEditNote(note);
+                        }}>
+                        <div className='top-side'>
+                          <h3>
+                            <RiDraftLine />
+                            <span>
+                              {note.title ? note.title : '[Untitled]'}
+                            </span>
+                          </h3>
                         </div>
-                      ))}
+
+                        {note.metadata.tags?.length > 0 ? (
+                          <div className='tags-container'>
+                            {note.metadata.tags.map((tag) => (
+                              <p
+                                key={tag.id}
+                                style={{ backgroundColor: tag.color }}>
+                                {tag.value}
+                              </p>
+                            ))}
+                          </div>
+                        ) : null}
+
+                        <div className='bottom-side'>
+                          {NoteAttributes.renderPriority(note)}
+                          {NoteAttributes.renderStatus(note)}
+                          <h5>{formatDate(note.updatedAt)}</h5>
+                        </div>
+                      </motion.div>
+                    ))}
                   </section>
                 </div>
               ) : null

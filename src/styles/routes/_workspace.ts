@@ -154,10 +154,6 @@ export const _workspace = styled.main`
           background: rgb(${({ theme }) => theme.foreground});
           border-radius: 12px;
 
-          :hover {
-            background: rgba(${({ theme }) => theme.primary}, 0.2);
-          }
-
           .top-side {
             width: 100%;
             display: flex;
@@ -172,6 +168,7 @@ export const _workspace = styled.main`
               align-items: center;
               gap: 5px;
               font-weight: 500;
+              font-size: 0.96rem;
               max-width: 380px;
               svg {
                 width: 18px;

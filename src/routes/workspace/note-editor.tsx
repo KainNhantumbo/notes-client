@@ -1,13 +1,13 @@
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
-import React, { useEffect, JSX } from 'react';
+import { useEffect } from 'react';
 import Editor from '@/components/editor/Editor';
 import Properties from '@/components/Properties';
 import CustomTools from '@/components/editor/Tools';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
 
-function NoteEditor(): JSX.Element {
+export default function NoteEditor() {
   const { state, dispatch } = useAppContext();
 
   useEffect(() => {
@@ -36,5 +36,3 @@ function NoteEditor(): JSX.Element {
     </Layout>
   );
 }
-
-export default React.memo(NoteEditor);

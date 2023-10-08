@@ -3,7 +3,6 @@ import { CSSProperties } from 'react';
 import EditorToolbar from './EditorToolbar';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
-import { useThemeContext } from '@/context/ThemeContext';
 import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
@@ -18,10 +17,8 @@ import Superscript from '@tiptap/extension-superscript';
 import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
-import CharacterCount from '@tiptap/extension-character-count';
 
 export default function Editor() {
-  const { colorScheme } = useThemeContext();
   const { state, dispatch } = useAppContext();
 
   const editorStyles: CSSProperties = {
@@ -35,9 +32,7 @@ export default function Editor() {
   };
 
   return (
-    <div
-      style={{ width: '100%', height: 'fit-content' }}
-      data-color-mode={colorScheme.scheme}>
+    <div className='editor-box-container'>
       <EditorProvider
         extensions={editorExtensions}
         content={state.currentNote.content}
@@ -63,7 +58,6 @@ export default function Editor() {
 export const editorExtensions = [
   TextStyle,
   Typography,
-  CharacterCount.configure({ mode: 'textSize', limit: null }),
   Subscript.configure({
     HTMLAttributes: { class: 'subscript-class' }
   }),

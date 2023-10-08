@@ -14,21 +14,21 @@ import {
 } from 'react-icons/ri';
 import moment from 'moment';
 import { Note } from '@/types';
+import { useMemo } from 'react';
 import TurndownService from 'turndown';
 import actions from '@/shared/actions';
-import { useMemo, memo, JSX } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { readingTime } from 'reading-time-estimator';
-import { generateHTML, generateText } from '@tiptap/react';
+import { generateText, generateHTML } from '@tiptap/react';
 import { editorExtensions as extensions } from './editor/Editor';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
 
 type ExportTypes = 'markdown' | 'html' | 'text';
 
-function Properties(): JSX.Element {
+export default function Properties() {
   const { state, dispatch, useFetchAPI } = useAppContext();
   const navigate = useNavigate();
 
@@ -36,18 +36,21 @@ function Properties(): JSX.Element {
   // const printToPDF = () => {};
 
   const metadata = useMemo(() => {
-    const content = generateText(state.currentNote.content, extensions, {
-      blockSeparator: '\n'
-    });
-    const estimatedLines = content.split('\n').length;
-    const measure = readingTime(content, undefined, 'en');
-
-    return {
-      words: measure.words,
-      lines: estimatedLines,
-      time: measure.minutes,
-      characters: content.length
-    };
+    try {
+      const content = generateText(state.currentNote.content, extensions);
+      const estimatedLines = content.split('\n').length;
+      const measure = readingTime(content, undefined, 'en');
+      return {
+        words: measure.words,
+        lines: estimatedLines,
+        time: measure.minutes,
+        characters: content.length
+      };
+    } catch (error) {
+      console.log(error);
+      console.log(state.currentNote.content);
+      return { words: '', lines: '', time: '', characters: 0 };
+    }
   }, [state.currentNote]);
 
   const exportToClipboard = async (type: ExportTypes) => {
@@ -457,5 +460,3 @@ function Properties(): JSX.Element {
     </AnimatePresence>
   );
 }
-
-export default memo(Properties);

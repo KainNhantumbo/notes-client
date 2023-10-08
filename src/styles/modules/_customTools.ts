@@ -3,6 +3,7 @@ import { StyledCornerButton } from '../defaults';
 
 export const _customTools = styled.section`
   width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 12px;
