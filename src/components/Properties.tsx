@@ -43,13 +43,17 @@ export default function Properties() {
       return {
         words: measure.words,
         lines: estimatedLines,
-        time: measure.minutes,
+        time: `${measure.minutes} minutes`,
         characters: content.length
       };
     } catch (error) {
       console.log(error);
-      console.log(state.currentNote.content);
-      return { words: '', lines: '', time: '', characters: 0 };
+      return {
+        words: 'unknown',
+        lines: 'unknown',
+        time: 'unknown',
+        characters: 'unknown'
+      };
     }
   }, [state.currentNote]);
 
@@ -395,7 +399,7 @@ export default function Properties() {
                     <RiHistoryLine />
                     <span>Read time:</span>
                   </h3>
-                  <span>{`${metadata.time} minutes`}</span>
+                  <span>{metadata.time}</span>
                 </div>
               </section>
             </div>
