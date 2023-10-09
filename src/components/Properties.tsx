@@ -284,15 +284,11 @@ export default function Properties() {
 
               <motion.button
                 whileTap={{ scale: 0.8 }}
-                title='Close'
                 className='box-btn_close'
                 onClick={() =>
                   dispatch({
                     type: actions.PROPERTIES_DRAWER,
-                    payload: {
-                      ...state,
-                      isPropertiesDrawer: false
-                    }
+                    payload: { ...state, isPropertiesDrawer: false }
                   })
                 }>
                 <Cross2Icon />

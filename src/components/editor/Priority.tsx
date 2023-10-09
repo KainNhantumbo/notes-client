@@ -68,7 +68,11 @@ export default function Priority() {
           <span>{data.label} Priority</span>
         )}
         <CaretDownIcon />
-        <Tooltip className='tooltip-class' id='set-priority' />
+        <Tooltip
+          classNameArrow='tooltip-border-class'
+          className='tooltip-class'
+          id='set-priority'
+        />
       </DropdownTriggerButton>
     </Dropdown>
   );

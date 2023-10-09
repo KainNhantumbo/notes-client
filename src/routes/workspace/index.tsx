@@ -1,6 +1,8 @@
 import {
+  RiApps2Line,
   RiDraftLine,
   RiMenuLine,
+  RiMoreFill,
   RiPushpinFill,
   RiPushpinLine,
   RiTimerFlashLine
@@ -257,7 +259,7 @@ function Workspace(): JSX.Element {
               </motion.button>
             ) : null}
           </div>
-        </section>
+        </section> 
 
         {state.notes.length > 0 && !isLoading && !isError ? (
           <div className='wrapper-container'>
@@ -265,15 +267,22 @@ function Workspace(): JSX.Element {
               data.length > 0 ? (
                 <div key={type} className='groups-container'>
                   <h3 className='group-title'>
-                    {type === 'Pinned' ? <RiPushpinFill /> : <RiPushpinLine />}
+                    {type === 'Pinned' ? <RiPushpinFill /> : <RiApps2Line />}
                     <span>{type}</span>
                   </h3>
 
                   <section className='notes-container'>
-                    {data.map((note) => (
+                    {data.map((note, index) => (
                       <motion.div
                         key={note._id}
                         className={`note-container`}
+                        initial={{ scale: 0, opacity: 0, y: 50 }}
+                        animate={{
+                          scale: 1,
+                          opacity: 1,
+                          y: 0,
+                          transition: { delay: index * 0.2 }
+                        }}
                         whileHover={{
                           boxShadow: `0px 12px 25px rgba(${theme.black}, .1)`
                         }}
@@ -284,7 +293,7 @@ function Workspace(): JSX.Element {
                         }}>
                         <div className='top-side'>
                           <h3>
-                            <RiDraftLine />
+                            <RiMoreFill />
                             <span>
                               {note.title ? note.title : '[Untitled]'}
                             </span>

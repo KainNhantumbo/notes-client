@@ -54,7 +54,11 @@ export default function Image() {
         onClick={() => setIsEditorVisible(true)}
         className={editor.isActive('image') ? 'is-active' : ''}>
         <RiImage2Line />
-        <Tooltip className='tooltip-class' id='image' />
+        <Tooltip
+          classNameArrow='tooltip-border-class'
+          className='tooltip-class'
+          id='image'
+        />
       </button>
 
       <AnimatePresence>

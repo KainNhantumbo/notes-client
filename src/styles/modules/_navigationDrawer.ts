@@ -71,38 +71,61 @@ export const _navigationDrawer = styled.section`
     justify-content: space-between;
 
     .top-navigator {
+      width: 100%;
       display: flex;
       flex-direction: column;
       width: 100%;
+      padding: 8px 12px;
+      gap: 12px;
 
-      .element {
+      .navigation-item {
         width: 100%;
         position: relative;
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
 
-        :hover {
-          background: rgba(${({ theme }) => theme.font}, 0.1);
-        }
-
-        .item-container {
-          padding: 3px 20px;
+        .navigation-item-title {
+          width: 100%;
           display: flex;
           flex-direction: row;
           align-items: center;
-          gap: 8px;
-          font-size: 0.9rem;
-          line-height: 1.6rem;
+          gap: 5px;
         }
 
         :hover {
-          cursor: pointer;
+          background: rgba(${({ theme }) => theme.primary}, 0.5);
         }
       }
 
-      .active-element {
-        background: rgb(${({ theme }) => theme.background_shade});
-        :hover {
-          background: rgb(${({ theme }) => theme.background_shade});
+      .navigation-item-active {
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
+        color: rgb(${({ theme }) => theme.primary_shade});
+
+        :before {
+          position: absolute;
+          content: '';
+          width: 3.5px;
+          height: 24px;
+          border-radius: 5px;
+          background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
+          top: calc(50% - 12px);
+          left: -8px;
         }
+      }
+
+      .navigation-item-button {
+        padding: 3px 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        line-height: 1.6rem;
+        cursor: pointer;
       }
     }
 

@@ -55,7 +55,11 @@ export default function CustomTools() {
               });
             }}>
             <RiMenuLine />
-            <Tooltip className='tooltip-class' id='properties-drawer' />
+            <Tooltip
+              classNameArrow='tooltip-border-class'
+              className='tooltip-class'
+              id='properties-drawer'
+            />
           </motion.button>
         </div>
       </div>

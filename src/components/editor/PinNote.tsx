@@ -40,7 +40,11 @@ export default function TooglePinNote() {
           <span>Pin</span>
         </>
       )}
-      <Tooltip className='tooltip-class' id='pin-note' />
+      <Tooltip
+        classNameArrow='tooltip-border-class'
+        className='tooltip-class'
+        id='pin-note'
+      />
     </Container>
   );
 }

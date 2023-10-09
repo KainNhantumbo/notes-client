@@ -1,9 +1,11 @@
 import {
   RiAddLine,
+  RiApps2Line,
+  RiArrowDropDownLine,
+  RiArrowDropUpLine,
   RiDeleteBin6Fill,
   RiDeleteBin6Line,
   RiDeleteBin7Line,
-  RiDraftLine,
   RiFolder3Line,
   RiHashtag,
   RiHome2Line,
@@ -11,19 +13,40 @@ import {
   RiMenuLine,
   RiSettings6Line
 } from 'react-icons/ri';
+import { IconType } from 'react-icons';
+import classnames from 'classnames';
 import actions from '../shared/actions';
 import { app_metadata } from '@/shared/data';
 import logo from '@/assets/logo-192x192.png';
 import { useMemo, useState, memo, JSX } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { useNavigate, NavigateFunction } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
 
+type Navigation = {
+  top: Array<{
+    label: string;
+    icon: IconType;
+    anchor: string;
+    classname: string;
+    children?: Array<any>;
+    execute: () => void;
+    statusIndicatorIcons?: { active: IconType; inactive: IconType };
+    button?: { icon: IconType; handler: () => void };
+  }>;
+  bottom: Array<{
+    label: string;
+    icon: IconType;
+    execute: () => void;
+  }>;
+};
+
 function NavigationDrawer(): JSX.Element {
-  const navigate: NavigateFunction = useNavigate();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { state, dispatch, useFetchAPI } = useAppContext();
+  const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
   const [openCollapsible, setOpenCollapsible] = useState<boolean>(false);
 
   const groupedTags = useMemo(() => {
@@ -92,13 +115,13 @@ function NavigationDrawer(): JSX.Element {
     });
   };
 
-  const navigation = {
+  const navigation: Navigation = {
     top: [
       {
         label: 'All Notes',
-        icon: RiDraftLine,
+        icon: RiApps2Line,
         anchor: '/workspace?tab=all-notes&folder=none',
-        classname: 'all-notes',
+        classname: 'all-notes-class',
         execute: () => {
           navigate('/workspace?tab=all-notes&folder=none');
         }
@@ -106,30 +129,27 @@ function NavigationDrawer(): JSX.Element {
       {
         label: 'Folders',
         icon: RiFolder3Line,
+        classname: 'folders-class',
         anchor: `/workspace?tab=folders&folder=none`,
         statusIndicatorIcons: {
-          active: CaretDownIcon,
-          inactive: CaretUpIcon
+          active: RiArrowDropDownLine,
+          inactive: RiArrowDropUpLine
         },
-        classname: 'folders',
         execute: () => {
           navigate(`/workspace?tab=folders&folder=none`);
         },
-        button: {
-          icon: RiAddLine,
-          handleFunction: () => {}
-        },
+        button: { icon: RiAddLine, handler: () => {} },
         children: []
       },
       {
         label: 'Trash',
         icon: RiDeleteBin7Line,
+        classname: 'trash-class',
         statusIndicatorIcons: {
           active: RiDeleteBin6Line,
           inactive: RiDeleteBin6Fill
         },
         anchor: `/workspace?tab=trash&folder=trash`,
-        classname: 'trash',
         execute: () => {
           navigate(`/workspace?tab=trash&folder=trash`);
         },
@@ -138,12 +158,12 @@ function NavigationDrawer(): JSX.Element {
       {
         label: 'Tags',
         icon: RiHashtag,
+        classname: 'tags-class',
         statusIndicatorIcons: {
-          active: CaretDownIcon,
-          inactive: CaretUpIcon
+          active: RiArrowDropDownLine,
+          inactive: RiArrowDropUpLine
         },
         anchor: `/workspace?tab=tags&folder=tags`,
-        classname: 'tags',
         execute: () => {
           navigate(`/workspace?tab=tags&folder=tags`);
         },
@@ -217,19 +237,17 @@ function NavigationDrawer(): JSX.Element {
                   <li
                     key={String(index)}
                     onClick={() => action.execute()}
-                    className={`element ${action.classname} ${
-                      location.search.includes(
+                    className={classnames('navigation-item', action.classname, {
+                      'navigation-item-active': location.search.includes(
                         action.label.toLowerCase().split(' ').join('-')
                       )
-                        ? 'active-element'
-                        : ''
-                    }`}>
-                    <button className='item-container'>
-                      <h3>
-                        <action.icon />
-                        <span>{action.label}</span>
-                      </h3>
-                    </button>
+                    })}>
+                    <h3 className='navigation-item-title'>
+                      <action.icon />
+                      <span>{action.label}</span>
+                    </h3>
+
+                    <button className='navigation-item-button'></button>
 
                     {action.children ? (
                       <section className='children-container'>

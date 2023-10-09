@@ -7,6 +7,23 @@ export const _workspace = styled.main`
   position: relative;
   background: rgb(${({ theme }) => theme.background});
 
+  .tooltip-class {
+    border-radius: 8px;
+    color: rgb(${({ theme }) => theme.white});
+    background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
+    border: 1px solid rgba(${({ theme }) => theme.white}, 0.9);
+    backdrop-filter: blur(20px);
+    font-family: 'Inter';
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .tooltip-border-class {
+    border-right: 1px solid rgba(${({ theme }) => theme.white}, 0.9);
+    border-bottom: 1px solid rgba(${({ theme }) => theme.white}, 0.9);
+  }
+
   .header-container {
     position: fixed;
     top: 0;
@@ -145,6 +162,7 @@ export const _workspace = styled.main`
           justify-content: space-between;
           align-items: center;
           padding: 7px 8px;
+          padding-top: 12px;
           font-size: 0.9rem;
           user-select: none;
           cursor: pointer;

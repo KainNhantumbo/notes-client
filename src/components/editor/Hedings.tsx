@@ -53,7 +53,11 @@ export default function Headings() {
         data-tooltip-content='Insert Heading'
         className={editor.isActive('heading') ? 'is-active' : ''}>
         <RiHeading />
-        <Tooltip className='tooltip-class' id='headings' />
+        <Tooltip
+          classNameArrow='tooltip-border-class'
+          className='tooltip-class'
+          id='headings'
+        />
       </button>
     </Dropdown>
   );

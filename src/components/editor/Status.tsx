@@ -67,7 +67,11 @@ export default function Status() {
           <span>Currently {data.label}</span>
         )}
         <CaretDownIcon />
-        <Tooltip className='tooltip-class' id='set-status' />
+        <Tooltip
+          classNameArrow='tooltip-border-class'
+          className='tooltip-class'
+          id='set-status'
+        />
       </DropdownTriggerButton>
     </Dropdown>
   );
