@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IconType } from '@/types';
 import Dropdown from 'rc-dropdown';
 import styled from 'styled-components';
+import { Tooltip } from 'react-tooltip';
 import { useCurrentEditor } from '@tiptap/react';
 import { RiH1, RiH2, RiH3, RiH4, RiH5, RiH6, RiHeading } from 'react-icons/ri';
 
@@ -30,9 +31,7 @@ export default function Headings() {
         <div
           key={index.toString()}
           onClick={() => toggleHeading(level)}
-          className={
-            editor.isActive('heading', { level }) ? 'is-active' : ''
-          }>
+          className={editor.isActive('heading', { level }) ? 'is-active' : ''}>
           <Icon />
           <span>Heading {String(level)}</span>
         </div>
@@ -50,10 +49,11 @@ export default function Headings() {
       onVisibleChange={(state) => setIsDropdownVisible(state)}
       overlay={renderDropdownItems}>
       <button
-        title={`Set heading`}
-        aria-placeholder={`Set heading`}
+        data-tooltip-id='headings'
+        data-tooltip-content='Insert Heading'
         className={editor.isActive('heading') ? 'is-active' : ''}>
         <RiHeading />
+        <Tooltip className='tooltip-class' id='headings' />
       </button>
     </Dropdown>
   );

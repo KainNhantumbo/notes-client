@@ -4,13 +4,14 @@ import {
   StyledInputs,
   StyledLabels
 } from '@/styles/defaults';
+import { isWebUri } from 'valid-url';
+import { Tooltip } from 'react-tooltip';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
 import { RiCloseLine, RiImage2Line } from 'react-icons/ri';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import { isWebUri } from 'valid-url';
 
 type ImageAttributes = { src: string; alt: string; title: string };
 
@@ -47,12 +48,13 @@ export default function Image() {
   return (
     <>
       <button
-        title='Insert an image'
-        aria-placeholder='Insert an image'
+        data-tooltip-id='image'
+        data-tooltip-content='Insert Image'
         type='button'
         onClick={() => setIsEditorVisible(true)}
         className={editor.isActive('image') ? 'is-active' : ''}>
         <RiImage2Line />
+        <Tooltip className='tooltip-class' id='image' />
       </button>
 
       <AnimatePresence>
