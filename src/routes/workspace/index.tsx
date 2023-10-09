@@ -1,10 +1,8 @@
 import {
   RiApps2Line,
-  RiDraftLine,
   RiMenuLine,
   RiMoreFill,
   RiPushpinFill,
-  RiPushpinLine,
   RiTimerFlashLine
 } from 'react-icons/ri';
 import {
@@ -27,12 +25,16 @@ import { MixIcon, PlusIcon } from '@radix-ui/react-icons';
 import NavigationDrawer from '@/components/NavigationDrawer';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
+import About from '@/components/modals/About';
 
 function Workspace(): JSX.Element {
   const theme = useTheme();
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
+  const isTrashFolder = currentTab === 'trash';
 
   const [notesQuery, settingsQuery, userQuery] = useQueries({
     queries: [
@@ -179,17 +181,30 @@ function Workspace(): JSX.Element {
       {
         type: 'Pinned',
         data: state.notes.filter(
-          (note) => note.metadata.pinned && !note.metadata.deleted
+          (note) =>
+            note.metadata.pinned && note.metadata.deleted === !isTrashFolder
         )
       },
       {
         type: 'All Notes',
         data: state.notes.filter(
-          (note) => !note.metadata.pinned && !note.metadata.deleted
+          (note) =>
+            !note.metadata.pinned && !note.metadata.deleted === !isTrashFolder
         )
       }
     ];
     return group;
+  }, [state.notes, searchParams]);
+
+  const hasNotes = useMemo(() => {
+    return (
+      groupedNotes
+        .map((item) => item.data)
+        .reduce((acc, curr) => {
+          const data = acc.concat(curr);
+          return data;
+        }, []).length > 0
+    );
   }, [state.notes]);
 
   return (
@@ -200,6 +215,7 @@ function Workspace(): JSX.Element {
       }}>
       <Container>
         <NavigationDrawer />
+        <About/>
 
         <section className='header-container'>
           <h2>
@@ -259,9 +275,9 @@ function Workspace(): JSX.Element {
               </motion.button>
             ) : null}
           </div>
-        </section> 
+        </section>
 
-        {state.notes.length > 0 && !isLoading && !isError ? (
+        {hasNotes && !isLoading && !isError ? (
           <div className='wrapper-container'>
             {groupedNotes.map(({ type, data }) =>
               data.length > 0 ? (

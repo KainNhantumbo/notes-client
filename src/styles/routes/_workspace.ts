@@ -171,6 +171,7 @@ export const _workspace = styled.main`
           gap: 16px;
           background: rgb(${({ theme }) => theme.foreground});
           border-radius: 12px;
+          border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
           .top-side {
             width: 100%;

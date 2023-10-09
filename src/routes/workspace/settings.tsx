@@ -82,13 +82,6 @@ export default function Settings() {
         type: actions.USER,
         payload: { ...state, user: { ...state.user, ...response.data } }
       });
-      dispatch({
-        type: actions.PROMPT,
-        payload: {
-          ...state,
-          prompt: { ...state.prompt, status: false }
-        }
-      });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
       dispatch({
@@ -112,6 +105,14 @@ export default function Settings() {
             actionButtonMessage: 'Retry',
             handleFunction: syncUserData
           }
+        }
+      });
+    } finally {
+      dispatch({
+        type: actions.PROMPT,
+        payload: {
+          ...state,
+          prompt: { ...state.prompt, status: false }
         }
       });
     }
@@ -175,16 +176,50 @@ export default function Settings() {
     }
   };
 
+  const handleEmptyTrash = async () => {
+    try {
+      await useFetchAPI({ method: 'delete', url: `/api/v1/notes` });
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Trash Notes',
+            message: 'The trash was cleared successfully!',
+            status: true
+          }
+        }
+      });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message || error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            ...state.toast,
+            title: 'Empty Trash Error',
+            message:
+              error?.response?.data?.message ||
+              'Failed to delete trash notes. Please, try again.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: handleUpdatePassword
+          }
+        }
+      });
+    } finally {
+      dispatch({
+        type: actions.PROMPT,
+        payload: {   ...state, prompt: { ...state.prompt, status: false } }
+      });
+    }
+  };
+
   const handleDeleteAccount = async () => {
     try {
       await useFetchAPI({ method: 'delete', url: '/api/v1/users' });
-      dispatch({
-        type: actions.PROMPT,
-        payload: {
-          ...state,
-          prompt: { ...state.prompt, status: false }
-        }
-      });
 
       dispatch({
         type: actions.AUTH,
@@ -219,6 +254,14 @@ export default function Settings() {
             actionButtonMessage: 'Retry',
             handleFunction: handleUpdatePassword
           }
+        }
+      });
+    } finally {
+      dispatch({
+        type: actions.PROMPT,
+        payload: {
+          ...state,
+          prompt: { ...state.prompt, status: false }
         }
       });
     }
@@ -475,8 +518,6 @@ export default function Settings() {
                       <span>Editor Experience Customization</span>
                     </h3>
 
-                    
-                    
                     <div className='form-element'>
                       <label htmlFor='editor-toolbar'>
                         <RulerSquareIcon />
@@ -513,8 +554,6 @@ export default function Settings() {
                         }}
                       />
                     </div>
-                    
-                    
                   </section>
                 </div>
               </div>
@@ -687,15 +726,56 @@ export default function Settings() {
             </section>
 
             <section className='group-container'>
-              <h2>Delete Account</h2>
+              <h2>Your Account and Data</h2>
               <div className='content-container'>
-                <h3>
-                  <span>
+                <div className='data-container account-data'>
+                  <h3 className='sub-title'>
+                    <DotsHorizontalIcon />
+                    <span>Empty Trash</span>
+                  </h3>
+
+                  <p>Remove at once all notes stored on trash.</p>
+
+                  <motion.button
+                    className='save'
+                    title='Delete Permanently'
+                    aria-label='Delete Permanently'
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => {
+                      dispatch({
+                        type: actions.PROMPT,
+                        payload: {
+                          ...state,
+                          prompt: {
+                            ...state.prompt,
+                            title: 'Delete Permanently',
+                            message:
+                              'Do you really want to permanently delete all notes from the trash? This actions cannot be undone.',
+                            actionButtonMessage: 'Confirm',
+                            status: true,
+                            handleFunction: handleEmptyTrash
+                          }
+                        }
+                      });
+                    }}>
+                    <span>Wipe Trash</span>
+                  </motion.button>
+                </div>
+
+                <hr />
+
+                <div className='data-container account-data'>
+                  <h3 className='sub-title'>
+                    <DotsHorizontalIcon />
+                    <span>Delete account</span>
+                  </h3>
+
+                  <p>
                     This will erase all your data from the server and delete
                     your account, be careful, it can't be undone.
-                  </span>
-                </h3>
-                <div className='data-container delete-account-settings'>
+                  </p>
+
                   <motion.button
                     className='save'
                     title='Delete account'

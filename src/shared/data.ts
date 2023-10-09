@@ -5,6 +5,7 @@ import {
   CrossCircledIcon,
   DashboardIcon,
   GearIcon,
+  GitHubLogoIcon,
   HeartIcon,
   MagnifyingGlassIcon,
   ReloadIcon,
@@ -12,9 +13,14 @@ import {
 } from '@radix-ui/react-icons';
 import Package from '../../package.json';
 import { Option } from '@/types';
-import { RiBubbleChartLine } from 'react-icons/ri';
+import {
+  RiBubbleChartLine,
+  RiMailCheckLine,
+  RiStackLine
+} from 'react-icons/ri';
 
 export const app_metadata = {
+  author: Package.author,
   appName: Package.metadata.name,
   version: Package.version,
   license: Package.license,
@@ -25,7 +31,24 @@ export const app_metadata = {
   description: 'A simple taking notes application to fit your daily needs.',
   copyright: `© ${new Date().getFullYear()} ${Package.metadata.name} | ${
     Package.author.name
-  }`
+  }`,
+  contacts: [
+    {
+      name: 'Github',
+      icon: GitHubLogoIcon,
+      url: Package.author.github
+    },
+    {
+      name: 'Portfolio',
+      icon: RiStackLine,
+      url: Package.author.portfolio
+    },
+    {
+      name: 'E-mail',
+      icon: RiMailCheckLine,
+      url: Package.author.email
+    }
+  ]
 };
 
 export const navigationAnchors = [

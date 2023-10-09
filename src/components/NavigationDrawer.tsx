@@ -9,12 +9,14 @@ import {
   RiFolder3Line,
   RiHashtag,
   RiHome2Line,
+  RiInformationLine,
   RiLogoutBoxRLine,
   RiMenuLine,
   RiSettings6Line
 } from 'react-icons/ri';
 import { IconType } from 'react-icons';
 import classnames from 'classnames';
+import { Collapse } from 'react-collapse';
 import actions from '../shared/actions';
 import { app_metadata } from '@/shared/data';
 import logo from '@/assets/logo-192x192.png';
@@ -30,6 +32,7 @@ type Navigation = {
     icon: IconType;
     anchor: string;
     classname: string;
+    length: number;
     children?: Array<any>;
     execute: () => void;
     statusIndicatorIcons?: { active: IconType; inactive: IconType };
@@ -46,8 +49,12 @@ function NavigationDrawer(): JSX.Element {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { state, dispatch, useFetchAPI } = useAppContext();
+  const [openCollapsible, setOpenCollapsible] = useState({
+    isFolders: false,
+    isTags: false
+  });
+
   const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
-  const [openCollapsible, setOpenCollapsible] = useState<boolean>(false);
 
   const groupedTags = useMemo(() => {
     const tags = state.notes
@@ -58,11 +65,6 @@ function NavigationDrawer(): JSX.Element {
         return group;
       }, []);
     return tags;
-  }, [state.notes]);
-
-  const deletedNotes = useMemo(() => {
-    const data = state.notes.filter((note) => note.metadata.deleted);
-    return data;
   }, [state.notes]);
 
   const handleLogout = (): void => {
@@ -122,6 +124,7 @@ function NavigationDrawer(): JSX.Element {
         icon: RiApps2Line,
         anchor: '/workspace?tab=all-notes&folder=none',
         classname: 'all-notes-class',
+        length: state.notes.filter((note) => !note.metadata.deleted).length,
         execute: () => {
           navigate('/workspace?tab=all-notes&folder=none');
         }
@@ -135,6 +138,7 @@ function NavigationDrawer(): JSX.Element {
           active: RiArrowDropDownLine,
           inactive: RiArrowDropUpLine
         },
+        length: state.folders.length,
         execute: () => {
           navigate(`/workspace?tab=folders&folder=none`);
         },
@@ -145,6 +149,7 @@ function NavigationDrawer(): JSX.Element {
         label: 'Trash',
         icon: RiDeleteBin7Line,
         classname: 'trash-class',
+        length: state.notes.filter((note) => note.metadata.deleted).length,
         statusIndicatorIcons: {
           active: RiDeleteBin6Line,
           inactive: RiDeleteBin6Fill
@@ -163,6 +168,7 @@ function NavigationDrawer(): JSX.Element {
           active: RiArrowDropDownLine,
           inactive: RiArrowDropUpLine
         },
+        length: groupedTags.length,
         anchor: `/workspace?tab=tags&folder=tags`,
         execute: () => {
           navigate(`/workspace?tab=tags&folder=tags`);
@@ -186,6 +192,15 @@ function NavigationDrawer(): JSX.Element {
           });
           navigate('/');
         }
+      },
+      {
+        label: 'About',
+        icon: RiInformationLine,
+        execute: () =>
+          dispatch({
+            type: actions.ABOUT_MODAL,
+            payload: { ...state, isAboutModal: true }
+          })
       },
       {
         label: 'Settings',

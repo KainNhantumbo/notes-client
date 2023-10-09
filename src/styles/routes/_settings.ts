@@ -64,7 +64,7 @@ export const _settings = styled.main`
     gap: 8px;
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 12px;
     background: rgb(${({ theme }) => theme.foreground});
 
     h2 {
@@ -74,6 +74,13 @@ export const _settings = styled.main`
       border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
       padding-bottom: 2px;
       color: rgb(${({ theme }) => theme.secondary_shade});
+    }
+
+    hr {
+      all: unset;
+      border-bottom: 2px solid rgba(${({ theme }) => theme.font}, 0.15);
+      margin: 8px 0;
+      border-radius: 3px;
     }
 
     .sub-title {
@@ -102,6 +109,10 @@ export const _settings = styled.main`
         line-height: 1.6rem;
       }
 
+      p {
+        line-height: 1.6rem;
+      }
+
       .password-settings {
         display: flex;
         flex-direction: column;
@@ -111,42 +122,25 @@ export const _settings = styled.main`
           display: flex;
           flex-direction: column;
           gap: 12px;
-
-          p {
-            line-height: 1.6rem;
-          }
-
-          button {
-            ${BaseButton}
-          }
         }
       }
 
-      .account-settings {
-        button {
-          ${BaseButton}
-        }
-      }
-
-      .delete-account-settings {
-        button {
-          ${BaseButton}
-        }
+      .account-data {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
       }
 
       .data-container {
+        button {
+          ${BaseButton}
+        }
+
         .form-section {
           display: flex;
           flex-direction: column;
           width: 100%;
           gap: 10px;
-
-          hr {
-            all: unset;
-            border-bottom: 2px solid rgba(${({ theme }) => theme.font}, 0.15);
-            margin: 8px 0;
-            border-radius: 3px;
-          }
 
           .form-element {
             display: flex;

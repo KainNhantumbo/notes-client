@@ -4,6 +4,7 @@ import { TAction, TState } from '@/types/reducer';
 const initialState: TState = {
   notes: [],
   folders: [],
+  isAboutModal: false,
   isLogoutModal: false,
   isNavigationDrawer: false,
   isPropertiesDrawer: false,
@@ -74,6 +75,9 @@ function reducer(state: TState, action: TAction): TState {
 
     case actions.LOGOUT_MODAL:
       return { ...state, isLogoutModal: action.payload.isLogoutModal };
+
+    case actions.ABOUT_MODAL:
+      return { ...state, isAboutModal: action.payload.isAboutModal };
 
     case actions.SIGN_IN:
       return { ...state, signIn: action.payload.signIn };

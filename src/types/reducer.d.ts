@@ -13,6 +13,7 @@ import {
 
 export type TState = {
   auth: Auth;
+  isAboutModal: boolean;
   isLogoutModal: boolean;
   isPropertiesDrawer: boolean;
   isNavigationDrawer: boolean;
