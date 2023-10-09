@@ -3,6 +3,7 @@ import { useState } from 'react';
 import TagEditor from './TagEditor';
 import actions from '@/shared/actions';
 import { SubmitEvent, Tag } from '@/types';
+import { Tooltip } from 'react-tooltip';
 import { m as motion } from 'framer-motion';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
@@ -71,42 +72,46 @@ export default function Tags() {
             className='tag'
             style={{ background: tag.color }}>
             <p
-              title='Edit and update tag'
-              aria-placeholder='Edit and update tag'
+              data-tooltip-id='edit-tag'
+              data-tooltip-content='Edit and update tag'
               onClick={() => {
                 setTag(tag);
                 setIsTagEditorVisible(true);
               }}>
               {tag.value}
+              <Tooltip className='tooltip-class' id='edit-tag' />
             </p>
             <button
-              title='Remove tag'
-              aria-placeholder='Remove tag'
+              data-tooltip-id='remove-tag'
+              data-tooltip-content='Remove tag'
               className='remove-tag_button'
               onClick={() => removeTag(tag.id)}>
               <Cross2Icon />
+              <Tooltip className='tooltip-class' id='remove-tag' />
             </button>
           </motion.div>
         ))}
       </section>
       <form onSubmit={(e) => createTag(e)}>
         <input
-          type='text'
-          id={'tags'}
-          name={'tags'}
-          className='tag-input'
-          value={tag.value}
           style={{
             display:
               state.currentNote.metadata.tags.length <= 7 ? 'block' : 'none'
           }}
-          placeholder={'Add tags...'}
-          title='Type here to add new tags...'
+          id='tags'
+          type='text'
+          name='tags'
           maxLength={12}
+          value={tag.value}
+          className='tag-input'
+          placeholder='Add tags...'
+          data-tooltip-id='tag-input'
+          data-tooltip-content='Type here to add new tags...'
           onChange={(e) =>
-            setTag((data) => ({ ...data, value: String(e.target.value) }))
+            setTag((data) => ({ ...data, value: e.target.value }))
           }
         />
+        <Tooltip className='tooltip-class' id='tag-input' />
       </form>
 
       <TagEditor

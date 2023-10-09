@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
 import styled from 'styled-components';
+import { Tooltip } from 'react-tooltip';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { statusDataMapping } from '@/shared/data';
@@ -57,8 +58,8 @@ export default function Status() {
       onVisibleChange={(state) => setIsDropdownVisible(state)}
       overlay={renderDropdownItems}>
       <DropdownTriggerButton
-        title={`Set note status`}
-        aria-placeholder={`Set note status`}>
+        data-tooltip-id={`set-status`}
+        data-tooltip-content={`Set note status`}>
         <data.icon color={data.color} />
         {state.currentNote.metadata.status === 'none' ? (
           <span>Set status</span>
@@ -66,6 +67,7 @@ export default function Status() {
           <span>Currently {data.label}</span>
         )}
         <CaretDownIcon />
+        <Tooltip className='tooltip-class' id='set-status' />
       </DropdownTriggerButton>
     </Dropdown>
   );

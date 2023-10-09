@@ -1,4 +1,5 @@
 import actions from '@/shared/actions';
+import { Tooltip } from 'react-tooltip';
 import { useAppContext } from '@/context/AppContext';
 import styled, { useTheme } from 'styled-components';
 import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
@@ -9,7 +10,10 @@ export default function TooglePinNote() {
 
   return (
     <Container
-      title={state.currentNote.metadata.pinned ? 'Unpin note' : 'Pin note'}
+      data-tooltip-id='pin-note'
+      data-tooltip-content={
+        state.currentNote.metadata.pinned ? 'Unpin note' : 'Pin note'
+      }
       onClick={() =>
         dispatch({
           type: actions.CURRENT_NOTE,
@@ -36,6 +40,7 @@ export default function TooglePinNote() {
           <span>Pin</span>
         </>
       )}
+      <Tooltip className='tooltip-class' id='pin-note' />
     </Container>
   );
 }

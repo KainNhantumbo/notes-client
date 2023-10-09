@@ -3,9 +3,10 @@ import Priority from './Priority';
 import StatusEditor from './Status';
 import TooglePinNote from './PinNote';
 import actions from '@/shared/actions';
-import { useAppContext } from '@/context/AppContext';
 import { m as motion } from 'framer-motion';
 import { RiMenuLine } from 'react-icons/ri';
+import { Tooltip } from 'react-tooltip';
+import { useAppContext } from '@/context/AppContext';
 import { _customTools as Container } from '@/styles/modules/_customTools';
 
 export default function CustomTools() {
@@ -44,9 +45,9 @@ export default function CustomTools() {
         <div className='left-side-container'>
           <motion.button
             whileTap={{ scale: 0.8 }}
+            data-tooltip-id='properties-drawer'
+            data-tooltip-content='Open note properties drawer'
             className='trigger-left-pannel-button'
-            title='Open note properties drawer'
-            aria-placeholder='Open note properties drawer'
             onClick={() => {
               dispatch({
                 type: actions.PROPERTIES_DRAWER,
@@ -54,6 +55,7 @@ export default function CustomTools() {
               });
             }}>
             <RiMenuLine />
+            <Tooltip className='tooltip-class' id='properties-drawer' />
           </motion.button>
         </div>
       </div>

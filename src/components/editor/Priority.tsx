@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import Dropdown from 'rc-dropdown';
 import actions from '@/shared/actions';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { Tooltip } from 'react-tooltip';
 import { useAppContext } from '@/context/AppContext';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { RiTimerFlashLine } from 'react-icons/ri';
@@ -58,8 +59,8 @@ export default function Priority() {
       onVisibleChange={(state) => setIsDropdownVisible(state)}
       overlay={renderDropdownItems}>
       <DropdownTriggerButton
-        title={`Set note priority`}
-        aria-placeholder={`Set note priority`}>
+        data-tooltip-id='set-priority'
+        data-tooltip-content={`Set note priority`}>
         <RiTimerFlashLine color={data.color} className='dot-icon' />
         {state.currentNote.metadata.priority === 'none' ? (
           <span>Set priority</span>
@@ -67,6 +68,7 @@ export default function Priority() {
           <span>{data.label} Priority</span>
         )}
         <CaretDownIcon />
+        <Tooltip className='tooltip-class' id='set-priority' />
       </DropdownTriggerButton>
     </Dropdown>
   );
