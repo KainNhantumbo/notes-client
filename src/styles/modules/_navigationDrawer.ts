@@ -81,73 +81,149 @@ export const _navigationDrawer = styled.section`
 
       .navigation-item {
         width: 100%;
-        position: relative;
-        border-radius: 8px;
-        padding: 12px;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
 
-        :hover {
-          background: rgba(${({ theme }) => theme.primary}, 0.5);
-        }
-
-        .navigation-item-title {
+        .navigation-box-container {
           width: 100%;
+          position: relative;
+          border-radius: 8px;
+          padding: 12px;
           display: flex;
           flex-direction: row;
           align-items: center;
-          gap: 5px;
-          text-transform: capitalize;
+          justify-content: space-between;
+
+          :hover {
+            background: rgba(${({ theme }) => theme.primary}, 0.5);
+          }
+
+          .navigation-item-title {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+            text-transform: capitalize;
+          }
+
+          .navigation-item-length {
+            width: fit-content;
+            height: fit-content;
+            display: grid;
+            place-content: center center;
+            place-items: center center;
+            font-size: 0.8rem;
+            padding: 5px;
+            border-radius: 4px;
+            font-weight: 500;
+            background: rgb(${({ theme }) => theme.foreground});
+            color: rgb(${({ theme }) => theme.primary_shade});
+            border: 1px solid rgba(${({ theme }) => theme.primary}, 0.3);
+          }
+
+          .navigation-item-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+          }
+
+          .navigation-item_state-indicator-button {
+            all: unset;
+            width: fit-content;
+            height: fit-content;
+            color: rgb(${({ theme }) => theme.primary_shade});
+            cursor: pointer;
+            display: grid;
+            place-content: center;
+            padding: 0px;
+
+            :hover {
+              color: rgb(${({ theme }) => theme.primary_shade});
+            }
+
+            svg {
+              width: 60px;
+              height: 25px;
+            }
+          }
         }
 
-        .navigation-item-length {
-          width: fit-content;
-          height: fit-content;
-          display: grid;
-          place-content: center center;
-          place-items: center center;
-          font-size: 0.8rem;
-          padding: 5px;
-          border-radius: 4px;
-          font-weight: 500;
-          background: rgb(${({ theme }) => theme.foreground});
+        .navigation-box-container-active {
+          background: rgb(${({ theme }) => theme.primary}, 0.2);
           color: rgb(${({ theme }) => theme.primary_shade});
-          border: 1px solid rgba(${({ theme }) => theme.primary}, 0.3);
+
+          .navigation-item-length {
+            border: 1px solid transparent;
+          }
+
+          :before {
+            position: absolute;
+            content: '';
+            width: 3.5px;
+            height: 24px;
+            border-radius: 5px;
+            background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
+            top: calc(50% - 12px);
+            left: -8px;
+          }
+        }
+
+        .childrens-container {
+          width: 100%;
+
+          .collapsable-container {
+            width: 100%;
+            transition: height 500ms;
+
+            .tags-collapsable {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              padding: 12px;
+              border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+              border-top: none;
+              border-radius: 12px 12px;
+
+              .tags-container {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                h4 {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 5px;
+
+                  .tag-icon {
+                    width: 20px;
+                    height: 20px;
+                  }
+                }
+
+                .tag-count {
+                  width: fit-content;
+                  height: fit-content;
+                  display: grid;
+                  place-content: center center;
+                  place-items: center center;
+                  font-size: 0.8rem;
+                  padding: 5px;
+                  border-radius: 4px;
+                  font-weight: 500;
+                  background: rgb(${({ theme }) => theme.foreground});
+                  color: rgb(${({ theme }) => theme.primary_shade});
+                  border: 1px solid rgba(${({ theme }) => theme.primary}, 0.3);
+                }
+              }
+            }
+          }
         }
       }
-
-      .navigation-item-active {
-        background: rgb(${({ theme }) => theme.primary}, 0.2);
-        color: rgb(${({ theme }) => theme.primary_shade});
-
-        .navigation-item-length {
-          border: 1px solid transparent;
-        }
-
-        :before {
-          position: absolute;
-          content: '';
-          width: 3.5px;
-          height: 24px;
-          border-radius: 5px;
-          background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
-          top: calc(50% - 12px);
-          left: -8px;
-        }
-      }
-
-      /* .navigation-item-button {
-        padding: 3px 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.9rem;
-        line-height: 1.6rem;
-        cursor: pointer;
-      } */
     }
 
     .bottom-navigator {

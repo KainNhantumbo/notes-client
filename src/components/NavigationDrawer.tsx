@@ -26,25 +26,17 @@ import { useAppContext } from '../context/AppContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
+import {
+  CaretDownIcon,
+  CaretUpIcon,
+  DotFilledIcon
+} from '@radix-ui/react-icons';
 
-type Navigation = {
-  top: Array<{
-    label: string;
-    icon: IconType;
-    anchor: string;
-    classname: string;
-    length: number;
-    children?: Array<any>;
-    execute: () => void;
-    statusIndicatorIcons?: { active: IconType; inactive: IconType };
-    button?: { icon: IconType; handler: () => void };
-  }>;
-  bottom: Array<{
-    label: string;
-    icon: IconType;
-    execute: () => void;
-  }>;
-};
+type Navigation = Array<{
+  label: string;
+  icon: IconType;
+  execute: () => void;
+}>;
 
 function NavigationDrawer(): JSX.Element {
   const navigate = useNavigate();
@@ -110,64 +102,44 @@ function NavigationDrawer(): JSX.Element {
     });
   };
 
-  const navigation: Navigation = {
-    top: [
-      {
-        label: 'folders',
-        icon: RiFolder3Line,
-        classname: 'folders-class',
-        anchor: `/workspace?tab=folders&folder=none`,
-        statusIndicatorIcons: {
-          active: RiArrowDropDownLine,
-          inactive: RiArrowDropUpLine
-        },
-        length: state.folders.length,
-        execute: () => {
-          navigate(`/workspace?tab=folders&folder=none`);
-        },
-        button: { icon: RiAddLine, handler: () => {} },
-        children: []
+  const navigation: Navigation = [
+    {
+      label: 'Logout',
+      icon: RiLogoutBoxRLine,
+      execute: handleLogout
+    },
+    {
+      label: 'Home',
+      icon: RiHome2Line,
+      execute: () => {
+        dispatch({
+          type: actions.NAVIGATION_DRAWER,
+          payload: { ...state, isNavigationDrawer: false }
+        });
+        navigate('/');
       }
-    ],
-    bottom: [
-      {
-        label: 'Logout',
-        icon: RiLogoutBoxRLine,
-        execute: handleLogout
-      },
-      {
-        label: 'Home',
-        icon: RiHome2Line,
-        execute: () => {
-          dispatch({
-            type: actions.NAVIGATION_DRAWER,
-            payload: { ...state, isNavigationDrawer: false }
-          });
-          navigate('/');
-        }
-      },
-      {
-        label: 'About',
-        icon: RiInformationLine,
-        execute: () =>
-          dispatch({
-            type: actions.ABOUT_MODAL,
-            payload: { ...state, isAboutModal: true }
-          })
-      },
-      {
-        label: 'Settings',
-        icon: RiSettings6Line,
-        execute: () => {
-          dispatch({
-            type: actions.NAVIGATION_DRAWER,
-            payload: { ...state, isNavigationDrawer: false }
-          });
-          navigate('/workspace/settings');
-        }
+    },
+    {
+      label: 'About',
+      icon: RiInformationLine,
+      execute: () =>
+        dispatch({
+          type: actions.ABOUT_MODAL,
+          payload: { ...state, isAboutModal: true }
+        })
+    },
+    {
+      label: 'Settings',
+      icon: RiSettings6Line,
+      execute: () => {
+        dispatch({
+          type: actions.NAVIGATION_DRAWER,
+          payload: { ...state, isNavigationDrawer: false }
+        });
+        navigate('/workspace/settings');
       }
-    ]
-  };
+    }
+  ];
 
   const notes = useMemo(() => {
     return {
@@ -197,24 +169,57 @@ function NavigationDrawer(): JSX.Element {
     const tags = state.notes
       .filter((note) => !note.deleted)
       .map((note) => note.tags)
-      .reduce((acc, current) => {
+      .reduce((acc, current, i, arr) => {
         const group = acc.concat(current);
         return group;
-      }, []);
+      }, [])
+      .map((item, index, array) => {
+        const duplicates = array.filter(
+          (duplicate) => duplicate.value == item.value
+        );
+        if (duplicates.length > 0) return { ...item, count: duplicates.length };
+        return { ...item, count: 0 };
+      });
+
+    const t = tags
+      .map((item, index, array) =>
+        array.some((tag) => tag.count === item.count) ? null : item
+      )
+      .filter((tag) => tag !== null);
 
     return {
       label: 'tags',
       icon: RiHashtag,
-      classname: 'tags-class',
+      class: 'tags-class',
       statusIndicatorIcons: {
-        active: RiArrowDropDownLine,
-        inactive: RiArrowDropUpLine
+        active: CaretDownIcon,
+        inactive: CaretUpIcon
       },
       length: tags.length,
       execute: () => {
         navigate(`/workspace?tab=tags&folder=tags`);
       },
       children: [...tags]
+    };
+  }, [state.notes]);
+
+
+  const folders = useMemo(() => {
+    return {
+      label: 'folders',
+      icon: RiFolder3Line,
+      classname: 'folders-class',
+      anchor: `/workspace?tab=folders&folder=none`,
+      statusIndicatorIcons: {
+        active: RiArrowDropDownLine,
+        inactive: RiArrowDropUpLine
+      },
+      length: state.folders.length,
+      execute: () => {
+        navigate(`/workspace?tab=folders&folder=none`);
+      },
+      button: { icon: RiAddLine, handler: () => {} },
+      children: []
     };
   }, [state.notes]);
 
@@ -247,58 +252,99 @@ function NavigationDrawer(): JSX.Element {
             <motion.ul>
               <div className='top-navigator'>
                 <li
-                  className={classnames('navigation-item', notes.class, {
-                    'navigation-item-active': assertLocation(notes.label)
-                  })}
+                  className={classnames('navigation-item', notes.class)}
                   onClick={() => notes.execute()}>
-                  <h3 className='navigation-item-title'>
-                    <notes.icon />
-                    <span>{notes.label}</span>
-                  </h3>
-                  <div className='navigation-item-length'>{notes.length}</div>
-                </li>
-
-                <li
-                  className={classnames('navigation-item', trash.class, {
-                    'navigation-item-active': assertLocation(trash.label)
-                  })}
-                  onClick={() => trash.execute()}>
-                  <h3 className='navigation-item-title'>
-                    <trash.icon />
-                    <span>{trash.label}</span>
-                  </h3>
-                  <div className='navigation-item-length'>{trash.length}</div>
-                </li>
-
-                {navigation.top.map((action, index) => (
-                  <li
-                    key={String(index)}
-                    onClick={() => action.execute()}
-                    className={classnames('navigation-item', action.classname, {
-                      'navigation-item-active': location.search.includes(
-                        action.label.toLowerCase().split(' ').join('-')
+                  <div
+                    className={classnames('navigation-box-container', {
+                      'navigation-box-container-active': assertLocation(
+                        notes.label
                       )
                     })}>
                     <h3 className='navigation-item-title'>
-                      <action.icon />
-                      <span>{action.label}</span>
+                      <notes.icon />
+                      <span>{notes.label}</span>
                     </h3>
+                    <div className='navigation-item-length'>{notes.length}</div>
+                  </div>
+                </li>
 
-                    <button className='navigation-item-button'></button>
+                <li
+                  className={classnames('navigation-item', tags.class)}
+                  onClick={() => tags.execute()}>
+                  <div
+                    className={classnames('navigation-box-container', {
+                      'navigation-box-container-active': assertLocation(
+                        tags.label
+                      )
+                    })}>
+                    <h3 className='navigation-item-title'>
+                      <tags.icon />
+                      <span>{tags.label}</span>
+                    </h3>
+                    <section className='navigation-item-actions'>
+                      <button
+                        className='navigation-item_state-indicator-button'
+                        onClick={() => {
+                          setIsCollapsed((state) => ({
+                            ...state,
+                            tags: !state.tags
+                          }));
+                        }}>
+                        {isCollapsed.tags ? (
+                          <tags.statusIndicatorIcons.active />
+                        ) : (
+                          <tags.statusIndicatorIcons.inactive />
+                        )}
+                      </button>
+                      <div className='navigation-item-length'>
+                        {tags.length}
+                      </div>
+                    </section>
+                  </div>
 
-                    {action.children ? (
-                      <Collapse isOpened={false} className='children-container'>
-                        {action.children.map((child, index) => (
-                          <p key={String(index)}>{child}</p>
-                        ))}
-                      </Collapse>
-                    ) : null}
-                  </li>
-                ))}
+                  <div className='childrens-container'>
+                    <Collapse
+                      isOpened={isCollapsed.tags}
+                      theme={{
+                        collapse: 'collapsable-container',
+                        content: 'tags-collapsable'
+                      }}>
+                      {tags.children.map((child) => (
+                        <div key={child.id} className='tags-container'>
+                          <h4>
+                            <DotFilledIcon
+                              style={{ color: child.color }}
+                              className='tag-icon'
+                            />
+                            <span>{child.value}</span>
+                          </h4>
+                          <div className='tag-count'>{child.count}</div>
+                        </div>
+                      ))}
+                    </Collapse>
+                  </div>
+                </li>
+
+                <li
+                  className={classnames('navigation-item', trash.class)}
+                  onClick={() => trash.execute()}>
+                  <div
+                    className={classnames('navigation-box-container', {
+                      'navigation-box-container-active': assertLocation(
+                        trash.label
+                      )
+                    })}>
+                    <h3 className='navigation-item-title'>
+                      <trash.icon />
+                      <span>{trash.label}</span>
+                    </h3>
+                    <div className='navigation-item-length'>{trash.length}</div>
+                  </div>
+                </li>
               </div>
 
               <div className='bottom-navigator'>
-                {navigation.bottom.map((action, index) => (
+                {navigation.map((action, index) => (
                   <button
                     key={String(index)}
                     className={`element`}
