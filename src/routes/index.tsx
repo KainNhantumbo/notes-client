@@ -1,11 +1,11 @@
 import { m as motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
-import demo_dark from '@/assets/demo-dark.jpg';
+import demo_dark from '@/assets/demo-dark.png';
 import app_logo from '@/assets/logo-192x192.png';
+import demo_light from '@/assets/demo-light.png';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
-import demo_light from '@/assets/demo-light.jpg';
 import { _home as Container } from '@/styles/routes/_home';
 import { app_features, app_metadata } from '@/shared/data';
 import { NavigateFunction, useNavigate } from 'react-router-dom';

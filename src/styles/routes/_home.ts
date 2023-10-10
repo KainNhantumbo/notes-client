@@ -107,7 +107,6 @@ export const _home = styled.main`
         width: 100%;
         height: 100%;
         max-width: 900px;
-        max-height: 480px;
         object-fit: cover;
         border-radius: 10px;
         margin: 10px auto;

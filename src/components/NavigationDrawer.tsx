@@ -181,11 +181,13 @@ function NavigationDrawer(): JSX.Element {
         return { ...item, count: 0 };
       });
 
-    const t = tags
-      .map((item, index, array) =>
-        array.some((tag) => tag.count === item.count) ? null : item
-      )
-      .filter((tag) => tag !== null);
+    //TODO: remove duplicated tags
+
+    // const t = tags
+    //   .map((item, index, array) =>
+    //     array.some((tag) => tag.count === item.count) ? null : item
+    //   )
+    //   .filter((tag) => tag !== null);
 
     return {
       label: 'tags',
@@ -202,7 +204,6 @@ function NavigationDrawer(): JSX.Element {
       children: [...tags]
     };
   }, [state.notes]);
-
 
   const folders = useMemo(() => {
     return {

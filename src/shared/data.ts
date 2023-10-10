@@ -29,7 +29,7 @@ export const app_metadata = {
   tags: Package.keywords.join(' '),
   websiteUrl: Package.url,
   description: 'A simple taking notes application to fit your daily needs.',
-  copyright: `${new Date().getFullYear()} ${Package.name}`,
+  copyright: `${new Date().getFullYear()} ${Package.metadata.name}`,
   contacts: [
     {
       name: 'Github',

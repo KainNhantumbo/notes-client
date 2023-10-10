@@ -63,6 +63,7 @@ export const _noteEditor = styled.main`
       margin-bottom: 16px;
       word-wrap: break-word;
       display: block;
+      line-height: 1.6rem;
     }
 
     h3,
@@ -79,10 +80,17 @@ export const _noteEditor = styled.main`
 
     ul,
     ol {
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
       li {
         list-style: disc;
         margin-left: 2rem;
+        line-height: 1.6rem;
+      }
+    }
+
+    ol {
+      li {
+        list-style: decimal;
       }
     }
 
@@ -92,7 +100,7 @@ export const _noteEditor = styled.main`
       max-width: 700px;
       max-height: 480px;
       object-fit: cover;
-      border-radius: 5px;
+      border-radius: 3px;
       margin: 10px auto;
     }
 
