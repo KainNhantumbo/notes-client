@@ -1,5 +1,7 @@
 import {
   RiApps2Line,
+  RiDeleteBin2Line,
+  RiLoopLeftLine,
   RiMenuLine,
   RiMoreFill,
   RiPushpinFill,
@@ -330,9 +332,11 @@ function Workspace(): JSX.Element {
                         {note.deleted ? (
                           <div className='note-actions-container'>
                             <button>
+                              <RiLoopLeftLine />
                               <span>Restore</span>
                             </button>
                             <button>
+                              <RiDeleteBin2Line />
                               <span>Delete</span>
                             </button>
                           </div>
@@ -348,40 +352,46 @@ function Workspace(): JSX.Element {
 
         {!isLoading && isError ? (
           <section className='error-container'>
-            <h3>
-              {(error as any)?.response?.data?.message ||
-                (error as any)?.code ||
-                'An error occurred while fetching data'}
-            </h3>
-            <button onClick={() => refetch({ queryKey: ['query-notes'] })}>
-              <span>Try again</span>
-            </button>
+            <div>
+              <h3>
+                {(error as any)?.response?.data?.message ||
+                  (error as any)?.code ||
+                  'An error occurred while fetching data'}
+              </h3>
+              <button onClick={() => refetch({ queryKey: ['query-notes'] })}>
+                <span>Try again</span>
+              </button>
+            </div>
           </section>
         ) : null}
 
         {state.notes.length < 1 && !isError && !isLoading ? (
           <section className='empty-notes-container'>
-            <MixIcon />
-            <h3>
-              <span>No notes</span>
-            </h3>
-            <p>
-              Press <i>Compose</i> button to start writing notes
-            </p>
+            <div>
+              <MixIcon />
+              <h3>
+                <span>No notes</span>
+              </h3>
+              <p>
+                Press <i>Compose</i> button to start writing notes
+              </p>
+            </div>
           </section>
         ) : null}
 
         {isLoading && !isError ? (
           <div className='loading-indicator'>
-            <MoonLoader
-              size={30}
-              color={`rgb(${theme.primary_shade})`}
-              aria-placeholder='Loading your notes...'
-              cssOverride={{
-                display: 'block'
-              }}
-            />
-            <h3>Loading your notes...</h3>
+            <div className='loader-content'>
+              <MoonLoader
+                size={30}
+                color={`rgb(${theme.primary_shade})`}
+                aria-placeholder='Loading your notes...'
+                cssOverride={{
+                  display: 'block'
+                }}
+              />
+              <h3>Loading your notes...</h3>
+            </div>
           </div>
         ) : null}
       </Container>

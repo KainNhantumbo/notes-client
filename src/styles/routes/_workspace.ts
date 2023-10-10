@@ -283,60 +283,81 @@ export const _workspace = styled.main`
   }
 
   .empty-notes-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: calc(20% - 1px) 20px;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center center;
+    place-items: center center;
     gap: 20px;
-    align-items: center;
 
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 500;
-    }
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
 
-    p {
-      text-align: center;
-      line-height: 1.6rem;
-      font-size: 0.95rem;
-
-      i {
-        color: rgb(${({ theme }) => theme.primary_shade});
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 500;
       }
-    }
 
-    svg {
-      width: 60px;
-      height: 60px;
-      color: rgb(${({ theme }) => theme.primary});
+      p {
+        text-align: center;
+        line-height: 1.6rem;
+        font-size: 0.95rem;
+
+        i {
+          color: rgb(${({ theme }) => theme.primary_shade});
+        }
+      }
+
+      svg {
+        width: 60px;
+        height: 60px;
+        color: rgb(${({ theme }) => theme.primary});
+      }
     }
   }
 
   .loading-indicator {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center center;
+    place-items: center center;
     gap: 20px;
-    align-items: center;
     font-weight: 500;
     font-size: 0.95rem;
     color: rgb(${({ theme }) => theme.primary_shade});
     padding: calc(20% - 1px) 12px;
+
+    .loader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
   }
 
   .error-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center center;
+    place-items: center center;
     gap: 20px;
     color: rgb(${({ theme }) => theme.error});
     font-weight: 500;
     font-size: 0.95rem;
     line-height: 1.6rem;
     padding: calc(20% - 1px) 12px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
 
     button {
       ${BaseButton}
