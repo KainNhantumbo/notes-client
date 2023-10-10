@@ -91,7 +91,6 @@ export const app_features = [
 
 export const footerAnchors = [
   { name: 'Privacy Policy', anchor: '/docs/privacy-policy' },
-  { name: 'Terms of use', anchor: '/docs/terms-of-use' },
   { name: 'Contact', anchor: '/docs/contact' },
   { name: 'FAQ', anchor: '/docs/faq' },
   { name: 'Donate', anchor: 'https://www.buymeacoffee.com/nhantumbokU' },

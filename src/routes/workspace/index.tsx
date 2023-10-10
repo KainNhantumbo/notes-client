@@ -28,6 +28,7 @@ import { MixIcon, PlusIcon } from '@radix-ui/react-icons';
 import NavigationDrawer from '@/components/NavigationDrawer';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
+import PerfectScrollbar from 'perfect-scrollbar';
 
 export default function Workspace(): JSX.Element {
   const theme = useTheme();
@@ -307,7 +308,7 @@ export default function Workspace(): JSX.Element {
   }, [state.query]);
 
   const groupedNotes = useMemo(() => {
-    const group = [
+    return [
       {
         type: 'Pinned',
         data: state.notes.filter(
@@ -321,7 +322,6 @@ export default function Workspace(): JSX.Element {
         )
       }
     ];
-    return group;
   }, [state.notes, searchParams]);
 
   const hasNotes = useMemo(() => {
