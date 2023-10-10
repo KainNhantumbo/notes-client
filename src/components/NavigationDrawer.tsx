@@ -50,23 +50,15 @@ function NavigationDrawer(): JSX.Element {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { state, dispatch, useFetchAPI } = useAppContext();
-  const [openCollapsible, setOpenCollapsible] = useState({
+  const [isCollapsed, setIsCollapsed] = useState({
     folders: false,
     tags: false
   });
 
   const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
 
-  const groupedTags = useMemo(() => {
-    const tags = state.notes
-      .filter((note) => !note.deleted)
-      .map((note) => note.tags)
-      .reduce((acc, current) => {
-        const group = acc.concat(current);
-        return group;
-      }, []);
-    return tags;
-  }, [state.notes]);
+  const assertLocation = (label: string) =>
+    currentTab.toLowerCase() === label.toLowerCase();
 
   const handleLogout = (): void => {
     dispatch({
@@ -135,21 +127,6 @@ function NavigationDrawer(): JSX.Element {
         },
         button: { icon: RiAddLine, handler: () => {} },
         children: []
-      },
-      {
-        label: 'tags',
-        icon: RiHashtag,
-        classname: 'tags-class',
-        statusIndicatorIcons: {
-          active: RiArrowDropDownLine,
-          inactive: RiArrowDropUpLine
-        },
-        length: groupedTags.length,
-        anchor: `/workspace?tab=tags&folder=tags`,
-        execute: () => {
-          navigate(`/workspace?tab=tags&folder=tags`);
-        },
-        children: []
       }
     ],
     bottom: [
@@ -192,9 +169,6 @@ function NavigationDrawer(): JSX.Element {
     ]
   };
 
-  const assertLocation = (label: string) =>
-    location.search.includes(label.toLowerCase().split(' ').join('-'));
-
   const notes = useMemo(() => {
     return {
       label: 'all notes',
@@ -216,6 +190,31 @@ function NavigationDrawer(): JSX.Element {
       execute: () => {
         navigate(`/workspace?tab=trash&folder=trash`);
       }
+    };
+  }, [state.notes]);
+
+  const tags = useMemo(() => {
+    const tags = state.notes
+      .filter((note) => !note.deleted)
+      .map((note) => note.tags)
+      .reduce((acc, current) => {
+        const group = acc.concat(current);
+        return group;
+      }, []);
+
+    return {
+      label: 'tags',
+      icon: RiHashtag,
+      classname: 'tags-class',
+      statusIndicatorIcons: {
+        active: RiArrowDropDownLine,
+        inactive: RiArrowDropUpLine
+      },
+      length: tags.length,
+      execute: () => {
+        navigate(`/workspace?tab=tags&folder=tags`);
+      },
+      children: [...tags]
     };
   }, [state.notes]);
 

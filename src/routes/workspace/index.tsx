@@ -1,6 +1,7 @@
 import {
   RiApps2Line,
   RiDeleteBin2Line,
+  RiDeleteBin6Line,
   RiLoopLeftLine,
   RiMenuLine,
   RiMoreFill,
@@ -332,7 +333,7 @@ export default function Workspace(): JSX.Element {
           return data;
         }, []).length > 0
     );
-  }, [state.notes]);
+  }, [state.notes, searchParams]);
 
   return (
     <Layout
@@ -496,7 +497,7 @@ export default function Workspace(): JSX.Element {
           </section>
         ) : null}
 
-        {!hasNotes && !isError && !isLoading ? (
+        {!hasNotes && !isTrashFolder && !isError && !isLoading ? (
           <section className='empty-notes-container'>
             <div>
               <MixIcon />
@@ -506,6 +507,18 @@ export default function Workspace(): JSX.Element {
               <p>
                 Press <i>Compose</i> button to start writing notes
               </p>
+            </div>
+          </section>
+        ) : null}
+
+        {!hasNotes && isTrashFolder && !isError && !isLoading ? (
+          <section className='empty-notes-container'>
+            <div>
+              <RiDeleteBin6Line />
+              <h3>
+                <span>Trash</span>
+              </h3>
+              <p>Lucky!! No notes in trash to be displayed.</p>
             </div>
           </section>
         ) : null}
