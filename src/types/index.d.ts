@@ -82,12 +82,8 @@ export type Note = {
 export type Folder = {
   _id: string;
   name: string;
-  metadata: {
-    color: string;
-    favorite: boolean;
-    tags: string[];
-    deleted: boolean;
-  };
+  color: string;
+  deleted: boolean;
 };
 
 export type Modal = {

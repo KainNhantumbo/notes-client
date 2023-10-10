@@ -51,8 +51,8 @@ function NavigationDrawer(): JSX.Element {
   const [searchParams] = useSearchParams();
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [openCollapsible, setOpenCollapsible] = useState({
-    isFolders: false,
-    isTags: false
+    folders: false,
+    tags: false
   });
 
   const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
@@ -121,17 +121,7 @@ function NavigationDrawer(): JSX.Element {
   const navigation: Navigation = {
     top: [
       {
-        label: 'All Notes',
-        icon: RiApps2Line,
-        anchor: '/workspace?tab=all-notes&folder=none',
-        classname: 'all-notes-class',
-        length: state.notes.filter((note) => !note.deleted).length,
-        execute: () => {
-          navigate('/workspace?tab=all-notes&folder=none');
-        }
-      },
-      {
-        label: 'Folders',
+        label: 'folders',
         icon: RiFolder3Line,
         classname: 'folders-class',
         anchor: `/workspace?tab=folders&folder=none`,
@@ -147,22 +137,7 @@ function NavigationDrawer(): JSX.Element {
         children: []
       },
       {
-        label: 'Trash',
-        icon: RiDeleteBin7Line,
-        classname: 'trash-class',
-        length: state.notes.filter((note) => note.deleted).length,
-        statusIndicatorIcons: {
-          active: RiDeleteBin6Line,
-          inactive: RiDeleteBin6Fill
-        },
-        anchor: `/workspace?tab=trash&folder=trash`,
-        execute: () => {
-          navigate(`/workspace?tab=trash&folder=trash`);
-        },
-        children: []
-      },
-      {
-        label: 'Tags',
+        label: 'tags',
         icon: RiHashtag,
         classname: 'tags-class',
         statusIndicatorIcons: {
@@ -217,6 +192,33 @@ function NavigationDrawer(): JSX.Element {
     ]
   };
 
+  const assertLocation = (label: string) =>
+    location.search.includes(label.toLowerCase().split(' ').join('-'));
+
+  const notes = useMemo(() => {
+    return {
+      label: 'all notes',
+      icon: RiApps2Line,
+      class: 'all-notes-class',
+      length: state.notes.filter((note) => !note.deleted).length,
+      execute: () => {
+        navigate('/workspace?tab=all-notes&folder=none');
+      }
+    };
+  }, [state.notes]);
+
+  const trash = useMemo(() => {
+    return {
+      label: 'trash',
+      icon: RiDeleteBin7Line,
+      class: 'trash-class',
+      length: state.notes.filter((note) => note.deleted).length,
+      execute: () => {
+        navigate(`/workspace?tab=trash&folder=trash`);
+      }
+    };
+  }, [state.notes]);
+
   return (
     <AnimatePresence>
       {state.isNavigationDrawer && (
@@ -245,6 +247,30 @@ function NavigationDrawer(): JSX.Element {
 
             <motion.ul>
               <div className='top-navigator'>
+                <li
+                  className={classnames('navigation-item', notes.class, {
+                    'navigation-item-active': assertLocation(notes.label)
+                  })}
+                  onClick={() => notes.execute()}>
+                  <h3 className='navigation-item-title'>
+                    <notes.icon />
+                    <span>{notes.label}</span>
+                  </h3>
+                  <div className='navigation-item-length'>{notes.length}</div>
+                </li>
+
+                <li
+                  className={classnames('navigation-item', trash.class, {
+                    'navigation-item-active': assertLocation(trash.label)
+                  })}
+                  onClick={() => trash.execute()}>
+                  <h3 className='navigation-item-title'>
+                    <trash.icon />
+                    <span>{trash.label}</span>
+                  </h3>
+                  <div className='navigation-item-length'>{trash.length}</div>
+                </li>
+
                 {navigation.top.map((action, index) => (
                   <li
                     key={String(index)}
@@ -262,11 +288,11 @@ function NavigationDrawer(): JSX.Element {
                     <button className='navigation-item-button'></button>
 
                     {action.children ? (
-                      <section className='children-container'>
+                      <Collapse isOpened={false} className='children-container'>
                         {action.children.map((child, index) => (
-                          <p key={String(index)}>dsfijfiosdjfois</p>
+                          <p key={String(index)}>{child}</p>
                         ))}
-                      </section>
+                      </Collapse>
                     ) : null}
                   </li>
                 ))}

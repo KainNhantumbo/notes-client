@@ -28,7 +28,6 @@ import { MixIcon, PlusIcon } from '@radix-ui/react-icons';
 import NavigationDrawer from '@/components/NavigationDrawer';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
-import PerfectScrollbar from 'perfect-scrollbar';
 
 export default function Workspace(): JSX.Element {
   const theme = useTheme();
@@ -390,7 +389,7 @@ export default function Workspace(): JSX.Element {
             />
             <SortQuery />
 
-            {!isError && !isLoading ? (
+            {!isError && !isLoading && !isTrashFolder ? (
               <motion.button
                 title='Compose a new note'
                 placeholder='Compose a new note'

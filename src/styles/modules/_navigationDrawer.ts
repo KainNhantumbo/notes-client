@@ -30,6 +30,12 @@ export const _navigationDrawer = styled.section`
     user-select: none;
     padding: 8px 12px;
     border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12000;
+    background: rgb(${({ theme }) => theme.foreground});
+    border-top-right-radius: 12px;
 
     h3 {
       padding-top: 2px;
@@ -71,6 +77,7 @@ export const _navigationDrawer = styled.section`
       width: 100%;
       padding: 8px 12px;
       gap: 12px;
+      padding-top: 50px;
 
       .navigation-item {
         width: 100%;
@@ -82,22 +89,42 @@ export const _navigationDrawer = styled.section`
         align-items: center;
         justify-content: space-between;
 
+        :hover {
+          background: rgba(${({ theme }) => theme.primary}, 0.5);
+        }
+
         .navigation-item-title {
           width: 100%;
           display: flex;
           flex-direction: row;
           align-items: center;
           gap: 5px;
+          text-transform: capitalize;
         }
 
-        :hover {
-          background: rgba(${({ theme }) => theme.primary}, 0.5);
+        .navigation-item-length {
+          width: fit-content;
+          height: fit-content;
+          display: grid;
+          place-content: center center;
+          place-items: center center;
+          font-size: 0.8rem;
+          padding: 5px;
+          border-radius: 4px;
+          font-weight: 500;
+          background: rgb(${({ theme }) => theme.foreground});
+          color: rgb(${({ theme }) => theme.primary_shade});
+          border: 1px solid rgba(${({ theme }) => theme.primary}, 0.3);
         }
       }
 
       .navigation-item-active {
         background: rgb(${({ theme }) => theme.primary}, 0.2);
         color: rgb(${({ theme }) => theme.primary_shade});
+
+        .navigation-item-length {
+          border: 1px solid transparent;
+        }
 
         :before {
           position: absolute;
@@ -111,7 +138,7 @@ export const _navigationDrawer = styled.section`
         }
       }
 
-      .navigation-item-button {
+      /* .navigation-item-button {
         padding: 3px 20px;
         display: flex;
         flex-direction: row;
@@ -120,7 +147,7 @@ export const _navigationDrawer = styled.section`
         font-size: 0.9rem;
         line-height: 1.6rem;
         cursor: pointer;
-      }
+      } */
     }
 
     .bottom-navigator {
@@ -135,6 +162,7 @@ export const _navigationDrawer = styled.section`
       left: 0;
       z-index: 3000;
       background: rgb(${({ theme }) => theme.foreground});
+      border-bottom-right-radius: 12px;
 
       button {
         all: unset;
