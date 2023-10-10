@@ -17,14 +17,14 @@ export default function Tags() {
   const createTag = (e: SubmitEvent) => {
     e.preventDefault();
     if (tag.value.length < 1) return undefined;
-    const isTagAdded = state.currentNote.metadata.tags.some(
+    const isTagAdded = state.currentNote.tags.some(
       (item) => item.value.toLowerCase() === tag.value.toLowerCase()
     );
 
     if (isTagAdded) return undefined;
     const data = { id: nanoid(8), color: '#E47131', value: tag.value };
 
-    if (state.currentNote.metadata.tags.length <= 7) {
+    if (state.currentNote.tags.length <= 7) {
       dispatch({
         type: actions.CURRENT_NOTE,
         payload: {
@@ -32,8 +32,8 @@ export default function Tags() {
           currentNote: {
             ...state.currentNote,
             metadata: {
-              ...state.currentNote.metadata,
-              tags: [...state.currentNote.metadata.tags, data]
+              ...state.currentNote,
+              tags: [...state.currentNote.tags, data]
             }
           }
         }
@@ -50,10 +50,8 @@ export default function Tags() {
         currentNote: {
           ...state.currentNote,
           metadata: {
-            ...state.currentNote.metadata,
-            tags: [
-              ...state.currentNote.metadata.tags.filter((tag) => tag.id !== id)
-            ]
+            ...state.currentNote,
+            tags: [...state.currentNote.tags.filter((tag) => tag.id !== id)]
           }
         }
       }
@@ -63,7 +61,7 @@ export default function Tags() {
   return (
     <Container>
       <section className='tags-list-container'>
-        {state.currentNote.metadata.tags.map((tag) => (
+        {state.currentNote.tags.map((tag) => (
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -95,8 +93,7 @@ export default function Tags() {
       <form onSubmit={(e) => createTag(e)}>
         <input
           style={{
-            display:
-              state.currentNote.metadata.tags.length <= 7 ? 'block' : 'none'
+            display: state.currentNote.tags.length <= 7 ? 'block' : 'none'
           }}
           id='tags'
           type='text'

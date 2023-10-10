@@ -13,7 +13,6 @@ export const _signup = styled.main`
     display: flex;
     margin-top: 0px;
   }
-  
 
   * {
     ::selection {
@@ -44,9 +43,11 @@ export const _signup = styled.main`
 
   img {
     width: 100%;
+    max-width: 380px;
     object-fit: cover;
     border-radius: 12px 0 0 12px;
-    @media screen and (max-width: 1140px) {
+
+    @media screen and (max-width: 865px) {
       display: none;
     }
   }

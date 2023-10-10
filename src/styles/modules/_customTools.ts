@@ -27,7 +27,7 @@ export const _customTools = styled.section`
     }
   }
 
-  .metadata-modifiers-container {
+  -modifiers-container {
     width: 100%;
     display: flex;
     flex-direction: row;

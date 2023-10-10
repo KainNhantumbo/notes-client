@@ -94,19 +94,9 @@ export default function Properties() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Note Copied!',
             message: 'Note contents copied to clipboard successfully',
-            status: true,
-            actionButtonMessage: 'Close',
-            handleFunction: () =>
-              dispatch({
-                type: actions.TOAST,
-                payload: {
-                  ...state,
-                  toast: { ...state.toast, status: false }
-                }
-              })
+            status: true
           }
         }
       });
@@ -117,7 +107,6 @@ export default function Properties() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Note Copy Error',
             message:
               (error as Error).message ||
@@ -143,36 +132,25 @@ export default function Properties() {
           message: 'Do you really want to make a new copy of this note?',
           handleFunction: async () => {
             try {
-              const { title, content, metadata } = state.currentNote;
+              let { _id, title, content, ...data } = state.currentNote;
+
+              title = title.includes('(Duplicated)')
+                ? title
+                : `(Duplicated) ${title}`;
+
               await useFetchAPI<Note>({
                 method: 'post',
                 url: '/api/v1/notes',
-                data: {
-                  title: title.includes('(Duplicated)')
-                    ? title
-                    : `(Duplicated) ${title}`,
-                  content,
-                  metadata
-                }
+                data: { title, content, ...data }
               });
               dispatch({
                 type: actions.TOAST,
                 payload: {
                   ...state,
                   toast: {
-                    ...state.toast,
                     title: 'Duplicate Confirmation',
                     message: 'Note duplicated successfully',
-                    status: true,
-                    actionButtonMessage: 'Close',
-                    handleFunction: () =>
-                      dispatch({
-                        type: actions.TOAST,
-                        payload: {
-                          ...state,
-                          toast: { ...state.toast, status: false }
-                        }
-                      })
+                    status: true
                   }
                 }
               });
@@ -187,7 +165,6 @@ export default function Properties() {
                 payload: {
                   ...state,
                   toast: {
-                    ...state.toast,
                     title: 'Duplicate Note Error',
                     message:
                       error?.response?.data?.message ||
@@ -230,11 +207,11 @@ export default function Properties() {
             });
 
             try {
-              const { _id, metadata } = state.currentNote;
+              const { _id, ...data } = state.currentNote;
               await useFetchAPI<Note>({
                 method: 'patch',
                 url: `/api/v1/notes/${_id}`,
-                data: { metadata: { ...metadata, deleted: true } }
+                data: { ...data, deleted: true }
               });
               navigate('/workspace', { replace: true });
             } catch (error: any) {
@@ -244,7 +221,6 @@ export default function Properties() {
                 payload: {
                   ...state,
                   toast: {
-                    ...state.toast,
                     title: 'Delete Error',
                     message:
                       error?.response?.data?.message ||
@@ -301,7 +277,7 @@ export default function Properties() {
               </h2>
               <section>
                 <div className='item-container priority-container'>
-                  {state.currentNote.metadata.pinned ? (
+                  {state.currentNote.pinned ? (
                     <h3>
                       <RiPushpinFill />
                       <span>Pinned note</span>
@@ -319,7 +295,7 @@ export default function Properties() {
                     <RiTimerFlashLine />
                     <span>Priority: </span>
                   </h3>
-                  <span>{state.currentNote.metadata.priority}</span>
+                  <span>{state.currentNote.priority}</span>
                 </div>
 
                 <div className='item-container priority-container'>
@@ -327,16 +303,16 @@ export default function Properties() {
                     <RiBubbleChartLine />
                     <span>Status: </span>
                   </h3>
-                  <span>{state.currentNote.metadata.status}</span>
+                  <span>{state.currentNote.status}</span>
                 </div>
-                {state.currentNote.metadata.tags.length > 0 ? (
+                {state.currentNote.tags.length > 0 ? (
                   <div className='item-container tags-container'>
                     <h3>
                       <RiHashtag />
                       <span>Tags: </span>
                     </h3>
                     <div className='tags-container_content'>
-                      {state.currentNote.metadata.tags.map((tag) => (
+                      {state.currentNote.tags.map((tag) => (
                         <div
                           style={{ backgroundColor: tag.color }}
                           key={tag.id}>

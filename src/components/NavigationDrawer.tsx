@@ -3,6 +3,7 @@ import {
   RiApps2Line,
   RiArrowDropDownLine,
   RiArrowDropUpLine,
+  RiCloseLine,
   RiDeleteBin6Fill,
   RiDeleteBin6Line,
   RiDeleteBin7Line,
@@ -58,8 +59,8 @@ function NavigationDrawer(): JSX.Element {
 
   const groupedTags = useMemo(() => {
     const tags = state.notes
-      .filter((note) => !note.metadata.deleted)
-      .map((note) => note.metadata.tags)
+      .filter((note) => !note.deleted)
+      .map((note) => note.tags)
       .reduce((acc, current) => {
         const group = acc.concat(current);
         return group;
@@ -124,7 +125,7 @@ function NavigationDrawer(): JSX.Element {
         icon: RiApps2Line,
         anchor: '/workspace?tab=all-notes&folder=none',
         classname: 'all-notes-class',
-        length: state.notes.filter((note) => !note.metadata.deleted).length,
+        length: state.notes.filter((note) => !note.deleted).length,
         execute: () => {
           navigate('/workspace?tab=all-notes&folder=none');
         }
@@ -149,7 +150,7 @@ function NavigationDrawer(): JSX.Element {
         label: 'Trash',
         icon: RiDeleteBin7Line,
         classname: 'trash-class',
-        length: state.notes.filter((note) => note.metadata.deleted).length,
+        length: state.notes.filter((note) => note.deleted).length,
         statusIndicatorIcons: {
           active: RiDeleteBin6Line,
           inactive: RiDeleteBin6Fill
@@ -225,25 +226,21 @@ function NavigationDrawer(): JSX.Element {
             initial={{ opacity: 0, x: -300 }}
             animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
             exit={{ opacity: 0, x: -300, transition: { duration: 0.5 } }}>
-            <section
-              className='header'
-              onClick={() => {
-                dispatch({
-                  type: actions.NAVIGATION_DRAWER,
-                  payload: { ...state, isNavigationDrawer: false }
-                });
-              }}>
-              <div className='logo-container'>
-                <img
-                  src={logo}
-                  loading='lazy'
-                  decoding='async'
-                  alt={`${app_metadata.appName} logo image`}
-                  aria-placeholder={`${app_metadata.appName} logo image`}
-                />
-                <h3>{app_metadata.appName.toLowerCase()}</h3>
-              </div>
-              <RiMenuLine className='hamburguer-icon' />
+            <section className='header'>
+              <motion.button
+                whileTap={{ scale: 0.8 }}
+                className='box-btn_close'
+                onClick={() => {
+                  dispatch({
+                    type: actions.NAVIGATION_DRAWER,
+                    payload: { ...state, isNavigationDrawer: false }
+                  });
+                }}>
+                <RiCloseLine />
+              </motion.button>
+              <h3>
+                <i>Choco</i>notey
+              </h3>
             </section>
 
             <motion.ul>

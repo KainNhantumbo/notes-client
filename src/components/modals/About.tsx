@@ -1,9 +1,8 @@
 import {
   RiAppsLine,
   RiCloseLine,
-  RiCodeLine,
-  RiCopyrightLine,
-  RiMoreFill
+  RiCodeSSlashLine,
+  RiCopyrightLine
 } from 'react-icons/ri';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _about as Container } from '@/styles/modules/_about';
@@ -47,7 +46,7 @@ export default function About() {
                   </span>
                 </h2>
                 <h3>
-                  <RiCodeLine />
+                  <RiCodeSSlashLine />
                   <span>
                     <i>Developer:</i> {author.name}
                   </span>
@@ -71,15 +70,13 @@ export default function About() {
 
               <div className='legal'>
                 <h3>
-                  <RiCopyrightLine />
+                  <RiAppsLine />
                   <span>{license}</span>
                 </h3>
 
                 <h3>
-                  <RiAppsLine />
-                  <span>
-                    {copyright}
-                  </span>
+                  <RiCopyrightLine />
+                  <span> {copyright}</span>
                 </h3>
               </div>
               <button

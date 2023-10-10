@@ -15,7 +15,7 @@ export default function Priority() {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const [{ data }] = prioritiesDataMapping.filter((item) => {
-    if (item.value === state.currentNote.metadata.priority) {
+    if (item.value === state.currentNote.priority) {
       return item;
     }
   });
@@ -27,7 +27,7 @@ export default function Priority() {
         ...state,
         currentNote: {
           ...state.currentNote,
-          metadata: { ...state.currentNote.metadata, priority: data }
+          metadata: { ...state.currentNote, priority: data }
         }
       }
     });
@@ -62,7 +62,7 @@ export default function Priority() {
         data-tooltip-id='set-priority'
         data-tooltip-content={`Set note priority`}>
         <RiTimerFlashLine color={data.color} className='dot-icon' />
-        {state.currentNote.metadata.priority === 'none' ? (
+        {state.currentNote.priority === 'none' ? (
           <span>Set priority</span>
         ) : (
           <span>{data.label} Priority</span>

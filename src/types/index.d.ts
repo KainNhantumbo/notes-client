@@ -69,14 +69,12 @@ export type Note = {
   title: string;
   content: object;
   created_by: string;
-  metadata: {
-    folder_id: string;
-    pinned: boolean;
-    tags: Tag[];
-    deleted: boolean;
-    priority: 'none' | 'low' | 'medium' | 'high';
-    status: 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
-  };
+  folder_id: string;
+  pinned: boolean;
+  tags: Tag[];
+  deleted: boolean;
+  priority: 'none' | 'low' | 'medium' | 'high';
+  status: 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
   createdAt: string;
   updatedAt: string;
 };
@@ -96,8 +94,10 @@ export type Modal = {
   title: string;
   status: boolean;
   message: string;
-  actionButtonMessage: string | undefined;
-  handleFunction: ((data: any | undefined) => void | Promise<void>) | undefined;
+  actionButtonMessage?: string | undefined;
+  handleFunction?:
+    | ((data: any | undefined) => void | Promise<void>)
+    | undefined;
 };
 
 export type Query = { search: string; sort: string };

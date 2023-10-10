@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { StyledCornerButton } from '../defaults';
 
 export const _navigationDrawer = styled.section`
   top: 0;
@@ -24,41 +25,34 @@ export const _navigationDrawer = styled.section`
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    cursor: pointer;
+    gap: 12px;
     user-select: none;
+    padding: 8px 12px;
     border-bottom: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-    padding: 12px 20px;
 
-    .logo-container {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 8px;
-      img {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
+    h3 {
+      padding-top: 2px;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+      font-weight: 600;
 
-      h3 {
-        text-transform: uppercase;
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-    }
-
-    .hamburguer-icon {
-      pointer-events: none;
-      width: 20px;
-      height: 20px;
-    }
-
-    :hover {
-      .hamburguer-icon {
+      i {
         color: rgb(${({ theme }) => theme.primary_shade});
+      }
+    }
+
+    button {
+      ${StyledCornerButton}
+      width: 100%;
+      max-width: 18px;
+      height: 18px;
+      border-radius: 10px;
+      border: none;
+
+      :hover {
+        color: rgb(${({ theme }) => theme.error});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
       }
     }
   }

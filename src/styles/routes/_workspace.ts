@@ -263,15 +263,18 @@ export const _workspace = styled.main`
             }
           }
 
-          button {
-            ${StyledCornerButton}
-            border: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
+          .note-actions-container {
+            justify-self: flex-start;
+            align-self: flex-start;
 
-            :hover {
-              background: rgba(${({ theme }) => theme.font}, 0.1);
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+
+            button {
+              ${BaseButton}
             }
           }
         }

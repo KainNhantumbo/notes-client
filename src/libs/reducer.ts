@@ -38,14 +38,12 @@ const initialState: TState = {
     title: '',
     content: { type: 'doc', content: [] },
     created_by: '',
-    metadata: {
-      folder_id: '',
-      deleted: false,
-      pinned: false,
-      status: 'none',
-      priority: 'none',
-      tags: []
-    },
+    folder_id: '',
+    deleted: false,
+    pinned: false,
+    status: 'none',
+    priority: 'none',
+    tags: [],
     updatedAt: '',
     createdAt: ''
   },

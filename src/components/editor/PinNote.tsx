@@ -12,7 +12,7 @@ export default function TooglePinNote() {
     <Container
       data-tooltip-id='pin-note'
       data-tooltip-content={
-        state.currentNote.metadata.pinned ? 'Unpin note' : 'Pin note'
+        state.currentNote.pinned ? 'Unpin note' : 'Pin note'
       }
       onClick={() =>
         dispatch({
@@ -22,14 +22,14 @@ export default function TooglePinNote() {
             currentNote: {
               ...state.currentNote,
               metadata: {
-                ...state.currentNote.metadata,
-                pinned: !state.currentNote.metadata.pinned
+                ...state.currentNote,
+                pinned: !state.currentNote.pinned
               }
             }
           }
         })
       }>
-      {state.currentNote.metadata.pinned ? (
+      {state.currentNote.pinned ? (
         <>
           <RiPushpinFill style={{ color: `rgb(${primaryShadeColor})` }} />
           <span style={{ color: `rgb(${primaryShadeColor})` }}>Pinned</span>

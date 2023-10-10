@@ -114,7 +114,6 @@ function Workspace(): JSX.Element {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Note Sync Error',
             message:
               error?.response?.data?.message ||
@@ -143,7 +142,6 @@ function Workspace(): JSX.Element {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Data Sync Error',
             message: 'Failed to fetch your settings and user account data.',
             status: true,
@@ -181,15 +179,13 @@ function Workspace(): JSX.Element {
       {
         type: 'Pinned',
         data: state.notes.filter(
-          (note) =>
-            note.metadata.pinned && note.metadata.deleted === !isTrashFolder
+          (note) => note.pinned && note.deleted === !isTrashFolder
         )
       },
       {
         type: 'All Notes',
         data: state.notes.filter(
-          (note) =>
-            !note.metadata.pinned && !note.metadata.deleted === !isTrashFolder
+          (note) => !note.pinned && !note.deleted === !isTrashFolder
         )
       }
     ];
@@ -215,7 +211,7 @@ function Workspace(): JSX.Element {
       }}>
       <Container>
         <NavigationDrawer />
-        <About/>
+        <About />
 
         <section className='header-container'>
           <h2>
@@ -302,10 +298,8 @@ function Workspace(): JSX.Element {
                         whileHover={{
                           boxShadow: `0px 12px 25px rgba(${theme.black}, .1)`
                         }}
-                        onClick={(e: any) => {
-                          const isTarget =
-                            e.target.classList.contains('action-panel');
-                          if (!isTarget) handleEditNote(note);
+                        onClick={() => {
+                          if (!note.deleted) handleEditNote(note);
                         }}>
                         <div className='top-side'>
                           <h3>
@@ -316,9 +310,9 @@ function Workspace(): JSX.Element {
                           </h3>
                         </div>
 
-                        {note.metadata.tags?.length > 0 ? (
+                        {note.tags?.length > 0 ? (
                           <div className='tags-container'>
-                            {note.metadata.tags.map((tag) => (
+                            {note.tags.map((tag) => (
                               <p
                                 key={tag.id}
                                 style={{ backgroundColor: tag.color }}>
@@ -333,6 +327,16 @@ function Workspace(): JSX.Element {
                           {NoteAttributes.renderStatus(note)}
                           <h5>{formatDate(note.updatedAt)}</h5>
                         </div>
+                        {note.deleted ? (
+                          <div className='note-actions-container'>
+                            <button>
+                              <span>Restore</span>
+                            </button>
+                            <button>
+                              <span>Delete</span>
+                            </button>
+                          </div>
+                        ) : null}
                       </motion.div>
                     ))}
                   </section>
@@ -390,7 +394,7 @@ export default React.memo(Workspace);
 class NoteAttributes {
   static renderPriority(note: Note): JSX.Element {
     const [{ data, value }] = prioritiesDataMapping.filter(
-      (attr) => attr.value === note.metadata.priority
+      (attr) => attr.value === note.priority
     );
 
     return (
@@ -407,13 +411,13 @@ class NoteAttributes {
 
   static renderStatus(note: Note): JSX.Element {
     const [{ data }] = statusDataMapping.filter(
-      (item) => item.value === note.metadata.status
+      (item) => item.value === note.status
     );
 
     return (
       <div className='status-container'>
         <data.icon color={data.color} className='dot-icon' />
-        {note.metadata.status === 'none' ? (
+        {note.status === 'none' ? (
           <span>Normal status</span>
         ) : (
           <span>Currently {data.label}</span>
@@ -428,14 +432,12 @@ class NoteAttributes {
       title: '',
       content: {},
       created_by: '',
-      metadata: {
-        folder_id: '',
-        deleted: false,
-        pinned: false,
-        status: 'none',
-        priority: 'none',
-        tags: []
-      },
+      folder_id: '',
+      deleted: false,
+      pinned: false,
+      status: 'none',
+      priority: 'none',
+      tags: [],
       updatedAt: '',
       createdAt: ''
     };

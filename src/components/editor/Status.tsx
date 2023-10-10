@@ -14,7 +14,7 @@ export default function Status() {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const [{ data }] = statusDataMapping.filter((item) => {
-    if (item.value === state.currentNote.metadata.status) {
+    if (item.value === state.currentNote.status) {
       return item;
     }
   });
@@ -26,7 +26,7 @@ export default function Status() {
         ...state,
         currentNote: {
           ...state.currentNote,
-          metadata: { ...state.currentNote.metadata, status: data }
+          metadata: { ...state.currentNote, status: data }
         }
       }
     });
@@ -61,7 +61,7 @@ export default function Status() {
         data-tooltip-id={`set-status`}
         data-tooltip-content={`Set note status`}>
         <data.icon color={data.color} />
-        {state.currentNote.metadata.status === 'none' ? (
+        {state.currentNote.status === 'none' ? (
           <span>Set status</span>
         ) : (
           <span>Currently {data.label}</span>

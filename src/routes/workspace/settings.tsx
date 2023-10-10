@@ -58,7 +58,6 @@ export default function Settings() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Settings Sync Error',
             message:
               error?.response?.data?.message || 'Failed to sync your settings.',
@@ -96,7 +95,6 @@ export default function Settings() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Account Data Sync Error',
             message:
               error?.response?.data?.message ||
@@ -126,7 +124,6 @@ export default function Settings() {
           payload: {
             ...state,
             toast: {
-              ...state.toast,
               title: 'Update Password Error',
               message: 'Passwords must match. Please, try again.',
               status: true
@@ -148,7 +145,6 @@ export default function Settings() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Password Updated',
             message: 'Your password was updated successfully.',
             status: true
@@ -162,7 +158,6 @@ export default function Settings() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Update Password Error',
             message:
               error?.response?.data?.message ||
@@ -184,7 +179,6 @@ export default function Settings() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Trash Notes',
             message: 'The trash was cleared successfully!',
             status: true
@@ -198,7 +192,6 @@ export default function Settings() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Empty Trash Error',
             message:
               error?.response?.data?.message ||
@@ -212,7 +205,7 @@ export default function Settings() {
     } finally {
       dispatch({
         type: actions.PROMPT,
-        payload: {   ...state, prompt: { ...state.prompt, status: false } }
+        payload: { ...state, prompt: { ...state.prompt, status: false } }
       });
     }
   };
@@ -245,7 +238,6 @@ export default function Settings() {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Delete Account Error',
             message:
               error?.response?.data?.message ||

@@ -11,13 +11,13 @@ import {
   ReloadIcon,
   UpdateIcon
 } from '@radix-ui/react-icons';
-import Package from '../../package.json';
-import { Option } from '@/types';
 import {
   RiBubbleChartLine,
   RiMailCheckLine,
   RiStackLine
 } from 'react-icons/ri';
+import Package from '../../package.json';
+import { Option } from '@/types';
 
 export const app_metadata = {
   author: Package.author,
@@ -29,9 +29,7 @@ export const app_metadata = {
   tags: Package.keywords.join(' '),
   websiteUrl: Package.url,
   description: 'A simple taking notes application to fit your daily needs.',
-  copyright: `© ${new Date().getFullYear()} ${Package.metadata.name} | ${
-    Package.author.name
-  }`,
+  copyright: `${new Date().getFullYear()} ${Package.name}`,
   contacts: [
     {
       name: 'Github',
@@ -41,7 +39,7 @@ export const app_metadata = {
     {
       name: 'Portfolio',
       icon: RiStackLine,
-      url: Package.author.portfolio
+      url: Package.author.url
     },
     {
       name: 'E-mail',

@@ -33,9 +33,9 @@ export default function TagEditor({
         currentNote: {
           ...state.currentNote,
           metadata: {
-            ...state.currentNote.metadata,
+            ...state.currentNote,
             tags: [
-              ...state.currentNote.metadata.tags.map((currentTag) =>
+              ...state.currentNote.tags.map((currentTag) =>
                 currentTag.id === tag.id
                   ? { ...currentTag, ...tag }
                   : currentTag

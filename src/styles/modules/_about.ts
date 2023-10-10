@@ -126,6 +126,9 @@ export const _about = styled.section`
     .legal {
       margin: 0 auto;
       font-size: 0.92rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
       h3 {
         display: flex;

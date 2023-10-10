@@ -130,7 +130,6 @@ function AppContext({ children }: Props) {
         payload: {
           ...state,
           toast: {
-            ...state.toast,
             title: 'Note Sync Error',
             message:
               error?.response?.data?.message || 'Failed to sync your note.',
