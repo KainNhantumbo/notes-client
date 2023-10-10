@@ -2,7 +2,7 @@ import { Tag } from '@/types';
 import actions from '@/shared/actions';
 import { RiCloseLine, RiHashtag } from 'react-icons/ri';
 import { useAppContext } from '@/context/AppContext';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { SelectContainer } from '../Select';
 import { colorOptions } from '@/shared/data';
@@ -32,16 +32,11 @@ export default function TagEditor({
         ...state,
         currentNote: {
           ...state.currentNote,
-          metadata: {
-            ...state.currentNote,
-            tags: [
-              ...state.currentNote.tags.map((currentTag) =>
-                currentTag.id === tag.id
-                  ? { ...currentTag, ...tag }
-                  : currentTag
-              )
-            ]
-          }
+          tags: [
+            ...state.currentNote.tags.map((currentTag) =>
+              currentTag.id === tag.id ? { ...currentTag, ...tag } : currentTag
+            )
+          ]
         }
       }
     });

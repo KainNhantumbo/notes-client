@@ -41,7 +41,7 @@ export default function Editor() {
             type: actions.CURRENT_NOTE,
             payload: {
               ...state,
-              currentNote: { ...state.currentNote, content: editor.state.doc }
+              currentNote: { ...state.currentNote, content: editor.getHTML() }
             }
           });
         }}

@@ -31,10 +31,7 @@ export default function Tags() {
           ...state,
           currentNote: {
             ...state.currentNote,
-            metadata: {
-              ...state.currentNote,
-              tags: [...state.currentNote.tags, data]
-            }
+            tags: [...state.currentNote.tags, data]
           }
         }
       });
@@ -49,10 +46,7 @@ export default function Tags() {
         ...state,
         currentNote: {
           ...state.currentNote,
-          metadata: {
-            ...state.currentNote,
-            tags: [...state.currentNote.tags.filter((tag) => tag.id !== id)]
-          }
+          tags: [...state.currentNote.tags.filter((tag) => tag.id !== id)]
         }
       }
     });
@@ -77,8 +71,8 @@ export default function Tags() {
                 setIsTagEditorVisible(true);
               }}>
               {tag.value}
-              <Tooltip className='tooltip-class' id='edit-tag' />
             </p>
+            <Tooltip className='tooltip-class' id='edit-tag' />
             <button
               data-tooltip-id='remove-tag'
               data-tooltip-content='Remove tag'

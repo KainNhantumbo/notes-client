@@ -20,6 +20,7 @@ import { useTheme } from 'styled-components';
 import { Layout } from '@/components/Layout';
 import SortQuery from '@/components/SortQuery';
 import { Note, Settings, User } from '@/types';
+import About from '@/components/modals/About';
 import { useQueries } from '@tanstack/react-query';
 import { useAppContext } from '@/context/AppContext';
 import React, { useEffect, JSX, useMemo } from 'react';
@@ -27,7 +28,6 @@ import { MixIcon, PlusIcon } from '@radix-ui/react-icons';
 import NavigationDrawer from '@/components/NavigationDrawer';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
-import About from '@/components/modals/About';
 
 function Workspace(): JSX.Element {
   const theme = useTheme();
@@ -98,8 +98,7 @@ function Workspace(): JSX.Element {
     try {
       const { data } = await useFetchAPI<Note>({
         method: 'post',
-        url: '/api/v1/notes',
-        data: { content: { type: 'doc', content: [] } }
+        url: '/api/v1/notes'
       });
       dispatch({
         type: actions.CURRENT_NOTE,
@@ -181,7 +180,7 @@ function Workspace(): JSX.Element {
       {
         type: 'Pinned',
         data: state.notes.filter(
-          (note) => note.pinned && note.deleted === !isTrashFolder
+          (note) => note.pinned && !note.deleted === !isTrashFolder
         )
       },
       {
@@ -312,7 +311,7 @@ function Workspace(): JSX.Element {
                           </h3>
                         </div>
 
-                        {note.tags?.length > 0 ? (
+                        {note.tags.length > 0 ? (
                           <div className='tags-container'>
                             {note.tags.map((tag) => (
                               <p
@@ -365,7 +364,7 @@ function Workspace(): JSX.Element {
           </section>
         ) : null}
 
-        {state.notes.length < 1 && !isError && !isLoading ? (
+        {!hasNotes && !isError && !isLoading ? (
           <section className='empty-notes-container'>
             <div>
               <MixIcon />
@@ -440,7 +439,7 @@ class NoteAttributes {
     return {
       _id: '',
       title: '',
-      content: {},
+      content: '',
       created_by: '',
       folder_id: '',
       deleted: false,

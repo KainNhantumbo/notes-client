@@ -47,7 +47,7 @@ const initialState: TState = {
     updatedAt: '',
     createdAt: ''
   },
-  query: { search: '', sort: '-updatedAt' },
+  query: { search: '', sort: '-updatedAt', status: '', priority: '' },
   settings: {
     _id: '',
     created_by: '',

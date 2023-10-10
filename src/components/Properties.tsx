@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { readingTime } from 'reading-time-estimator';
-import { generateText, generateHTML } from '@tiptap/react';
+import { generateText, generateJSON } from '@tiptap/react';
 import { editorExtensions as extensions } from './editor/Editor';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
@@ -37,7 +37,10 @@ export default function Properties() {
 
   const metadata = useMemo(() => {
     try {
-      const content = generateText(state.currentNote.content, extensions);
+      const content = generateText(
+        generateJSON(state.currentNote.content, extensions),
+        extensions
+      );
       const estimatedLines = content.split('\n').length;
       const measure = readingTime(content, undefined, 'en');
       return {
@@ -69,11 +72,13 @@ export default function Properties() {
 
       const clipboard = async (data: string) =>
         navigator.clipboard.writeText(data);
-      const html = generateHTML(state.currentNote.content, extensions);
+      const html = state.currentNote.content;
       const markdown = new TurndownService({}).turndown(html);
-      const text = generateText(state.currentNote.content, extensions, {
-        blockSeparator: '\n'
-      });
+      const text = generateText(
+        generateJSON(state.currentNote.content, extensions),
+        extensions,
+        { blockSeparator: '\n' }
+      );
 
       switch (type) {
         case 'html':

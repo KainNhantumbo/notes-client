@@ -7,7 +7,7 @@ import { m as motion } from 'framer-motion';
 import { RiMenuLine } from 'react-icons/ri';
 import { Tooltip } from 'react-tooltip';
 import { useAppContext } from '@/context/AppContext';
-import { _customTools as Container } from '@/styles/modules/_customTools';
+import { _tools as Container } from '@/styles/modules/_tools';
 
 export default function CustomTools() {
   const { state, dispatch } = useAppContext();
@@ -20,7 +20,7 @@ export default function CustomTools() {
           name='title'
           placeholder='Untitled'
           aria-label='Your note title'
-          value={state.currentNote.title}
+          value={state.currentNote.title === 'Untitled' ? '' :state.currentNote.title }
           maxLength={115}
           required
           onChange={(e): void =>
@@ -35,7 +35,7 @@ export default function CustomTools() {
         />
       </div>
 
-      <div className='metadata-modifiers-container'>
+      <div className='extra-tools-container'>
         <div className='right-side-container'>
           <TooglePinNote />
           <Priority />

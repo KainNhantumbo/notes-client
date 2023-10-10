@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { StyledCornerButton } from '../defaults';
 
-export const _customTools = styled.section`
+export const _tools = styled.section`
   width: 100%;
   height: fit-content;
   display: flex;
@@ -27,7 +27,7 @@ export const _customTools = styled.section`
     }
   }
 
-  -modifiers-container {
+  .extra-tools-container {
     width: 100%;
     display: flex;
     flex-direction: row;

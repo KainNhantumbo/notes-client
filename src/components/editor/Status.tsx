@@ -24,10 +24,7 @@ export default function Status() {
       type: actions.CURRENT_NOTE,
       payload: {
         ...state,
-        currentNote: {
-          ...state.currentNote,
-          metadata: { ...state.currentNote, status: data }
-        }
+        currentNote: { ...state.currentNote, status: data }
       }
     });
     setIsDropdownVisible(false);

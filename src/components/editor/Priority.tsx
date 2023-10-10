@@ -25,10 +25,7 @@ export default function Priority() {
       type: actions.CURRENT_NOTE,
       payload: {
         ...state,
-        currentNote: {
-          ...state.currentNote,
-          metadata: { ...state.currentNote, priority: data }
-        }
+        currentNote: { ...state.currentNote, priority: data }
       }
     });
     setIsDropdownVisible(false);

@@ -21,10 +21,7 @@ export default function TooglePinNote() {
             ...state,
             currentNote: {
               ...state.currentNote,
-              metadata: {
-                ...state.currentNote,
-                pinned: !state.currentNote.pinned
-              }
+              pinned: !state.currentNote.pinned
             }
           }
         })

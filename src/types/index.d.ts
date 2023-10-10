@@ -67,7 +67,7 @@ export type Tag = { id: string; color: string; value: string };
 export type Note = {
   _id: string;
   title: string;
-  content: object;
+  content: string;
   created_by: string;
   folder_id: string;
   pinned: boolean;
@@ -100,7 +100,12 @@ export type Modal = {
     | undefined;
 };
 
-export type Query = { search: string; sort: string };
+export type Query = {
+  search: string;
+  sort: string;
+  status: string;
+  priority: string;
+};
 
 export type Option = { value: string; label: string };
 
