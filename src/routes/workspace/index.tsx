@@ -23,13 +23,13 @@ import { Note, Settings, User } from '@/types';
 import About from '@/components/modals/About';
 import { useQueries } from '@tanstack/react-query';
 import { useAppContext } from '@/context/AppContext';
-import React, { useEffect, JSX, useMemo } from 'react';
+import { useEffect, JSX, useMemo } from 'react';
 import { MixIcon, PlusIcon } from '@radix-ui/react-icons';
 import NavigationDrawer from '@/components/NavigationDrawer';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
 
-function Workspace(): JSX.Element {
+export default function Workspace(): JSX.Element {
   const theme = useTheme();
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [searchParams] = useSearchParams();
@@ -193,6 +193,72 @@ function Workspace(): JSX.Element {
     });
   };
 
+  const deleteNoteFromTrash = (noteId: string) => {
+    dispatch({
+      type: actions.PROMPT,
+      payload: {
+        ...state,
+        prompt: {
+          title: 'Delete Note',
+          message:
+            'Do you really want to permanently delete this note from the trash? This action cannot be undone.',
+          status: true,
+          actionButtonMessage: 'Delete',
+          handleFunction: async () => {
+            try {
+              const [foundNote] = state.notes.filter(
+                (note) => note._id === noteId
+              );
+              const { _id, ...data } = foundNote;
+              await useFetchAPI({
+                method: 'delete',
+                url: `/api/v1/notes/${_id}`,
+                data: { ...data, deleted: false }
+              });
+
+              dispatch({
+                type: actions.PROMPT,
+                payload: {
+                  ...state,
+                  prompt: { ...state.prompt, status: false }
+                }
+              });
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: {
+                    status: true,
+                    title: 'Notes Sync',
+                    message: 'Your note was deleted from trash successfully!'
+                  }
+                }
+              });
+              refetch({ queryKey: ['query-notes'] });
+            } catch (error: any) {
+              console.error(error?.response?.data?.message || error);
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: {
+                    title: 'Note Sync Error',
+                    message:
+                      error?.response?.data?.message ||
+                      'Failed to delete your note from trash. Check your internet connection and try again.',
+                    status: true,
+                    actionButtonMessage: 'Retry',
+                    handleFunction: deleteNoteFromTrash
+                  }
+                }
+              });
+            }
+          }
+        }
+      }
+    });
+  };
+
   function handleEditNote(data: Note) {
     dispatch({
       type: actions.CURRENT_NOTE,
@@ -229,7 +295,7 @@ function Workspace(): JSX.Element {
         payload: { ...state, notes: [...data] }
       });
     }
-  }, [data]);
+  }, [data, searchParams]);
 
   useEffect(() => {
     if (state.auth.token) {
@@ -400,7 +466,8 @@ function Workspace(): JSX.Element {
                               <RiLoopLeftLine />
                               <span>Restore</span>
                             </button>
-                            <button>
+                            <button
+                              onClick={() => deleteNoteFromTrash(note._id)}>
                               <RiDeleteBin2Line />
                               <span>Delete</span>
                             </button>
@@ -463,8 +530,6 @@ function Workspace(): JSX.Element {
     </Layout>
   );
 }
-
-export default React.memo(Workspace);
 
 class NoteAttributes {
   static renderPriority(note: Note): JSX.Element {

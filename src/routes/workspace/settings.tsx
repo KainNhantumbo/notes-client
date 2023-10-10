@@ -173,7 +173,7 @@ export default function Settings() {
 
   const handleEmptyTrash = async () => {
     try {
-      await useFetchAPI({ method: 'delete', url: `/api/v1/notes` });
+      await useFetchAPI({ method: 'delete', url: `/api/v1/notes/trash` });
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -743,7 +743,7 @@ export default function Settings() {
                             ...state.prompt,
                             title: 'Delete Permanently',
                             message:
-                              'Do you really want to permanently delete all notes from the trash? This actions cannot be undone.',
+                              'Do you really want to permanently delete all notes from the trash? This action cannot be undone.',
                             actionButtonMessage: 'Confirm',
                             status: true,
                             handleFunction: handleEmptyTrash
