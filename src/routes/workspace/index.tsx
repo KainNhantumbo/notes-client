@@ -118,7 +118,7 @@ function Workspace(): JSX.Element {
             title: 'Note Sync Error',
             message:
               error?.response?.data?.message ||
-              'Failed to create your note. Check your internet connection and try again',
+              'Failed to create your note. Check your internet connection and try again.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: createNote
@@ -127,6 +127,71 @@ function Workspace(): JSX.Element {
       });
     }
   }
+
+  const restoreNoteFromTrash = (noteId: string) => {
+    dispatch({
+      type: actions.PROMPT,
+      payload: {
+        ...state,
+        prompt: {
+          title: 'Restore Note',
+          message: 'Do you really want to restore this note?',
+          status: true,
+          actionButtonMessage: 'Restore',
+          handleFunction: async () => {
+            try {
+              const [foundNote] = state.notes.filter(
+                (note) => note._id === noteId
+              );
+              const { _id, ...data } = foundNote;
+              await useFetchAPI({
+                method: 'patch',
+                url: `/api/v1/notes/${_id}`,
+                data: { ...data, deleted: false }
+              });
+
+              dispatch({
+                type: actions.PROMPT,
+                payload: {
+                  ...state,
+                  prompt: { ...state.prompt, status: false }
+                }
+              });
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: {
+                    status: true,
+                    title: 'Notes Sync',
+                    message: 'Your note was restored from trash successfully!'
+                  }
+                }
+              });
+              refetch({ queryKey: ['query-notes'] });
+            } catch (error: any) {
+              console.error(error?.response?.data?.message || error);
+              dispatch({
+                type: actions.TOAST,
+                payload: {
+                  ...state,
+                  toast: {
+                    title: 'Note Sync Error',
+                    message:
+                      error?.response?.data?.message ||
+                      'Failed to restore your note from trash. Check your internet connection and try again.',
+                    status: true,
+                    actionButtonMessage: 'Retry',
+                    handleFunction: restoreNoteFromTrash
+                  }
+                }
+              });
+            }
+          }
+        }
+      }
+    });
+  };
 
   function handleEditNote(data: Note) {
     dispatch({
@@ -330,7 +395,8 @@ function Workspace(): JSX.Element {
                         </div>
                         {note.deleted ? (
                           <div className='note-actions-container'>
-                            <button>
+                            <button
+                              onClick={() => restoreNoteFromTrash(note._id)}>
                               <RiLoopLeftLine />
                               <span>Restore</span>
                             </button>

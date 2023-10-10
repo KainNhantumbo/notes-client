@@ -266,7 +266,6 @@ export const _workspace = styled.main`
           .note-actions-container {
             justify-self: flex-start;
             align-self: flex-start;
-
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -275,6 +274,15 @@ export const _workspace = styled.main`
 
             button {
               ${BaseButton}
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 5px;
+
+              svg {
+                width: 18px;
+                height: 18px;
+              }
             }
           }
         }
