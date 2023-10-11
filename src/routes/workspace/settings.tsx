@@ -513,6 +513,14 @@ export default function Settings() {
                       </label>
                       <p>This controls the display of markup editor tools.</p>
 
+                      <p>
+                        <strong>
+                          <i>Warning:</i> Please do not disble this when the
+                          autosave feature is off because you will not be able
+                          to sync your notes manualy.
+                        </strong>
+                      </p>
+
                       <SelectContainer
                         id='editor-toolbar'
                         placeholder={

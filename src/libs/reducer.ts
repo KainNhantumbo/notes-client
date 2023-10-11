@@ -57,7 +57,7 @@ const initialState: TState = {
         font_size: 16,
         line_height: 1.6,
         font_family:
-          "Inter, 'SF Display', 'Segoe UI', 'Noto Sans', Roboto, ' Sans', Tahoma, Geneva, Verdana, sans-serif",
+          "Inter, 'SF Display', 'Segoe UI', 'Noto Sans', Roboto, 'Open Sans', Helvetica, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
         font_weight: 400
       },
       editing: { enable_toolbar: true }

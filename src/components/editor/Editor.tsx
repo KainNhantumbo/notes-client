@@ -1,5 +1,5 @@
 import actions from '@/shared/actions';
-import { CSSProperties, memo, useEffect } from 'react';
+import { CSSProperties, memo } from 'react';
 import EditorToolbar from './EditorToolbar';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
@@ -16,8 +16,6 @@ import Superscript from '@tiptap/extension-superscript';
 import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
-import hjs from 'highlight.js';
-import hljs from 'highlight.js';
 
 function Editor() {
   const { state, dispatch } = useAppContext();
@@ -48,7 +46,11 @@ function Editor() {
           });
         }}
         editorProps={{ attributes: { class: 'editor-container' } }}
-        slotBefore={<EditorToolbar />}>
+        slotBefore={
+          state.settings.editor.editing.enable_toolbar ? (
+            <EditorToolbar />
+          ) : null
+        }>
         <BubbleMenu className='editor-bubble-menu'>
           <p></p>
         </BubbleMenu>

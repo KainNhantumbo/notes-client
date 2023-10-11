@@ -1,12 +1,12 @@
 import actions from '@/shared/actions';
-import { Layout } from '@/components/Layout';
-import { useEffect, Suspense, lazy } from 'react';
-import Properties from '@/components/Properties';
-import Tools from '@/components/editor/Tools';
-import { useAppContext } from '@/context/AppContext';
-import { _noteEditor as Container } from '@/styles/routes/_note-editor';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
+import { Layout } from '@/components/Layout';
+import Tools from '@/components/editor/Tools';
+import { useEffect, Suspense, lazy } from 'react';
+import Properties from '@/components/Properties';
+import { useAppContext } from '@/context/AppContext';
+import { _noteEditor as Container } from '@/styles/routes/_note-editor';
 
 const Editor = lazy(() => import('@/components/editor/Editor'));
 

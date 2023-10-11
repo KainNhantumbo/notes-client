@@ -156,6 +156,10 @@ export const _settings = styled.main`
               align-self: end;
               font-size: 0.8rem;
             }
+
+            i {
+              color: rgb(${({ theme }) => theme.error});
+            }
           }
 
           .auto-save_elements {
