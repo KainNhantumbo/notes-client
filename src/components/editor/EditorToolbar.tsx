@@ -26,6 +26,7 @@ import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
 import { useAppContext } from '@/context/AppContext';
 import actions from '@/shared/actions';
+import TextAlign from './TextAlign';
 
 export default function EditorToolbar() {
   const { editor } = useCurrentEditor();
@@ -134,6 +135,8 @@ export default function EditorToolbar() {
             id='underline'
           />
         </button>
+
+        <TextAlign />
 
         <button
           data-tooltip-id='strike'

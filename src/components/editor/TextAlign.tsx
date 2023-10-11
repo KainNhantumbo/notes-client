@@ -1,16 +1,15 @@
-import { useCurrentEditor } from '@tiptap/react';
-import Dropdown from 'rc-dropdown';
-import { useState } from 'react';
-import { IconType } from 'react-icons';
 import {
   RiAlignCenter,
   RiAlignJustify,
   RiAlignLeft,
   RiAlignRight,
-  RiText
 } from 'react-icons/ri';
+import Dropdown from 'rc-dropdown';
+import { useState } from 'react';
+import { IconType } from 'react-icons';
 import { Tooltip } from 'react-tooltip';
 import styled from 'styled-components';
+import { useCurrentEditor } from '@tiptap/react';
 
 type AlignOptions = 'left' | 'center' | 'right' | 'justify';
 
@@ -58,7 +57,7 @@ export default function TextAlign() {
         data-tooltip-id='text-align'
         data-tooltip-content='Align Text'
         className={editor.isActive('textAlign') ? 'is-active' : ''}>
-        <RiText />
+        <RiAlignCenter />
         <Tooltip
           classNameArrow='tooltip-border-class'
           className='tooltip-class'

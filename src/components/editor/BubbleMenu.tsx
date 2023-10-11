@@ -10,6 +10,7 @@ import {
 import Headings from './Headings';
 import { Tooltip } from 'react-tooltip';
 import { BubbleMenu as FloatingBubble, useCurrentEditor } from '@tiptap/react';
+import TextAlign from './TextAlign';
 
 export default function BubbleMenu() {
   const { editor } = useCurrentEditor();
@@ -60,6 +61,8 @@ export default function BubbleMenu() {
             id='underline'
           />
         </button>
+
+        <TextAlign />
 
         <button
           data-tooltip-id='strike'

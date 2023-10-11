@@ -19,6 +19,7 @@ export const _tags = styled.div`
     width: fit-content;
     display: flex;
     flex-flow: row wrap;
+    align-items: center;
     gap: 5px;
 
     .tag {
