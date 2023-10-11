@@ -64,7 +64,7 @@ export const app_features = [
   {
     icon: DashboardIcon,
     title: 'Powerful features',
-    content: `Sharing is made simple by exporting your notes to where you want - PDF, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`
+    content: `Sharing is made simple by exporting your notes to where you want - Plain Text, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`
   },
   {
     icon: HeartIcon,
@@ -75,7 +75,7 @@ export const app_features = [
   {
     icon: GearIcon,
     title: 'Make it Yours',
-    content: `Customize your notes with filters, labels, priorities, and more.`
+    content: `Customize your notes with filters, colors, status labels, priorities, and more.`
   },
   {
     icon: ColorWheelIcon,
@@ -85,7 +85,7 @@ export const app_features = [
   {
     icon: MagnifyingGlassIcon,
     title: 'Quick find',
-    content: `All you need to do is start typing - name of a note, description or tag - and instantly you're taken there.`
+    content: `All you need to do is start typing - name of a note, content or tag - and instantly you're taken there.`
   }
 ];
 

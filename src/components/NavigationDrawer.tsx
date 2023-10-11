@@ -4,33 +4,28 @@ import {
   RiArrowDropDownLine,
   RiArrowDropUpLine,
   RiCloseLine,
-  RiDeleteBin6Fill,
-  RiDeleteBin6Line,
   RiDeleteBin7Line,
   RiFolder3Line,
   RiHashtag,
   RiHome2Line,
   RiInformationLine,
   RiLogoutBoxRLine,
-  RiMenuLine,
   RiSettings6Line
 } from 'react-icons/ri';
-import { IconType } from 'react-icons';
-import classnames from 'classnames';
-import { Collapse } from 'react-collapse';
-import actions from '../shared/actions';
-import { app_metadata } from '@/shared/data';
-import logo from '@/assets/logo-192x192.png';
-import { useMemo, useState, memo, JSX } from 'react';
-import { useAppContext } from '../context/AppContext';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { m as motion, AnimatePresence } from 'framer-motion';
-import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
 import {
   CaretDownIcon,
   CaretUpIcon,
   DotFilledIcon
 } from '@radix-ui/react-icons';
+import { IconType } from 'react-icons';
+import classnames from 'classnames';
+import { Collapse } from 'react-collapse';
+import actions from '../shared/actions';
+import { useMemo, useState, memo, JSX } from 'react';
+import { useAppContext } from '../context/AppContext';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { m as motion, AnimatePresence } from 'framer-motion';
+import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
 
 type Navigation = Array<{
   label: string;
@@ -179,15 +174,11 @@ function NavigationDrawer(): JSX.Element {
         );
         if (duplicates.length > 0) return { ...item, count: duplicates.length };
         return { ...item, count: 0 };
-      });
-
-    //TODO: remove duplicated tags
-
-    // const t = tags
-    //   .map((item, index, array) =>
-    //     array.some((tag) => tag.count === item.count) ? null : item
-    //   )
-    //   .filter((tag) => tag !== null);
+      })
+      .filter((obj, index, arr) => {
+        return index === arr.findIndex((o) => obj.value === o.value);
+      })
+      .sort((a, b) => (a.value.toLowerCase() > b.value.toLowerCase() ? 1 : -1));
 
     return {
       label: 'tags',

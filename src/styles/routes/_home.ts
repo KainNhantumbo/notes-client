@@ -111,6 +111,7 @@ export const _home = styled.main`
         border-radius: 10px;
         margin: 10px auto;
         box-shadow: 0 12px 35px rgba(${({ theme }) => theme.black}, 0.2);
+        border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
       }
     }
 
@@ -141,7 +142,7 @@ export const _home = styled.main`
         padding: 20px;
         font-weight: 500;
         background: rgb(${({ theme }) => theme.foreground});
-        border: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
+        border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
         h3 {
           display: flex;
@@ -199,7 +200,6 @@ export const _home = styled.main`
         border-radius: 50%;
         margin: 10px auto;
         box-shadow: 0 12px 35px rgba(${({ theme }) => theme.black}, 0.2);
-        
       }
 
       .action-buttons {
