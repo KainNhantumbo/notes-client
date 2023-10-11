@@ -4,8 +4,8 @@ import {
   RiUnderline,
   RiStrikethrough,
   RiCodeLine,
-  RiFontColor,
-  RiParagraph
+  RiParagraph,
+  RiMarkPenLine
 } from 'react-icons/ri';
 import Headings from './Headings';
 import { Tooltip } from 'react-tooltip';
@@ -48,6 +48,8 @@ export default function BubbleMenu() {
           />
         </button>
 
+        <Headings />
+
         <button
           data-tooltip-id='underline'
           data-tooltip-content='Toggle Underline'
@@ -61,8 +63,6 @@ export default function BubbleMenu() {
             id='underline'
           />
         </button>
-
-        <TextAlign />
 
         <button
           data-tooltip-id='strike'
@@ -78,7 +78,21 @@ export default function BubbleMenu() {
           />
         </button>
 
-        <Headings />
+        <button
+          data-tooltip-id='highlight-text'
+          data-tooltip-content='Highlight'
+          type='button'
+          onClick={() => editor.chain().focus().toggleHighlight().run()}
+          className={editor.isActive('highlight') ? 'is-active' : ''}>
+          <RiMarkPenLine />
+          <Tooltip
+            classNameArrow='tooltip-border-class'
+            className='tooltip-class'
+            id='highlight-text'
+          />
+        </button>
+
+        <TextAlign />
 
         <button
           data-tooltip-id='paragraph'
@@ -104,23 +118,6 @@ export default function BubbleMenu() {
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
             id='code'
-          />
-        </button>
-        <button
-          data-tooltip-id='text-style'
-          data-tooltip-content='Toggle Text Style'
-          type='button'
-          onClick={() => editor.chain().focus().setColor('#E47131').run()}
-          className={
-            editor.isActive('textStyle', { color: '#E47131' })
-              ? 'is-active'
-              : ''
-          }>
-          <RiFontColor />
-          <Tooltip
-            classNameArrow='tooltip-border-class'
-            className='tooltip-class'
-            id='text-style'
           />
         </button>
       </section>

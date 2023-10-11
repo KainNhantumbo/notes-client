@@ -288,11 +288,6 @@ export const _noteEditor = styled.main`
       font-style: italic;
     }
 
-    mark {
-      background: rgba(${({ theme }) => theme.error}, 0.08);
-      color: rgb(${({ theme }) => theme.primary_shade});
-    }
-
     .text-style-class {
       color: rgb(${({ theme }) => theme.primary_shade});
     }

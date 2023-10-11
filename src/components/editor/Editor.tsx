@@ -3,9 +3,6 @@ import { CSSProperties, memo } from 'react';
 import EditorToolbar from './EditorToolbar';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
-import { Color } from '@tiptap/extension-color';
-import ListItem from '@tiptap/extension-list-item';
-import TextStyle from '@tiptap/extension-text-style';
 import Typography from '@tiptap/extension-typography';
 import { EditorProvider } from '@tiptap/react';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -18,9 +15,9 @@ import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import BubbleMenu from './BubbleMenu';
 import TextAlign from '@tiptap/extension-text-align';
-import HighLight from '@tiptap/extension-highlight'
+import Highlight from '@tiptap/extension-highlight';
 
-function Editor() {
+function Editor(): JSX.Element {
   const { state, dispatch } = useAppContext();
 
   const editorStyles: CSSProperties = {
@@ -63,7 +60,6 @@ function Editor() {
 export default memo(Editor);
 
 export const editorExtensions = [
-  TextStyle.configure({ HTMLAttributes: { class: 'text-style-class' } }),
   Typography,
   TextAlign.configure({
     types: ['heading', 'paragraph'],
@@ -96,7 +92,12 @@ export const editorExtensions = [
     emptyEditorClass: 'placeholder-class',
     placeholder: 'Start typing something...'
   }),
-  Color.configure({ types: [TextStyle.name, ListItem.name] }),
+  Highlight.configure({
+    HTMLAttributes: {
+      class: 'highlight-class'
+    },
+    multicolor: false
+  }),
   TaskList.configure({
     HTMLAttributes: { class: 'task-list-class' }
   }),
