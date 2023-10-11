@@ -4,9 +4,10 @@ import {
   RiUnderline,
   RiStrikethrough,
   RiCodeLine,
-  RiRulerLine,
-  RiTextWrap
+  RiFontColor,
+  RiParagraph
 } from 'react-icons/ri';
+import Headings from './Hedings';
 import { Tooltip } from 'react-tooltip';
 import { BubbleMenu as FloatingBubble, useCurrentEditor } from '@tiptap/react';
 
@@ -74,6 +75,21 @@ export default function BubbleMenu() {
           />
         </button>
 
+        <Headings />
+
+        <button
+          data-tooltip-id='paragraph'
+          data-tooltip-content='Paragraph'
+          onClick={() => editor.chain().focus().setParagraph().run()}
+          className={editor.isActive('paragraph') ? 'is-active' : ''}>
+          <RiParagraph />
+          <Tooltip
+            classNameArrow='tooltip-border-class'
+            className='tooltip-class'
+            id='paragraph'
+          />
+        </button>
+
         <button
           data-tooltip-id='code'
           data-tooltip-content='Inline Code'
@@ -87,28 +103,21 @@ export default function BubbleMenu() {
             id='code'
           />
         </button>
-
         <button
-          data-tooltip-id='horizontal-ruler'
-          data-tooltip-content='Insert Horizontal Ruler'
-          onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-          <RiRulerLine />
+          data-tooltip-id='text-style'
+          data-tooltip-content='Toggle Text Style'
+          type='button'
+          onClick={() => editor.chain().focus().setColor('#E47131').run()}
+          className={
+            editor.isActive('textStyle', { color: '#E47131' })
+              ? 'is-active'
+              : ''
+          }>
+          <RiFontColor />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
-            id='horizontal-ruler'
-          />
-        </button>
-
-        <button
-          data-tooltip-id='hard-break'
-          data-tooltip-content='Insert Hard Break'
-          onClick={() => editor.chain().focus().setHardBreak().run()}>
-          <RiTextWrap />
-          <Tooltip
-            classNameArrow='tooltip-border-class'
-            className='tooltip-class'
-            id='hard-break'
+            id='text-style'
           />
         </button>
       </section>
