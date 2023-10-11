@@ -20,7 +20,7 @@ import {
   RiUnderline
 } from 'react-icons/ri';
 import Image from './Image';
-import Headings from './Hedings';
+import Headings from './Headings';
 import { Tooltip } from 'react-tooltip';
 import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';

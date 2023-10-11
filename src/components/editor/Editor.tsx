@@ -17,6 +17,7 @@ import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import BubbleMenu from './BubbleMenu';
+import TextAlign from '@tiptap/extension-text-align';
 
 function Editor() {
   const { state, dispatch } = useAppContext();
@@ -63,6 +64,11 @@ export default memo(Editor);
 export const editorExtensions = [
   TextStyle.configure({ HTMLAttributes: { class: 'text-style-class' } }),
   Typography,
+  TextAlign.configure({
+    types: ['heading', 'paragraph'],
+    alignments: ['left', 'center', 'right', 'justify'],
+    defaultAlignment: 'left'
+  }),
   Subscript.configure({
     HTMLAttributes: { class: 'subscript-class' }
   }),

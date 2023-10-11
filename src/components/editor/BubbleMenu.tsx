@@ -7,7 +7,7 @@ import {
   RiFontColor,
   RiParagraph
 } from 'react-icons/ri';
-import Headings from './Hedings';
+import Headings from './Headings';
 import { Tooltip } from 'react-tooltip';
 import { BubbleMenu as FloatingBubble, useCurrentEditor } from '@tiptap/react';
 
