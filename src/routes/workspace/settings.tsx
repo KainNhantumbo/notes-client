@@ -42,11 +42,7 @@ export default function Settings() {
 
   const syncSettings = async (data: Settings) => {
     try {
-      await useFetchAPI({
-        method: 'patch',
-        url: '/api/v1/settings',
-        data: { ...data }
-      });
+      await useFetchAPI({ method: 'patch', url: '/api/v1/settings', data });
       dispatch({
         type: actions.SETTINGS,
         payload: { ...state, settings: data }
@@ -147,7 +143,8 @@ export default function Settings() {
           toast: {
             title: 'Password Updated',
             message: 'Your password was updated successfully.',
-            status: true
+            status: true,
+            closeOnDelay: true
           }
         }
       });
@@ -181,7 +178,8 @@ export default function Settings() {
           toast: {
             title: 'Trash Notes',
             message: 'The trash was cleared successfully!',
-            status: true
+            status: true,
+            closeOnDelay: true
           }
         }
       });
@@ -213,7 +211,6 @@ export default function Settings() {
   const handleDeleteAccount = async () => {
     try {
       await useFetchAPI({ method: 'delete', url: '/api/v1/users' });
-
       dispatch({
         type: actions.AUTH,
         payload: {
@@ -221,7 +218,6 @@ export default function Settings() {
           auth: { id: '', name: '', token: '', email: '' }
         }
       });
-
       navigate('/', { replace: true });
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);

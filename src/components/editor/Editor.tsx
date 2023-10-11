@@ -8,7 +8,6 @@ import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import Typography from '@tiptap/extension-typography';
 import { EditorProvider, BubbleMenu } from '@tiptap/react';
-import FontFamily from '@tiptap/extension-font-family';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
 import Subscript from '@tiptap/extension-subscript';
@@ -17,25 +16,22 @@ import Superscript from '@tiptap/extension-superscript';
 import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
-import hjs from 'highlight.js'
+import hjs from 'highlight.js';
 import hljs from 'highlight.js';
 
 function Editor() {
   const { state, dispatch } = useAppContext();
 
-  const editorStyles: CSSProperties = {
-    fontFamily: state.settings.editor.font.font_family,
-    fontSize: state.settings.editor.font.font_size,
-    fontWeight: state.settings.editor.font.font_weight,
-    lineHeight: `${String(state.settings.editor.font.line_height)} px`,
-    wordWrap: 'break-word',
-    lineBreak: 'anywhere',
-    maxWidth: '1080px'
-  };
-
-  useEffect(() => {
-    
-  }, [state.currentNote]);
+  // TODO: add styles to the editor
+  // const editorStyles: CSSProperties = {
+  //   fontFamily: state.settings.editor.font.font_family,
+  //   fontSize: state.settings.editor.font.font_size,
+  //   fontWeight: state.settings.editor.font.font_weight,
+  //   lineHeight: `${String(state.settings.editor.font.line_height)} px`,
+  //   wordWrap: 'break-word',
+  //   lineBreak: 'anywhere',
+  //   maxWidth: '1080px'
+  // };
 
   return (
     <div className='editor-box-container'>

@@ -90,7 +90,7 @@ export type Modal = {
   title: string;
   status: boolean;
   message: string;
-  delayMs?: number;
+  closeOnDelay?: boolean;
   actionButtonMessage?: string | undefined;
   handleFunction?:
     | ((data: any | undefined) => void | Promise<void>)

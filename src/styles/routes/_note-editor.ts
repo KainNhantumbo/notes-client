@@ -3,8 +3,7 @@ import styled from 'styled-components';
 export const _noteEditor = styled.main`
   width: 100%;
   height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
+  max-height: 99vh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -78,7 +77,7 @@ export const _noteEditor = styled.main`
   .editor-container,
   .tiptap {
     width: 100%;
-    max-height: 75vh;
+    max-height: 100%;
     padding: 12px;
 
     @media screen and (max-width: 740px) {

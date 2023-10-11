@@ -101,7 +101,8 @@ export default function Properties() {
           toast: {
             title: 'Note Copied!',
             message: 'Note contents copied to clipboard successfully',
-            status: true
+            status: true,
+            closeOnDelay: true
           }
         }
       });
@@ -155,7 +156,8 @@ export default function Properties() {
                   toast: {
                     title: 'Duplicate Confirmation',
                     message: 'Note duplicated successfully',
-                    status: true
+                    status: true,
+                    closeOnDelay: true
                   }
                 }
               });

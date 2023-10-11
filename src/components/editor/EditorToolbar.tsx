@@ -43,7 +43,7 @@ export default function EditorToolbar() {
           title: 'Note Sync',
           message: 'Note changes saved successfully!',
           status: true,
-          delayMs: 5000
+          closeOnDelay: true
         }
       }
     });

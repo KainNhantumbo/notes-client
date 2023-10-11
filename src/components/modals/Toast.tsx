@@ -9,7 +9,7 @@ export default function Toast() {
   const { state, dispatch } = useAppContext();
 
   useEffect(() => {
-    if (!state.toast.delayMs) return;
+    if (!state.toast.closeOnDelay) return;
     const debounceTimer = setTimeout(() => {
       dispatch({
         type: actions.TOAST,
@@ -18,7 +18,7 @@ export default function Toast() {
           toast: { title: '', message: '', status: false }
         }
       });
-    }, state.toast.delayMs);
+    }, 5000);
 
     return () => clearTimeout(debounceTimer);
   }, [state.toast]);
