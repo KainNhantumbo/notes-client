@@ -75,6 +75,55 @@ export const _noteEditor = styled.main`
     }
   }
 
+  .bubble-menu-container {
+    width: 100%;
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    gap: 5px;
+    margin: 5px 0;
+    margin: 0 auto;
+    padding: 5px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    background: rgba(${({ theme }) => theme.foreground}, 0.8);
+    box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
+    border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
+
+    button {
+      all: unset;
+      color: rgb(${({ theme }) => theme.font});
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      display: grid;
+      place-content: center;
+      padding: 5px;
+      border-radius: 8px;
+
+      :hover {
+        color: rgb(${({ theme }) => theme.primary_shade});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
+      }
+
+      svg {
+        pointer-events: none;
+        width: 17px;
+        height: 17px;
+      }
+
+      :disabled {
+        color: rgba(${({ theme }) => theme.font}, 0.5);
+      }
+    }
+
+    .is-active {
+      color: rgb(${({ theme }) => theme.primary_shade});
+      background: rgb(${({ theme }) => theme.primary}, 0.2);
+    }
+  }
+
   .editor-container,
   .tiptap {
     width: 100%;

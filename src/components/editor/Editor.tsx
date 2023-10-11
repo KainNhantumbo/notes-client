@@ -7,7 +7,7 @@ import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import Typography from '@tiptap/extension-typography';
-import { EditorProvider, BubbleMenu } from '@tiptap/react';
+import { EditorProvider } from '@tiptap/react';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
 import Subscript from '@tiptap/extension-subscript';
@@ -16,6 +16,7 @@ import Superscript from '@tiptap/extension-superscript';
 import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
+import BubbleMenu from './BubbleMenu';
 
 function Editor() {
   const { state, dispatch } = useAppContext();
@@ -51,9 +52,7 @@ function Editor() {
             <EditorToolbar />
           ) : null
         }>
-        <BubbleMenu className='editor-bubble-menu'>
-          <p></p>
-        </BubbleMenu>
+        <BubbleMenu />
       </EditorProvider>
     </div>
   );
