@@ -18,6 +18,7 @@ import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import BubbleMenu from './BubbleMenu';
 import TextAlign from '@tiptap/extension-text-align';
+import HighLight from '@tiptap/extension-highlight'
 
 function Editor() {
   const { state, dispatch } = useAppContext();
