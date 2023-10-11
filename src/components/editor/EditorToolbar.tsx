@@ -12,6 +12,7 @@ import {
   RiListRadio,
   RiParagraph,
   RiRulerLine,
+  RiSave2Line,
   RiStrikethrough,
   RiSubscript,
   RiSuperscript,
@@ -23,15 +24,49 @@ import Headings from './Hedings';
 import { Tooltip } from 'react-tooltip';
 import { useCurrentEditor } from '@tiptap/react';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
+import { useAppContext } from '@/context/AppContext';
+import actions from '@/shared/actions';
 
 export default function EditorToolbar() {
   const { editor } = useCurrentEditor();
+  const { state, dispatch, syncCurrentNote } = useAppContext();
 
   if (!editor) return null;
+
+  const saveNoteChanges = () => {
+    syncCurrentNote();
+    dispatch({
+      type: actions.TOAST,
+      payload: {
+        ...state,
+        toast: {
+          title: 'Note Sync',
+          message: 'Note changes saved successfully!',
+          status: true,
+          delayMs: 5000
+        }
+      }
+    });
+  };
 
   return (
     <Container>
       <section className='toolbar-wrapper-container'>
+        {!state.settings.editor.auto_save.enabled ? (
+          <button
+            data-tooltip-id='save'
+            data-tooltip-content='Save changes'
+            onClick={saveNoteChanges}
+            disabled={false}>
+            <RiSave2Line />
+            <Tooltip
+              classNameArrow='tooltip-border-class'
+              className='tooltip-class'
+              id='save'
+            />
+          </button>
+        ) : null}
+
         <button
           data-tooltip-id='undo'
           data-tooltip-content='Undo'

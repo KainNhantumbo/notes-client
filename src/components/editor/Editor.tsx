@@ -1,5 +1,5 @@
 import actions from '@/shared/actions';
-import { CSSProperties, memo } from 'react';
+import { CSSProperties, memo, useEffect } from 'react';
 import EditorToolbar from './EditorToolbar';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
@@ -17,6 +17,8 @@ import Superscript from '@tiptap/extension-superscript';
 import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
+import hjs from 'highlight.js'
+import hljs from 'highlight.js';
 
 function Editor() {
   const { state, dispatch } = useAppContext();
@@ -30,6 +32,10 @@ function Editor() {
     lineBreak: 'anywhere',
     maxWidth: '1080px'
   };
+
+  useEffect(() => {
+    
+  }, [state.currentNote]);
 
   return (
     <div className='editor-box-container'>
@@ -105,6 +111,7 @@ export const editorExtensions = [
     dropcursor: { width: 2, color: 'rgb(228, 113, 49)' },
     code: { HTMLAttributes: { class: 'code-class' } },
     blockquote: { HTMLAttributes: { class: 'blockquote-class' } },
-    horizontalRule: {HTMLAttributes: {class: 'hr-class'}}
+    horizontalRule: { HTMLAttributes: { class: 'hr-class' } },
+    codeBlock: { HTMLAttributes: { class: 'code-block-class' } }
   })
 ];

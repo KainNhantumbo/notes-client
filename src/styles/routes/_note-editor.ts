@@ -4,6 +4,7 @@ export const _noteEditor = styled.main`
   width: 100%;
   height: 100vh;
   max-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -55,12 +56,34 @@ export const _noteEditor = styled.main`
     margin: 0 auto;
   }
 
+  .ProseMirror {
+    min-height: 250px;
+    overflow-y: auto;
+
+    :focus {
+      outline: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      cursor: grab;
+
+      :hover {
+        width: 12px;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+
   .editor-container,
   .tiptap {
     width: 100%;
-    max-height: 100%;
-    overflow-y: hidden;
+    max-height: 75vh;
     padding: 12px;
+
+    @media screen and (max-width: 740px) {
+      max-height: 71.5vh;
+    }
 
     .placeholder-class:first-child::before {
       color: rgba(${({ theme }) => theme.font}, 0.5);
@@ -174,12 +197,9 @@ export const _noteEditor = styled.main`
       width: 100%;
       background: rgba(${({ theme }) => theme.primary}, 0.1);
       border-left: 3px solid rgba(${({ theme }) => theme.font}, 0.1);
-      border-radius: 5px;
-      text-align: center;
-      font-weight: 500;
+      text-align: left;
       font-size: 1.2rem;
       padding: 18px;
-      font-style: italic;
       margin: 12px 0;
 
       p {
@@ -196,13 +216,23 @@ export const _noteEditor = styled.main`
       }
     }
 
+    code {
+      line-height: 1.4rem;
+    }
+
     .code-class {
+      white-space: pre;
       padding: 2px 5px;
       background: rgba(${({ theme }) => theme.font}, 0.1);
       border-radius: 5px;
       margin: 0 5px;
+      line-height: 1.6rem;
       font-family: Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono',
         'Courier New', ui-monospace, monospace;
+    }
+
+    .code-block-class {
+      white-space: pre;
     }
 
     i {

@@ -5,17 +5,19 @@ export const _editorToolbar = styled.section`
 
   .toolbar-wrapper-container {
     width: 100%;
+    min-width: fit-content;
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-flow: row wrap;
     gap: 5px;
+    margin: 5px 0;
     margin: 0 auto;
-    margin-bottom: 5px;
 
     button {
       all: unset;
       color: rgb(${({ theme }) => theme.font});
-      width: fit-content;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
       display: grid;
       place-content: center;

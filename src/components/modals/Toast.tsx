@@ -3,9 +3,25 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _toast as Container } from '@/styles/modules/_toast';
+import { useEffect } from 'react';
 
 export default function Toast() {
   const { state, dispatch } = useAppContext();
+
+  useEffect(() => {
+    if (!state.toast.delayMs) return;
+    const debounceTimer = setTimeout(() => {
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: { title: '', message: '', status: false }
+        }
+      });
+    }, state.toast.delayMs);
+
+    return () => clearTimeout(debounceTimer);
+  }, [state.toast]);
 
   return (
     <AnimatePresence>

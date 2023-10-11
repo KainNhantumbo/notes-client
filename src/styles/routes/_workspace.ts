@@ -212,7 +212,7 @@ export const _workspace = styled.main`
             display: flex;
             flex-flow: row wrap;
             align-items: center;
-            gap: 3px;
+            gap: 5px;
 
             p {
               width: fit-content;
@@ -243,6 +243,7 @@ export const _workspace = styled.main`
               padding: 6px 8px;
               color: rgb(${({ theme }) => theme.primary_shade});
               background: rgb(${({ theme }) => theme.primary}, 0.2);
+              text-transform: capitalize;
 
               span {
                 font-weight: 500;
@@ -253,6 +254,12 @@ export const _workspace = styled.main`
                 width: 18px;
                 height: 18px;
                 transform: scale(50px);
+              }
+
+              @media screen and (max-width: 530px) {
+                i {
+                  display: none;
+                }
               }
             }
 

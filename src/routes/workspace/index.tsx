@@ -310,7 +310,7 @@ export default function Workspace(): JSX.Element {
   }, [state.query]);
 
   const groupedNotes = useMemo(() => {
-    const queryObj = searchParams.get('folder')
+    const queryObj = searchParams.get('folder');
     console.log(queryObj);
 
     return [
@@ -558,9 +558,14 @@ class NoteAttributes {
       <div className='priority-container'>
         <RiTimerFlashLine color={data.color} className='dot-icon' />
         {value === 'none' ? (
-          <span>Normal priority</span>
+          <span>
+            Normal<i> priority</i>
+          </span>
         ) : (
-          <span>{data.label} Priority</span>
+          <span>
+            {data.label}
+            <i> Priority</i>
+          </span>
         )}
       </div>
     );
@@ -575,9 +580,14 @@ class NoteAttributes {
       <div className='status-container'>
         <data.icon color={data.color} className='dot-icon' />
         {note.status === 'none' ? (
-          <span>Normal status</span>
+          <span>
+            <i>Normal </i>status
+          </span>
         ) : (
-          <span>Currently {data.label}</span>
+          <span>
+            <i>Currently </i>
+            {data.label}
+          </span>
         )}
       </div>
     );

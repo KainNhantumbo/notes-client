@@ -67,6 +67,7 @@ const DropdownContainer = styled.section`
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 500;
+  gap: 5px;
 
   div {
     display: flex;

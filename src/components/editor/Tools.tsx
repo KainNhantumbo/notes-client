@@ -9,7 +9,7 @@ import { Tooltip } from 'react-tooltip';
 import { useAppContext } from '@/context/AppContext';
 import { _tools as Container } from '@/styles/modules/_tools';
 
-export default function CustomTools() {
+export default function Tools() {
   const { state, dispatch } = useAppContext();
 
   return (

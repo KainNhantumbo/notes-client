@@ -70,7 +70,6 @@ export const _navigationDrawer = styled.section`
     flex-direction: column;
     justify-content: space-between;
     overflow-y: scroll;
-    scroll-padding-bottom: 460px;
     padding-bottom: 200px;
 
     ::-webkit-scrollbar {
@@ -243,16 +242,16 @@ export const _navigationDrawer = styled.section`
     .bottom-navigator {
       width: 100%;
       display: flex;
+      padding: 20px 12px;
       flex-direction: column;
       gap: 5px;
-      padding: 20px 12px;
-      border-top: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
       position: absolute;
       bottom: 0;
       left: 0;
       z-index: 3000;
+      border-radius: 12px 12px;
       background: rgb(${({ theme }) => theme.foreground});
-      border-bottom-right-radius: 12px;
+      border-top: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
       button {
         all: unset;

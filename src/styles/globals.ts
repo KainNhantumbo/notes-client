@@ -34,11 +34,19 @@ export const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar {
     width: 5px;
     background: rgba(${({ theme }) => theme.background}, 0.3);
+
+    :hover {
+      transition: all 0.2s ease-in-out;
+    }
   }
 
   ::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background: rgb(${({ theme }) => theme.font});
+
+    :hover {
+      transition: all 0.2s ease-in-out;
+    }
   }
   
   ::-webkit-scrollbar-thumb::before {

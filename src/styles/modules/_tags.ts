@@ -9,11 +9,17 @@ export const _tags = styled.div`
   margin-bottom: 8px;
   position: relative;
 
+  @media screen and (max-width: 530px) {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
   .tags-list-container {
-    display: flex;
-    flex-direction: row;
-    gap: 3px;
     width: fit-content;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 5px;
 
     .tag {
       display: flex;
@@ -23,9 +29,8 @@ export const _tags = styled.div`
       padding: 5px;
       border-radius: 12px;
       user-select: none;
-      width: 100%;
-      min-width: fit-content;
-      
+      width: fit-content;
+
       p {
         font-size: 0.8rem;
         font-weight: 500;
@@ -72,6 +77,14 @@ export const _tags = styled.div`
     ::placeholder {
       color: rgba(${({ theme }) => theme.font}, 0.8);
       font-size: 0.9rem;
+    }
+
+    @media screen and (max-width: 530px) {
+      width: 100%;
+      max-width: 100%;
+      align-self: flex-start;
+      justify-self: flex-start;
+
     }
   }
 `;
