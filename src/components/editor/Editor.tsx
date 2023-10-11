@@ -22,19 +22,19 @@ import hljs from 'highlight.js';
 function Editor() {
   const { state, dispatch } = useAppContext();
 
-  // TODO: add styles to the editor
-  // const editorStyles: CSSProperties = {
-  //   fontFamily: state.settings.editor.font.font_family,
-  //   fontSize: state.settings.editor.font.font_size,
-  //   fontWeight: state.settings.editor.font.font_weight,
-  //   lineHeight: `${String(state.settings.editor.font.line_height)} px`,
-  //   wordWrap: 'break-word',
-  //   lineBreak: 'anywhere',
-  //   maxWidth: '1080px'
-  // };
+  const editorStyles: CSSProperties = {
+    fontFamily: state.settings.editor.font.font_family,
+    fontSize: state.settings.editor.font.font_size,
+    fontWeight: state.settings.editor.font.font_weight,
+    lineHeight: `${String(state.settings.editor.font.line_height)} px`,
+    wordWrap: 'break-word',
+    lineBreak: 'anywhere',
+    maxWidth: '1080px',
+    maxHeight: '100%'
+  };
 
   return (
-    <div className='editor-box-container'>
+    <div style={editorStyles} className='editor-box-container'>
       <EditorProvider
         extensions={editorExtensions}
         content={state.currentNote.content}

@@ -57,7 +57,7 @@ const initialState: TState = {
         font_size: 16,
         line_height: 1.6,
         font_family:
-          "Inter, Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono', 'Courier New', ui-monospace, monospace",
+          "Inter, 'SF Display', 'Segoe UI', 'Noto Sans', Roboto, ' Sans', Tahoma, Geneva, Verdana, sans-serif",
         font_weight: 400
       },
       editing: { enable_toolbar: true }

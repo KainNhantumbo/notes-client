@@ -311,7 +311,6 @@ export default function Workspace(): JSX.Element {
 
   const groupedNotes = useMemo(() => {
     const queryObj = searchParams.get('folder');
-    console.log(queryObj);
 
     return [
       {

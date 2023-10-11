@@ -18,6 +18,7 @@ import {
 } from 'react-icons/ri';
 import Package from '../../package.json';
 import { Option } from '@/types';
+import { RequiredOptions } from 'prettier';
 
 export const app_metadata = {
   author: Package.author,
@@ -169,3 +170,19 @@ export const statusDataMapping = [
     data: { label: 'Completed', color: '#3D9A50', icon: CheckCircledIcon }
   }
 ];
+
+export const prettierConfig: Partial<RequiredOptions> = {
+  semi: true,
+  trailingComma: 'es5',
+  singleQuote: true,
+  endOfLine: 'lf',
+  printWidth: 80,
+  tabWidth: 2,
+  useTabs: false,
+  proseWrap: 'preserve',
+  jsxSingleQuote: true,
+  bracketSpacing: true,
+  bracketSameLine: true,
+  arrowParens: 'always',
+  vueIndentScriptAndStyle: true
+};

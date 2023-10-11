@@ -25,6 +25,8 @@ import { generateText, generateJSON } from '@tiptap/react';
 import { editorExtensions as extensions } from './editor/Editor';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _properties as Container } from '@/styles/modules/_properties';
+import prettier from 'prettier';
+import { prettierConfig } from '@/shared/data';
 
 type ExportTypes = 'markdown' | 'html' | 'text';
 
@@ -72,7 +74,15 @@ export default function Properties() {
 
       const clipboard = async (data: string) =>
         navigator.clipboard.writeText(data);
-      const html = state.currentNote.content;
+
+      const html = await prettier.format(
+        state.currentNote.content,
+       
+      );
+
+      console.log(prettier.getFileInfo(html));
+      console.log(html);
+
       const markdown = new TurndownService({}).turndown(html);
       const text = generateText(
         generateJSON(state.currentNote.content, extensions),
