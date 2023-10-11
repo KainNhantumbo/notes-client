@@ -59,9 +59,13 @@ export default function Status() {
         data-tooltip-content={`Set note status`}>
         <data.icon color={data.color} />
         {state.currentNote.status === 'none' ? (
-          <span>Set status</span>
+          <span>
+            <i>Set </i>status
+          </span>
         ) : (
-          <span>Currently {data.label}</span>
+          <span>
+            <i>Currently</i> {data.label}
+          </span>
         )}
         <CaretDownIcon />
         <Tooltip
@@ -127,6 +131,8 @@ const DropdownTriggerButton = styled.button`
   gap: 3px;
   border-radius: 8px;
   padding: 6px 8px;
+  white-space: nowrap;
+  width: fit-content;
 
   :hover {
     transition: all 200ms ease-in-out;

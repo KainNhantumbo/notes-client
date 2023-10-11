@@ -37,7 +37,8 @@ export default function Workspace(): JSX.Element {
   const navigate = useNavigate();
 
   const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
-  const isTrashFolder = currentTab === 'trash';
+  const isTrashTab = currentTab === 'trash';
+  const isTagsTab = currentTab === 'tags';
 
   const [notesQuery, settingsQuery, userQuery] = useQueries({
     queries: [
@@ -276,7 +277,8 @@ export default function Workspace(): JSX.Element {
           ...state,
           toast: {
             title: 'Data Sync Error',
-            message: 'Failed to fetch your settings and user account data.',
+            message:
+              'Failed to fetch your settings and user account data. You must be logged in and have a good internet connection.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: () => {
@@ -308,17 +310,20 @@ export default function Workspace(): JSX.Element {
   }, [state.query]);
 
   const groupedNotes = useMemo(() => {
+    const queryObj = searchParams.get('folder')
+    console.log(queryObj);
+
     return [
       {
         type: 'Pinned',
         data: state.notes.filter(
-          (note) => note.pinned && !note.deleted === !isTrashFolder
+          (note) => note.pinned && !note.deleted === !isTrashTab
         )
       },
       {
         type: 'All Notes',
         data: state.notes.filter(
-          (note) => !note.pinned && !note.deleted === !isTrashFolder
+          (note) => !note.pinned && !note.deleted === !isTrashTab
         )
       }
     ];
@@ -390,7 +395,7 @@ export default function Workspace(): JSX.Element {
             />
             <SortQuery />
 
-            {!isError && !isLoading && !isTrashFolder ? (
+            {!isError && !isLoading && !isTrashTab ? (
               <motion.button
                 title='Compose a new note'
                 placeholder='Compose a new note'
@@ -497,7 +502,7 @@ export default function Workspace(): JSX.Element {
           </section>
         ) : null}
 
-        {!hasNotes && !isTrashFolder && !isError && !isLoading ? (
+        {!hasNotes && !isTrashTab && !isError && !isLoading ? (
           <section className='empty-notes-container'>
             <div>
               <MixIcon />
@@ -511,7 +516,7 @@ export default function Workspace(): JSX.Element {
           </section>
         ) : null}
 
-        {!hasNotes && isTrashFolder && !isError && !isLoading ? (
+        {!hasNotes && isTrashTab && !isError && !isLoading ? (
           <section className='empty-notes-container'>
             <div>
               <RiDeleteBin6Line />

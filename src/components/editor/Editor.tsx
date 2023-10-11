@@ -1,5 +1,5 @@
 import actions from '@/shared/actions';
-import { CSSProperties } from 'react';
+import { CSSProperties, memo } from 'react';
 import EditorToolbar from './EditorToolbar';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
@@ -18,7 +18,7 @@ import Image from '@tiptap/extension-image';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 
-export default function Editor() {
+function Editor() {
   const { state, dispatch } = useAppContext();
 
   const editorStyles: CSSProperties = {
@@ -55,8 +55,10 @@ export default function Editor() {
   );
 }
 
+export default memo(Editor);
+
 export const editorExtensions = [
-  TextStyle,
+  TextStyle.configure({ HTMLAttributes: { class: 'text-style-class' } }),
   Typography,
   Subscript.configure({
     HTMLAttributes: { class: 'subscript-class' }
@@ -89,7 +91,7 @@ export const editorExtensions = [
     HTMLAttributes: { class: 'task-list-class' }
   }),
   TaskItem.configure({
-    nested: true,
+    nested: false,
     HTMLAttributes: { class: 'task-item-class' }
   }),
   StarterKit.configure({
@@ -100,6 +102,9 @@ export const editorExtensions = [
     italic: { HTMLAttributes: { class: 'italics-class' } },
     bulletList: { keepMarks: true, keepAttributes: false },
     orderedList: { keepMarks: true, keepAttributes: false },
-    dropcursor: { width: 3, class: 'dropcursor-class' }
+    dropcursor: { width: 2, color: 'rgb(228, 113, 49)' },
+    code: { HTMLAttributes: { class: 'code-class' } },
+    blockquote: { HTMLAttributes: { class: 'blockquote-class' } },
+    horizontalRule: {HTMLAttributes: {class: 'hr-class'}}
   })
 ];

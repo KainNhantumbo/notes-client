@@ -9,6 +9,7 @@ export const _tools = styled.section`
   gap: 12px;
 
   .form-container {
+    padding-top: 12px;
     input {
       width: 100%;
       height: fit-content;
@@ -44,6 +45,24 @@ export const _tools = styled.section`
       flex-direction: row;
       align-items: center;
       gap: 12px;
+      text-transform: capitalize;
+
+      @media screen and (max-width: 530px) {
+        gap: 2px;
+        span {
+          font-size: 0.85rem;
+        }
+
+        i {
+          display: none;
+        }
+      }
+    }
+
+    @media screen and (max-width: 530px) {
+      gap: 5px;
+      border: none;
+      padding: 5px 0;
     }
 
     .trigger-left-pannel-button {

@@ -60,9 +60,13 @@ export default function Priority() {
         data-tooltip-content={`Set note priority`}>
         <RiTimerFlashLine color={data.color} className='dot-icon' />
         {state.currentNote.priority === 'none' ? (
-          <span>Set priority</span>
+          <span>
+            <i>Set </i>priority
+          </span>
         ) : (
-          <span>{data.label} Priority</span>
+          <span>
+            {data.label} <i>Priority</i>
+          </span>
         )}
         <CaretDownIcon />
         <Tooltip
@@ -129,6 +133,8 @@ const DropdownTriggerButton = styled.button`
   gap: 3px;
   border-radius: 8px;
   padding: 6px 8px;
+  white-space: nowrap;
+  width: fit-content;
 
   :hover {
     transition: all 200ms ease-in-out;
@@ -146,4 +152,6 @@ const DropdownTriggerButton = styled.button`
     height: 18px;
     transform: scale(50px);
   }
+
+  
 `;

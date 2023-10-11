@@ -26,6 +26,26 @@ export const _noteEditor = styled.main`
     border-bottom: 1px solid rgba(${({ theme }) => theme.white}, 0.9);
   }
 
+  .loading-indicator {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center center;
+    place-items: center center;
+    gap: 20px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: rgb(${({ theme }) => theme.primary_shade});
+    padding: calc(20% - 1px) 12px;
+
+    .loader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+
   .wrapper-container {
     width: 100%;
     height: 100%;
@@ -38,7 +58,6 @@ export const _noteEditor = styled.main`
   .editor-container,
   .tiptap {
     width: 100%;
-
     max-height: 100%;
     overflow-y: hidden;
     padding: 12px;
@@ -49,6 +68,19 @@ export const _noteEditor = styled.main`
       float: left;
       height: 0;
       pointer-events: none;
+    }
+
+    hr,
+    .hr-class {
+      color: rgb(${({ theme }) => theme.font});
+      border-bottom: 2px solid rgb(${({ theme }) => theme.font});
+      margin: 8px 0;
+      border-radius: 3px;
+    }
+
+    em,
+    .italic-class {
+      font-style: italic;
     }
 
     a,
@@ -84,13 +116,46 @@ export const _noteEditor = styled.main`
       li {
         list-style: disc;
         margin-left: 2rem;
-        line-height: 1.6rem;
       }
     }
 
     ol {
       li {
         list-style: decimal;
+      }
+    }
+
+    .task-list-class {
+      width: 100%;
+
+      .task-item-class {
+        width: 100%;
+
+        list-style: disc;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+
+        label {
+          width: fit-content;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 0;
+        }
+
+        div {
+          position: relative;
+          top: 7px;
+        }
+
+        input[type='checkbox'] {
+          :checked {
+            color: rgb(${({ theme }) => theme.primary_shade});
+            background: rgb(${({ theme }) => theme.primary_shade});
+          }
+        }
       }
     }
 
@@ -104,10 +169,40 @@ export const _noteEditor = styled.main`
       margin: 10px auto;
     }
 
-    blockquote {
-      margin: 0 auto;
+    blockquote,
+    .blockquote-class {
+      width: 100%;
+      background: rgba(${({ theme }) => theme.primary}, 0.1);
+      border-left: 3px solid rgba(${({ theme }) => theme.font}, 0.1);
+      border-radius: 5px;
       text-align: center;
       font-weight: 500;
+      font-size: 1.2rem;
+      padding: 18px;
+      font-style: italic;
+      margin: 12px 0;
+
+      p {
+        line-height: 2rem;
+      }
+
+      @media screen and (max-width: 530px) {
+        padding: 12px;
+        font-size: 1.1rem;
+
+        p {
+          line-height: 1.8rem;
+        }
+      }
+    }
+
+    .code-class {
+      padding: 2px 5px;
+      background: rgba(${({ theme }) => theme.font}, 0.1);
+      border-radius: 5px;
+      margin: 0 5px;
+      font-family: Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono',
+        'Courier New', ui-monospace, monospace;
     }
 
     i {
@@ -116,6 +211,10 @@ export const _noteEditor = styled.main`
 
     mark {
       background: rgba(${({ theme }) => theme.error}, 0.08);
+      color: rgb(${({ theme }) => theme.primary_shade});
+    }
+
+    .text-style-class {
       color: rgb(${({ theme }) => theme.primary_shade});
     }
 

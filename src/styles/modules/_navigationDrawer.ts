@@ -69,6 +69,19 @@ export const _navigationDrawer = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: scroll;
+    scroll-padding-bottom: 460px;
+    padding-bottom: 200px;
+
+    ::-webkit-scrollbar {
+      width: 1px;
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 1px;
+      background: transparent;
+    }
 
     .top-navigator {
       width: 100%;
@@ -192,6 +205,7 @@ export const _navigationDrawer = styled.section`
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                cursor: pointer;
 
                 h4 {
                   display: flex;

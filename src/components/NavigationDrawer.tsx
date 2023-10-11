@@ -35,7 +35,7 @@ type Navigation = Array<{
 
 function NavigationDrawer(): JSX.Element {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setUrlSearchParams] = useSearchParams();
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [isCollapsed, setIsCollapsed] = useState({
     folders: false,
@@ -190,11 +190,11 @@ function NavigationDrawer(): JSX.Element {
       },
       length: tags.length,
       execute: () => {
-        navigate(`/workspace?tab=tags&folder=tags`);
+        navigate(`/workspace?tab=tags&folder=`);
       },
       children: [...tags]
     };
-  }, [state.notes]);
+  }, [state.notes, searchParams]);
 
   const folders = useMemo(() => {
     return {
@@ -261,6 +261,23 @@ function NavigationDrawer(): JSX.Element {
                 </li>
 
                 <li
+                  className={classnames('navigation-item', trash.class)}
+                  onClick={() => trash.execute()}>
+                  <div
+                    className={classnames('navigation-box-container', {
+                      'navigation-box-container-active': assertLocation(
+                        trash.label
+                      )
+                    })}>
+                    <h3 className='navigation-item-title'>
+                      <trash.icon />
+                      <span>{trash.label}</span>
+                    </h3>
+                    <div className='navigation-item-length'>{trash.length}</div>
+                  </div>
+                </li>
+
+                <li
                   className={classnames('navigation-item', tags.class)}
                   onClick={() => tags.execute()}>
                   <div
@@ -302,7 +319,14 @@ function NavigationDrawer(): JSX.Element {
                         content: 'tags-collapsable'
                       }}>
                       {tags.children.map((child) => (
-                        <div key={child.id} className='tags-container'>
+                        <div
+                          key={child.id}
+                          className='tags-container'
+                          onClick={() => {
+                            navigate(
+                              `/workspace?tab=tagscx&folder=${child.value}`
+                            );
+                          }}>
                           <h4>
                             <DotFilledIcon
                               style={{ color: child.color }}
@@ -314,23 +338,6 @@ function NavigationDrawer(): JSX.Element {
                         </div>
                       ))}
                     </Collapse>
-                  </div>
-                </li>
-
-                <li
-                  className={classnames('navigation-item', trash.class)}
-                  onClick={() => trash.execute()}>
-                  <div
-                    className={classnames('navigation-box-container', {
-                      'navigation-box-container-active': assertLocation(
-                        trash.label
-                      )
-                    })}>
-                    <h3 className='navigation-item-title'>
-                      <trash.icon />
-                      <span>{trash.label}</span>
-                    </h3>
-                    <div className='navigation-item-length'>{trash.length}</div>
                   </div>
                 </li>
               </div>

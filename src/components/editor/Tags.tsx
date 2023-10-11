@@ -95,6 +95,9 @@ export default function Tags() {
           maxLength={12}
           value={tag.value}
           className='tag-input'
+          autoComplete='false'
+          spellCheck={false}
+          autoCorrect='false'
           placeholder='Add tags...'
           data-tooltip-id='tag-input'
           data-tooltip-content='Type here to add new tags...'

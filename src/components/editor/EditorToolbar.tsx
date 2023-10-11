@@ -161,9 +161,9 @@ export default function EditorToolbar() {
           data-tooltip-id='text-style'
           data-tooltip-content='Toggle Text Style'
           type='button'
-          onClick={() => editor.chain().focus().setColor('#958DF1').run()}
+          onClick={() => editor.chain().focus().setColor('#E47131').run()}
           className={
-            editor.isActive('textStyle', { color: '#958DF1' })
+            editor.isActive('textStyle', { color: '#E47131' })
               ? 'is-active'
               : ''
           }>

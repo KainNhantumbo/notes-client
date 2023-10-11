@@ -56,6 +56,8 @@ const Container = styled.button`
   gap: 3px;
   border-radius: 8px;
   padding: 5px 8px;
+  white-space: nowrap;
+  width: fit-content;
 
   :hover {
     transition: all 200ms ease-in-out;

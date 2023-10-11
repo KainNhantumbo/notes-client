@@ -1,14 +1,18 @@
 import actions from '@/shared/actions';
 import { Layout } from '@/components/Layout';
-import { useEffect } from 'react';
-import Editor from '@/components/editor/Editor';
+import { useEffect, Suspense, lazy } from 'react';
 import Properties from '@/components/Properties';
-import CustomTools from '@/components/editor/Tools';
+import Tools from '@/components/editor/Tools';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
+import { MoonLoader } from 'react-spinners';
+import { useTheme } from 'styled-components';
+
+const Editor = lazy(() => import('@/components/editor/Editor'));
 
 export default function NoteEditor() {
   const { state, dispatch } = useAppContext();
+  const theme = useTheme();
 
   useEffect(() => {
     return () => {
@@ -19,6 +23,22 @@ export default function NoteEditor() {
     };
   }, []);
 
+  const LoadIndicator = () => (
+    <div className='loading-indicator'>
+      <div className='loader-content'>
+        <MoonLoader
+          size={30}
+          color={`rgb(${theme.primary_shade})`}
+          aria-placeholder='Loading your notes...'
+          cssOverride={{
+            display: 'block'
+          }}
+        />
+        <h3>Loading your editor...</h3>
+      </div>
+    </div>
+  );
+
   return (
     <Layout
       metadata={{
@@ -28,8 +48,10 @@ export default function NoteEditor() {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <CustomTools />
-          <Editor />
+          <Tools />
+          <Suspense fallback={<LoadIndicator />}>
+            <Editor />
+          </Suspense>
           <Properties />
         </div>
       </Container>
