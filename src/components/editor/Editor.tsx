@@ -28,7 +28,8 @@ function Editor(): JSX.Element {
     wordWrap: 'break-word',
     lineBreak: 'anywhere',
     maxWidth: '1080px',
-    maxHeight: '100%'
+    overflow: 'auto',
+    position: 'relative'
   };
 
   return (

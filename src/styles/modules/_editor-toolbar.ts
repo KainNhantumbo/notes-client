@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const _editorToolbar = styled.section`
   width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: rgb(${({ theme }) => theme.foreground});
+  z-index: 300;
+  box-shadow: 12px -12px 20px 10px rgb(${({ theme }) => theme.foreground});
 
   .toolbar-wrapper-container {
     width: 100%;

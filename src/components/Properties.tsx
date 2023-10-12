@@ -22,8 +22,8 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
 import { readingTime } from 'reading-time-estimator';
 import { generateText, generateJSON } from '@tiptap/react';
-import { editorExtensions as extensions } from './editor/Editor';
 import { AnimatePresence, m as motion } from 'framer-motion';
+import { editorExtensions as extensions } from './editor/Editor';
 import { _properties as Container } from '@/styles/modules/_properties';
 
 type ExportTypes = 'markdown' | 'html' | 'text';
@@ -409,7 +409,7 @@ export default function Properties() {
                   className='action'
                   onClick={() => exportToClipboard('text')}>
                   <RiClipboardLine />
-                  <span>Copy as text</span>
+                  <span>Copy as Text</span>
                 </motion.button>
 
                 <motion.button

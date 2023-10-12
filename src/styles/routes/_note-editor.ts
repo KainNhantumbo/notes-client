@@ -4,7 +4,6 @@ export const _noteEditor = styled.main`
   width: 100%;
   height: 100vh;
   max-height: 100vh;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -54,25 +53,7 @@ export const _noteEditor = styled.main`
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-  }
-
-  .ProseMirror {
-    min-height: 250px;
-    overflow-y: auto;
-
-    :focus {
-      outline: none;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-      cursor: grab;
-
-      :hover {
-        width: 12px;
-        transition: all 0.2s ease-in-out;
-      }
-    }
+    overflow: hidden;
   }
 
   .bubble-menu-container {
@@ -124,15 +105,31 @@ export const _noteEditor = styled.main`
     }
   }
 
+  .ProseMirror {
+    min-height: 250px;
+    overflow-y: auto;
+
+    :focus {
+      outline: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      cursor: grab;
+
+      :hover {
+        width: 12px;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+
+
   .editor-container,
   .tiptap {
     width: 100%;
-    max-height: 75vh;
+    height: auto;
     padding: 12px;
-
-    @media screen and (max-width: 740px) {
-      max-height: 71.5vh;
-    }
 
     .placeholder-class:first-child::before {
       color: rgba(${({ theme }) => theme.font}, 0.5);

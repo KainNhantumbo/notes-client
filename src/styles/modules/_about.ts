@@ -6,7 +6,7 @@ export const _about = styled.section`
   width: 100vw;
   height: 100vh;
   background: rgba(${({ theme }) => theme.background}, 0.2);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(5px);
   z-index: 11000;
   top: 0;
   left: 0;
@@ -26,8 +26,8 @@ export const _about = styled.section`
     position: relative;
     line-height: 1.4rem;
     font-size: 0.9rem;
-    backdrop-filter: blur(10px);
-    background: rgba(${({ theme }) => theme.foreground}, 0.8);
+    backdrop-filter: blur(12px);
+    background: rgba(${({ theme }) => theme.foreground}, 0.9);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
     border-radius: 12px;

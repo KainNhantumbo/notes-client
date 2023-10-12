@@ -10,6 +10,7 @@ export const _tools = styled.section`
 
   .form-container {
     padding-top: 12px;
+
     input {
       width: 100%;
       height: fit-content;

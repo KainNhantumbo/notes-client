@@ -20,9 +20,9 @@ export default function About() {
       {state.isAboutModal && (
         <Container
           className='main'
-          onClick={(e) => {
-            const target = (e as any).target.classList;
-            if (target.contains('main')) {
+          onClick={(e: any) => {
+            const isTarget = e.target.classList.contains('main');
+            if (isTarget) {
               dispatch({
                 type: actions.ABOUT_MODAL,
                 payload: { ...state, isAboutModal: false }
