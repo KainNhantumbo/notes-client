@@ -6,12 +6,12 @@ Taking notes in markdown is made simple with this application. It provides the c
 
 Not limited, this application is capable of a robust markdown editing and preview, support for the dark and light modes, syntax highlighting, github flavored markdown and more. You can find the API source code [here](https://github.com/KainNhantumbo/notes-api).
 
-<!-- **Access this app live at: [https://github.com/KainNhantumbo/notes-app](https://github.com/KainNhantumbo/notes-app)**
+**Access this app live at: [https://choconotey-demo.vercel.app](https://choconotey-demo.vercel.app)**
 
 **Here are some screenshots in default light and dark themes:**
 
-![](./src/docs/img/v2.jpeg)
-![](./src/docs/img/v5.jpeg) -->
+![](./src/assets/demo-light.png)
+![](./src/assets/demo-dark.png)
 
 ## Project status
 

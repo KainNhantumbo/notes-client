@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "url": "",
-  "website_name": "",
+  "url": "https://choconotey-demo.vercel.app",
+  "website_name": "choconotey demo",
   "browserslist": [
     "defaults",
     "not IE 11"
@@ -14,7 +14,6 @@
     "name": "Kain Nhantumbo",
     "email": "nhantumbok@gmail.com",
     "url": "https://portifolio-dev-mu.vercel.app",
-    "website": "https://publish-it-programming.vercel.app",
     "github": "https://github.com/KainNhantumbo"
   },
   "metadata": {

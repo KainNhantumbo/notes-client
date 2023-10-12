@@ -5,7 +5,7 @@ export const _footer = styled.footer`
   font-weight: 500;
   font-size: 1rem;
   z-index: 10000;
-  gap: 8px;
+  gap: 12px;
   display: flex;
   flex-direction: column;
   background: rgba(${({ theme }) => theme.foreground_shade}, 0.5);
@@ -61,52 +61,7 @@ export const _footer = styled.footer`
       .copyright-sentence {
         text-align: center;
         line-height: 1.2rem;
-      }
-    }
-
-    .theme-fluent-buttons {
-      background: none;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      gap: 2px;
-      border: 1px solid rgba(${({ theme }) => theme.font}, 0.3);
-      border-radius: 8px;
-      padding: 3px;
-
-      .active {
-        background: rgba(${({ theme }) => theme.font}, 0.2);
-      }
-
-      button {
-        display: grid;
-        place-content: center;
-        place-items: center;
-        border: none;
-        background: none;
-        padding: 5px;
-        border-radius: 8px;
-        outline: none;
-        user-select: none;
-
-        :hover {
-          cursor: pointer;
-          background: rgba(${({ theme }) => theme.font}, 0.2);
-        }
-
-        svg {
-          color: rgb(${({ theme }) => theme.font});
-        }
-      }
-
-      @media screen and (max-width: 680px) {
-        position: relative;
         margin-top: 12px;
-        bottom: 12px;
-      }
-
-      @media screen and (max-width: 470px) {
-        bottom: 0;
       }
     }
   }
