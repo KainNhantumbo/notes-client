@@ -3,12 +3,12 @@ import {
   useNavigate,
   NavigateFunction,
   useLocation,
-  Location,
+  Location
 } from 'react-router-dom';
 import {
   ArrowRightIcon,
   Cross2Icon,
-  HamburgerMenuIcon,
+  HamburgerMenuIcon
 } from '@radix-ui/react-icons';
 import logo from '@/assets/logo-192x192.png';
 import { useState, useEffect } from 'react';
@@ -54,21 +54,21 @@ export default function Header() {
               exit={{
                 opacity: 0,
                 translateY: -70,
-                transition: { duration: 0.25 },
+                transition: { duration: 0.25 }
               }}
               style={{ display: isMenu ? 'flex' : 'none' }}>
               <section className='navigation-anchors-container'>
                 {navigationAnchors.map((item, index) => (
-                  <Link
+                  <a
                     key={index.toString()}
-                    to={item.url}
+                    href={item.url}
                     className={
                       location.pathname.includes(item.alias) ? 'active' : ''
                     }>
                     <motion.span whileHover={{ scale: 1.1 }}>
                       {item.name}
                     </motion.span>
-                  </Link>
+                  </a>
                 ))}
               </section>
 

@@ -1,6 +1,6 @@
 # Choconotey Notes (React.JS + Typescript)
 
-This repository contains a **choconotey notes front-end** built with React.JS and Typescript, of course, with a flavor of other awesome community opensource packages.
+This repository contains a **choconotey notes front-end** app built with React.JS and Typescript, of course, with a flavor of other awesome community opensource packages.
 
 Taking notes in markdown is made simple with this application. It provides the core features to create, organize, share and export your notes content in multiple formats like Markdown, HTML and plain text.
 
@@ -34,7 +34,7 @@ Note: This project still under development and not all of the features stated be
 - Handle user login, registration and authentication with jwt (JSON web tokens) strategy.
 - Store all data in Mongo DB, handled by a separated Node.JS with Express.JS server application.
 
-### Scripts for testing
+### Scripts for testing and local setup
 
 Make sure you have installed **Node.js (v18.17.0 or later recommended) which also comes with npm v9.6.7**.\
 In the project directory, you can run in terminal:

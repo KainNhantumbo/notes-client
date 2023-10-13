@@ -14,6 +14,23 @@ export const _home = styled.main`
     }
   }
 
+  .tooltip-class {
+    border-radius: 8px;
+    color: rgb(${({ theme }) => theme.white});
+    background: rgba(${({ theme }) => theme.primary_shade}, 0.8);
+    border: 1px solid rgba(${({ theme }) => theme.white}, 0.9);
+    backdrop-filter: blur(20px);
+    font-family: 'Inter';
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .tooltip-border-class {
+    border-right: 1px solid rgba(${({ theme }) => theme.white}, 0.9);
+    border-bottom: 1px solid rgba(${({ theme }) => theme.white}, 0.9);
+  }
+
   .wrapper-container {
     width: 100%;
     display: grid;
@@ -57,6 +74,8 @@ export const _home = styled.main`
         text-align: center;
         font-weight: 500;
         line-height: 1.6rem;
+        max-width: 700px;
+        margin: 0 auto;
       }
 
       .action-buttons {
@@ -164,6 +183,78 @@ export const _home = styled.main`
       }
     }
 
+    .identity-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin: 50px 0;
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        line-height: 2.8rem;
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        align-self: center;
+        font-family: 'Zilla Slab', serif;
+        position: relative;
+
+        ::before {
+          content: '';
+          position: absolute;
+          width: 30px;
+          height: 5px;
+          top: -20px;
+          left: calc(50% - 15px);
+          border-radius: 12px;
+          background: rgb(${({ theme }) => theme.primary_shade});
+        }
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 0.95rem;
+        line-height: 1.6rem;
+        text-align: center;
+      }
+
+      .shields-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        margin: 0 auto;
+        align-self: center;
+
+        a {
+          width: fit-content;
+          display: grid;
+          place-content: center center;
+          place-items: center center;
+          padding: 8px;
+          border-radius: 12px;
+          background: rgba(${({ theme }) => theme.primary}, 0.2);
+
+          svg {
+            width: 22px;
+            height: 22px;
+          }
+
+          :hover {
+            transition: all 200ms ease-in-out;
+            svg {
+              color: rgb(${({ theme }) => theme.primary_shade});
+            }
+          }
+        }
+      }
+    }
+
     .call-to-action {
       display: flex;
       flex-direction: column;
@@ -172,7 +263,6 @@ export const _home = styled.main`
       background: rgb(${({ theme }) => theme.background});
       padding: 12px;
       border-radius: 12px;
-      box-shadow: 0 12px 35px rgba(${({ theme }) => theme.black}, 0.2);
       border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
 
       h2 {

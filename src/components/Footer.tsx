@@ -12,10 +12,7 @@ export default function Footer() {
           </Link>
         ))}
       </nav>
-
-      <div className='base-container'>
-        <p className='copyright-sentence'>{app_metadata.copyright}</p>
-      </div>
+      <p className='copyright-sentence'>&copy; {app_metadata.copyright}</p>
     </Container>
   );
 }

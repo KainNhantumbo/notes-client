@@ -39,7 +39,7 @@ export const app_metadata = {
     {
       name: 'Portfolio',
       icon: RiStackLine,
-      url: Package.author.url
+      url: Package.author.portfolio
     },
     {
       name: 'E-mail',
@@ -51,8 +51,7 @@ export const app_metadata = {
 
 export const navigationAnchors = [
   { name: 'Overview', url: '/', alias: 'overview' },
-  { name: 'Features', url: '/#features', alias: 'features' },
-  { name: 'About', url: '/#about', alias: 'about' }
+  { name: 'Features', url: '#features', alias: 'features' },
 ];
 
 export const app_features = [

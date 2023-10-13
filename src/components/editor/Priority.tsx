@@ -152,6 +152,4 @@ const DropdownTriggerButton = styled.button`
     height: 18px;
     transform: scale(50px);
   }
-
-  
 `;
