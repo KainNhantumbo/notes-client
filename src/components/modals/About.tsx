@@ -42,7 +42,7 @@ export default function About() {
               <div className='box-info'>
                 <h2 className='box-app-name'>
                   <span>
-                    {appName} v{version} Beta
+                    {appName} v{version}
                   </span>
                 </h2>
                 <h3>

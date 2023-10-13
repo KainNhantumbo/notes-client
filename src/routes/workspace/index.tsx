@@ -38,7 +38,6 @@ export default function Workspace(): JSX.Element {
 
   const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
   const isTrashTab = currentTab === 'trash';
-  const isTagsTab = currentTab === 'tags';
 
   const [notesQuery, settingsQuery, userQuery] = useQueries({
     queries: [
@@ -166,7 +165,8 @@ export default function Workspace(): JSX.Element {
                   toast: {
                     status: true,
                     title: 'Notes Sync',
-                    message: 'Your note was restored from trash successfully!'
+                    message: 'Your note was restored from trash successfully!',
+                    closeOnDelay: true
                   }
                 }
               });
@@ -232,7 +232,8 @@ export default function Workspace(): JSX.Element {
                   toast: {
                     status: true,
                     title: 'Notes Sync',
-                    message: 'Your note was deleted from trash successfully!'
+                    message: 'Your note was deleted from trash successfully!',
+                    closeOnDelay: true
                   }
                 }
               });

@@ -43,6 +43,7 @@ export default function Properties() {
       );
       const estimatedLines = content.split('\n').length;
       const measure = readingTime(content, undefined, 'en');
+
       return {
         words: measure.words,
         lines: estimatedLines,

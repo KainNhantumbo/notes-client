@@ -1,17 +1,22 @@
-# Notes Client Application (React.JS + Typescript)
+# Choconotey Notes (React.JS + Typescript)
 
-This repository contains a **markdown notes application** built with React.JS and Typescript, of course, with a flavor of other awesome community opensource packages.
+This repository contains a **choconotey notes front-end** built with React.JS and Typescript, of course, with a flavor of other awesome community opensource packages.
 
-Taking notes in markdown is made simple with this application. It provides the core features to create, organize, share and export your markdown notes in multiple file formats like JSON, Markdown, HTML and PDF.
+Taking notes in markdown is made simple with this application. It provides the core features to create, organize, share and export your notes content in multiple formats like Markdown, HTML and plain text.
 
-Not limited, this application is capable of a robust markdown editing and preview, support for the dark and light modes, syntax highlighting, github flavored markdown and more. You can find the API source code [here](https://github.com/KainNhantumbo/notes-api).
+Not limited, the core editor is built on top of the headless [Tiptap Editor](https://tiptap.dev), empowering this application for robust note editing, with extensions, tools, syntax highlighting and more. You can find the API source code [here](https://github.com/KainNhantumbo/notes-api).
 
 **Access this app live at: [https://choconotey-demo.vercel.app](https://choconotey-demo.vercel.app)**
 
-**Here are some screenshots in default light and dark themes:**
+## **Here are some screenshots:**
 
-![](./src/assets/demo-light.png)
-![](./src/assets/demo-dark.png)
+| Light Theme (Desktop)                   | Dark Theme (Desktop)                   |  
+|:---------------------------------------:|:--------------------------------------:|
+|![](./src/assets/demo-light.png?raw=true)|![](./src/assets/demo-dark.png?raw=true)|
+
+| Light Theme (Mobile)                    | Dark Theme (Mobile)                    |
+|:---------------------------------------:|:--------------------------------------:|
+|![](./src/assets/demo-light-mobile.png?raw=true)|![](./src/assets/demo-dark-mobile.png?raw=true)|
 
 ## Project status
 
@@ -20,7 +25,11 @@ Note: This project still under development and not all of the features stated be
 ## Features Log
 
 ### - Release v1.0.0
-
+- Realtime preview (WYSIWYG) note editor and a clean and simple interface to get a distraction-free writing experience.
+- Support [CommonMark Spec](https://spec.commonmark.org/0.29/) and [GitHub Flavored Markdown Spec](https://github.github.com/gfm/).
+- Support html parsing to improve your writing efficiency.
+- Output **HTML**, **Plan Text** and **markdown**  note content.
+- Color themes: **Light** and **Dark**.
 - Handle create, read, update and delete notes, folder and users on the database.
 - Handle user login, registration and authentication with jwt (JSON web tokens) strategy.
 - Store all data in Mongo DB, handled by a separated Node.JS with Express.JS server application.

@@ -124,7 +124,6 @@ export const _noteEditor = styled.main`
     }
   }
 
-
   .editor-container,
   .tiptap {
     width: 100%;
@@ -170,13 +169,23 @@ export const _noteEditor = styled.main`
     h3,
     h2 {
       margin-bottom: 10px;
-      font-size: 1.2rem;
-      font-weight: 500;
+      font-size: 1.5rem;
     }
 
     h2 {
       font-size: 1.4rem;
       line-height: 2rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+
+    h5,
+    h6 {
+      font-size: 1.1rem;
+      line-height: 1.8rem;
     }
 
     ul,
