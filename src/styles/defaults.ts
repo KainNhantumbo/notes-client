@@ -51,56 +51,6 @@ export const BaseButton = css`
   }
 `;
 
-export const Button_Mono_A = css`
-  border: none;
-  border-radius: 8px;
-  background: rgb(${({ theme }) => theme.primary});
-  color: rgb(${({ theme }) => theme.font_dimmed});
-  padding: 10px;
-  width: fit-content;
-  cursor: pointer;
-  outline: none;
-
-  :hover {
-    background: rgb(${({ theme }) => theme.secondary});
-  }
-  svg {
-    pointer-events: none;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: calc(50% - 10px);
-    left: calc(50% - 10px);
-  }
-`;
-
-export const Button_Mono_B = css`
-  border: none;
-  border-radius: 8px;
-  background: none;
-  color: rgb(${({ theme }) => theme.font});
-  border: 1px solid rgba(${({ theme }) => theme.font}, 0.08);
-  position: relative;
-  width: fit-content;
-  cursor: pointer;
-  display: grid;
-  place-content: center;
-  outline: none;
-
-  :hover {
-    color: rgb(${({ theme }) => theme.primary_shade});
-  }
-
-  svg {
-    pointer-events: none;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: calc(50% - 10px);
-    left: calc(50% - 10px);
-  }
-`;
-
 export const StyledCornerButton = css`
   all: unset;
   border-radius: 10px;
@@ -175,57 +125,5 @@ export const StyledInputs = css`
 
   textarea {
     resize: vertical;
-  }
-`;
-
-export const statsContainerStyles = css`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-content: center;
-  place-items: center;
-  margin: 0 auto;
-  margin-top: 12px;
-
-  .fetch-error-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin: 20px 0;
-    color: rgb(${({ theme }) => theme.error});
-    font-weight: 500;
-    font-size: 1.1rem;
-    line-height: 1.4rem;
-    align-self: flex-end;
-    padding-top: 3500px;
-
-    button {
-      ${BaseButton}
-    }
-  }
-  p {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    font-weight: 500;
-    line-height: 1.6rem;
-    color: rgb(${({ theme }) => theme.primary_shade});
-  }
-
-  .loading {
-    width: 100%;
-    height: 100%;
-    align-self: flex-end;
-    display: flex;
-
-    flex-direction: row;
-    align-items: center;
-    font-weight: 500;
-    font-size: 1.1rem;
-    gap: 10px;
-    padding: 20px;
-    margin: 0 auto;
-
-    color: rgb(${({ theme }) => theme.primary_shade});
   }
 `;
