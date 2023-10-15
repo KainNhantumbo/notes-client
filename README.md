@@ -10,13 +10,13 @@ Not limited, the core editor is built on top of the headless [Tiptap Editor](htt
 
 ## **Here are some screenshots:**
 
-| Light Theme (Desktop)                   | Dark Theme (Desktop)                   |  
-|:---------------------------------------:|:--------------------------------------:|
-|![](./src/assets/demo-light.png?raw=true)|![](./src/assets/demo-dark.png?raw=true)|
+|           Light Theme (Desktop)           |           Dark Theme (Desktop)           |
+| :---------------------------------------: | :--------------------------------------: |
+| ![](./src/assets/demo-light.png?raw=true) | ![](./src/assets/demo-dark.png?raw=true) |
 
-| Light Theme (Mobile)                    | Dark Theme (Mobile)                    |
-|:---------------------------------------:|:--------------------------------------:|
-|![](./src/assets/demo-light-mobile.png?raw=true)|![](./src/assets/demo-dark-mobile.png?raw=true)|
+|               Light Theme (Mobile)               |               Dark Theme (Mobile)               |
+| :----------------------------------------------: | :---------------------------------------------: |
+| ![](./src/assets/demo-light-mobile.png?raw=true) | ![](./src/assets/demo-dark-mobile.png?raw=true) |
 
 ## Project status
 
@@ -25,10 +25,12 @@ Note: This project still under development and not all of the features stated be
 ## Features Log
 
 ### - Release v1.0.0
+
 - Realtime preview (WYSIWYG) note editor and a clean and simple interface to get a distraction-free writing experience.
 - Support [CommonMark Spec](https://spec.commonmark.org/0.29/) and [GitHub Flavored Markdown Spec](https://github.github.com/gfm/).
+- Installable on all platforms as PWA (Progressive Web Application).
 - Support html parsing to improve your writing efficiency.
-- Output **HTML**, **Plan Text** and **markdown**  note content.
+- Output **HTML**, **Plan Text** and **markdown** note content.
 - Color themes: **Light** and **Dark**.
 - Handle create, read, update and delete notes, folder and users on the database.
 - Handle user login, registration and authentication with jwt (JSON web tokens) strategy.
