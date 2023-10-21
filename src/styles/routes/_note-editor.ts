@@ -169,11 +169,11 @@ export const _noteEditor = styled.main`
     h3,
     h2 {
       margin-bottom: 10px;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
 
     h2 {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       line-height: 2rem;
     }
 
@@ -290,14 +290,15 @@ export const _noteEditor = styled.main`
       white-space: pre;
     }
 
-    i {
-      font-style: italic;
-    }
-
+    
     .text-style-class {
       color: rgb(${({ theme }) => theme.primary_shade});
     }
-
+    
+    i {
+      font-style: italic;
+    }
+    
     u {
       text-underline-offset: 3px;
     }

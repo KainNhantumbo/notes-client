@@ -39,7 +39,7 @@ const context = createContext<Context>({
   syncCurrentNote: async () => {}
 });
 
-function AppContext({ children }: Props) {
+export default function AppContext({ children }: Props) {
   const navigate: NavigateFunction = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -122,7 +122,6 @@ function AppContext({ children }: Props) {
           ]
         }
       });
-      console.log('Sync note: ', _id);
     } catch (error: any) {
       console.error(error?.response?.data?.message || error);
       dispatch({
@@ -181,8 +180,6 @@ function AppContext({ children }: Props) {
     </context.Provider>
   );
 }
-
-export default React.memo(AppContext);
 
 export function useAppContext() {
   return useContext<Context>(context);

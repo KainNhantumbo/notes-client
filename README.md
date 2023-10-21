@@ -1,6 +1,6 @@
 # Choconotey Notes (React.JS + Typescript)
 
-This repository contains a **choconotey notes front-end** app built with React.JS and Typescript, of course, with a flavor of other awesome community opensource packages.
+Welcome to **choconotey notes** app repository, built with React.JS and Typescript, and of course, with a flavour of other awesome community opensource packages.
 
 Taking notes in markdown is made simple with this application. It provides the core features to create, organize, share and export your notes content in multiple formats like Markdown, HTML and plain text.
 
@@ -20,14 +20,14 @@ Not limited, the core editor is built on top of the headless [Tiptap Editor](htt
 
 ## Project status
 
-Note: This project still under development and not all of the features stated befora are available yet. Further details of its bulding, software architecture and features will be given as the app grows.
+Note: This project still under development and not all of the features stated before may be already available yet. Further details of its bulding, software architecture and features will be given as the app grows.
 
 ## Features Log
 
 ### - Release v1.0.0
 
 - Realtime preview (WYSIWYG) note editor and a clean and simple interface to get a distraction-free writing experience.
-- Support [CommonMark Spec](https://spec.commonmark.org/0.29/) and [GitHub Flavored Markdown Spec](https://github.github.com/gfm/).
+- Support [CommonMark Spec](https://spec.commonmark.org/0.29/) and [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
 - Installable on all platforms as PWA (Progressive Web Application).
 - Support html parsing to improve your writing efficiency.
 - Output **HTML**, **Plan Text** and **markdown** note content.
