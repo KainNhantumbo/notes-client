@@ -47,7 +47,7 @@ export default function NoteEditor() {
         updatedAt: state.currentNote.updatedAt || new Date().toISOString()
       }}>
       <Container>
-        <div className='wrapper-container'>
+        <div id='editor-root' className='wrapper-container'>
           <Tools />
           <Suspense fallback={<LoadIndicator />}>
             <Editor />

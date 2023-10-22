@@ -32,9 +32,6 @@ export default function Properties() {
   const { state, dispatch, useFetchAPI } = useAppContext();
   const navigate = useNavigate();
 
-  // TODO: ADD A PRINTER METHOD
-  // const printToPDF = () => {};
-
   const metadata = useMemo(() => {
     try {
       const content = generateText(
@@ -126,6 +123,7 @@ export default function Properties() {
       });
     }
   };
+
 
   const handleDuplicate = () => {
     dispatch({
