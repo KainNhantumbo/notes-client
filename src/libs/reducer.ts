@@ -8,6 +8,7 @@ export const initialState: TState = {
   isLogoutModal: false,
   isNavigationDrawer: false,
   isPropertiesDrawer: false,
+  isEditorToolsTogglerModal: false,
   signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', token: '' },
@@ -66,6 +67,7 @@ export const initialState: TState = {
         superscript: true,
         subscript: true,
         code: true,
+        image: true,
         paragraph: true,
         bulletList: true,
         orderedList: true,
@@ -142,6 +144,12 @@ export function reducer(state: TState, action: TAction): TState {
       return {
         ...state,
         isNavigationDrawer: action.payload.isNavigationDrawer
+      };
+
+    case actions.EDITOR_TOOLS_TOGGLER_MODAL:
+      return {
+        ...state,
+        isEditorToolsTogglerModal: action.payload.isEditorToolsTogglerModal
       };
 
     default:

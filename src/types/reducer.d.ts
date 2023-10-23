@@ -15,6 +15,7 @@ export type TState = {
   auth: Auth;
   isAboutModal: boolean;
   isLogoutModal: boolean;
+  isEditorToolsTogglerModal: boolean;
   isPropertiesDrawer: boolean;
   isNavigationDrawer: boolean;
   notes: Note[];
