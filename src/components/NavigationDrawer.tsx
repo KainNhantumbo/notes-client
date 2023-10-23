@@ -35,7 +35,7 @@ type Navigation = Array<{
 
 function NavigationDrawer(): JSX.Element {
   const navigate = useNavigate();
-  const [searchParams, setUrlSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [isCollapsed, setIsCollapsed] = useState({
     folders: false,
@@ -135,6 +135,27 @@ function NavigationDrawer(): JSX.Element {
       }
     }
   ];
+
+  const priorities = useMemo(() => {
+    return {
+      none: state.notes.filter((note) => note.priority === 'none').length,
+      high: state.notes.filter((note) => note.priority === 'high').length,
+      medium: state.notes.filter((note) => note.priority === 'medium').length,
+      low: state.notes.filter((note) => note.priority === 'low').length
+    };
+  }, [state.notes]);
+
+  const statuses = useMemo(() => {
+    return {
+      none: state.notes.filter((note) => note.status === 'none').length,
+      active: state.notes.filter((note) => note.status === 'active').length,
+      completed: state.notes.filter((note) => note.status === 'completed')
+        .length,
+      reviewing: state.notes.filter((note) => note.status === 'reviewing')
+        .length,
+      pending: state.notes.filter((note) => note.status === 'pending').length
+    };
+  }, [state.notes]);
 
   const notes = useMemo(() => {
     return {

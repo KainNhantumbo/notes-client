@@ -1,7 +1,7 @@
 import actions from '../shared/actions';
 import { TAction, TState } from '@/types/reducer';
 
-const initialState: TState = {
+export const initialState: TState = {
   notes: [],
   folders: [],
   isAboutModal: false,
@@ -53,6 +53,28 @@ const initialState: TState = {
     created_by: '',
     editor: {
       auto_save: { enabled: true, delay: 500 },
+      toolbar: {
+        undo: true,
+        redo: true,
+        bold: true,
+        italic: true,
+        headings: true,
+        underline: true,
+        strike: true,
+        textAlign: true,
+        highlight: true,
+        superscript: true,
+        subscript: true,
+        code: true,
+        paragraph: true,
+        bulletList: true,
+        orderedList: true,
+        taskList: true,
+        codeBlock: true,
+        blockquote: true,
+        horizontalRuler: true,
+        hardBreak: true
+      },
       font: {
         font_size: 16,
         line_height: 1.6,
@@ -66,7 +88,7 @@ const initialState: TState = {
   }
 };
 
-function reducer(state: TState, action: TAction): TState {
+export function reducer(state: TState, action: TAction): TState {
   switch (action.type) {
     case actions.AUTH:
       return { ...state, auth: action.payload.auth };
@@ -126,5 +148,3 @@ function reducer(state: TState, action: TAction): TState {
       return { ...state };
   }
 }
-
-export { initialState, reducer };

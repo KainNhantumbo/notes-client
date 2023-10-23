@@ -115,6 +115,7 @@ export type Settings = {
   editor: {
     auto_save: { enabled: boolean; delay: number };
     editing: { enable_toolbar: boolean };
+    toolbar: EditorTools;
     font: {
       font_size: number;
       line_height: number;
@@ -122,4 +123,27 @@ export type Settings = {
       font_weight: 400 | 500 | 600 | 700 | 800;
     };
   };
+};
+
+export type EditorTools = {
+  undo: boolean;
+  redo: boolean;
+  bold: boolean;
+  italic: boolean;
+  headings: boolean;
+  underline: boolean;
+  strike: boolean;
+  textAlign: boolean;
+  highlight: boolean;
+  superscript: boolean;
+  subscript: boolean;
+  code: boolean;
+  paragraph: boolean;
+  bulletList: boolean;
+  orderedList: boolean;
+  taskList: boolean;
+  codeBlock: boolean;
+  blockquote: boolean;
+  horizontalRuler: boolean;
+  hardBreak: boolean;
 };
