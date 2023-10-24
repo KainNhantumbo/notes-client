@@ -7,6 +7,7 @@ import { useEffect, Suspense, lazy } from 'react';
 import Properties from '@/components/Properties';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
+import EditorToolsToggler from '@/components/modals/EditorToolsToggler';
 
 const Editor = lazy(() => import('@/components/editor/Editor'));
 
@@ -49,6 +50,7 @@ export default function NoteEditor() {
       <Container>
         <div id='editor-root' className='wrapper-container'>
           <Tools />
+          <EditorToolsToggler/>
           <Suspense fallback={<LoadIndicator />}>
             <Editor />
           </Suspense>

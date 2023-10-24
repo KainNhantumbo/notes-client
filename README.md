@@ -22,6 +22,24 @@ Not limited, the core editor is built on top of the headless [Tiptap Editor](htt
 
 Note: This project still under development and not all of the features stated before may be already available yet. Further details of its bulding, software architecture and features will be given as the app grows.
 
+## Project structure
+
+```
+$PROJECT_ROOT
+│
+├── public
+└── src
+    ├── assets
+    ├── componentsZ
+    ├── config
+    ├── context
+    ├── libs
+    ├── routes
+    ├── shared
+    ├── styles
+    └── types
+```
+
 ## Features Log
 
 ### - Release v1.0.0

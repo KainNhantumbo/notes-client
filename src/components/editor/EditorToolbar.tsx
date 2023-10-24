@@ -13,6 +13,7 @@ import {
   RiParagraph,
   RiRulerLine,
   RiSave2Line,
+  RiSettings5Line,
   RiStrikethrough,
   RiSubscript,
   RiSuperscript,
@@ -350,6 +351,26 @@ export default function EditorToolbar() {
             />
           </button>
         ) : null}
+
+        <button
+          data-tooltip-id='toolbar-settings'
+          data-tooltip-content='Toolbar Settings'
+          onClick={() =>
+            dispatch({
+              type: actions.EDITOR_TOOLS_TOGGLER_MODAL,
+              payload: {
+                ...state,
+                isEditorToolsTogglerModal: true
+              }
+            })
+          }>
+          <RiSettings5Line/>
+          <Tooltip
+            classNameArrow='tooltip-border-class'
+            className='tooltip-class'
+            id='toolbar-settings'
+          />
+        </button>
       </section>
     </Container>
   );

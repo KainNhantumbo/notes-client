@@ -78,7 +78,7 @@ export default function SignIn() {
         <div className='wrapper-container'>
           <img
             loading='lazy'
-            decoding='async'
+            decoding='sync'
             src={media_login}
             alt='background image'
           />

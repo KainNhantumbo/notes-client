@@ -7,7 +7,7 @@ import { _editorToolsToggler as Container } from '@/styles/modules/_editor-tools
 export default function EditorToolsToggler() {
   const { state, dispatch } = useAppContext();
 
-  const updateTool = (key: string, value: boolean) => {
+  const handleToggle = (key: string, value: boolean) => {
     dispatch({
       type: actions.SETTINGS,
       payload: {
@@ -21,33 +21,18 @@ export default function EditorToolsToggler() {
         }
       }
     });
+
+    console.log(state.settings.editor.toolbar);
+    console.log({ [key]: value });
   };
 
   const options = Object.entries(state.settings.editor.toolbar).map(
     ([key, value]) => ({ value: value, key })
   );
 
-  const renderOptions = (): JSX.Element => (
-    <section className='options-container'>
-      {options.map((option, index) => (
-        <div key={index} className='option'>
-          <label htmlFor={`tool-${index}`} id={`tool-${index}`}>
-            <span>{option.key}</span>
-          </label>
-          <input
-            type='checkbox'
-            checked={option.value}
-            id={`tool-${index}`}
-            onChange={(e) => updateTool(option.key, option.value)}
-          />
-        </div>
-      ))}
-    </section>
-  );
-
   return (
     <AnimatePresence>
-      {state.prompt.status && (
+      {state.isEditorToolsTogglerModal && (
         <Container
           className='main'
           onClick={(e: any): void => {
@@ -95,7 +80,23 @@ export default function EditorToolsToggler() {
                 <RiCloseLine />
               </motion.button>
 
-              {renderOptions()}
+              <section className='options-container'>
+                {options.map((option, index) => (
+                  <div key={index} className='option'>
+                    <label htmlFor={`tool-${index}`} id={`tool-${index}`}>
+                      <span>{option.key.toLowerCase()}</span>
+                    </label>
+                    <input
+                      type='checkbox'
+                      checked={option.value}
+                      id={`tool-${index}`}
+                      onChange={(e) =>
+                        handleToggle(option.key, e.target.checked)
+                      }
+                    />
+                  </div>
+                ))}
+              </section>
             </div>
           </motion.section>
         </Container>
