@@ -3,6 +3,7 @@ import {
   RiApps2Line,
   RiArrowDropDownLine,
   RiArrowDropUpLine,
+  RiBubbleChartLine,
   RiCloseLine,
   RiDeleteBin7Line,
   RiFolder3Line,
@@ -10,7 +11,9 @@ import {
   RiHome2Line,
   RiInformationLine,
   RiLogoutBoxRLine,
-  RiSettings6Line
+  RiSettings6Line,
+  RiTimerFlashLine,
+  RiTimerLine
 } from 'react-icons/ri';
 import {
   CaretDownIcon,
@@ -26,6 +29,7 @@ import { useAppContext } from '../context/AppContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
+import { prioritiesDataMapping } from '@/shared/data';
 
 type Navigation = Array<{
   label: string;
@@ -39,7 +43,9 @@ function NavigationDrawer(): JSX.Element {
   const { state, dispatch, useFetchAPI } = useAppContext();
   const [isCollapsed, setIsCollapsed] = useState({
     folders: false,
-    tags: false
+    tags: false,
+    status: false,
+    priorities: false
   });
 
   const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
@@ -138,22 +144,46 @@ function NavigationDrawer(): JSX.Element {
 
   const priorities = useMemo(() => {
     return {
-      none: state.notes.filter((note) => note.priority === 'none').length,
-      high: state.notes.filter((note) => note.priority === 'high').length,
-      medium: state.notes.filter((note) => note.priority === 'medium').length,
-      low: state.notes.filter((note) => note.priority === 'low').length
+      label: 'priorities',
+      icon: RiTimerFlashLine,
+      class: 'priorities-class',
+      statusIndicatorIcons: {
+        active: CaretDownIcon,
+        inactive: CaretUpIcon
+      },
+      execute: () => {
+        navigate(`/workspace?tab=priorities&folder=none`);
+      },
+      children: {
+        none: state.notes.filter((note) => note.priority === 'none').length,
+        high: state.notes.filter((note) => note.priority === 'high').length,
+        medium: state.notes.filter((note) => note.priority === 'medium').length,
+        low: state.notes.filter((note) => note.priority === 'low').length
+      }
     };
   }, [state.notes]);
 
   const statuses = useMemo(() => {
     return {
-      none: state.notes.filter((note) => note.status === 'none').length,
-      active: state.notes.filter((note) => note.status === 'active').length,
-      completed: state.notes.filter((note) => note.status === 'completed')
-        .length,
-      reviewing: state.notes.filter((note) => note.status === 'reviewing')
-        .length,
-      pending: state.notes.filter((note) => note.status === 'pending').length
+      label: 'status',
+      icon: RiBubbleChartLine,
+      class: 'status-class',
+      statusIndicatorIcons: {
+        active: CaretDownIcon,
+        inactive: CaretUpIcon
+      },
+      execute: () => {
+        navigate(`/workspace?tab=status&folder=none`);
+      },
+      children: {
+        none: state.notes.filter((note) => note.status === 'none').length,
+        active: state.notes.filter((note) => note.status === 'active').length,
+        completed: state.notes.filter((note) => note.status === 'completed')
+          .length,
+        reviewing: state.notes.filter((note) => note.status === 'reviewing')
+          .length,
+        pending: state.notes.filter((note) => note.status === 'pending').length
+      }
     };
   }, [state.notes]);
 
@@ -337,7 +367,7 @@ function NavigationDrawer(): JSX.Element {
                       isOpened={isCollapsed.tags}
                       theme={{
                         collapse: 'collapsable-container',
-                        content: 'tags-collapsable'
+                        content: 'inner-collapsable'
                       }}>
                       {tags.children.map((child) => (
                         <div
@@ -358,6 +388,65 @@ function NavigationDrawer(): JSX.Element {
                           <div className='tag-count'>{child.count}</div>
                         </div>
                       ))}
+                    </Collapse>
+                  </div>
+                </li>
+
+                <li
+                  className={classnames('navigation-item', priorities.class)}
+                  onClick={() => priorities.execute()}>
+                  <div
+                    className={classnames('navigation-box-container', {
+                      'navigation-box-container-active': assertLocation(
+                        priorities.label
+                      )
+                    })}>
+                    <h3 className='navigation-item-title'>
+                      <priorities.icon />
+                      <span>{priorities.label}</span>
+                    </h3>
+                    <section className='navigation-item-actions'>
+                      <button
+                        className='navigation-item_state-indicator-button'
+                        onClick={() => {
+                          setIsCollapsed((state) => ({
+                            ...state,
+                            priorities: !state.priorities
+                          }));
+                        }}>
+                        {isCollapsed.priorities ? (
+                          <priorities.statusIndicatorIcons.active />
+                        ) : (
+                          <priorities.statusIndicatorIcons.inactive />
+                        )}
+                      </button>
+                    </section>
+                  </div>
+
+                  <div className='childrens-container'>
+                    <Collapse
+                      isOpened={isCollapsed.priorities}
+                      theme={{
+                        collapse: 'collapsable-container',
+                        content: 'inner-collapsable'
+                      }}>
+                      {Object.entries(priorities.children).map(
+                        ([key, count]) => {
+                          const [{ data }] = prioritiesDataMapping.filter(
+                            (item) => item.value === key
+                          );
+
+                          return (
+                            <div key={key} className='priorities-container'>
+                              <h4>
+                                <DotFilledIcon color={data.color} />
+                                <span>{data.label}</span>
+                              </h4>
+                              <div>{count}</div>
+                            </div>
+                          );
+                        }
+                      )}
                     </Collapse>
                   </div>
                 </li>

@@ -189,7 +189,7 @@ export const _navigationDrawer = styled.section`
             width: 100%;
             transition: height 500ms;
 
-            .tags-collapsable {
+            .inner-collapsable {
               width: 100%;
               display: flex;
               flex-direction: column;
@@ -219,6 +219,42 @@ export const _navigationDrawer = styled.section`
                 }
 
                 .tag-count {
+                  width: fit-content;
+                  height: fit-content;
+                  display: grid;
+                  place-content: center center;
+                  place-items: center center;
+                  font-size: 0.8rem;
+                  padding: 5px;
+                  border-radius: 4px;
+                  font-weight: 500;
+                  background: rgb(${({ theme }) => theme.foreground});
+                  color: rgb(${({ theme }) => theme.primary_shade});
+                  border: 1px solid rgba(${({ theme }) => theme.primary}, 0.3);
+                }
+              }
+
+              .priorities-container {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                cursor: pointer;
+
+                h4 {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 5px;
+                  text-transform: capitalize;
+
+                  svg {
+                    width: 20px;
+                    height: 20px;
+                  }
+                }
+
+                div {
                   width: fit-content;
                   height: fit-content;
                   display: grid;
