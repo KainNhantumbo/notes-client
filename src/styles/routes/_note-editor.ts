@@ -290,15 +290,43 @@ export const _noteEditor = styled.main`
       white-space: pre;
     }
 
-    
+    pre {
+      border-radius: 8px !important;
+      padding: 12px;
+      background: rgba(${({ theme }) => theme.font}, 0.1);
+      border: 1px solid rgba(${({ theme }) => theme.black}, 0.1);
+      white-space: pre-wrap;
+      word-break: break-all;
+      word-wrap: break-word;
+      text-align: justify;
+    }
+
+    pre code {
+      word-spacing: normal;
+      tab-size: 2 !important;
+      hyphens: none;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6rem;
+      white-space: inherit;
+      border: none;
+      padding: 0;
+      overflow: auto;
+      font-size: 1rem;
+      margin: 2rem 0;
+      word-wrap: break-word;
+      word-break: break-all;
+      font-family: Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono',
+        'Courier New', ui-monospace, monospace;
+    }
+
     .text-style-class {
       color: rgb(${({ theme }) => theme.primary_shade});
     }
-    
+
     i {
       font-style: italic;
     }
-    
+
     u {
       text-underline-offset: 3px;
     }

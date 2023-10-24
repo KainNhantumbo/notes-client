@@ -3,6 +3,7 @@ import {
   RiClipboardLine,
   RiDeleteBin7Line,
   RiFileCopy2Line,
+  RiFileExcel2Line,
   RiHashtag,
   RiHistoryLine,
   RiHtml5Line,
@@ -24,7 +25,9 @@ import { readingTime } from 'reading-time-estimator';
 import { generateText, generateJSON } from '@tiptap/react';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { editorExtensions as extensions } from './editor/Editor';
+import CsvDownloader from 'react-csv-downloader';
 import { _properties as Container } from '@/styles/modules/_properties';
+import { Datas, IColumn } from 'react-csv-downloader/dist/esm/lib/csv';
 
 type ExportTypes = 'markdown' | 'html' | 'text';
 
@@ -56,6 +59,38 @@ export default function Properties() {
         characters: 'unknown'
       };
     }
+  }, [state.currentNote]);
+
+  const CSVData = useMemo(() => {
+    const note = state.currentNote;
+    const columns: IColumn[] = [
+      { id: 'title', displayName: 'Title' },
+      { id: 'status', displayName: 'Status' },
+      { id: 'priority', displayName: 'Priority' },
+      { id: 'tags', displayName: 'Tags' },
+      { id: 'content', displayName: 'Content' }
+    ];
+
+    const data: Datas = [
+      { title: note.title },
+      { status: note.status },
+      { priority: note.priority },
+      { createdAt: note.createdAt },
+      {
+        content: generateText(
+          generateJSON(note.content, extensions),
+          extensions,
+          { blockSeparator: '\n' }
+        )
+      },
+      { tags: note.tags.map((tag) => tag.value).toString() }
+    ];
+
+    return {
+      filename: `${note.title || 'Untitled'}_${new Date().toISOString()}`,
+      data,
+      columns
+    };
   }, [state.currentNote]);
 
   const exportToClipboard = async (type: ExportTypes) => {
@@ -123,7 +158,6 @@ export default function Properties() {
       });
     }
   };
-
 
   const handleDuplicate = () => {
     dispatch({
@@ -426,6 +460,17 @@ export default function Properties() {
                   <RiHtml5Line />
                   <span>Copy as HTML</span>
                 </motion.button>
+
+                <CsvDownloader
+                  separator={';'}
+                  datas={CSVData.data}
+                  columns={CSVData.columns}
+                  filename={CSVData.filename}>
+                  <motion.button whileTap={{ scale: 0.8 }} className='action'>
+                    <RiFileExcel2Line />
+                    <span>Download as CSV</span>
+                  </motion.button>
+                </CsvDownloader>
 
                 <motion.button
                   whileTap={{ scale: 0.8 }}

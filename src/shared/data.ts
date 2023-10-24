@@ -63,7 +63,7 @@ export const app_features = [
   {
     icon: DashboardIcon,
     title: 'Powerful features',
-    content: `Sharing is made simple by exporting your notes to where you want - Plain Text, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`
+    content: `Sharing is made simple by exporting your notes to where you want - Plain Text, CSV, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`
   },
   {
     icon: HeartIcon,

@@ -135,6 +135,7 @@ export const _properties = styled.section`
     flex-direction: column;
     gap: 8px;
     padding: 8px;
+    overflow-y: auto;
 
     h2 {
       font-weight: 500;
