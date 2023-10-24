@@ -42,8 +42,9 @@ $PROJECT_ROOT
 
 ## Features Log
 
-### - Release v1.0.0
 
+
+### - Release v1.0.0
 - Realtime preview (WYSIWYG) note editor and a clean and simple interface to get a distraction-free writing experience.
 - Support [CommonMark Spec](https://spec.commonmark.org/0.29/) and [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
 - Installable on all platforms as PWA (Progressive Web Application).

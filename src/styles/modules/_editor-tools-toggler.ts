@@ -23,7 +23,7 @@ export const _editorToolsToggler = styled.section`
     padding: 12px 20px;
     border-radius: 12px;
     background: rgb(${({ theme }) => theme.foreground});
-    max-width: 500px;
+    max-width: 400px;
     margin: 25px;
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
     box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.1);
@@ -50,13 +50,15 @@ export const _editorToolsToggler = styled.section`
 
     .button-close {
       ${StyledCornerButton}
-      border: none;
       position: absolute;
       right: 12px;
       top: 12px;
+      border-radius: 10px;
+      border: none;
 
       :hover {
         color: rgb(${({ theme }) => theme.error});
+        background: rgb(${({ theme }) => theme.primary}, 0.2);
       }
     }
 
@@ -67,7 +69,6 @@ export const _editorToolsToggler = styled.section`
       width: 100%;
       overflow-y: auto;
       max-height: 480px;
-
 
       .option {
         width: 100%;

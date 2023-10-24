@@ -1,7 +1,7 @@
 {
   "name": "choconotey-client",
   "description": "markdown notes frontend application",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "url": "https://choconotey-demo.vercel.app",

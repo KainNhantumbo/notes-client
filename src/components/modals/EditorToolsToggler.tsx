@@ -3,32 +3,59 @@ import { RiCloseLine } from 'react-icons/ri';
 import { useAppContext } from '@/context/AppContext';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _editorToolsToggler as Container } from '@/styles/modules/_editor-tools-toggler';
+import { useMemo } from 'react';
+import { Settings } from '@/types';
 
 export default function EditorToolsToggler() {
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch, useFetchAPI } = useAppContext();
 
-  const handleToggle = (key: string, value: boolean) => {
-    dispatch({
-      type: actions.SETTINGS,
-      payload: {
-        ...state,
-        settings: {
-          ...state.settings,
-          editor: {
-            ...state.settings.editor,
-            toolbar: { ...state.settings.editor.toolbar, [key]: value }
+  const syncSettings = async (data: Settings) => {
+    try {
+      await useFetchAPI({ method: 'patch', url: '/api/v1/settings', data });
+    } catch (error: any) {
+      console.error(error?.response?.data?.message || error);
+      dispatch({
+        type: actions.TOAST,
+        payload: {
+          ...state,
+          toast: {
+            title: 'Settings Sync Error',
+            message:
+              error?.response?.data?.message || 'Failed to sync your settings.',
+            status: true,
+            actionButtonMessage: 'Retry',
+            handleFunction: syncSettings
           }
         }
-      }
-    });
-
-    console.log(state.settings.editor.toolbar);
-    console.log({ [key]: value });
+      });
+    }
   };
 
-  const options = Object.entries(state.settings.editor.toolbar).map(
-    ([key, value]) => ({ value: value, key })
-  );
+  const handleToggle = (key: string, value: boolean) => {
+    const data: Settings = {
+      ...state.settings,
+      editor: {
+        ...state.settings.editor,
+        toolbar: { ...state.settings.editor.toolbar, [key]: value }
+      }
+    };
+
+    dispatch({
+      type: actions.SETTINGS,
+      payload: { ...state, settings: data }
+    });
+
+    syncSettings(data);
+  };
+
+  const options = useMemo(() => {
+    return Object.entries(state.settings.editor.toolbar).map(
+      ([key, value]) => ({
+        value: value,
+        key
+      })
+    );
+  }, [state.settings]);
 
   return (
     <AnimatePresence>
@@ -60,7 +87,7 @@ export default function EditorToolsToggler() {
               <div className='prompt-info'>
                 <span className='prompt-title'>Toolbar Settings</span>
                 <p className='prompt-message'>
-                  Switch on or off the tools that will appear on the toolbar
+                  Switch on or off the tools that appear on your editor toolbar.
                 </p>
               </div>
 
