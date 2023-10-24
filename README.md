@@ -43,8 +43,12 @@ $PROJECT_ROOT
 ## Features Log
 
 
+### - Version v1.1.0
+- added support for control and enable or disable editor toolbar each tool.
+- Fixed found bugs, removed unused packages and improved performance.
+![Toolbar tool twiker demo](/src/assets/toolbar-settings-demo.png "Toolbar tool twiker demo")
 
-### - Release v1.0.0
+### - Version v1.0.0
 - Realtime preview (WYSIWYG) note editor and a clean and simple interface to get a distraction-free writing experience.
 - Support [CommonMark Spec](https://spec.commonmark.org/0.29/) and [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
 - Installable on all platforms as PWA (Progressive Web Application).
