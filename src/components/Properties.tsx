@@ -67,15 +67,16 @@ export default function Properties() {
       { id: 'title', displayName: 'Title' },
       { id: 'status', displayName: 'Status' },
       { id: 'priority', displayName: 'Priority' },
+      { id: 'content', displayName: 'Content' },
       { id: 'tags', displayName: 'Tags' },
-      { id: 'content', displayName: 'Content' }
+      { id: 'createdAt', displayName: 'createdAt' },
+      { id: 'updatedAt', displayName: 'updatedAt' }
     ];
 
     const data: Datas = [
       { title: note.title },
       { status: note.status },
       { priority: note.priority },
-      { createdAt: note.createdAt },
       {
         content: generateText(
           generateJSON(note.content, extensions),
@@ -83,7 +84,9 @@ export default function Properties() {
           { blockSeparator: '\n' }
         )
       },
-      { tags: note.tags.map((tag) => tag.value).toString() }
+      { tags: note.tags.map((tag) => tag.value).toString() },
+      { createdAt: note.createdAt },
+      { updatedAt: note.updatedAt }
     ];
 
     return {
@@ -102,7 +105,7 @@ export default function Properties() {
     try {
       if (Object.keys(state.currentNote.content).length < 1)
         throw new Error('Cannot export empty notes to clipboard.');
-
+      
       const clipboard = async (data: string) =>
         navigator.clipboard.writeText(data);
       const html = state.currentNote.content;

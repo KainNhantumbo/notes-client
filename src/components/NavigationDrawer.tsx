@@ -29,7 +29,7 @@ import { useAppContext } from '../context/AppContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
-import { prioritiesDataMapping } from '@/shared/data';
+import { prioritiesMap, statusMap } from '@/shared/data';
 
 type Navigation = Array<{
   label: string;
@@ -312,19 +312,116 @@ function NavigationDrawer(): JSX.Element {
                 </li>
 
                 <li
-                  className={classnames('navigation-item', trash.class)}
-                  onClick={() => trash.execute()}>
+                  className={classnames('navigation-item', priorities.class)}
+                  onClick={() => priorities.execute()}>
                   <div
                     className={classnames('navigation-box-container', {
                       'navigation-box-container-active': assertLocation(
-                        trash.label
+                        priorities.label
                       )
                     })}>
                     <h3 className='navigation-item-title'>
-                      <trash.icon />
-                      <span>{trash.label}</span>
+                      <priorities.icon />
+                      <span>{priorities.label}</span>
                     </h3>
-                    <div className='navigation-item-length'>{trash.length}</div>
+                    <section className='navigation-item-actions'>
+                      <button
+                        className='navigation-item_state-indicator-button'
+                        onClick={() => {
+                          setIsCollapsed((state) => ({
+                            ...state,
+                            priorities: !state.priorities
+                          }));
+                        }}>
+                        {isCollapsed.priorities ? (
+                          <priorities.statusIndicatorIcons.active />
+                        ) : (
+                          <priorities.statusIndicatorIcons.inactive />
+                        )}
+                      </button>
+                    </section>
+                  </div>
+
+                  <div className='childrens-container'>
+                    <Collapse
+                      isOpened={isCollapsed.priorities}
+                      theme={{
+                        collapse: 'collapsable-container',
+                        content: 'inner-collapsable'
+                      }}>
+                      {Object.entries(priorities.children).map(
+                        ([key, count]) => {
+                          const [{ data }] = prioritiesMap.filter(
+                            (item) => item.value === key
+                          );
+                          return (
+                            <div key={key} className='priorities-container'>
+                              <h4>
+                                <DotFilledIcon color={data.color} />
+                                <span>{data.label}</span>
+                              </h4>
+                              <div>{count}</div>
+                            </div>
+                          );
+                        }
+                      )}
+                    </Collapse>
+                  </div>
+                </li>
+
+                <li
+                  className={classnames('navigation-item', statuses.class)}
+                  onClick={() => statuses.execute()}>
+                  <div
+                    className={classnames('navigation-box-container', {
+                      'navigation-box-container-active': assertLocation(
+                        statuses.label
+                      )
+                    })}>
+                    <h3 className='navigation-item-title'>
+                      <statuses.icon />
+                      <span>{statuses.label}</span>
+                    </h3>
+                    <section className='navigation-item-actions'>
+                      <button
+                        className='navigation-item_state-indicator-button'
+                        onClick={() => {
+                          setIsCollapsed((state) => ({
+                            ...state,
+                            status: !state.status
+                          }));
+                        }}>
+                        {isCollapsed.status ? (
+                          <statuses.statusIndicatorIcons.active />
+                        ) : (
+                          <statuses.statusIndicatorIcons.inactive />
+                        )}
+                      </button>
+                    </section>
+                  </div>
+
+                  <div className='childrens-container'>
+                    <Collapse
+                      isOpened={isCollapsed.status}
+                      theme={{
+                        collapse: 'collapsable-container',
+                        content: 'inner-collapsable'
+                      }}>
+                      {Object.entries(statuses.children).map(([key, count]) => {
+                        const [{ data }] = statusMap.filter(
+                          (item) => item.value === key
+                        );
+                        return (
+                          <div key={key} className='status-container'>
+                            <h4>
+                              <data.icon color={data.color} />
+                              <span>{data.label}</span>
+                            </h4>
+                            <div>{count}</div>
+                          </div>
+                        );
+                      })}
+                    </Collapse>
                   </div>
                 </li>
 
@@ -393,61 +490,19 @@ function NavigationDrawer(): JSX.Element {
                 </li>
 
                 <li
-                  className={classnames('navigation-item', priorities.class)}
-                  onClick={() => priorities.execute()}>
+                  className={classnames('navigation-item', trash.class)}
+                  onClick={() => trash.execute()}>
                   <div
                     className={classnames('navigation-box-container', {
                       'navigation-box-container-active': assertLocation(
-                        priorities.label
+                        trash.label
                       )
                     })}>
                     <h3 className='navigation-item-title'>
-                      <priorities.icon />
-                      <span>{priorities.label}</span>
+                      <trash.icon />
+                      <span>{trash.label}</span>
                     </h3>
-                    <section className='navigation-item-actions'>
-                      <button
-                        className='navigation-item_state-indicator-button'
-                        onClick={() => {
-                          setIsCollapsed((state) => ({
-                            ...state,
-                            priorities: !state.priorities
-                          }));
-                        }}>
-                        {isCollapsed.priorities ? (
-                          <priorities.statusIndicatorIcons.active />
-                        ) : (
-                          <priorities.statusIndicatorIcons.inactive />
-                        )}
-                      </button>
-                    </section>
-                  </div>
-
-                  <div className='childrens-container'>
-                    <Collapse
-                      isOpened={isCollapsed.priorities}
-                      theme={{
-                        collapse: 'collapsable-container',
-                        content: 'inner-collapsable'
-                      }}>
-                      {Object.entries(priorities.children).map(
-                        ([key, count]) => {
-                          const [{ data }] = prioritiesDataMapping.filter(
-                            (item) => item.value === key
-                          );
-
-                          return (
-                            <div key={key} className='priorities-container'>
-                              <h4>
-                                <DotFilledIcon color={data.color} />
-                                <span>{data.label}</span>
-                              </h4>
-                              <div>{count}</div>
-                            </div>
-                          );
-                        }
-                      )}
-                    </Collapse>
+                    <div className='navigation-item-length'>{trash.length}</div>
                   </div>
                 </li>
               </div>

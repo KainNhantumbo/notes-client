@@ -8,11 +8,7 @@ import {
   RiPushpinFill,
   RiTimerFlashLine
 } from 'react-icons/ri';
-import {
-  app_metadata,
-  prioritiesDataMapping,
-  statusDataMapping
-} from '@/shared/data';
+import { app_metadata, prioritiesMap, statusMap } from '@/shared/data';
 import actions from '@/shared/actions';
 import { formatDate } from '@/libs/utils';
 import { m as motion } from 'framer-motion';
@@ -550,7 +546,7 @@ export default function Workspace(): JSX.Element {
 
 class NoteAttributes {
   static renderPriority(note: Note): JSX.Element {
-    const [{ data, value }] = prioritiesDataMapping.filter(
+    const [{ data, value }] = prioritiesMap.filter(
       (attr) => attr.value === note.priority
     );
 
@@ -572,9 +568,7 @@ class NoteAttributes {
   }
 
   static renderStatus(note: Note): JSX.Element {
-    const [{ data }] = statusDataMapping.filter(
-      (item) => item.value === note.status
-    );
+    const [{ data }] = statusMap.filter((item) => item.value === note.status);
 
     return (
       <div className='status-container'>

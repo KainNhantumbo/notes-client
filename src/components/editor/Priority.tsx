@@ -6,7 +6,7 @@ import { Tooltip } from 'react-tooltip';
 import { useAppContext } from '@/context/AppContext';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { RiTimerFlashLine } from 'react-icons/ri';
-import { prioritiesDataMapping } from '@/shared/data';
+import { prioritiesMap } from '@/shared/data';
 
 type TPriority = 'none' | 'low' | 'medium' | 'high';
 
@@ -14,7 +14,7 @@ export default function Priority() {
   const { state, dispatch } = useAppContext();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const [{ data }] = prioritiesDataMapping.filter((item) => {
+  const [{ data }] = prioritiesMap.filter((item) => {
     if (item.value === state.currentNote.priority) {
       return item;
     }
@@ -34,7 +34,7 @@ export default function Priority() {
   const renderDropdownItems = (): JSX.Element => {
     return (
       <DropdownContainer>
-        {prioritiesDataMapping.map(({ value, data }, index) => (
+        {prioritiesMap.map(({ value, data }, index) => (
           <div
             key={index.toString()}
             onClick={() => handleUpdatePriority(value as TPriority)}>

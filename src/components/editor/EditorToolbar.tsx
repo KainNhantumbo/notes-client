@@ -364,7 +364,7 @@ export default function EditorToolbar() {
               }
             })
           }>
-          <RiSettings5Line/>
+          <RiSettings5Line />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'

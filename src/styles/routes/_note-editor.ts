@@ -315,7 +315,7 @@ export const _noteEditor = styled.main`
       margin: 2rem 0;
       word-wrap: break-word;
       word-break: break-all;
-      font-family: Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono',
+      font-family: 'JetBrains Mono', Consolas, 'Liberation Mono',
         'Courier New', ui-monospace, monospace;
     }
 

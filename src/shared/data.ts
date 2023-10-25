@@ -51,7 +51,7 @@ export const app_metadata = {
 
 export const navigationAnchors = [
   { name: 'Overview', url: '/', alias: 'overview' },
-  { name: 'Features', url: '#features', alias: 'features' },
+  { name: 'Features', url: '#features', alias: 'features' }
 ];
 
 export const app_features = [
@@ -139,14 +139,14 @@ export const colorSchemeOptions = [
   { label: 'Automatic', value: `{"mode":"auto", "scheme": "dark"}` }
 ];
 
-export const prioritiesDataMapping = [
+export const prioritiesMap = [
   { value: 'none', data: { label: 'None', color: '#ccc' } },
   { value: 'low', data: { label: 'Low', color: '#3D9A50' } },
   { value: 'medium', data: { label: 'Medium', color: '#FBBD08' } },
   { value: 'high', data: { label: 'High', color: '#C62A2F' } }
 ];
 
-export const statusDataMapping = [
+export const statusMap = [
   {
     value: 'none',
     data: { label: 'None', color: '#ccc', icon: RiBubbleChartLine }

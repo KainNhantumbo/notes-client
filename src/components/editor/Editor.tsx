@@ -4,7 +4,7 @@ import EditorToolbar from './EditorToolbar';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
 import Typography from '@tiptap/extension-typography';
-import { EditorProvider } from '@tiptap/react';
+import { EditorProvider, ReactNodeViewRenderer } from '@tiptap/react';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
 import Subscript from '@tiptap/extension-subscript';
@@ -16,6 +16,22 @@ import TaskItem from '@tiptap/extension-task-item';
 import BubbleMenu from './BubbleMenu';
 import TextAlign from '@tiptap/extension-text-align';
 import Highlight from '@tiptap/extension-highlight';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import css from 'highlight.js/lib/languages/css';
+import js from 'highlight.js/lib/languages/javascript';
+import ts from 'highlight.js/lib/languages/typescript';
+import go from 'highlight.js/lib/languages/go';
+import html from 'highlight.js/lib/languages/xml';
+import { all, common, createLowlight } from 'lowlight';
+
+import CodeBlockWrapper from './CodeBlockWrapper.tsx';
+
+const lowlight = createLowlight(common);
+lowlight.register('html', html);
+lowlight.register('css', css);
+lowlight.register('js', js);
+lowlight.register('ts', ts);
+lowlight.register('go', go);
 
 function Editor(): JSX.Element {
   const { state, dispatch } = useAppContext();
@@ -106,6 +122,14 @@ export const editorExtensions = [
     nested: false,
     HTMLAttributes: { class: 'task-item-class' }
   }),
+  CodeBlockLowlight.extend({
+    addNodeView() {
+      return ReactNodeViewRenderer(CodeBlockWrapper, {
+        attrs: { language: 'javascript' }
+      });
+    }
+  }).configure({ lowlight: lowlight}),
+
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4, 5, 6],
@@ -118,6 +142,6 @@ export const editorExtensions = [
     code: { HTMLAttributes: { class: 'code-class' } },
     blockquote: { HTMLAttributes: { class: 'blockquote-class' } },
     horizontalRule: { HTMLAttributes: { class: 'hr-class' } },
-    codeBlock: { HTMLAttributes: { class: 'code-block-class' } }
+    codeBlock: false
   })
 ];

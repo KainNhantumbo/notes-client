@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Tooltip } from 'react-tooltip';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
-import { statusDataMapping } from '@/shared/data';
+import { statusMap } from '@/shared/data';
 
 type TStatus = 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
 
@@ -13,7 +13,7 @@ export default function Status() {
   const { state, dispatch } = useAppContext();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const [{ data }] = statusDataMapping.filter((item) => {
+  const [{ data }] = statusMap.filter((item) => {
     if (item.value === state.currentNote.status) {
       return item;
     }
@@ -33,7 +33,7 @@ export default function Status() {
   const renderDropdownItems = (): JSX.Element => {
     return (
       <DropdownContainer>
-        {statusDataMapping.map(({ value, data }, index) => (
+        {statusMap.map(({ value, data }, index) => (
           <div
             key={index.toString()}
             onClick={() => handleUpdateStatus(value as TStatus)}>
