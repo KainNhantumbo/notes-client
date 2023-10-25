@@ -16,7 +16,7 @@ export default function CodeBlockWrapper({
         defaultValue={defaultLanguage}
         onChange={(event) => {
           updateAttributes({ language: event.target.value });
-          console.log(<NodeViewContent as='code' />);
+          console.log(defaultLanguage);
         }}>
         <option value='null'>auto</option>
         <option disabled>—</option>

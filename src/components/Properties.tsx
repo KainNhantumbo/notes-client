@@ -25,9 +25,8 @@ import { readingTime } from 'reading-time-estimator';
 import { generateText, generateJSON } from '@tiptap/react';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { editorExtensions as extensions } from './editor/Editor';
-import CsvDownloader from 'react-csv-downloader';
+import JSONCSVDownloader from 'react-json-to-csv';
 import { _properties as Container } from '@/styles/modules/_properties';
-import { Datas, IColumn } from 'react-csv-downloader/dist/esm/lib/csv';
 
 type ExportTypes = 'markdown' | 'html' | 'text';
 
@@ -63,30 +62,30 @@ export default function Properties() {
 
   const CSVData = useMemo(() => {
     const note = state.currentNote;
-    const columns: IColumn[] = [
-      { id: 'title', displayName: 'Title' },
-      { id: 'status', displayName: 'Status' },
-      { id: 'priority', displayName: 'Priority' },
-      { id: 'content', displayName: 'Content' },
-      { id: 'tags', displayName: 'Tags' },
-      { id: 'createdAt', displayName: 'createdAt' },
-      { id: 'updatedAt', displayName: 'updatedAt' }
+    const columns: string[] = [
+      'Title',
+      'Status',
+      'Priority',
+      'Content',
+      'Tags',
+      'createdAt',
+      'updatedAt'
     ];
 
-    const data: Datas = [
-      { title: note.title },
-      { status: note.status },
-      { priority: note.priority },
+    const data = [
       {
+        title: note.title,
+        status: note.status,
+        priority: note.priority,
         content: generateText(
           generateJSON(note.content, extensions),
           extensions,
           { blockSeparator: '\n' }
-        )
-      },
-      { tags: note.tags.map((tag) => tag.value).toString() },
-      { createdAt: note.createdAt },
-      { updatedAt: note.updatedAt }
+        ),
+        tags: note.tags.map((tag) => tag.value).toString(),
+        createdAt: note.createdAt,
+        updatedAt: note.updatedAt
+      }
     ];
 
     return {
@@ -105,7 +104,7 @@ export default function Properties() {
     try {
       if (Object.keys(state.currentNote.content).length < 1)
         throw new Error('Cannot export empty notes to clipboard.');
-      
+
       const clipboard = async (data: string) =>
         navigator.clipboard.writeText(data);
       const html = state.currentNote.content;
@@ -464,16 +463,16 @@ export default function Properties() {
                   <span>Copy as HTML</span>
                 </motion.button>
 
-                <CsvDownloader
-                  separator={';'}
-                  datas={CSVData.data}
-                  columns={CSVData.columns}
+                <JSONCSVDownloader
+                  style={{ all: 'unset', width: '100%', maxWidth: '100%' }}
+                  data={CSVData.data}
+                  headers={CSVData.columns}
                   filename={CSVData.filename}>
                   <motion.button whileTap={{ scale: 0.8 }} className='action'>
                     <RiFileExcel2Line />
                     <span>Download as CSV</span>
                   </motion.button>
-                </CsvDownloader>
+                </JSONCSVDownloader>
 
                 <motion.button
                   whileTap={{ scale: 0.8 }}

@@ -149,7 +149,7 @@ export const _properties = styled.section`
       font-size: 0.9rem;
       padding-left: 5px;
 
-      button {
+      .action {
         all: unset;
         position: relative;
         display: flex;

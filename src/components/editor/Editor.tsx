@@ -22,7 +22,7 @@ import js from 'highlight.js/lib/languages/javascript';
 import ts from 'highlight.js/lib/languages/typescript';
 import go from 'highlight.js/lib/languages/go';
 import html from 'highlight.js/lib/languages/xml';
-import { all, common, createLowlight } from 'lowlight';
+import { common, createLowlight } from 'lowlight';
 
 import CodeBlockWrapper from './CodeBlockWrapper.tsx';
 
@@ -128,7 +128,7 @@ export const editorExtensions = [
         attrs: { language: 'javascript' }
       });
     }
-  }).configure({ lowlight: lowlight}),
+  }).configure({ lowlight: lowlight }),
 
   StarterKit.configure({
     heading: {

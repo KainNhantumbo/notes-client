@@ -13,7 +13,6 @@ import {
   RiLogoutBoxRLine,
   RiSettings6Line,
   RiTimerFlashLine,
-  RiTimerLine
 } from 'react-icons/ri';
 import {
   CaretDownIcon,
@@ -28,8 +27,8 @@ import { useMemo, useState, memo, JSX } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
 import { prioritiesMap, statusMap } from '@/shared/data';
+import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
 
 type Navigation = Array<{
   label: string;
@@ -247,24 +246,25 @@ function NavigationDrawer(): JSX.Element {
     };
   }, [state.notes, searchParams]);
 
-  const folders = useMemo(() => {
-    return {
-      label: 'folders',
-      icon: RiFolder3Line,
-      classname: 'folders-class',
-      anchor: `/workspace?tab=folders&folder=none`,
-      statusIndicatorIcons: {
-        active: RiArrowDropDownLine,
-        inactive: RiArrowDropUpLine
-      },
-      length: state.folders.length,
-      execute: () => {
-        navigate(`/workspace?tab=folders&folder=none`);
-      },
-      button: { icon: RiAddLine, handler: () => {} },
-      children: []
-    };
-  }, [state.notes]);
+  // TODO:ADD FOLDERS FEATURE
+  // const folders = useMemo(() => {
+  //   return {
+  //     label: 'folders',
+  //     icon: RiFolder3Line,
+  //     classname: 'folders-class',
+  //     anchor: `/workspace?tab=folders&folder=none`,
+  //     statusIndicatorIcons: {
+  //       active: RiArrowDropDownLine,
+  //       inactive: RiArrowDropUpLine
+  //     },
+  //     length: state.folders.length,
+  //     execute: () => {
+  //       navigate(`/workspace?tab=folders&folder=none`);
+  //     },
+  //     button: { icon: RiAddLine, handler: () => {} },
+  //     children: []
+  //   };
+  // }, [state.notes]);
 
   return (
     <AnimatePresence>
