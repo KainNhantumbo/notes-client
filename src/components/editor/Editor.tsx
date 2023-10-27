@@ -22,16 +22,15 @@ import js from 'highlight.js/lib/languages/javascript';
 import ts from 'highlight.js/lib/languages/typescript';
 import go from 'highlight.js/lib/languages/go';
 import html from 'highlight.js/lib/languages/xml';
-import { common, createLowlight } from 'lowlight';
+import { lowlight } from 'lowlight/lib/core';
 
 import CodeBlockWrapper from './CodeBlockWrapper.tsx';
 
-const lowlight = createLowlight(common);
-lowlight.register('html', html);
-lowlight.register('css', css);
-lowlight.register('js', js);
-lowlight.register('ts', ts);
-lowlight.register('go', go);
+lowlight.registerLanguage('html', html);
+lowlight.registerLanguage('css', css);
+lowlight.registerLanguage('js', js);
+lowlight.registerLanguage('ts', ts);
+lowlight.registerLanguage('go', go);
 
 function Editor(): JSX.Element {
   const { state, dispatch } = useAppContext();

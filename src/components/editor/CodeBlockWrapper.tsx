@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
 
 export default function CodeBlockWrapper({
@@ -16,7 +14,8 @@ export default function CodeBlockWrapper({
         defaultValue={defaultLanguage}
         onChange={(event) => {
           updateAttributes({ language: event.target.value });
-          console.log(defaultLanguage);
+          console.log(event.target.value
+            );
         }}>
         <option value='null'>auto</option>
         <option disabled>—</option>

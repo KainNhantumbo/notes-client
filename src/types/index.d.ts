@@ -1,9 +1,6 @@
 import React from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
-import * as editorTheme from '@uiw/codemirror-themes-all';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
-
-export type EditorTheme = keyof typeof editorTheme;
 
 export type IconType = React.ForwardRefExoticComponent<
   IconProps & React.RefAttributes<SVGSVGElement>
@@ -91,10 +88,8 @@ export type Modal = {
   status: boolean;
   message: string;
   closeOnDelay?: boolean;
-  actionButtonMessage?: string | undefined;
-  handleFunction?:
-    | ((data: any | undefined) => void | Promise<void>)
-    | undefined;
+  actionButtonMessage?: string;
+  handleFunction?: (data?: any) => void | Promise<void>;
 };
 
 export type Query = {
@@ -140,7 +135,6 @@ export type EditorTools = {
   subscript: boolean;
   code: boolean;
   paragraph: boolean;
-  // table: boolean;
   bulletList: boolean;
   orderedList: boolean;
   taskList: boolean;

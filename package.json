@@ -32,7 +32,10 @@
     "node": ">=18.17.0",
     "npm": ">=9.6.7"
   },
-  "license": "Apache License Version 2.0",
+  "license": {
+    "name": "Apache License Version 2.0",
+    "url": " http://www.apache.org/licenses"
+  },
   "repository": "https://github.com/KainNhantumbo/notes-app",
   "scripts": {
     "dev": "vite",
@@ -62,7 +65,7 @@
     "framer-motion": "^10.12.18",
     "highlight.js": "^11.9.0",
     "lodash.isequal": "^4.5.0",
-    "lowlight": "^3.1.0",
+    "lowlight": "^2.9.0",
     "moment": "^2.29.4",
     "nanoid": "^4.0.2",
     "rc-dropdown": "^4.1.0",
