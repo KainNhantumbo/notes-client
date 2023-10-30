@@ -24,7 +24,7 @@ const context = createContext<Context>({
   changeColorScheme: () => {}
 });
 
- function ThemeContext({ children }: Props) {
+function ThemeContext({ children }: Props) {
   const { state, dispatch } = useAppContext();
   const [currentTheme, setCurrentTheme] = useState<Theme>(light_default);
   const [colorScheme, setColorScheme] = useState<ColorScheme>({
@@ -120,7 +120,7 @@ const context = createContext<Context>({
   );
 }
 
-export default React.memo(ThemeContext)
+export default React.memo(ThemeContext);
 
 export function useThemeContext() {
   return useContext(context);

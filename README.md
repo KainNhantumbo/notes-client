@@ -1,6 +1,6 @@
 # Choconotey Notes (React.JS + Typescript)
 
-Welcome to **choconotey notes** app repository, built with React.JS and Typescript, and of course, with a flavour of other awesome community opensource packages.
+Welcome to **choconotey notes** app repository, built with React.JS and Typescript, and of course, with a flavour of other awesome community open source packages.
 
 Taking notes in markdown is made simple with this application. It provides the core features to create, organize, share and export your notes content in multiple formats like Markdown, HTML and plain text.
 
@@ -30,7 +30,7 @@ $PROJECT_ROOT
 ├── public
 └── src
     ├── assets
-    ├── componentsZ
+    ├── components
     ├── config
     ├── context
     ├── libs

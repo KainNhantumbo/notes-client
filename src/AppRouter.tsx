@@ -11,9 +11,11 @@ import Settings from './routes/workspace/settings';
 import NoteEditor from './routes/workspace/note-editor';
 import PrivacyPolicy from './routes/docs/privacy-policy';
 import NotFoundError from './routes/404';
+import { JSX } from 'react';
 
+type RouteType = { path: string; element: JSX.ElementType };
 
-const routes = [
+const routes: RouteType[] = [
   { path: '/', element: Home },
   { path: '/workspace', element: Workspace },
   { path: '/workspace/settings', element: Settings },
@@ -25,7 +27,7 @@ const routes = [
   { path: '/auth/update-password', element: UpdatePassword },
   { path: '/auth/signup-success', element: SignupSuccess },
   { path: '/docs/privacy-policy', element: PrivacyPolicy },
-  { path: '*', element: NotFoundError },
+  { path: '*', element: NotFoundError }
 ];
 
 export default function AppRouter() {

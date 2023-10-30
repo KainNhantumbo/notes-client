@@ -141,7 +141,24 @@ export default function AppContext({ children }: Props) {
     }
   };
 
+  // sends a handshake to the server 
+  async function handleAPIHealthCheck() {
+    try {
+      const {
+        data: { code, message }
+      } = await fetch<{ code: number; message: string }>({
+        method: 'get',
+        url: '/api/v1/healthcheck'
+      });
+      console.info(`Service response code ${code}. ${message}`);
+    } catch (error: any) {
+      console.error(error);
+      console.warn('API Service is currently offline');
+    }
+  }
+
   useEffect(() => {
+    handleAPIHealthCheck()
     authenticateUser();
     computeInnerWindowSize();
     window.addEventListener('resize', computeInnerWindowSize);

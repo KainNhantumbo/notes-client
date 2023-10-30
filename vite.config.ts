@@ -21,37 +21,50 @@ export default defineConfig({
             src: '/favicon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
-            purpose: 'favicon',
+            purpose: 'favicon'
           },
           {
             src: '/favicon-256x256.png',
             sizes: '256x256',
             type: 'image/png',
-            purpose: 'favicon',
+            purpose: 'favicon'
           },
           {
             src: '/favicon-384x384.png',
             sizes: '384x384',
             type: 'image/png',
-            purpose: 'favicon',
+            purpose: 'favicon'
           },
           {
             src: '/favicon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable',
-          },
+            purpose: 'any maskable'
+          }
         ],
         theme_color: '#FFFFFF',
         background_color: '#FFFFFF',
         start_url: '/',
         scope: '/',
         display: 'standalone',
-        orientation: 'portrait',
+        orientation: 'portrait'
       },
-    }),
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: '*',
+            method: 'GET',
+            handler: 'CacheFirst' as const,
+            options: {
+              cacheName: 'choconotey-cache',
+              cacheableResponse: { statuses: [200] }
+            }
+          }
+        ]
+      }
+    })
   ],
   server: {
-    port: 3000,
-  },
+    port: 3000
+  }
 });

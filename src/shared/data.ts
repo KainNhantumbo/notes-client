@@ -23,7 +23,7 @@ export const app_metadata = {
   author: Package.author,
   appName: Package.metadata.name,
   version: Package.version,
-  license: Package.license,
+  license: Package.license.name,
   repository: Package.repository,
   websiteName: Package.website_name,
   tags: Package.keywords.join(' '),

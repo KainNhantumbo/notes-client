@@ -1,7 +1,6 @@
 import './styles/global.css';
 import 'rc-dropdown/assets/index.css';
-import { Suspense } from 'react';
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import AppContext from './context/AppContext';
 import { BrowserRouter as Router } from 'react-router-dom';

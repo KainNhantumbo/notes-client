@@ -50,7 +50,7 @@ export default function Cookies() {
               <p>
                 We use cookies to grant you a better experience in our site. By
                 using {app_metadata.appName}, you accept our {'  '}
-                <Link to='/legal/privacy-policy'>
+                <Link to='/docs/privacy-policy'>
                   <strong>privacy policy</strong>
                 </Link>
                 .
