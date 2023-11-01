@@ -4,7 +4,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
+    'plugin:react-hooks/recommended'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -12,8 +12,11 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true },
+      { allowConstantExport: true }
     ],
     'react/no-unescaped-entities': 'off',
-  },
+    'react-refresh/only-export-components': 'off',
+    'react-hooks/rules-of-hooks': 'off',
+    'react-hooks/exhaustive-deps': 'off'
+  }
 };

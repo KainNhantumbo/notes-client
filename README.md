@@ -2,7 +2,7 @@
 
 Welcome to **choconotey notes** app repository, built with React.JS and Typescript, and of course, with a flavour of other awesome community open source packages.
 
-Taking notes in markdown is made simple with this application. It provides the core features to create, organize, share and export your notes content in multiple formats like Markdown, HTML and plain text.
+Taking notes in markdown is made simple with this application. It provides the core features to create, organize, share and export your notes content in multiple formats like Markdown, CSV, HTML and plain text.
 
 Not limited, the core editor is built on top of the headless [Tiptap Editor](https://tiptap.dev), empowering this application for robust note editing, with extensions, tools, syntax highlighting and more. You can find the API source code [here](https://github.com/KainNhantumbo/notes-api).
 
@@ -44,9 +44,11 @@ $PROJECT_ROOT
 
 
 ### - Version v1.1.0
-- added support for control and enable or disable editor toolbar each tool.
 - Fixed found bugs, removed unused packages and improved performance.
+- added support to download note data in csv format, group notes by status and priorities in the navigation drawer tabs and, improved support for code blocks rendering in the editor. 
+- added support for control and enable or disable editor toolbar each tool.
 ![Toolbar tool twiker demo](/src/assets/toolbar-settings-demo.png "Toolbar tool twiker demo")
+
 
 ### - Version v1.0.0
 - Realtime preview (WYSIWYG) note editor and a clean and simple interface to get a distraction-free writing experience.

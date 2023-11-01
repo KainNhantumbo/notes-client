@@ -1,26 +1,23 @@
 import {
-  RiAddLine,
   RiApps2Line,
-  RiArrowDropDownLine,
-  RiArrowDropUpLine,
   RiBubbleChartLine,
   RiCloseLine,
   RiDeleteBin7Line,
-  RiFolder3Line,
   RiHashtag,
   RiHome2Line,
   RiInformationLine,
   RiLogoutBoxRLine,
   RiSettings6Line,
-  RiTimerFlashLine,
+  RiTimerFlashLine
 } from 'react-icons/ri';
 import {
   CaretDownIcon,
   CaretUpIcon,
   DotFilledIcon
 } from '@radix-ui/react-icons';
-import { IconType } from 'react-icons';
+import { AxiosError } from 'axios';
 import classnames from 'classnames';
+import { IconType } from 'react-icons';
 import { Collapse } from 'react-collapse';
 import actions from '../shared/actions';
 import { useMemo, useState, memo, JSX } from 'react';
@@ -85,8 +82,11 @@ function NavigationDrawer(): JSX.Element {
               });
 
               navigate('/auth/signin', { replace: true });
-            } catch (error: any) {
-              console.error(error?.response?.data?.message || error);
+            } catch (error: unknown) {
+              console.error(
+                (error as AxiosError<{ message: string }>).response?.data
+                  .message || error
+              );
             } finally {
               dispatch({
                 type: actions.PROMPT,
@@ -214,7 +214,7 @@ function NavigationDrawer(): JSX.Element {
     const tags = state.notes
       .filter((note) => !note.deleted)
       .map((note) => note.tags)
-      .reduce((acc, current, i, arr) => {
+      .reduce((acc, current) => {
         const group = acc.concat(current);
         return group;
       }, [])
