@@ -207,18 +207,22 @@ export const _home = styled.main`
 
       @media screen and (max-width: 750px) {
         flex-direction: column;
+        gap: 40px;
 
         img,
         ::before,
         ::after {
           max-height: 360px;
+          margin: 0 auto;
         }
       }
     }
 
     .features-container {
+      width: 100%;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 20px;
 
       h2 {
@@ -246,6 +250,14 @@ export const _home = styled.main`
         i {
           color: rgb(${({ theme }) => theme.primary_shade});
         }
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        line-height: 1.6rem;
+        max-width: 700px;
+        font-weight: 500;
+        text-align: center;
       }
 
       section {
@@ -302,7 +314,10 @@ export const _home = styled.main`
       display: flex;
       flex-direction: column;
       gap: 20px;
-      margin: 50px 0;
+      margin: 20px 0;
+      padding: 60px 20px;
+      border-radius: 30px;
+      background: rgba(${({ theme }) => theme.background_shade});
 
       h2 {
         font-size: 1.8rem;
@@ -335,15 +350,32 @@ export const _home = styled.main`
         width: 100%;
         display: flex;
         flex-flow: row wrap;
-        gap: 20px;
+        gap: 40px;
 
         .comment-container {
           width: 100%;
-          max-width: 42%;
+          max-width: 300px;
           margin: 0 auto;
           display: flex;
           flex-direction: column;
           gap: 20px;
+
+          .comment {
+            line-height: 1.6rem;
+            position: relative;
+            padding-left: 20px;
+
+            ::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 5px;
+              height: 100%;
+              background: rgb(${({ theme }) => theme.primary_shade});
+              border-radius: 5px;
+            }
+          }
 
           .author-container {
             display: flex;
@@ -363,7 +395,16 @@ export const _home = styled.main`
             .author-details {
               display: flex;
               flex-direction: column;
-              
+              gap: 5px;
+
+              h3 {
+                font-weight: 500;
+                line-height: 1.6rem;
+              }
+
+              p {
+                font-size: 0.9rem;
+              }
             }
           }
         }

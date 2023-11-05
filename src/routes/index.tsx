@@ -6,6 +6,7 @@ import {
 } from 'react-icons/ri';
 import { Tooltip } from 'react-tooltip';
 import { m as motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import demo_dark from '@/assets/demo-dark.png';
 import app_logo from '@/assets/logo-192x192.png';
@@ -14,7 +15,6 @@ import { useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import { _home as Container } from '@/styles/routes/_home';
 import { app_features, app_metadata, comments } from '@/shared/data';
-import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const theme = useTheme();
@@ -111,6 +111,11 @@ export default function Home() {
                 Empowering features to boost your{' '}
                 <i>productivity capabilities</i>...
               </h2>
+              <h3>
+                We create deep expertise and outcomes-oriented methods to
+                created meaningful impact for people.
+              </h3>
+
               <section>
                 {app_features.map((feature, index) => (
                   <motion.div
@@ -138,7 +143,7 @@ export default function Home() {
               <section className='content-container'>
                 {comments.map(({ comment, author }, index) => (
                   <div key={index} className='comment-container'>
-                    <p>{comment}</p>
+                    <p className='comment'>{comment}</p>
                     <div className='author-container'>
                       <img
                         loading='lazy'
