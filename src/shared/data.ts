@@ -50,8 +50,11 @@ export const app_metadata = {
 };
 
 export const navigationAnchors = [
-  { name: 'Overview', url: '/', alias: 'overview' },
-  { name: 'Features', url: '#features', alias: 'features' }
+  { name: 'Overview', url: '#overview', alias: 'overview' },
+  { name: 'Learn', url: '#learn', alias: 'learn' },
+  { name: 'Features', url: '#features', alias: 'features' },
+  { name: 'Comments', url: '#comments', alias: 'comments' },
+  { name: 'Contact', url: '#contact', alias: 'contact' }
 ];
 
 export const app_features = [

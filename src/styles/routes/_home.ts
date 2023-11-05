@@ -411,7 +411,7 @@ export const _home = styled.main`
       }
     }
 
-    .identity-container {
+    .contact-container {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -447,6 +447,7 @@ export const _home = styled.main`
         font-size: 0.95rem;
         line-height: 1.6rem;
         text-align: center;
+        max-width: 700px;
       }
 
       .shields-container {

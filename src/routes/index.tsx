@@ -30,7 +30,7 @@ export default function Home() {
       <Container>
         <div className='wrapper-container'>
           <article>
-            <section className='introduction-container'>
+            <section id='overview' className='introduction-container'>
               <h1>
                 <span>Collect your thoughts and convert into notes</span>
               </h1>
@@ -70,7 +70,7 @@ export default function Home() {
               />
             </section>
 
-            <section className='presentaion-container'>
+            <section id='learn' className='presentaion-container'>
               <img
                 loading='lazy'
                 decoding='async'
@@ -135,7 +135,7 @@ export default function Home() {
               </section>
             </section>
 
-            <section className='comments-container'>
+            <section id='comments' className='comments-container'>
               <h2>
                 <i>Trusted</i> by various type of people
               </h2>
@@ -162,11 +162,12 @@ export default function Home() {
               </section>
             </section>
 
-            <section className='identity-container'>
+            <section id='contact' className='contact-container'>
               <h2>Who is behind {appName}?</h2>
               <p>
                 This app is developed by a indie developer, {author.name}, based
-                in Maputo, Mozambique.
+                in Maputo, Mozambique. Get in touch using one of the options
+                below:
               </p>
 
               <div className='shields-container'>

@@ -10,12 +10,12 @@ import {
   Cross2Icon,
   HamburgerMenuIcon
 } from '@radix-ui/react-icons';
-import logo from '@/assets/logo-192x192.png';
 import { useState, useEffect } from 'react';
+import logo from '@/assets/logo-192x192.png';
 import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { _header as Container } from '../styles/modules/_header';
 import { app_metadata, navigationAnchors } from '../shared/data';
+import { _header as Container } from '../styles/modules/_header';
 
 export default function Header() {
   const [isMenu, setIsMenu] = useState<boolean>(false);
