@@ -58,7 +58,7 @@ export default function Home() {
                   target='_blank'
                   href={repository}>
                   <span>Give a star</span>
-                  <GitHubLogoIcon />
+                  <RiGithubLine />
                 </motion.a>
               </div>
 
@@ -81,7 +81,9 @@ export default function Home() {
               />
 
               <div>
-                <h2>Keep track of your annotations more easier than before</h2>
+                <h2>
+                  Keep track of your annotations <i>more easier</i> than before
+                </h2>
 
                 <p>
                   Say goodbye to the hassle of juggling notes and ensure you
@@ -107,7 +109,8 @@ export default function Home() {
 
             <section id='features' className='features-container'>
               <h2>
-                Empowering features to boost your productivity capabilities
+                Empowering features to boost your{' '}
+                <i>productivity capabilities</i>...
               </h2>
               <section>
                 {app_features.map((feature, index) => (
