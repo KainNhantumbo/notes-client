@@ -71,22 +71,61 @@ export default function Home() {
               />
             </section>
 
+            <section className='presentaion-container'>
+              <img
+                loading='lazy'
+                decoding='async'
+                src={'/src/assets/annotation-unsplash.jpg'}
+                alt={`${appName} demo image`}
+                placeholder={`${appName} demo image`}
+              />
+
+              <div>
+                <h2>Keep track of your annotations more easier than before</h2>
+
+                <p>
+                  Say goodbye to the hassle of juggling notes and ensure you
+                  never miss important details again. With{' '}
+                  <i>
+                    <strong>Choconotey</strong>
+                  </i>
+                  , you can effortlessly capture your daily key insights.
+                </p>
+
+                <p>
+                  Our innovative solution revolutionizes the way you document
+                  your work. It streamlines the process, making it more
+                  efficient and accurate. Embrace the future of work companion
+                  with{' '}
+                  <i>
+                    <strong>Choconotey</strong>
+                  </i>
+                  .
+                </p>
+              </div>
+            </section>
+
             <section id='features' className='features-container'>
-              {app_features.map((feature, index) => (
-                <motion.div
-                  whileHover={{
-                    boxShadow: `0 0 25px rgba(${theme.black}, 0.09)`,
-                    translateY: -8
-                  }}
-                  title={feature.title}
-                  key={String(index)}>
-                  <h3>
-                    <feature.icon />
-                    <span>{feature.title}</span>
-                  </h3>
-                  <p>{feature.content}</p>
-                </motion.div>
-              ))}
+              <h2>
+                Empowering features to boost your productivity capabilities
+              </h2>
+              <section>
+                {app_features.map((feature, index) => (
+                  <motion.div
+                    whileHover={{
+                      boxShadow: `0 0 25px rgba(${theme.black}, 0.09)`,
+                      translateY: -8
+                    }}
+                    title={feature.title}
+                    key={String(index)}>
+                    <h3>
+                      <feature.icon />
+                      <span>{feature.title}</span>
+                    </h3>
+                    <p>{feature.content}</p>
+                  </motion.div>
+                ))}
+              </section>
             </section>
 
             <section className='identity-container'>
