@@ -143,3 +143,12 @@ export type EditorTools = {
   horizontalRuler: boolean;
   hardBreak: boolean;
 };
+
+export type Comment = {
+  author: {
+    name: string;
+    carrier: string;
+    picture: string;
+  };
+  comment: string;
+};

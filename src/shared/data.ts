@@ -17,7 +17,7 @@ import {
   RiStackLine
 } from 'react-icons/ri';
 import Package from '../../package.json';
-import { Option } from '@/types';
+import { Comment, Option } from '@/types';
 
 export const app_metadata = {
   author: Package.author,
@@ -166,5 +166,44 @@ export const statusMap = [
   {
     value: 'completed',
     data: { label: 'Completed', color: '#3D9A50', icon: CheckCircledIcon }
+  }
+];
+
+export const comments: Comment[] = [
+  {
+    author: {
+      name: 'Raphael Nemo',
+      carrier: 'Typer at Zoof',
+      picture: '/src/assets/sergio-de-paula-unsplash.jpg'
+    },
+    comment:
+      'I had a pleasure to work with Kain for over 3 years on products with thousands of users. It would be unfair to give credit to anyone else in the team for improving the conversion funnel to the very last detail of Choconotey.'
+  },
+  {
+    author: {
+      name: 'Nancy Guerra',
+      carrier: 'Freelancer',
+      picture: '/src/assets/jake-nackos-unsplash.jpg'
+    },
+    comment:
+      'Choconotey make my day more easier as a freelancer. Been throught a lot of meeting and work so hard to remember any point and sometimes it miss. But now, everything can easily get recap by Choconotey.'
+  },
+  {
+    author: {
+      name: 'Dylan Soares',
+      carrier: 'Product Designer',
+      picture: '/src/assets/christian-buehner-unsplash.jpg'
+    },
+    comment:
+      'I am a passionate product designer driven by delivering results. Working with Choconotey as been a fantastic experience and help me to keep track of essential work key points.'
+  },
+  {
+    author: {
+      name: 'Clementine Papari',
+      carrier: 'Hunter',
+      picture: '/src/assets/michael-dam-unsplash.jpg'
+    },
+    comment:
+      'Working with Choconotey is a breath of fresh air for my projects at a time I were struggling. I found a new ambitious perspetive wich I were able to put into pratice quickly transforming problems into a-ha moments.'
   }
 ];

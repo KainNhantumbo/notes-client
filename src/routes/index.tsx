@@ -10,11 +10,10 @@ import { Layout } from '@/components/Layout';
 import demo_dark from '@/assets/demo-dark.png';
 import app_logo from '@/assets/logo-192x192.png';
 import demo_light from '@/assets/demo-light.png';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 import { _home as Container } from '@/styles/routes/_home';
-import { app_features, app_metadata } from '@/shared/data';
+import { app_features, app_metadata, comments } from '@/shared/data';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
@@ -127,6 +126,33 @@ export default function Home() {
                     </h3>
                     <p>{feature.content}</p>
                   </motion.div>
+                ))}
+              </section>
+            </section>
+
+            <section className='comments-container'>
+              <h2>
+                <i>Trusted</i> by various type of people
+              </h2>
+
+              <section className='content-container'>
+                {comments.map(({ comment, author }, index) => (
+                  <div key={index} className='comment-container'>
+                    <p>{comment}</p>
+                    <div className='author-container'>
+                      <img
+                        loading='lazy'
+                        decoding='async'
+                        src={author.picture}
+                        alt={`${author.name} demo image`}
+                        placeholder={`${author.name} demo image`}
+                      />
+                      <div className='author-details'>
+                        <h3>{author.name}</h3>
+                        <p>{author.carrier}</p>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </section>
             </section>

@@ -298,6 +298,78 @@ export const _home = styled.main`
       }
     }
 
+    .comments-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin: 50px 0;
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        line-height: 2.8rem;
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        align-self: center;
+        font-family: 'Zilla Slab', serif;
+        position: relative;
+
+        ::before {
+          content: '';
+          position: absolute;
+          width: 30px;
+          height: 5px;
+          top: -20px;
+          left: calc(50% - 15px);
+          border-radius: 12px;
+          background: rgb(${({ theme }) => theme.primary_shade});
+        }
+
+        i {
+          color: rgb(${({ theme }) => theme.primary_shade});
+        }
+      }
+
+      .content-container {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        gap: 20px;
+
+        .comment-container {
+          width: 100%;
+          max-width: 42%;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          .author-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              max-width: 50px;
+              max-height: 50px;
+              object-fit: cover;
+              border-radius: 50%;
+            }
+
+            .author-details {
+              display: flex;
+              flex-direction: column;
+              
+            }
+          }
+        }
+      }
+    }
+
     .identity-container {
       width: 100%;
       display: flex;
