@@ -13,9 +13,14 @@ import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '@/context/AppContext';
 import { useEffect, useState } from 'react';
 import { InputEvents, SubmitEvent } from '@/types';
-import media_login from '@/assets/media-login.jpg';
+import loginImage from '@/assets/media-login.jpg';
+import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
 import { useTheme } from 'styled-components';
 import { _signup as Container } from '@/styles/routes/_signup';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { AxiosError } from 'axios';
+
+type FetchError = AxiosError<{ message: string; code: number }>;
 
 export default function SignUp() {
   const theme = useTheme();
@@ -48,11 +53,13 @@ export default function SignUp() {
         withCredentials: true
       });
       navigate(`/auth/signup-success`, { replace: true });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message || error?.code
+        message:
+          (error as FetchError).response?.data?.message ||
+          String((error as FetchError).code)
       });
     } finally {
       setLoading(false);
@@ -81,12 +88,13 @@ export default function SignUp() {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <img
-            loading='lazy'
-            decoding='sync'
-            src={media_login}
+          <LazyLoadImage
+            effect='blur'
+            width={'100%'}
+            height={'100%'}
+            placeholderSrc={loginPlaceholderImage}
+            src={loginImage}
             alt='background image'
-            placeholder='background image'
           />
 
           <article>

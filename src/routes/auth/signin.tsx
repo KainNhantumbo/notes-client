@@ -4,12 +4,17 @@ import { m as motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Layout } from '@/components/Layout';
 import { app_metadata } from '@/shared/data';
-import media_login from '@/assets/media-login.jpg';
+import loginImage from '@/assets/media-login.jpg';
+import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useAppContext } from '@/context/AppContext';
 import { InputEvents, SubmitEvent, Auth } from '@/types';
 import { _signin as Container } from '@/styles/routes/_signin';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
+
+type FetchError = AxiosError<{ message: string; code: number }>;
 
 export default function SignIn() {
   const navigate: NavigateFunction = useNavigate();
@@ -47,11 +52,13 @@ export default function SignIn() {
       });
 
       navigate(`/workspace`, { replace: true });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message || error?.code
+        message:
+          (error as FetchError).response?.data?.message ||
+          String((error as FetchError).code)
       });
     } finally {
       setLoading(false);
@@ -76,10 +83,12 @@ export default function SignIn() {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <img
-            loading='lazy'
-            decoding='sync'
-            src={media_login}
+          <LazyLoadImage
+            effect='blur'
+            width={'100%'}
+            height={'100%'}
+            placeholderSrc={loginPlaceholderImage}
+            src={loginImage}
             alt='background image'
           />
 

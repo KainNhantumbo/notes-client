@@ -133,6 +133,7 @@ export const _home = styled.main`
     }
 
     .presentaion-container {
+      width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;

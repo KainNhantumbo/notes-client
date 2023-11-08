@@ -8,10 +8,15 @@ import { Tooltip } from 'react-tooltip';
 import { m as motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
-import demo_dark from '@/assets/demo-dark.png';
+import demoDarkImage from '@/assets/demo-dark.png';
+import demoDarkPlaceholderImage from '@/assets/demo-dark-placeholder.png';
 import app_logo from '@/assets/logo-192x192.png';
-import demo_light from '@/assets/demo-light.png';
+import demoLightImage from '@/assets/demo-light.png';
+import demoLightPlaceholderImage from '@/assets/demo-light-placeholder.png';
 import { useTheme } from 'styled-components';
+import annotationImage from '@/assets/annotation-unsplash.jpg';
+import annotationPlaceholderImage from '@/assets/annotation-unsplash-placeholder.jpg';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useThemeContext } from '../context/ThemeContext';
 import { _home as Container } from '@/styles/routes/_home';
 import { app_features, app_metadata, comments } from '@/shared/data';
@@ -61,22 +66,30 @@ export default function Home() {
                 </motion.a>
               </div>
 
-              <img
-                loading='lazy'
-                decoding='async'
-                src={colorScheme.scheme === 'dark' ? demo_dark : demo_light}
+              <LazyLoadImage
+                src={
+                  colorScheme.scheme === 'dark' ? demoDarkImage : demoLightImage
+                }
+                width={'100%'}
+                height={'100%'}
                 alt={`${appName} demo image`}
-                placeholder={`${appName} demo image`}
+                effect='blur'
+                placeholderSrc={
+                  colorScheme.scheme === 'dark'
+                    ? demoDarkPlaceholderImage
+                    : demoLightPlaceholderImage
+                }
               />
             </section>
 
             <section id='learn' className='presentaion-container'>
-              <img
-                loading='lazy'
-                decoding='async'
-                src={'/src/assets/annotation-unsplash.jpg'}
+              <LazyLoadImage
+                src={annotationImage}
+                effect='blur'
+                width={'100%'}
+                height={'100%'}
                 alt={`${appName} demo image`}
-                placeholder={`${appName} demo image`}
+                placeholderSrc={annotationPlaceholderImage}
               />
 
               <div>
