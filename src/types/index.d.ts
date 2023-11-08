@@ -1,6 +1,9 @@
 import React from 'react';
+import { AxiosError } from 'axios';
 import type { ChangeEvent, FormEvent } from 'react';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
+
+type FetchError = AxiosError<{ message: string; code: number }>;
 
 export type IconType = React.ForwardRefExoticComponent<
   IconProps & React.RefAttributes<SVGSVGElement>
@@ -89,7 +92,7 @@ export type Modal = {
   message: string;
   closeOnDelay?: boolean;
   actionButtonMessage?: string;
-  handleFunction?: (data?: any) => void | Promise<void>;
+  handleFunction?: (data?: Partial<>) => void | Promise<void>;
 };
 
 export type Query = {

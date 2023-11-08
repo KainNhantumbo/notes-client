@@ -1,14 +1,12 @@
 import {
   RiApps2Line,
   RiDeleteBin2Line,
-  RiDeleteBin6Line,
   RiLoopLeftLine,
   RiMenuLine,
   RiMoreFill,
   RiPushpinFill,
   RiTimerFlashLine
 } from 'react-icons/ri';
-import { app_metadata, prioritiesMap, statusMap } from '@/shared/data';
 import actions from '@/shared/actions';
 import { formatDate } from '@/libs/utils';
 import { m as motion } from 'framer-motion';
@@ -16,15 +14,19 @@ import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
 import { Layout } from '@/components/Layout';
 import SortQuery from '@/components/SortQuery';
-import { Note, Settings, User } from '@/types';
+import { FetchError, Note, Settings, User } from '@/types';
 import About from '@/components/modals/About';
 import { useQueries } from '@tanstack/react-query';
 import { useAppContext } from '@/context/AppContext';
 import { useEffect, JSX, useMemo } from 'react';
-import { MixIcon, PlusIcon } from '@radix-ui/react-icons';
+import { PlusIcon } from '@radix-ui/react-icons';
 import NavigationDrawer from '@/components/NavigationDrawer';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { _workspace as Container } from '@/styles/routes/_workspace';
+import { app_metadata, prioritiesMap, statusMap } from '@/shared/data';
+import { Player } from '@lottiefiles/react-lottie-player';
+import emptyNoteAnimation from '@/shared/animation-note.json';
+import emptyTrashAnimation from '@/shared/animation-trash.json';
 
 export default function Workspace(): JSX.Element {
   const theme = useTheme();
@@ -56,8 +58,8 @@ export default function Workspace(): JSX.Element {
         payload: { ...state, user: { ...state.user, ...data } }
       });
       return data;
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
     }
   }
 
@@ -72,8 +74,8 @@ export default function Workspace(): JSX.Element {
         payload: { ...state, settings: { ...state.settings, ...data } }
       });
       return data;
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
     }
   }
 
@@ -85,8 +87,8 @@ export default function Workspace(): JSX.Element {
         url: `/api/v1/notes?${queryParams}`
       });
       return data;
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
     }
   }
 
@@ -105,8 +107,8 @@ export default function Workspace(): JSX.Element {
         }
       });
       navigate(`/workspace/note-editor/${data._id}`);
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -114,7 +116,7 @@ export default function Workspace(): JSX.Element {
           toast: {
             title: 'Note Sync Error',
             message:
-              error?.response?.data?.message ||
+              (error as FetchError).response?.data?.message ||
               'Failed to create your note. Check your internet connection and try again.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -167,8 +169,10 @@ export default function Workspace(): JSX.Element {
                 }
               });
               refetch({ queryKey: ['query-notes'] });
-            } catch (error: any) {
-              console.error(error?.response?.data?.message || error);
+            } catch (error) {
+              console.error(
+                (error as FetchError).response?.data?.message || error
+              );
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -176,7 +180,7 @@ export default function Workspace(): JSX.Element {
                   toast: {
                     title: 'Note Sync Error',
                     message:
-                      error?.response?.data?.message ||
+                      (error as FetchError).response?.data?.message ||
                       'Failed to restore your note from trash. Check your internet connection and try again.',
                     status: true,
                     actionButtonMessage: 'Retry',
@@ -234,8 +238,10 @@ export default function Workspace(): JSX.Element {
                 }
               });
               refetch({ queryKey: ['query-notes'] });
-            } catch (error: any) {
-              console.error(error?.response?.data?.message || error);
+            } catch (error) {
+              console.error(
+                (error as FetchError).response?.data?.message || error
+              );
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -243,7 +249,7 @@ export default function Workspace(): JSX.Element {
                   toast: {
                     title: 'Note Sync Error',
                     message:
-                      error?.response?.data?.message ||
+                      (error as FetchError).response?.data?.message ||
                       'Failed to delete your note from trash. Check your internet connection and try again.',
                     status: true,
                     actionButtonMessage: 'Retry',
@@ -307,8 +313,6 @@ export default function Workspace(): JSX.Element {
   }, [state.query]);
 
   const groupedNotes = useMemo(() => {
-    const queryObj = searchParams.get('folder');
-
     return [
       {
         type: 'Pinned',
@@ -487,8 +491,7 @@ export default function Workspace(): JSX.Element {
           <section className='error-container'>
             <div>
               <h3>
-                {(error as any)?.response?.data?.message ||
-                  (error as any)?.code ||
+                {(error as FetchError)?.response?.data?.message ||
                   'An error occurred while fetching data'}
               </h3>
               <button onClick={() => refetch({ queryKey: ['query-notes'] })}>
@@ -501,7 +504,12 @@ export default function Workspace(): JSX.Element {
         {!hasNotes && !isTrashTab && !isError && !isLoading ? (
           <section className='empty-notes-container'>
             <div>
-              <MixIcon />
+              <Player
+                loop
+                autoplay
+                src={emptyNoteAnimation}
+                style={{ height: '200px', width: '200px' }}
+              />
               <h3>
                 <span>No notes</span>
               </h3>
@@ -515,7 +523,12 @@ export default function Workspace(): JSX.Element {
         {!hasNotes && isTrashTab && !isError && !isLoading ? (
           <section className='empty-notes-container'>
             <div>
-              <RiDeleteBin6Line />
+              <Player
+                loop
+                autoplay
+                src={emptyTrashAnimation}
+                style={{ height: '200px', width: '200px' }}
+              />
               <h3>
                 <span>Trash</span>
               </h3>
