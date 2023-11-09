@@ -1,7 +1,7 @@
 import React from 'react';
 import { AxiosError } from 'axios';
+import { IconType } from 'react-icons';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
-
 type FetchError = AxiosError<{ message: string; code: number }>;
 
 export type IconType = React.ForwardRefExoticComponent<
@@ -137,3 +137,5 @@ export type Comment = {
   };
   comment: string;
 };
+
+export type Contact = { alias: string; path: string; icon: IconType };

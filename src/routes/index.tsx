@@ -4,6 +4,7 @@ import {
   RiMailLine,
   RiProfileLine
 } from 'react-icons/ri';
+import { Contact } from '@/types';
 import { Tooltip } from 'react-tooltip';
 import { m as motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +28,29 @@ export default function Home() {
   const { colorScheme } = useThemeContext();
   const { appName, repository, author } = app_metadata;
 
+  const contacts: Contact[] = [
+    {
+      alias: '@Gmail',
+      path: author.email,
+      icon: RiMailLine
+    },
+    {
+      alias: '@LinkedIn',
+      path: author.linkedin,
+      icon: RiLinkedinBoxLine
+    },
+    {
+      alias: '@Portfolio',
+      path: author.portfolio,
+      icon: RiProfileLine
+    },
+    {
+      alias: '@Github',
+      path: author.github,
+      icon: RiGithubLine
+    }
+  ];
+
   return (
     <Layout
       renderHeader
@@ -36,15 +60,26 @@ export default function Home() {
         <div className='wrapper-container'>
           <article>
             <section id='overview' className='introduction-container'>
-              <h1>
-                <span>Collect your thoughts and convert into notes</span>
-              </h1>
+              <motion.h1
+                initial={{ scale: 0, x: 820, opacity: 0 }}
+                animate={{ scale: 1, x: 0, opacity: 1 }}>
+                <span>
+                  Collect <i>your</i> thoughts and convert into <i>notes</i>!
+                </span>
+              </motion.h1>
 
-              <p>
+              <motion.p
+                initial={{ scale: 0, x: -820, opacity: 0 }}
+                animate={{
+                  scale: 1,
+                  x: 0,
+                  opacity: 1,
+                  transition: { delay: 0.2 }
+                }}>
                 All your notes, synced on your devices. Get started with{' '}
                 {appName} now for free on all your devices or use it in your
                 browser.
-              </p>
+              </motion.p>
 
               <div className='action-buttons'>
                 <motion.button
@@ -66,20 +101,31 @@ export default function Home() {
                 </motion.a>
               </div>
 
-              <LazyLoadImage
-                src={
-                  colorScheme.scheme === 'dark' ? demoDarkImage : demoLightImage
-                }
-                width={'100%'}
-                height={'100%'}
-                alt={`${appName} demo image`}
-                effect='blur'
-                placeholderSrc={
-                  colorScheme.scheme === 'dark'
-                    ? demoDarkPlaceholderImage
-                    : demoLightPlaceholderImage
-                }
-              />
+              <motion.div
+                initial={{ scale: 0, y: -820, opacity: 0 }}
+                animate={{
+                  scale: 1,
+                  y: 0,
+                  opacity: 1,
+                  transition: { delay: 0.4 }
+                }}>
+                <LazyLoadImage
+                  src={
+                    colorScheme.scheme === 'dark'
+                      ? demoDarkImage
+                      : demoLightImage
+                  }
+                  width={'100%'}
+                  height={'100%'}
+                  alt={`${appName} demo image`}
+                  effect='blur'
+                  placeholderSrc={
+                    colorScheme.scheme === 'dark'
+                      ? demoDarkPlaceholderImage
+                      : demoLightPlaceholderImage
+                  }
+                />
+              </motion.div>
             </section>
 
             <section id='learn' className='presentaion-container'>
@@ -92,7 +138,7 @@ export default function Home() {
                 placeholderSrc={annotationPlaceholderImage}
               />
 
-              <div>
+              <div className='content-container'>
                 <h2>
                   Keep track of your annotations <i>more easier</i> than before
                 </h2>
@@ -120,14 +166,18 @@ export default function Home() {
             </section>
 
             <section id='features' className='features-container'>
-              <h2>
+              <motion.h2
+                initial={{ opacity: 0, x: 200 }}
+                whileInView={{ opacity: 1, x: 0 }}>
                 Empowering features to boost your{' '}
                 <i>productivity capabilities</i>...
-              </h2>
-              <h3>
+              </motion.h2>
+              <motion.h3
+                initial={{ opacity: 0, x: -200 }}
+                whileInView={{ opacity: 1, x: 0 }}>
                 We create deep expertise and outcomes-oriented methods to
                 created meaningful impact for people.
-              </h3>
+              </motion.h3>
 
               <section>
                 {app_features.map((feature, index) => (
@@ -135,6 +185,13 @@ export default function Home() {
                     whileHover={{
                       boxShadow: `0 0 25px rgba(${theme.black}, 0.09)`,
                       translateY: -8
+                    }}
+                    initial={{ scale: 0, opacity: 0, y: 200 }}
+                    whileInView={{
+                      scale: 1,
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.2, duration: 0.5 }
                     }}
                     title={feature.title}
                     key={String(index)}>
@@ -155,7 +212,19 @@ export default function Home() {
 
               <section className='content-container'>
                 {comments.map(({ comment, author }, index) => (
-                  <div key={index} className='comment-container'>
+                  <motion.div
+                    key={index}
+                    className='comment-container'
+                    initial={{ scale: 0, opacity: 0, y: -200 }}
+                    whileInView={{
+                      scale: 1,
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        delay: index / comments.length,
+                        duration: 0.5
+                      }
+                    }}>
                     <p className='comment'>{comment}</p>
                     <div className='author-container'>
                       <img
@@ -170,7 +239,7 @@ export default function Home() {
                         <p>{author.carrier}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </section>
             </section>
@@ -184,64 +253,34 @@ export default function Home() {
               </p>
 
               <div className='shields-container'>
-                <a
-                  data-tooltip-id={author.email}
-                  data-tooltip-content={`@Gmail | ${author.email}`}
-                  href={`mailto:${author.email}`}
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <RiMailLine />
-                  <Tooltip
-                    classNameArrow='tooltip-border-class'
-                    className='tooltip-class'
-                    id={author.email}
-                  />
-                </a>
-                <a
-                  href={author.github}
-                  data-tooltip-id={author.github}
-                  data-tooltip-content={`@Github | ${author.github}`}
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <RiGithubLine />
-                  <Tooltip
-                    classNameArrow='tooltip-border-class'
-                    className='tooltip-class'
-                    id={author.github}
-                  />
-                </a>
-
-                <a
-                  href={author.portfolio}
-                  data-tooltip-id={author.portfolio}
-                  data-tooltip-content={`@Homepage | ${author.portfolio}`}
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <RiProfileLine />
-                  <Tooltip
-                    classNameArrow='tooltip-border-class'
-                    className='tooltip-class'
-                    id={author.portfolio}
-                  />
-                </a>
-
-                <a
-                  href={author.linkedin}
-                  data-tooltip-id={author.linkedin}
-                  data-tooltip-content={`@LinkedIn | ${author.linkedin}`}
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <RiLinkedinBoxLine />
-                  <Tooltip
-                    classNameArrow='tooltip-border-class'
-                    className='tooltip-class'
-                    id={author.linkedin}
-                  />
-                </a>
+                {contacts.map(({ alias, path, icon: Icon }, i) => (
+                  <motion.a
+                    key={path}
+                    initial={{ scale: 0 }}
+                    whileInView={{
+                      scale: 1,
+                      transition: { delay: i / contacts.length }
+                    }}
+                    data-tooltip-id={path}
+                    data-tooltip-content={`${alias} | ${path}`}
+                    href={path == author.email ? `mailto:${path}` : path}
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    <Icon />
+                    <Tooltip
+                      id={path}
+                      classNameArrow='tooltip-border-class'
+                      className='tooltip-class'
+                    />
+                  </motion.a>
+                ))}
               </div>
             </section>
 
-            <section className='call-to-action'>
+            <motion.section
+              className='call-to-action'
+              initial={{ scale: 0, y: 100 }}
+              whileInView={{ scale: 1, y: 0, transition: { duration: 0.5 } }}>
               <img
                 loading='lazy'
                 decoding='async'
@@ -251,7 +290,9 @@ export default function Home() {
               />
 
               <h2>
-                <span>Ready to get started?</span>
+                <span>
+                  <i>Ready</i> to get started?
+                </span>
               </h2>
               <p>
                 Don't have an account yet? Sign up for a free account and take
@@ -269,7 +310,7 @@ export default function Home() {
                   <span>Get started</span>
                 </motion.button>
               </div>
-            </section>
+            </motion.section>
           </article>
         </div>
       </Container>

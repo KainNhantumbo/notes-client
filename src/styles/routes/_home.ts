@@ -68,6 +68,9 @@ export const _home = styled.main`
         max-width: 600px;
         align-self: center;
         font-family: 'Zilla Slab', serif;
+        i {
+          color: rgb(${({ theme }) => theme.primary_shade});
+        }
       }
 
       p {
@@ -177,7 +180,7 @@ export const _home = styled.main`
         position: relative;
       }
 
-      div {
+      .content-container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -225,8 +228,6 @@ export const _home = styled.main`
       flex-direction: column;
       align-items: center;
       gap: 20px;
-
-      
 
       h2 {
         font-size: 1.8rem;
@@ -320,7 +321,7 @@ export const _home = styled.main`
       margin: 20px 0;
       padding: 60px 20px;
       border-radius: 30px;
-      background: rgba(${({ theme }) => theme.background_shade});
+      background: rgb(${({ theme }) => theme.background_shade});
 
       h2 {
         font-size: 1.8rem;
@@ -492,10 +493,33 @@ export const _home = styled.main`
       flex-direction: column;
       gap: 20px;
       align-items: center;
-      background: rgb(${({ theme }) => theme.background});
+      background: rgb(${({ theme }) => theme.background_shade});
       padding: 12px;
       border-radius: 12px;
-      border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+      position: relative;
+
+      ::before {
+        content: '';
+        position: absolute;
+        width: 80%;
+        height: 100%;
+        top: -40px;
+        left: calc(10%);
+        z-index: -2;
+        border-radius: 12px;
+        background: rgb(${({ theme }) => theme.primary_shade});
+      }
+      ::after {
+        content: '';
+        position: absolute;
+        width: 90%;
+        height: 100%;
+        top: -20px;
+        left: calc(5%);
+        z-index: -1;
+        border-radius: 12px;
+        background: rgb(${({ theme }) => theme.primary});
+      }
 
       h2 {
         font-size: 2.8rem;
@@ -506,6 +530,9 @@ export const _home = styled.main`
         max-width: 600px;
         align-self: center;
         font-family: 'Zilla Slab', serif;
+        i {
+          color: rgb(${({ theme }) => theme.primary_shade});
+        }
       }
 
       p {
@@ -519,8 +546,9 @@ export const _home = styled.main`
         max-width: 80px;
         max-height: 80px;
         object-fit: cover;
-        border-radius: 50%;
+        border-radius: 40%;
         margin: 10px auto;
+        border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
         box-shadow: 0 12px 35px rgba(${({ theme }) => theme.black}, 0.2);
       }
 
