@@ -4,52 +4,45 @@ import {
   LockClosedIcon
 } from '@radix-ui/react-icons';
 import fetch from '@/config/client';
-import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { PulseLoader } from 'react-spinners';
 import { app_metadata } from '@/shared/data';
 import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
-import { useAppContext } from '@/context/AppContext';
 import { useEffect, useState } from 'react';
-import { InputEvents, SubmitEvent } from '@/types';
 import loginImage from '@/assets/media-login.jpg';
 import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
 import { useTheme } from 'styled-components';
 import { _signup as Container } from '@/styles/routes/_signup';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { AxiosError } from 'axios';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { UserSignupType, userSignupSchema } from '@/config/schemas';
 
 type FetchError = AxiosError<{ message: string; code: number }>;
 
 export default function SignUp() {
   const theme = useTheme();
   const navigate: NavigateFunction = useNavigate();
-  const { state, dispatch } = useAppContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
 
-  const handleChange = (e: InputEvents): void => {
-    dispatch({
-      type: actions.SIGN_UP,
-      payload: {
-        ...state,
-        signUp: {
-          ...state.signUp,
-          [e.target.name]: e.target.value
-        }
-      }
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<UserSignupType>({
+    resolver: zodResolver(userSignupSchema)
+  });
 
-  const handleSubmit = async (e: SubmitEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<UserSignupType> = async (data) => {
     setLoading(true);
     try {
       await fetch({
         method: 'post',
         url: '/api/v1/users',
-        data: state.signUp,
+        data: { ...data },
         withCredentials: true
       });
       navigate(`/auth/signup-success`, { replace: true });
@@ -101,7 +94,7 @@ export default function SignUp() {
             <div className='form-container'>
               <h2>Hi, welcome to {app_metadata.appName}</h2>
               <p>Please fill the form below to create a new user account.</p>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <section className='form-section'>
                   <div className='form-element'>
                     <label htmlFor='first_name'>
@@ -111,13 +104,15 @@ export default function SignUp() {
                     <input
                       type='text'
                       id='first_name'
-                      name='first_name'
                       autoComplete='on'
                       placeholder='Your last name'
-                      aria-label='Your last name'
-                      required={true}
-                      onChange={(e): void => handleChange(e)}
+                      {...register('first_name')}
                     />
+                    {errors.first_name ? (
+                      <p className='error-message'>
+                        {errors.first_name?.message}
+                      </p>
+                    ) : null}
                   </div>
                   <div className='form-element'>
                     <label htmlFor='last_name'>
@@ -127,13 +122,14 @@ export default function SignUp() {
                     <input
                       type='text'
                       id='last_name'
-                      autoComplete='on'
-                      name='last_name'
                       placeholder='Your last name'
-                      aria-label='Your last name'
-                      required={true}
-                      onChange={(e): void => handleChange(e)}
+                      {...register('last_name')}
                     />
+                    {errors.last_name ? (
+                      <p className='error-message'>
+                        {errors.last_name?.message}
+                      </p>
+                    ) : null}
                   </div>
                 </section>
 
@@ -146,13 +142,12 @@ export default function SignUp() {
                     <input
                       type='email'
                       id='email'
-                      name='email'
                       placeholder='Your email'
-                      aria-label='Your email'
-                      autoComplete='on'
-                      required
-                      onChange={(e): void => handleChange(e)}
+                      {...register('email')}
                     />
+                    {errors.email ? (
+                      <p className='error-message'>{errors.email?.message}</p>
+                    ) : null}
                   </div>
                   <div className='form-element'>
                     <label htmlFor='password'>
@@ -162,14 +157,14 @@ export default function SignUp() {
                     <input
                       type='password'
                       id='password'
-                      name='password'
-                      autoComplete='on'
-                      minLength={8}
-                      aria-hidden='true'
                       placeholder='Password'
-                      aria-label='Password'
-                      onChange={(e): void => handleChange(e)}
+                      {...register('password')}
                     />
+                    {errors.password ? (
+                      <p className='error-message'>
+                        {errors.password?.message}
+                      </p>
+                    ) : null}
                   </div>
                 </section>
 
@@ -182,20 +177,16 @@ export default function SignUp() {
                     <input
                       type='password'
                       id='confirm_password'
-                      name='confirm_password'
-                      autoComplete='on'
-                      aria-hidden='true'
-                      minLength={8}
                       placeholder='Confirm your password'
-                      aria-label='Confirm your password'
-                      onChange={(e): void => handleChange(e)}
+                      {...register('confirm_password')}
                     />
+                    {errors.confirm_password ? (
+                      <p className='error-message'>
+                        {errors.confirm_password?.message}
+                      </p>
+                    ) : null}
                   </div>
                 </section>
-
-                <span className='error-message'>
-                  {error.status && !loading ? error.message : `  `}
-                </span>
 
                 {loading && !error.status ? (
                   <PulseLoader
