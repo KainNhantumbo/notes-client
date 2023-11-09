@@ -9,17 +9,9 @@ export const initialState: TState = {
   isNavigationDrawer: false,
   isPropertiesDrawer: false,
   isEditorToolsTogglerModal: false,
-  signIn: { email: '', password: '' },
   windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', token: '' },
   user: { first_name: '', last_name: '', email: '' },
-  signUp: {
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    confirm_password: ''
-  },
   toast: {
     title: '',
     message: '',
@@ -100,12 +92,6 @@ export function reducer(state: TState, action: TAction): TState {
 
     case actions.ABOUT_MODAL:
       return { ...state, isAboutModal: action.payload.isAboutModal };
-
-    case actions.SIGN_IN:
-      return { ...state, signIn: action.payload.signIn };
-
-    case actions.SIGN_UP:
-      return { ...state, signUp: action.payload.signUp };
 
     case actions.NOTES:
       return { ...state, notes: action.payload.notes };

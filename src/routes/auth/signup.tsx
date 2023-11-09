@@ -4,6 +4,7 @@ import {
   LockClosedIcon
 } from '@radix-ui/react-icons';
 import fetch from '@/config/client';
+import { AxiosError } from 'axios';
 import { m as motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { PulseLoader } from 'react-spinners';
@@ -11,14 +12,13 @@ import { app_metadata } from '@/shared/data';
 import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import loginImage from '@/assets/media-login.jpg';
-import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
 import { useTheme } from 'styled-components';
-import { _signup as Container } from '@/styles/routes/_signup';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { AxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { _signup as Container } from '@/styles/routes/_signup';
 import { UserSignupType, userSignupSchema } from '@/config/schemas';
+import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
 
 type FetchError = AxiosError<{ message: string; code: number }>;
 

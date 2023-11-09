@@ -1,6 +1,5 @@
 import React from 'react';
 import { AxiosError } from 'axios';
-import type { ChangeEvent, FormEvent } from 'react';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
 
 type FetchError = AxiosError<{ message: string; code: number }>;
@@ -12,13 +11,6 @@ export type IconType = React.ForwardRefExoticComponent<
 export type HeadProps =
   | { title?: string; createdAt?: string; updatedAt?: string }
   | undefined;
-
-export type InputEvents =
-  | ChangeEvent<HTMLInputElement>
-  | ChangeEvent<HTMLSelectElement>
-  | ChangeEvent<HTMLTextAreaElement>;
-
-export type SubmitEvent = FormEvent<HTMLFormElement>;
 
 export type ColorScheme = {
   mode: 'auto' | 'manual';
@@ -51,16 +43,6 @@ export type Theme = {
 declare module 'styled-components' {
   export interface DefaultTheme extends Theme {}
 }
-
-export type SignIn = { email: string; password: string };
-
-export type SignUp = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-  confirm_password: string;
-};
 
 export type Tag = { id: string; color: string; value: string };
 

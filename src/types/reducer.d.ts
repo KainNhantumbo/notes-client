@@ -2,12 +2,9 @@ import {
   Auth,
   Folder,
   Modal,
-  TNavigation,
   Note,
   Query,
   Settings,
-  SignIn,
-  SignUp,
   User
 } from '@/types/index';
 
@@ -21,8 +18,6 @@ export type TState = {
   notes: Note[];
   currentNote: Note;
   folders: Folder[];
-  signIn: SignIn;
-  signUp: SignUp;
   toast: Modal;
   prompt: Modal;
   windowInnerSize: { width: number; height: number };
