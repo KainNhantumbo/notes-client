@@ -226,6 +226,8 @@ export const _home = styled.main`
       align-items: center;
       gap: 20px;
 
+      
+
       h2 {
         font-size: 1.8rem;
         font-weight: 600;

@@ -1,9 +1,10 @@
 import { z } from 'zod';
 
-export const loginSchema = z.object({
+export const userLoginSchema = z.object({
   email: z
     .string()
-    .email({ message: 'Please enter your email.' })
+    .min(1, { message: 'Email is required.' })
+    .email({ message: 'Please enter a valid email.' })
     .trim()
     .toLowerCase(),
   password: z
@@ -12,7 +13,7 @@ export const loginSchema = z.object({
     .trim()
 });
 
-export const signupSchema = z.object({
+export const userSignupSchema = z.object({
   first_name: z
     .string()
     .min(2, { message: 'First name must have a minimun of 2 characters.' })
@@ -25,7 +26,8 @@ export const signupSchema = z.object({
     .trim(),
   email: z
     .string()
-    .email({ message: 'Please enter your email.' })
+    .min(1, { message: 'Email is required.' })
+    .email({ message: 'Please enter a valid email.' })
     .trim()
     .toLowerCase(),
   password: z
@@ -39,3 +41,6 @@ export const signupSchema = z.object({
     .min(8, { message: 'Your password must have at least 8 characters.' })
     .max(20, { message: 'Your password must have less than 20 characters.' })
 });
+
+export type UserLoginType = z.infer<typeof userLoginSchema>;
+export type UserSignupType = z.infer<typeof userSignupSchema>;

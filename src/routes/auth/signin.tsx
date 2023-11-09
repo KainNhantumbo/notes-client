@@ -9,11 +9,13 @@ import loginImage from '@/assets/media-login.jpg';
 import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useAppContext } from '@/context/AppContext';
-import { InputEvents, SubmitEvent, Auth } from '@/types';
+import { Auth } from '@/types';
 import { _signin as Container } from '@/styles/routes/_signin';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
-// import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { userLoginSchema, UserLoginType } from '@/config/schemas';
 
 type FetchError = AxiosError<{ message: string; code: number }>;
 
@@ -23,27 +25,24 @@ export default function SignIn() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });
 
-  const handleChange = (e: InputEvents): void => {
-    dispatch({
-      type: actions.SIGN_IN,
-      payload: {
-        ...state,
-        signIn: {
-          ...state.signIn,
-          [e.target.name]: e.target.value
-        }
-      }
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<UserLoginType>({
+    resolver: zodResolver(userLoginSchema)
+  });
 
-  const handleSubmit = async (e: SubmitEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<UserLoginType> = async ({
+    email,
+    password
+  }) => {
     setLoading(true);
     try {
       const { data } = await fetch<Auth>({
         method: 'post',
         url: '/api/v1/auth/default/login',
-        data: state.signIn,
+        data: { email, password },
         withCredentials: true
       });
 
@@ -51,7 +50,6 @@ export default function SignIn() {
         type: actions.AUTH,
         payload: { ...state, auth: { ...data } }
       });
-
       navigate(`/workspace`, { replace: true });
     } catch (error) {
       console.error((error as FetchError).response?.data?.message || error);
@@ -97,7 +95,7 @@ export default function SignIn() {
             <div className='form-container'>
               <h2>Hello, welcome back!</h2>
               <p>Please fill the form below to access your account.</p>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <section className='input-field'>
                   <label htmlFor='email'>
                     <EnvelopeClosedIcon />
@@ -106,13 +104,14 @@ export default function SignIn() {
                   <input
                     type='email'
                     id='email'
-                    name='email'
                     autoComplete='on'
                     placeholder='Type your email'
-                    aria-label='Type your email'
-                    required
-                    onChange={(e): void => handleChange(e)}
+                    {...register('email')}
                   />
+
+                  {errors.email ? (
+                    <p className='error-message'>{errors.email?.message}</p>
+                  ) : null}
                 </section>
 
                 <section className='input-field'>
@@ -123,13 +122,12 @@ export default function SignIn() {
                   <input
                     type='password'
                     id='password'
-                    name='password'
-                    aria-hidden='true'
                     placeholder='Type your password'
-                    aria-label='Type your password'
-                    autoComplete='on'
-                    onChange={(e): void => handleChange(e)}
+                    {...register('password')}
                   />
+                  {errors.password ? (
+                    <p className='error-message'>{errors.password?.message}</p>
+                  ) : null}
                 </section>
                 <div className='password-reset'>
                   <Link
@@ -138,9 +136,6 @@ export default function SignIn() {
                     <span>Forgot password? Recover account.</span>
                   </Link>
                 </div>
-                {error.status && (
-                  <span className='error-message'>{error.message}</span>
-                )}
 
                 <motion.button
                   whileTap={{ scale: 0.8 }}
