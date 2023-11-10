@@ -40,6 +40,14 @@ $PROJECT_ROOT
     └── types
 ```
 
+## Project Stack
+- **Typescript** - a superset language of Javascript that provides typechecking.
+- **Vite** - a next generation frontend tooling.
+- **React.JS** - library used to build big, fast Web apps with JavaScript.
+- **Styled Components** - library to write styles for components.
+- **Tiptap** - a framework that powers the core editor.
+- **Zod** - for frontend data validation.
+
 ## Features Log
 
 ### - Version 1.2.0
