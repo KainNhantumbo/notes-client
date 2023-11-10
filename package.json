@@ -36,7 +36,7 @@
     "name": "Apache License Version 2.0",
     "url": " http://www.apache.org/licenses"
   },
-  "repository": "https://github.com/KainNhantumbo/notes-app",
+  "repository": "https://github.com/KainNhantumbo/notes-client",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

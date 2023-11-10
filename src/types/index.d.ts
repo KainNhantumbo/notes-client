@@ -1,8 +1,15 @@
-import React from 'react';
 import { AxiosError } from 'axios';
 import { IconType } from 'react-icons';
+import React, { ChangeEvent, FormEvent } from 'react';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
+
 type FetchError = AxiosError<{ message: string; code: number }>;
+
+export type InputEvents =
+  | ChangeEvent<HTMLInputElement>
+  | ChangeEvent<HTMLTextAreaElement>;
+
+export type SubmitEvent = FormEvent<HTMLFormElement>;
 
 export type IconType = React.ForwardRefExoticComponent<
   IconProps & React.RefAttributes<SVGSVGElement>

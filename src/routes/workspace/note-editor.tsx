@@ -4,12 +4,14 @@ import { useTheme } from 'styled-components';
 import { Layout } from '@/components/Layout';
 import Tools from '@/components/editor/Tools';
 import { useEffect, Suspense, lazy } from 'react';
-import Properties from '@/components/Properties';
 import { useAppContext } from '@/context/AppContext';
 import { _noteEditor as Container } from '@/styles/routes/_note-editor';
-import EditorToolsToggler from '@/components/modals/EditorToolsToggler';
 
+const Properties = lazy(() => import('@/components/Properties'));
 const Editor = lazy(() => import('@/components/editor/Editor'));
+const EditorToolsToggler = lazy(
+  () => import('@/components/modals/EditorToolsToggler')
+);
 
 export default function NoteEditor() {
   const { state, dispatch } = useAppContext();
@@ -50,11 +52,15 @@ export default function NoteEditor() {
       <Container>
         <div id='editor-root' className='wrapper-container'>
           <Tools />
-          <EditorToolsToggler/>
+          <Suspense>
+            <EditorToolsToggler />
+          </Suspense>
           <Suspense fallback={<LoadIndicator />}>
             <Editor />
           </Suspense>
-          <Properties />
+          <Suspense>
+            <Properties />
+          </Suspense>
         </div>
       </Container>
     </Layout>

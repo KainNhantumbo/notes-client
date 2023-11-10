@@ -1,17 +1,19 @@
+import Loader from './components/Loader';
+import { JSX, Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom';
-import PasswordRecovery from './routes/auth/password-recovery';
-import ResetPasswordSuccess from './routes/auth/password-recovery-success';
-import Home from './routes/index';
-import SignIn from './routes/auth/signin';
-import SignUp from './routes/auth/signup';
-import UpdatePassword from './routes/auth/update-password';
-import SignupSuccess from './routes/auth/signup-success';
-import Workspace from './routes/workspace';
-import Settings from './routes/workspace/settings';
-import NoteEditor from './routes/workspace/note-editor';
-import PrivacyPolicy from './routes/docs/privacy-policy';
-import NotFoundError from './routes/404';
-import { JSX } from 'react';
+
+const PasswordRecovery = lazy(() => import('./routes/auth/password-recovery'));
+const ResetPasswordSuccess =lazy( ()=> import('./routes/auth/password-recovery-success'))
+const Home = lazy(()=> import('./routes/index'))
+const SignIn = lazy (() => import('./routes/auth/signin'));
+const SignUp = lazy(() => import('./routes/auth/signup'));
+const UpdatePassword = lazy(() => import('./routes/auth/update-password'));
+const SignupSuccess = lazy(() => import('./routes/auth/signup-success'));
+const Settings = lazy(() => import('./routes/workspace/settings'));
+const NoteEditor = lazy(() => import('./routes/workspace/note-editor'));
+const PrivacyPolicy = lazy(() => import('./routes/docs/privacy-policy'));
+const NotFoundError = lazy(() => import('./routes/404'));
+const Workspace = lazy(() => import('./routes/workspace'));
 
 type RouteType = { path: string; element: JSX.ElementType };
 
@@ -34,7 +36,15 @@ export default function AppRouter() {
   return (
     <Routes>
       {routes.map((route, index) => (
-        <Route key={index} path={route.path} element={<route.element />} />
+        <Route
+          key={index}
+          path={route.path}
+          element={
+            <Suspense fallback={<Loader />}>
+              <route.element />
+            </Suspense>
+          }
+        />
       ))}
     </Routes>
   );

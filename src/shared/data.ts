@@ -19,6 +19,11 @@ import {
 import Package from '../../package.json';
 import { Comment, Option } from '@/types';
 
+import rapahaelNemoImage from '@/assets/sergio-de-paula-unsplash.jpg';
+import nancyGuerraImage from '@/assets/jake-nackos-unsplash.jpg';
+import dilanSoaresImage from '@/assets/christian-buehner-unsplash.jpg';
+import clementinePapariImage from '@/assets/michael-dam-unsplash.jpg';
+
 export const app_metadata = {
   author: Package.author,
   appName: Package.metadata.name,
@@ -177,7 +182,7 @@ export const comments: Comment[] = [
     author: {
       name: 'Raphael Nemo',
       carrier: 'Typer at Zoof',
-      picture: '/src/assets/sergio-de-paula-unsplash.jpg'
+      picture: rapahaelNemoImage
     },
     comment:
       'I had a pleasure to work with Kain for over 3 years on products with thousands of users. It would be unfair to give credit to anyone else in the team for improving the conversion funnel to the very last detail of Choconotey.'
@@ -186,7 +191,7 @@ export const comments: Comment[] = [
     author: {
       name: 'Nancy Guerra',
       carrier: 'Freelancer',
-      picture: '/src/assets/jake-nackos-unsplash.jpg'
+      picture: nancyGuerraImage
     },
     comment:
       'Choconotey make my day more easier as a freelancer. Been throught a lot of meeting and work so hard to remember any point and sometimes it miss. But now, everything can easily get recap by Choconotey.'
@@ -195,7 +200,7 @@ export const comments: Comment[] = [
     author: {
       name: 'Dylan Soares',
       carrier: 'Product Designer',
-      picture: '/src/assets/christian-buehner-unsplash.jpg'
+      picture: dilanSoaresImage
     },
     comment:
       'I am a passionate product designer driven by delivering results. Working with Choconotey as been a fantastic experience and help me to keep track of essential work key points.'
@@ -204,7 +209,7 @@ export const comments: Comment[] = [
     author: {
       name: 'Clementine Papari',
       carrier: 'Hunter',
-      picture: '/src/assets/michael-dam-unsplash.jpg'
+      picture: clementinePapariImage
     },
     comment:
       'Working with Choconotey is a breath of fresh air for my projects at a time I were struggling. I found a new ambitious perspetive wich I were able to put into pratice quickly transforming problems into a-ha moments.'

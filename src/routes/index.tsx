@@ -10,13 +10,13 @@ import { m as motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import demoDarkImage from '@/assets/demo-dark.png';
-import demoDarkPlaceholderImage from '@/assets/demo-dark-placeholder.png';
+import demoDarkSmImage from '@/assets/demo-dark-placeholder.png';
 import app_logo from '@/assets/logo-192x192.png';
 import demoLightImage from '@/assets/demo-light.png';
-import demoLightPlaceholderImage from '@/assets/demo-light-placeholder.png';
+import demoLightSmImage from '@/assets/demo-light-placeholder.png';
 import { useTheme } from 'styled-components';
 import annotationImage from '@/assets/annotation-unsplash.jpg';
-import annotationPlaceholderImage from '@/assets/annotation-unsplash-placeholder.jpg';
+import annotationSmImage from '@/assets/annotation-unsplash-placeholder.jpg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useThemeContext } from '../context/ThemeContext';
 import { _home as Container } from '@/styles/routes/_home';
@@ -121,8 +121,8 @@ export default function Home() {
                   effect='blur'
                   placeholderSrc={
                     colorScheme.scheme === 'dark'
-                      ? demoDarkPlaceholderImage
-                      : demoLightPlaceholderImage
+                      ? demoDarkSmImage
+                      : demoLightSmImage
                   }
                 />
               </motion.div>
@@ -135,7 +135,7 @@ export default function Home() {
                 width={'100%'}
                 height={'100%'}
                 alt={`${appName} demo image`}
-                placeholderSrc={annotationPlaceholderImage}
+                placeholderSrc={annotationSmImage}
               />
 
               <div className='content-container'>

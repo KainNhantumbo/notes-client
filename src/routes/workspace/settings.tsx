@@ -21,7 +21,7 @@ import { SelectContainer } from '@/components/Select';
 import { useThemeContext } from '@/context/ThemeContext';
 import { _settings as Container } from '@/styles/routes/_settings';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { InputEvents, ColorScheme, Settings, User } from '@/types';
+import { InputEvents, ColorScheme, Settings, User, FetchError } from '@/types';
 
 export default function Settings() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -47,8 +47,8 @@ export default function Settings() {
         type: actions.SETTINGS,
         payload: { ...state, settings: data }
       });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -56,7 +56,8 @@ export default function Settings() {
           toast: {
             title: 'Settings Sync Error',
             message:
-              error?.response?.data?.message || 'Failed to sync your settings.',
+              (error as FetchError).response?.data?.message ||
+              'Failed to sync your settings.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncSettings
@@ -77,8 +78,8 @@ export default function Settings() {
         type: actions.USER,
         payload: { ...state, user: { ...state.user, ...response.data } }
       });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.PROMPT,
         payload: {
@@ -93,7 +94,7 @@ export default function Settings() {
           toast: {
             title: 'Account Data Sync Error',
             message:
-              error?.response?.data?.message ||
+              (error as FetchError).response?.data?.message ||
               'Failed to sync your account data.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -148,8 +149,8 @@ export default function Settings() {
           }
         }
       });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -157,7 +158,7 @@ export default function Settings() {
           toast: {
             title: 'Update Password Error',
             message:
-              error?.response?.data?.message ||
+              (error as FetchError).response?.data?.message ||
               'Failed to update your password. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -183,8 +184,8 @@ export default function Settings() {
           }
         }
       });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -192,7 +193,7 @@ export default function Settings() {
           toast: {
             title: 'Empty Trash Error',
             message:
-              error?.response?.data?.message ||
+              (error as FetchError).response?.data?.message ||
               'Failed to delete trash notes. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -219,8 +220,8 @@ export default function Settings() {
         }
       });
       navigate('/', { replace: true });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.PROMPT,
         payload: {
@@ -236,7 +237,7 @@ export default function Settings() {
           toast: {
             title: 'Delete Account Error',
             message:
-              error?.response?.data?.message ||
+              (error as FetchError).response?.data?.message ||
               'Failed to update your password. Please, try again.',
             status: true,
             actionButtonMessage: 'Retry',
@@ -284,7 +285,7 @@ export default function Settings() {
                     placeholder={'Select the global color scheme...'}
                     onChange={(option) => {
                       const parsedValue: ColorScheme = JSON.parse(
-                        (option as any)?.value
+                        (option as { value: string })?.value
                       );
                       changeColorScheme({ ...parsedValue });
                       syncSettings({
@@ -339,7 +340,7 @@ export default function Settings() {
                         ]}
                         onChange={(option) => {
                           const parsedValue: { enabled: boolean } = JSON.parse(
-                            (option as any)?.value
+                            (option as { value: string })?.value
                           );
 
                           syncSettings({
@@ -463,7 +464,8 @@ export default function Settings() {
                               ...state.settings.editor,
                               font: {
                                 ...state.settings.editor.font,
-                                font_weight: e.target.value as any
+                                font_weight: e.target
+                                  .value as unknown as typeof state.settings.editor.font.font_weight
                               }
                             }
                           });
@@ -534,7 +536,7 @@ export default function Settings() {
                         ]}
                         onChange={(option) => {
                           const parsedValue: { enabled: boolean } = JSON.parse(
-                            (option as any)?.value
+                            (option as { value: string })?.value
                           );
 
                           syncSettings({
