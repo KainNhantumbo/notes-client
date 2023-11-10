@@ -42,17 +42,24 @@ $PROJECT_ROOT
 
 ## Features Log
 
+### - Version 1.2.0
+
+- Improved performance by splitting code chunks and lazy loading images.
+- Improved home page layout by adding new styles and animations.
+- Fixed found bugs.
 
 ### - Version v1.1.0
-- Fixed found bugs, removed unused packages and improved performance.
-- added support to download note data in csv format, group notes by status and priorities in the navigation drawer tabs and, improved support for code blocks rendering in the editor. 
-- added support for control and enable or disable editor toolbar each tool.
-![Toolbar tool twiker demo](/src/assets/toolbar-settings-demo.png "Toolbar tool twiker demo")
 
+- Fixed found bugs, removed unused packages and improved performance.
+- added support to download note data in csv format and group notes by status and priorities in the navigation drawer tabs
+-  improved support for rendering code blocks inside of the editor.
+- added support for control and enable or disable editor toolbar each tool.
+  ![Toolbar tool twiker demo](/src/assets/toolbar-settings-demo.png 'Toolbar tool twiker demo')
 
 ### - Version v1.0.0
+
 - Realtime preview (WYSIWYG) note editor and a clean and simple interface to get a distraction-free writing experience.
-- Support [CommonMark Spec](https://spec.commonmark.org/0.29/) and [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
+- Support [CommonMark Spec](https://spec.commonmark.org/0.29/).
 - Installable on all platforms as PWA (Progressive Web Application).
 - Support html parsing to improve your writing efficiency.
 - Output **HTML**, **Plan Text** and **markdown** note content.

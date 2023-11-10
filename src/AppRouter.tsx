@@ -1,11 +1,13 @@
 import Loader from './components/Loader';
-import { JSX, Suspense, lazy } from 'react'
+import { JSX, Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+const ResetPasswordSuccess = lazy(
+  () => import('./routes/auth/password-recovery-success')
+);
 const PasswordRecovery = lazy(() => import('./routes/auth/password-recovery'));
-const ResetPasswordSuccess =lazy( ()=> import('./routes/auth/password-recovery-success'))
-const Home = lazy(()=> import('./routes/index'))
-const SignIn = lazy (() => import('./routes/auth/signin'));
+const Home = lazy(() => import('./routes/index'));
+const SignIn = lazy(() => import('./routes/auth/signin'));
 const SignUp = lazy(() => import('./routes/auth/signup'));
 const UpdatePassword = lazy(() => import('./routes/auth/update-password'));
 const SignupSuccess = lazy(() => import('./routes/auth/signup-success'));
