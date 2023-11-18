@@ -1,4 +1,4 @@
-# Choconotey Notes (React.JS + Typescript)
+# 🌟 Choconotey Notes (React.JS + Typescript)
 
 Welcome to **choconotey notes** app repository, built with React.JS and Typescript, and of course, with a flavour of other awesome community open source packages.
 
@@ -18,11 +18,11 @@ Not limited, the core editor is built on top of the headless [Tiptap Editor](htt
 | :----------------------------------------------: | :---------------------------------------------: |
 | ![](./src/assets/demo-light-mobile.png?raw=true) | ![](./src/assets/demo-dark-mobile.png?raw=true) |
 
-## Project status
+## 🌠 Project status
 
 Note: This project still under development and not all of the features stated before may be already available yet. Further details of its bulding, software architecture and features will be given as the app grows.
 
-## Project structure
+## 🌳 Project structure
 
 ```
 $PROJECT_ROOT
@@ -40,7 +40,7 @@ $PROJECT_ROOT
     └── types
 ```
 
-## Project Stack
+## 🐾 Project Stack
 - **Typescript** - a superset language of Javascript that provides typechecking.
 - **Vite** - a next generation frontend tooling.
 - **React.JS** - library used to build big, fast Web apps with JavaScript.
@@ -48,7 +48,7 @@ $PROJECT_ROOT
 - **Tiptap** - a framework that powers the core editor.
 - **Zod** - for frontend data validation.
 
-## Features Log
+## 🎊 Features Log
 
 ### - Version 1.2.0
 
@@ -76,13 +76,14 @@ $PROJECT_ROOT
 - Handle user login, registration and authentication with jwt (JSON web tokens) strategy.
 - Store all data in Mongo DB, handled by a separated Node.JS with Express.JS server application.
 
-### Scripts for testing and local setup
+## 🏗️ Testing and Local Setup
 
 Make sure you have installed **Node.js (v18.17.0 or later recommended) which also comes with npm v9.6.7**.\
 In the project directory, you can run in terminal:
 
 ```bash
- npm run dev
+npm install
+npm run dev
 ```
 
 Runs the app in the development mode and the server will reload when you make changes to the source code.
@@ -99,19 +100,19 @@ npm run start
 
 Builds and starts the server in prodution.
 
-## Contact
+## ☘️  Find me!
 
 E-mail: [nhantumbok@gmail.com](nhantumbok@gmail.com 'Send an e-mail')\
 Github: [https://github.com/KainNhantumbo](https://github.com/KainNhantumbo 'See my github profile')  
-Portfolio: [https://portifolio-dev-mu.vercel.app](https://portifolio-dev-mu.vercel.app 'See my portfolio website')\
-My Blog: [https://publish-it-programming.vercel.app](https://publish-it-programming.vercel.app 'Visit my blog site')
+Portfolio: [https://codenut-dev.vercel.app](https://codenut-dev.vercel.app 'See my portfolio website')\
+My Blog: [https://codenut-dev.vercel.app/blog](https://codenut-dev.vercel.app/blog 'Visit my blog site')
 
 #### If you like this project, let me know by leaving a star on this repository so I can keep improving this app.😊😘
 
 Best regards, Kain Nhantumbo.\
-**Made with ❤ React + Vite and Typescript**
+✌️🇲🇿 **Made with ❤ React + Vite and Typescript**
 
-## License
+## 📜 License
 
 Licensed under Apache License 2.0. All rights reserved.\
 Copyright &copy; 2023 Kain Nhantumbo.

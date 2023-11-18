@@ -3,7 +3,7 @@ import { IconType } from 'react-icons';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
 
-type FetchError = AxiosError<{ message: string; code: number }>;
+export type FetchError = AxiosError<{ message: string; code: number }>;
 
 export type InputEvents =
   | ChangeEvent<HTMLInputElement>
