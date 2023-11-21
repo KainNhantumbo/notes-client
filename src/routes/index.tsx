@@ -102,9 +102,8 @@ export default function Home() {
               </div>
 
               <motion.div
-                initial={{ scale: 0, y: -820, opacity: 0 }}
+                initial={{ y: -820, opacity: 0 }}
                 animate={{
-                  scale: 1,
                   y: 0,
                   opacity: 1,
                   transition: { delay: 0.4 }

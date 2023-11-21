@@ -5,8 +5,8 @@ export const _signup = styled.main`
   width: 100%;
   min-height: 100vh;
   display: grid;
-  place-content: center center;
-  place-items: center center;
+  place-content: center;
+  place-items: center;
   margin-top: 20px;
 
   @media screen and (max-width: 1140px) {
@@ -14,63 +14,48 @@ export const _signup = styled.main`
     margin-top: 0px;
   }
 
-  * {
-    ::selection {
-      background: rgb(${({ theme }) => theme.background_shade});
-      color: rgb(${({ theme }) => theme.primary_shade});
-    }
-  }
-
   .wrapper-container {
-    width: 100%;
-    height: 100%;
+    width: fit-content;
+    max-width: 800px;
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content: flex-start;
-    background: rgba(${({ theme }) => theme.background_shade}, 0.3);
     border-radius: 12px;
+    background: rgb(${({ theme }) => theme.background});
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    margin: 40px 12px 12px;
 
-    @media screen and (max-width: 1140px) {
-      align-self: center;
-      width: fit-content;
-      margin: 40px 12px 12px;
-      border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-      box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
+    @media screen and (max-width: 790px) {
+      border: none;
+      background: inherit;
     }
   }
 
   img {
     width: 100%;
+    height: 100%;
     max-width: 380px;
     object-fit: cover;
     border-radius: 12px 0 0 12px;
 
-    @media screen and (max-width: 865px) {
+    @media screen and (max-width: 790px) {
       display: none;
     }
   }
 
   article {
     width: 100%;
-    height: 100%;
-    display: grid;
-    place-content: center;
-    place-items: center;
     padding: 25px;
 
     .form-container {
       width: 100%;
-      height: 100%;
-      max-width: 500px;
+
       display: flex;
       gap: 20px;
-      justify-content: flex-start;
       flex-direction: column;
 
-      @media screen and (min-width: 440px) {
-        min-width: 400px;
+      @media screen and (min-width: 340px) {
+        min-width: 330px;
       }
 
       @media screen and (max-width: 365px) {
@@ -92,15 +77,16 @@ export const _signup = styled.main`
       }
 
       form {
+        width: 100%;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
         gap: 18px;
 
         .form-section {
+          width: 100%;
           display: flex;
           flex-direction: row;
-          width: 100%;
           gap: 10px;
 
           @media screen and (max-width: 465px) {
@@ -108,6 +94,7 @@ export const _signup = styled.main`
           }
 
           .form-element {
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -130,6 +117,7 @@ export const _signup = styled.main`
           ${BaseButton}
           align-self: center;
           width: 100%;
+          max-width: 300px;
         }
       }
 

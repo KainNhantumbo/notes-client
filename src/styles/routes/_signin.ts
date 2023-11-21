@@ -14,42 +14,37 @@ export const _signin = styled.main`
     margin-top: 0px;
   }
 
-  * {
-    ::selection {
-      background: rgb(${({ theme }) => theme.background_shade});
-      color: rgb(${({ theme }) => theme.primary_shade});
-    }
-  }
-
   .wrapper-container {
-    width: 100%;
+    width: fit-content;
     height: 100%;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: flex-start;
-    background: rgba(${({ theme }) => theme.background_shade}, 0.3);
+    background: rgb(${({ theme }) => theme.background});
     border-radius: 12px;
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
+    
     @media screen and (max-width: 1140px) {
       align-self: center;
-      width: fit-content;
       margin: 40px 12px;
-      border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-      box-shadow: 0 0 25px rgba(${({ theme }) => theme.black}, 0.09);
+    }
+
+    @media screen and (max-width: 790px) {
+      border: none;
+      box-shadow: unset;
+      background: inherit;
     }
   }
 
   img {
     width: 100%;
+    height: 100%;
     max-width: 380px;
     object-fit: cover;
     border-radius: 12px 0 0 12px;
-    @media screen and (max-width: 860px) {
-      max-width: 40%;
-    }
 
-    @media screen and (max-width: 765px) {
+    @media screen and (max-width: 790px) {
       display: none;
     }
   }
@@ -71,8 +66,8 @@ export const _signin = styled.main`
       justify-content: flex-start;
       flex-direction: column;
 
-      @media screen and (min-width: 440px) {
-        min-width: 400px;
+      @media screen and (min-width: 340px) {
+        min-width: 330px;
       }
 
       @media screen and (max-width: 365px) {

@@ -17,6 +17,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react-refresh/only-export-components': 'off',
     'react-hooks/rules-of-hooks': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
     'react-hooks/exhaustive-deps': 'off'
   }
 };

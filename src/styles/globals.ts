@@ -7,6 +7,11 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     margin: 0;
     max-width: 100%;
+
+    ::selection {
+      background: rgb(${({ theme }) => theme.background_shade});
+      color: rgb(${({ theme }) => theme.primary_shade});
+    }
   }
   
   label {

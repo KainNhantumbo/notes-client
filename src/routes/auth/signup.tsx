@@ -15,10 +15,8 @@ import loginImage from '@/assets/media-login.jpg';
 import { useTheme } from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { _signup as Container } from '@/styles/routes/_signup';
 import { UserSignupType, userSignupSchema } from '@/config/schemas';
-import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
 
 type FetchError = AxiosError<{ message: string; code: number }>;
 
@@ -81,11 +79,11 @@ export default function SignUp() {
       }}>
       <Container>
         <div className='wrapper-container'>
-          <LazyLoadImage
-            effect='blur'
+          <img
             width={'100%'}
             height={'100%'}
-            placeholderSrc={loginPlaceholderImage}
+            loading='lazy'
+            decoding='sync'
             src={loginImage}
             alt='background image'
           />
