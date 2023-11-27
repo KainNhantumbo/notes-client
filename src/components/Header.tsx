@@ -11,7 +11,7 @@ import {
   HamburgerMenuIcon
 } from '@radix-ui/react-icons';
 import { useState, useEffect } from 'react';
-import logo from '@/assets/logo-192x192.png';
+import logo from '@/assets/logo-19x192.png';
 import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { app_metadata, navigationAnchors } from '../shared/data';

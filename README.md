@@ -6,7 +6,7 @@ Taking notes in markdown is made simple with this application. It provides the c
 
 Not limited, the core editor is built on top of the headless [Tiptap Editor](https://tiptap.dev), empowering this application for robust note editing, with extensions, tools, syntax highlighting and more. You can find the API source code [here](https://github.com/KainNhantumbo/notes-api).
 
-**Access this app live at: [https://choconotey-demo.vercel.app](https://choconotey-demo.vercel.app)**
+> **Access this app live at: [https://choconotey-demo.vercel.app](https://choconotey-demo.vercel.app)**
 
 ## **Here are some screenshots:**
 
@@ -20,7 +20,7 @@ Not limited, the core editor is built on top of the headless [Tiptap Editor](htt
 
 ## 🌠 Project status
 
-Note: This project still under development and not all of the features stated before may be already available yet. Further details of its bulding, software architecture and features will be given as the app grows.
+Note: This project is concluded, but I am maintening it. You can expect to see more features being added in the future. Enjoy!!
 
 ## 🌳 Project structure
 
@@ -82,7 +82,7 @@ Make sure you have installed **Node.js (v18.17.0 or later recommended) which als
 In the project directory, you can run in terminal:
 
 ```bash
-npm install
+npm install --save
 npm run dev
 ```
 

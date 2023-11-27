@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import demoDarkImage from '@/assets/demo-dark.png';
 import demoDarkSmImage from '@/assets/demo-dark-placeholder.png';
-import app_logo from '@/assets/logo-192x192.png';
+import app_logo from '@/assets/logo-19x192.png';
 import demoLightImage from '@/assets/demo-light.png';
 import demoLightSmImage from '@/assets/demo-light-placeholder.png';
 import { useTheme } from 'styled-components';
