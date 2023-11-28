@@ -16,18 +16,20 @@ import { useAppContext } from '../context/AppContext';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { app_metadata, navigationAnchors } from '../shared/data';
 import { _header as Container } from '../styles/modules/_header';
+import { useWindowInnerSize } from '@/hooks/useWindowInnerSize';
 
 export default function Header() {
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const location: Location = useLocation();
   const { state } = useAppContext();
+  const windowInnerSize = useWindowInnerSize();
 
   const toggleMenu = (): void => setIsMenu((current) => !current);
 
   useEffect((): void => {
-    state.windowInnerSize.width > 770 ? setIsMenu(true) : setIsMenu(false);
-  }, [state.windowInnerSize]);
+    windowInnerSize.width > 770 ? setIsMenu(true) : setIsMenu(false);
+  }, [windowInnerSize]);
 
   return (
     <Container>

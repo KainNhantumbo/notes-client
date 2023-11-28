@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios';
-import { IconType } from 'react-icons';
 import React, { ChangeEvent, FormEvent } from 'react';
 import { IconProps } from '@radix-ui/react-icons/dist/types';
 
@@ -81,7 +80,8 @@ export type Modal = {
   message: string;
   closeOnDelay?: boolean;
   actionButtonMessage?: string;
-  handleFunction?: (data?: Partial<>) => void | Promise<void>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handleFunction?: (param?: any) => void | Promise<void>;
 };
 
 export type Query = {

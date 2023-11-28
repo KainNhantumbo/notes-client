@@ -8,7 +8,7 @@ import {
   User
 } from '@/types/index';
 
-export type TState = {
+export type State = {
   auth: Auth;
   isAboutModal: boolean;
   isLogoutModal: boolean;
@@ -20,10 +20,9 @@ export type TState = {
   folders: Folder[];
   toast: Modal;
   prompt: Modal;
-  windowInnerSize: { width: number; height: number };
   query: Query;
   settings: Settings;
   user: User;
 };
 
-export type TAction = { type: string; payload: TState };
+export type Action = { type: string; payload: State };

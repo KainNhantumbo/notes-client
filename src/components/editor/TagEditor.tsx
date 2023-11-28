@@ -49,8 +49,8 @@ export default function TagEditor({
       {isVisible ? (
         <Container
           className='main'
-          onClick={(e: any): void => {
-            const isTarget = e.target.classList.contains('main');
+          onClick={(e): void => {
+            const isTarget = (e as any).target.classList.contains('main');
             if (isTarget) {
               setTag({ id: '', color: '', value: '' });
               setIsVisible(false);

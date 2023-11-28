@@ -16,12 +16,7 @@ interface Props {
   metadata: HeadProps | undefined;
 }
 
-export function Layout({
-  children,
-  metadata,
-  renderHeader,
-  renderFooter
-}: Props) {
+export function Layout({ children, renderHeader, renderFooter }: Props) {
   const { state } = useAppContext();
   const navigate: NavigateFunction = useNavigate();
   const location = useLocation();

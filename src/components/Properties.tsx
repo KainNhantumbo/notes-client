@@ -14,7 +14,7 @@ import {
   RiTimerLine
 } from 'react-icons/ri';
 import moment from 'moment';
-import { Note } from '@/types';
+import { FetchError, Note } from '@/types';
 import { useMemo } from 'react';
 import TurndownService from 'turndown';
 import actions from '@/shared/actions';
@@ -173,6 +173,7 @@ export default function Properties() {
           message: 'Do you really want to make a new copy of this note?',
           handleFunction: async () => {
             try {
+              // eslint-disable-next-line prefer-const, @typescript-eslint/no-unused-vars
               let { _id, title, content, ...data } = state.currentNote;
 
               title = title.includes('(Duplicated)')
@@ -200,8 +201,10 @@ export default function Properties() {
                 type: actions.PROPERTIES_DRAWER,
                 payload: { ...state, isPropertiesDrawer: false }
               });
-            } catch (error: any) {
-              console.error(error?.response?.data?.message || error);
+            } catch (error) {
+              console.error(
+                (error as FetchError).response?.data?.message || error
+              );
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -209,7 +212,7 @@ export default function Properties() {
                   toast: {
                     title: 'Duplicate Note Error',
                     message:
-                      error?.response?.data?.message ||
+                      (error as FetchError).response?.data?.message ||
                       'Failed to make a new copy of your note data.',
                     status: true,
                     actionButtonMessage: 'Retry',
@@ -256,8 +259,10 @@ export default function Properties() {
                 data: { ...data, deleted: true }
               });
               navigate('/workspace', { replace: true });
-            } catch (error: any) {
-              console.error(error?.response?.data?.message || error);
+            } catch (error) {
+              console.error(
+                (error as FetchError).response?.data?.message || error
+              );
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -265,7 +270,7 @@ export default function Properties() {
                   toast: {
                     title: 'Delete Error',
                     message:
-                      error?.response?.data?.message ||
+                      (error as FetchError).response?.data?.message ||
                       'Failed to move your note data to trash.',
                     status: true,
                     actionButtonMessage: 'Retry',

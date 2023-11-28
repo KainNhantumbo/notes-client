@@ -127,7 +127,7 @@ export default function Workspace(): JSX.Element {
     }
   }
 
-  const restoreNoteFromTrash = (noteId: string) => {
+  const restoreNoteFromTrash = (noteId: unknown) => {
     dispatch({
       type: actions.PROMPT,
       payload: {
@@ -140,7 +140,7 @@ export default function Workspace(): JSX.Element {
           handleFunction: async () => {
             try {
               const [foundNote] = state.notes.filter(
-                (note) => note._id === noteId
+                (note) => note._id === (noteId as string)
               );
               const { _id, ...data } = foundNote;
               await useFetchAPI({
@@ -195,7 +195,7 @@ export default function Workspace(): JSX.Element {
     });
   };
 
-  const deleteNoteFromTrash = (noteId: string) => {
+  const deleteNoteFromTrash = (noteId: unknown) => {
     dispatch({
       type: actions.PROMPT,
       payload: {
@@ -209,7 +209,7 @@ export default function Workspace(): JSX.Element {
           handleFunction: async () => {
             try {
               const [foundNote] = state.notes.filter(
-                (note) => note._id === noteId
+                (note) => note._id === (noteId as string)
               );
               const { _id, ...data } = foundNote;
               await useFetchAPI({

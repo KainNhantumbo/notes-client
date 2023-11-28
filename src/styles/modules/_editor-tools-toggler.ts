@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton, BaseButtonOutline, StyledCornerButton } from '../defaults';
+import { StyledCornerButton } from '../defaults';
 
 export const _editorToolsToggler = styled.section`
   position: fixed;

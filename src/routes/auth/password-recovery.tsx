@@ -2,7 +2,7 @@ import fetch from '@/config/client';
 import { m as motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { useState, useEffect } from 'react';
-import { SubmitEvent } from '@/types';
+import { FetchError, SubmitEvent } from '@/types';
 import { app_metadata } from '@/shared/data';
 import { PulseLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
@@ -28,11 +28,11 @@ export default function PasswordRecovery() {
         withCredentials: true
       });
       navigate('/auth/_password-recovery-success', { replace: true });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       setError({
         status: true,
-        message: error?.response?.data?.message || error?.code
+        message: (error as FetchError).response?.data?.message || (error as FetchError).message
       });
     } finally {
       setLoading(false);

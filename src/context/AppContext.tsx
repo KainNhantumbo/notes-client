@@ -6,14 +6,14 @@ import {
   Dispatch,
   useEffect
 } from 'react';
-import { Auth, Note } from '@/types';
+import { Auth, FetchError, Note } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/shared/actions';
 import ThemeContext from './ThemeContext';
 import compareObjects from 'lodash.isequal';
 import { initialState, reducer } from '../libs/reducer';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { TAction, TState } from '@/types/reducer';
+import { Action, State } from '@/types/reducer';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -24,18 +24,16 @@ const queryClient = new QueryClient({
 type Props = { children: ReactNode };
 
 type Context = {
-  state: TState;
-  dispatch: Dispatch<TAction>;
-  useFetchAPI: <T>(
-    config: AxiosRequestConfig
-  ) => Promise<AxiosResponse<T, any>>;
+  state: State;
+  dispatch: Dispatch<Action>;
+  useFetchAPI: <T>(config: AxiosRequestConfig) => Promise<AxiosResponse<T>>;
   syncCurrentNote: () => Promise<void>;
 };
 
 const context = createContext<Context>({
   state: initialState,
   dispatch: () => {},
-  useFetchAPI: (): any => {},
+  useFetchAPI: async ({ ...config }) => await fetch({ ...config }),
   syncCurrentNote: async () => {}
 });
 
@@ -54,14 +52,14 @@ export default function AppContext({ children }: Props) {
         type: actions.AUTH,
         payload: { ...state, auth: { ...data } }
       });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
     }
   };
 
   async function useFetchAPI<T>(
     config: AxiosRequestConfig
-  ): Promise<AxiosResponse<T, any>> {
+  ): Promise<AxiosResponse<T>> {
     fetch.interceptors.response.use(
       undefined,
       (error: AxiosError): Promise<never> => {
@@ -82,20 +80,8 @@ export default function AppContext({ children }: Props) {
     });
   }
 
-  const computeInnerWindowSize = (): void => {
-    dispatch({
-      type: actions.WINDOW_INNER_SIZE,
-      payload: {
-        ...state,
-        windowInnerSize: {
-          width: Number(window.innerWidth.toFixed(0)),
-          height: Number(window.innerHeight.toFixed(0))
-        }
-      }
-    });
-  };
-
   const syncCurrentNote = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _id, created_by, ...currentNote } = state.currentNote;
     if (!state.auth.token || !_id) return undefined;
 
@@ -122,8 +108,8 @@ export default function AppContext({ children }: Props) {
           ]
         }
       });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -131,7 +117,8 @@ export default function AppContext({ children }: Props) {
           toast: {
             title: 'Note Sync Error',
             message:
-              error?.response?.data?.message || 'Failed to sync your note.',
+              (error as FetchError).response?.data?.message ||
+              'Failed to sync your note.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncCurrentNote
@@ -141,7 +128,7 @@ export default function AppContext({ children }: Props) {
     }
   };
 
-  // sends a handshake to the server 
+  // sends a handshake to the server
   async function handleAPIHealthCheck() {
     try {
       const {
@@ -151,20 +138,15 @@ export default function AppContext({ children }: Props) {
         url: '/api/v1/healthcheck'
       });
       console.info(`Service response code ${code}. ${message}`);
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
       console.warn('API Service is currently offline');
     }
   }
 
   useEffect(() => {
-    handleAPIHealthCheck()
+    handleAPIHealthCheck();
     authenticateUser();
-    computeInnerWindowSize();
-    window.addEventListener('resize', computeInnerWindowSize);
-    return () => {
-      window.removeEventListener('resize', computeInnerWindowSize);
-    };
   }, []);
 
   useEffect(() => {

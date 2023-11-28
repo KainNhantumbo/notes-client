@@ -1,7 +1,7 @@
 import actions from '../shared/actions';
-import { TAction, TState } from '@/types/reducer';
+import { Action, State } from '@/types/reducer';
 
-export const initialState: TState = {
+export const initialState: State = {
   notes: [],
   folders: [],
   isAboutModal: false,
@@ -9,7 +9,6 @@ export const initialState: TState = {
   isNavigationDrawer: false,
   isPropertiesDrawer: false,
   isEditorToolsTogglerModal: false,
-  windowInnerSize: { width: 0, height: 0 },
   auth: { id: '', email: '', name: '', token: '' },
   user: { first_name: '', last_name: '', email: '' },
   toast: {
@@ -82,7 +81,7 @@ export const initialState: TState = {
   }
 };
 
-export function reducer(state: TState, action: TAction): TState {
+export function reducer(state: State, action: Action): State {
   switch (action.type) {
     case actions.AUTH:
       return { ...state, auth: action.payload.auth };
@@ -107,9 +106,6 @@ export function reducer(state: TState, action: TAction): TState {
 
     case actions.CURRENT_NOTE:
       return { ...state, currentNote: action.payload.currentNote };
-
-    case actions.WINDOW_INNER_SIZE:
-      return { ...state, windowInnerSize: action.payload.windowInnerSize };
 
     case actions.PROPERTIES_DRAWER:
       return {

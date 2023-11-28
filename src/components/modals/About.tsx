@@ -20,8 +20,8 @@ export default function About() {
       {state.isAboutModal && (
         <Container
           className='main'
-          onClick={(e: any) => {
-            const isTarget = e.target.classList.contains('main');
+          onClick={(e) => {
+            const isTarget = (e as any).target.classList.contains('main');
             if (isTarget) {
               dispatch({
                 type: actions.ABOUT_MODAL,

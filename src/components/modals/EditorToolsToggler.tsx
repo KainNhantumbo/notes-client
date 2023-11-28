@@ -4,7 +4,7 @@ import { useAppContext } from '@/context/AppContext';
 import { AnimatePresence, m as motion } from 'framer-motion';
 import { _editorToolsToggler as Container } from '@/styles/modules/_editor-tools-toggler';
 import { useMemo } from 'react';
-import { Settings } from '@/types';
+import { FetchError, Settings } from '@/types';
 
 export default function EditorToolsToggler() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -12,8 +12,8 @@ export default function EditorToolsToggler() {
   const syncSettings = async (data: Settings) => {
     try {
       await useFetchAPI({ method: 'patch', url: '/api/v1/settings', data });
-    } catch (error: any) {
-      console.error(error?.response?.data?.message || error);
+    } catch (error) {
+      console.error((error as FetchError).response?.data?.message || error);
       dispatch({
         type: actions.TOAST,
         payload: {
@@ -21,7 +21,7 @@ export default function EditorToolsToggler() {
           toast: {
             title: 'Settings Sync Error',
             message:
-              error?.response?.data?.message || 'Failed to sync your settings.',
+              (error as FetchError).response?.data?.message || 'Failed to sync your settings.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncSettings
@@ -62,7 +62,7 @@ export default function EditorToolsToggler() {
       {state.isEditorToolsTogglerModal && (
         <Container
           className='main'
-          onClick={(e: any): void => {
+          onClick={(e): void => {
             const target = (e as any).target.classList;
             if (target.contains('main')) {
               dispatch({
