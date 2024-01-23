@@ -127,7 +127,7 @@ export const editorExtensions = [
         attrs: { language: 'javascript' }
       });
     }
-  }).configure({ lowlight: lowlight }),
+  }).configure({ lowlight }),
 
   StarterKit.configure({
     heading: {

@@ -1,13 +1,13 @@
-import Header from './Header';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
+import { ReactNode, useEffect } from 'react';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
+import type { HeadProps } from '../types';
 import Footer from './Footer';
-import Toast from './modals/Toast';
+import Header from './Header';
 import Cookies from './modals/Cookies';
 import { PromptModal } from './modals/Prompt';
-import type { HeadProps } from '../types';
-import { ReactNode, useEffect } from 'react';
-import { useAppContext } from '../context/AppContext';
-import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
-import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+import Toast from './modals/Toast';
 
 interface Props {
   children: ReactNode;
@@ -16,7 +16,11 @@ interface Props {
   metadata: HeadProps | undefined;
 }
 
-export function Layout({ children, renderHeader, renderFooter }: Props) {
+export default function Layout({
+  children,
+  renderHeader,
+  renderFooter
+}: Props) {
   const { state } = useAppContext();
   const navigate: NavigateFunction = useNavigate();
   const location = useLocation();

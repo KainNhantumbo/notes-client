@@ -16,7 +16,7 @@ import {
   DotFilledIcon
 } from '@radix-ui/react-icons';
 import { AxiosError } from 'axios';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { IconType } from 'react-icons';
 import { Collapse } from 'react-collapse';
 import actions from '../shared/actions';
@@ -266,262 +266,258 @@ function NavigationDrawer(): JSX.Element {
   //   };
   // }, [state.notes]);
 
+  if (!state.isNavigationDrawer) return <></>;
+
   return (
     <AnimatePresence>
-      {state.isNavigationDrawer && (
-        <Container>
-          <motion.div
-            className='main-container'
-            initial={{ opacity: 0, x: -300 }}
-            animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
-            exit={{ opacity: 0, x: -300, transition: { duration: 0.5 } }}>
-            <section className='header'>
-              <motion.button
-                whileTap={{ scale: 0.8 }}
-                className='box-btn_close'
-                onClick={() => {
-                  dispatch({
-                    type: actions.NAVIGATION_DRAWER,
-                    payload: { ...state, isNavigationDrawer: false }
-                  });
-                }}>
-                <RiCloseLine />
-              </motion.button>
-              <h3>
-                <i>Choco</i>notey
-              </h3>
-            </section>
+      <Container>
+        <motion.div
+          className='main-container'
+          initial={{ opacity: 0, x: -300 }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
+          exit={{ opacity: 0, x: -300, transition: { duration: 0.5 } }}>
+          <section className='header'>
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className='box-btn_close'
+              onClick={() => {
+                dispatch({
+                  type: actions.NAVIGATION_DRAWER,
+                  payload: { ...state, isNavigationDrawer: false }
+                });
+              }}>
+              <RiCloseLine />
+            </motion.button>
+            <h3>
+              <i>Choco</i>notey
+            </h3>
+          </section>
 
-            <motion.ul>
-              <div className='top-navigator'>
-                <li
-                  className={classnames('navigation-item', notes.class)}
-                  onClick={() => notes.execute()}>
-                  <div
-                    className={classnames('navigation-box-container', {
-                      'navigation-box-container-active': assertLocation(
-                        notes.label
-                      )
-                    })}>
-                    <h3 className='navigation-item-title'>
-                      <notes.icon />
-                      <span>{notes.label}</span>
-                    </h3>
-                    <div className='navigation-item-length'>{notes.length}</div>
-                  </div>
-                </li>
+          <motion.ul>
+            <div className='top-navigator'>
+              <li
+                className={clsx('navigation-item', notes.class)}
+                onClick={() => notes.execute()}>
+                <div
+                  className={clsx('navigation-box-container', {
+                    'navigation-box-container-active': assertLocation(
+                      notes.label
+                    )
+                  })}>
+                  <h3 className='navigation-item-title'>
+                    <notes.icon />
+                    <span>{notes.label}</span>
+                  </h3>
+                  <div className='navigation-item-length'>{notes.length}</div>
+                </div>
+              </li>
 
-                <li
-                  className={classnames('navigation-item', priorities.class)}
-                  onClick={() => priorities.execute()}>
-                  <div
-                    className={classnames('navigation-box-container', {
-                      'navigation-box-container-active': assertLocation(
-                        priorities.label
-                      )
-                    })}>
-                    <h3 className='navigation-item-title'>
-                      <priorities.icon />
-                      <span>{priorities.label}</span>
-                    </h3>
-                    <section className='navigation-item-actions'>
-                      <button
-                        className='navigation-item_state-indicator-button'
-                        onClick={() => {
-                          setIsCollapsed((state) => ({
-                            ...state,
-                            priorities: !state.priorities
-                          }));
-                        }}>
-                        {isCollapsed.priorities ? (
-                          <priorities.statusIndicatorIcons.active />
-                        ) : (
-                          <priorities.statusIndicatorIcons.inactive />
-                        )}
-                      </button>
-                    </section>
-                  </div>
-
-                  <div className='childrens-container'>
-                    <Collapse
-                      isOpened={isCollapsed.priorities}
-                      theme={{
-                        collapse: 'collapsable-container',
-                        content: 'inner-collapsable'
+              <li
+                className={clsx('navigation-item', priorities.class)}
+                onClick={() => priorities.execute()}>
+                <div
+                  className={clsx('navigation-box-container', {
+                    'navigation-box-container-active': assertLocation(
+                      priorities.label
+                    )
+                  })}>
+                  <h3 className='navigation-item-title'>
+                    <priorities.icon />
+                    <span>{priorities.label}</span>
+                  </h3>
+                  <section className='navigation-item-actions'>
+                    <button
+                      className='navigation-item_state-indicator-button'
+                      onClick={() => {
+                        setIsCollapsed((state) => ({
+                          ...state,
+                          priorities: !state.priorities
+                        }));
                       }}>
-                      {Object.entries(priorities.children).map(
-                        ([key, count]) => {
-                          const [{ data }] = prioritiesMap.filter(
-                            (item) => item.value === key
-                          );
-                          return (
-                            <div key={key} className='priorities-container'>
-                              <h4>
-                                <DotFilledIcon color={data.color} />
-                                <span>{data.label}</span>
-                              </h4>
-                              <div>{count}</div>
-                            </div>
-                          );
-                        }
+                      {isCollapsed.priorities ? (
+                        <priorities.statusIndicatorIcons.active />
+                      ) : (
+                        <priorities.statusIndicatorIcons.inactive />
                       )}
-                    </Collapse>
-                  </div>
-                </li>
+                    </button>
+                  </section>
+                </div>
 
-                <li
-                  className={classnames('navigation-item', statuses.class)}
-                  onClick={() => statuses.execute()}>
-                  <div
-                    className={classnames('navigation-box-container', {
-                      'navigation-box-container-active': assertLocation(
-                        statuses.label
-                      )
-                    })}>
-                    <h3 className='navigation-item-title'>
-                      <statuses.icon />
-                      <span>{statuses.label}</span>
-                    </h3>
-                    <section className='navigation-item-actions'>
-                      <button
-                        className='navigation-item_state-indicator-button'
-                        onClick={() => {
-                          setIsCollapsed((state) => ({
-                            ...state,
-                            status: !state.status
-                          }));
-                        }}>
-                        {isCollapsed.status ? (
-                          <statuses.statusIndicatorIcons.active />
-                        ) : (
-                          <statuses.statusIndicatorIcons.inactive />
-                        )}
-                      </button>
-                    </section>
-                  </div>
-
-                  <div className='childrens-container'>
-                    <Collapse
-                      isOpened={isCollapsed.status}
-                      theme={{
-                        collapse: 'collapsable-container',
-                        content: 'inner-collapsable'
-                      }}>
-                      {Object.entries(statuses.children).map(([key, count]) => {
-                        const [{ data }] = statusMap.filter(
-                          (item) => item.value === key
-                        );
-                        return (
-                          <div key={key} className='status-container'>
-                            <h4>
-                              <data.icon color={data.color} />
-                              <span>{data.label}</span>
-                            </h4>
-                            <div>{count}</div>
-                          </div>
-                        );
-                      })}
-                    </Collapse>
-                  </div>
-                </li>
-
-                <li
-                  className={classnames('navigation-item', tags.class)}
-                  onClick={() => tags.execute()}>
-                  <div
-                    className={classnames('navigation-box-container', {
-                      'navigation-box-container-active': assertLocation(
-                        tags.label
-                      )
-                    })}>
-                    <h3 className='navigation-item-title'>
-                      <tags.icon />
-                      <span>{tags.label}</span>
-                    </h3>
-                    <section className='navigation-item-actions'>
-                      <button
-                        className='navigation-item_state-indicator-button'
-                        onClick={() => {
-                          setIsCollapsed((state) => ({
-                            ...state,
-                            tags: !state.tags
-                          }));
-                        }}>
-                        {isCollapsed.tags ? (
-                          <tags.statusIndicatorIcons.active />
-                        ) : (
-                          <tags.statusIndicatorIcons.inactive />
-                        )}
-                      </button>
-                      <div className='navigation-item-length'>
-                        {tags.length}
-                      </div>
-                    </section>
-                  </div>
-
-                  <div className='childrens-container'>
-                    <Collapse
-                      isOpened={isCollapsed.tags}
-                      theme={{
-                        collapse: 'collapsable-container',
-                        content: 'inner-collapsable'
-                      }}>
-                      {tags.children.map((child) => (
-                        <div
-                          key={child.id}
-                          className='tags-container'
-                          onClick={() => {
-                            navigate(
-                              `/workspace?tab=tagscx&folder=${child.value}`
-                            );
-                          }}>
+                <div className='childrens-container'>
+                  <Collapse
+                    isOpened={isCollapsed.priorities}
+                    theme={{
+                      collapse: 'collapsable-container',
+                      content: 'inner-collapsable'
+                    }}>
+                    {Object.entries(priorities.children).map(([key, count]) => {
+                      const [{ data }] = prioritiesMap.filter(
+                        (item) => item.value === key
+                      );
+                      return (
+                        <div key={key} className='priorities-container'>
                           <h4>
-                            <DotFilledIcon
-                              style={{ color: child.color }}
-                              className='tag-icon'
-                            />
-                            <span>{child.value}</span>
+                            <DotFilledIcon color={data.color} />
+                            <span>{data.label}</span>
                           </h4>
-                          <div className='tag-count'>{child.count}</div>
+                          <div>{count}</div>
                         </div>
-                      ))}
-                    </Collapse>
-                  </div>
-                </li>
+                      );
+                    })}
+                  </Collapse>
+                </div>
+              </li>
 
-                <li
-                  className={classnames('navigation-item', trash.class)}
-                  onClick={() => trash.execute()}>
-                  <div
-                    className={classnames('navigation-box-container', {
-                      'navigation-box-container-active': assertLocation(
-                        trash.label
-                      )
-                    })}>
-                    <h3 className='navigation-item-title'>
-                      <trash.icon />
-                      <span>{trash.label}</span>
-                    </h3>
-                    <div className='navigation-item-length'>{trash.length}</div>
-                  </div>
-                </li>
-              </div>
+              <li
+                className={clsx('navigation-item', statuses.class)}
+                onClick={() => statuses.execute()}>
+                <div
+                  className={clsx('navigation-box-container', {
+                    'navigation-box-container-active': assertLocation(
+                      statuses.label
+                    )
+                  })}>
+                  <h3 className='navigation-item-title'>
+                    <statuses.icon />
+                    <span>{statuses.label}</span>
+                  </h3>
+                  <section className='navigation-item-actions'>
+                    <button
+                      className='navigation-item_state-indicator-button'
+                      onClick={() => {
+                        setIsCollapsed((state) => ({
+                          ...state,
+                          status: !state.status
+                        }));
+                      }}>
+                      {isCollapsed.status ? (
+                        <statuses.statusIndicatorIcons.active />
+                      ) : (
+                        <statuses.statusIndicatorIcons.inactive />
+                      )}
+                    </button>
+                  </section>
+                </div>
 
-              <div className='bottom-navigator'>
-                {navigation.map((action, index) => (
-                  <button
-                    key={String(index)}
-                    className={`element`}
-                    onClick={() => action.execute()}>
-                    <action.icon />
-                    <span>{action.label}</span>
-                  </button>
-                ))}
-              </div>
-            </motion.ul>
-          </motion.div>
-        </Container>
-      )}
+                <div className='childrens-container'>
+                  <Collapse
+                    isOpened={isCollapsed.status}
+                    theme={{
+                      collapse: 'collapsable-container',
+                      content: 'inner-collapsable'
+                    }}>
+                    {Object.entries(statuses.children).map(([key, count]) => {
+                      const [{ data }] = statusMap.filter(
+                        (item) => item.value === key
+                      );
+                      return (
+                        <div key={key} className='status-container'>
+                          <h4>
+                            <data.icon color={data.color} />
+                            <span>{data.label}</span>
+                          </h4>
+                          <div>{count}</div>
+                        </div>
+                      );
+                    })}
+                  </Collapse>
+                </div>
+              </li>
+
+              <li
+                className={clsx('navigation-item', tags.class)}
+                onClick={() => tags.execute()}>
+                <div
+                  className={clsx('navigation-box-container', {
+                    'navigation-box-container-active': assertLocation(
+                      tags.label
+                    )
+                  })}>
+                  <h3 className='navigation-item-title'>
+                    <tags.icon />
+                    <span>{tags.label}</span>
+                  </h3>
+                  <section className='navigation-item-actions'>
+                    <button
+                      className='navigation-item_state-indicator-button'
+                      onClick={() => {
+                        setIsCollapsed((state) => ({
+                          ...state,
+                          tags: !state.tags
+                        }));
+                      }}>
+                      {isCollapsed.tags ? (
+                        <tags.statusIndicatorIcons.active />
+                      ) : (
+                        <tags.statusIndicatorIcons.inactive />
+                      )}
+                    </button>
+                    <div className='navigation-item-length'>{tags.length}</div>
+                  </section>
+                </div>
+
+                <div className='childrens-container'>
+                  <Collapse
+                    isOpened={isCollapsed.tags}
+                    theme={{
+                      collapse: 'collapsable-container',
+                      content: 'inner-collapsable'
+                    }}>
+                    {tags.children.map((child) => (
+                      <div
+                        key={child.id}
+                        className='tags-container'
+                        onClick={() => {
+                          navigate(
+                            `/workspace?tab=tagscx&folder=${child.value}`
+                          );
+                        }}>
+                        <h4>
+                          <DotFilledIcon
+                            style={{ color: child.color }}
+                            className='tag-icon'
+                          />
+                          <span>{child.value}</span>
+                        </h4>
+                        <div className='tag-count'>{child.count}</div>
+                      </div>
+                    ))}
+                  </Collapse>
+                </div>
+              </li>
+
+              <li
+                className={clsx('navigation-item', trash.class)}
+                onClick={() => trash.execute()}>
+                <div
+                  className={clsx('navigation-box-container', {
+                    'navigation-box-container-active': assertLocation(
+                      trash.label
+                    )
+                  })}>
+                  <h3 className='navigation-item-title'>
+                    <trash.icon />
+                    <span>{trash.label}</span>
+                  </h3>
+                  <div className='navigation-item-length'>{trash.length}</div>
+                </div>
+              </li>
+            </div>
+
+            <div className='bottom-navigator'>
+              {navigation.map((action, index) => (
+                <button
+                  key={String(index)}
+                  className={`element`}
+                  onClick={() => action.execute()}>
+                  <action.icon />
+                  <span>{action.label}</span>
+                </button>
+              ))}
+            </div>
+          </motion.ul>
+        </motion.div>
+      </Container>
     </AnimatePresence>
   );
 }

@@ -21,6 +21,7 @@ export default function About() {
         <Container
           className='main'
           onClick={(e) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const isTarget = (e as any).target.classList.contains('main');
             if (isTarget) {
               dispatch({

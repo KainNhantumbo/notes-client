@@ -63,6 +63,7 @@ export default function EditorToolsToggler() {
         <Container
           className='main'
           onClick={(e): void => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const target = (e as any).target.classList;
             if (target.contains('main')) {
               dispatch({

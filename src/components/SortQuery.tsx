@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Dropdown from 'rc-dropdown';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import actions from '@/shared/actions';
 import styled from 'styled-components';
 import { m as motion } from 'framer-motion';
@@ -19,7 +19,7 @@ export default function SortQuery() {
         {sortOptions.map(({ value, label }, index) => (
           <div
             key={index.toString()}
-            className={classnames(state.query.sort === value && 'is-active')}
+            className={clsx(state.query.sort === value && 'is-active')}
             onClick={() => {
               dispatch({
                 type: actions.QUERY_NOTES,

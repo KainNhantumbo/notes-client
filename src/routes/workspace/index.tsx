@@ -12,7 +12,7 @@ import { formatDate } from '@/libs/utils';
 import { m as motion } from 'framer-motion';
 import { MoonLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
-import { Layout } from '@/components/Layout';
+import Layout from '@/components/Layout';
 import SortQuery from '@/components/SortQuery';
 import { FetchError, Note, Settings, User } from '@/types';
 import About from '@/components/modals/About';

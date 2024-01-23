@@ -31,7 +31,7 @@ export default function Image() {
     if (!imageData.src) return setErrorMessages('Please insert image url');
 
     if (!isWebUri(imageData.src))
-      return setErrorMessages('Please provide a valid image source url');
+      return setErrorMessages('Please provide a valid image url');
 
     editor.chain().focus().setImage(imageData).run();
     setImageData({ title: '', src: '', alt: '' });
@@ -65,6 +65,7 @@ export default function Image() {
         {isEditorVisible ? (
           <Container
             className='main'
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onClick={(e: any): void => {
               const isTarget = e.target.classList.contains('main');
               if (isTarget) {

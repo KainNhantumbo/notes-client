@@ -5,19 +5,16 @@ export type WindowInnerSize = { width: number; height: number };
 export const useWindowInnerSize = (): WindowInnerSize => {
   const [value, setValue] = useState<WindowInnerSize>({ width: 0, height: 0 });
 
-  const computeInnerWindowSize = (): void => {
+  const onChange = (): void =>
     setValue({
-      width: Number(window.innerWidth.toFixed(0)),
-      height: Number(window.innerHeight.toFixed(0))
+      width: +window.innerWidth.toFixed(0),
+      height: +window.innerHeight.toFixed(0)
     });
-  };
 
   useEffect(() => {
-    computeInnerWindowSize();
-    window.addEventListener('resize', computeInnerWindowSize);
-    return () => {
-      window.removeEventListener('resize', computeInnerWindowSize);
-    };
+    onChange();
+    window.addEventListener('resize', onChange);
+    return () => window.removeEventListener('resize', onChange);
   }, []);
 
   return value;

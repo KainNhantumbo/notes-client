@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Tag } from '@/types';
 import actions from '@/shared/actions';
 import { RiCloseLine, RiHashtag } from 'react-icons/ri';
@@ -99,8 +100,11 @@ export default function TagEditor({
             <SelectContainer
               placeholder={'Select a color...'}
               options={colorOptions}
-              onChange={(option: any) => {
-                setTag((data) => ({ ...data, color: option?.value }));
+              onChange={(option) => {
+                setTag((data) => ({
+                  ...data,
+                  color: String((option as { value: string }).value)
+                }));
               }}
             />
 

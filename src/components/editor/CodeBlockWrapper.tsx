@@ -6,6 +6,7 @@ export default function CodeBlockWrapper({
   },
   updateAttributes,
   extension
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) {
   return (
     <NodeViewWrapper className='code-block'>
@@ -14,8 +15,7 @@ export default function CodeBlockWrapper({
         defaultValue={defaultLanguage}
         onChange={(event) => {
           updateAttributes({ language: event.target.value });
-          console.log(event.target.value
-            );
+          console.log(event.target.value);
         }}>
         <option value='null'>auto</option>
         <option disabled>—</option>
