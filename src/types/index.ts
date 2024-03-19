@@ -4,9 +4,7 @@ import { IconProps } from '@radix-ui/react-icons/dist/types';
 
 export type FetchError = AxiosError<{ message: string; code: number }>;
 
-export type InputEvents =
-  | ChangeEvent<HTMLInputElement>
-  | ChangeEvent<HTMLTextAreaElement>;
+export type InputEvents = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>;
 
 export type SubmitEvent = FormEvent<HTMLFormElement>;
 

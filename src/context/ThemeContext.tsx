@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  ReactNode,
-  useState,
-  useEffect
-} from 'react';
+import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 import { Theme, ColorScheme } from '../types';
 import { GlobalStyles } from '../styles/globals';
 import { ThemeProvider } from 'styled-components';
@@ -80,8 +74,7 @@ function ThemeContext({ children }: Props) {
 
   useEffect((): void => {
     const colorScheme: ColorScheme = JSON.parse(
-      localStorage.getItem('color-scheme') ||
-        `{"mode": "auto", "scheme": "light"}`
+      localStorage.getItem('color-scheme') || `{"mode": "auto", "scheme": "light"}`
     );
     setColorScheme(colorScheme);
   }, []);

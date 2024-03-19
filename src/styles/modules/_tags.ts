@@ -85,7 +85,6 @@ export const _tags = styled.div`
       max-width: 100%;
       align-self: flex-start;
       justify-self: flex-start;
-
     }
   }
 `;

@@ -96,9 +96,7 @@ export default function Image() {
                 <RiCloseLine />
               </motion.button>
 
-              <form
-                className='image-form-container'
-                onSubmit={(e) => e.preventDefault()}>
+              <form className='image-form-container' onSubmit={(e) => e.preventDefault()}>
                 <section className='input-field'>
                   <label htmlFor='image-title'>
                     <DotsHorizontalIcon />

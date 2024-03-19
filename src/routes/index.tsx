@@ -1,26 +1,21 @@
-import {
-  RiGithubLine,
-  RiLinkedinBoxLine,
-  RiMailLine,
-  RiProfileLine
-} from 'react-icons/ri';
-import { Contact } from '@/types';
-import { Tooltip } from 'react-tooltip';
-import { m as motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { Layout } from '@/components/Layout';
-import demoDarkImage from '@/assets/demo-dark.png';
-import demoDarkSmImage from '@/assets/demo-dark-placeholder.png';
-import app_logo from '@/assets/logo-19x192.png';
-import demoLightImage from '@/assets/demo-light.png';
-import demoLightSmImage from '@/assets/demo-light-placeholder.png';
-import { useTheme } from 'styled-components';
-import annotationImage from '@/assets/annotation-unsplash.jpg';
 import annotationSmImage from '@/assets/annotation-unsplash-placeholder.jpg';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useThemeContext } from '../context/ThemeContext';
-import { _home as Container } from '@/styles/routes/_home';
+import annotationImage from '@/assets/annotation-unsplash.jpg';
+import demoDarkSmImage from '@/assets/demo-dark-placeholder.png';
+import demoDarkImage from '@/assets/demo-dark.png';
+import demoLightSmImage from '@/assets/demo-light-placeholder.png';
+import demoLightImage from '@/assets/demo-light.png';
+import app_logo from '@/assets/logo-19x192.png';
+import Layout from '@/components/Layout';
 import { app_features, app_metadata, comments } from '@/shared/data';
+import { _home as Container } from '@/styles/routes/_home';
+import { Contact } from '@/types';
+import { m as motion } from 'framer-motion';
+import { RiGithubLine, RiLinkedinBoxLine, RiMailLine, RiProfileLine } from 'react-icons/ri';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useNavigate } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
+import { useTheme } from 'styled-components';
+import { useThemeContext } from '../context/ThemeContext';
 
 export default function Home() {
   const theme = useTheme();
@@ -52,10 +47,7 @@ export default function Home() {
   ];
 
   return (
-    <Layout
-      renderHeader
-      renderFooter
-      metadata={{ title: `${appName} | Overview` }}>
+    <Layout renderHeader renderFooter metadata={{ title: `${appName} | Overview` }}>
       <Container>
         <div className='wrapper-container'>
           <article>
@@ -76,9 +68,8 @@ export default function Home() {
                   opacity: 1,
                   transition: { delay: 0.2 }
                 }}>
-                All your notes, synced on your devices. Get started with{' '}
-                {appName} now for free on all your devices or use it in your
-                browser.
+                All your notes, synced on your devices. Get started with {appName} now for
+                free on all your devices or use it in your browser.
               </motion.p>
 
               <div className='action-buttons'>
@@ -86,9 +77,7 @@ export default function Home() {
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
                   className='browser-button'
-                  onClick={() =>
-                    navigate('/workspace?tab=all-notes&folder=none')
-                  }>
+                  onClick={() => navigate('/workspace?tab=all-notes&folder=none')}>
                   <span>Get started</span>
                 </motion.button>
                 <motion.a
@@ -109,19 +98,13 @@ export default function Home() {
                   transition: { delay: 0.4 }
                 }}>
                 <LazyLoadImage
-                  src={
-                    colorScheme.scheme === 'dark'
-                      ? demoDarkImage
-                      : demoLightImage
-                  }
+                  src={colorScheme.scheme === 'dark' ? demoDarkImage : demoLightImage}
                   width={'100%'}
                   height={'100%'}
                   alt={`${appName} demo image`}
                   effect='blur'
                   placeholderSrc={
-                    colorScheme.scheme === 'dark'
-                      ? demoDarkSmImage
-                      : demoLightSmImage
+                    colorScheme.scheme === 'dark' ? demoDarkSmImage : demoLightSmImage
                   }
                 />
               </motion.div>
@@ -143,8 +126,8 @@ export default function Home() {
                 </h2>
 
                 <p>
-                  Say goodbye to the hassle of juggling notes and ensure you
-                  never miss important details again. With{' '}
+                  Say goodbye to the hassle of juggling notes and ensure you never miss
+                  important details again. With{' '}
                   <i>
                     <strong>Choconotey</strong>
                   </i>
@@ -152,10 +135,9 @@ export default function Home() {
                 </p>
 
                 <p>
-                  Our innovative solution revolutionizes the way you document
-                  your work. It streamlines the process, making it more
-                  efficient and accurate. Embrace the future of work companion
-                  with{' '}
+                  Our innovative solution revolutionizes the way you document your work. It
+                  streamlines the process, making it more efficient and accurate. Embrace
+                  the future of work companion with{' '}
                   <i>
                     <strong>Choconotey</strong>
                   </i>
@@ -168,14 +150,13 @@ export default function Home() {
               <motion.h2
                 initial={{ opacity: 0, x: 200 }}
                 whileInView={{ opacity: 1, x: 0 }}>
-                Empowering features to boost your{' '}
-                <i>productivity capabilities</i>...
+                Empowering features to boost your <i>productivity capabilities</i>...
               </motion.h2>
               <motion.h3
                 initial={{ opacity: 0, x: -200 }}
                 whileInView={{ opacity: 1, x: 0 }}>
-                We create deep expertise and outcomes-oriented methods to
-                created meaningful impact for people.
+                We create deep expertise and outcomes-oriented methods to created meaningful
+                impact for people.
               </motion.h3>
 
               <section>
@@ -246,9 +227,8 @@ export default function Home() {
             <section id='contact' className='contact-container'>
               <h2>Who is behind {appName}?</h2>
               <p>
-                This app is developed by a indie developer, {author.name}, based
-                in Maputo, Mozambique. Get in touch using one of the options
-                below:
+                This app is developed by a indie developer, {author.name}, based in Maputo,
+                Mozambique. Get in touch using one of the options below:
               </p>
 
               <div className='shields-container'>
@@ -294,17 +274,15 @@ export default function Home() {
                 </span>
               </h2>
               <p>
-                Don't have an account yet? Sign up for a free account and take
-                your produtivity to next level...
+                Don't have an account yet? Sign up for a free account and take your
+                produtivity to next level...
               </p>
 
               <div className='action-buttons'>
                 <motion.button
                   whileTap={{ scale: 0.8 }}
                   whileHover={{ scale: 1.05 }}
-                  onClick={() =>
-                    navigate('/workspace?tab=all-notes&folder=none')
-                  }
+                  onClick={() => navigate('/workspace?tab=all-notes&folder=none')}
                   className='browser-button'>
                   <span>Get started</span>
                 </motion.button>

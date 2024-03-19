@@ -1,3 +1,11 @@
+import Layout from '@/components/Layout';
+import { SelectContainer } from '@/components/Select';
+import { useAppContext } from '@/context/AppContext';
+import { useThemeContext } from '@/context/ThemeContext';
+import actions from '@/shared/actions';
+import { app_metadata, colorSchemeOptions } from '@/shared/data';
+import { _settings as Container } from '@/styles/routes/_settings';
+import { ColorScheme, FetchError, InputEvents, Settings, User } from '@/types';
 import {
   ClockIcon,
   DotsHorizontalIcon,
@@ -11,17 +19,9 @@ import {
   LockOpen2Icon,
   RulerSquareIcon
 } from '@radix-ui/react-icons';
-import { app_metadata, colorSchemeOptions } from '@/shared/data';
-import { useState } from 'react';
 import { m as motion } from 'framer-motion';
-import actions from '@/shared/actions';
-import { Layout } from '@/components/Layout';
-import { useAppContext } from '@/context/AppContext';
-import { SelectContainer } from '@/components/Select';
-import { useThemeContext } from '@/context/ThemeContext';
-import { _settings as Container } from '@/styles/routes/_settings';
+import { useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { InputEvents, ColorScheme, Settings, User, FetchError } from '@/types';
 
 export default function Settings() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -275,9 +275,7 @@ export default function Settings() {
               <h2>Themes</h2>
               <div className='content-container'>
                 <h3>
-                  <span>
-                    Choose the global UI theme and the editor color schemes
-                  </span>
+                  <span>Choose the global UI theme and the editor color schemes</span>
                 </h3>
                 <div className='data-container'>
                   <SelectContainer
@@ -293,8 +291,7 @@ export default function Settings() {
                         theme: {
                           ...state.settings.theme,
                           scheme: parsedValue.scheme,
-                          is_automatic:
-                            parsedValue.mode === 'auto' ? true : false
+                          is_automatic: parsedValue.mode === 'auto' ? true : false
                         }
                       });
                     }}
@@ -330,9 +327,7 @@ export default function Settings() {
                       <SelectContainer
                         id='auto-save-state'
                         placeholder={
-                          state.settings.editor.auto_save.enabled
-                            ? 'Enabled'
-                            : 'Disabled'
+                          state.settings.editor.auto_save.enabled ? 'Enabled' : 'Disabled'
                         }
                         options={[
                           { label: 'Enabled', value: `{"enabled": true}` },
@@ -361,10 +356,7 @@ export default function Settings() {
                         <ClockIcon />
                         <span>Delay Time</span>
                       </label>
-                      <p>
-                        This controls the time before automatic save in
-                        milliseconds.
-                      </p>
+                      <p>This controls the time before automatic save in milliseconds.</p>
 
                       <input
                         type='number'
@@ -491,9 +483,7 @@ export default function Settings() {
                               ...state.settings.editor,
                               font: {
                                 ...state.settings.editor.font,
-                                line_height: parseFloat(
-                                  Number(e.target.value).toFixed(1)
-                                )
+                                line_height: parseFloat(Number(e.target.value).toFixed(1))
                               }
                             }
                           });
@@ -517,9 +507,9 @@ export default function Settings() {
 
                       <p>
                         <strong>
-                          <i>Warning:</i> Please do not disble this when the
-                          autosave feature is off because you will not be able
-                          to sync your notes manualy.
+                          <i>Warning:</i> Please do not disble this when the autosave
+                          feature is off because you will not be able to sync your notes
+                          manualy.
                         </strong>
                       </p>
 
@@ -662,8 +652,7 @@ export default function Settings() {
               <div className='content-container'>
                 <h3>
                   <span>
-                    We encorage to use strong passwords that you can easily
-                    remember
+                    We encorage to use strong passwords that you can easily remember
                   </span>
                 </h3>
                 <div className='data-container password-settings'>
@@ -705,8 +694,8 @@ export default function Settings() {
                   </section>
                   <div className='save-container'>
                     <p>
-                      Tip: just leave this section blanc if you don't want to
-                      update your password.
+                      Tip: just leave this section blanc if you don't want to update your
+                      password.
                     </p>
 
                     <motion.button
@@ -770,8 +759,8 @@ export default function Settings() {
                   </h3>
 
                   <p>
-                    This will erase all your data from the server and delete
-                    your account, be careful, it can't be undone.
+                    This will erase all your data from the server and delete your account,
+                    be careful, it can't be undone.
                   </p>
 
                   <motion.button

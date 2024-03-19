@@ -22,9 +22,7 @@ export function ErrorPage(props: Props) {
           {props.message ||
             'Oops! Looks like something bad happened, for now, thats all we know.'}
         </p>
-        <button onClick={props.retryFn}>
-          {props.button_message ?? 'Try again'}
-        </button>
+        <button onClick={props.retryFn}>{props.button_message ?? 'Try again'}</button>
       </section>
     </Container>
   );

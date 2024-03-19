@@ -11,11 +11,7 @@ import {
   ReloadIcon,
   UpdateIcon
 } from '@radix-ui/react-icons';
-import {
-  RiBubbleChartLine,
-  RiMailCheckLine,
-  RiStackLine
-} from 'react-icons/ri';
+import { RiBubbleChartLine, RiMailCheckLine, RiStackLine } from 'react-icons/ri';
 import Package from '../../package.json';
 import { Comment, Option } from '@/types';
 

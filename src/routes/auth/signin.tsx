@@ -1,21 +1,21 @@
-import { AxiosError } from 'axios';
+import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
+import loginImage from '@/assets/media-login.jpg';
+import Layout from '@/components/Layout';
 import fetch from '@/config/client';
+import { UserLoginType, userLoginSchema } from '@/config/schemas';
+import { useAppContext } from '@/context/AppContext';
 import actions from '@/shared/actions';
+import { app_metadata } from '@/shared/data';
+import { _signin as Container } from '@/styles/routes/_signin';
+import type { Auth } from '@/types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
+import type { AxiosError } from 'axios';
 import { m as motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Layout } from '@/components/Layout';
-import { app_metadata } from '@/shared/data';
-import loginImage from '@/assets/media-login.jpg';
-import loginPlaceholderImage from '@/assets/media-login-placeholder.jpg';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useAppContext } from '@/context/AppContext';
-import { Auth } from '@/types';
-import { _signin as Container } from '@/styles/routes/_signin';
-import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
-import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { userLoginSchema, UserLoginType } from '@/config/schemas';
+import { Link, useNavigate, type NavigateFunction } from 'react-router-dom';
 
 type FetchError = AxiosError<{ message: string; code: number }>;
 
@@ -33,10 +33,7 @@ export default function SignIn() {
     resolver: zodResolver(userLoginSchema)
   });
 
-  const onSubmit: SubmitHandler<UserLoginType> = async ({
-    email,
-    password
-  }) => {
+  const onSubmit: SubmitHandler<UserLoginType> = async ({ email, password }) => {
     setLoading(true);
     try {
       const { data } = await fetch<Auth>({
@@ -130,9 +127,7 @@ export default function SignIn() {
                   ) : null}
                 </section>
                 <div className='password-reset'>
-                  <Link
-                    to={'/auth/password-recovery'}
-                    preventScrollReset={false}>
+                  <Link to={'/auth/password-recovery'} preventScrollReset={false}>
                     <span>Forgot password? Recover account.</span>
                   </Link>
                 </div>

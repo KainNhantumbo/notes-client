@@ -1,14 +1,14 @@
+import Layout from '@/components/Layout';
 import fetch from '@/config/client';
-import { m as motion } from 'framer-motion';
-import { Layout } from '@/components/Layout';
-import { useState, useEffect } from 'react';
-import { FetchError, SubmitEvent } from '@/types';
 import { app_metadata } from '@/shared/data';
+import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
+import { FetchError, SubmitEvent } from '@/types';
+import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
+import { m as motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
-import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
-import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 export default function PasswordRecovery() {
   const theme = useTheme();
@@ -32,7 +32,8 @@ export default function PasswordRecovery() {
       console.error((error as FetchError).response?.data?.message || error);
       setError({
         status: true,
-        message: (error as FetchError).response?.data?.message || (error as FetchError).message
+        message:
+          (error as FetchError).response?.data?.message || (error as FetchError).message
       });
     } finally {
       setLoading(false);
@@ -61,8 +62,8 @@ export default function PasswordRecovery() {
             <div className='form-container'>
               <h2>Password Recovery</h2>
               <p>
-                Please type the e-mail associated with your account and we will
-                send an e-mail with instructions to recover your account.
+                Please type the e-mail associated with your account and we will send an
+                e-mail with instructions to recover your account.
               </p>
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>

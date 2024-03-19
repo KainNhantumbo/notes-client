@@ -269,7 +269,7 @@ export const _navigationDrawer = styled.section`
                   border: 1px solid rgba(${({ theme }) => theme.primary}, 0.3);
                 }
               }
-              
+
               .status-container {
                 width: 100%;
                 display: flex;

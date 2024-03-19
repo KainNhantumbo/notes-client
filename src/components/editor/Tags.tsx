@@ -101,9 +101,7 @@ export default function Tags() {
           placeholder='Add tags...'
           data-tooltip-id='tag-input'
           data-tooltip-content='Type here to add new tags...'
-          onChange={(e) =>
-            setTag((data) => ({ ...data, value: e.target.value }))
-          }
+          onChange={(e) => setTag((data) => ({ ...data, value: e.target.value }))}
         />
         <Tooltip className='tooltip-class' id='tag-input' />
       </form>

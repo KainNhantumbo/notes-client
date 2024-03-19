@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Layout } from '@/components/Layout';
+import Layout from '@/components/Layout';
 import { app_metadata } from '@/shared/data';
 import { _signinSuccess as Container } from '@/styles/routes/_signup-sucess';
 import { LockClosedIcon, PersonIcon } from '@radix-ui/react-icons';
+import { Link } from 'react-router-dom';
 
 export default function SignupSuccess() {
   return (
@@ -12,7 +12,7 @@ export default function SignupSuccess() {
       metadata={{
         title: `${app_metadata.appName} | Account created successful`,
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }}>
       <Container>
         <div className='wrapper-container'>
@@ -23,8 +23,8 @@ export default function SignupSuccess() {
               </div>
               <h2>Joined successfully!</h2>
               <p>
-                You have created your account successfuly, now can click the
-                login button below to continue.
+                You have created your account successfuly, now can click the login button
+                below to continue.
               </p>
 
               <Link to={`/auth/signin`} className='a-open-mail'>

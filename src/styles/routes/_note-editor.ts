@@ -282,8 +282,8 @@ export const _noteEditor = styled.main`
       border-radius: 5px;
       margin: 0 5px;
       line-height: 1.6rem;
-      font-family: Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono',
-        'Courier New', ui-monospace, monospace;
+      font-family: Menlo, 'JetBrains Mono', Consolas, 'Liberation Mono', 'Courier New',
+        ui-monospace, monospace;
     }
 
     .code-block-class {
@@ -315,8 +315,8 @@ export const _noteEditor = styled.main`
       margin: 2rem 0;
       word-wrap: break-word;
       word-break: break-all;
-      font-family: 'JetBrains Mono', Consolas, 'Liberation Mono',
-        'Courier New', ui-monospace, monospace;
+      font-family: 'JetBrains Mono', Consolas, 'Liberation Mono', 'Courier New',
+        ui-monospace, monospace;
     }
 
     .text-style-class {

@@ -6,7 +6,7 @@ export default function CodeBlockWrapper({
   },
   updateAttributes,
   extension
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) {
   return (
     <NodeViewWrapper className='code-block'>
@@ -19,13 +19,11 @@ export default function CodeBlockWrapper({
         }}>
         <option value='null'>auto</option>
         <option disabled>—</option>
-        {extension.options.lowlight
-          .listLanguages()
-          .map((lang: string, index: number) => (
-            <option key={index} value={lang}>
-              {lang}
-            </option>
-          ))}
+        {extension.options.lowlight.listLanguages().map((lang: string, index: number) => (
+          <option key={index} value={lang}>
+            {lang}
+          </option>
+        ))}
       </select>
       <pre>
         <NodeViewContent as='code' />

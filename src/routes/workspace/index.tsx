@@ -170,9 +170,7 @@ export default function Workspace(): JSX.Element {
               });
               refetch({ queryKey: ['query-notes'] });
             } catch (error) {
-              console.error(
-                (error as FetchError).response?.data?.message || error
-              );
+              console.error((error as FetchError).response?.data?.message || error);
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -239,9 +237,7 @@ export default function Workspace(): JSX.Element {
               });
               refetch({ queryKey: ['query-notes'] });
             } catch (error) {
-              console.error(
-                (error as FetchError).response?.data?.message || error
-              );
+              console.error((error as FetchError).response?.data?.message || error);
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -316,15 +312,11 @@ export default function Workspace(): JSX.Element {
     return [
       {
         type: 'Pinned',
-        data: state.notes.filter(
-          (note) => note.pinned && !note.deleted === !isTrashTab
-        )
+        data: state.notes.filter((note) => note.pinned && !note.deleted === !isTrashTab)
       },
       {
         type: 'All Notes',
-        data: state.notes.filter(
-          (note) => !note.pinned && !note.deleted === !isTrashTab
-        )
+        data: state.notes.filter((note) => !note.pinned && !note.deleted === !isTrashTab)
       }
     ];
   }, [state.notes, searchParams]);
@@ -352,9 +344,7 @@ export default function Workspace(): JSX.Element {
 
         <section className='header-container'>
           <h2>
-            <span>
-              {searchParams.get('tab')?.split('-')?.join(' ') ?? 'Workspace'}
-            </span>
+            <span>{searchParams.get('tab')?.split('-')?.join(' ') ?? 'Workspace'}</span>
           </h2>
 
           <div className='form-container'>
@@ -441,18 +431,14 @@ export default function Workspace(): JSX.Element {
                         <div className='top-side'>
                           <h3>
                             <RiMoreFill />
-                            <span>
-                              {note.title ? note.title : '[Untitled]'}
-                            </span>
+                            <span>{note.title ? note.title : '[Untitled]'}</span>
                           </h3>
                         </div>
 
                         {note.tags.length > 0 ? (
                           <div className='tags-container'>
                             {note.tags.map((tag) => (
-                              <p
-                                key={tag.id}
-                                style={{ backgroundColor: tag.color }}>
+                              <p key={tag.id} style={{ backgroundColor: tag.color }}>
                                 {tag.value}
                               </p>
                             ))}
@@ -466,13 +452,11 @@ export default function Workspace(): JSX.Element {
                         </div>
                         {note.deleted ? (
                           <div className='note-actions-container'>
-                            <button
-                              onClick={() => restoreNoteFromTrash(note._id)}>
+                            <button onClick={() => restoreNoteFromTrash(note._id)}>
                               <RiLoopLeftLine />
                               <span>Restore</span>
                             </button>
-                            <button
-                              onClick={() => deleteNoteFromTrash(note._id)}>
+                            <button onClick={() => deleteNoteFromTrash(note._id)}>
                               <RiDeleteBin2Line />
                               <span>Delete</span>
                             </button>
@@ -559,9 +543,7 @@ export default function Workspace(): JSX.Element {
 
 class NoteAttributes {
   static renderPriority(note: Note): JSX.Element {
-    const [{ data, value }] = prioritiesMap.filter(
-      (attr) => attr.value === note.priority
-    );
+    const [{ data, value }] = prioritiesMap.filter((attr) => attr.value === note.priority);
 
     return (
       <div className='priority-container'>

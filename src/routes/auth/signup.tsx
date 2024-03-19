@@ -1,22 +1,22 @@
+import loginImage from '@/assets/media-login.jpg';
+import Layout from '@/components/Layout';
+import fetch from '@/config/client';
+import { UserSignupType, userSignupSchema } from '@/config/schemas';
+import { app_metadata } from '@/shared/data';
+import { _signup as Container } from '@/styles/routes/_signup';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   DotsHorizontalIcon,
   EnvelopeClosedIcon,
   LockClosedIcon
 } from '@radix-ui/react-icons';
-import fetch from '@/config/client';
 import { AxiosError } from 'axios';
 import { m as motion } from 'framer-motion';
-import { Layout } from '@/components/Layout';
-import { PulseLoader } from 'react-spinners';
-import { app_metadata } from '@/shared/data';
-import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import loginImage from '@/assets/media-login.jpg';
-import { useTheme } from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { _signup as Container } from '@/styles/routes/_signup';
-import { UserSignupType, userSignupSchema } from '@/config/schemas';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
+import { PulseLoader } from 'react-spinners';
+import { useTheme } from 'styled-components';
 
 type FetchError = AxiosError<{ message: string; code: number }>;
 
@@ -107,9 +107,7 @@ export default function SignUp() {
                       {...register('first_name')}
                     />
                     {errors.first_name ? (
-                      <p className='error-message'>
-                        {errors.first_name?.message}
-                      </p>
+                      <p className='error-message'>{errors.first_name?.message}</p>
                     ) : null}
                   </div>
                   <div className='form-element'>
@@ -124,9 +122,7 @@ export default function SignUp() {
                       {...register('last_name')}
                     />
                     {errors.last_name ? (
-                      <p className='error-message'>
-                        {errors.last_name?.message}
-                      </p>
+                      <p className='error-message'>{errors.last_name?.message}</p>
                     ) : null}
                   </div>
                 </section>
@@ -159,9 +155,7 @@ export default function SignUp() {
                       {...register('password')}
                     />
                     {errors.password ? (
-                      <p className='error-message'>
-                        {errors.password?.message}
-                      </p>
+                      <p className='error-message'>{errors.password?.message}</p>
                     ) : null}
                   </div>
                 </section>
@@ -179,9 +173,7 @@ export default function SignUp() {
                       {...register('confirm_password')}
                     />
                     {errors.confirm_password ? (
-                      <p className='error-message'>
-                        {errors.confirm_password?.message}
-                      </p>
+                      <p className='error-message'>{errors.confirm_password?.message}</p>
                     ) : null}
                   </div>
                 </section>

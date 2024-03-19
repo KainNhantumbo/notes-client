@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Layout } from '@/components/Layout';
+import Layout from '@/components/Layout';
 import { app_metadata } from '@/shared/data';
 import { _signinSuccess as Container } from '@/styles/routes/_signup-sucess';
 import { CardStackIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
+import { Link } from 'react-router-dom';
 
 export default function ResetPasswordSuccess() {
   return (
@@ -12,7 +12,7 @@ export default function ResetPasswordSuccess() {
       metadata={{
         title: `${app_metadata.appName} | Account created successful`,
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }}>
       <Container>
         <div className='wrapper-container'>
@@ -22,10 +22,7 @@ export default function ResetPasswordSuccess() {
                 <CardStackIcon />
               </div>
               <h2>Please check your mail box!</h2>
-              <p>
-                We already sent an e-mail with instructions to reset your
-                password.
-              </p>
+              <p>We already sent an e-mail with instructions to reset your password.</p>
 
               <Link to={`mailto:`} className='a-open-mail'>
                 <EnvelopeOpenIcon />

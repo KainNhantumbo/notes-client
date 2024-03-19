@@ -77,11 +77,9 @@ export default function Properties() {
         title: note.title,
         status: note.status,
         priority: note.priority,
-        content: generateText(
-          generateJSON(note.content, extensions),
-          extensions,
-          { blockSeparator: '\n' }
-        ),
+        content: generateText(generateJSON(note.content, extensions), extensions, {
+          blockSeparator: '\n'
+        }),
         tags: note.tags.map((tag) => tag.value).toString(),
         createdAt: note.createdAt,
         updatedAt: note.updatedAt
@@ -105,8 +103,7 @@ export default function Properties() {
       if (Object.keys(state.currentNote.content).length < 1)
         throw new Error('Cannot export empty notes to clipboard.');
 
-      const clipboard = async (data: string) =>
-        navigator.clipboard.writeText(data);
+      const clipboard = async (data: string) => navigator.clipboard.writeText(data);
       const html = state.currentNote.content;
       const markdown = new TurndownService({}).turndown(html);
       const text = generateText(
@@ -150,8 +147,7 @@ export default function Properties() {
           toast: {
             title: 'Note Copy Error',
             message:
-              (error as Error).message ||
-              'Failed to copy note contents to clipboard.',
+              (error as Error).message || 'Failed to copy note contents to clipboard.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: exportToClipboard
@@ -176,9 +172,7 @@ export default function Properties() {
               // eslint-disable-next-line prefer-const, @typescript-eslint/no-unused-vars
               let { _id, title, content, ...data } = state.currentNote;
 
-              title = title.includes('(Duplicated)')
-                ? title
-                : `(Duplicated) ${title}`;
+              title = title.includes('(Duplicated)') ? title : `(Duplicated) ${title}`;
 
               await useFetchAPI<Note>({
                 method: 'post',
@@ -202,9 +196,7 @@ export default function Properties() {
                 payload: { ...state, isPropertiesDrawer: false }
               });
             } catch (error) {
-              console.error(
-                (error as FetchError).response?.data?.message || error
-              );
+              console.error((error as FetchError).response?.data?.message || error);
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -260,9 +252,7 @@ export default function Properties() {
               });
               navigate('/workspace', { replace: true });
             } catch (error) {
-              console.error(
-                (error as FetchError).response?.data?.message || error
-              );
+              console.error((error as FetchError).response?.data?.message || error);
               dispatch({
                 type: actions.TOAST,
                 payload: {
@@ -360,9 +350,7 @@ export default function Properties() {
                     </h3>
                     <div className='tags-container_content'>
                       {state.currentNote.tags.map((tag) => (
-                        <div
-                          style={{ backgroundColor: tag.color }}
-                          key={tag.id}>
+                        <div style={{ backgroundColor: tag.color }} key={tag.id}>
                           <span>{tag.value}</span>
                         </div>
                       ))}

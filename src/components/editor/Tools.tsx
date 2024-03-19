@@ -20,7 +20,7 @@ export default function Tools() {
           name='title'
           placeholder='Untitled'
           aria-label='Your note title'
-          value={state.currentNote.title === 'Untitled' ? '' :state.currentNote.title }
+          value={state.currentNote.title === 'Untitled' ? '' : state.currentNote.title}
           maxLength={115}
           required
           onChange={(e): void =>

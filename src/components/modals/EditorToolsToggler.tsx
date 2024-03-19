@@ -21,7 +21,8 @@ export default function EditorToolsToggler() {
           toast: {
             title: 'Settings Sync Error',
             message:
-              (error as FetchError).response?.data?.message || 'Failed to sync your settings.',
+              (error as FetchError).response?.data?.message ||
+              'Failed to sync your settings.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncSettings
@@ -49,12 +50,10 @@ export default function EditorToolsToggler() {
   };
 
   const options = useMemo(() => {
-    return Object.entries(state.settings.editor.toolbar).map(
-      ([key, value]) => ({
-        value: value,
-        key
-      })
-    );
+    return Object.entries(state.settings.editor.toolbar).map(([key, value]) => ({
+      value: value,
+      key
+    }));
   }, [state.settings]);
 
   return (
@@ -118,9 +117,7 @@ export default function EditorToolsToggler() {
                       type='checkbox'
                       checked={option.value}
                       id={`tool-${index}`}
-                      onChange={(e) =>
-                        handleToggle(option.key, e.target.checked)
-                      }
+                      onChange={(e) => handleToggle(option.key, e.target.checked)}
                     />
                   </div>
                 ))}

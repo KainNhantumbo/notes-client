@@ -16,11 +16,7 @@ interface Props {
   metadata: HeadProps | undefined;
 }
 
-export default function Layout({
-  children,
-  renderHeader,
-  renderFooter
-}: Props) {
+function Layout({ children, renderHeader, renderFooter }: Props) {
   const { state } = useAppContext();
   const navigate: NavigateFunction = useNavigate();
   const location = useLocation();
@@ -40,12 +36,12 @@ export default function Layout({
         {renderHeader ? <Header /> : null}
         <Cookies />
         <Toast key={state.toast.title.split(' ').join('') || undefined} />
-        <PromptModal
-          key={state.prompt.title.split(' ').join('') || undefined}
-        />
+        <PromptModal key={state.prompt.title.split(' ').join('') || undefined} />
         {children}
         {renderFooter ? <Footer /> : null}
       </LazyMotion>
     </MotionConfig>
   );
 }
+
+export default Layout;

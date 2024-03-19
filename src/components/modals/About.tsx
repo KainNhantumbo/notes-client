@@ -1,9 +1,4 @@
-import {
-  RiAppsLine,
-  RiCloseLine,
-  RiCodeSSlashLine,
-  RiCopyrightLine
-} from 'react-icons/ri';
+import { RiAppsLine, RiCloseLine, RiCodeSSlashLine, RiCopyrightLine } from 'react-icons/ri';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { _about as Container } from '@/styles/modules/_about';
 import { useAppContext } from '@/context/AppContext';
@@ -12,8 +7,7 @@ import actions from '@/shared/actions';
 
 export default function About() {
   const { state, dispatch } = useAppContext();
-  const { appName, version, copyright, license, author, contacts } =
-    app_metadata;
+  const { appName, version, copyright, license, author, contacts } = app_metadata;
 
   return (
     <AnimatePresence>
@@ -59,10 +53,7 @@ export default function About() {
                   <div key={contact.name} className='contact'>
                     {<contact.icon />}
                     <span>{contact.name}: </span>
-                    <a
-                      href={contact.url}
-                      target={'_blank'}
-                      rel={'noreferrer noopener'}>
+                    <a href={contact.url} target={'_blank'} rel={'noreferrer noopener'}>
                       {contact.url.replace('https://', '')}
                     </a>
                   </div>

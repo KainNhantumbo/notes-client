@@ -5,11 +5,7 @@ import {
   useLocation,
   Location
 } from 'react-router-dom';
-import {
-  ArrowRightIcon,
-  Cross2Icon,
-  HamburgerMenuIcon
-} from '@radix-ui/react-icons';
+import { ArrowRightIcon, Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { useState, useEffect } from 'react';
 import logo from '@/assets/logo-19x192.png';
 import { useAppContext } from '../context/AppContext';
@@ -64,12 +60,8 @@ export default function Header() {
                   <a
                     key={index.toString()}
                     href={item.url}
-                    className={
-                      location.pathname.includes(item.alias) ? 'active' : ''
-                    }>
-                    <motion.span whileHover={{ scale: 1.1 }}>
-                      {item.name}
-                    </motion.span>
+                    className={location.pathname.includes(item.alias) ? 'active' : ''}>
+                    <motion.span whileHover={{ scale: 1.1 }}>{item.name}</motion.span>
                   </a>
                 ))}
               </section>
@@ -91,9 +83,7 @@ export default function Header() {
                     whileTap={{ scale: 0.9 }}
                     title='Go to workspace'
                     className='user-account'
-                    onClick={() =>
-                      navigate(`/workspace?tab=all-notes&folder=none`)
-                    }>
+                    onClick={() => navigate(`/workspace?tab=all-notes&folder=none`)}>
                     <span>Go to Workspace</span>
                     <ArrowRightIcon />
                   </motion.button>
@@ -106,9 +96,7 @@ export default function Header() {
         <motion.button
           whileTap={{ scale: 0.8 }}
           title={`${isMenu ? 'Close menu drawer' : 'Open menu drawer'}`}
-          aria-placeholder={`${
-            isMenu ? 'Close menu drawer' : 'Open menu drawer'
-          }`}
+          aria-placeholder={`${isMenu ? 'Close menu drawer' : 'Open menu drawer'}`}
           aria-label={`${isMenu ? 'Close menu drawer' : 'Open menu drawer'}`}
           className={`toggle-btn ${isMenu ? 'toggle-btn_active' : ''}`}
           onClick={toggleMenu}>

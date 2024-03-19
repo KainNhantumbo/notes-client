@@ -80,9 +80,7 @@ export default function TagEditor({
               <RiCloseLine />
             </motion.button>
 
-            <form
-              className='tag-form-container'
-              onSubmit={(e) => e.preventDefault()}>
+            <form className='tag-form-container' onSubmit={(e) => e.preventDefault()}>
               <input
                 type='text'
                 id={'tags'}

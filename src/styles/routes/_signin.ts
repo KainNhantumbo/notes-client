@@ -24,7 +24,7 @@ export const _signin = styled.main`
     background: rgb(${({ theme }) => theme.background});
     border-radius: 12px;
     border: 1px solid rgba(${({ theme }) => theme.font}, 0.15);
-    
+
     @media screen and (max-width: 1140px) {
       align-self: center;
       margin: 40px 12px;

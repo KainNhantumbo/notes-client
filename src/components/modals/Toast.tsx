@@ -62,9 +62,7 @@ export default function Toast() {
                 <span className='prompt-title'>{state.toast.title}</span>
                 <section className='prompt-message'>
                   {state.toast.message.includes('\n') ? (
-                    state.toast.message
-                      .split('\n')
-                      .map((phrase) => <p>{phrase}</p>)
+                    state.toast.message.split('\n').map((phrase) => <p>{phrase}</p>)
                   ) : (
                     <p>{state.toast.message}</p>
                   )}
@@ -89,8 +87,7 @@ export default function Toast() {
                   <span>Dismiss</span>
                 </motion.button>
 
-                {!state.toast.handleFunction ||
-                !state.toast.actionButtonMessage ? null : (
+                {!state.toast.handleFunction || !state.toast.actionButtonMessage ? null : (
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.9 }}

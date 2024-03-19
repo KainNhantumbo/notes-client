@@ -34,9 +34,7 @@ export default function Status() {
     return (
       <DropdownContainer>
         {statusMap.map(({ value, data }, index) => (
-          <div
-            key={index.toString()}
-            onClick={() => handleUpdateStatus(value as TStatus)}>
+          <div key={index.toString()} onClick={() => handleUpdateStatus(value as TStatus)}>
             <data.icon color={data.color} />
             <span>Status: {data.label}</span>
           </div>

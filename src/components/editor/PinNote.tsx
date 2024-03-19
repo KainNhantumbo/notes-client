@@ -11,9 +11,7 @@ export default function TooglePinNote() {
   return (
     <Container
       data-tooltip-id='pin-note'
-      data-tooltip-content={
-        state.currentNote.pinned ? 'Unpin note' : 'Pin note'
-      }
+      data-tooltip-content={state.currentNote.pinned ? 'Unpin note' : 'Pin note'}
       onClick={() =>
         dispatch({
           type: actions.CURRENT_NOTE,

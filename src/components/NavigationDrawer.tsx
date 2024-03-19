@@ -10,11 +10,7 @@ import {
   RiSettings6Line,
   RiTimerFlashLine
 } from 'react-icons/ri';
-import {
-  CaretDownIcon,
-  CaretUpIcon,
-  DotFilledIcon
-} from '@radix-ui/react-icons';
+import { CaretDownIcon, CaretUpIcon, DotFilledIcon } from '@radix-ui/react-icons';
 import { AxiosError } from 'axios';
 import clsx from 'clsx';
 import { IconType } from 'react-icons';
@@ -84,8 +80,7 @@ function NavigationDrawer(): JSX.Element {
               navigate('/auth/signin', { replace: true });
             } catch (error: unknown) {
               console.error(
-                (error as AxiosError<{ message: string }>).response?.data
-                  .message || error
+                (error as AxiosError<{ message: string }>).response?.data.message || error
               );
             } finally {
               dispatch({
@@ -177,10 +172,8 @@ function NavigationDrawer(): JSX.Element {
       children: {
         none: state.notes.filter((note) => note.status === 'none').length,
         active: state.notes.filter((note) => note.status === 'active').length,
-        completed: state.notes.filter((note) => note.status === 'completed')
-          .length,
-        reviewing: state.notes.filter((note) => note.status === 'reviewing')
-          .length,
+        completed: state.notes.filter((note) => note.status === 'completed').length,
+        reviewing: state.notes.filter((note) => note.status === 'reviewing').length,
         pending: state.notes.filter((note) => note.status === 'pending').length
       }
     };
@@ -219,9 +212,7 @@ function NavigationDrawer(): JSX.Element {
         return group;
       }, [])
       .map((item, index, array) => {
-        const duplicates = array.filter(
-          (duplicate) => duplicate.value == item.value
-        );
+        const duplicates = array.filter((duplicate) => duplicate.value == item.value);
         if (duplicates.length > 0) return { ...item, count: duplicates.length };
         return { ...item, count: 0 };
       })
@@ -300,9 +291,7 @@ function NavigationDrawer(): JSX.Element {
                 onClick={() => notes.execute()}>
                 <div
                   className={clsx('navigation-box-container', {
-                    'navigation-box-container-active': assertLocation(
-                      notes.label
-                    )
+                    'navigation-box-container-active': assertLocation(notes.label)
                   })}>
                   <h3 className='navigation-item-title'>
                     <notes.icon />
@@ -317,9 +306,7 @@ function NavigationDrawer(): JSX.Element {
                 onClick={() => priorities.execute()}>
                 <div
                   className={clsx('navigation-box-container', {
-                    'navigation-box-container-active': assertLocation(
-                      priorities.label
-                    )
+                    'navigation-box-container-active': assertLocation(priorities.label)
                   })}>
                   <h3 className='navigation-item-title'>
                     <priorities.icon />
@@ -351,9 +338,7 @@ function NavigationDrawer(): JSX.Element {
                       content: 'inner-collapsable'
                     }}>
                     {Object.entries(priorities.children).map(([key, count]) => {
-                      const [{ data }] = prioritiesMap.filter(
-                        (item) => item.value === key
-                      );
+                      const [{ data }] = prioritiesMap.filter((item) => item.value === key);
                       return (
                         <div key={key} className='priorities-container'>
                           <h4>
@@ -373,9 +358,7 @@ function NavigationDrawer(): JSX.Element {
                 onClick={() => statuses.execute()}>
                 <div
                   className={clsx('navigation-box-container', {
-                    'navigation-box-container-active': assertLocation(
-                      statuses.label
-                    )
+                    'navigation-box-container-active': assertLocation(statuses.label)
                   })}>
                   <h3 className='navigation-item-title'>
                     <statuses.icon />
@@ -407,9 +390,7 @@ function NavigationDrawer(): JSX.Element {
                       content: 'inner-collapsable'
                     }}>
                     {Object.entries(statuses.children).map(([key, count]) => {
-                      const [{ data }] = statusMap.filter(
-                        (item) => item.value === key
-                      );
+                      const [{ data }] = statusMap.filter((item) => item.value === key);
                       return (
                         <div key={key} className='status-container'>
                           <h4>
@@ -429,9 +410,7 @@ function NavigationDrawer(): JSX.Element {
                 onClick={() => tags.execute()}>
                 <div
                   className={clsx('navigation-box-container', {
-                    'navigation-box-container-active': assertLocation(
-                      tags.label
-                    )
+                    'navigation-box-container-active': assertLocation(tags.label)
                   })}>
                   <h3 className='navigation-item-title'>
                     <tags.icon />
@@ -468,9 +447,7 @@ function NavigationDrawer(): JSX.Element {
                         key={child.id}
                         className='tags-container'
                         onClick={() => {
-                          navigate(
-                            `/workspace?tab=tagscx&folder=${child.value}`
-                          );
+                          navigate(`/workspace?tab=tags&folder=${child.value}`);
                         }}>
                         <h4>
                           <DotFilledIcon
@@ -491,9 +468,7 @@ function NavigationDrawer(): JSX.Element {
                 onClick={() => trash.execute()}>
                 <div
                   className={clsx('navigation-box-container', {
-                    'navigation-box-container-active': assertLocation(
-                      trash.label
-                    )
+                    'navigation-box-container-active': assertLocation(trash.label)
                   })}>
                   <h3 className='navigation-item-title'>
                     <trash.icon />

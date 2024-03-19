@@ -1,9 +1,4 @@
-import {
-  RiAlignCenter,
-  RiAlignJustify,
-  RiAlignLeft,
-  RiAlignRight,
-} from 'react-icons/ri';
+import { RiAlignCenter, RiAlignJustify, RiAlignLeft, RiAlignRight } from 'react-icons/ri';
 import Dropdown from 'rc-dropdown';
 import { useState } from 'react';
 import { IconType } from 'react-icons';

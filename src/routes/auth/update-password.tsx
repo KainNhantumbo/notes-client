@@ -1,13 +1,13 @@
+import Layout from '@/components/Layout';
 import fetch from '@/config/client';
-import { m as motion } from 'framer-motion';
-import { Layout } from '@/components/Layout';
-import { useState, useEffect } from 'react';
-import { FetchError, InputEvents, SubmitEvent } from '@/types';
 import { app_metadata } from '@/shared/data';
+import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
+import { FetchError, InputEvents, SubmitEvent } from '@/types';
+import { LockClosedIcon } from '@radix-ui/react-icons';
+import { m as motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { PulseLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
-import { _recoveryPassword as Container } from '@/styles/routes/_recovery-pasword';
-import { LockClosedIcon } from '@radix-ui/react-icons';
 
 export default function UpdatePassword() {
   const theme = useTheme();
@@ -45,8 +45,7 @@ export default function UpdatePassword() {
       setError({
         status: true,
         message:
-          (error as FetchError).response?.data?.message ||
-          (error as FetchError).message
+          (error as FetchError).response?.data?.message || (error as FetchError).message
       });
     } finally {
       setLoading(false);
@@ -75,8 +74,8 @@ export default function UpdatePassword() {
             <div className='form-container'>
               <h2>Update Password</h2>
               <p>
-                Note: your password should be strong and must differ from past
-                used passwords.
+                Note: your password should be strong and must differ from past used
+                passwords.
               </p>
               <form onSubmit={handleSubmit}>
                 <section className='input-field'>

@@ -11,7 +11,7 @@ const styles: CSSProperties = {
   flexDirection: 'column',
   gap: '20px',
   alignItems: 'center',
-  padding: 'calc(25% - 1px) 12px',
+  padding: 'calc(25% - 1px) 12px'
 };
 
 export default function Loader() {
@@ -23,7 +23,7 @@ export default function Loader() {
         color={`rgb(${theme.primary_shade})`}
         cssOverride={{
           display: 'block',
-          background: `rgb(${theme.background})`,
+          background: `rgb(${theme.background})`
         }}
       />
     </section>

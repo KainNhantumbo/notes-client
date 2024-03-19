@@ -1,12 +1,4 @@
-import {
-  Auth,
-  Folder,
-  Modal,
-  Note,
-  Query,
-  Settings,
-  User
-} from '@/types/index';
+import { Auth, Folder, Modal, Note, Query, Settings, User } from '@/types/index';
 
 export type State = {
   auth: Auth;

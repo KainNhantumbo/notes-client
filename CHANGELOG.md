@@ -1,3 +1,8 @@
+## CHANGE LOG
+
+All changes to Choconotey App will be documented here.
+
+
 ### - Version 1.2.0
 
 - Improved performance by splitting code chunks and lazy loading images.

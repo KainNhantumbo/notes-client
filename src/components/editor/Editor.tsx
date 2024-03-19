@@ -63,9 +63,7 @@ function Editor(): JSX.Element {
         }}
         editorProps={{ attributes: { class: 'editor-container' } }}
         slotBefore={
-          state.settings.editor.editing.enable_toolbar ? (
-            <EditorToolbar />
-          ) : null
+          state.settings.editor.editing.enable_toolbar ? <EditorToolbar /> : null
         }>
         <BubbleMenu />
       </EditorProvider>

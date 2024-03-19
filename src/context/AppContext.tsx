@@ -57,22 +57,17 @@ export default function AppContext({ children }: Props) {
     }
   };
 
-  async function useFetchAPI<T>(
-    config: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> {
-    fetch.interceptors.response.use(
-      undefined,
-      (error: AxiosError): Promise<never> => {
-        const status = Number(error?.response?.status);
-        if (status > 400 && status < 404) {
-          authenticateUser().catch((error) => {
-            console.error(error?.response?.data?.message || error);
-            navigate('/auth/sign-in', { replace: true });
-          });
-        }
-        return Promise.reject(error);
+  async function useFetchAPI<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    fetch.interceptors.response.use(undefined, (error: AxiosError): Promise<never> => {
+      const status = Number(error?.response?.status);
+      if (status > 400 && status < 404) {
+        authenticateUser().catch((error) => {
+          console.error(error?.response?.data?.message || error);
+          navigate('/auth/sign-in', { replace: true });
+        });
       }
-    );
+      return Promise.reject(error);
+    });
     return await fetch<T>({
       ...config,
       headers: { authorization: `Bearer ${state.auth.token}` },
@@ -117,8 +112,7 @@ export default function AppContext({ children }: Props) {
           toast: {
             title: 'Note Sync Error',
             message:
-              (error as FetchError).response?.data?.message ||
-              'Failed to sync your note.',
+              (error as FetchError).response?.data?.message || 'Failed to sync your note.',
             status: true,
             actionButtonMessage: 'Retry',
             handleFunction: syncCurrentNote
@@ -159,9 +153,12 @@ export default function AppContext({ children }: Props) {
   }, [state.currentNote]);
 
   useEffect((): (() => void) => {
-    const timer = setTimeout((): void => {
-      authenticateUser();
-    }, 1000 * 60 * 4);
+    const timer = setTimeout(
+      (): void => {
+        authenticateUser();
+      },
+      1000 * 60 * 4
+    );
     return (): void => clearTimeout(timer);
   }, [state.auth]);
 

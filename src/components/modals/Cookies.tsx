@@ -14,9 +14,7 @@ export default function Cookies() {
   };
 
   useEffect(() => {
-    const advisorState = JSON.parse(
-      localStorage.getItem('cookies_warning') || 'false'
-    );
+    const advisorState = JSON.parse(localStorage.getItem('cookies_warning') || 'false');
 
     if (!advisorState) {
       localStorage.setItem('cookies_warning', JSON.stringify('true'));
@@ -48,8 +46,8 @@ export default function Cookies() {
             className='advisor'>
             <div>
               <p>
-                We use cookies to grant you a better experience in our site. By
-                using {app_metadata.appName}, you accept our {'  '}
+                We use cookies to grant you a better experience in our site. By using{' '}
+                {app_metadata.appName}, you accept our {'  '}
                 <Link to='/docs/privacy-policy'>
                   <strong>privacy policy</strong>
                 </Link>
