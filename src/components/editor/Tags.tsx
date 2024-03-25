@@ -1,13 +1,13 @@
+import { useAppContext } from '@/context/AppContext';
+import actions from '@/shared/actions';
+import { _tags as Container } from '@/styles/modules/_tags';
+import { SubmitEvent, Tag } from '@/types';
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { m as motion } from 'framer-motion';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
-import TagEditor from './TagEditor';
-import actions from '@/shared/actions';
-import { SubmitEvent, Tag } from '@/types';
 import { Tooltip } from 'react-tooltip';
-import { m as motion } from 'framer-motion';
-import { Cross2Icon } from '@radix-ui/react-icons';
-import { useAppContext } from '@/context/AppContext';
-import { _tags as Container } from '@/styles/modules/_tags';
+import TagEditor from './TagEditor';
 
 export default function Tags() {
   const { state, dispatch } = useAppContext();
@@ -29,10 +29,7 @@ export default function Tags() {
         type: actions.CURRENT_NOTE,
         payload: {
           ...state,
-          currentNote: {
-            ...state.currentNote,
-            tags: [...state.currentNote.tags, data]
-          }
+          currentNote: { ...state.currentNote, tags: [...state.currentNote.tags, data] }
         }
       });
       setTag({ id: '', color: '', value: '' });

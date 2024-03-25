@@ -1,7 +1,7 @@
 import TagsEditor from './Tags';
 import Priority from './Priority';
 import StatusEditor from './Status';
-import TooglePinNote from './PinNote';
+import TogglePinNote from './PinNote';
 import actions from '@/shared/actions';
 import { m as motion } from 'framer-motion';
 import { RiMenuLine } from 'react-icons/ri';
@@ -37,7 +37,7 @@ export default function Tools() {
 
       <div className='extra-tools-container'>
         <div className='right-side-container'>
-          <TooglePinNote />
+          <TogglePinNote />
           <Priority />
           <StatusEditor />
         </div>
@@ -47,7 +47,7 @@ export default function Tools() {
             whileTap={{ scale: 0.8 }}
             data-tooltip-id='properties-drawer'
             data-tooltip-content='Open note properties drawer'
-            className='trigger-left-pannel-button'
+            className='trigger-left-panel-button'
             onClick={() => {
               dispatch({
                 type: actions.PROPERTIES_DRAWER,

@@ -1,36 +1,29 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useReducer,
-  Dispatch,
-  useEffect
-} from 'react';
-import { Auth, FetchError, Note } from '@/types';
 import fetch from '@/config/client';
 import actions from '@/shared/actions';
-import ThemeContext from './ThemeContext';
-import compareObjects from 'lodash.isequal';
-import { initialState, reducer } from '../libs/reducer';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { Auth, FetchError, Note } from '@/types';
 import { Action, State } from '@/types/reducer';
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import compareObjects from 'lodash.isequal';
+import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { initialState, reducer } from '../libs/reducer';
+import ThemeContext from './ThemeContext';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { networkMode: 'always' } }
 });
 
-type Props = { children: ReactNode };
+type Props = { children: React.ReactNode };
 
 type Context = {
   state: State;
-  dispatch: Dispatch<Action>;
+  dispatch: React.Dispatch<Action>;
   useFetchAPI: <T>(config: AxiosRequestConfig) => Promise<AxiosResponse<T>>;
   syncCurrentNote: () => Promise<void>;
 };
 
-const context = createContext<Context>({
+const context = React.createContext<Context>({
   state: initialState,
   dispatch: () => {},
   useFetchAPI: async ({ ...config }) => await fetch({ ...config }),
@@ -38,8 +31,8 @@ const context = createContext<Context>({
 });
 
 export default function AppContext({ children }: Props) {
-  const navigate: NavigateFunction = useNavigate();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const authenticateUser = async () => {
     try {
@@ -95,12 +88,10 @@ export default function AppContext({ children }: Props) {
         type: actions.NOTES,
         payload: {
           ...state,
-          notes: [
-            ...state.notes.map((note) => {
-              if (note._id === data._id) return { ...note, ...data };
-              return note;
-            })
-          ]
+          notes: state.notes.map((note) => {
+            if (note._id === data._id) return { ...note, ...data };
+            return note;
+          })
         }
       });
     } catch (error) {
@@ -138,21 +129,20 @@ export default function AppContext({ children }: Props) {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     handleAPIHealthCheck();
     authenticateUser();
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!state.settings.editor.auto_save.enabled) return;
-
     const debounceTimer = setTimeout(() => {
       syncCurrentNote();
     }, state.settings.editor.auto_save.delay);
     return () => clearTimeout(debounceTimer);
   }, [state.currentNote]);
 
-  useEffect((): (() => void) => {
+  React.useEffect((): (() => void) => {
     const timer = setTimeout(
       (): void => {
         authenticateUser();
@@ -163,13 +153,7 @@ export default function AppContext({ children }: Props) {
   }, [state.auth]);
 
   return (
-    <context.Provider
-      value={{
-        state,
-        dispatch,
-        useFetchAPI,
-        syncCurrentNote
-      }}>
+    <context.Provider value={{ state, dispatch, useFetchAPI, syncCurrentNote }}>
       <QueryClientProvider client={queryClient}>
         <ThemeContext>{children}</ThemeContext>
       </QueryClientProvider>
@@ -178,5 +162,5 @@ export default function AppContext({ children }: Props) {
 }
 
 export function useAppContext() {
-  return useContext<Context>(context);
+  return React.useContext<Context>(context);
 }

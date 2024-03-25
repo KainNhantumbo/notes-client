@@ -17,34 +17,35 @@ import { Tooltip } from 'react-tooltip';
 import { useTheme } from 'styled-components';
 import { useThemeContext } from '../context/ThemeContext';
 
+const { appName, repository, author } = app_metadata;
+
+const contacts: Contact[] = [
+  {
+    alias: '@Gmail',
+    path: author.email,
+    icon: RiMailLine
+  },
+  {
+    alias: '@LinkedIn',
+    path: author.linkedin,
+    icon: RiLinkedinBoxLine
+  },
+  {
+    alias: '@Portfolio',
+    path: author.portfolio,
+    icon: RiProfileLine
+  },
+  {
+    alias: '@Github',
+    path: author.github,
+    icon: RiGithubLine
+  }
+];
+
 export default function Home() {
   const theme = useTheme();
   const navigate = useNavigate();
   const { colorScheme } = useThemeContext();
-  const { appName, repository, author } = app_metadata;
-
-  const contacts: Contact[] = [
-    {
-      alias: '@Gmail',
-      path: author.email,
-      icon: RiMailLine
-    },
-    {
-      alias: '@LinkedIn',
-      path: author.linkedin,
-      icon: RiLinkedinBoxLine
-    },
-    {
-      alias: '@Portfolio',
-      path: author.portfolio,
-      icon: RiProfileLine
-    },
-    {
-      alias: '@Github',
-      path: author.github,
-      icon: RiGithubLine
-    }
-  ];
 
   return (
     <Layout renderHeader renderFooter metadata={{ title: `${appName} | Overview` }}>
@@ -110,7 +111,7 @@ export default function Home() {
               </motion.div>
             </section>
 
-            <section id='learn' className='presentaion-container'>
+            <section id='learn' className='presentation-container'>
               <LazyLoadImage
                 src={annotationImage}
                 effect='blur'

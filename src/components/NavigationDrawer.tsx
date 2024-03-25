@@ -1,35 +1,17 @@
-import {
-  RiApps2Line,
-  RiBubbleChartLine,
-  RiCloseLine,
-  RiDeleteBin7Line,
-  RiHashtag,
-  RiHome2Line,
-  RiInformationLine,
-  RiLogoutBoxRLine,
-  RiSettings6Line,
-  RiTimerFlashLine
-} from 'react-icons/ri';
-import { CaretDownIcon, CaretUpIcon, DotFilledIcon } from '@radix-ui/react-icons';
-import { AxiosError } from 'axios';
-import clsx from 'clsx';
-import { IconType } from 'react-icons';
-import { Collapse } from 'react-collapse';
-import actions from '../shared/actions';
-import { useMemo, useState, memo, JSX } from 'react';
-import { useAppContext } from '../context/AppContext';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { m as motion, AnimatePresence } from 'framer-motion';
 import { prioritiesMap, statusMap } from '@/shared/data';
 import { _navigationDrawer as Container } from '@/styles/modules/_navigationDrawer';
+import type { FetchError, Navigation } from '@/types';
+import { CaretDownIcon, CaretUpIcon, DotFilledIcon } from '@radix-ui/react-icons';
+import clsx from 'clsx';
+import { AnimatePresence, m as motion } from 'framer-motion';
+import { memo, useMemo, useState } from 'react';
+import { Collapse } from 'react-collapse';
+import * as Ri from 'react-icons/ri';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
+import actions from '../shared/actions';
 
-type Navigation = Array<{
-  label: string;
-  icon: IconType;
-  execute: () => void;
-}>;
-
-function NavigationDrawer(): JSX.Element {
+function NavigationDrawer() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -40,7 +22,10 @@ function NavigationDrawer(): JSX.Element {
     priorities: false
   });
 
-  const currentTab = searchParams.get('tab')?.split('-')?.join(' ') || '';
+  const currentTab = useMemo(
+    () => searchParams.get('tab')?.split('-')?.join(' ') || '',
+    [searchParams]
+  );
 
   const assertLocation = (label: string) =>
     currentTab.toLowerCase() === label.toLowerCase();
@@ -64,31 +49,20 @@ function NavigationDrawer(): JSX.Element {
               });
               dispatch({
                 type: actions.AUTH,
-                payload: {
-                  ...state,
-                  auth: { id: '', name: '', token: '', email: '' }
-                }
+                payload: { ...state, auth: { id: '', name: '', token: '', email: '' } }
               });
               dispatch({
                 type: actions.NAVIGATION_DRAWER,
-                payload: {
-                  ...state,
-                  isNavigationDrawer: false
-                }
+                payload: { ...state, isNavigationDrawer: false }
               });
 
               navigate('/auth/signin', { replace: true });
-            } catch (error: unknown) {
-              console.error(
-                (error as AxiosError<{ message: string }>).response?.data.message || error
-              );
+            } catch (error) {
+              console.error((error as FetchError).response?.data.message || error);
             } finally {
               dispatch({
                 type: actions.PROMPT,
-                payload: {
-                  ...state,
-                  prompt: { ...state.prompt, status: false }
-                }
+                payload: { ...state, prompt: { ...state.prompt, status: false } }
               });
             }
           }
@@ -98,14 +72,10 @@ function NavigationDrawer(): JSX.Element {
   };
 
   const navigation: Navigation = [
-    {
-      label: 'Logout',
-      icon: RiLogoutBoxRLine,
-      execute: handleLogout
-    },
+    { label: 'Logout', icon: Ri.RiLogoutBoxRLine, execute: handleLogout },
     {
       label: 'Home',
-      icon: RiHome2Line,
+      icon: Ri.RiHome2Line,
       execute: () => {
         dispatch({
           type: actions.NAVIGATION_DRAWER,
@@ -116,16 +86,17 @@ function NavigationDrawer(): JSX.Element {
     },
     {
       label: 'About',
-      icon: RiInformationLine,
-      execute: () =>
+      icon: Ri.RiInformationLine,
+      execute: () => {
         dispatch({
           type: actions.ABOUT_MODAL,
           payload: { ...state, isAboutModal: true }
-        })
+        });
+      }
     },
     {
       label: 'Settings',
-      icon: RiSettings6Line,
+      icon: Ri.RiSettings6Line,
       execute: () => {
         dispatch({
           type: actions.NAVIGATION_DRAWER,
@@ -139,15 +110,10 @@ function NavigationDrawer(): JSX.Element {
   const priorities = useMemo(() => {
     return {
       label: 'priorities',
-      icon: RiTimerFlashLine,
+      icon: Ri.RiTimerFlashLine,
       class: 'priorities-class',
-      statusIndicatorIcons: {
-        active: CaretDownIcon,
-        inactive: CaretUpIcon
-      },
-      execute: () => {
-        navigate(`/workspace?tab=priorities&folder=none`);
-      },
+      statusIndicatorIcons: { active: CaretDownIcon, inactive: CaretUpIcon },
+      execute: () => navigate(`/workspace?tab=priorities&folder=none`),
       children: {
         none: state.notes.filter((note) => note.priority === 'none').length,
         high: state.notes.filter((note) => note.priority === 'high').length,
@@ -160,15 +126,10 @@ function NavigationDrawer(): JSX.Element {
   const statuses = useMemo(() => {
     return {
       label: 'status',
-      icon: RiBubbleChartLine,
+      icon: Ri.RiBubbleChartLine,
       class: 'status-class',
-      statusIndicatorIcons: {
-        active: CaretDownIcon,
-        inactive: CaretUpIcon
-      },
-      execute: () => {
-        navigate(`/workspace?tab=status&folder=none`);
-      },
+      statusIndicatorIcons: { active: CaretDownIcon, inactive: CaretUpIcon },
+      execute: () => navigate(`/workspace?tab=status&folder=none`),
       children: {
         none: state.notes.filter((note) => note.status === 'none').length,
         active: state.notes.filter((note) => note.status === 'active').length,
@@ -182,57 +143,42 @@ function NavigationDrawer(): JSX.Element {
   const notes = useMemo(() => {
     return {
       label: 'all notes',
-      icon: RiApps2Line,
+      icon: Ri.RiApps2Line,
       class: 'all-notes-class',
       length: state.notes.filter((note) => !note.deleted).length,
-      execute: () => {
-        navigate('/workspace?tab=all-notes&folder=none');
-      }
+      execute: () => navigate('/workspace?tab=all-notes&folder=none')
     };
   }, [state.notes]);
 
   const trash = useMemo(() => {
     return {
       label: 'trash',
-      icon: RiDeleteBin7Line,
+      icon: Ri.RiDeleteBin7Line,
       class: 'trash-class',
       length: state.notes.filter((note) => note.deleted).length,
-      execute: () => {
-        navigate(`/workspace?tab=trash&folder=trash`);
-      }
+      execute: () => navigate(`/workspace?tab=trash&folder=trash`)
     };
   }, [state.notes]);
 
   const tags = useMemo(() => {
     const tags = state.notes
       .filter((note) => !note.deleted)
-      .map((note) => note.tags)
-      .reduce((acc, current) => {
-        const group = acc.concat(current);
-        return group;
-      }, [])
-      .map((item, index, array) => {
-        const duplicates = array.filter((duplicate) => duplicate.value == item.value);
-        if (duplicates.length > 0) return { ...item, count: duplicates.length };
-        return { ...item, count: 0 };
+      .map(({ tags }) => tags)
+      .reduce((acc, current) => acc.concat(current), [])
+      .map((item, i, tags) => {
+        const duplicates = tags.filter((duplicate) => duplicate.value === item.value);
+        return { ...item, count: duplicates.length };
       })
-      .filter((obj, index, arr) => {
-        return index === arr.findIndex((o) => obj.value === o.value);
-      })
+      .filter((obj, i, arr) => i === arr.findIndex((o) => obj.value === o.value))
       .sort((a, b) => (a.value.toLowerCase() > b.value.toLowerCase() ? 1 : -1));
 
     return {
       label: 'tags',
-      icon: RiHashtag,
+      icon: Ri.RiHashtag,
       class: 'tags-class',
-      statusIndicatorIcons: {
-        active: CaretDownIcon,
-        inactive: CaretUpIcon
-      },
+      statusIndicatorIcons: { active: CaretDownIcon, inactive: CaretUpIcon },
       length: tags.length,
-      execute: () => {
-        navigate(`/workspace?tab=tags&folder=`);
-      },
+      execute: () => navigate(`/workspace?tab=tags&folder=`),
       children: [...tags]
     };
   }, [state.notes, searchParams]);
@@ -241,8 +187,8 @@ function NavigationDrawer(): JSX.Element {
   // const folders = useMemo(() => {
   //   return {
   //     label: 'folders',
-  //     icon: RiFolder3Line,
-  //     classname: 'folders-class',
+  //     icon: Ri.RiFolder3Line,
+  //     class: 'folders-class',
   //     anchor: `/workspace?tab=folders&folder=none`,
   //     statusIndicatorIcons: {
   //       active: RiArrowDropDownLine,
@@ -277,7 +223,7 @@ function NavigationDrawer(): JSX.Element {
                   payload: { ...state, isNavigationDrawer: false }
                 });
               }}>
-              <RiCloseLine />
+              <Ri.RiCloseLine />
             </motion.button>
             <h3>
               <i>Choco</i>notey

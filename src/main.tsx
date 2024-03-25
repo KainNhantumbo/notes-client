@@ -1,20 +1,20 @@
-import './styles/global.css';
 import 'rc-dropdown/assets/index.css';
-import React, { lazy, Suspense } from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom/client';
-import AppContext from './context/AppContext';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Loader from './components/Loader';
+import AppContext from './context/AppContext';
+import './styles/global.css';
 
-const AppRouter = lazy(() => import('./AppRouter'));
+const AppRouter = React.lazy(() => import('./AppRouter'));
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
       <AppContext>
-        <Suspense fallback={<Loader />}>
+        <React.Suspense fallback={<Loader />}>
           <AppRouter />
-        </Suspense>
+        </React.Suspense>
       </AppContext>
     </Router>
   </React.StrictMode>

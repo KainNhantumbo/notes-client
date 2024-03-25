@@ -1,20 +1,11 @@
-import {
-  RiBold,
-  RiItalic,
-  RiUnderline,
-  RiStrikethrough,
-  RiCodeLine,
-  RiParagraph,
-  RiMarkPenLine
-} from 'react-icons/ri';
-import Headings from './Headings';
-import { Tooltip } from 'react-tooltip';
 import { BubbleMenu as FloatingBubble, useCurrentEditor } from '@tiptap/react';
+import * as Ri from 'react-icons/ri';
+import { Tooltip } from 'react-tooltip';
+import Headings from './Headings';
 import TextAlign from './TextAlign';
 
 export default function BubbleMenu() {
   const { editor } = useCurrentEditor();
-
   if (!editor) return null;
 
   return (
@@ -26,7 +17,7 @@ export default function BubbleMenu() {
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
           className={editor.isActive('bold') ? 'is-active' : ''}>
-          <RiBold />
+          <Ri.RiBold />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
@@ -40,7 +31,7 @@ export default function BubbleMenu() {
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           className={editor.isActive('italic') ? 'is-active' : ''}>
-          <RiItalic />
+          <Ri.RiItalic />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
@@ -56,7 +47,7 @@ export default function BubbleMenu() {
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           disabled={!editor.can().chain().focus().toggleUnderline().run()}
           className={editor.isActive('underline') ? 'is-active' : ''}>
-          <RiUnderline />
+          <Ri.RiUnderline />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
@@ -70,7 +61,7 @@ export default function BubbleMenu() {
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
           className={editor.isActive('strike') ? 'is-active' : ''}>
-          <RiStrikethrough />
+          <Ri.RiStrikethrough />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
@@ -84,7 +75,7 @@ export default function BubbleMenu() {
           type='button'
           onClick={() => editor.chain().focus().toggleHighlight().run()}
           className={editor.isActive('highlight') ? 'is-active' : ''}>
-          <RiMarkPenLine />
+          <Ri.RiMarkPenLine />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
@@ -99,7 +90,7 @@ export default function BubbleMenu() {
           data-tooltip-content='Paragraph'
           onClick={() => editor.chain().focus().setParagraph().run()}
           className={editor.isActive('paragraph') ? 'is-active' : ''}>
-          <RiParagraph />
+          <Ri.RiParagraph />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'
@@ -113,7 +104,7 @@ export default function BubbleMenu() {
           onClick={() => editor.chain().focus().toggleCode().run()}
           disabled={!editor.can().chain().focus().toggleCode().run()}
           className={editor.isActive('code') ? 'is-active' : ''}>
-          <RiCodeLine />
+          <Ri.RiCodeLine />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'

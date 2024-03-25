@@ -1,6 +1,10 @@
-import { AxiosError } from 'axios';
-import React, { ChangeEvent, FormEvent } from 'react';
-import { IconProps } from '@radix-ui/react-icons/dist/types';
+import type { IconProps } from '@radix-ui/react-icons/dist/types';
+import type { AxiosError } from 'axios';
+import type { ChangeEvent, FormEvent } from 'react';
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends Theme {}
+}
 
 export type FetchError = AxiosError<{ message: string; code: number }>;
 
@@ -12,21 +16,14 @@ export type IconType = React.ForwardRefExoticComponent<
   IconProps & React.RefAttributes<SVGSVGElement>
 >;
 
-export type HeadProps =
-  | { title?: string; createdAt?: string; updatedAt?: string }
-  | undefined;
+export type HeadProps = { title?: string; createdAt?: string; updatedAt?: string };
 
 export type ColorScheme = {
   mode: 'auto' | 'manual';
   scheme: 'dark' | 'light';
 };
 
-export type Auth = {
-  id: string;
-  name: string;
-  token: string;
-  email: string;
-};
+export type Auth = { id: string; name: string; token: string; email: string };
 
 export type Theme = {
   primary: string;
@@ -43,10 +40,6 @@ export type Theme = {
   foreground: string;
   foreground_shade: string;
 };
-
-declare module 'styled-components' {
-  export interface DefaultTheme extends Theme {}
-}
 
 export type Tag = { id: string; color: string; value: string };
 
@@ -65,12 +58,7 @@ export type Note = {
   updatedAt: string;
 };
 
-export type Folder = {
-  _id: string;
-  name: string;
-  color: string;
-  deleted: boolean;
-};
+export type Folder = { _id: string; name: string; color: string; deleted: boolean };
 
 export type Modal = {
   title: string;
@@ -96,7 +84,7 @@ export type User = { first_name: string; last_name: string; email: string };
 export type Settings = {
   _id: string;
   created_by: string;
-  theme: { scheme: 'light' | 'dark'; is_automatic: boolean };
+  theme: { scheme: 'dark' | 'light'; is_automatic: boolean };
   editor: {
     auto_save: { enabled: boolean; delay: number };
     editing: { enable_toolbar: boolean };
@@ -134,12 +122,14 @@ export type EditorTools = {
   hardBreak: boolean;
 };
 
+export type Navigation = Array<{
+  label: string;
+  icon: IconType;
+  execute: () => void;
+}>;
+
 export type Comment = {
-  author: {
-    name: string;
-    carrier: string;
-    picture: string;
-  };
+  author: { name: string; carrier: string; picture: string };
   comment: string;
 };
 

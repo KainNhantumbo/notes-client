@@ -1,23 +1,17 @@
-import {
-  Link,
-  useNavigate,
-  NavigateFunction,
-  useLocation,
-  Location
-} from 'react-router-dom';
-import { ArrowRightIcon, Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { useState, useEffect } from 'react';
 import logo from '@/assets/logo-19x192.png';
+import { useWindowInnerSize } from '@/hooks/useWindowInnerSize';
+import { ArrowRightIcon, Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
+import { AnimatePresence, m as motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
-import { m as motion, AnimatePresence } from 'framer-motion';
 import { app_metadata, navigationAnchors } from '../shared/data';
 import { _header as Container } from '../styles/modules/_header';
-import { useWindowInnerSize } from '@/hooks/useWindowInnerSize';
 
 export default function Header() {
   const [isMenu, setIsMenu] = useState<boolean>(false);
-  const navigate: NavigateFunction = useNavigate();
-  const location: Location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { state } = useAppContext();
   const windowInnerSize = useWindowInnerSize();
 

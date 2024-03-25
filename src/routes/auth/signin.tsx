@@ -7,20 +7,17 @@ import { useAppContext } from '@/context/AppContext';
 import actions from '@/shared/actions';
 import { app_metadata } from '@/shared/data';
 import { _signin as Container } from '@/styles/routes/_signin';
-import type { Auth } from '@/types';
+import type { Auth, FetchError } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
-import type { AxiosError } from 'axios';
 import { m as motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Link, useNavigate, type NavigateFunction } from 'react-router-dom';
-
-type FetchError = AxiosError<{ message: string; code: number }>;
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
-  const navigate: NavigateFunction = useNavigate();
+  const navigate = useNavigate();
   const { state, dispatch } = useAppContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState({ status: false, message: '' });

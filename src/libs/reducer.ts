@@ -1,5 +1,5 @@
+import type { Action, State } from '@/types/reducer';
 import actions from '../shared/actions';
-import { Action, State } from '@/types/reducer';
 
 export const initialState: State = {
   notes: [],
@@ -108,10 +108,7 @@ export function reducer(state: State, action: Action): State {
       return { ...state, currentNote: action.payload.currentNote };
 
     case actions.PROPERTIES_DRAWER:
-      return {
-        ...state,
-        isPropertiesDrawer: action.payload.isPropertiesDrawer
-      };
+      return { ...state, isPropertiesDrawer: action.payload.isPropertiesDrawer };
 
     case actions.QUERY_NOTES:
       return { ...state, query: action.payload.query };
@@ -123,10 +120,7 @@ export function reducer(state: State, action: Action): State {
       return { ...state, user: action.payload.user };
 
     case actions.NAVIGATION_DRAWER:
-      return {
-        ...state,
-        isNavigationDrawer: action.payload.isNavigationDrawer
-      };
+      return { ...state, isNavigationDrawer: action.payload.isNavigationDrawer };
 
     case actions.EDITOR_TOOLS_TOGGLER_MODAL:
       return {

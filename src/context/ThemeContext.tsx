@@ -1,27 +1,25 @@
-import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react';
-import { Theme, ColorScheme } from '../types';
-import { GlobalStyles } from '../styles/globals';
-import { ThemeProvider } from 'styled-components';
-import { dark_default, light_default } from '../styles/themes';
-import { useAppContext } from './AppContext';
 import actions from '@/shared/actions';
+import * as React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from '../styles/globals';
+import { dark_default, light_default } from '../styles/themes';
+import { ColorScheme, Theme } from '../types';
+import { useAppContext } from './AppContext';
 
 type Context = {
   colorScheme: ColorScheme;
   changeColorScheme: ({ mode, scheme }: ColorScheme) => void;
 };
 
-type Props = { children: ReactNode };
-
-const context = createContext<Context>({
+const context = React.createContext<Context>({
   colorScheme: { mode: 'auto', scheme: 'light' },
   changeColorScheme: () => {}
 });
 
-function ThemeContext({ children }: Props) {
+function ThemeContext({ children }: { children: React.ReactNode }) {
   const { state, dispatch } = useAppContext();
-  const [currentTheme, setCurrentTheme] = useState<Theme>(light_default);
-  const [colorScheme, setColorScheme] = useState<ColorScheme>({
+  const [currentTheme, setCurrentTheme] = React.useState<Theme>(light_default);
+  const [colorScheme, setColorScheme] = React.useState<ColorScheme>({
     mode: 'auto',
     scheme: 'light'
   });
@@ -61,9 +59,7 @@ function ThemeContext({ children }: Props) {
       case 'manual':
         if (scheme === 'dark') {
           setDarkColorScheme({ mode, scheme });
-        }
-
-        if (scheme === 'light') {
+        } else if (scheme === 'light') {
           setLightColorScheme({ mode, scheme });
         }
         break;
@@ -72,19 +68,16 @@ function ThemeContext({ children }: Props) {
     }
   };
 
-  useEffect((): void => {
+  React.useEffect((): void => {
     const colorScheme: ColorScheme = JSON.parse(
       localStorage.getItem('color-scheme') || `{"mode": "auto", "scheme": "light"}`
     );
     setColorScheme(colorScheme);
   }, []);
 
-  useEffect((): void => {
-    if (colorScheme.scheme === 'dark') {
-      setCurrentTheme(dark_default);
-    } else if (colorScheme.scheme === 'light') {
-      setCurrentTheme(light_default);
-    }
+  React.useEffect((): void => {
+    if (colorScheme.scheme === 'dark') setCurrentTheme(dark_default);
+    else if (colorScheme.scheme === 'light') setCurrentTheme(light_default);
 
     // sync color scheme state to global settings
     dispatch({
@@ -116,5 +109,5 @@ function ThemeContext({ children }: Props) {
 export default React.memo(ThemeContext);
 
 export function useThemeContext() {
-  return useContext(context);
+  return React.useContext(context);
 }

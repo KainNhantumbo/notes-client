@@ -1,3 +1,12 @@
+import { useAppContext } from '@/context/AppContext';
+import actions from '@/shared/actions';
+import { _properties as Container } from '@/styles/modules/_properties';
+import { FetchError, Note } from '@/types';
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { generateJSON, generateText } from '@tiptap/react';
+import { AnimatePresence, m as motion } from 'framer-motion';
+import moment from 'moment';
+import { useMemo } from 'react';
 import {
   RiBubbleChartLine,
   RiClipboardLine,
@@ -13,20 +22,11 @@ import {
   RiTimerFlashLine,
   RiTimerLine
 } from 'react-icons/ri';
-import moment from 'moment';
-import { FetchError, Note } from '@/types';
-import { useMemo } from 'react';
-import TurndownService from 'turndown';
-import actions from '@/shared/actions';
-import { useNavigate } from 'react-router-dom';
-import { Cross2Icon } from '@radix-ui/react-icons';
-import { useAppContext } from '@/context/AppContext';
-import { readingTime } from 'reading-time-estimator';
-import { generateText, generateJSON } from '@tiptap/react';
-import { AnimatePresence, m as motion } from 'framer-motion';
-import { editorExtensions as extensions } from './editor/Editor';
 import JSONCSVDownloader from 'react-json-to-csv';
-import { _properties as Container } from '@/styles/modules/_properties';
+import { useNavigate } from 'react-router-dom';
+import { readingTime } from 'reading-time-estimator';
+import TurndownService from 'turndown';
+import { editorExtensions as extensions } from './editor/Editor';
 
 type ExportTypes = 'markdown' | 'html' | 'text';
 
@@ -51,12 +51,7 @@ export default function Properties() {
       };
     } catch (error) {
       console.log(error);
-      return {
-        words: 'unknown',
-        lines: 'unknown',
-        time: 'unknown',
-        characters: 'unknown'
-      };
+      return { words: 'unknown', lines: 'unknown', time: 'unknown', characters: 'unknown' };
     }
   }, [state.currentNote]);
 
@@ -171,7 +166,6 @@ export default function Properties() {
             try {
               // eslint-disable-next-line prefer-const, @typescript-eslint/no-unused-vars
               let { _id, title, content, ...data } = state.currentNote;
-
               title = title.includes('(Duplicated)') ? title : `(Duplicated) ${title}`;
 
               await useFetchAPI<Note>({
@@ -215,10 +209,7 @@ export default function Properties() {
             } finally {
               dispatch({
                 type: actions.PROMPT,
-                payload: {
-                  ...state,
-                  prompt: { ...state.prompt, status: false }
-                }
+                payload: { ...state, prompt: { ...state.prompt, status: false } }
               });
             }
           }
@@ -271,10 +262,7 @@ export default function Properties() {
             } finally {
               dispatch({
                 type: actions.PROMPT,
-                payload: {
-                  ...state,
-                  prompt: { ...state.prompt, status: false }
-                }
+                payload: { ...state, prompt: { ...state.prompt, status: false } }
               });
             }
           }
@@ -322,7 +310,7 @@ export default function Properties() {
                   ) : (
                     <h3>
                       <RiPushpinLine />
-                      <span>Unpined note</span>
+                      <span>Unpinned note</span>
                     </h3>
                   )}
                 </div>
@@ -372,7 +360,7 @@ export default function Properties() {
                 <div className='item-container'>
                   <h3>
                     <RiHistoryLine />
-                    <span>Modfied:</span>
+                    <span>Modified:</span>
                   </h3>
                   <span>
                     {moment(state.currentNote.updatedAt || Date.now()).format(

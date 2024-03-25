@@ -1,10 +1,10 @@
-import actions from '@/shared/actions';
-import { RiCloseLine } from 'react-icons/ri';
 import { useAppContext } from '@/context/AppContext';
-import { AnimatePresence, m as motion } from 'framer-motion';
+import actions from '@/shared/actions';
 import { _editorToolsToggler as Container } from '@/styles/modules/_editor-tools-toggler';
+import type { FetchError, Settings } from '@/types';
+import { AnimatePresence, m as motion } from 'framer-motion';
 import { useMemo } from 'react';
-import { FetchError, Settings } from '@/types';
+import { RiCloseLine } from 'react-icons/ri';
 
 export default function EditorToolsToggler() {
   const { state, dispatch, useFetchAPI } = useAppContext();
@@ -49,12 +49,14 @@ export default function EditorToolsToggler() {
     syncSettings(data);
   };
 
-  const options = useMemo(() => {
-    return Object.entries(state.settings.editor.toolbar).map(([key, value]) => ({
-      value: value,
-      key
-    }));
-  }, [state.settings]);
+  const options = useMemo(
+    () =>
+      Object.entries(state.settings.editor.toolbar).map(([key, value]) => ({
+        value: value,
+        key
+      })),
+    [state.settings]
+  );
 
   return (
     <AnimatePresence>
@@ -67,10 +69,7 @@ export default function EditorToolsToggler() {
             if (target.contains('main')) {
               dispatch({
                 type: actions.EDITOR_TOOLS_TOGGLER_MODAL,
-                payload: {
-                  ...state,
-                  isEditorToolsTogglerModal: false
-                }
+                payload: { ...state, isEditorToolsTogglerModal: false }
               });
             }
           }}>

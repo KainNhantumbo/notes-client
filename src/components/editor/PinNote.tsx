@@ -1,10 +1,10 @@
-import actions from '@/shared/actions';
-import { Tooltip } from 'react-tooltip';
 import { useAppContext } from '@/context/AppContext';
-import styled, { useTheme } from 'styled-components';
+import actions from '@/shared/actions';
 import { RiPushpinFill, RiPushpinLine } from 'react-icons/ri';
+import { Tooltip } from 'react-tooltip';
+import styled, { useTheme } from 'styled-components';
 
-export default function TooglePinNote() {
+export default function TogglePinNote() {
   const { state, dispatch } = useAppContext();
   const { primary_shade: primaryShadeColor } = useTheme();
 
@@ -17,10 +17,7 @@ export default function TooglePinNote() {
           type: actions.CURRENT_NOTE,
           payload: {
             ...state,
-            currentNote: {
-              ...state.currentNote,
-              pinned: !state.currentNote.pinned
-            }
+            currentNote: { ...state.currentNote, pinned: !state.currentNote.pinned }
           }
         })
       }>

@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import { IconType } from '@/types';
-import Dropdown from 'rc-dropdown';
-import styled from 'styled-components';
-import { Tooltip } from 'react-tooltip';
 import { useCurrentEditor } from '@tiptap/react';
+import Dropdown from 'rc-dropdown';
+import { useState } from 'react';
 import { RiH1, RiH2, RiH3, RiH4, RiH5, RiH6, RiHeading } from 'react-icons/ri';
+import { Tooltip } from 'react-tooltip';
+import styled from 'styled-components';
+
+type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
 const headings: { icon: IconType; level: number }[] = [
   { icon: RiH1, level: 1 },
@@ -16,14 +18,16 @@ const headings: { icon: IconType; level: number }[] = [
 ];
 
 export default function Headings() {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const { editor } = useCurrentEditor();
   if (!editor) return null;
 
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const toggleHeading = (level: any) => {
-    editor.chain().focus().toggleHeading({ level }).run();
+  const toggleHeading = (level: unknown) => {
+    editor
+      .chain()
+      .focus()
+      .toggleHeading({ level: level as Level })
+      .run();
   };
 
   const renderDropdownItems = (): JSX.Element => (

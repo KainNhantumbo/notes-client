@@ -4,14 +4,14 @@ import {
   StyledInputs,
   StyledLabels
 } from '@/styles/defaults';
-import { isWebUri } from 'valid-url';
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { useCurrentEditor } from '@tiptap/react';
+import { AnimatePresence, m as motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { RiCloseLine, RiImage2Line } from 'react-icons/ri';
 import { Tooltip } from 'react-tooltip';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { useCurrentEditor } from '@tiptap/react';
-import { RiCloseLine, RiImage2Line } from 'react-icons/ri';
-import { AnimatePresence, m as motion } from 'framer-motion';
-import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { isWebUri } from 'valid-url';
 
 type ImageAttributes = { src: string; alt: string; title: string };
 
@@ -77,11 +77,7 @@ export default function Image() {
               className='image-panel-container'
               exit={{ opacity: 0, scale: 0 }}
               initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                transition: { duration: 0.3 }
-              }}>
+              animate={{ opacity: 1, scale: 1, transition: { duration: 0.3 } }}>
               <h2>
                 <RiImage2Line />
                 <span>Image</span>
@@ -110,10 +106,7 @@ export default function Image() {
                     placeholder={'Type an image title'}
                     maxLength={32}
                     onChange={(e) =>
-                      setImageData((data) => ({
-                        ...data,
-                        title: e.target.value
-                      }))
+                      setImageData((data) => ({ ...data, title: e.target.value }))
                     }
                   />
                   <span className='counter'>{`${imageData.title.length} / 32`}</span>

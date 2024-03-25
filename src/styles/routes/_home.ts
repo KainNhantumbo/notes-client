@@ -135,7 +135,7 @@ export const _home = styled.main`
       }
     }
 
-    .presentaion-container {
+    .presentation-container {
       width: 100%;
       display: flex;
       flex-direction: row;

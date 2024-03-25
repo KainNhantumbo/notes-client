@@ -1,6 +1,6 @@
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 import { ReactNode, useEffect } from 'react';
-import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import type { HeadProps } from '../types';
 import Footer from './Footer';
@@ -9,16 +9,16 @@ import Cookies from './modals/Cookies';
 import { PromptModal } from './modals/Prompt';
 import Toast from './modals/Toast';
 
-interface Props {
+type Props = {
   children: ReactNode;
   renderHeader?: boolean;
   renderFooter?: boolean;
-  metadata: HeadProps | undefined;
-}
+  metadata?: HeadProps;
+};
 
 function Layout({ children, renderHeader, renderFooter }: Props) {
   const { state } = useAppContext();
-  const navigate: NavigateFunction = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect((): (() => void) => {

@@ -1,21 +1,23 @@
-import Loader from './components/Loader';
-import { JSX, Suspense, lazy } from 'react';
+import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Loader from './components/Loader';
 
-const ResetPasswordSuccess = lazy(() => import('./routes/auth/password-recovery-success'));
-const PasswordRecovery = lazy(() => import('./routes/auth/password-recovery'));
-const Home = lazy(() => import('./routes/index'));
-const SignIn = lazy(() => import('./routes/auth/signin'));
-const SignUp = lazy(() => import('./routes/auth/signup'));
-const UpdatePassword = lazy(() => import('./routes/auth/update-password'));
-const SignupSuccess = lazy(() => import('./routes/auth/signup-success'));
-const Settings = lazy(() => import('./routes/workspace/settings'));
-const NoteEditor = lazy(() => import('./routes/workspace/note-editor'));
-const PrivacyPolicy = lazy(() => import('./routes/docs/privacy-policy'));
-const NotFoundError = lazy(() => import('./routes/404'));
-const Workspace = lazy(() => import('./routes/workspace'));
+const ResetPasswordSuccess = React.lazy(
+  () => import('./routes/auth/password-recovery-success')
+);
+const PasswordRecovery = React.lazy(() => import('./routes/auth/password-recovery'));
+const Home = React.lazy(() => import('./routes/index'));
+const SignIn = React.lazy(() => import('./routes/auth/signin'));
+const SignUp = React.lazy(() => import('./routes/auth/signup'));
+const UpdatePassword = React.lazy(() => import('./routes/auth/update-password'));
+const SignupSuccess = React.lazy(() => import('./routes/auth/signup-success'));
+const Settings = React.lazy(() => import('./routes/workspace/settings'));
+const NoteEditor = React.lazy(() => import('./routes/workspace/note-editor'));
+const PrivacyPolicy = React.lazy(() => import('./routes/docs/privacy-policy'));
+const NotFoundError = React.lazy(() => import('./routes/404'));
+const Workspace = React.lazy(() => import('./routes/workspace'));
 
-type RouteType = { path: string; element: JSX.ElementType };
+type RouteType = { path: string; element: React.JSX.ElementType };
 
 const routes: RouteType[] = [
   { path: '/', element: Home },
@@ -40,9 +42,9 @@ export default function AppRouter() {
           key={index}
           path={route.path}
           element={
-            <Suspense fallback={<Loader />}>
+            <React.Suspense fallback={<Loader />}>
               <route.element />
-            </Suspense>
+            </React.Suspense>
           }
         />
       ))}

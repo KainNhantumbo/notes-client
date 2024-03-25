@@ -1,30 +1,29 @@
-import actions from '@/shared/actions';
-import { CSSProperties, memo } from 'react';
-import EditorToolbar from './EditorToolbar';
-import { StarterKit } from '@tiptap/starter-kit';
 import { useAppContext } from '@/context/AppContext';
-import Typography from '@tiptap/extension-typography';
-import { EditorProvider, ReactNodeViewRenderer } from '@tiptap/react';
-import Placeholder from '@tiptap/extension-placeholder';
-import Link from '@tiptap/extension-link';
-import Subscript from '@tiptap/extension-subscript';
-import Underline from '@tiptap/extension-underline';
-import Superscript from '@tiptap/extension-superscript';
-import Image from '@tiptap/extension-image';
-import TaskList from '@tiptap/extension-task-list';
-import TaskItem from '@tiptap/extension-task-item';
-import BubbleMenu from './BubbleMenu';
-import TextAlign from '@tiptap/extension-text-align';
-import Highlight from '@tiptap/extension-highlight';
+import actions from '@/shared/actions';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import Highlight from '@tiptap/extension-highlight';
+import Image from '@tiptap/extension-image';
+import Link from '@tiptap/extension-link';
+import Placeholder from '@tiptap/extension-placeholder';
+import Subscript from '@tiptap/extension-subscript';
+import Superscript from '@tiptap/extension-superscript';
+import TaskItem from '@tiptap/extension-task-item';
+import TaskList from '@tiptap/extension-task-list';
+import TextAlign from '@tiptap/extension-text-align';
+import Typography from '@tiptap/extension-typography';
+import Underline from '@tiptap/extension-underline';
+import { EditorProvider, ReactNodeViewRenderer } from '@tiptap/react';
+import { StarterKit } from '@tiptap/starter-kit';
 import css from 'highlight.js/lib/languages/css';
+import go from 'highlight.js/lib/languages/go';
 import js from 'highlight.js/lib/languages/javascript';
 import ts from 'highlight.js/lib/languages/typescript';
-import go from 'highlight.js/lib/languages/go';
 import html from 'highlight.js/lib/languages/xml';
 import { lowlight } from 'lowlight/lib/core';
-
+import * as React from 'react';
+import BubbleMenu from './BubbleMenu';
 import CodeBlockWrapper from './CodeBlockWrapper.tsx';
+import EditorToolbar from './EditorToolbar';
 
 lowlight.registerLanguage('html', html);
 lowlight.registerLanguage('css', css);
@@ -35,17 +34,20 @@ lowlight.registerLanguage('go', go);
 function Editor(): JSX.Element {
   const { state, dispatch } = useAppContext();
 
-  const editorStyles: CSSProperties = {
-    fontFamily: state.settings.editor.font.font_family,
-    fontSize: state.settings.editor.font.font_size,
-    fontWeight: state.settings.editor.font.font_weight,
-    lineHeight: `${String(state.settings.editor.font.line_height)} px`,
-    wordWrap: 'break-word',
-    lineBreak: 'anywhere',
-    maxWidth: '1080px',
-    overflow: 'auto',
-    position: 'relative'
-  };
+  const editorStyles: React.CSSProperties = React.useMemo(
+    () => ({
+      fontFamily: state.settings.editor.font.font_family,
+      fontSize: state.settings.editor.font.font_size,
+      fontWeight: state.settings.editor.font.font_weight,
+      lineHeight: `${String(state.settings.editor.font.line_height)} px`,
+      wordWrap: 'break-word',
+      lineBreak: 'anywhere',
+      maxWidth: '1080px',
+      overflow: 'auto',
+      position: 'relative'
+    }),
+    [state.settings]
+  );
 
   return (
     <div style={editorStyles} className='editor-box-container'>
@@ -71,7 +73,7 @@ function Editor(): JSX.Element {
   );
 }
 
-export default memo(Editor);
+export default React.memo(Editor);
 
 export const editorExtensions = [
   Typography,
@@ -80,22 +82,14 @@ export const editorExtensions = [
     alignments: ['left', 'center', 'right', 'justify'],
     defaultAlignment: 'left'
   }),
-  Subscript.configure({
-    HTMLAttributes: { class: 'subscript-class' }
-  }),
-  Superscript.configure({
-    HTMLAttributes: { class: 'superscript-class' }
-  }),
-  Underline.configure({
-    HTMLAttributes: { class: 'underline-class' }
-  }),
+  Subscript.configure({ HTMLAttributes: { class: 'subscript-class' } }),
+  Superscript.configure({ HTMLAttributes: { class: 'superscript-class' } }),
+  Underline.configure({ HTMLAttributes: { class: 'underline-class' } }),
   Link.configure({
     protocols: ['ftp', 'mailto', 'http', 'https', 'tls'],
     openOnClick: false,
     linkOnPaste: true,
-    HTMLAttributes: {
-      class: 'link-class'
-    }
+    HTMLAttributes: { class: 'link-class' }
   }),
   Image.configure({
     allowBase64: true,
@@ -107,9 +101,7 @@ export const editorExtensions = [
     placeholder: 'Start typing something...'
   }),
   Highlight.configure({
-    HTMLAttributes: {
-      class: 'highlight-class'
-    },
+    HTMLAttributes: { class: 'highlight-class' },
     multicolor: false
   }),
   TaskList.configure({

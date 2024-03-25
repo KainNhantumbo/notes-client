@@ -66,7 +66,7 @@ export const _tools = styled.section`
       padding: 5px 0;
     }
 
-    .trigger-left-pannel-button {
+    .trigger-left-panel-button {
       ${StyledCornerButton}
       border: none;
       :hover {

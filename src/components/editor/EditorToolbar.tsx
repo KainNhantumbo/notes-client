@@ -1,33 +1,12 @@
-import {
-  RiArrowGoBackLine,
-  RiArrowGoForwardLine,
-  RiBold,
-  RiBracesLine,
-  RiCodeLine,
-  RiDoubleQuotesR,
-  RiItalic,
-  RiListCheck2,
-  RiListOrdered2,
-  RiListRadio,
-  RiMarkPenLine,
-  RiParagraph,
-  RiRulerLine,
-  RiSave2Line,
-  RiSettings5Line,
-  RiStrikethrough,
-  RiSubscript,
-  RiSuperscript,
-  RiTextWrap,
-  RiUnderline
-} from 'react-icons/ri';
-import Image from './Image';
-import Headings from './Headings';
-import TextAlign from './TextAlign';
-import { Tooltip } from 'react-tooltip';
-import actions from '@/shared/actions';
-import { useCurrentEditor } from '@tiptap/react';
 import { useAppContext } from '@/context/AppContext';
+import actions from '@/shared/actions';
 import { _editorToolbar as Container } from '@/styles/modules/_editor-toolbar';
+import { useCurrentEditor } from '@tiptap/react';
+import * as Ri from 'react-icons/ri';
+import { Tooltip } from 'react-tooltip';
+import Headings from './Headings';
+import Image from './Image';
+import TextAlign from './TextAlign';
 
 export default function EditorToolbar() {
   const { editor } = useCurrentEditor();
@@ -60,7 +39,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Save changes'
             onClick={saveNoteChanges}
             disabled={false}>
-            <RiSave2Line />
+            <Ri.RiSave2Line />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -75,7 +54,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Undo'
             onClick={() => editor.chain().focus().undo().run()}
             disabled={!editor.can().chain().focus().undo().run()}>
-            <RiArrowGoBackLine />
+            <Ri.RiArrowGoBackLine />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -90,7 +69,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Redo'
             onClick={() => editor.chain().focus().redo().run()}
             disabled={!editor.can().chain().focus().redo().run()}>
-            <RiArrowGoForwardLine />
+            <Ri.RiArrowGoForwardLine />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -106,7 +85,7 @@ export default function EditorToolbar() {
             onClick={() => editor.chain().focus().toggleBold().run()}
             disabled={!editor.can().chain().focus().toggleBold().run()}
             className={editor.isActive('bold') ? 'is-active' : ''}>
-            <RiBold />
+            <Ri.RiBold />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -122,7 +101,7 @@ export default function EditorToolbar() {
             onClick={() => editor.chain().focus().toggleItalic().run()}
             disabled={!editor.can().chain().focus().toggleItalic().run()}
             className={editor.isActive('italic') ? 'is-active' : ''}>
-            <RiItalic />
+            <Ri.RiItalic />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -140,7 +119,7 @@ export default function EditorToolbar() {
             onClick={() => editor.chain().focus().toggleUnderline().run()}
             disabled={!editor.can().chain().focus().toggleUnderline().run()}
             className={editor.isActive('underline') ? 'is-active' : ''}>
-            <RiUnderline />
+            <Ri.RiUnderline />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -158,7 +137,7 @@ export default function EditorToolbar() {
             onClick={() => editor.chain().focus().toggleStrike().run()}
             disabled={!editor.can().chain().focus().toggleStrike().run()}
             className={editor.isActive('strike') ? 'is-active' : ''}>
-            <RiStrikethrough />
+            <Ri.RiStrikethrough />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -174,7 +153,7 @@ export default function EditorToolbar() {
             type='button'
             onClick={() => editor.chain().focus().toggleHighlight().run()}
             className={editor.isActive('highlight') ? 'is-active' : ''}>
-            <RiMarkPenLine />
+            <Ri.RiMarkPenLine />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -190,7 +169,7 @@ export default function EditorToolbar() {
             onClick={() => editor.chain().focus().toggleSubscript().run()}
             disabled={!editor.can().chain().focus().toggleSubscript().run()}
             className={editor.isActive('subscript') ? 'is-active' : ''}>
-            <RiSubscript />
+            <Ri.RiSubscript />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -206,7 +185,7 @@ export default function EditorToolbar() {
             onClick={() => editor.chain().focus().toggleSuperscript().run()}
             disabled={!editor.can().chain().focus().toggleSuperscript().run()}
             className={editor.isActive('superscript') ? 'is-active' : ''}>
-            <RiSuperscript />
+            <Ri.RiSuperscript />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -222,7 +201,7 @@ export default function EditorToolbar() {
             onClick={() => editor.chain().focus().toggleCode().run()}
             disabled={!editor.can().chain().focus().toggleCode().run()}
             className={editor.isActive('code') ? 'is-active' : ''}>
-            <RiCodeLine />
+            <Ri.RiCodeLine />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -237,7 +216,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Paragraph'
             onClick={() => editor.chain().focus().setParagraph().run()}
             className={editor.isActive('paragraph') ? 'is-active' : ''}>
-            <RiParagraph />
+            <Ri.RiParagraph />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -252,7 +231,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Toggle Bullet List'
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={editor.isActive('bulletList') ? 'is-active' : ''}>
-            <RiListRadio />
+            <Ri.RiListRadio />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -267,7 +246,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Toggle Ordered List'
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
             className={editor.isActive('orderedList') ? 'is-active' : ''}>
-            <RiListOrdered2 />
+            <Ri.RiListOrdered2 />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -282,7 +261,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Toggle Task List'
             onClick={() => editor.chain().focus().toggleTaskList().run()}
             className={editor.isActive('taskList') ? 'is-active' : ''}>
-            <RiListCheck2 />
+            <Ri.RiListCheck2 />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -298,7 +277,7 @@ export default function EditorToolbar() {
             type='button'
             onClick={() => editor.chain().focus().toggleCodeBlock().run()}
             className={editor.isActive('codeBlock') ? 'is-active' : ''}>
-            <RiBracesLine />
+            <Ri.RiBracesLine />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -313,7 +292,7 @@ export default function EditorToolbar() {
             data-tooltip-content='Toggle Blockquote'
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
             className={editor.isActive('blockquote') ? 'is-active' : ''}>
-            <RiDoubleQuotesR />
+            <Ri.RiDoubleQuotesR />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -329,7 +308,7 @@ export default function EditorToolbar() {
             data-tooltip-id='horizontal-ruler'
             data-tooltip-content='Insert Horizontal Ruler'
             onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-            <RiRulerLine />
+            <Ri.RiRulerLine />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -343,7 +322,7 @@ export default function EditorToolbar() {
             data-tooltip-id='hard-break'
             data-tooltip-content='Insert Hard Break'
             onClick={() => editor.chain().focus().setHardBreak().run()}>
-            <RiTextWrap />
+            <Ri.RiTextWrap />
             <Tooltip
               classNameArrow='tooltip-border-class'
               className='tooltip-class'
@@ -358,13 +337,10 @@ export default function EditorToolbar() {
           onClick={() =>
             dispatch({
               type: actions.EDITOR_TOOLS_TOGGLER_MODAL,
-              payload: {
-                ...state,
-                isEditorToolsTogglerModal: true
-              }
+              payload: { ...state, isEditorToolsTogglerModal: true }
             })
           }>
-          <RiSettings5Line />
+          <Ri.RiSettings5Line />
           <Tooltip
             classNameArrow='tooltip-border-class'
             className='tooltip-class'

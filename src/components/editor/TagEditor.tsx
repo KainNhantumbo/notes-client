@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Tag } from '@/types';
-import actions from '@/shared/actions';
-import { RiCloseLine, RiHashtag } from 'react-icons/ri';
 import { useAppContext } from '@/context/AppContext';
-import { Dispatch, SetStateAction } from 'react';
-import { AnimatePresence, m as motion } from 'framer-motion';
-import { SelectContainer } from '../Select';
+import actions from '@/shared/actions';
 import { colorOptions } from '@/shared/data';
 import { _tagEditor as Container } from '@/styles/modules/_tag-editor';
+import { Tag } from '@/types';
+import { AnimatePresence, m as motion } from 'framer-motion';
+import type { Dispatch, SetStateAction } from 'react';
+import { RiCloseLine, RiHashtag } from 'react-icons/ri';
+import { SelectContainer } from '../Select';
 
 type Props = {
   data: Tag;
@@ -33,11 +32,9 @@ export default function TagEditor({
         ...state,
         currentNote: {
           ...state.currentNote,
-          tags: [
-            ...state.currentNote.tags.map((currentTag) =>
-              currentTag.id === tag.id ? { ...currentTag, ...tag } : currentTag
-            )
-          ]
+          tags: state.currentNote.tags.map((currentTag) =>
+            currentTag.id === tag.id ? { ...currentTag, ...tag } : currentTag
+          )
         }
       }
     });
@@ -51,6 +48,7 @@ export default function TagEditor({
         <Container
           className='main'
           onClick={(e): void => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const isTarget = (e as any).target.classList.contains('main');
             if (isTarget) {
               setTag({ id: '', color: '', value: '' });

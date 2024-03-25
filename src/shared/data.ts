@@ -1,24 +1,12 @@
-import {
-  CheckCircledIcon,
-  CheckIcon,
-  ColorWheelIcon,
-  CrossCircledIcon,
-  DashboardIcon,
-  GearIcon,
-  GitHubLogoIcon,
-  HeartIcon,
-  MagnifyingGlassIcon,
-  ReloadIcon,
-  UpdateIcon
-} from '@radix-ui/react-icons';
-import { RiBubbleChartLine, RiMailCheckLine, RiStackLine } from 'react-icons/ri';
+import type { Comment, Option } from '@/types';
+import * as Rd from '@radix-ui/react-icons';
+import * as Ri from 'react-icons/ri';
 import Package from '../../package.json';
-import { Comment, Option } from '@/types';
 
-import rapahaelNemoImage from '@/assets/sergio-de-paula-unsplash.jpg';
+import dylanSoaresImage from '@/assets/christian-buehner-unsplash.jpg';
 import nancyGuerraImage from '@/assets/jake-nackos-unsplash.jpg';
-import dilanSoaresImage from '@/assets/christian-buehner-unsplash.jpg';
 import clementinePapariImage from '@/assets/michael-dam-unsplash.jpg';
+import raphaelNemoImage from '@/assets/sergio-de-paula-unsplash.jpg';
 
 export const app_metadata = {
   author: Package.author,
@@ -34,17 +22,17 @@ export const app_metadata = {
   contacts: [
     {
       name: 'Github',
-      icon: GitHubLogoIcon,
+      icon: Rd.GitHubLogoIcon,
       url: Package.author.github
     },
     {
       name: 'Portfolio',
-      icon: RiStackLine,
+      icon: Ri.RiStackLine,
       url: Package.author.portfolio
     },
     {
       name: 'E-mail',
-      icon: RiMailCheckLine,
+      icon: Ri.RiMailCheckLine,
       url: Package.author.email
     }
   ]
@@ -60,33 +48,33 @@ export const navigationAnchors = [
 
 export const app_features = [
   {
-    icon: CheckIcon,
-    title: 'Use it everywere',
-    content: `Notes stay updated across all your devices, automaticaly and in real time. There's no "sync" button: it just works fine. `
+    icon: Rd.CheckIcon,
+    title: 'Use it everywhere',
+    content: `Notes stay updated across all your devices, automatically and in real time. There's no "sync" button: it just works fine. `
   },
   {
-    icon: DashboardIcon,
+    icon: Rd.DashboardIcon,
     title: 'Powerful features',
     content: `Sharing is made simple by exporting your notes to where you want - Plain Text, CSV, HTML & Markdown export: ${app_metadata.appName} is jammed with useful features.`
   },
   {
-    icon: HeartIcon,
+    icon: Rd.HeartIcon,
     title: 'Ease to use',
     content:
       'Just open, write and organize without any interruptions: no heavy-lifting, no steep learning curve. Enjoy an ease experience.'
   },
   {
-    icon: GearIcon,
+    icon: Rd.GearIcon,
     title: 'Make it Yours',
     content: `Customize your notes with filters, colors, status labels, priorities, and more.`
   },
   {
-    icon: ColorWheelIcon,
+    icon: Rd.ColorWheelIcon,
     title: 'Beautiful animations',
     content: `Everything you do in ${app_metadata.appName} is  nicely animated for better experience.`
   },
   {
-    icon: MagnifyingGlassIcon,
+    icon: Rd.MagnifyingGlassIcon,
     title: 'Quick find',
     content: `All you need to do is start typing - name of a note, content or tag - and instantly you're taken there.`
   }
@@ -153,23 +141,23 @@ export const prioritiesMap = [
 export const statusMap = [
   {
     value: 'none',
-    data: { label: 'None', color: '#ccc', icon: RiBubbleChartLine }
+    data: { label: 'None', color: '#ccc', icon: Ri.RiBubbleChartLine }
   },
   {
     value: 'active',
-    data: { label: 'Active', color: '#0091FF', icon: UpdateIcon }
+    data: { label: 'Active', color: '#0091FF', icon: Rd.UpdateIcon }
   },
   {
     value: 'pending',
-    data: { label: 'Pending', color: '#F76808', icon: CrossCircledIcon }
+    data: { label: 'Pending', color: '#F76808', icon: Rd.CrossCircledIcon }
   },
   {
     value: 'reviewing',
-    data: { label: 'Reviewing', color: '#7E808A', icon: ReloadIcon }
+    data: { label: 'Reviewing', color: '#7E808A', icon: Rd.ReloadIcon }
   },
   {
     value: 'completed',
-    data: { label: 'Completed', color: '#3D9A50', icon: CheckCircledIcon }
+    data: { label: 'Completed', color: '#3D9A50', icon: Rd.CheckCircledIcon }
   }
 ];
 
@@ -177,8 +165,8 @@ export const comments: Comment[] = [
   {
     author: {
       name: 'Raphael Nemo',
-      carrier: 'Typer at Zoof',
-      picture: rapahaelNemoImage
+      carrier: 'Typier at Zoo',
+      picture: raphaelNemoImage
     },
     comment:
       'I had a pleasure to work with Kain for over 3 years on products with thousands of users. It would be unfair to give credit to anyone else in the team for improving the conversion funnel to the very last detail of Choconotey.'
@@ -190,13 +178,13 @@ export const comments: Comment[] = [
       picture: nancyGuerraImage
     },
     comment:
-      'Choconotey make my day more easier as a freelancer. Been throught a lot of meeting and work so hard to remember any point and sometimes it miss. But now, everything can easily get recap by Choconotey.'
+      'Choconotey make my day more easier as a freelancer. Been through a lot of meeting and work so hard to remember any point and sometimes it miss. But now, everything can easily get recap by Choconotey.'
   },
   {
     author: {
       name: 'Dylan Soares',
       carrier: 'Product Designer',
-      picture: dilanSoaresImage
+      picture: dylanSoaresImage
     },
     comment:
       'I am a passionate product designer driven by delivering results. Working with Choconotey as been a fantastic experience and help me to keep track of essential work key points.'
@@ -208,6 +196,6 @@ export const comments: Comment[] = [
       picture: clementinePapariImage
     },
     comment:
-      'Working with Choconotey is a breath of fresh air for my projects at a time I were struggling. I found a new ambitious perspetive wich I were able to put into pratice quickly transforming problems into a-ha moments.'
+      'Working with Choconotey is a breath of fresh air for my projects at a time I were struggling. I found a new ambitious perspetive which I were able to put into practice quickly transforming problems into a-ha moments.'
   }
 ];

@@ -1,23 +1,22 @@
-import { useState } from 'react';
-import Dropdown from 'rc-dropdown';
-import actions from '@/shared/actions';
-import styled from 'styled-components';
-import { Tooltip } from 'react-tooltip';
-import { CaretDownIcon } from '@radix-ui/react-icons';
 import { useAppContext } from '@/context/AppContext';
+import actions from '@/shared/actions';
 import { statusMap } from '@/shared/data';
+import { CaretDownIcon } from '@radix-ui/react-icons';
+import Dropdown from 'rc-dropdown';
+import * as React from 'react';
+import { Tooltip } from 'react-tooltip';
+import styled from 'styled-components';
 
 type TStatus = 'none' | 'active' | 'pending' | 'reviewing' | 'completed';
 
 export default function Status() {
   const { state, dispatch } = useAppContext();
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isDropdownVisible, setIsDropdownVisible] = React.useState(false);
 
-  const [{ data }] = statusMap.filter((item) => {
-    if (item.value === state.currentNote.status) {
-      return item;
-    }
-  });
+  const [{ data }] = React.useMemo(
+    () => statusMap.filter((item) => item.value === state.currentNote.status),
+    [state.currentNote.status]
+  );
 
   const handleUpdateStatus = (data: TStatus): void => {
     dispatch({

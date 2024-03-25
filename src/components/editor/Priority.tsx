@@ -1,32 +1,28 @@
-import { useState } from 'react';
-import Dropdown from 'rc-dropdown';
-import actions from '@/shared/actions';
-import styled from 'styled-components';
-import { Tooltip } from 'react-tooltip';
 import { useAppContext } from '@/context/AppContext';
-import { CaretDownIcon } from '@radix-ui/react-icons';
-import { RiTimerFlashLine } from 'react-icons/ri';
+import actions from '@/shared/actions';
 import { prioritiesMap } from '@/shared/data';
+import { CaretDownIcon } from '@radix-ui/react-icons';
+import Dropdown from 'rc-dropdown';
+import * as React from 'react';
+import { RiTimerFlashLine } from 'react-icons/ri';
+import { Tooltip } from 'react-tooltip';
+import styled from 'styled-components';
 
-type TPriority = 'none' | 'low' | 'medium' | 'high';
+type PriorityType = 'none' | 'low' | 'medium' | 'high';
 
 export default function Priority() {
   const { state, dispatch } = useAppContext();
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isDropdownVisible, setIsDropdownVisible] = React.useState(false);
 
-  const [{ data }] = prioritiesMap.filter((item) => {
-    if (item.value === state.currentNote.priority) {
-      return item;
-    }
-  });
+  const [{ data }] = React.useMemo(
+    () => prioritiesMap.filter((item) => item.value === state.currentNote.priority),
+    [state.currentNote.priority]
+  );
 
-  const handleUpdatePriority = (data: TPriority): void => {
+  const handleUpdatePriority = (data: PriorityType): void => {
     dispatch({
       type: actions.CURRENT_NOTE,
-      payload: {
-        ...state,
-        currentNote: { ...state.currentNote, priority: data }
-      }
+      payload: { ...state, currentNote: { ...state.currentNote, priority: data } }
     });
     setIsDropdownVisible(false);
   };
@@ -37,7 +33,7 @@ export default function Priority() {
         {prioritiesMap.map(({ value, data }, index) => (
           <div
             key={index.toString()}
-            onClick={() => handleUpdatePriority(value as TPriority)}>
+            onClick={() => handleUpdatePriority(value as PriorityType)}>
             <RiTimerFlashLine color={data.color} />
             <span>Priority: {data.label}</span>
           </div>
