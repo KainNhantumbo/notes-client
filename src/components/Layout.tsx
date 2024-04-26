@@ -16,7 +16,7 @@ type Props = {
   metadata?: HeadProps;
 };
 
-function Layout({ children, renderHeader, renderFooter }: Props) {
+export default function Layout({ children, renderHeader, renderFooter }: Props) {
   const { state } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,5 +43,3 @@ function Layout({ children, renderHeader, renderFooter }: Props) {
     </MotionConfig>
   );
 }
-
-export default Layout;
