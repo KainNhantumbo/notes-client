@@ -64,7 +64,7 @@
     "@tiptap/extension-underline": "^2.1.11",
     "@tiptap/react": "^2.1.11",
     "@tiptap/starter-kit": "^2.1.11",
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "clsx": "^2.1.0",
     "framer-motion": "^10.12.18",
     "highlight.js": "^11.9.0",
