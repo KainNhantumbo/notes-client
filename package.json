@@ -53,7 +53,7 @@
     "@tiptap/extension-code-block-lowlight": "^2.1.11",
     "@tiptap/extension-highlight": "^2.1.11",
     "@tiptap/extension-image": "^2.1.11",
-    "@tiptap/extension-link": "^2.1.11",
+    "@tiptap/extension-link": "^2.10.4",
     "@tiptap/extension-placeholder": "^2.1.11",
     "@tiptap/extension-subscript": "^2.1.11",
     "@tiptap/extension-superscript": "^2.1.11",
